@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { TOOL_DISPLAY_NAMES as toolDisplayNames, CATEGORY_DISPLAY_NAMES as categoryDisplayNames } from '../../lib/constants';
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -29,27 +30,7 @@ interface Props {
 /*  Display-name maps                                                  */
 /* ------------------------------------------------------------------ */
 
-const toolDisplayNames: Record<string, string> = {
-  chatgpt: 'ChatGPT',
-  claude: 'Claude',
-  gemini: 'Gemini',
-  midjourney: 'Midjourney',
-  'dall-e': 'DALL-E',
-  'stable-diffusion': 'Stable Diffusion',
-  cursor: 'Cursor',
-  'github-copilot': 'GitHub Copilot',
-};
-
-const categoryDisplayNames: Record<string, string> = {
-  writing: 'Writing',
-  coding: 'Coding',
-  marketing: 'Marketing',
-  'image-generation': 'Image Generation',
-  business: 'Business',
-  'data-analysis': 'Data Analysis',
-  education: 'Education',
-  creative: 'Creative',
-};
+/* toolDisplayNames, categoryDisplayNames imported from lib/constants */
 
 /* ------------------------------------------------------------------ */
 /*  URL search-param helpers                                           */

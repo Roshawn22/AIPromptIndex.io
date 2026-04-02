@@ -393,7 +393,7 @@ export default function PromptBuilder({ prompts, tools, categories }: Props) {
               <a
                 href={affiliateUrl}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener sponsored"
                 className="inline-flex items-center gap-1.5 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-2)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-primary)] transition-colors hover:border-[var(--color-accent-muted)] hover:text-[var(--color-accent)] font-[var(--font-display)]"
               >
                 Open in {toolName}

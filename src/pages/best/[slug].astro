@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/global/Header.astro';
 import Footer from '../../components/global/Footer.astro';
+import { TOOL_DISPLAY_NAMES as toolDisplayNames, CATEGORY_DISPLAY_NAMES as categoryDisplayNames } from '../../lib/constants';
 import PromptCard from '../../components/prompt/PromptCard.astro';
 import Breadcrumb from '../../components/common/Breadcrumb.astro';
 import NewsletterSignup from '../../components/common/NewsletterSignup.astro';
@@ -46,27 +47,7 @@ const filterType = roundup.filter.tool ? 'tool' : 'category';
 const filterValue = roundup.filter.tool || roundup.filter.category;
 const linkTarget = filterType === 'tool' ? `/tools/${filterValue}/` : `/categories/${filterValue}/`;
 
-const toolDisplayNames: Record<string, string> = {
-  chatgpt: 'ChatGPT',
-  claude: 'Claude',
-  gemini: 'Gemini',
-  midjourney: 'Midjourney',
-  'dall-e': 'DALL-E',
-  'stable-diffusion': 'Stable Diffusion',
-  cursor: 'Cursor',
-  'github-copilot': 'GitHub Copilot',
-};
-
-const categoryDisplayNames: Record<string, string> = {
-  writing: 'Writing',
-  coding: 'Coding',
-  marketing: 'Marketing',
-  'image-generation': 'Image Generation',
-  business: 'Business',
-  'data-analysis': 'Data Analysis',
-  education: 'Education',
-  creative: 'Creative',
-};
+/* toolDisplayNames, categoryDisplayNames imported from lib/constants */
 
 const displayName = filterType === 'tool'
   ? toolDisplayNames[filterValue!] || filterValue

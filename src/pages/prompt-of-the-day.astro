@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/global/Header.astro';
 import Footer from '../components/global/Footer.astro';
+import { TOOL_DISPLAY_NAMES as toolDisplayNames, DIFFICULTY_COLORS as difficultyColor } from '../lib/constants';
 import Badge from '../components/ui/Badge.astro';
 import PromptCodeBlock from '../components/prompt/PromptCodeBlock.tsx';
 import CopyButton from '../components/ui/CopyButton.tsx';
@@ -20,22 +21,7 @@ const promptIndex = dayOfYear % allPrompts.length;
 const prompt = allPrompts.sort((a, b) => a.data.slug.localeCompare(b.data.slug))[promptIndex];
 const data = prompt.data;
 
-const toolDisplayNames: Record<string, string> = {
-  chatgpt: 'ChatGPT',
-  claude: 'Claude',
-  gemini: 'Gemini',
-  midjourney: 'Midjourney',
-  'dall-e': 'DALL-E',
-  'stable-diffusion': 'Stable Diffusion',
-  cursor: 'Cursor',
-  'github-copilot': 'GitHub Copilot',
-};
-
-const difficultyColor = {
-  beginner: 'green' as const,
-  intermediate: 'yellow' as const,
-  advanced: 'red' as const,
-};
+/* toolDisplayNames, difficultyColor imported from lib/constants */
 
 const siteUrl = 'https://aipromptindex.io';
 const pageUrl = `${siteUrl}/prompt-of-the-day/`;

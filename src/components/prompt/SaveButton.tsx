@@ -29,20 +29,25 @@ function SaveButtonInner({ promptSlug }: SaveButtonProps) {
 
   const [showTooltip, setShowTooltip] = useState(false);
 
+  const [isPending, setIsPending] = useState(false);
+
   const handleToggle = useCallback(async () => {
-    if (!clerkUserId) return;
+    if (!clerkUserId || isPending) return;
+    setIsPending(true);
     try {
       if (isSaved) {
-        await removePrompt({ clerkUserId, promptSlug });
+        await removePrompt({ promptSlug });
       } else {
-        await savePrompt({ clerkUserId, promptSlug });
+        await savePrompt({ promptSlug });
         setShowTooltip(true);
         setTimeout(() => setShowTooltip(false), 2000);
       }
     } catch (err) {
       console.error('Save toggle failed:', err);
+    } finally {
+      setIsPending(false);
     }
-  }, [clerkUserId, isSaved, promptSlug, savePrompt, removePrompt]);
+  }, [clerkUserId, isSaved, isPending, promptSlug, savePrompt, removePrompt]);
 
   // Not signed in -- wrap in SignInButton
   if (!isSignedIn) {

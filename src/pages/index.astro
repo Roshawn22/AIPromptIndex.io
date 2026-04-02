@@ -7,6 +7,7 @@ import Button from '../components/ui/Button.astro';
 import NewsletterSignup from '../components/common/NewsletterSignup.astro';
 import PromptCard from '../components/prompt/PromptCard.astro';
 import { getCollection } from 'astro:content';
+import { TOOL_DISPLAY_NAMES as toolDisplayNames } from '../lib/constants';
 
 const allPrompts = await getCollection('prompts');
 
@@ -17,17 +18,6 @@ const featuredPrompts = allPrompts
 const latestPrompts = [...allPrompts]
   .sort((a, b) => new Date(b.data.dateAdded).getTime() - new Date(a.data.dateAdded).getTime())
   .slice(0, 5);
-
-const toolDisplayNames: Record<string, string> = {
-  chatgpt: 'ChatGPT',
-  claude: 'Claude',
-  gemini: 'Gemini',
-  midjourney: 'Midjourney',
-  'dall-e': 'DALL-E',
-  'stable-diffusion': 'Stable Diffusion',
-  cursor: 'Cursor',
-  'github-copilot': 'GitHub Copilot',
-};
 
 const categories = [
   { name: 'Writing', slug: 'writing', icon: 'PenLine', description: 'Blog posts, emails, copywriting' },

@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/global/Header.astro';
 import Footer from '../../components/global/Footer.astro';
+import { TOOL_DISPLAY_NAMES as toolDisplayNames, CATEGORY_DISPLAY_NAMES as categoryDisplayNames, DIFFICULTY_COLORS as difficultyColor } from '../../lib/constants';
 import Badge from '../../components/ui/Badge.astro';
 import Tag from '../../components/ui/Tag.astro';
 import Breadcrumb from '../../components/common/Breadcrumb.astro';
@@ -35,33 +36,7 @@ const relatedPrompts = allPrompts
   .filter((p) => p.data.slug !== data.slug && (p.data.category === data.category || p.data.tool === data.tool))
   .slice(0, 4);
 
-const difficultyColor = {
-  beginner: 'green' as const,
-  intermediate: 'yellow' as const,
-  advanced: 'red' as const,
-};
-
-const toolDisplayNames: Record<string, string> = {
-  chatgpt: 'ChatGPT',
-  claude: 'Claude',
-  gemini: 'Gemini',
-  midjourney: 'Midjourney',
-  'dall-e': 'DALL-E',
-  'stable-diffusion': 'Stable Diffusion',
-  cursor: 'Cursor',
-  'github-copilot': 'GitHub Copilot',
-};
-
-const categoryDisplayNames: Record<string, string> = {
-  writing: 'Writing',
-  coding: 'Coding',
-  marketing: 'Marketing',
-  'image-generation': 'Image Generation',
-  business: 'Business',
-  'data-analysis': 'Data Analysis',
-  education: 'Education',
-  creative: 'Creative',
-};
+/* toolDisplayNames, categoryDisplayNames, difficultyColor imported from lib/constants */
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://aipromptindex.io';
 const pageUrl = `${siteUrl}/prompts/${data.slug}/`;

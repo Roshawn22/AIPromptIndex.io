@@ -32,16 +32,7 @@ const difficultyColor = {
   advanced: 'red' as const,
 };
 
-const toolDisplayNames: Record<string, string> = {
-  chatgpt: 'ChatGPT',
-  claude: 'Claude',
-  gemini: 'Gemini',
-  midjourney: 'Midjourney',
-  'dall-e': 'DALL-E',
-  'stable-diffusion': 'Stable Diffusion',
-  cursor: 'Cursor',
-  'github-copilot': 'GitHub Copilot',
-};
+import { TOOL_DISPLAY_NAMES as toolDisplayNames } from '../../lib/constants';
 
 const truncatedDescription = description.length > 150
   ? description.slice(0, 150).trimEnd() + '...'
