@@ -1,0 +1,23 @@
+{
+  "title": "Next.js API Route Handler with Validation",
+  "slug": "nextjs-route-handler",
+  "promptText": "Create a Next.js App Router API route handler for [ENDPOINT_PURPOSE] at the path [ROUTE_PATH]. The handler should support [HTTP_METHODS] methods. Use TypeScript and implement the following: 1) Request validation using Zod schemas for all inputs — path params, query params, and request body. Return descriptive 422 errors for validation failures with field-level messages. 2) Proper error handling with a try-catch wrapper that catches known error types (validation, auth, not-found, conflict) and returns appropriate HTTP status codes with consistent error response shapes. 3) Authentication check using [AUTH_METHOD] — return 401 for missing credentials and 403 for insufficient permissions. 4) Rate limiting headers in the response. 5) Type-safe response helpers that enforce the response schema at compile time. 6) Edge runtime compatibility if the handler does not need Node.js APIs. 7) Include JSDoc comments on the exported handler explaining the endpoint's purpose, parameters, and response codes. Generate the route handler file, the Zod schemas file, any shared types, and a sample test file using the Next.js test utilities. Follow Next.js 14+ App Router conventions with the route.ts file naming pattern.",
+  "description": "This prompt generates Next.js API route handlers that handle the boring but critical parts of API development — validation, error handling, authentication, and type safety — so you can focus on business logic. The Zod schema integration catches malformed requests before they reach your handler, while the typed response helpers prevent you from accidentally returning the wrong shape. The consistent error response format means your frontend team always knows what to expect when something fails. The included test file gives you a starting point for route testing, which is often skipped because the setup is tedious. Ideal for teams building Next.js applications who want their API routes to be as robust as a dedicated backend service.",
+  "tool": "cursor",
+  "category": "coding",
+  "tags": ["nextjs", "api-routes", "typescript", "zod", "validation"],
+  "difficulty": "intermediate",
+  "promptType": "code",
+  "variables": [
+    { "name": "ENDPOINT_PURPOSE", "description": "What the API endpoint does", "example": "managing user workspace invitations — creating, listing, accepting, and revoking invites" },
+    { "name": "ROUTE_PATH", "description": "The API route path", "example": "/api/workspaces/[workspaceId]/invitations" },
+    { "name": "HTTP_METHODS", "description": "Which HTTP methods to implement", "example": "GET (list invitations), POST (create invitation), PATCH (accept/decline)" },
+    { "name": "AUTH_METHOD", "description": "How authentication is handled", "example": "NextAuth.js session with role-based access control (owner, admin, member roles)" }
+  ],
+  "tips": ["Include your existing error handling pattern or middleware if you have one so Cursor stays consistent", "Specify your database ORM (Prisma, Drizzle, etc.) so the handler uses the right query patterns", "Ask Cursor to generate the corresponding frontend fetch hooks alongside the route handler"],
+  "exampleOutput": "```typescript\n// app/api/workspaces/[workspaceId]/invitations/route.ts\nimport { NextRequest, NextResponse } from 'next/server';\nimport { z } from 'zod';\nimport { getServerSession } from 'next-auth';\nimport { authOptions } from '@/lib/auth';\n\nconst CreateInvitationSchema = z.object({\n  email: z.string().email('Invalid email address'),\n  role: z.enum(['admin', 'member'], {\n    errorMap: () => ({ message: 'Role must be admin or member' }),\n  }),\n});\n\nconst ParamsSchema = z.object({\n  workspaceId: z.string().uuid('Invalid workspace ID'),\n});\n\n/**\n * POST /api/workspaces/[workspaceId]/invitations\n * Creates a new workspace invitation and sends an email.\n * Requires: owner or admin role in the workspace.\n * Returns: 201 with invitation object, or 409 if already invited.\n */\nexport async function POST(\n  request: NextRequest,\n  { params }: { params: { workspaceId: string } }\n) {\n  try {\n    const session = await getServerSession(authOptions);\n    if (!session?.user) {\n      return NextResponse.json(\n        { error: 'Authentication required' },\n        { status: 401 }\n      );\n    }\n    // ... validation and business logic\n  } catch (error) {\n    // ... error handling\n  }\n}\n```",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Next.js API Route Handler Prompt for Cursor",
+  "metaDescription": "Generate type-safe Next.js API route handlers with Zod validation and error handling using Cursor."
+}

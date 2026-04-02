@@ -1,0 +1,22 @@
+{
+  "title": "Docker Compose Generator for Multi-Service Apps",
+  "slug": "docker-compose-generator",
+  "promptText": "Generate a production-ready Docker Compose configuration for a [APP_TYPE] application with the following services: [SERVICES_LIST]. The deployment environment is [ENVIRONMENT]. Create a complete docker-compose.yml that includes: properly configured services with official base images and pinned version tags (never use 'latest'), health checks for every service with appropriate intervals and retries, a named network with proper service isolation (not all services need to talk to each other), named volumes for persistent data with explicit mount paths, environment variables loaded from a .env file with sensible defaults, resource limits (memory and CPU) appropriate for each service, restart policies suited to each service's criticality, proper dependency ordering with depends_on and health check conditions. Also generate: a companion .env.example file with all variables documented, a Dockerfile for the application service if it needs a custom build, a .dockerignore file, and brief setup instructions. Add comments in the compose file explaining non-obvious configuration choices. Ensure the configuration follows the Compose Specification (v3.8+). Flag any security concerns like running containers as root or exposed debug ports.",
+  "description": "This prompt generates Docker Compose configurations that follow production best practices out of the box, saving you from the hours of trial-and-error that typically accompany multi-service setups. Every service gets health checks, resource limits, and proper networking — the details that are easy to skip but critical for reliability. The companion .env.example and .dockerignore files mean your team can clone and run without configuration archaeology. The security audit catches common mistakes like exposed ports and root containers before they reach production. Whether you are setting up a local development environment or deploying to a Docker Compose-based production setup, this prompt produces configurations that work correctly the first time.",
+  "tool": "cursor",
+  "category": "coding",
+  "tags": ["docker", "docker-compose", "devops", "containerization", "infrastructure"],
+  "difficulty": "intermediate",
+  "promptType": "code",
+  "variables": [
+    { "name": "APP_TYPE", "description": "The type of application being containerized", "example": "full-stack SaaS application" },
+    { "name": "SERVICES_LIST", "description": "The services that need to run together", "example": "Next.js frontend, Node.js API, PostgreSQL database, Redis cache, Nginx reverse proxy, and Celery worker with RabbitMQ" },
+    { "name": "ENVIRONMENT", "description": "Where this will be deployed", "example": "local development with hot-reloading, with a separate production override file" }
+  ],
+  "tips": ["Specify your exact technology versions so Cursor pins the right image tags", "Ask for a docker-compose.override.yml for development-specific settings like volume mounts and debug ports", "Include your current Dockerfile if you have one so Cursor can optimize it alongside the compose config"],
+  "exampleOutput": "```yaml\n# docker-compose.yml\n# Full-stack SaaS application - Development Configuration\n# Compose Specification v3.8\n\nversion: '3.8'\n\nservices:\n  # --- Application Layer ---\n  frontend:\n    build:\n      context: ./frontend\n      dockerfile: Dockerfile\n      target: development\n    ports:\n      - \"3000:3000\"\n    volumes:\n      - ./frontend/src:/app/src  # Hot-reload source files\n    environment:\n      - NEXT_PUBLIC_API_URL=http://localhost:4000\n    depends_on:\n      api:\n        condition: service_healthy\n    networks:\n      - frontend-net\n    deploy:\n      resources:\n        limits:\n          memory: 512M\n          cpus: '0.5'\n    restart: unless-stopped\n    healthcheck:\n      test: [\"CMD\", \"curl\", \"-f\", \"http://localhost:3000/api/health\"]\n      interval: 30s\n      timeout: 10s\n      retries: 3\n      start_period: 40s\n\n  api:\n    build:\n      context: ./api\n      dockerfile: Dockerfile\n    # ... continued\n```",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Docker Compose Generator Prompt for Cursor",
+  "metaDescription": "Generate production-ready Docker Compose files for multi-service apps with Cursor. Health checks and security included."
+}

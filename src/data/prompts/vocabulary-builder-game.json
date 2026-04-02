@@ -1,0 +1,23 @@
+{
+  "title": "Vocabulary Builder Game",
+  "slug": "vocabulary-builder-game",
+  "promptText": "You are a creative language educator who designs engaging vocabulary games. Create an interactive vocabulary building game session for me.\n\nTarget language: [TARGET_LANGUAGE]\nCurrent proficiency level: [PROFICIENCY_LEVEL]\nTopic or theme for vocabulary: [VOCABULARY_THEME]\nPreferred game format: [GAME_FORMAT]\n\nDesign and run the game as follows:\n1. Select 15-20 vocabulary words appropriate for the specified level and theme, including a mix of nouns, verbs, adjectives, and useful phrases\n2. For each word, provide: the word in the target language, pronunciation guide, English translation, a memorable example sentence, and a mnemonic or memory hook\n3. Create 3 rounds of increasingly difficult game activities using the vocabulary:\n   - Round 1: Matching and recognition exercises with context clues\n   - Round 2: Fill-in-the-blank sentences requiring correct word form and usage\n   - Round 3: Creative production challenges like writing mini-dialogues or describing scenarios using multiple target words\n4. Include a scoring rubric so learners can self-assess their progress\n5. End with a spaced repetition schedule suggesting when to review these words for optimal retention\n6. Add cultural context notes where relevant to deepen understanding beyond simple translation",
+  "description": "This prompt creates structured vocabulary learning games that go beyond flashcards to build real language retention. It combines game-based learning with proven memory techniques like mnemonics, spaced repetition, and contextual usage. The three-round difficulty progression moves learners from recognition to active production, mirroring how vocabulary acquisition actually works in the brain. It is perfect for self-directed language learners, tutors looking for engaging lesson materials, or parents helping children learn a second language. The cultural context notes add depth that pure vocabulary lists miss, helping learners understand when and how to use words naturally.",
+  "tool": "chatgpt",
+  "category": "education",
+  "tags": ["vocabulary", "language-learning", "games", "education", "flashcards"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "TARGET_LANGUAGE", "description": "The language you are learning", "example": "Spanish" },
+    { "name": "PROFICIENCY_LEVEL", "description": "Your current level in the target language", "example": "Intermediate (B1 CEFR)" },
+    { "name": "VOCABULARY_THEME", "description": "The topic area for the vocabulary words", "example": "Ordering food at restaurants and discussing cuisine" },
+    { "name": "GAME_FORMAT", "description": "Your preferred style of game activity", "example": "Mix of multiple choice, fill-in-the-blank, and scenario-based challenges" }
+  ],
+  "tips": ["Specify words you already know so the game focuses on new vocabulary rather than review", "Ask for vocabulary from real-world contexts like menus, signs, or song lyrics for more memorable learning", "Request the game in a conversational format where you respond and get feedback for a more interactive experience"],
+  "exampleOutput": "**Vocabulary Game: Spanish Restaurant Survival**\n\n**Word List (5 of 18):**\n1. **la cuenta** (lah KWEN-tah) - the bill/check\n   - Example: \"¿Nos puede traer la cuenta, por favor?\"\n   - Memory hook: Think \"account\" - la cuenta is your account of what you owe\n\n**Round 1 - Context Detective:**\nRead the dialogue and match the underlined words to their meanings:\n\"Buenas tardes, ¿tienen una *mesa* para dos? Me gustaría ver el *menú* y quizás pedir la *especialidad* de la casa...\"\n\nA) specialty  B) table  C) menu\nMatch: mesa = ___, menú = ___, especialidad = ___",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Vocabulary Builder Game Prompt for ChatGPT",
+  "metaDescription": "Create interactive vocabulary learning games with this ChatGPT prompt. Includes mnemonics, spaced repetition schedules, and three rounds of activities."
+}

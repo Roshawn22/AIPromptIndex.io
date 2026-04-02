@@ -1,0 +1,23 @@
+{
+  "title": "Professional Email Response Templates",
+  "slug": "email-response-templates",
+  "promptText": "Create a professional email response for the following scenario: I need to reply to a [EMAIL_TYPE] email in a [TONE] tone. The context is: [SITUATION_CONTEXT]. The key points I need to address are: [KEY_POINTS]. Please write a complete email response that opens with an appropriate greeting, addresses each point clearly and concisely, maintains professionalism throughout, and closes with a clear next step or call to action. Keep the response between 150-250 words. Use proper email formatting with paragraphs, and avoid jargon unless the context requires it. If the situation involves a difficult or sensitive topic, acknowledge the other party's perspective before presenting my position. Include a subject line suggestion if this is a new thread.",
+  "description": "This prompt generates polished, ready-to-send email responses for common professional scenarios including client follow-ups, meeting requests, complaint handling, project updates, and more. Instead of staring at a blank compose window trying to strike the right tone, you get a well-structured response that addresses all key points while maintaining professionalism. The prompt adapts to different tones from formal to friendly, making it useful across industries and relationship types. Particularly valuable for non-native English speakers, people managing high email volumes, or anyone who wants to communicate more effectively without spending twenty minutes on a single reply.",
+  "tool": "chatgpt",
+  "category": "writing",
+  "tags": ["email", "professional", "communication", "business-writing", "templates"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "EMAIL_TYPE", "description": "The type of email you are responding to", "example": "client follow-up after a missed deadline" },
+    { "name": "TONE", "description": "The desired tone for the response", "example": "apologetic but confident" },
+    { "name": "SITUATION_CONTEXT", "description": "Background information about the situation", "example": "We missed a deliverable by two days due to a vendor delay, but the project is back on track" },
+    { "name": "KEY_POINTS", "description": "Main points to cover in the response", "example": "acknowledge the delay, explain the cause briefly, share the new timeline, offer a goodwill gesture" }
+  ],
+  "tips": ["Specify the relationship dynamic (e.g., new client vs. long-term partner) for better tone calibration", "Include any company-specific language or phrases you typically use", "Mention if there are cultural considerations for the recipient"],
+  "exampleOutput": "Subject: Update on Project Timeline — Back on Track\n\nHi Sarah,\n\nThank you for your patience regarding the Meridian project deliverables. I want to address the two-day delay directly — our primary vendor experienced an unexpected supply chain disruption that impacted our production schedule.\n\nHere's where we stand now:\n- All pending items are back in production as of Monday\n- The revised delivery date is March 15th\n- We've added a buffer day to ensure no further slips\n\nTo make up for the inconvenience, we'd like to include the additional analytics dashboard at no extra charge with this phase.\n\nPlease let me know if you'd like to schedule a quick call to walk through the updated timeline together.\n\nBest regards,\nAlex",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Professional Email Response Templates Prompt for ChatGPT",
+  "metaDescription": "Generate professional email responses for any business scenario with ChatGPT. Save time and communicate clearly."
+}

@@ -1,0 +1,23 @@
+{
+  "title": "Google Ads Copy Generator",
+  "slug": "google-ads-copy-generator",
+  "promptText": "Generate Google Ads copy for [PRODUCT_SERVICE] targeting [TARGET_AUDIENCE]. The campaign goal is [CAMPAIGN_GOAL]. My unique selling propositions are: [USP_LIST]. Create the following ad variations: 5 responsive search ad headlines (max 30 characters each) that include the primary keyword [PRIMARY_KEYWORD], 5 additional headlines focused on benefits, urgency, or social proof, 4 descriptions (max 90 characters each) that expand on the headlines with clear calls to action, 2 sitelink extensions with 25-character headers and 35-character descriptions each, and 3 callout extensions (max 25 characters each). For each headline and description, note which psychological trigger it uses (urgency, social proof, authority, specificity, curiosity). Ensure all character counts are within Google Ads limits. Include a negative keyword suggestion list of 10 terms to avoid wasting budget. Vary the calls to action across descriptions — don't repeat 'Get Started' or 'Learn More' on every line.",
+  "description": "This prompt generates complete Google Ads copy sets that are ready to paste into your campaign, with every element respecting character limits. Instead of writing one headline at a time and losing track of which angles you have covered, you get a complete responsive search ad with varied headlines, descriptions, and extensions in one output. The psychological trigger annotations help you understand why each line works, making it easier to iterate and test. The included negative keyword list prevents budget waste from day one. Designed for PPC managers, small business owners running their own ads, and agencies producing copy at scale across multiple client accounts.",
+  "tool": "chatgpt",
+  "category": "marketing",
+  "tags": ["google-ads", "PPC", "ad-copy", "search-ads", "paid-media"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "PRODUCT_SERVICE", "description": "What you are advertising", "example": "online bookkeeping software for freelancers" },
+    { "name": "TARGET_AUDIENCE", "description": "Who you are trying to reach", "example": "self-employed professionals and freelancers who do their own books" },
+    { "name": "CAMPAIGN_GOAL", "description": "What you want the ads to achieve", "example": "drive free trial signups at under $25 CPA" },
+    { "name": "PRIMARY_KEYWORD", "description": "The main search keyword to target", "example": "freelance bookkeeping software" }
+  ],
+  "tips": ["Include your current best-performing headline so ChatGPT can generate variations that build on what already works", "Mention your competitor names so the copy can differentiate without naming them directly", "Specify your landing page URL so descriptions can align with the page's messaging"],
+  "exampleOutput": "## Headlines (30 char max)\n**Keyword Headlines:**\n1. \"Freelance Bookkeeping Made Easy\" (30) — Specificity\n2. \"Bookkeeping Software for 1099s\" (30) — Specificity\n3. \"#1 Freelancer Bookkeeping App\" (29) — Authority\n4. \"Freelance Books in 10 Min/Week\" (30) — Specificity\n5. \"Smart Bookkeeping for Solos\" (27) — Benefit\n\n**Benefit/Urgency Headlines:**\n6. \"Ditch the Spreadsheets Today\" (28) — Urgency\n7. \"Tax Season? You're Ready.\" (25) — Emotion\n8. \"Join 15,000+ Freelancers\" (25) — Social Proof\n9. \"Free 14-Day Trial — No Card\" (28) — Risk Removal\n10. \"Save 5 Hours Every Month\" (25) — Specificity\n\n## Descriptions (90 char max)\n1. \"Track income, expenses & invoices in one place. Start your free trial — setup takes 3 min.\" (90)\n2. \"Built for freelancers, not accountants. Automatic tax categories save hours every quarter.\" (90)...",
+  "isFeatured": true,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Google Ads Copy Generator Prompt for ChatGPT",
+  "metaDescription": "Generate complete Google Ads copy sets with headlines, descriptions, and extensions using ChatGPT. Character-count ready."
+}

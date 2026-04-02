@@ -1,0 +1,23 @@
+{
+  "title": "Survey Results Analyzer",
+  "slug": "survey-results-analyzer",
+  "promptText": "You are a research analyst specializing in survey methodology and qualitative data analysis. I have collected survey responses and need help extracting meaningful insights.\n\nSurvey topic: [SURVEY_TOPIC]\nNumber of respondents: [RESPONDENT_COUNT]\nKey questions and response summaries: [RESPONSE_DATA]\nBusiness context: [BUSINESS_CONTEXT]\n\nPlease provide a comprehensive analysis:\n1. Executive summary with the 3-5 most important findings, each supported by specific data points\n2. Identify statistically notable patterns, segments, or correlations in the responses\n3. Highlight any surprising or counterintuitive findings that challenge common assumptions\n4. Analyze open-ended responses for recurring themes, sentiment, and notable quotes worth highlighting\n5. Flag potential biases in the survey design that might affect interpretation, such as leading questions, selection bias, or low response rates\n6. Provide actionable recommendations ranked by expected impact and ease of implementation\n7. Suggest follow-up questions or deeper dives that would strengthen the findings\n8. Format the key metrics in a way that is ready for a stakeholder presentation, including suggested chart types for each finding",
+  "description": "This prompt turns raw survey data into a structured analysis report with actionable insights. It goes beyond simple tallying by identifying hidden patterns, flagging potential biases, and translating findings into business recommendations. Whether you ran a customer satisfaction survey, employee engagement pulse, or market research study, this prompt helps you extract the story behind the numbers. It is especially useful for teams without a dedicated research analyst who need to present survey findings to stakeholders quickly and credibly. The output includes both quantitative analysis and qualitative theme extraction for open-ended responses.",
+  "tool": "claude",
+  "category": "data-analysis",
+  "tags": ["survey", "research", "insights", "qualitative-analysis", "reporting"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "SURVEY_TOPIC", "description": "The subject and purpose of the survey", "example": "Customer satisfaction after migrating to our new platform" },
+    { "name": "RESPONDENT_COUNT", "description": "Total number of survey responses received", "example": "342 responses out of 1,200 customers contacted (28.5% response rate)" },
+    { "name": "RESPONSE_DATA", "description": "Summary of key questions and aggregated responses", "example": "Q1 Overall satisfaction (1-10): Mean 6.8, Median 7. Q2 Would you recommend us: Yes 58%, Maybe 27%, No 15%. Q3 Biggest pain point (open text): 342 responses..." },
+    { "name": "BUSINESS_CONTEXT", "description": "Background information to contextualize the findings", "example": "We migrated 1,200 enterprise customers to a new platform 3 months ago. Previous satisfaction score was 8.2. Churn has increased 4% since migration." }
+  ],
+  "tips": ["Include the actual survey questions so the analysis can flag any leading or ambiguous wording", "Paste a sample of open-ended responses rather than just summaries to get better thematic analysis", "Mention any demographic breakdowns available so the analysis can identify segment-specific patterns"],
+  "exampleOutput": "**Executive Summary:**\n1. Overall satisfaction dropped 1.4 points post-migration (8.2 to 6.8), with the steepest decline among enterprise accounts with 50+ users\n2. The top three pain points from open-ended analysis are: onboarding complexity (mentioned by 41%), missing features from legacy platform (28%), and performance slowness (22%)\n3. Despite lower satisfaction scores, NPS intent remains moderate at 58% promoters, suggesting frustration is recoverable if addressed quickly...",
+  "isFeatured": true,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Survey Results Analyzer Prompt for Claude",
+  "metaDescription": "Analyze survey data and extract actionable insights with this Claude prompt. Get executive summaries, pattern detection, and stakeholder-ready recommendations."
+}

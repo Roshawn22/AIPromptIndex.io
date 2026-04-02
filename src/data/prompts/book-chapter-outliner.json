@@ -1,0 +1,23 @@
+{
+  "title": "Non-Fiction Book Chapter Outliner",
+  "slug": "book-chapter-outliner",
+  "promptText": "Create a detailed chapter outline for Chapter [CHAPTER_NUMBER] of my non-fiction book about [BOOK_TOPIC]. The chapter title is [CHAPTER_TITLE] and it should cover [CHAPTER_SCOPE]. The target reader is [TARGET_READER]. For this chapter outline, provide: a one-paragraph chapter summary explaining the key takeaway, a compelling opening hook (anecdote, question, or surprising fact) that draws the reader in, 5-7 main sections with descriptive subheadings, for each section include 3-4 bullet points detailing the key arguments or information to cover, suggest 2-3 real-world examples or case studies per section that support the points, identify where to place data visualizations or callout boxes, include transition sentences between major sections to maintain narrative flow, end with a chapter summary and bridge to the next chapter. Ensure the outline follows a logical progression from foundational concepts to advanced application. Mark which sections are essential versus optional for hitting the target word count of [WORD_COUNT] words.",
+  "description": "This prompt creates comprehensive chapter outlines that serve as a complete writing roadmap for non-fiction authors. Instead of staring at a blank page wondering what to write next, you get a structured blueprint with specific examples, data points, and transitions already mapped out. The outline format distinguishes essential sections from optional ones, helping you hit word count targets without padding. The emphasis on real-world examples and case studies ensures your chapters feel grounded rather than theoretical. Whether you are writing a business book, self-help guide, or technical manual, this prompt adapts to your subject matter and audience level. Particularly valuable for first-time authors who need guidance on chapter architecture.",
+  "tool": "claude",
+  "category": "writing",
+  "tags": ["book-writing", "outline", "non-fiction", "chapter-planning", "author"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "CHAPTER_NUMBER", "description": "Which chapter in the book", "example": "3" },
+    { "name": "BOOK_TOPIC", "description": "The overall subject of the book", "example": "building a personal brand in the creator economy" },
+    { "name": "CHAPTER_TITLE", "description": "The title of this specific chapter", "example": "Finding Your Niche Without Limiting Your Growth" },
+    { "name": "TARGET_READER", "description": "Who the book is written for", "example": "aspiring content creators with 0-10K followers who want to turn their expertise into income" }
+  ],
+  "tips": ["Share your full table of contents so Claude understands where this chapter fits in the larger arc", "Mention competing books so the outline can differentiate your approach", "Ask Claude to flag sections where original research or interviews would strengthen the chapter"],
+  "exampleOutput": "# Chapter 3: Finding Your Niche Without Limiting Your Growth\n\n**Chapter Summary:** This chapter dismantles the myth that niching down means boxing yourself in. Readers will learn the \"Niche Ladder\" framework for starting specific and expanding strategically...\n\n## Opening Hook\nIn 2022, Ali Abdaal had 3 million subscribers watching his videos about being a junior doctor. Then he stopped making medical content entirely. His channel didn't shrink — it doubled...\n\n## Section 1: The Niche Paradox (Essential — 1,200 words)\n- Why \"niche down\" is simultaneously the best and worst advice for new creators\n- The difference between a topic niche and an audience niche\n- Data: creators who start broad grow 3x slower in Year 1 but...\n\n**Suggested examples:** Ali Abdaal's pivot, Mr. Beast's early gaming videos, Sahil Bloom's finance-to-general-wisdom arc\n\n[Bridge: Now that we understand why specificity works, let's build your personal niche strategy...]",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Non-Fiction Book Chapter Outliner Prompt for Claude",
+  "metaDescription": "Create detailed non-fiction chapter outlines with Claude. Structured writing roadmaps with examples and transitions."
+}

@@ -1,0 +1,23 @@
+{
+  "title": "Customer Testimonial Writer and Polisher",
+  "slug": "customer-testimonial-writer",
+  "promptText": "Transform the following raw customer feedback into a polished, credible testimonial for [PRODUCT_SERVICE]. The original feedback is: [RAW_FEEDBACK]. The customer's name is [CUSTOMER_NAME] and they are [CUSTOMER_ROLE]. Generate three versions of the testimonial: 1) Short version (1-2 sentences, under 40 words) for use on landing pages, ads, and social media graphics — this should capture the single most impactful statement. 2) Medium version (3-4 sentences, 50-80 words) for website testimonial sections and email marketing — include the problem, the solution experience, and a specific result. 3) Long version (5-7 sentences, 100-150 words) for case study snippets and sales collateral — tell the full story arc from challenge through transformation to outcome. For all versions: preserve the customer's authentic voice and personality, keep any specific numbers or results they mentioned (do not inflate), add credibility by making the language feel natural rather than marketing-polished, bold the most quotable phrase in each version, and include a suggested headline that could appear above the testimonial. Do not fabricate details or results that were not in the original feedback.",
+  "description": "This prompt transforms messy, informal customer feedback into professional testimonials while preserving authenticity. Most raw feedback is either too brief, too rambling, or buried in email threads to use directly on your website. This prompt extracts the most compelling elements and restructures them into three ready-to-use formats without adding false claims or inflated results. The emphasis on maintaining the customer's natural voice ensures testimonials sound real rather than ghostwritten. The three-length approach means one piece of feedback yields content for landing pages, email campaigns, case studies, and social proof sections simultaneously. Essential for marketing teams, SaaS companies, and agencies that need to scale social proof production.",
+  "tool": "gemini",
+  "category": "marketing",
+  "tags": ["testimonials", "social-proof", "customer-feedback", "copywriting", "case-study"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "PRODUCT_SERVICE", "description": "The product or service the testimonial is about", "example": "ProjectBoard project management software" },
+    { "name": "RAW_FEEDBACK", "description": "The unedited customer feedback to transform", "example": "honestly before projectboard we were using like 4 different tools and nothing talked to each other. now everything is in one place and our standups went from 30 min to 10. the team actually likes using it which never happens with PM tools lol. saved us probably 6 hours a week across the team" },
+    { "name": "CUSTOMER_NAME", "description": "Name of the customer", "example": "Rachel Torres" },
+    { "name": "CUSTOMER_ROLE", "description": "Customer's title and company", "example": "Engineering Manager at Vantage Media" }
+  ],
+  "tips": ["Always get written approval from the customer before publishing any version of their testimonial", "Include the specific metrics from the raw feedback — numbers make testimonials 2-3x more believable", "Ask Gemini to suggest a follow-up question you could ask the customer to strengthen the testimonial further"],
+  "exampleOutput": "## Short Version (Landing Page)\n**Headline: From 4 Tools to 1 — In a Week**\n\"ProjectBoard **saved our team 6 hours a week** and cut our standups from 30 minutes to 10. It's the first PM tool my team actually enjoys using.\"\n— Rachel Torres, Engineering Manager at Vantage Media\n\n## Medium Version (Website)\n**Headline: The PM Tool Her Team Actually Likes**\nBefore ProjectBoard, Rachel's team juggled four disconnected tools for project management. \"Nothing talked to each other, and we were wasting time just staying organized,\" she says. After switching, **standups dropped from 30 minutes to 10**, and the team saves an estimated 6 hours per week. \"It's the first PM tool my engineers actually enjoy using — and that never happens.\"\n— Rachel Torres, Engineering Manager at Vantage Media",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Customer Testimonial Writer Prompt for Gemini",
+  "metaDescription": "Transform raw customer feedback into polished testimonials with Gemini. Three formats for landing pages and case studies."
+}

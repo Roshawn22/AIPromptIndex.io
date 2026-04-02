@@ -1,0 +1,23 @@
+{
+  "title": "Math Problem Set Generator",
+  "slug": "math-problem-set-generator",
+  "promptText": "You are a math educator who creates well-structured problem sets that build understanding progressively. Generate a complete problem set based on the following specifications.\n\nMath topic: [MATH_TOPIC]\nStudent level: [STUDENT_LEVEL]\nNumber of problems: [PROBLEM_COUNT]\nDifficulty distribution: [DIFFICULTY_MIX]\n\nFor the problem set, please:\n1. Create the specified number of problems arranged in order of increasing difficulty\n2. Include a mix of problem types: computational practice, word problems with real-world contexts, conceptual understanding questions, and at least one challenge problem that requires creative thinking\n3. For word problems, use diverse, culturally inclusive scenarios that connect math to students' real lives\n4. Provide a detailed answer key with full step-by-step solutions, not just final answers\n5. For each problem, note the specific sub-skill being tested so teachers can identify where students struggle\n6. Include two worked examples at the beginning that demonstrate the key techniques needed for the problem set\n7. Add scaffolding hints for the harder problems that teachers can optionally share with struggling students\n8. Flag common misconceptions or typical errors students make on each problem type\n9. Suggest follow-up problems for students who need additional practice on specific sub-skills",
+  "description": "This prompt generates comprehensive math problem sets with progressive difficulty, worked examples, and complete solution keys. Unlike random problem generators, it structures problems to build understanding systematically, mixing computational practice with word problems and conceptual questions. Each problem targets a specific sub-skill, making it easy for teachers to diagnose exactly where students need help. The included scaffolding hints and common misconception flags make the problem set useful for differentiated instruction. Ideal for math teachers creating homework or assessments, tutors preparing practice materials, or students who want additional practice beyond their textbook with full solutions to learn from.",
+  "tool": "chatgpt",
+  "category": "education",
+  "tags": ["math", "problem-set", "education", "teaching", "assessment"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "MATH_TOPIC", "description": "The specific math concept or chapter to cover", "example": "Solving systems of linear equations (substitution and elimination methods)" },
+    { "name": "STUDENT_LEVEL", "description": "Grade level or course name", "example": "Algebra 1, 9th grade" },
+    { "name": "PROBLEM_COUNT", "description": "How many problems to generate", "example": "15 problems" },
+    { "name": "DIFFICULTY_MIX", "description": "The desired distribution of easy, medium, and hard problems", "example": "5 easy (skill-building), 6 medium (application), 3 hard (multi-step), 1 challenge (competition-level)" }
+  ],
+  "tips": ["Specify any real-world contexts that are relevant to your students for more engaging word problems", "Mention your curriculum standards like Common Core so the problems align with required competencies", "Request problems that avoid requiring a calculator if you want to assess mental math alongside the topic"],
+  "exampleOutput": "**Problem Set: Systems of Linear Equations**\n\n**Worked Example 1 (Substitution):**\nSolve: y = 2x + 3 and 3x + y = 18\nStep 1: Since y is already isolated, substitute (2x + 3) for y in the second equation...\n\n**Problem 1 (Easy - Substitution with isolated variable):**\nSolve the system: y = 4x - 1 and 2x + y = 11\nSub-skill: Direct substitution when one variable is already isolated\nCommon error: Students forget to substitute back to find the second variable...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Math Problem Set Generator Prompt for ChatGPT",
+  "metaDescription": "Generate structured math problem sets with solutions, scaffolding hints, and difficulty progression using this ChatGPT prompt for teachers and tutors."
+}

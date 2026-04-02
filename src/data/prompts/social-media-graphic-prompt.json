@@ -1,0 +1,22 @@
+{
+  "title": "Social Media Graphic Prompt",
+  "slug": "social-media-graphic-prompt",
+  "promptText": "Create a social media graphic with consistent branding for the following specifications.\n\nBrand and platform: [BRAND_PLATFORM]\nContent and message: [CONTENT_MESSAGE]\nVisual style guidelines: [STYLE_GUIDELINES]\nCall to action or text overlay needed: [CTA_TEXT]\n\nDesign requirements:\n- The graphic should immediately grab attention in a crowded social media feed within the first half-second of viewing\n- Use bold, high-contrast composition with a clear focal point that draws the eye to the key message\n- Leave intentional space for text overlay areas where the message will be readable against the background\n- The color palette and visual style should be consistent with the brand guidelines provided\n- Include visual hierarchy that guides the viewer from the hook element to the supporting content to the call to action\n- The image should maintain impact when viewed at small mobile sizes, approximately 400px wide\n- Avoid overly busy backgrounds that would compete with text overlays or reduce readability\n- Style: digital illustration, vibrant colors, professional marketing aesthetic, clean composition with text-safe zones, modern and polished --ar 1:1 --s 600",
+  "description": "This prompt creates scroll-stopping social media graphics using DALL-E that maintain consistent brand aesthetics while optimizing for engagement. It addresses the unique challenges of social media design, including small mobile display sizes, split-second attention windows, and the need for text overlay zones. The prompt builds in visual hierarchy principles that guide viewers from hook to message to call-to-action, following the same patterns used by professional social media design teams. It is ideal for content creators, social media managers, and small business owners who need to produce branded graphics quickly without a graphic designer. The output provides a strong visual foundation that can be enhanced with text overlays in tools like Canva.",
+  "tool": "dall-e",
+  "category": "image-generation",
+  "tags": ["social-media", "graphic-design", "marketing", "content-creation", "branding"],
+  "difficulty": "beginner",
+  "promptType": "image",
+  "variables": [
+    { "name": "BRAND_PLATFORM", "description": "The brand name and target social media platform", "example": "FitCore Nutrition, for Instagram feed posts" },
+    { "name": "CONTENT_MESSAGE", "description": "The topic or message the graphic should communicate", "example": "New product launch: plant-based protein powder in three flavors" },
+    { "name": "STYLE_GUIDELINES", "description": "Brand colors, fonts, and visual direction", "example": "Colors: electric lime green (#B8FF00) and matte black. Style: bold, energetic, fitness-focused, clean product photography aesthetic" },
+    { "name": "CTA_TEXT", "description": "The text that will be overlaid and the desired call to action", "example": "Headline: 'Fuel Different' Subtext: 'Plant protein that performs. Link in bio.'" }
+  ],
+  "tips": ["Specify the exact platform dimensions since Instagram (1:1), Stories (9:16), and LinkedIn (1.91:1) all require different compositions", "Request multiple variations using different color treatments of the same layout for A/B testing", "Ask for versions with and without text safe zones to see the full design versus the practical version"],
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Social Media Graphic Prompt for DALL-E",
+  "metaDescription": "Create branded social media graphics with DALL-E using this prompt. Optimized for engagement with text-safe zones, visual hierarchy, and mobile readability."
+}

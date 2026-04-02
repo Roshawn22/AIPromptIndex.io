@@ -1,0 +1,23 @@
+{
+  "title": "Speech Writer Assistant for Events and Presentations",
+  "slug": "speech-writer-assistant",
+  "promptText": "Write a [SPEECH_LENGTH]-minute speech for [EVENT_TYPE] on the topic of [TOPIC]. The audience is [AUDIENCE_DESCRIPTION]. The speech should: open with a powerful hook — a story, surprising statistic, or provocative question that immediately captures attention, establish the speaker's credibility and connection to the topic within the first 60 seconds, present 3 main points in a logical flow with transitions between each, include at least one personal anecdote or case study per main point to make abstract ideas concrete, use rhetorical devices (tricolon, anaphora, contrast) to create memorable moments, build toward a clear thesis or call to action, close with a callback to the opening hook for a sense of completeness. Write in a conversational spoken style — short sentences, contractions, natural pauses marked with ellipses or dashes. Include stage direction notes in brackets where timing or delivery matters. The tone should be [DESIRED_TONE]. Avoid reading like an essay — this needs to sound great when spoken aloud.",
+  "description": "This prompt produces speeches that are designed to be delivered, not just read. The emphasis on spoken cadence, rhetorical devices, and stage directions means you get a draft that sounds natural at the podium rather than stiff and academic. The three-point structure with personal anecdotes follows the format that audiences retain best, while the callback close creates a satisfying narrative arc. Whether you are delivering a keynote, a wedding toast, a company all-hands address, or a TEDx talk, this prompt adapts to the event context and audience. The included delivery notes help even nervous speakers know when to pause, emphasize, or slow down for impact.",
+  "tool": "claude",
+  "category": "writing",
+  "tags": ["speech", "public-speaking", "presentation", "keynote", "rhetoric"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "SPEECH_LENGTH", "description": "Duration of the speech in minutes", "example": "15" },
+    { "name": "EVENT_TYPE", "description": "The type of event where the speech will be given", "example": "annual company all-hands meeting" },
+    { "name": "TOPIC", "description": "The main subject of the speech", "example": "embracing uncertainty as a competitive advantage in 2026" },
+    { "name": "AUDIENCE_DESCRIPTION", "description": "Who will be listening", "example": "200 employees across engineering, sales, and operations teams" }
+  ],
+  "tips": ["Record yourself reading the draft aloud to catch awkward phrasing before you edit", "Provide examples of speakers you admire so Claude can match their style", "Ask for a one-page outline version first to nail the structure before generating the full speech"],
+  "exampleOutput": "[Walk to center stage. Pause. Make eye contact.]\n\nTwo years ago, I sat in a conference room and watched our entire product roadmap become irrelevant — overnight.\n\n[Pause for two beats.]\n\nA competitor we'd never heard of launched something we'd been planning for eighteen months. And in that moment, I had a choice. Panic... or pivot.\n\nI chose to pivot. And that decision — made in uncertainty, without a playbook — turned out to be the best strategic move this company has ever made.\n\n[Transition to first point.]\n\nToday I want to talk about why uncertainty isn't the enemy of good strategy. It IS good strategy...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Speech Writer Assistant Prompt for Claude",
+  "metaDescription": "Write compelling speeches for events and presentations with Claude. Natural delivery-ready drafts with stage notes."
+}

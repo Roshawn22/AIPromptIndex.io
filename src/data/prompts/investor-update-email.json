@@ -1,0 +1,23 @@
+{
+  "title": "Investor Update Email",
+  "slug": "investor-update-email",
+  "promptText": "You are a startup communications advisor who helps founders write clear, professional investor updates. Draft a monthly investor update email based on the following information.\n\nCompany name and stage: [COMPANY_INFO]\nKey metrics this month: [MONTHLY_METRICS]\nMajor wins and milestones: [WINS]\nChallenges and how you are addressing them: [CHALLENGES]\n\nStructure the update email as follows:\n1. Subject line that is concise and includes the month and year\n2. Opening paragraph: A 2-3 sentence executive summary of the month covering the overall trajectory, written with confident but honest tone\n3. Key metrics section: Present 5-7 core metrics in a clean table format with month-over-month and year-over-year comparisons where available, using arrows or indicators for trends\n4. Wins section: Highlight 2-3 major accomplishments with brief context on why each matters for the business trajectory\n5. Challenges section: Be transparent about 1-2 current challenges, including what you have tried, what you are doing next, and any specific help investors could provide\n6. Product and roadmap update: Brief summary of what shipped and what is coming next quarter\n7. Team update: Any key hires, departures, or organizational changes\n8. Ask section: Specific, actionable requests where investors can help, such as introductions, advice on specific decisions, or candidate referrals\n9. Closing: Forward-looking statement about next month's priorities\n\nWrite in a tone that is professional yet personable, demonstrating command of the business while being transparent about difficulties.",
+  "description": "This prompt helps startup founders craft polished monthly investor update emails that maintain strong relationships with their backers. It follows the format preferred by top VCs, combining quantitative metrics with narrative context, transparent challenge reporting, and specific asks that make it easy for investors to add value. The structure ensures you cover all the essential elements without rambling, keeping updates concise enough that busy investors actually read them. Whether you are pre-seed or Series B, this prompt adapts to your stage and helps establish a cadence of professional communication that builds investor confidence over time.",
+  "tool": "claude",
+  "category": "business",
+  "tags": ["startup", "investor-relations", "email", "fundraising", "communication"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "COMPANY_INFO", "description": "Company name, stage, and brief description", "example": "DataFlow AI, Series A ($8M raised), B2B SaaS for automated data pipeline management" },
+    { "name": "MONTHLY_METRICS", "description": "Key business metrics for the month", "example": "MRR: $142K (up 12% MoM), Customers: 47 (net +5), Net Revenue Retention: 118%, Burn: $280K/mo, Runway: 14 months" },
+    { "name": "WINS", "description": "Major accomplishments and milestones", "example": "Closed our first enterprise deal ($48K ACV) with a Fortune 500 company. Launched self-serve onboarding reducing time-to-value from 14 days to 3." },
+    { "name": "CHALLENGES", "description": "Current obstacles and your approach to solving them", "example": "Engineering hiring is slower than planned. We have extended offers to 3 senior engineers but lost 2 to FAANG counteroffers. Adjusting comp bands and adding remote flexibility." }
+  ],
+  "tips": ["Send updates consistently on the same date each month even when there is not much to report", "Include a specific ask in every update since investors want to help but need concrete requests", "Lead with your strongest metric in the opening paragraph to anchor the reader's perception of your trajectory"],
+  "exampleOutput": "**Subject: DataFlow AI - March 2026 Investor Update**\n\nHi team,\n\nMarch was our strongest month since launch. We crossed $142K MRR (up 12% MoM), closed our first Fortune 500 customer, and shipped self-serve onboarding that cut time-to-value by 79%.\n\n**Key Metrics:**\n| Metric | March | Feb | MoM Change |\n|--------|-------|-----|------------|\n| MRR | $142K | $127K | +12% |\n| Customers | 47 | 42 | +5 |\n| NRR | 118% | 112% | +6pts |...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Investor Update Email Prompt for Claude",
+  "metaDescription": "Write professional monthly investor update emails with this Claude prompt. Includes metrics tables, milestone highlights, and specific investor asks."
+}

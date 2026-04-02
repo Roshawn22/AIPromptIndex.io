@@ -1,0 +1,23 @@
+{
+  "title": "Spreadsheet Formula Builder",
+  "slug": "spreadsheet-formula-builder",
+  "promptText": "You are an advanced spreadsheet specialist fluent in both Microsoft Excel and Google Sheets formulas. I need help building a formula to accomplish a specific task.\n\nWhat I want to calculate: [CALCULATION_GOAL]\nMy spreadsheet application: [SPREADSHEET_APP]\nRelevant column layout: [COLUMN_LAYOUT]\nAny conditions or filters: [CONDITIONS]\n\nPlease provide:\n1. The complete formula ready to paste into a cell, with the exact syntax for my chosen spreadsheet app\n2. A plain-English breakdown of how the formula works, explaining each nested function from the inside out\n3. An alternative approach using a different formula strategy in case the first is too slow on large datasets\n4. Edge case warnings such as how the formula handles blank cells, text in numeric columns, or #N/A errors\n5. A helper column approach if the single-formula solution is too complex to maintain\n6. Performance tips if the dataset exceeds 10,000 rows, including whether XLOOKUP, FILTER, or array formulas would be more efficient\n\nMake sure the formula is compatible with the latest version of the specified application and note any features that require specific versions or add-ons.",
+  "description": "This prompt converts plain English descriptions of calculations into working spreadsheet formulas for Excel or Google Sheets. Whether you need a complex VLOOKUP with multiple criteria, dynamic array formulas, conditional aggregations, or nested IF statements, this prompt generates paste-ready formulas with full explanations. It is ideal for business analysts, finance professionals, and operations teams who know what they want to calculate but struggle with spreadsheet syntax. The output includes not just the formula but also performance considerations and alternative approaches, making it valuable for both quick fixes and production-grade spreadsheet models.",
+  "tool": "chatgpt",
+  "category": "data-analysis",
+  "tags": ["excel", "google-sheets", "formulas", "spreadsheet", "productivity"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "CALCULATION_GOAL", "description": "What you want the formula to compute in plain English", "example": "Sum all revenue in column D where the region in column B is 'West' and the date in column A falls within Q1 2026" },
+    { "name": "SPREADSHEET_APP", "description": "Excel or Google Sheets with version if known", "example": "Google Sheets" },
+    { "name": "COLUMN_LAYOUT", "description": "Description of your column headers and data types", "example": "A: Date (mm/dd/yyyy), B: Region (text), C: Product (text), D: Revenue (currency), E: Units (integer)" },
+    { "name": "CONDITIONS", "description": "Any special conditions, filters, or edge cases to handle", "example": "Ignore rows where revenue is blank or zero, and the date column sometimes has text entries like 'TBD'" }
+  ],
+  "tips": ["Specify your exact column letters and header row to get a formula you can paste directly without editing", "Mention if you need the formula to work as an array formula or a single-cell formula", "If you are building a financial model, ask for the LAMBDA version so you can name and reuse complex logic"],
+  "exampleOutput": "**Primary Formula (Google Sheets):**\n```\n=SUMPRODUCT((B2:B1000=\"West\")*(A2:A1000>=DATE(2026,1,1))*(A2:A1000<=DATE(2026,3,31))*(ISNUMBER(A2:A1000))*(D2:D1000<>\"\")*(D2:D1000<>0)*D2:D1000)\n```\n\n**How it works:** The SUMPRODUCT multiplies five TRUE/FALSE arrays element-by-element...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Spreadsheet Formula Builder Prompt for ChatGPT",
+  "metaDescription": "Build complex Excel and Google Sheets formulas from plain English with this ChatGPT prompt. Get paste-ready formulas with explanations and edge case handling."
+}

@@ -1,0 +1,23 @@
+{
+  "title": "API Documentation Generator from Code",
+  "slug": "api-documentation-generator",
+  "promptText": "Generate comprehensive API documentation for the following [FRAMEWORK] codebase. The API serves [API_PURPOSE]. Analyze the code and produce documentation in [DOC_FORMAT] format that includes: 1) API Overview section with base URL, authentication method, rate limiting details, and versioning strategy. 2) For each endpoint: HTTP method and path, description of what it does and when to use it, request parameters (path, query, body) with types and required/optional status, request body JSON schema with field descriptions, example request with curl and [LANGUAGE] SDK snippets, success response with status code and full JSON example, error responses for common failure modes (400, 401, 403, 404, 422, 500) with error message formats, and any side effects or webhooks triggered. 3) Data models section documenting shared types and enums. 4) Authentication guide with step-by-step setup. 5) Pagination documentation if applicable. 6) Changelog section template. Use consistent formatting and cross-reference related endpoints. Flag any undocumented behavior, missing error handling, or inconsistencies you find in the code.",
+  "description": "This prompt transforms raw API code into developer-friendly documentation that follows the standards engineers expect from tools like Stripe and Twilio. Instead of manually tracing through route handlers and middleware to document each endpoint, you get complete documentation generated directly from the code with accurate parameter types, response shapes, and error codes. The multi-format code examples (curl plus SDK) reduce friction for developers integrating your API. The prompt also acts as a code review by flagging undocumented behavior and missing error handling, catching issues that would otherwise surface as developer support tickets. Ideal for teams shipping APIs without dedicated technical writers or for generating first-draft documentation that writers can then polish.",
+  "tool": "github-copilot",
+  "category": "coding",
+  "tags": ["api", "documentation", "openapi", "developer-experience", "rest-api"],
+  "difficulty": "intermediate",
+  "promptType": "code",
+  "variables": [
+    { "name": "FRAMEWORK", "description": "The backend framework used", "example": "Express.js with TypeScript" },
+    { "name": "API_PURPOSE", "description": "What the API does", "example": "a task management platform with projects, tasks, comments, and team collaboration" },
+    { "name": "DOC_FORMAT", "description": "The documentation format to generate", "example": "OpenAPI 3.1 YAML with a companion Markdown guide" },
+    { "name": "LANGUAGE", "description": "The SDK language for code examples", "example": "Python" }
+  ],
+  "tips": ["Paste your actual route files rather than describing them for the most accurate documentation", "Include your middleware files so Copilot can document authentication and validation behavior", "Ask for a Postman collection export alongside the docs for instant API testing"],
+  "exampleOutput": "```yaml\nopenapi: 3.1.0\ninfo:\n  title: TaskFlow API\n  version: 2.1.0\n  description: Task management platform API for projects, tasks, and team collaboration.\n\nservers:\n  - url: https://api.taskflow.io/v2\n    description: Production\n\npaths:\n  /projects:\n    get:\n      summary: List all projects\n      description: Returns a paginated list of projects the authenticated user has access to.\n      tags: [Projects]\n      parameters:\n        - name: page\n          in: query\n          schema:\n            type: integer\n            default: 1\n        - name: per_page\n          in: query\n          schema:\n            type: integer\n            default: 20\n            maximum: 100\n      responses:\n        '200':\n          description: Successful response\n          content:\n            application/json:\n              schema:\n                $ref: '#/components/schemas/ProjectList'\n```",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "API Documentation Generator Prompt for GitHub Copilot",
+  "metaDescription": "Auto-generate comprehensive API documentation from code with GitHub Copilot. OpenAPI specs and developer guides."
+}

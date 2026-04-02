@@ -1,0 +1,23 @@
+{
+  "title": "Meeting Notes Summarizer",
+  "slug": "meeting-notes-summarizer",
+  "promptText": "You are an executive assistant who excels at distilling long meetings into clear, actionable summaries. Summarize the following meeting content into a structured format.\n\nMeeting type and context: [MEETING_TYPE]\nParticipants: [PARTICIPANTS]\nMeeting transcript or notes: [MEETING_CONTENT]\nKey decisions needed or agenda items: [AGENDA_ITEMS]\n\nProduce a meeting summary with the following sections:\n1. Meeting header: Date, duration, attendees, and meeting objective in one line\n2. Executive summary: A 3-4 sentence paragraph capturing the most important outcomes, written so someone who was not at the meeting can quickly understand what happened and what it means\n3. Key decisions made: Bullet list of each decision with who made it, the rationale, and any dissenting views noted\n4. Action items table: A table with columns for task description, owner, deadline, and priority level, sorted by deadline\n5. Discussion highlights: Brief summaries of each major topic discussed, including different perspectives raised and any unresolved disagreements\n6. Parking lot: Topics that were raised but deferred to a future meeting, with suggested owners and timelines\n7. Risks and blockers identified: Any obstacles, dependencies, or concerns that could affect progress on action items\n8. Next meeting: Suggested agenda items for the follow-up meeting based on open items and deferred topics",
+  "description": "This prompt converts raw meeting transcripts or rough notes into polished, actionable meeting summaries that ensure nothing falls through the cracks. The structured format separates decisions from discussions, extracts clear action items with owners and deadlines, and captures deferred topics in a parking lot for follow-up. It is designed for busy professionals who attend back-to-back meetings and need a reliable system for tracking commitments. The executive summary enables stakeholders who missed the meeting to stay informed without reading the full notes. Especially valuable for project managers, team leads, and executive assistants who summarize meetings for broader distribution.",
+  "tool": "gemini",
+  "category": "business",
+  "tags": ["meetings", "productivity", "action-items", "notes", "project-management"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "MEETING_TYPE", "description": "The type of meeting and its purpose", "example": "Weekly product team standup to review sprint progress and unblock issues" },
+    { "name": "PARTICIPANTS", "description": "List of attendees and their roles", "example": "Sarah Chen (PM), Mike Johnson (Engineering Lead), Lisa Park (Designer), Tom Williams (QA), Priya Sharma (Data Analyst)" },
+    { "name": "MEETING_CONTENT", "description": "The raw transcript, recording notes, or detailed meeting notes", "example": "Sarah opened by reviewing sprint velocity... Mike mentioned the API migration is blocked by the auth team... Lisa presented two design options for the onboarding flow..." },
+    { "name": "AGENDA_ITEMS", "description": "The planned topics or decisions that needed to be made", "example": "1. Sprint progress review 2. API migration blocker 3. Onboarding redesign decision 4. Q2 planning timeline" }
+  ],
+  "tips": ["Paste the raw transcript rather than pre-edited notes to capture nuances and action items you might have missed", "Include participant roles so the summary can correctly attribute decisions and assign action items", "Specify your preferred format for action items if your team uses a specific project management tool like Jira or Asana"],
+  "exampleOutput": "**Meeting Summary: Weekly Product Standup**\nDate: April 2, 2026 | Duration: 45 min | Attendees: S. Chen, M. Johnson, L. Park, T. Williams, P. Sharma\nObjective: Review sprint progress, resolve API migration blocker, decide on onboarding design\n\n**Executive Summary:**\nThe team is on track for 80% of sprint commitments. The API migration is blocked pending auth team capacity, which Sarah will escalate to the VP of Engineering today. The team selected Lisa's Design Option B for onboarding after reviewing conversion data.\n\n**Action Items:**\n| Task | Owner | Deadline | Priority |\n|------|-------|----------|----------|\n| Escalate auth team blocker to VP Eng | Sarah | Apr 2 | High |...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Meeting Notes Summarizer Prompt for Gemini",
+  "metaDescription": "Summarize meeting recordings into action items and decisions with this Gemini prompt. Get structured notes with owners, deadlines, and follow-up agendas."
+}

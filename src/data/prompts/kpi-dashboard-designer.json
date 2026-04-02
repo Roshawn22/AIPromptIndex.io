@@ -1,0 +1,23 @@
+{
+  "title": "KPI Dashboard Designer",
+  "slug": "kpi-dashboard-designer",
+  "promptText": "You are a business intelligence consultant specializing in KPI framework design and dashboard architecture. Help me design a comprehensive KPI dashboard.\n\nBusiness type: [BUSINESS_TYPE]\nDepartment or function: [DEPARTMENT]\nPrimary business goals: [BUSINESS_GOALS]\nCurrent data sources available: [DATA_SOURCES]\n\nPlease design a complete dashboard specification:\n1. Identify the 8-12 most critical KPIs for this context, organized into a hierarchy of leading and lagging indicators\n2. For each KPI, define: the exact calculation formula, data source, refresh frequency, target or benchmark, and red/yellow/green threshold values\n3. Design the dashboard layout with specific widget placement, specifying which KPIs should be scorecards, trend lines, gauges, or comparison charts\n4. Create a visual hierarchy that puts the most actionable metrics above the fold and detailed breakdowns below\n5. Define drill-down paths showing how each top-level metric can be decomposed for root cause analysis\n6. Recommend alert rules for metrics that need proactive notification when they deviate from targets\n7. Include a suggested filter panel with the most useful dimension slicers for this business context\n8. Specify the ideal dashboard refresh cadence and any real-time requirements",
+  "description": "This prompt generates a complete KPI dashboard specification including metric selection, calculation formulas, layout design, and drill-down architecture. Instead of guessing which metrics matter, you get a structured framework built on business intelligence best practices. It covers everything from choosing the right leading and lagging indicators to defining alert thresholds and filter panels. The output is detailed enough to hand directly to a BI developer or implement yourself in tools like Tableau, Power BI, or Looker. It is ideal for operations leaders, startup founders, and analysts who need to build dashboards that drive action rather than just display numbers.",
+  "tool": "gemini",
+  "category": "data-analysis",
+  "tags": ["kpi", "dashboard", "business-intelligence", "metrics", "reporting"],
+  "difficulty": "advanced",
+  "promptType": "text",
+  "variables": [
+    { "name": "BUSINESS_TYPE", "description": "The type of business or industry", "example": "B2B SaaS company with $5M ARR, 200 customers" },
+    { "name": "DEPARTMENT", "description": "The team or function this dashboard serves", "example": "Customer Success team" },
+    { "name": "BUSINESS_GOALS", "description": "The primary objectives this dashboard should track", "example": "Reduce churn from 8% to 4% annually, increase NRR to 115%, improve time-to-value for new customers" },
+    { "name": "DATA_SOURCES", "description": "Available data systems and tools", "example": "Salesforce CRM, Stripe billing, Intercom support tickets, Mixpanel product analytics, PostgreSQL data warehouse" }
+  ],
+  "tips": ["Include your current pain points so the dashboard design prioritizes metrics that address real gaps", "Mention who will view this dashboard daily versus weekly since it affects layout and detail level", "Specify if you need mobile-friendly layouts since this constrains the number of widgets per row"],
+  "exampleOutput": "**Dashboard: Customer Success Command Center**\n\n**Row 1 - Health Overview (above the fold):**\n- Large scorecard: Net Revenue Retention (NRR) - Current: 108%, Target: 115%, Status: Yellow\n- Gauge: Monthly Churn Rate - Current: 0.7%, Threshold: Green <0.33%, Yellow 0.33-0.67%, Red >0.67%\n- Trend line: Customer Health Score distribution over 12 months\n\n**KPI #1: Net Revenue Retention**\n- Formula: (Starting MRR + Expansion - Contraction - Churn) / Starting MRR\n- Source: Stripe billing API\n- Refresh: Daily...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "KPI Dashboard Designer Prompt for Gemini",
+  "metaDescription": "Design KPI dashboards with metrics, layouts, and drill-down paths using this Gemini prompt. Get implementation-ready specs for Tableau, Power BI, or Looker."
+}

@@ -1,0 +1,23 @@
+{
+  "title": "Product Launch Marketing Campaign Planner",
+  "slug": "product-launch-campaign",
+  "promptText": "Create a comprehensive product launch marketing plan for [PRODUCT_NAME], a [PRODUCT_DESCRIPTION] launching on [LAUNCH_DATE]. The target audience is [TARGET_AUDIENCE] and the marketing budget is [BUDGET]. Build a complete launch plan with these sections: 1) Pre-launch phase (4 weeks before): teaser campaign strategy, waitlist or early access mechanics, influencer or partner outreach plan, content calendar with specific topics for blog/social/email. 2) Launch week: day-by-day timeline of activities including press outreach, social media posts, email sequence (3-5 emails with subject lines and key messages), paid advertising plan with channel allocation and targeting, live event or webinar concept. 3) Post-launch phase (2 weeks after): momentum-building tactics, user-generated content strategy, retargeting campaign structure, metrics dashboard with KPIs to track. 4) Channel-specific plans: detail the approach for each of these channels — email, social media (specify platforms), paid ads, PR/media, partnerships. Include specific copy angles and messaging themes for each phase, not just tactics. Budget allocation percentages across channels with rationale.",
+  "description": "This prompt produces a complete, actionable product launch plan that covers the full timeline from pre-launch buzz to post-launch momentum. Instead of a vague strategy document, you get specific daily activities, email subject lines, budget allocations, and KPIs you can immediately execute against. The three-phase structure ensures you build anticipation before launch, maximize impact during launch week, and sustain momentum afterward — the phase most companies neglect. The channel-specific breakdowns prevent the common mistake of spreading effort too thin without a clear plan for each platform. Suitable for SaaS launches, physical product drops, course releases, and service announcements at any budget level.",
+  "tool": "chatgpt",
+  "category": "marketing",
+  "tags": ["product-launch", "marketing-plan", "campaign", "go-to-market", "strategy"],
+  "difficulty": "advanced",
+  "promptType": "text",
+  "variables": [
+    { "name": "PRODUCT_NAME", "description": "Name of the product being launched", "example": "FocusFlow 2.0" },
+    { "name": "PRODUCT_DESCRIPTION", "description": "What the product is and does", "example": "an AI-powered focus timer app that blocks distractions and schedules deep work sessions" },
+    { "name": "LAUNCH_DATE", "description": "When the product launches", "example": "May 15, 2026" },
+    { "name": "TARGET_AUDIENCE", "description": "Primary audience for the launch", "example": "remote knowledge workers and students aged 22-38 who struggle with digital distractions" }
+  ],
+  "tips": ["Include your existing audience size (email list, social followers) so the plan is realistic for your reach", "Mention any partnerships or influencer relationships already in place to build on them", "Ask ChatGPT to create a Gantt-style timeline you can import into your project management tool"],
+  "exampleOutput": "# FocusFlow 2.0 Launch Plan\n\n## Phase 1: Pre-Launch (April 17 — May 14)\n\n### Week 1-2: Build Anticipation\n- **Email:** Send \"Something's Coming\" teaser to existing list (Subject: \"We've been quiet. Here's why.\")\n- **Social:** Start a \"Deep Work Diaries\" content series — 3 posts/week showing productivity stats and user stories\n- **Waitlist:** Launch early access page with referral mechanic (refer 3 friends = skip the line)\n- **Target:** 2,000 waitlist signups by Week 2\n\n### Week 3-4: Warm the Audience\n- **Influencer outreach:** Send advance access to 15 productivity YouTubers and newsletter authors\n- **Blog:** Publish \"The State of Digital Distraction in 2026\" data piece for SEO and press pickup\n- **Email:** Drip sequence — Day 1: problem awareness, Day 4: behind-the-scenes, Day 7: feature preview\n\n## Phase 2: Launch Week (May 15-21)\n\n### Day 1 — Launch Day\n- 6:00 AM: Email blast to full list + waitlist (Subject: \"FocusFlow 2.0 is live\")\n- 8:00 AM: Press embargo lifts — coordinate with 5 publications...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Product Launch Campaign Planner Prompt for ChatGPT",
+  "metaDescription": "Plan a complete product launch campaign with ChatGPT. Pre-launch through post-launch with daily timelines and budgets."
+}

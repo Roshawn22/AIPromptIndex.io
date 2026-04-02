@@ -1,0 +1,22 @@
+{
+  "title": "Conventional Git Commit Message Writer",
+  "slug": "git-commit-message-writer",
+  "promptText": "Analyze the following git diff and write a conventional commit message following the [CONVENTION] format. The diff is from the [PROJECT_TYPE] project. Here is the diff: [GIT_DIFF]. Generate a commit message with: 1) A type prefix (feat, fix, refactor, docs, test, chore, perf, ci, style, build) chosen based on the actual changes — not guessed. 2) An optional scope in parentheses identifying the module or area affected. 3) A subject line under 72 characters in imperative mood (e.g., 'add' not 'added' or 'adds'). 4) A body paragraph (wrapped at 72 characters) explaining WHY the change was made, not just what changed — the diff already shows the what. 5) A footer with references to related issues or tickets if a ticket pattern is detected in the diff. Also provide: a one-sentence summary of the change's impact for code reviewers, a risk assessment (low/medium/high) based on what the diff touches, and flag any concerns like modified database schemas, changed API contracts, or removed error handling. If the diff contains multiple unrelated changes, suggest splitting into separate commits with a message for each.",
+  "description": "This prompt generates precise, conventional commit messages by actually analyzing the diff rather than relying on vague descriptions. The emphasis on explaining 'why' in the body means your git history becomes genuinely useful for future developers trying to understand decisions, not just a log of what files changed. The risk assessment and concern flagging turn the commit message into a lightweight code review checkpoint. The split suggestion catches the common anti-pattern of bundling unrelated changes. Whether your team uses Conventional Commits, Angular convention, or a custom format, this prompt adapts to your standard. Essential for maintaining a clean git history in collaborative projects.",
+  "tool": "cursor",
+  "category": "coding",
+  "tags": ["git", "commit-messages", "conventional-commits", "version-control", "developer-tools"],
+  "difficulty": "beginner",
+  "promptType": "code",
+  "variables": [
+    { "name": "CONVENTION", "description": "The commit message convention to follow", "example": "Conventional Commits 1.0.0" },
+    { "name": "PROJECT_TYPE", "description": "The type of project for context", "example": "Next.js e-commerce application" },
+    { "name": "GIT_DIFF", "description": "The actual git diff output to analyze", "example": "diff --git a/src/cart/CartProvider.tsx..." }
+  ],
+  "tips": ["Configure this as a git hook or Cursor shortcut so it runs automatically on every commit", "Include the related ticket number in your prompt if it is not visible in the diff", "For large diffs, ask Cursor to suggest a commit sequence rather than one monolithic message"],
+  "exampleOutput": "```\nfix(cart): prevent duplicate items when adding from quick-buy button\n\nThe quick-buy button on product cards was not checking existing cart\nitems before dispatching ADD_ITEM, causing duplicate entries when\nusers clicked rapidly. This led to incorrect totals at checkout.\n\nAdd an idempotency check in CartProvider that merges quantities\nfor matching product + variant combinations instead of creating\nnew line items.\n\nCloses #347\n```\n\n**Reviewer summary:** Fixes a cart duplication bug by adding idempotency to the add-item action.\n**Risk:** Low — isolated to cart state management, no API or schema changes.\n**Concerns:** None detected.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Conventional Git Commit Message Writer Prompt for Cursor",
+  "metaDescription": "Generate precise conventional commit messages from git diffs with Cursor. Explains the why, not just the what."
+}

@@ -1,0 +1,23 @@
+{
+  "title": "Data Visualization Recommender",
+  "slug": "data-visualization-recommender",
+  "promptText": "You are a data visualization expert with deep knowledge of chart types, visual encoding principles, and storytelling with data. I have a dataset and need your help choosing the best visualization approach.\n\nDataset description: [DATASET_DESCRIPTION]\nThe key question I want to answer: [ANALYSIS_QUESTION]\nMy audience is: [AUDIENCE]\nThe tool I plan to use for visualization: [VIZ_TOOL]\n\nPlease recommend the top 3 chart types for this scenario, ranked by effectiveness. For each recommendation:\n1. Name the specific chart type and explain why it suits this data and question\n2. Describe the ideal axis mapping, color encoding, and any grouping or faceting strategy\n3. Warn about common mistakes or misleading representations with this chart type\n4. Provide a brief specification I can use to build it, including suggested labels, legends, and annotations\n5. Suggest one alternative view that would complement the primary chart for deeper exploration\n\nAlso identify any data preparation steps needed before visualization, such as aggregation, normalization, or outlier handling.",
+  "description": "This prompt helps analysts and data professionals select the most effective chart types for their specific data and audience. Rather than defaulting to bar charts and line graphs, this prompt provides expert-level guidance on visual encoding, axis mapping, and common pitfalls for each recommendation. It considers the nature of the data, the analytical question being asked, and who will be viewing the visualization. The output includes actionable specifications that can be directly implemented in tools like Tableau, Power BI, or Python libraries, making it a practical bridge between raw data and compelling visual stories.",
+  "tool": "gemini",
+  "category": "data-analysis",
+  "tags": ["data-visualization", "charts", "analytics", "dashboard", "reporting"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "DATASET_DESCRIPTION", "description": "Overview of your data including columns, types, and row count", "example": "Monthly sales data with columns: date, region (4 regions), product_category (8 categories), revenue, units_sold. 960 rows over 2 years." },
+    { "name": "ANALYSIS_QUESTION", "description": "The specific question your visualization should answer", "example": "Which product categories are growing fastest across regions?" },
+    { "name": "AUDIENCE", "description": "Who will view this visualization and their data literacy level", "example": "Executive leadership team in a quarterly business review" },
+    { "name": "VIZ_TOOL", "description": "The visualization tool or library you plan to use", "example": "Tableau Desktop" }
+  ],
+  "tips": ["Be specific about data types and cardinality so the recommendations account for visual clutter", "Mention if your data has significant outliers or missing values as this affects chart choice", "Include whether this is for a live presentation, printed report, or interactive dashboard since each format favors different chart types"],
+  "exampleOutput": "**Recommendation 1: Small Multiples Line Chart (Sparkline Grid)**\nWhy: With 8 categories across 4 regions, a single chart would be cluttered. Small multiples let you compare growth trends at a glance.\n- X-axis: Month (time), Y-axis: Revenue, Facet: Region (columns) x Category (rows)\n- Color: Single color per panel with a reference line for overall average\n- Pitfall: Ensure all panels share the same Y-axis scale to avoid misleading comparisons...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Data Visualization Recommender Prompt for Gemini",
+  "metaDescription": "Get expert chart type recommendations for your data with this Gemini prompt. Includes axis mapping, encoding strategies, and implementation specs."
+}

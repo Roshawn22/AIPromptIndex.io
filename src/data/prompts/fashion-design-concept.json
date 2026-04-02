@@ -1,0 +1,22 @@
+{
+  "title": "Fashion Design Concept",
+  "slug": "fashion-design-concept",
+  "promptText": "Generate a fashion design concept and mood board visualization for a new collection.\n\nCollection name and season: [COLLECTION_NAME]\nTarget demographic and price point: [TARGET_DEMOGRAPHIC]\nDesign inspiration and theme: [DESIGN_INSPIRATION]\nKey garment types needed: [GARMENT_TYPES]\n\nVisualize the following design concept:\n- Create a cohesive fashion illustration showing the collection's signature silhouettes and fabric textures\n- The design should communicate the collection's mood, era influences, and cultural references through visual storytelling\n- Include details that suggest fabric weight, drape, and construction techniques without losing the artistic quality of a fashion illustration\n- The color palette should be clearly visible with intentional use of primary, secondary, and accent colors\n- Show how different pieces in the collection relate to each other and can be styled together\n- Incorporate the seasonal context through styling, layering, and accessory suggestions\n- The illustration style should feel like a professional fashion design presentation board\n- Balance trend-forward elements with wearable, commercially viable design choices\n- Style: fashion illustration, editorial quality, mood board aesthetic, rich textures and fabrics visible, professional fashion design presentation, mixed media collage feel, high fashion photography reference --ar 3:4 --s 700",
+  "description": "This prompt generates fashion design concepts and mood board visualizations using Stable Diffusion that capture the aesthetic vision of a collection before physical prototyping. It bridges the gap between a designer's verbal concept and visual realization, producing images that communicate silhouettes, color palettes, fabric textures, and overall mood. The output functions like a digital version of the mood boards and concept sketches that fashion designers create early in the collection development process. It is valuable for emerging fashion designers exploring concepts before investing in samples, fashion students developing portfolio pieces, and boutique owners creating custom collection briefs for manufacturers.",
+  "tool": "stable-diffusion",
+  "category": "image-generation",
+  "tags": ["fashion", "design", "mood-board", "illustration", "creative"],
+  "difficulty": "intermediate",
+  "promptType": "image",
+  "variables": [
+    { "name": "COLLECTION_NAME", "description": "The collection name and target season", "example": "SOLSTICE - Fall/Winter 2027" },
+    { "name": "TARGET_DEMOGRAPHIC", "description": "The intended customer and price positioning", "example": "Professional women 28-45, contemporary price point ($200-$600 per piece)" },
+    { "name": "DESIGN_INSPIRATION", "description": "The creative inspiration and thematic references", "example": "Japanese wabi-sabi philosophy meets Scandinavian minimalism. Imperfect textures, muted earth tones, architectural draping, raw edge details." },
+    { "name": "GARMENT_TYPES", "description": "The key pieces to include in the concept", "example": "Oversized wool coat, asymmetric wrap dress, wide-leg trousers, structured blazer with soft shoulders, knit midi skirt" }
+  ],
+  "tips": ["Include specific fabric types and textures to get more realistic material representation in the visualization", "Reference specific designers or fashion houses whose aesthetic aligns with your vision for more accurate style matching", "Generate concepts at different stages from abstract mood board to specific garment illustrations to explore the design direction progressively"],
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Fashion Design Concept Prompt for Stable Diffusion",
+  "metaDescription": "Generate fashion design concepts and mood boards with Stable Diffusion. Visualize collections with silhouettes, color palettes, and fabric textures."
+}

@@ -1,0 +1,23 @@
+{
+  "title": "Personalized Resume Cover Letter Writer",
+  "slug": "resume-cover-letter-writer",
+  "promptText": "Write a personalized cover letter for a [JOB_TITLE] position at [COMPANY_NAME]. Here is the job description: [JOB_DESCRIPTION]. Here is my relevant background: [MY_BACKGROUND]. The cover letter should: open with a compelling hook that shows genuine interest in this specific company (not a generic opener), connect my top 2-3 experiences directly to the job requirements using specific examples and quantifiable results, demonstrate knowledge of the company's mission, recent news, or industry position, show personality while maintaining professionalism, address any potential concerns like career gaps or industry switches proactively and positively, close with confidence and a clear call to action. Keep it to one page (250-350 words). Avoid overused phrases like 'I am writing to express my interest' or 'I believe I would be a great fit.' Write in first person with an active, confident voice. The tone should match the company culture — more formal for finance or law, more casual for startups or creative agencies.",
+  "description": "This prompt creates tailored cover letters that hiring managers actually want to read, moving beyond the generic templates that get immediately discarded. By analyzing the specific job description against your background, it identifies the strongest connection points and presents them with concrete evidence. The prompt explicitly avoids the overused phrases that signal a mass-produced application, and instead produces letters that feel personal and researched. The culture-matching tone adjustment means your letter for a startup sounds different from one for a Fortune 500 company. Particularly useful for career changers who need to frame transferable skills effectively, or anyone applying to competitive positions where the cover letter is a differentiator.",
+  "tool": "gemini",
+  "category": "writing",
+  "tags": ["cover-letter", "resume", "job-application", "career", "hiring"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "JOB_TITLE", "description": "The position you are applying for", "example": "Senior Product Manager" },
+    { "name": "COMPANY_NAME", "description": "The company you are applying to", "example": "Stripe" },
+    { "name": "JOB_DESCRIPTION", "description": "Key requirements from the job posting", "example": "5+ years PM experience, API/platform products, data-driven decision making, cross-functional leadership" },
+    { "name": "MY_BACKGROUND", "description": "Your relevant experience and accomplishments", "example": "7 years as PM at fintech companies, launched a payments API serving 10K developers, grew platform revenue 40% YoY, MBA from Wharton" }
+  ],
+  "tips": ["Paste the full job description rather than summarizing it for better keyword matching", "Include specific company news or product launches to make the letter feel researched", "Generate 2-3 versions with different opening hooks and pick the strongest one"],
+  "exampleOutput": "Dear Hiring Team,\n\nWhen Stripe launched Adaptive Pricing last quarter, I spent the weekend reading every piece of documentation — not because I had to, but because pricing infrastructure is exactly the kind of complex, high-leverage problem I love solving.\n\nOver the past seven years in fintech product management, I've built the type of products Stripe's merchants depend on. At PayFlow, I led the team that designed and launched a developer payments API from zero to 10,000 active integrations in 18 months. That experience taught me how to balance developer experience with business outcomes — our platform revenue grew 40% year-over-year while maintaining a Net Promoter Score of 72 among developers...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Personalized Cover Letter Writer Prompt for Gemini",
+  "metaDescription": "Create tailored cover letters that stand out with Gemini. Match your experience to job requirements automatically."
+}

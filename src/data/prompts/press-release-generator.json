@@ -1,0 +1,23 @@
+{
+  "title": "Press Release Generator for Company Announcements",
+  "slug": "press-release-generator",
+  "promptText": "Write a professional press release for [COMPANY_NAME] announcing [ANNOUNCEMENT_TYPE]. Here are the key details: [KEY_DETAILS]. The target media outlets are [TARGET_MEDIA]. Follow standard press release format: start with a dateline (city, state — date), write a compelling headline that summarizes the news in under 10 words, include a subheadline that adds context, open with the most newsworthy information in the first paragraph (who, what, when, where, why), expand with supporting details and data points in the body paragraphs, include a quote from [SPOKESPERSON_NAME] who is [SPOKESPERSON_TITLE], add relevant industry context or market data to establish significance, close with a boilerplate 'About [COMPANY_NAME]' section, and end with media contact information placeholder. Keep the total length between 400-600 words. Write in AP style. Make the tone authoritative but not promotional — journalists should be able to use this with minimal editing.",
+  "description": "This prompt generates press releases that follow the inverted pyramid structure journalists expect, making your announcement more likely to get picked up by media outlets. Rather than writing marketing copy disguised as news, this produces genuinely newsworthy content with proper AP style formatting, quotable executive statements, and the industry context editors look for. The structured approach ensures you never miss critical elements like the boilerplate or media contact section. Useful for product launches, funding announcements, partnerships, executive hires, awards, and company milestones. Saves hours compared to drafting from scratch and produces consistently publication-ready results.",
+  "tool": "claude",
+  "category": "writing",
+  "tags": ["press-release", "PR", "media", "communications", "AP-style"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "COMPANY_NAME", "description": "Name of the company issuing the release", "example": "NovaTech Solutions" },
+    { "name": "ANNOUNCEMENT_TYPE", "description": "What is being announced", "example": "a $15M Series A funding round led by Sequoia Capital" },
+    { "name": "KEY_DETAILS", "description": "Essential facts and figures for the announcement", "example": "Funding will be used to expand the engineering team from 20 to 50, launch in three new markets (UK, Germany, Japan), and release the enterprise product tier in Q3 2026" },
+    { "name": "SPOKESPERSON_NAME", "description": "Name and title of the person being quoted", "example": "Maria Chen, CEO and Co-Founder" }
+  ],
+  "tips": ["Include specific numbers and metrics — they make the release more credible and quotable", "Provide context about your industry so Claude can position the news within broader trends", "Ask for a shorter 200-word version as well for wire services and social media"],
+  "exampleOutput": "FOR IMMEDIATE RELEASE\n\nNovaTech Solutions Raises $15M Series A to Expand AI-Powered Supply Chain Platform\nFunding led by Sequoia Capital will accelerate international expansion and enterprise product launch\n\nSAN FRANCISCO, CA — April 2, 2026 — NovaTech Solutions, a supply chain intelligence platform, today announced it has raised $15 million in Series A funding led by Sequoia Capital with participation from existing investors.\n\nThe company plans to use the capital to triple its engineering team and expand operations into the United Kingdom, Germany and Japan by year-end...\n\n\"This funding validates what our customers have been telling us — the supply chain needs smarter tools, not more dashboards,\" said Maria Chen, CEO and Co-Founder of NovaTech Solutions...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Press Release Generator Prompt for Claude",
+  "metaDescription": "Generate professional press releases in AP style with Claude. Publication-ready format for company announcements."
+}

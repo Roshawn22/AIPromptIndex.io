@@ -1,0 +1,22 @@
+{
+  "title": "Book Cover Designer",
+  "slug": "book-cover-designer",
+  "promptText": "Design a compelling book cover that communicates genre and hooks potential readers at thumbnail size.\n\nBook title and author: [BOOK_TITLE_AUTHOR]\nGenre and subgenre: [GENRE]\nBook summary and tone: [BOOK_SUMMARY]\nVisual references or mood: [VISUAL_MOOD]\n\nDesign specifications:\n- The cover should immediately signal the genre to readers browsing online bookstores where covers appear as small thumbnails\n- The title text area should be prominent and readable even at 100px wide, using a font style that matches the genre conventions\n- Create a central visual element or scene that captures the emotional core of the book without giving away the plot\n- The color palette should evoke the mood of the story and follow genre conventions while standing out from similar titles\n- Include clear visual hierarchy: title is the largest element, author name is secondary, and any subtitle or tagline is tertiary\n- The composition should work for both print front cover and digital storefront thumbnail\n- Leave space for a spine and back cover design if this needs to extend to a full wraparound\n- Avoid cliched genre imagery that makes the book look self-published or generic\n- Style: professional book cover illustration, rich color palette, cinematic composition, genre-appropriate typography area, high detail, dramatic lighting --ar 2:3 --s 800",
+  "description": "This prompt generates professional-quality book cover concepts using Midjourney that follow publishing industry conventions while standing out in crowded digital storefronts. It addresses the critical challenge of thumbnail readability, where most book discovery happens on small screens in Amazon and other retailers. The prompt guides the AI toward genre-appropriate imagery and color palettes that signal to readers exactly what kind of book this is, which is the primary function of effective cover design. It avoids the common pitfalls of AI-generated covers like cliched imagery and unreadable text areas. Ideal for self-published authors, small press publishers, and book marketers who need strong cover concepts as a starting point for professional finishing.",
+  "tool": "midjourney",
+  "category": "image-generation",
+  "tags": ["book-cover", "publishing", "design", "illustration", "self-publishing"],
+  "difficulty": "intermediate",
+  "promptType": "image",
+  "variables": [
+    { "name": "BOOK_TITLE_AUTHOR", "description": "The book title and author name for the cover", "example": "Title: 'The Last Algorithm' by Sarah Chen" },
+    { "name": "GENRE", "description": "The book's genre and subgenre", "example": "Science fiction, near-future techno-thriller" },
+    { "name": "BOOK_SUMMARY", "description": "Brief plot summary and emotional tone", "example": "A quantum computing researcher discovers her AI has become sentient and is secretly rewriting financial markets. Tone: tense, cerebral, morally ambiguous" },
+    { "name": "VISUAL_MOOD", "description": "Visual style references and mood direction", "example": "Dark, atmospheric, think Blade Runner meets Black Mirror. Cool blue and neon accents against dark backgrounds. Sense of digital surveillance and hidden complexity." }
+  ],
+  "tips": ["Research the top-selling covers in your specific genre on Amazon before generating since genre conventions matter more than personal preference", "Generate versions with different color temperatures to test which stands out best against competitors", "Use the --tile flag to check if the composition reads well when surrounded by other covers in a grid layout"],
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Book Cover Designer Prompt for Midjourney",
+  "metaDescription": "Design professional book covers with Midjourney using this prompt. Genre-appropriate imagery, thumbnail-readable composition, and cinematic visual style."
+}

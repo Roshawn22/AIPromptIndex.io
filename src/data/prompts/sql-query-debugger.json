@@ -1,0 +1,23 @@
+{
+  "title": "SQL Query Debugger",
+  "slug": "sql-query-debugger",
+  "promptText": "You are a senior database engineer specializing in SQL performance and correctness. I have a SQL query that is either producing incorrect results or running too slowly. Here is my query:\n\n[SQL_QUERY]\n\nThe database system is [DATABASE_SYSTEM]. The expected behavior is [EXPECTED_BEHAVIOR], but instead it [ACTUAL_BEHAVIOR].\n\nPlease analyze this query step by step:\n1. Identify any logical errors, including incorrect JOINs, missing WHERE conditions, or faulty GROUP BY clauses\n2. Check for common pitfalls like NULL handling issues, implicit type conversions, or off-by-one errors in date ranges\n3. Evaluate performance concerns such as missing indexes, unnecessary subqueries, or full table scans\n4. Rewrite the corrected and optimized version of the query with inline comments explaining each change\n5. Suggest an execution plan analysis approach to verify the improvements\n6. Recommend any schema-level changes that would further boost performance",
+  "description": "This prompt transforms ChatGPT into a SQL debugging assistant that systematically diagnoses and fixes problematic database queries. Whether your query returns wrong results, times out on large datasets, or produces unexpected NULLs, this prompt walks through a structured analysis covering logical errors, performance bottlenecks, and optimization opportunities. It is particularly valuable for developers who work with complex multi-table joins, aggregation queries, or legacy SQL that has grown unwieldy over time. The output includes a corrected query with explanatory comments, making it both a fix and a learning tool for improving your SQL skills going forward.",
+  "tool": "chatgpt",
+  "category": "data-analysis",
+  "tags": ["sql", "debugging", "database", "optimization", "performance"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "SQL_QUERY", "description": "The SQL query you need debugged or optimized", "example": "SELECT u.name, COUNT(o.id) FROM users u LEFT JOIN orders o ON u.id = o.user_id WHERE o.status = 'completed' GROUP BY u.name" },
+    { "name": "DATABASE_SYSTEM", "description": "The database engine you are using", "example": "PostgreSQL 15" },
+    { "name": "EXPECTED_BEHAVIOR", "description": "What the query should return", "example": "all users with their completed order count, including users with zero orders" },
+    { "name": "ACTUAL_BEHAVIOR", "description": "What the query actually does wrong", "example": "users with zero orders are excluded from the results" }
+  ],
+  "tips": ["Include the table schema or at least column types when dealing with type conversion issues", "Mention the approximate row counts for each table so the optimizer suggestions are realistic", "If you have an EXPLAIN output already, paste it alongside the query for deeper analysis"],
+  "exampleOutput": "**Issue Identified:** Your LEFT JOIN is being converted to an INNER JOIN because the WHERE clause filters on `o.status = 'completed'`. When a user has no orders, `o.status` is NULL, which fails the equality check.\n\n**Corrected Query:**\n```sql\nSELECT u.name, COUNT(o.id)\nFROM users u\nLEFT JOIN orders o ON u.id = o.user_id AND o.status = 'completed'\nGROUP BY u.name;\n```\n\nThe fix moves the filter condition into the JOIN clause so users without matching orders still appear with a count of 0.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "SQL Query Debugger Prompt for ChatGPT",
+  "metaDescription": "Debug and optimize SQL queries with this free ChatGPT prompt. Identify logical errors, fix performance issues, and get corrected queries with explanations."
+}

@@ -1,0 +1,22 @@
+{
+  "title": "Logo Concept Generator",
+  "slug": "logo-concept-generator",
+  "promptText": "Create a professional logo concept for a brand with the following specifications.\n\nBrand name: [BRAND_NAME]\nIndustry and brand personality: [BRAND_PERSONALITY]\nPreferred style direction: [STYLE_DIRECTION]\nColor preferences: [COLOR_PREFERENCES]\n\nGenerate a logo design that embodies these characteristics:\n- The logo should work at multiple scales from favicon (16x16px) to billboard size without losing legibility or impact\n- Incorporate a distinctive symbol or icon element that can stand alone as a brand mark separate from the wordmark\n- The design should feel contemporary and timeless rather than following trends that will age quickly\n- Consider negative space, geometric balance, and visual weight distribution\n- The symbol should subtly reference the brand's industry or values without being too literal or clip-art-like\n- Use clean lines and intentional whitespace for a premium, professional feel\n- The composition should be balanced whether displayed horizontally, stacked vertically, or as an icon only\n- Style: vector illustration, flat design with subtle depth, professional brand identity, clean minimalist aesthetic, high contrast, centered composition --ar 1:1 --s 750",
+  "description": "This prompt generates professional logo concepts using Midjourney that balance visual distinctiveness with practical usability across different formats and sizes. Instead of generic clip-art-style logos, it guides the AI toward designs with intentional negative space, geometric balance, and subtle industry references that feel both contemporary and timeless. The prompt considers real-world logo requirements like scalability, standalone icon usage, and horizontal versus vertical layouts. It is ideal for entrepreneurs launching new brands, designers seeking initial concept inspiration, or small businesses that need professional-looking brand marks without hiring an agency. The output serves as a strong starting point for refinement rather than a final logo.",
+  "tool": "midjourney",
+  "category": "image-generation",
+  "tags": ["logo", "branding", "design", "visual-identity", "graphic-design"],
+  "difficulty": "intermediate",
+  "promptType": "image",
+  "variables": [
+    { "name": "BRAND_NAME", "description": "The name of the brand the logo is for", "example": "Verdant" },
+    { "name": "BRAND_PERSONALITY", "description": "The industry and personality traits the logo should convey", "example": "Sustainable packaging company, personality: innovative, trustworthy, earth-conscious, premium" },
+    { "name": "STYLE_DIRECTION", "description": "Visual style preferences for the logo", "example": "Modern minimalist with geometric shapes, similar to Stripe or Notion branding" },
+    { "name": "COLOR_PREFERENCES", "description": "Desired color palette or mood", "example": "Deep forest green as primary, warm gold as accent, works on both light and dark backgrounds" }
+  ],
+  "tips": ["Generate multiple variations by slightly adjusting the style direction to explore different visual concepts", "Ask for the logo on both white and dark backgrounds to ensure versatility", "Use the --no flag to exclude unwanted elements like text, gradients, or specific shapes that keep appearing"],
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Logo Concept Generator Prompt for Midjourney",
+  "metaDescription": "Generate professional logo concepts with Midjourney using this prompt. Creates scalable, distinctive brand marks with geometric balance and modern aesthetics."
+}

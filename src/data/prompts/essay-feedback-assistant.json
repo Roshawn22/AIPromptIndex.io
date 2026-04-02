@@ -1,0 +1,23 @@
+{
+  "title": "Essay Feedback Assistant",
+  "slug": "essay-feedback-assistant",
+  "promptText": "You are an experienced writing instructor who provides constructive, detailed feedback on student essays. Analyze the following essay and provide comprehensive feedback.\n\nEssay text: [ESSAY_TEXT]\nAssignment type: [ASSIGNMENT_TYPE]\nStudent level: [STUDENT_LEVEL]\nSpecific areas the student wants feedback on: [FOCUS_AREAS]\n\nProvide your feedback in the following structure:\n1. Overall impression: A 2-3 sentence summary of the essay's strengths and primary areas for improvement, written in an encouraging tone\n2. Thesis and argument analysis: Evaluate the clarity and strength of the thesis statement, how well the argument is developed, and whether evidence supports the claims\n3. Organization and structure: Assess paragraph transitions, logical flow, introduction effectiveness, and conclusion strength\n4. Evidence and support: Check whether claims are backed by specific examples, data, or citations, and flag any unsupported assertions\n5. Writing mechanics: Identify patterns in grammar, punctuation, word choice, and sentence variety without marking every individual error\n6. Three specific passages that work well, with explanations of why they are effective\n7. Three specific passages that need revision, with concrete rewrite suggestions showing the improvement\n8. A prioritized action plan listing the three most impactful changes the student should make first\n9. A rubric-style score across categories if the student wants grade-level feedback",
+  "description": "This prompt provides structured, instructor-quality feedback on student essays covering argument quality, organization, evidence use, and writing mechanics. Unlike simple grammar checkers, it evaluates the deeper elements of academic writing such as thesis strength, logical flow, and evidence-claim alignment. The feedback is designed to be constructive and educational, identifying patterns rather than just individual errors so students learn transferable skills. It includes both positive reinforcement and specific revision suggestions with concrete rewrites, making it actionable rather than vague. Ideal for students revising drafts, educators looking for a feedback template, or self-directed writers who want detailed critique on their work.",
+  "tool": "claude",
+  "category": "education",
+  "tags": ["essay", "writing-feedback", "education", "academic-writing", "grading"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "ESSAY_TEXT", "description": "The full text of the essay to review", "example": "In recent years, social media has transformed how people communicate..." },
+    { "name": "ASSIGNMENT_TYPE", "description": "The type of essay and any specific requirements", "example": "Argumentative essay, 1500 words, requires at least 5 scholarly sources, MLA format" },
+    { "name": "STUDENT_LEVEL", "description": "The academic level of the student", "example": "College sophomore, English 201 composition course" },
+    { "name": "FOCUS_AREAS", "description": "Specific aspects the student wants prioritized in feedback", "example": "I struggle with paragraph transitions and making my thesis more specific" }
+  ],
+  "tips": ["Paste the full essay rather than a summary so the feedback can reference specific passages", "Include the assignment rubric if available so the feedback aligns with how the essay will be graded", "Mention previous feedback the student has received to avoid repeating advice they have already heard"],
+  "exampleOutput": "**Overall Impression:**\nYour essay demonstrates a solid understanding of the topic and a genuine engagement with the research. The strongest element is your use of the Garcia (2024) case study, which grounds your argument in real data. The primary area for growth is tightening your thesis and ensuring each body paragraph connects back to it.\n\n**Thesis Analysis:**\nCurrent thesis: \"Social media has both good and bad effects on society.\" This is too broad to argue effectively. A stronger version: \"While social media expands access to community for isolated populations, its algorithmic design systematically amplifies divisive content, creating a net negative effect on democratic discourse.\"...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Essay Feedback Assistant Prompt for Claude",
+  "metaDescription": "Get detailed essay feedback with thesis analysis, revision suggestions, and prioritized improvement plans using this Claude prompt for students and educators."
+}

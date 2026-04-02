@@ -1,0 +1,23 @@
+{
+  "title": "Engaging Instagram Caption Writer",
+  "slug": "instagram-caption-writer",
+  "promptText": "Write an engaging Instagram caption for a [POST_TYPE] post about [POST_TOPIC] for my [BRAND_NICHE] account. My brand voice is [BRAND_VOICE]. The caption should: open with a scroll-stopping first line (this appears before 'more' so it must hook immediately), tell a micro-story or share an insight that connects emotionally with my audience, include a clear value proposition or takeaway so followers feel they gained something, end with a conversation-starting question or call to action that drives comments, and be formatted for readability with line breaks between ideas. Keep the caption between 150-300 words — long enough to provide value but short enough to hold attention. After the caption, generate: 20 relevant hashtags organized into 3 tiers (5 high-volume over 500K posts, 10 medium-volume 50K-500K, 5 niche under 50K), a suggested alt text for accessibility (under 125 characters), and 2 story slide ideas that complement this post. Do not use generic motivational language. Be specific and original.",
+  "description": "This prompt creates Instagram captions that drive meaningful engagement rather than just likes. The structured approach ensures every caption has a hook, value, and call to action — the three elements that Instagram's algorithm rewards with reach. The tiered hashtag strategy balances discoverability across different competition levels, giving your post the best chance of appearing in explore. The included alt text makes your content accessible, and the companion story ideas extend the post's lifecycle beyond the feed. Whether you are a personal brand, e-commerce business, or content creator, this prompt adapts to your voice while following proven engagement patterns.",
+  "tool": "gemini",
+  "category": "marketing",
+  "tags": ["instagram", "social-media", "captions", "hashtags", "engagement"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "POST_TYPE", "description": "The format of the post", "example": "carousel" },
+    { "name": "POST_TOPIC", "description": "What the post is about", "example": "5 mistakes beginners make when starting a side hustle" },
+    { "name": "BRAND_NICHE", "description": "Your account's niche or industry", "example": "entrepreneurship and online business education" },
+    { "name": "BRAND_VOICE", "description": "How your brand sounds", "example": "encouraging but direct, uses humor, speaks like a mentor not a guru" }
+  ],
+  "tips": ["Share your top 3 performing captions so Gemini can analyze what resonates with your specific audience", "Mention the visual content of the post so the caption complements rather than repeats the imagery", "Ask for 3 caption variations with different hooks to A/B test in your posting schedule"],
+  "exampleOutput": "I lost $2,000 on my first side hustle.\n\nNot because the idea was bad. Because I made every beginner mistake in the book — and nobody warned me.\n\nSwipe through to see the 5 mistakes I wish someone had called out on Day 1 >>>\n\nHere's the one that hurt the most:\n\nMistake #3 — I spent 3 months \"perfecting\" my website before talking to a single customer. By the time I launched, the market had moved on.\n\nThe fix? Talk to 10 people before you build anything. If they won't pay attention to your idea in a conversation, they won't pay money for it online.\n\nSave this for when you're tempted to \"just tweak one more thing\" before launching.\n\nWhich mistake surprised you the most? Drop a number below.\n\n---\n\n**Hashtags:**\nHigh-volume: #sidehustle #entrepreneurlife #onlinebusiness #businesstips #motivation\nMedium: #sidehustletips #beginnerbusiness #hustleculture #solopreneur #businessmistakes...\nNiche: #firstbusiness #sidehustlejourney #launchday #buildandlearn #scrappystartup\n\n**Alt text:** Carousel post with 5 common side hustle mistakes and practical fixes for each\n\n**Story ideas:**\n1. Poll: \"What's your biggest side hustle fear?\" with options\n2. \"The $2,000 mistake\" — tell the full story across 3-4 slides",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Engaging Instagram Caption Writer Prompt for Gemini",
+  "metaDescription": "Create scroll-stopping Instagram captions with tiered hashtags using Gemini. Drive engagement and reach."
+}

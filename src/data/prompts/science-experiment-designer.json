@@ -1,0 +1,23 @@
+{
+  "title": "Science Experiment Designer",
+  "slug": "science-experiment-designer",
+  "promptText": "You are a science education specialist who designs engaging, safe, and educational hands-on experiments. Design a complete experiment for the following context.\n\nSubject area: [SUBJECT_AREA]\nStudent age group: [AGE_GROUP]\nLearning objective: [LEARNING_OBJECTIVE]\nAvailable materials and budget: [MATERIALS_BUDGET]\n\nCreate a detailed experiment plan including:\n1. Experiment title and a one-sentence hook that captures student curiosity\n2. Scientific background: A brief, age-appropriate explanation of the underlying principle being demonstrated\n3. Hypothesis template: A fill-in-the-blank hypothesis statement students can customize based on their predictions\n4. Complete materials list with quantities, noting which items are common household supplies versus specialty purchases\n5. Step-by-step procedure with safety precautions clearly marked at each relevant step\n6. Data collection template: A table or chart structure students should use to record observations and measurements\n7. Three guided analysis questions that help students connect their observations to the underlying science\n8. Extension activities for students who finish early or want to go deeper\n9. Common mistakes and troubleshooting tips for the teacher or facilitator\n10. Assessment rubric aligned with the learning objective\n11. Cross-curricular connections showing how this experiment relates to math, writing, or other subjects",
+  "description": "This prompt designs complete, classroom-ready science experiments with detailed procedures, safety protocols, and assessment rubrics. It goes beyond simple activity descriptions to provide everything a teacher or parent needs to facilitate meaningful hands-on learning, including data collection templates, analysis questions, and extension activities for advanced students. The experiments are designed to build genuine scientific thinking skills like hypothesis formation, controlled variable management, and evidence-based conclusion drawing. Perfect for teachers planning lab days, homeschooling parents seeking structured STEM activities, or science fair participants who need a rigorous experimental design.",
+  "tool": "gemini",
+  "category": "education",
+  "tags": ["science", "experiments", "STEM", "hands-on-learning", "lesson-plan"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "SUBJECT_AREA", "description": "The science discipline and specific topic", "example": "Chemistry - understanding pH and acid-base reactions" },
+    { "name": "AGE_GROUP", "description": "Student age range or grade level", "example": "Middle school, grades 6-8 (ages 11-14)" },
+    { "name": "LEARNING_OBJECTIVE", "description": "What students should understand or be able to do after the experiment", "example": "Students will be able to classify common substances as acids or bases using indicators and predict reaction outcomes" },
+    { "name": "MATERIALS_BUDGET", "description": "Available materials and any budget constraints", "example": "Budget of $30 for a class of 25 students. Have access to basic lab equipment (beakers, safety goggles) but no specialized chemicals." }
+  ],
+  "tips": ["Specify any allergies or safety restrictions in your classroom so the experiment avoids those materials", "Mention the available class time so the experiment fits within your schedule", "Include whether students work individually or in groups since this affects material quantities and procedure design"],
+  "exampleOutput": "**Experiment: The pH Rainbow - Mapping Acids and Bases in Your Kitchen**\n\nHook: Can you predict the color of your juice just by knowing if it is an acid or a base?\n\n**Scientific Background:**\nEvery liquid has a pH value between 0-14 that tells us how acidic or basic it is. Acids (pH below 7) taste sour and can dissolve certain metals. Bases (pH above 7) feel slippery and are found in soaps...\n\n**Materials (per group of 4-5 students):**\n- 1 head of red cabbage (indicator source) - $2\n- 6 clear cups - household item\n- White vinegar - household item\n- Baking soda dissolved in water...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Science Experiment Designer Prompt for Gemini",
+  "metaDescription": "Design hands-on science experiments with safety protocols, data templates, and rubrics using this Gemini prompt. Perfect for teachers and homeschooling parents."
+}

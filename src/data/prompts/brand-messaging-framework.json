@@ -1,0 +1,23 @@
+{
+  "title": "Complete Brand Messaging Framework",
+  "slug": "brand-messaging-framework",
+  "promptText": "Create a comprehensive brand messaging framework for [BRAND_NAME], a [BUSINESS_DESCRIPTION] serving [TARGET_MARKET]. Our key differentiators are: [DIFFERENTIATORS]. Build the following framework components: 1) Brand positioning statement (one sentence following the format: For [target], [brand] is the [category] that [key benefit] because [reason to believe]), 2) Mission statement (under 25 words), 3) Vision statement (aspirational, under 20 words), 4) Brand promise (what customers can always expect), 5) Value propositions — three tiers: primary (the #1 reason to choose us), secondary (supporting benefits), tertiary (nice-to-haves), 6) Messaging pillars — 3-4 core themes with a headline, supporting copy (2-3 sentences), and proof points for each, 7) Tone of voice guidelines with 4 descriptive words and examples of do's and don'ts, 8) Elevator pitches in three lengths: 10-second, 30-second, and 60-second, 9) Tagline options — provide 5 candidates ranging from straightforward to creative. Ensure all messaging is consistent across components and could be used by any team member from sales to marketing to customer success without contradicting each other.",
+  "description": "This prompt builds a complete brand messaging framework that serves as the single source of truth for how your company communicates. Rather than having scattered brand language across pitch decks, websites, and sales scripts, you get a unified system where every element reinforces the others. The tiered value propositions ensure different teams emphasize the right benefits for their context, while the tone of voice guidelines with specific do's and don'ts prevent brand drift as your team grows. The multiple elevator pitch lengths give everyone from the CEO to new hires the right words for any situation. Essential for startups defining their voice, companies going through a rebrand, or any team that needs messaging alignment.",
+  "tool": "claude",
+  "category": "marketing",
+  "tags": ["branding", "messaging", "positioning", "brand-strategy", "copywriting"],
+  "difficulty": "advanced",
+  "promptType": "text",
+  "variables": [
+    { "name": "BRAND_NAME", "description": "The name of the brand", "example": "Luminary" },
+    { "name": "BUSINESS_DESCRIPTION", "description": "What the company does", "example": "B2B SaaS platform that automates employee onboarding workflows" },
+    { "name": "TARGET_MARKET", "description": "Who the primary customers are", "example": "mid-market HR teams at companies with 200-2000 employees" },
+    { "name": "DIFFERENTIATORS", "description": "What makes this brand different", "example": "deploys in 48 hours vs. industry standard of 6 weeks, no-code workflow builder, 97% employee satisfaction scores" }
+  ],
+  "tips": ["Include competitor names and their positioning so Claude can find whitespace for your messaging", "Share customer testimonials or sales call transcripts for authentic language mining", "Ask for a messaging matrix that maps each pillar to specific use cases (website, sales deck, email)"],
+  "exampleOutput": "# Luminary Brand Messaging Framework\n\n## Brand Positioning Statement\nFor mid-market HR teams drowning in onboarding complexity, Luminary is the onboarding automation platform that gets new hires productive in days instead of weeks, because our no-code workflows deploy in 48 hours — not 6 weeks.\n\n## Mission\nMake the first week at any company the best week.\n\n## Vision\nA world where every employee feels prepared and valued from Day 1.\n\n## Brand Promise\nOnboarding that works before your new hire's start date.\n\n## Messaging Pillars\n\n### Pillar 1: Speed to Value\n**Headline:** Live in 48 hours. Not 48 days.\n**Supporting copy:** While other platforms require months of implementation and dedicated IT resources, Luminary's no-code builder lets HR teams design and launch onboarding workflows in a single sprint...\n**Proof points:** Average deployment: 1.8 days. Zero IT tickets required. 340+ pre-built workflow templates.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Complete Brand Messaging Framework Prompt for Claude",
+  "metaDescription": "Build a unified brand messaging framework with Claude. Positioning, pillars, tone guidelines, and elevator pitches."
+}
