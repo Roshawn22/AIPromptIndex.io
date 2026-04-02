@@ -3,14 +3,28 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/global/Header.astro';
 import Footer from '../../components/global/Footer.astro';
-import PromptCard from '../../components/prompt/PromptCard.astro';
+import PromptFilter from '../../components/prompt/PromptFilter';
+
+import toolsJson from '../../data/tools/tools.json';
+import categoriesJson from '../../data/categories/categories.json';
 
 const allPrompts = await getCollection('prompts');
-const prompts = allPrompts.sort((a, b) => {
-  if (a.data.isFeatured && !b.data.isFeatured) return -1;
-  if (!a.data.isFeatured && b.data.isFeatured) return 1;
-  return new Date(b.data.dateAdded).getTime() - new Date(a.data.dateAdded).getTime();
-});
+
+// Serialize to plain objects for the React island
+const prompts = allPrompts.map((p) => ({
+  title: p.data.title,
+  slug: p.data.slug,
+  description: p.data.description,
+  tool: p.data.tool,
+  category: p.data.category,
+  difficulty: p.data.difficulty,
+  tags: p.data.tags ?? [],
+  isFeatured: p.data.isFeatured ?? false,
+  dateAdded: p.data.dateAdded,
+}));
+
+const tools = toolsJson.map((t: any) => ({ id: t.id, name: t.name, slug: t.slug }));
+const categories = categoriesJson.map((c: any) => ({ id: c.id, name: c.name, slug: c.slug }));
 ---
 
 <BaseLayout
@@ -23,24 +37,16 @@ const prompts = allPrompts.sort((a, b) => {
     <div class="mb-10">
       <h1>All Prompts</h1>
       <p class="mt-2 text-lg text-[var(--color-text-secondary)]">
-        {prompts.length} curated prompts across {new Set(prompts.map(p => p.data.category)).size} categories
+        {prompts.length} curated prompts across {new Set(prompts.map(p => p.category)).size} categories
       </p>
     </div>
 
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {prompts.map((prompt) => (
-        <PromptCard
-          title={prompt.data.title}
-          slug={prompt.data.slug}
-          description={prompt.data.description}
-          tool={prompt.data.tool}
-          category={prompt.data.category}
-          difficulty={prompt.data.difficulty}
-          tags={prompt.data.tags}
-          isFeatured={prompt.data.isFeatured}
-        />
-      ))}
-    </div>
+    <PromptFilter
+      client:load
+      prompts={prompts}
+      tools={tools}
+      categories={categories}
+    />
   </section>
 
   <Footer slot="footer" />

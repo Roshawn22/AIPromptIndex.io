@@ -5,6 +5,29 @@ import Footer from '../components/global/Footer.astro';
 import Badge from '../components/ui/Badge.astro';
 import Button from '../components/ui/Button.astro';
 import NewsletterSignup from '../components/common/NewsletterSignup.astro';
+import PromptCard from '../components/prompt/PromptCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPrompts = await getCollection('prompts');
+
+const featuredPrompts = allPrompts
+  .filter((p) => p.data.isFeatured)
+  .slice(0, 8);
+
+const latestPrompts = [...allPrompts]
+  .sort((a, b) => new Date(b.data.dateAdded).getTime() - new Date(a.data.dateAdded).getTime())
+  .slice(0, 5);
+
+const toolDisplayNames: Record<string, string> = {
+  chatgpt: 'ChatGPT',
+  claude: 'Claude',
+  gemini: 'Gemini',
+  midjourney: 'Midjourney',
+  'dall-e': 'DALL-E',
+  'stable-diffusion': 'Stable Diffusion',
+  cursor: 'Cursor',
+  'github-copilot': 'GitHub Copilot',
+};
 
 const categories = [
   { name: 'Writing', slug: 'writing', icon: 'PenLine', description: 'Blog posts, emails, copywriting' },
@@ -121,6 +144,69 @@ const tools = [
           <p class="mt-1 text-sm text-[var(--color-text-muted)]">
             {cat.description}
           </p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Featured Prompts -->
+  {featuredPrompts.length > 0 && (
+    <section class="mx-auto max-w-7xl px-[var(--space-page)] py-16 border-t border-[var(--color-border)]" data-reveal>
+      <div class="mb-10 flex items-end justify-between">
+        <div>
+          <h2 class="text-[var(--color-text-primary)]">Featured Prompts</h2>
+          <p class="mt-2 text-[var(--color-text-secondary)]">Editor's picks &mdash; our most popular and effective prompts</p>
+        </div>
+        <a href="/prompts/" class="hidden text-sm font-[var(--font-display)] font-medium text-[var(--color-accent)] hover:underline sm:block">
+          View all prompts &rarr;
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {featuredPrompts.map((prompt) => (
+          <PromptCard
+            title={prompt.data.title}
+            slug={prompt.data.slug}
+            description={prompt.data.description}
+            tool={prompt.data.tool}
+            category={prompt.data.category}
+            difficulty={prompt.data.difficulty}
+            tags={prompt.data.tags}
+            isFeatured={prompt.data.isFeatured}
+          />
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- Latest Prompts -->
+  <section class="mx-auto max-w-7xl px-[var(--space-page)] py-16 border-t border-[var(--color-border)]" data-reveal>
+    <div class="mb-10 flex items-end justify-between">
+      <div>
+        <h2 class="text-[var(--color-text-primary)]">Latest Prompts</h2>
+        <p class="mt-2 text-[var(--color-text-secondary)]">Recently added to the library</p>
+      </div>
+      <a href="/prompts/" class="hidden text-sm font-[var(--font-display)] font-medium text-[var(--color-accent)] hover:underline sm:block">
+        View all prompts &rarr;
+      </a>
+    </div>
+
+    <div class="divide-y divide-[var(--color-border)] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)]">
+      {latestPrompts.map((prompt) => (
+        <a
+          href={`/prompts/${prompt.data.slug}/`}
+          class="flex items-center justify-between gap-4 px-5 py-4 transition-colors hover:bg-[var(--color-surface-2)]"
+        >
+          <div class="flex items-center gap-3 min-w-0">
+            <span class="font-[var(--font-display)] font-semibold text-[var(--color-text-primary)] truncate">
+              {prompt.data.title}
+            </span>
+            <Badge variant="teal" size="sm">{toolDisplayNames[prompt.data.tool] || prompt.data.tool}</Badge>
+            <span class="hidden text-sm text-[var(--color-text-muted)] sm:inline capitalize">
+              {prompt.data.category.replace(/-/g, ' ')}
+            </span>
+          </div>
+          <span class="shrink-0 text-[var(--color-accent)] font-medium">&rarr;</span>
         </a>
       ))}
     </div>

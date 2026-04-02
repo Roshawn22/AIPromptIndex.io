@@ -1,0 +1,29 @@
+# AIPromptIndex.io
+> https://aipromptindex.io
+
+## What is this site?
+AIPromptIndex.io is a curated AI prompt directory for entrepreneurs and creators. It provides ready-to-use, copy-paste prompts for popular AI tools.
+
+## Content types
+- **Prompts**: Curated AI prompts with descriptions, variables, tips, and example outputs
+- **Tools**: AI tools the prompts are designed for (ChatGPT, Claude, Gemini, Midjourney, DALL-E, Cursor, GitHub Copilot, Stable Diffusion)
+- **Categories**: Use-case groupings (Writing, Coding, Marketing, Image Generation, Business, Data Analysis, Education, Creative)
+
+## URL patterns
+- Prompts: /prompts/{slug}/
+- Tools: /tools/{slug}/
+- Categories: /categories/{slug}/
+- Blog: /blog/{slug}/
+- Guides: /guides/{slug}/
+
+## Scale
+- 64+ curated prompts across 8 categories and 8 AI tools
+- Each prompt includes: title, description, prompt text, variables, tips, difficulty level, and example output
+
+## Machine-readable feeds and endpoints
+- RSS feed: /rss.xml
+- Search index (JSON): /search-index.json
+- Sitemap: /sitemap.xml
+
+## Related sites
+- AIToolIndex.io — curated directory of 200+ AI tools
