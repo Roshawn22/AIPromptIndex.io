@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/global/Header.astro';
+import Footer from '../components/global/Footer.astro';
+---
+
+<BaseLayout
+  title="Contact"
+  description="Get in touch with the AIPromptIndex team."
+  noindex={true}
+>
+  <Header slot="header" />
+
+  <section class="mx-auto max-w-3xl px-[var(--space-page)] py-16 text-center">
+    <h1>Contact Us</h1>
+    <p class="mt-4 text-lg text-[var(--color-text-secondary)]">
+      Have a question, suggestion, or business inquiry? We'd love to hear from you.
+    </p>
+    <div class="mt-8 space-y-4 text-[var(--color-text-secondary)]">
+      <p>Follow us on <a href="https://twitter.com/aipromptindex" class="text-[var(--color-accent)] hover:underline">X (Twitter)</a></p>
+      <p>Watch us on <a href="https://youtube.com/@AIHeavyOfficial" class="text-[var(--color-accent)] hover:underline">YouTube</a></p>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

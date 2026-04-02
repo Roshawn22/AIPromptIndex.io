@@ -1,0 +1,22 @@
+{
+  "title": "Complex Concept Explainer for Kids",
+  "slug": "concept-explainer-for-kids",
+  "promptText": "You are an award-winning children's educator known for making complex ideas simple and fun. Explain [CONCEPT] to a [AGE_GROUP]-year-old. Use a creative analogy involving [ANALOGY_THEME] that the child can relate to. Break the explanation into 3-4 simple steps, using short sentences and everyday words. Include: a fun opening question to spark curiosity, the main explanation using the analogy, a 'mind-blowing fact' about the concept, a simple hands-on activity they can do at home to experience the concept, and 3 follow-up questions to check understanding and encourage further thinking. Avoid jargon. If the concept involves numbers, use examples with quantities a child can visualize.",
+  "description": "Explaining complex concepts to children requires a rare combination of deep understanding and creative simplification. This prompt generates explanations that use relatable analogies to build genuine understanding rather than surface-level memorization. The hands-on activity component leverages kinesthetic learning, which research shows dramatically improves retention in young learners. The follow-up questions use Socratic method principles to encourage independent thinking rather than passive consumption. Perfect for parents, elementary teachers, homeschool educators, or content creators producing educational material for young audiences.",
+  "tool": "chatgpt",
+  "category": "education",
+  "tags": ["kids-education", "analogies", "simplification", "STEM", "parenting"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "CONCEPT", "description": "The concept to explain", "example": "how electricity works" },
+    { "name": "AGE_GROUP", "description": "Age of the child", "example": "8" },
+    { "name": "ANALOGY_THEME", "description": "Theme for the analogy", "example": "a water park with slides and pools" }
+  ],
+  "tips": ["Test the explanation on an actual child and note which parts need simplification", "Ask for the same concept at different age levels to see how the explanation scaffolds", "Request a picture book version with illustration descriptions for visual learners"],
+  "exampleOutput": "**Opening Question:** Have you ever wondered what happens when you flip a light switch? Where does the light come from?\n\n**The Water Park Explanation:**\nImagine electricity is like water flowing through a huge water park!\n\nStep 1: The power plant is like the big pump at the top of the water park that pushes all the water up high. It creates energy that wants to flow.\n\nStep 2: The wires in your walls are like the water slides and tubes. They give the electricity a path to travel through your house.\n\nStep 3: When you flip a light switch, it is like opening a gate on a water slide. The electricity rushes through and lights up your bulb!\n\n**Mind-Blowing Fact:** Electricity travels almost as fast as light: 670 million miles per hour. That means it could zoom around the Earth 7 times in just ONE second!",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Complex Concept Explainer for Kids - ChatGPT",
+  "metaDescription": "Explain complex topics to children using fun analogies and activities. Try this free ChatGPT prompt for parents, teachers, and educators."
+}

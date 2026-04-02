@@ -1,0 +1,26 @@
+{
+  "title": "Cinematic Portrait Generator",
+  "slug": "cinematic-portrait-generator",
+  "promptText": "A cinematic portrait of [SUBJECT_DESCRIPTION], shot on a 85mm lens with shallow depth of field. [LIGHTING_STYLE] lighting creating dramatic shadows across the face. The subject is positioned using the rule of thirds against a [BACKGROUND] background. Color grading inspired by [FILM_REFERENCE] with [COLOR_PALETTE] tones. Film grain texture, 8K resolution, photorealistic. The expression conveys [EMOTION]. Shot from a [CAMERA_ANGLE] angle.",
+  "description": "This image generation prompt creates stunning cinematic portraits that look like stills from high-budget films. By specifying lens focal length, lighting style, and color grading references, you get images with a consistent professional quality that goes far beyond basic AI headshots. The film reference parameter is particularly powerful because it gives the AI a visual shorthand for complex color and mood combinations. Use it for concept art, character design, social media content, or visualizing characters for fiction projects.",
+  "tool": "midjourney",
+  "category": "image-generation",
+  "tags": ["portrait", "cinematic", "photography", "character-design", "photorealistic"],
+  "difficulty": "intermediate",
+  "promptType": "image",
+  "variables": [
+    { "name": "SUBJECT_DESCRIPTION", "description": "Who or what the portrait depicts", "example": "a weathered sea captain in his 60s with salt-and-pepper beard" },
+    { "name": "LIGHTING_STYLE", "description": "Type of lighting setup", "example": "Rembrandt" },
+    { "name": "BACKGROUND", "description": "What is behind the subject", "example": "foggy harbor at dawn" },
+    { "name": "FILM_REFERENCE", "description": "A film whose visual style to emulate", "example": "Blade Runner 2049" },
+    { "name": "COLOR_PALETTE", "description": "Dominant color tones", "example": "desaturated teal and amber" },
+    { "name": "EMOTION", "description": "The feeling in the subject's expression", "example": "quiet determination mixed with melancholy" },
+    { "name": "CAMERA_ANGLE", "description": "Camera position relative to subject", "example": "slightly low" }
+  ],
+  "tips": ["Combine film references with specific color palettes for unique looks", "Add '--ar 2:3' for vertical portrait aspect ratios in Midjourney", "Try 'Kodak Portra 400' or 'Fujifilm Pro 400H' as film stock references for different color science"],
+  "exampleOutput": "A photorealistic cinematic portrait of a weathered sea captain with deep-set eyes and salt-and-pepper beard, Rembrandt lighting casting dramatic shadows across his face. Foggy harbor at dawn behind him, soft bokeh. Blade Runner 2049 color grading with desaturated teal and amber tones. His expression conveys quiet determination. Slight film grain, 8K detail.",
+  "isFeatured": true,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Cinematic Portrait Generator for Midjourney",
+  "metaDescription": "Create stunning cinematic portrait images with film-quality lighting and color grading. Try this Midjourney prompt for photorealistic results."
+}

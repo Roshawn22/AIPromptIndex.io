@@ -1,0 +1,7 @@
+@import "tailwindcss" source(none);
+
+@source "../layouts/BaseLayout.astro";
+@source "../pages";
+@source "../components";
+
+@import "./theme.css";

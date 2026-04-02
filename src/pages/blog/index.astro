@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/global/Header.astro';
+import Footer from '../../components/global/Footer.astro';
+import Button from '../../components/ui/Button.astro';
+---
+
+<BaseLayout
+  title="Blog"
+  description="AI prompting tips, tool reviews, and industry insights from the AIPromptIndex team."
+>
+  <Header slot="header" />
+
+  <section class="mx-auto max-w-3xl px-[var(--space-page)] py-16 text-center">
+    <h1>Blog</h1>
+    <p class="mt-4 text-lg text-[var(--color-text-secondary)]">
+      AI prompting tips, tool reviews, and industry insights. Coming soon.
+    </p>
+    <div class="mt-8">
+      <Button href="/prompts/" variant="outline">Browse Prompts Instead</Button>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

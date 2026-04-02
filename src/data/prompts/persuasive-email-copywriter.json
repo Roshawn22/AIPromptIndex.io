@@ -1,0 +1,24 @@
+{
+  "title": "Persuasive Email Copywriter",
+  "slug": "persuasive-email-copywriter",
+  "promptText": "Act as a world-class email copywriter. Write a persuasive [EMAIL_TYPE] email for [BRAND_NAME] that promotes [OFFER]. The target audience is [AUDIENCE]. Use the PAS (Problem-Agitate-Solution) framework. Include a compelling subject line, preview text, body copy with a clear value proposition, and a single strong call-to-action button text. Keep the tone [TONE] and the email under 250 words. End with a P.S. line that adds urgency or a bonus incentive.",
+  "description": "This prompt transforms your email marketing by generating conversion-focused copy using proven persuasion frameworks. The PAS structure ensures every email hits the reader's pain point, amplifies the urgency, and positions your product or service as the ideal solution. Whether you are launching a product, running a flash sale, or nurturing leads through a drip sequence, this prompt produces ready-to-send email copy complete with subject lines and CTAs. It saves hours of copywriting time while maintaining the psychological triggers that drive opens and clicks.",
+  "tool": "claude",
+  "category": "marketing",
+  "tags": ["email-marketing", "copywriting", "PAS-framework", "conversion"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "EMAIL_TYPE", "description": "Type of email (promotional, welcome, abandoned cart, etc.)", "example": "promotional" },
+    { "name": "BRAND_NAME", "description": "Your company or brand name", "example": "FitTrack Pro" },
+    { "name": "OFFER", "description": "The product, service, or deal being promoted", "example": "50% off annual membership for the first 100 sign-ups" },
+    { "name": "AUDIENCE", "description": "Who you are emailing", "example": "health-conscious professionals aged 30-45" },
+    { "name": "TONE", "description": "Voice and style of the email", "example": "friendly but authoritative" }
+  ],
+  "tips": ["Test multiple subject lines by running the prompt several times", "Adjust the word count constraint for different email types", "Pair this with A/B testing to find your highest-converting version"],
+  "exampleOutput": "Subject: Your gym routine is failing you (here's the fix)\nPreview: The 10-minute method 12,000 members swear by\n\nHey [First Name],\n\nYou wake up at 5 AM, drag yourself to the gym, spend an hour on machines... and still don't see results. Sound familiar?\n\nThe truth is, 73% of gym-goers quit within 90 days because they follow outdated routines that ignore their body's unique needs...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Persuasive Email Copywriter Prompt for Claude",
+  "metaDescription": "Write high-converting marketing emails with this Claude prompt. Uses PAS framework for subject lines, body copy, and CTAs that drive clicks."
+}

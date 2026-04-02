@@ -1,0 +1,22 @@
+{
+  "title": "Data Dashboard Design and Layout",
+  "slug": "dashboard-design-prompt",
+  "promptText": "You are a data visualization expert and UX designer. Design a comprehensive dashboard layout for [DASHBOARD_PURPOSE] that will be used by [USER_ROLE]. The dashboard should display [KEY_METRICS] as primary KPIs. Create a detailed wireframe description including: header section with filters and date range selector, KPI card row with sparkline trends, 3-4 main visualization panels specifying chart types (bar, line, heatmap, etc.) and what data each displays, a data table section with sortable columns, and an alerts/notifications sidebar. For each visualization, explain why that chart type is the best choice for that data. Specify the color palette following accessibility guidelines (WCAG AA contrast ratios). Include responsive breakpoint behavior for tablet and mobile views.",
+  "description": "Designing effective data dashboards requires balancing information density with clarity, and choosing the right visualization for each metric. This prompt generates a complete dashboard specification that a designer or developer can implement directly. The emphasis on chart type rationale ensures each visualization serves a clear purpose rather than defaulting to bar charts for everything. The accessibility color palette and responsive breakpoint specifications make the design production-ready. Use it for product analytics dashboards, executive reporting interfaces, or client-facing data portals.",
+  "tool": "gemini",
+  "category": "data-analysis",
+  "tags": ["dashboard", "data-visualization", "UX-design", "KPIs", "wireframe"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "DASHBOARD_PURPOSE", "description": "What the dashboard tracks", "example": "SaaS subscription analytics" },
+    { "name": "USER_ROLE", "description": "Who will use this dashboard", "example": "VP of Growth and their team of 5 analysts" },
+    { "name": "KEY_METRICS", "description": "The most important numbers to display", "example": "MRR, churn rate, LTV:CAC ratio, net revenue retention, and active users" }
+  ],
+  "tips": ["Specify your frontend framework for implementation-ready component suggestions", "Mention your data refresh frequency to inform real-time vs. batch display decisions", "Request a dark mode variant if your application supports theme switching"],
+  "exampleOutput": "## Dashboard: SaaS Subscription Analytics\n\n### Header Bar\n- Logo + Dashboard title left-aligned\n- Global filters: Plan tier (dropdown), Customer segment (multi-select), Date range (preset: 7d/30d/90d/YTD + custom)\n- Auto-refresh toggle with 5-minute interval\n\n### KPI Card Row (5 cards, equal width)\n1. **MRR** - $247,500 - Sparkline showing 30-day trend - Green up arrow (+12.3% MoM)\n   *Why card + sparkline: Single metric with trend context, scannable at a glance*\n2. **Churn Rate** - 3.2% - Gauge visualization with red/yellow/green zones...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Data Dashboard Design Prompt for Gemini",
+  "metaDescription": "Design effective data dashboards with the right chart types and accessible color palettes. Try this Gemini prompt for dashboard wireframes."
+}

@@ -1,0 +1,27 @@
+{
+  "title": "Retro Pixel Art Game Scene",
+  "slug": "retro-pixel-art-scene",
+  "promptText": "A detailed pixel art scene in the style of [ERA_REFERENCE] era video games depicting [SCENE_DESCRIPTION]. [PIXEL_DENSITY] pixel density with a limited [COLOR_COUNT]-color palette using [COLOR_STYLE] colors. The scene includes [FOREGROUND_ELEMENTS] in the foreground and [BACKGROUND_ELEMENTS] in the background with parallax depth layers. Dithering technique for shading and gradients. Small animated-looking details like [ANIMATED_DETAILS]. Clean pixel edges, no anti-aliasing. Nostalgic retro gaming aesthetic with modern composition sensibility.",
+  "description": "Pixel art is experiencing a massive revival in indie game development, merchandise design, and digital nostalgia culture. This prompt captures the specific technical constraints that define authentic pixel art: limited color palettes, dithering instead of smooth gradients, clean pixel edges without anti-aliasing, and parallax-ready layer composition. The era reference parameter lets you target specific aesthetic generations from 8-bit NES to 16-bit SNES to early PC gaming. Use these for game development concept art, social media profile art, merchandise designs, or animated GIF backgrounds.",
+  "tool": "stable-diffusion",
+  "category": "image-generation",
+  "tags": ["pixel-art", "retro-gaming", "indie-game", "8-bit", "nostalgia"],
+  "difficulty": "intermediate",
+  "promptType": "image",
+  "variables": [
+    { "name": "ERA_REFERENCE", "description": "The era of pixel art to emulate", "example": "16-bit SNES" },
+    { "name": "SCENE_DESCRIPTION", "description": "What the scene depicts", "example": "a cozy ramen shop on a rainy cyberpunk street at night" },
+    { "name": "PIXEL_DENSITY", "description": "How detailed the pixels are", "example": "32x32 tile-based, medium" },
+    { "name": "COLOR_COUNT", "description": "Number of colors in the palette", "example": "24" },
+    { "name": "COLOR_STYLE", "description": "Color palette style", "example": "warm neon with cool blue shadows" },
+    { "name": "FOREGROUND_ELEMENTS", "description": "Objects in the front of the scene", "example": "steaming ramen bowls on a counter, a cat sitting on a stool" },
+    { "name": "BACKGROUND_ELEMENTS", "description": "Objects in the back", "example": "rain-streaked windows, neon signs in Japanese, passing hover-cars" },
+    { "name": "ANIMATED_DETAILS", "description": "Details that suggest animation", "example": "steam rising from bowls, rain droplets on the window, flickering neon sign" }
+  ],
+  "tips": ["Use 'negative prompt: smooth, gradient, 3D, photorealistic, blurry' for cleaner pixel results", "Specify exact pixel canvas size like '320x180' for game-ready dimensions", "Request tileable versions for use as game backgrounds"],
+  "exampleOutput": "A 16-bit SNES-style pixel art scene of a cozy ramen shop interior at night. A counter with steaming pixel-art ramen bowls in warm orange and yellow. A small pixel cat sits on a stool. Through rain-streaked windows, neon signs glow in pink and blue. 24-color palette with warm neons and cool blue shadows. Dithered shading on all surfaces. Clean pixel edges throughout.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Retro Pixel Art Game Scene for Stable Diffusion",
+  "metaDescription": "Create authentic retro pixel art scenes for games and digital art. Try this Stable Diffusion prompt for nostalgic 8-bit and 16-bit aesthetics."
+}

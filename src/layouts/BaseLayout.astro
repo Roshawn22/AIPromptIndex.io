@@ -1,0 +1,232 @@
+---
+import '../styles/global.css';
+import ScrollReveal from '../components/global/ScrollReveal.astro';
+import SearchWrapper from '../components/global/SearchWrapper.astro';
+import monoFontStylesHref from '../styles/mono-font.css?url';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  ogType?: string;
+  canonicalUrl?: string;
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  articleModifiedTime?: string;
+  publishedTime?: string;
+  loadMonoFont?: boolean;
+}
+
+const {
+  title,
+  description,
+  ogImage = '/favicon.svg',
+  ogType = 'website',
+  canonicalUrl,
+  noindex = false,
+  jsonLd,
+  articleModifiedTime,
+  publishedTime,
+  loadMonoFont = false,
+} = Astro.props;
+
+const fullTitle = title === 'AIPromptIndex' ? 'AIPromptIndex — The AI Prompt Library' : `${title} | AIPromptIndex`;
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://aipromptindex.io';
+const siteOrigin = new URL(siteUrl).origin;
+const canonicalPath = canonicalUrl ? new URL(canonicalUrl, siteOrigin).pathname : Astro.url.pathname;
+const canonical = new URL(canonicalPath, siteOrigin).toString();
+const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+const rawGaMeasurementId = (
+  import.meta.env.PUBLIC_GA_MEASUREMENT_ID as string | undefined
+)?.trim();
+const gaMeasurementId = rawGaMeasurementId && rawGaMeasurementId !== 'G-XXXXXXXXXX'
+  ? rawGaMeasurementId
+  : undefined;
+const googleSiteVerification = (
+  import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION as string | undefined
+)?.trim();
+const ogImageType = fullOgImage.endsWith('.png') ? 'image/png' : fullOgImage.endsWith('.svg') ? 'image/svg+xml' : undefined;
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${siteUrl}/#organization`,
+  name: 'AIPromptIndex',
+  url: siteUrl,
+  logo: {
+    '@type': 'ImageObject',
+    url: `${siteUrl}/favicon.svg`,
+    width: 32,
+    height: 32,
+  },
+  sameAs: ['https://twitter.com/aipromptindex'],
+};
+const pageJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': `${canonical}#webpage`,
+  name: title,
+  description,
+  url: canonical,
+  publisher: { '@id': `${siteUrl}/#organization` },
+  primaryImageOfPage: {
+    '@type': 'ImageObject',
+    url: fullOgImage,
+  },
+  datePublished: publishedTime || undefined,
+  dateModified: articleModifiedTime || publishedTime || undefined,
+};
+const pageJsonLdEntries = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+const allJsonLd = [organizationJsonLd, pageJsonLd, ...pageJsonLdEntries];
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    {loadMonoFont && (
+      <link rel="stylesheet" href={monoFontStylesHref} />
+    )}
+
+    <!-- Title & Description -->
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
+    {googleSiteVerification && (
+      <meta name="google-site-verification" content={googleSiteVerification} />
+    )}
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#0d9488" />
+    <link rel="alternate" type="application/rss+xml" title="AIPromptIndex RSS Feed" href="/rss.xml" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={fullOgImage} />
+    {ogImageType && <meta property="og:image:type" content={ogImageType} />}
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="AIPromptIndex" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={fullOgImage} />
+    <meta name="twitter:image:alt" content={title} />
+    <meta name="twitter:site" content="@AIPromptIndex" />
+
+    <!-- Robots -->
+    {noindex ? (
+      <meta name="robots" content="noindex, nofollow" />
+    ) : (
+      <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    )}
+
+    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {articleModifiedTime && <meta property="article:modified_time" content={articleModifiedTime} />}
+
+    <!-- JSON-LD Structured Data -->
+    {allJsonLd.map((ld) => (
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(ld)} />
+    ))}
+
+    {gaMeasurementId && (
+      <script
+        is:inline
+        set:html={`(function() {
+  var measurementId = ${JSON.stringify(gaMeasurementId)};
+  var hostname = window.location.hostname;
+  if (hostname !== 'aipromptindex.io' && hostname !== 'www.aipromptindex.io' && hostname !== 'localhost') return;
+
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function() {
+    window.dataLayer.push(arguments);
+  };
+  window.gtag('js', new Date());
+
+  function trackPageView() {
+    window.gtag('config', measurementId, {
+      page_path: window.location.pathname,
+      anonymize_ip: true,
+    });
+  }
+
+  var analyticsLoaded = false;
+  var analyticsScheduled = false;
+  var fallbackTimer = 0;
+
+  function cleanupTriggers() {
+    window.removeEventListener('pointerdown', scheduleAnalyticsLoad, true);
+    window.removeEventListener('keydown', scheduleAnalyticsLoad, true);
+    window.removeEventListener('scroll', scheduleAnalyticsLoad, true);
+    window.removeEventListener('focusin', scheduleAnalyticsLoad, true);
+    if (fallbackTimer) window.clearTimeout(fallbackTimer);
+  }
+
+  function loadAnalytics() {
+    if (analyticsLoaded) return;
+    analyticsLoaded = true;
+    cleanupTriggers();
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(measurementId);
+    document.head.appendChild(script);
+  }
+
+  function scheduleAnalyticsLoad() {
+    if (analyticsScheduled || analyticsLoaded) return;
+    analyticsScheduled = true;
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(loadAnalytics, { timeout: 2000 });
+    } else {
+      window.setTimeout(loadAnalytics, 1);
+    }
+  }
+
+  trackPageView();
+  document.addEventListener('astro:after-swap', trackPageView);
+
+  window.addEventListener('pointerdown', scheduleAnalyticsLoad, { capture: true, once: true, passive: true });
+  window.addEventListener('keydown', scheduleAnalyticsLoad, { capture: true, once: true });
+  window.addEventListener('scroll', scheduleAnalyticsLoad, { capture: true, once: true, passive: true });
+  window.addEventListener('focusin', scheduleAnalyticsLoad, { capture: true, once: true });
+  fallbackTimer = window.setTimeout(scheduleAnalyticsLoad, 10000);
+})();`}
+      />
+    )}
+
+    <!-- Theme: light-first, prevent flash -->
+    <script is:inline>
+      (function() {
+        var theme = localStorage.getItem('api-theme');
+        if (!theme) {
+          theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.classList.remove('dark', 'light');
+        if (theme === 'dark') document.documentElement.classList.add('dark');
+      })();
+    </script>
+  </head>
+  <body class="min-h-screen bg-[var(--color-surface-0)] text-[var(--color-text-primary)] antialiased">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:bg-[var(--color-accent)] focus:text-white focus:rounded-[var(--radius-md)]">
+      Skip to main content
+    </a>
+    <slot name="header" />
+    <main id="main-content">
+      <slot />
+    </main>
+    <slot name="footer" />
+    <SearchWrapper />
+    <ScrollReveal />
+  </body>
+</html>

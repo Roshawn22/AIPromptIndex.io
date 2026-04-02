@@ -1,0 +1,23 @@
+{
+  "title": "SWOT Analysis with Strategic Actions",
+  "slug": "swot-analysis-generator",
+  "promptText": "You are a management consultant from a top-tier firm. Conduct a thorough SWOT analysis for [COMPANY_NAME], a [BUSINESS_DESCRIPTION] operating in the [INDUSTRY] market. Current situation: [CURRENT_CONTEXT]. For each quadrant (Strengths, Weaknesses, Opportunities, Threats), identify 5-7 specific items with brief explanations. Then go beyond the basic SWOT by creating a TOWS matrix: identify 3 SO strategies (use Strengths to exploit Opportunities), 3 WO strategies (overcome Weaknesses by pursuing Opportunities), 3 ST strategies (use Strengths to mitigate Threats), and 3 WT strategies (minimize Weaknesses to avoid Threats). For each strategy, assign a priority rating (high/medium/low), estimated implementation timeline, and the key metric to track success. End with a recommended top-3 strategic priorities list with rationale.",
+  "description": "The standard SWOT analysis is often too shallow to drive real strategic decisions. This prompt extends the classic framework with a TOWS matrix that transforms observations into concrete strategies. By crossing internal factors with external factors, you get actionable strategic options rather than just a list of bullet points in four boxes. The priority ratings and success metrics make each strategy executable and measurable. This elevated SWOT is suitable for board presentations, strategic planning retreats, investor updates, or annual business reviews where surface-level analysis would undermine credibility.",
+  "tool": "chatgpt",
+  "category": "business",
+  "tags": ["SWOT", "strategy", "TOWS-matrix", "competitive-analysis", "planning"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "COMPANY_NAME", "description": "Your company", "example": "FreshRoute" },
+    { "name": "BUSINESS_DESCRIPTION", "description": "What the company does", "example": "farm-to-table grocery delivery service connecting local farms directly with consumers" },
+    { "name": "INDUSTRY", "description": "Your market", "example": "online grocery delivery" },
+    { "name": "CURRENT_CONTEXT", "description": "Relevant current situation details", "example": "18 months old, operating in 3 cities, $1.2M revenue run rate, 40% month-over-month growth, but customer acquisition cost is 3x industry average and we are facing new competition from Instacart's 'Local' feature" }
+  ],
+  "tips": ["Be honest about weaknesses; sugarcoating them defeats the purpose of the analysis", "Update your SWOT quarterly as market conditions change", "Share the completed analysis with your full leadership team for input before finalizing strategies"],
+  "exampleOutput": "## Strengths\n1. **Direct farm relationships** - Exclusive partnerships with 45+ local farms create a supply chain competitors cannot easily replicate\n2. **40% MoM growth rate** - Demonstrates strong product-market fit and word-of-mouth traction\n3. **Freshness guarantee** - Products delivered within 24 hours of harvest vs. 5-7 days for traditional grocery\n\n## TOWS Matrix: SO Strategies\n**SO1: Launch a Farm Subscription Box** (Priority: High | Timeline: Q3 | Metric: Subscription conversion rate)\nLeverage strong farm relationships (S1) and growing consumer demand for farm-to-table (O2) to create a weekly subscription model that increases LTV and reduces per-order acquisition cost.\n\n## Top 3 Strategic Priorities\n1. **Reduce CAC through subscription model** - Rationale: Current 3x industry CAC is unsustainable at scale. Subscriptions create recurring revenue without repeat acquisition costs.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "SWOT Analysis with TOWS Matrix Prompt - ChatGPT",
+  "metaDescription": "Generate actionable SWOT analyses with TOWS strategies and priority ratings. Try this ChatGPT prompt for strategic business planning."
+}

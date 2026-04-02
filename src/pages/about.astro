@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/global/Header.astro';
+import Footer from '../components/global/Footer.astro';
+import Button from '../components/ui/Button.astro';
+---
+
+<BaseLayout
+  title="About AIPromptIndex"
+  description="AIPromptIndex.io is a curated directory of AI prompts organized by tool, use case, and difficulty level. Free and community-driven."
+>
+  <Header slot="header" />
+
+  <section class="mx-auto max-w-3xl px-[var(--space-page)] py-16">
+    <h1>About AIPromptIndex</h1>
+    <div class="mt-8 space-y-6 text-[var(--color-text-secondary)] leading-relaxed">
+      <p>
+        AIPromptIndex.io is a curated directory of AI prompts organized by tool, use case, and difficulty level. We believe the right prompt can transform how you work with AI tools like ChatGPT, Claude, Midjourney, and more.
+      </p>
+      <p>
+        Our mission is simple: help entrepreneurs, creators, and professionals find the perfect prompt for every task. Every prompt in our directory is hand-curated for quality and usefulness.
+      </p>
+      <p>
+        AIPromptIndex is part of the <strong class="text-[var(--color-text-primary)]">AI Heavy</strong> ecosystem, alongside <a href="https://aitoolindex.io" class="text-[var(--color-accent)] hover:underline">AIToolIndex.io</a> (AI tools directory) and the <a href="https://youtube.com/@AIHeavyOfficial" class="text-[var(--color-accent)] hover:underline">AI Heavy YouTube channel</a>.
+      </p>
+      <h2 class="!mt-10 text-xl">How It Works</h2>
+      <ul class="list-disc list-inside space-y-2">
+        <li><strong class="text-[var(--color-text-primary)]">Browse</strong> — Explore prompts by tool, category, or difficulty</li>
+        <li><strong class="text-[var(--color-text-primary)]">Copy</strong> — One-click copy to your clipboard</li>
+        <li><strong class="text-[var(--color-text-primary)]">Customize</strong> — Replace the variables with your own details</li>
+        <li><strong class="text-[var(--color-text-primary)]">Submit</strong> — Share your best prompts with the community</li>
+      </ul>
+
+      <div class="!mt-10 flex flex-wrap gap-4">
+        <Button href="/prompts/">Browse Prompts</Button>
+        <Button href="/submit/" variant="outline">Submit a Prompt</Button>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

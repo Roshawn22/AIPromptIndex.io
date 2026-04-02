@@ -1,0 +1,22 @@
+{
+  "title": "React Component Generator with TypeScript",
+  "slug": "react-component-generator",
+  "promptText": "Generate a production-ready React component called [COMPONENT_NAME] using TypeScript and [STYLING_APPROACH]. The component should [COMPONENT_PURPOSE]. Include proper TypeScript interfaces for all props with JSDoc comments. Implement error boundaries and loading states. Add accessibility attributes (ARIA labels, keyboard navigation, screen reader support). Include unit tests using React Testing Library that cover rendering, user interactions, and edge cases. Follow React best practices: use functional components with hooks, implement proper memoization where beneficial, and handle cleanup in useEffect. Export the component as both a named and default export.",
+  "description": "This prompt generates complete, production-quality React components that follow modern best practices from day one. Instead of scaffolding a basic component and gradually adding TypeScript types, accessibility, and tests, you get everything in a single output. The emphasis on ARIA attributes and keyboard navigation ensures your components are accessible by default. The included test suite covers the most important scenarios so you can ship with confidence. Ideal for teams establishing component patterns or developers who want to maintain high standards without slowing down.",
+  "tool": "cursor",
+  "category": "coding",
+  "tags": ["react", "typescript", "component", "accessibility", "testing"],
+  "difficulty": "intermediate",
+  "promptType": "code",
+  "variables": [
+    { "name": "COMPONENT_NAME", "description": "Name of the React component", "example": "DataTable" },
+    { "name": "STYLING_APPROACH", "description": "CSS methodology to use", "example": "Tailwind CSS" },
+    { "name": "COMPONENT_PURPOSE", "description": "What the component does", "example": "display sortable, filterable tabular data with pagination and row selection" }
+  ],
+  "tips": ["Specify your project's React version to get compatible hook patterns", "Mention your state management library if the component needs global state", "Ask for Storybook stories as a follow-up to get a visual testing setup"],
+  "exampleOutput": "```tsx\nimport React, { useState, useMemo, useCallback } from 'react';\n\n/** Props for the DataTable component */\ninterface DataTableProps<T extends Record<string, unknown>> {\n  /** Array of data objects to display */\n  data: T[];\n  /** Column configuration */\n  columns: ColumnDef<T>[];\n  /** Enable row selection */\n  selectable?: boolean;\n  /** Callback when selection changes */\n  onSelectionChange?: (selected: T[]) => void;\n}\n```",
+  "isFeatured": true,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "React Component Generator Prompt for Cursor",
+  "metaDescription": "Generate production-ready React TypeScript components with tests and accessibility. Try this Cursor prompt to speed up frontend development."
+}

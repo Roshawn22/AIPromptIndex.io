@@ -1,0 +1,27 @@
+{
+  "title": "Business Plan Executive Summary",
+  "slug": "business-plan-executive-summary",
+  "promptText": "You are a seasoned business consultant who has helped 200+ startups secure funding. Write a compelling executive summary for [COMPANY_NAME], a [BUSINESS_MODEL] startup in the [INDUSTRY] industry. The company solves [PROBLEM] for [TARGET_MARKET] by offering [SOLUTION]. Include these sections: Company Overview (2-3 sentences), Problem Statement, Solution, Target Market size and characteristics, Revenue Model, Competitive Advantage, Current Traction (use [TRACTION_METRICS] as data points), Financial Projections summary for 3 years, and Funding Ask of [FUNDING_AMOUNT] with planned allocation. Keep the entire summary under 800 words and make every sentence earn its place.",
+  "description": "The executive summary is the most important page of any business plan because most investors decide whether to keep reading based on this section alone. This prompt generates a concise, compelling summary that covers all the elements sophisticated investors and lenders expect to see. The structured format ensures you do not miss critical sections like competitive advantage or funding allocation, while the word limit forces clarity and prioritization. Use it to draft your pitch deck narrative, loan applications, accelerator submissions, or internal strategic planning documents.",
+  "tool": "claude",
+  "category": "business",
+  "tags": ["business-plan", "executive-summary", "startup", "funding", "pitch"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "COMPANY_NAME", "description": "Your company name", "example": "NutriPlan AI" },
+    { "name": "BUSINESS_MODEL", "description": "Type of business model", "example": "B2C SaaS subscription" },
+    { "name": "INDUSTRY", "description": "Industry vertical", "example": "health-tech and personalized nutrition" },
+    { "name": "PROBLEM", "description": "The problem being solved", "example": "generic nutrition advice that ignores individual health conditions, genetics, and lifestyle" },
+    { "name": "TARGET_MARKET", "description": "Who you serve", "example": "health-conscious adults aged 25-55 managing chronic conditions through diet" },
+    { "name": "SOLUTION", "description": "Your product or service", "example": "an AI-powered meal planning app that creates personalized nutrition plans based on bloodwork, genetic data, and health goals" },
+    { "name": "TRACTION_METRICS", "description": "Current business metrics", "example": "12,000 paid subscribers, $45K MRR, 94% month-over-month retention, partnerships with 3 major lab testing companies" },
+    { "name": "FUNDING_AMOUNT", "description": "How much funding you seek", "example": "$2.5M Series Seed" }
+  ],
+  "tips": ["Lead with your strongest traction metric to hook the reader immediately", "Quantify your market size with a credible TAM/SAM/SOM breakdown", "Tailor the tone based on your audience: VCs want growth metrics, banks want stability"],
+  "exampleOutput": "NutriPlan AI is a B2C SaaS platform that uses artificial intelligence to create hyper-personalized nutrition plans based on individual bloodwork, genetic markers, and health goals. In a $271B global wellness market where 78% of consumers report frustration with generic dietary advice, we are the first platform to combine lab data integration with real-time meal planning.\n\nThe Problem: Over 60% of Americans managing chronic conditions like diabetes, heart disease, or autoimmune disorders receive nutrition guidance that ignores their unique biomarkers...",
+  "isFeatured": true,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Business Plan Executive Summary Prompt for Claude",
+  "metaDescription": "Write a compelling startup executive summary that investors actually read. Try this Claude prompt for your business plan or pitch deck."
+}

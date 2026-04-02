@@ -1,0 +1,24 @@
+{
+  "title": "High-Converting Landing Page Copy",
+  "slug": "landing-page-copy-generator",
+  "promptText": "You are a conversion rate optimization specialist and direct response copywriter. Write the complete copy for a landing page that converts visitors into [CONVERSION_GOAL] for [PRODUCT_NAME], which [PRODUCT_DESCRIPTION]. Target audience: [AUDIENCE]. Include: a headline using the 4U formula (Urgent, Unique, Ultra-specific, Useful), a subheadline that expands on the promise, a hero section with a primary CTA, three benefit blocks with icons (write the benefit headline and supporting copy for each), a social proof section with placeholder testimonial structure, an objection-handling FAQ section with 5 entries, a features-vs-benefits comparison section, a risk-reversal statement (guarantee), and a final CTA section with urgency. Write in [TONE] tone.",
+  "description": "Landing page copy is where marketing strategy meets conversion psychology. This prompt generates complete page copy following proven direct response frameworks that have been A/B tested across thousands of landing pages. The 4U headline formula ensures your above-the-fold content stops scrollers. The benefit blocks, social proof, and FAQ sections address the full buyer psychology journey from awareness to trust to action. The risk-reversal guarantee removes the final conversion barrier. Use this as a complete copy brief for your designer or as a starting point for iterative testing.",
+  "tool": "chatgpt",
+  "category": "marketing",
+  "tags": ["landing-page", "copywriting", "CRO", "conversion", "direct-response"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "CONVERSION_GOAL", "description": "What you want visitors to do", "example": "free trial sign-ups" },
+    { "name": "PRODUCT_NAME", "description": "Name of the product or service", "example": "ScheduleGenius" },
+    { "name": "PRODUCT_DESCRIPTION", "description": "What the product does", "example": "uses AI to automatically schedule meetings across time zones, eliminating back-and-forth emails" },
+    { "name": "AUDIENCE", "description": "Who the landing page targets", "example": "remote team managers at companies with 50-500 employees" },
+    { "name": "TONE", "description": "The voice of the copy", "example": "professional but conversational, with light humor" }
+  ],
+  "tips": ["A/B test the headline against 2-3 variations for best results", "Add real testimonials to replace the placeholder structure", "Use heatmap tools to track which sections get the most engagement"],
+  "exampleOutput": "**Headline:** Stop Losing 5 Hours a Week to Meeting Scheduling (Your Team Deserves Better)\n\n**Subheadline:** ScheduleGenius uses AI to find the perfect meeting time across 12 time zones in under 30 seconds. No more email ping-pong.\n\n**Primary CTA:** Start Your Free 14-Day Trial\n\n**Benefit Block 1:**\n*Icon: Clock*\n**Save 5+ Hours Per Week, Per Manager**\nThe average remote manager sends 23 scheduling emails per week. ScheduleGenius replaces all of them with a single AI-powered link...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Landing Page Copy Generator Prompt for ChatGPT",
+  "metaDescription": "Write high-converting landing page copy with proven frameworks. Try this ChatGPT prompt for headlines, benefits, and CTAs that drive sign-ups."
+}

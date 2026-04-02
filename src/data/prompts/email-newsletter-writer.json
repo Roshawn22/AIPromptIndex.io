@@ -1,0 +1,25 @@
+{
+  "title": "Weekly Email Newsletter Writer",
+  "slug": "email-newsletter-writer",
+  "promptText": "You are a newsletter editor for a [NICHE] audience. Write this week's edition of [NEWSLETTER_NAME], covering the latest developments in [TOPICS_THIS_WEEK]. Structure the newsletter as: an engaging opening that connects a current event to the reader's daily life, 3 curated story summaries (each with a headline, 2-3 sentence summary, and a 'why it matters' line), one deep-dive section (300 words) on [DEEP_DIVE_TOPIC], a quick tips section with 3 actionable takeaways, and a personal sign-off with a question to encourage replies. Keep the total word count under [WORD_LIMIT] words. Write in a [TONE] tone that builds trust and feels like a knowledgeable friend sharing insights. Include suggested subject lines (3 options) with predicted open rate reasoning.",
+  "description": "Email newsletters are the most reliable content distribution channel with an average ROI of $36 for every $1 spent, but consistent quality writing is the biggest bottleneck for newsletter operators. This prompt produces complete, ready-to-send editions with curated stories, original analysis, and engagement hooks that drive replies. The 'why it matters' framing ensures every story connects to the reader's actual interests. The subject line options with open rate reasoning help you A/B test effectively. Use it weekly to maintain your publishing cadence without burning out on content creation.",
+  "tool": "chatgpt",
+  "category": "writing",
+  "tags": ["newsletter", "email", "content-creation", "curation", "writing"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "NICHE", "description": "Your newsletter's topic area", "example": "AI and productivity" },
+    { "name": "NEWSLETTER_NAME", "description": "Name of your newsletter", "example": "The AI Efficiency Report" },
+    { "name": "TOPICS_THIS_WEEK", "description": "This week's topics to cover", "example": "Claude's new computer use feature, Google's Gemini pricing changes, and a viral AI workflow automation thread on X" },
+    { "name": "DEEP_DIVE_TOPIC", "description": "Topic for the featured analysis section", "example": "how to build an AI-powered email triage system that saves 45 minutes per day" },
+    { "name": "WORD_LIMIT", "description": "Maximum total word count", "example": "800" },
+    { "name": "TONE", "description": "Writing style", "example": "knowledgeable but approachable, with occasional dry humor" }
+  ],
+  "tips": ["Feed in your actual curated links and sources for more accurate summaries", "Maintain a consistent publishing schedule for best subscriber retention", "Track which sections get the most clicks to optimize future editions"],
+  "exampleOutput": "**Subject Line Options:**\n1. 'The AI feature that just replaced my email assistant' (Curiosity gap + personal story)\n2. 'Claude can use your computer now. Here is what that means.' (News hook + value promise)\n3. 'Save 45 min/day with this AI email trick' (Specific benefit + number)\n\nHey there,\n\nLast Tuesday, I watched an AI control my web browser, fill out a spreadsheet, and file three expense reports. I did not touch the keyboard once. This week, that stopped being science fiction for everyone...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Email Newsletter Writer Prompt for ChatGPT",
+  "metaDescription": "Write complete email newsletter editions with curated stories and analysis. Try this ChatGPT prompt to maintain your publishing cadence."
+}

@@ -1,0 +1,236 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/global/Header.astro';
+import Footer from '../../components/global/Footer.astro';
+import Badge from '../../components/ui/Badge.astro';
+import Tag from '../../components/ui/Tag.astro';
+import Breadcrumb from '../../components/common/Breadcrumb.astro';
+import ShareButtons from '../../components/common/ShareButtons.astro';
+import PromptCodeBlock from '../../components/prompt/PromptCodeBlock.tsx';
+import CopyButton from '../../components/ui/CopyButton.tsx';
+import VoteButtons from '../../components/prompt/VoteButtons.tsx';
+import { formatDate } from '../../lib/utils';
+
+export async function getStaticPaths() {
+  const prompts = await getCollection('prompts');
+  return prompts.map((prompt) => ({
+    params: { slug: prompt.data.slug },
+    props: { prompt },
+  }));
+}
+
+const { prompt } = Astro.props;
+const { data } = prompt;
+
+const allPrompts = await getCollection('prompts');
+const relatedPrompts = allPrompts
+  .filter((p) => p.data.slug !== data.slug && (p.data.category === data.category || p.data.tool === data.tool))
+  .slice(0, 4);
+
+const difficultyColor = {
+  beginner: 'green' as const,
+  intermediate: 'yellow' as const,
+  advanced: 'red' as const,
+};
+
+const toolDisplayNames: Record<string, string> = {
+  chatgpt: 'ChatGPT',
+  claude: 'Claude',
+  gemini: 'Gemini',
+  midjourney: 'Midjourney',
+  'dall-e': 'DALL-E',
+  'stable-diffusion': 'Stable Diffusion',
+  cursor: 'Cursor',
+  'github-copilot': 'GitHub Copilot',
+};
+
+const categoryDisplayNames: Record<string, string> = {
+  writing: 'Writing',
+  coding: 'Coding',
+  marketing: 'Marketing',
+  'image-generation': 'Image Generation',
+  business: 'Business',
+  'data-analysis': 'Data Analysis',
+  education: 'Education',
+  creative: 'Creative',
+};
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://aipromptindex.io';
+const pageUrl = `${siteUrl}/prompts/${data.slug}/`;
+---
+
+<BaseLayout
+  title={data.metaTitle || data.title}
+  description={data.metaDescription || data.description.slice(0, 160)}
+  loadMonoFont={true}
+>
+  <Header slot="header" />
+
+  <article class="mx-auto max-w-7xl px-[var(--space-page)] py-8">
+    <Breadcrumb items={[
+      { label: 'Home', href: '/' },
+      { label: categoryDisplayNames[data.category] || data.category, href: `/categories/${data.category}/` },
+      { label: data.title },
+    ]} />
+
+    <div class="lg:grid lg:grid-cols-[1fr_320px] lg:gap-10">
+      <!-- Main Content -->
+      <div>
+        <!-- Badges -->
+        <div class="flex flex-wrap items-center gap-2 mb-4">
+          <Badge variant="teal" size="md">{toolDisplayNames[data.tool] || data.tool}</Badge>
+          <Badge variant="neutral" size="md">{categoryDisplayNames[data.category] || data.category}</Badge>
+          <Badge variant={difficultyColor[data.difficulty]} size="md">{data.difficulty}</Badge>
+          {data.isFeatured && <Badge variant="purple" size="md">Featured</Badge>}
+        </div>
+
+        <h1 class="mb-4">{data.title}</h1>
+
+        <p class="text-sm text-[var(--color-text-muted)] mb-6">
+          Added {formatDate(data.dateAdded)}
+          {data.lastUpdated && ` · Updated ${formatDate(data.lastUpdated)}`}
+        </p>
+
+        <!-- Prompt Code Block -->
+        <div class="mb-8">
+          <PromptCodeBlock client:load promptText={data.promptText} promptSlug={data.slug} />
+        </div>
+
+        <!-- Big Copy Button + Vote -->
+        <div class="mb-8 flex items-center gap-3">
+          <CopyButton client:load text={data.promptText} label="Copy Prompt" size="lg" promptSlug={data.slug} />
+          <VoteButtons client:load promptSlug={data.slug} />
+          <ShareButtons url={pageUrl} title={data.title} />
+        </div>
+
+        <!-- Description -->
+        <div class="mb-8">
+          <h2 class="text-xl mb-3">About This Prompt</h2>
+          <p class="text-[var(--color-text-secondary)] leading-relaxed">{data.description}</p>
+        </div>
+
+        <!-- Variables -->
+        {data.variables.length > 0 && (
+          <div class="mb-8">
+            <h2 class="text-xl mb-3">Variables to Customize</h2>
+            <div class="space-y-3">
+              {data.variables.map((v) => (
+                <div class="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-4">
+                  <div class="flex items-center gap-2 mb-1">
+                    <code class="rounded bg-teal-500/10 px-2 py-0.5 text-sm font-[var(--font-mono)] text-[var(--color-accent)]">
+                      [{v.name}]
+                    </code>
+                  </div>
+                  <p class="text-sm text-[var(--color-text-secondary)]">{v.description}</p>
+                  <p class="mt-1 text-xs text-[var(--color-text-muted)]">Example: {v.example}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Tips -->
+        {data.tips.length > 0 && (
+          <div class="mb-8">
+            <h2 class="text-xl mb-3">Tips for Best Results</h2>
+            <ul class="space-y-2">
+              {data.tips.map((tip) => (
+                <li class="flex items-start gap-2 text-[var(--color-text-secondary)]">
+                  <svg class="mt-1 h-4 w-4 shrink-0 text-[var(--color-accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  {tip}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <!-- Example Output -->
+        {data.exampleOutput && (
+          <div class="mb-8">
+            <h2 class="text-xl mb-3">Example Output</h2>
+            <div class="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-2)] p-4">
+              <pre class="whitespace-pre-wrap text-sm text-[var(--color-text-secondary)]">{data.exampleOutput}</pre>
+            </div>
+          </div>
+        )}
+
+        <!-- Tags -->
+        {data.tags.length > 0 && (
+          <div class="mb-8">
+            <div class="flex flex-wrap gap-2">
+              {data.tags.map((tag) => (
+                <Tag>{tag}</Tag>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="hidden lg:block">
+        <div class="sticky top-24 space-y-6">
+          <!-- Quick Info -->
+          <div class="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-5">
+            <h3 class="font-[var(--font-display)] text-sm font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-4">
+              Quick Info
+            </h3>
+            <dl class="space-y-3 text-sm">
+              <div class="flex justify-between">
+                <dt class="text-[var(--color-text-muted)]">Tool</dt>
+                <dd class="font-medium text-[var(--color-text-primary)]">{toolDisplayNames[data.tool] || data.tool}</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="text-[var(--color-text-muted)]">Category</dt>
+                <dd class="font-medium text-[var(--color-text-primary)]">{categoryDisplayNames[data.category] || data.category}</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="text-[var(--color-text-muted)]">Difficulty</dt>
+                <dd class="font-medium text-[var(--color-text-primary)] capitalize">{data.difficulty}</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="text-[var(--color-text-muted)]">Variables</dt>
+                <dd class="font-medium text-[var(--color-text-primary)]">{data.variables.length}</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="text-[var(--color-text-muted)]">Type</dt>
+                <dd class="font-medium text-[var(--color-text-primary)] capitalize">{data.promptType}</dd>
+              </div>
+            </dl>
+
+            <div class="mt-5 space-y-2">
+              <CopyButton client:load text={data.promptText} label="Copy Prompt" size="md" promptSlug={data.slug} />
+            </div>
+          </div>
+
+          <!-- Related Prompts -->
+          {relatedPrompts.length > 0 && (
+            <div class="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-5">
+              <h3 class="font-[var(--font-display)] text-sm font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-4">
+                Related Prompts
+              </h3>
+              <div class="space-y-3">
+                {relatedPrompts.map((rp) => (
+                  <a
+                    href={`/prompts/${rp.data.slug}/`}
+                    class="block rounded-[var(--radius-md)] p-3 text-sm transition-colors hover:bg-[var(--color-surface-2)]"
+                  >
+                    <span class="font-medium text-[var(--color-text-primary)]">{rp.data.title}</span>
+                    <div class="mt-1 flex items-center gap-2">
+                      <Badge variant="teal" size="sm">{toolDisplayNames[rp.data.tool] || rp.data.tool}</Badge>
+                      <Badge variant={difficultyColor[rp.data.difficulty]} size="sm">{rp.data.difficulty}</Badge>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </aside>
+    </div>
+  </article>
+
+  <Footer slot="footer" />
+</BaseLayout>

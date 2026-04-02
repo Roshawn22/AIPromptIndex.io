@@ -1,0 +1,23 @@
+{
+  "title": "Personalized Learning Path Generator",
+  "slug": "personalized-learning-path",
+  "promptText": "You are a learning coach and career advisor. Create a personalized 90-day learning path for someone who wants to [LEARNING_GOAL]. Their current skill level is [CURRENT_LEVEL] and they can dedicate [TIME_COMMITMENT] per week to learning. Their preferred learning style is [LEARNING_STYLE]. Create a week-by-week plan that includes: specific topics to cover each week with time estimates, recommended free and paid resources (courses, books, tutorials, podcasts) for each topic, one hands-on project per every 2 weeks that builds on accumulated knowledge, milestone checkpoints every 3 weeks with self-assessment criteria, a portfolio piece suggestion that demonstrates competency to employers, and accountability mechanisms to stay on track. Progressively increase difficulty and reduce hand-holding as the learner advances.",
+  "description": "Self-directed learning fails most often due to lack of structure, not lack of motivation. This prompt creates a detailed 90-day learning roadmap that removes the overwhelming 'what should I learn next' decision fatigue. The progressive difficulty curve prevents the common pattern of staying too long in comfortable beginner territory. The hands-on projects ensure practical skill development rather than tutorial-following that does not transfer to real work. The portfolio piece at the end gives the learner tangible proof of their new capabilities. Use it for career transitions, skill upgrades, personal development goals, or team member growth plans.",
+  "tool": "claude",
+  "category": "education",
+  "tags": ["learning-path", "self-study", "career-development", "skill-building", "roadmap"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "LEARNING_GOAL", "description": "What they want to learn", "example": "become proficient in data analysis with Python, starting from zero coding experience" },
+    { "name": "CURRENT_LEVEL", "description": "Current knowledge", "example": "experienced Excel user, familiar with basic statistics, never written code" },
+    { "name": "TIME_COMMITMENT", "description": "Available study time", "example": "8-10 hours" },
+    { "name": "LEARNING_STYLE", "description": "How they learn best", "example": "hands-on projects and video tutorials, gets bored with long text-based readings" }
+  ],
+  "tips": ["Adjust the plan based on actual progress rather than rigidly following the timeline", "Join a community of other learners for accountability and support", "Skip topics you already know well and spend extra time on your weak areas"],
+  "exampleOutput": "## 90-Day Python Data Analysis Learning Path\n\n### Weeks 1-2: Python Fundamentals\n**Time:** ~9 hours/week\n\n**Week 1: Setup and Core Syntax** (9 hrs)\n- Day 1-2: Install Python, VS Code, Jupyter Notebook. Complete 'Hello World' through functions (3 hrs)\n  - Resource: freeCodeCamp Python Tutorial (YouTube, free) - Watch chapters 1-4\n- Day 3-4: Data types, lists, dictionaries, and loops (3 hrs)\n  - Resource: Codecademy Python 3 Course (free tier) - Modules 1-3\n- Day 5-7: File reading, CSV basics, and your first script (3 hrs)\n  - Resource: Automate the Boring Stuff, Chapter 1-3 (free online)\n\n**Project (end of Week 2):** Write a Python script that reads your bank statement CSV and categorizes expenses into buckets, outputting a summary. This replaces an Excel task you already know how to do, making the value immediately tangible.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Personalized Learning Path Generator for Claude",
+  "metaDescription": "Create a structured 90-day learning path with resources, projects, and milestones. Try this Claude prompt for self-directed skill building."
+}

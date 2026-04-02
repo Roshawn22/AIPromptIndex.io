@@ -1,0 +1,27 @@
+{
+  "title": "Sci-Fi Concept Art Vehicle Design",
+  "slug": "sci-fi-concept-art-prompt",
+  "promptText": "A detailed concept art design sheet for a [VEHICLE_TYPE] from a [SETTING_ERA] science fiction universe. The vehicle features [DESIGN_ELEMENTS] with a design philosophy that blends [DESIGN_INFLUENCES]. Shown from multiple angles: front 3/4 view (hero shot), side profile, and a detail callout of [DETAIL_FOCUS]. Color scheme: [COLORS]. The surface shows [SURFACE_TREATMENT]. Environment context: parked/flying in [ENVIRONMENT]. Concept art style with clean line work, professional presentation on a neutral gray background with subtle grid. Annotations pointing to key design features. Artstation trending, industry professional quality.",
+  "description": "Concept art design sheets are the foundation of visual development for films, games, and graphic novels. This prompt generates professional-quality vehicle concept art presented in the industry-standard design sheet format with multiple angles and detail callouts. The annotation requirement adds the technical communication layer that distinguishes professional concept art from fan art. By specifying design influences, you create vehicles that feel grounded in recognizable aesthetics while remaining original. Use these for game development pitches, film pre-production, personal portfolio pieces, or worldbuilding reference materials.",
+  "tool": "stable-diffusion",
+  "category": "image-generation",
+  "tags": ["concept-art", "sci-fi", "vehicle-design", "game-art", "illustration"],
+  "difficulty": "advanced",
+  "promptType": "image",
+  "variables": [
+    { "name": "VEHICLE_TYPE", "description": "Type of vehicle", "example": "single-pilot reconnaissance starfighter" },
+    { "name": "SETTING_ERA", "description": "The sci-fi setting's time period and style", "example": "near-future hard sci-fi (2180 AD)" },
+    { "name": "DESIGN_ELEMENTS", "description": "Key design features", "example": "forward-swept wings, exposed thruster arrays, a bubble canopy, and retractable sensor mast" },
+    { "name": "DESIGN_INFLUENCES", "description": "Visual influences to blend", "example": "Soviet-era MiG fighter jets with SpaceX Starship industrial aesthetics" },
+    { "name": "DETAIL_FOCUS", "description": "What to show in the detail callout", "example": "the cockpit interior with holographic HUD layout" },
+    { "name": "COLORS", "description": "Color scheme", "example": "matte gunmetal gray with burnt orange accent markings and weathered white hull panels" },
+    { "name": "SURFACE_TREATMENT", "description": "Surface details", "example": "panel lines, heat-scorched thruster areas, repaired battle damage with mismatched hull plates" },
+    { "name": "ENVIRONMENT", "description": "Environmental context", "example": "a dusty forward operating base on a Mars-like planet" }
+  ],
+  "tips": ["Add 'no text' to your negative prompt if the AI adds unwanted labels", "Use ControlNet with a rough sketch for more precise shape control", "Request interior layout as a separate prompt for cockpit design details"],
+  "exampleOutput": "A professional concept art design sheet on neutral gray background with grid. A near-future reconnaissance starfighter shown from three angles. Forward-swept wings, bubble canopy, and exposed thruster arrays. Soviet MiG meets SpaceX industrial design. Matte gunmetal gray with burnt orange accent markings. Weathered hull with repaired battle damage. Detail callout showing holographic cockpit HUD. Annotation lines pointing to sensor mast and thruster configuration. Parked on a dusty Mars-like base.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Sci-Fi Concept Art Vehicle Design for SD",
+  "metaDescription": "Create professional concept art design sheets for sci-fi vehicles and spacecraft. Try this Stable Diffusion prompt for game and film pre-production."
+}

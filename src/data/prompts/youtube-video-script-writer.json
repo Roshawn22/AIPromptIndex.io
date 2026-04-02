@@ -1,0 +1,23 @@
+{
+  "title": "YouTube Video Script Writer",
+  "slug": "youtube-video-script-writer",
+  "promptText": "You are a YouTube content strategist who has helped channels grow from 0 to 100K subscribers. Write a complete script for a [VIDEO_LENGTH]-minute YouTube video titled '[VIDEO_TITLE]' for a channel about [CHANNEL_NICHE]. Target audience: [AUDIENCE]. Include: a hook that grabs attention in the first 5 seconds (pattern interrupt or bold claim), a brief intro with channel branding (under 15 seconds), the main content broken into clear segments with transition phrases, B-roll suggestions in brackets for each segment, a mid-roll CTA for likes and subscribes with a specific reason to do so, and a strong outro with a teaser for the next video. Write in a conversational, spoken-word style (not written English). Include [BRACKETS] notes for on-screen text, graphics, and visual cues throughout.",
+  "description": "YouTube success depends heavily on retention, and retention depends on script quality. This prompt generates scripts optimized for the YouTube algorithm by frontloading hooks, maintaining pacing with segment transitions, and strategically placing CTAs where they feel natural rather than intrusive. The B-roll suggestions help editors cut engaging visuals without additional direction from the creator. The spoken-word style instruction prevents the stiff, over-written scripts that make creators sound unnatural on camera. Use it for educational content, vlogs, product reviews, tutorials, or any format that benefits from a planned structure.",
+  "tool": "chatgpt",
+  "category": "writing",
+  "tags": ["youtube", "video-script", "content-creation", "retention", "algorithm"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "VIDEO_LENGTH", "description": "Target video duration", "example": "10" },
+    { "name": "VIDEO_TITLE", "description": "The video title", "example": "5 AI Tools That Replaced My Entire Marketing Team" },
+    { "name": "CHANNEL_NICHE", "description": "What the channel covers", "example": "AI productivity and business automation" },
+    { "name": "AUDIENCE", "description": "Target viewer", "example": "solo entrepreneurs and small business owners aged 28-45" }
+  ],
+  "tips": ["Record the script as a teleprompter read first, then add natural pauses and ad-libs", "Front-load value in the first 30 seconds to survive the critical retention drop-off", "Test multiple thumbnail/title combinations with community posts before publishing"],
+  "exampleOutput": "[HOOK - COLD OPEN]\n'Last month I fired my marketing agency. Not because they were bad, but because five AI tools are now doing their job better, faster, and for less than the cost of a single team lunch.'\n\n[ON-SCREEN TEXT: 'I saved $4,200/month']\n\n[INTRO - 10 seconds]\n'What's up everyone, I'm [Name], and on this channel we find AI tools that actually save real businesses real money. If that sounds useful, you know what to do.'\n\n[B-ROLL: Quick montage of the 5 tool interfaces]\n\n[SEGMENT 1 - Tool #1]\n'Alright, the first tool completely changed how I handle social media, and honestly, it is the one I was most skeptical about...'",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "YouTube Video Script Writer Prompt for ChatGPT",
+  "metaDescription": "Write retention-optimized YouTube scripts with hooks, B-roll notes, and CTAs. Try this free ChatGPT prompt to grow your channel faster."
+}

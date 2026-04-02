@@ -1,0 +1,23 @@
+{
+  "title": "Python Data Pipeline Builder",
+  "slug": "python-data-pipeline",
+  "promptText": "Build a robust Python data pipeline that [PIPELINE_PURPOSE]. The pipeline should extract data from [DATA_SOURCE], transform it by [TRANSFORMATIONS], and load it into [DESTINATION]. Implement the following: proper logging with structured log messages, retry logic with exponential backoff for external API calls, data validation at each stage using Pydantic models, error handling that captures and reports failures without stopping the entire pipeline, configuration management using environment variables, and a dry-run mode for testing. Include type hints throughout, write docstrings for all public functions, and add unit tests for the transformation logic. Structure the code as a proper Python package with separate modules for extract, transform, and load stages.",
+  "description": "Data pipelines are the backbone of modern data infrastructure, but building reliable ones from scratch involves many subtle decisions around error handling, retry logic, and validation. This prompt generates a complete ETL pipeline with production-grade patterns built in from the start. The Pydantic validation ensures data quality at every stage, while the retry logic and structured logging make the pipeline resilient and debuggable. The modular package structure means you can extend and maintain the code as your data needs grow.",
+  "tool": "cursor",
+  "category": "coding",
+  "tags": ["python", "ETL", "data-pipeline", "pydantic", "automation"],
+  "difficulty": "advanced",
+  "promptType": "code",
+  "variables": [
+    { "name": "PIPELINE_PURPOSE", "description": "What the pipeline accomplishes", "example": "syncs customer data from Salesforce to a PostgreSQL analytics database" },
+    { "name": "DATA_SOURCE", "description": "Where data comes from", "example": "Salesforce REST API" },
+    { "name": "TRANSFORMATIONS", "description": "How data should be transformed", "example": "deduplicating records, normalizing phone numbers, enriching with company size data, and calculating lead scores" },
+    { "name": "DESTINATION", "description": "Where processed data goes", "example": "PostgreSQL database with upsert logic" }
+  ],
+  "tips": ["Specify your Python version for compatible syntax suggestions", "Mention your orchestration tool (Airflow, Prefect, etc.) for integration-ready code", "Request a Dockerfile and docker-compose.yml for containerized deployment"],
+  "exampleOutput": "```python\n# pipeline/extract/salesforce.py\nfrom typing import AsyncIterator\nfrom pydantic import BaseModel\nimport httpx\nfrom tenacity import retry, stop_after_attempt, wait_exponential\n\nclass SalesforceContact(BaseModel):\n    id: str\n    email: str\n    first_name: str\n    last_name: str\n    company: str | None = None\n    phone: str | None = None\n\n@retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=30))\nasync def fetch_contacts(config: SalesforceConfig) -> AsyncIterator[SalesforceContact]:\n    ...\n```",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Python Data Pipeline Builder Prompt for Cursor",
+  "metaDescription": "Build production-grade Python ETL pipelines with validation, retries, and testing. Try this Cursor prompt for reliable data engineering."
+}

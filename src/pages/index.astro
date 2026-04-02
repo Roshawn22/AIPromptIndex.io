@@ -1,0 +1,148 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/global/Header.astro';
+import Footer from '../components/global/Footer.astro';
+import Badge from '../components/ui/Badge.astro';
+import Button from '../components/ui/Button.astro';
+import NewsletterSignup from '../components/common/NewsletterSignup.astro';
+
+const categories = [
+  { name: 'Writing', slug: 'writing', icon: 'PenLine', description: 'Blog posts, emails, copywriting' },
+  { name: 'Coding', slug: 'coding', icon: 'Code', description: 'Code generation, debugging, review' },
+  { name: 'Marketing', slug: 'marketing', icon: 'Megaphone', description: 'Campaigns, social media, SEO' },
+  { name: 'Image Generation', slug: 'image-generation', icon: 'Image', description: 'AI art, logos, illustrations' },
+  { name: 'Business', slug: 'business', icon: 'Briefcase', description: 'Strategy, analysis, operations' },
+  { name: 'Data Analysis', slug: 'data-analysis', icon: 'BarChart3', description: 'Exploration, visualization, reports' },
+  { name: 'Education', slug: 'education', icon: 'GraduationCap', description: 'Learning, tutoring, study aids' },
+  { name: 'Creative', slug: 'creative', icon: 'Sparkles', description: 'Storytelling, brainstorming, ideation' },
+];
+
+const tools = [
+  { name: 'ChatGPT', slug: 'chatgpt', color: '#10a37f' },
+  { name: 'Claude', slug: 'claude', color: '#d4a574' },
+  { name: 'Gemini', slug: 'gemini', color: '#4285f4' },
+  { name: 'Midjourney', slug: 'midjourney', color: '#ffffff' },
+  { name: 'DALL-E', slug: 'dall-e', color: '#10a37f' },
+  { name: 'Cursor', slug: 'cursor', color: '#000000' },
+  { name: 'GitHub Copilot', slug: 'github-copilot', color: '#000000' },
+  { name: 'Stable Diffusion', slug: 'stable-diffusion', color: '#a855f7' },
+];
+---
+
+<BaseLayout
+  title="AIPromptIndex"
+  description="Discover, copy, and use curated AI prompts for ChatGPT, Claude, Midjourney, and 10+ AI tools. The AI Prompt Library for Entrepreneurs."
+>
+  <Header slot="header" />
+
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden border-b border-[var(--color-border)]">
+    <!-- Glow orbs -->
+    <div class="absolute top-0 left-1/4 h-96 w-96 rounded-full bg-teal-500/5 blur-3xl" aria-hidden="true"></div>
+    <div class="absolute bottom-0 right-1/4 h-96 w-96 rounded-full bg-violet-500/5 blur-3xl" aria-hidden="true"></div>
+
+    <div class="relative mx-auto max-w-7xl px-[var(--space-page)] py-20 text-center sm:py-28">
+      <div class="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface-1)] px-4 py-1.5 mb-6">
+        <span class="relative flex h-2 w-2">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal-400 opacity-75"></span>
+          <span class="relative inline-flex h-2 w-2 rounded-full bg-teal-500"></span>
+        </span>
+        <span class="text-xs font-[var(--font-display)] font-medium text-[var(--color-text-secondary)]">
+          50+ Curated Prompts &middot; 8 Categories &middot; 8 AI Tools
+        </span>
+      </div>
+
+      <h1 class="mx-auto max-w-4xl">
+        <span class="text-[var(--color-text-primary)]">The AI Prompt Library</span>
+        <br />
+        <span class="text-gradient">for Entrepreneurs</span>
+      </h1>
+
+      <p class="mx-auto mt-6 max-w-2xl text-lg text-[var(--color-text-secondary)]">
+        Discover, copy, and use curated prompts for ChatGPT, Claude, Midjourney, and more. Free and community-driven.
+      </p>
+
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <Button href="/prompts/" size="lg">
+          Browse Prompts
+        </Button>
+        <Button href="/submit/" size="lg" variant="outline">
+          Submit a Prompt
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tool Quick-Filter Bar -->
+  <section class="border-b border-[var(--color-border)] bg-[var(--color-surface-1)]">
+    <div class="mx-auto max-w-7xl px-[var(--space-page)] py-4">
+      <div class="flex items-center gap-3 overflow-x-auto pb-1 scrollbar-none">
+        <span class="shrink-0 text-xs font-[var(--font-display)] font-medium uppercase tracking-wider text-[var(--color-text-muted)]">
+          By Tool:
+        </span>
+        {tools.map((tool) => (
+          <a
+            href={`/tools/${tool.slug}/`}
+            class="shrink-0 rounded-full border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-1.5 text-sm font-[var(--font-display)] font-medium text-[var(--color-text-secondary)] transition-colors hover:border-[var(--color-accent-muted)] hover:text-[var(--color-accent)]"
+          >
+            {tool.name}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Browse by Category -->
+  <section class="mx-auto max-w-7xl px-[var(--space-page)] py-16" data-reveal>
+    <div class="mb-10 flex items-end justify-between">
+      <div>
+        <h2 class="text-[var(--color-text-primary)]">Browse by Use Case</h2>
+        <p class="mt-2 text-[var(--color-text-secondary)]">Find the perfect prompt for your next project</p>
+      </div>
+      <a href="/categories/" class="hidden text-sm font-[var(--font-display)] font-medium text-[var(--color-accent)] hover:underline sm:block">
+        View all categories &rarr;
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {categories.map((cat) => (
+        <a
+          href={`/categories/${cat.slug}/`}
+          class="group rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-5 transition-all duration-200 hover:shadow-[var(--shadow-card-hover)] hover:border-[var(--color-accent-muted)]"
+        >
+          <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-accent-glow)]">
+            <svg class="h-5 w-5 text-[var(--color-accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+            </svg>
+          </div>
+          <h3 class="font-[var(--font-display)] text-base font-semibold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
+            {cat.name}
+          </h3>
+          <p class="mt-1 text-sm text-[var(--color-text-muted)]">
+            {cat.description}
+          </p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Cross-Promo -->
+  <section class="mx-auto max-w-7xl px-[var(--space-page)] pb-16" data-reveal>
+    <div class="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-gradient-to-r from-teal-500/5 to-emerald-500/5 p-8 text-center">
+      <h2 class="text-xl font-[var(--font-display)] font-bold text-[var(--color-text-primary)]">
+        Looking for AI tools?
+      </h2>
+      <p class="mt-2 text-[var(--color-text-secondary)]">
+        Explore 200+ curated AI tools on our sister site
+      </p>
+      <Button href="https://aitoolindex.io" size="md" variant="outline" class="mt-4">
+        Visit AIToolIndex.io &rarr;
+      </Button>
+    </div>
+  </section>
+
+  <!-- Newsletter CTA -->
+  <NewsletterSignup />
+
+  <Footer slot="footer" />
+</BaseLayout>

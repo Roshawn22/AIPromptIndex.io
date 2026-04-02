@@ -1,0 +1,24 @@
+{
+  "title": "Songwriting Assistant with Chord Progressions",
+  "slug": "songwriting-assistant",
+  "promptText": "You are a songwriter and music theory expert who has written for multiple genres. Write a complete song in the [GENRE] genre about [THEME]. The song should have: a verse-chorus-verse-chorus-bridge-chorus structure, lyrics that tell a story or convey [EMOTION], suggested chord progressions for each section in the key of [KEY], a melody description noting where the vocal line rises and falls, and a production note suggesting instrumentation and tempo (BPM). Use [RHYME_SCHEME] rhyme scheme for the verses. The chorus should be catchy and singable with a memorable hook in the first line. Avoid cliches specific to this genre. Include syllable counts for each line to maintain rhythmic consistency.",
+  "description": "Songwriting combines the craft of poetry with music theory, and many songwriters excel at one but struggle with the other. This prompt bridges both disciplines by generating lyrics with built-in musicality: chord progressions that support the emotional arc, melody direction notes, and syllable counts for rhythmic consistency. The genre-specific awareness helps avoid the overused tropes that make songs feel derivative. Whether you are a lyricist who needs harmonic structure or a musician who needs words, this prompt provides a complete working draft that you can refine with your own artistry.",
+  "tool": "claude",
+  "category": "creative",
+  "tags": ["songwriting", "music", "lyrics", "chord-progressions", "creative-writing"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "GENRE", "description": "Musical genre", "example": "indie folk" },
+    { "name": "THEME", "description": "What the song is about", "example": "leaving a small town knowing you might never come back" },
+    { "name": "EMOTION", "description": "The emotional core", "example": "bittersweet hope" },
+    { "name": "KEY", "description": "Musical key", "example": "G major" },
+    { "name": "RHYME_SCHEME", "description": "Rhyme pattern for verses", "example": "ABAB" }
+  ],
+  "tips": ["Sing the lyrics out loud to test how they feel in your mouth", "Adjust chord progressions to match your vocal range", "Use the bridge as a place to modulate keys for emotional lift"],
+  "exampleOutput": "**Title:** 'Gravel and Grace'\n**Key:** G major | **Tempo:** 108 BPM | **Feel:** Fingerpicked acoustic guitar with light percussion\n\n**Verse 1** (Chords: G - Cadd9 - Em - D)\nI packed my life in cardboard boxes, (9 syllables)\nStacked them in a borrowed truck, (8 syllables)\nMama stood behind the screen door, (9 syllables)\nWaving like she's wishing luck. (8 syllables)\n\n*Melody note: Start low on 'I packed,' rise through 'cardboard boxes,' drop back on the second line for conversational feel.*\n\n**Chorus** (Chords: C - G - D - Em)\nBut the road don't care where you've been...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Songwriting Assistant Prompt with Chord Progressions",
+  "metaDescription": "Write complete songs with lyrics, chord progressions, and melody notes. Try this Claude prompt for genre-specific songwriting assistance."
+}

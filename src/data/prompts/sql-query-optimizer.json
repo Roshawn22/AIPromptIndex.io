@@ -1,0 +1,22 @@
+{
+  "title": "SQL Query Optimizer and Explainer",
+  "slug": "sql-query-optimizer",
+  "promptText": "You are a senior database engineer specializing in [DATABASE_SYSTEM] performance optimization. I have a SQL query that is running slowly on a table with approximately [TABLE_SIZE] rows. Here is the query: [SQL_QUERY]. Please: 1) Explain what this query does in plain English, 2) Identify performance bottlenecks and explain why they cause slowness, 3) Rewrite the query with optimizations (use CTEs, proper JOINs, avoid subqueries where possible), 4) Suggest indexes that would improve performance and explain why each helps, 5) Provide the EXPLAIN ANALYZE interpretation you would expect before and after optimization, 6) Note any potential data integrity issues or edge cases the original query might miss. Format each optimization with a clear before/after comparison.",
+  "description": "Slow SQL queries are one of the most common performance problems in production applications, and optimizing them requires understanding both the query logic and the database engine's execution strategy. This prompt acts as a virtual DBA who can explain your query in plain English, identify exactly why it is slow, and provide an optimized version with proper indexing recommendations. The EXPLAIN ANALYZE interpretation helps you understand what the database is actually doing under the hood. This is invaluable for developers who are proficient in SQL but lack deep performance tuning experience.",
+  "tool": "claude",
+  "category": "data-analysis",
+  "tags": ["SQL", "database", "performance", "optimization", "indexing"],
+  "difficulty": "advanced",
+  "promptType": "text",
+  "variables": [
+    { "name": "DATABASE_SYSTEM", "description": "Which database you are using", "example": "PostgreSQL 15" },
+    { "name": "TABLE_SIZE", "description": "Approximate number of rows", "example": "12 million" },
+    { "name": "SQL_QUERY", "description": "The slow query to optimize", "example": "SELECT * FROM orders o WHERE o.created_at > '2025-01-01' AND o.customer_id IN (SELECT customer_id FROM customers WHERE region = 'US') ORDER BY o.total DESC LIMIT 100" }
+  ],
+  "tips": ["Include your current indexes so the AI can suggest missing ones rather than duplicates", "Provide the actual EXPLAIN output if available for more precise recommendations", "Mention if you have read replicas or partitioned tables for architecture-aware suggestions"],
+  "exampleOutput": "## Plain English Explanation\nThis query finds the top 100 highest-value orders placed after January 1, 2025, by customers in the US region, sorted by order total descending.\n\n## Performance Bottlenecks\n1. **Correlated subquery on customers table**: The IN subquery forces a full scan of the customers table for each row evaluation. With 12M orders, this creates enormous overhead.\n2. **SELECT ***: Retrieving all columns when you likely only need a subset increases I/O.\n3. **Missing composite index**: No index covers the (created_at, customer_id, total) combination.\n\n## Optimized Query\n```sql\nWITH us_customers AS (\n  SELECT customer_id FROM customers WHERE region = 'US'\n)\nSELECT o.id, o.customer_id, o.total, o.created_at\nFROM orders o\nINNER JOIN us_customers uc ON o.customer_id = uc.customer_id\nWHERE o.created_at > '2025-01-01'\nORDER BY o.total DESC\nLIMIT 100;\n```",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "SQL Query Optimizer Prompt for Claude",
+  "metaDescription": "Optimize slow SQL queries with expert analysis, index recommendations, and before/after comparisons. Try this Claude prompt for faster databases."
+}

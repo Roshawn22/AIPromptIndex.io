@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/global/Header.astro';
+import Footer from '../components/global/Footer.astro';
+import SubmitForm from '../components/prompt/SubmitForm.tsx';
+---
+
+<BaseLayout
+  title="Submit a Prompt"
+  description="Share your best AI prompts with the community. Submit a prompt for ChatGPT, Claude, Midjourney, or any other AI tool."
+  noindex={true}
+>
+  <Header slot="header" />
+
+  <section class="mx-auto max-w-2xl px-[var(--space-page)] py-16">
+    <h1>Submit a Prompt</h1>
+    <p class="mt-2 text-lg text-[var(--color-text-secondary)]">
+      Share your best AI prompts with the community. We review every submission for quality.
+    </p>
+
+    <div class="mt-10">
+      <SubmitForm client:load />
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

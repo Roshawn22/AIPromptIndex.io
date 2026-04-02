@@ -1,0 +1,10 @@
+[
+  { "id": "writing", "name": "Writing", "slug": "writing", "description": "Prompts for content creation, copywriting, editing, and creative writing. Generate blog posts, emails, social media captions, and more.", "icon": "PenLine", "order": 1 },
+  { "id": "coding", "name": "Coding", "slug": "coding", "description": "Prompts for code generation, debugging, code review, refactoring, and technical documentation.", "icon": "Code", "order": 2 },
+  { "id": "marketing", "name": "Marketing", "slug": "marketing", "description": "Prompts for campaigns, social media strategy, SEO content, ad copy, and growth tactics.", "icon": "Megaphone", "order": 3 },
+  { "id": "image-generation", "name": "Image Generation", "slug": "image-generation", "description": "Prompts for AI art, logos, product photos, illustrations, and visual content creation.", "icon": "Image", "order": 4 },
+  { "id": "business", "name": "Business", "slug": "business", "description": "Prompts for strategy, financial analysis, business plans, presentations, and operations.", "icon": "Briefcase", "order": 5 },
+  { "id": "data-analysis", "name": "Data Analysis", "slug": "data-analysis", "description": "Prompts for data exploration, visualization, statistical analysis, and reporting.", "icon": "BarChart3", "order": 6 },
+  { "id": "education", "name": "Education", "slug": "education", "description": "Prompts for learning, tutoring, lesson planning, study aids, and educational content.", "icon": "GraduationCap", "order": 7 },
+  { "id": "creative", "name": "Creative", "slug": "creative", "description": "Prompts for storytelling, brainstorming, ideation, worldbuilding, and creative problem-solving.", "icon": "Sparkles", "order": 8 }
+]

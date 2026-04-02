@@ -1,0 +1,22 @@
+{
+  "title": "Blog Post Outline Generator",
+  "slug": "blog-post-outline-generator",
+  "promptText": "You are an expert content strategist. Create a detailed blog post outline for a [WORD_COUNT]-word article about [TOPIC] targeting [AUDIENCE]. The outline should include a compelling headline, an introduction hook, 5-7 main sections with subpoints, a conclusion with a call to action, and suggested internal linking opportunities. For each section, provide a one-sentence summary of the key argument or information to cover. Ensure the structure follows SEO best practices with a logical flow that keeps readers engaged.",
+  "description": "This prompt helps content creators and marketers generate comprehensive blog post outlines that are structured for both reader engagement and SEO performance. Instead of staring at a blank page, you get a ready-to-write framework complete with section breakdowns, key arguments, and strategic elements like internal linking suggestions. It is especially useful for content teams who need to maintain consistent quality across multiple writers, or for solo bloggers who want to plan their content more efficiently before diving into the actual writing process.",
+  "tool": "chatgpt",
+  "category": "writing",
+  "tags": ["blog", "content-strategy", "SEO", "outline", "writing"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "WORD_COUNT", "description": "Target word count for the final article", "example": "2000" },
+    { "name": "TOPIC", "description": "The subject of the blog post", "example": "remote work productivity tips for developers" },
+    { "name": "AUDIENCE", "description": "The target reader demographic", "example": "mid-level software engineers working from home" }
+  ],
+  "tips": ["Be specific about your audience to get more targeted section suggestions", "Include your primary keyword in the TOPIC field for better SEO alignment", "Use the generated outline as a starting framework and customize section order as needed"],
+  "exampleOutput": "Headline: '10 Proven Remote Work Productivity Hacks Every Developer Needs in 2026'\n\nIntroduction: Open with a statistic about remote developer productivity decline, then promise actionable solutions.\n\nSection 1: The Pomodoro Technique Adapted for Deep Coding Sessions - Explain why standard 25-minute intervals don't work for programming and suggest 52/17 splits instead.\n\nSection 2: Environment Design for Flow State...",
+  "isFeatured": true,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Blog Post Outline Generator Prompt for ChatGPT",
+  "metaDescription": "Generate detailed, SEO-optimized blog post outlines in seconds. Try this free ChatGPT prompt to plan your next article like a pro."
+}

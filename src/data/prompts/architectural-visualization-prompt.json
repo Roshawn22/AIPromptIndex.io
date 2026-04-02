@@ -1,0 +1,27 @@
+{
+  "title": "Architectural Visualization Render",
+  "slug": "architectural-visualization-prompt",
+  "promptText": "A photorealistic architectural visualization of [BUILDING_TYPE] designed in [ARCHITECTURAL_STYLE] style. The building features [KEY_DESIGN_ELEMENTS]. Exterior view from a [CAMERA_POSITION] perspective during [TIME_OF_DAY]. The surrounding environment includes [LANDSCAPE_ELEMENTS]. Materials visible include [MATERIALS]. Natural lighting with [LIGHTING_CONDITIONS]. People walking nearby for scale. Professional architectural photography quality, clean lines, precise geometry. Shot with a tilt-shift lens for corrected verticals. Post-processed with subtle HDR treatment. 8K resolution, Unreal Engine 5 render quality.",
+  "description": "Architectural visualization typically requires expensive 3D rendering software and hours of setup time. This prompt generates photorealistic architectural renders that capture the specific details architects and developers need to see: material treatments, lighting conditions, landscape context, and human scale references. The tilt-shift lens specification ensures the verticals are corrected, which is a hallmark of professional architectural photography. Use these for client presentations, real estate marketing materials, design competitions, or visualizing renovation concepts before committing to expensive construction.",
+  "tool": "midjourney",
+  "category": "image-generation",
+  "tags": ["architecture", "visualization", "3D-render", "real-estate", "design"],
+  "difficulty": "advanced",
+  "promptType": "image",
+  "variables": [
+    { "name": "BUILDING_TYPE", "description": "Type of building", "example": "a three-story modern residential home" },
+    { "name": "ARCHITECTURAL_STYLE", "description": "Design style", "example": "Scandinavian minimalist with Japanese wabi-sabi influences" },
+    { "name": "KEY_DESIGN_ELEMENTS", "description": "Notable architectural features", "example": "floor-to-ceiling windows, a cantilevered upper floor, a green roof terrace, and an interior courtyard visible through glass walls" },
+    { "name": "CAMERA_POSITION", "description": "Where the camera is positioned", "example": "street-level three-quarter" },
+    { "name": "TIME_OF_DAY", "description": "Lighting time", "example": "golden hour, late afternoon" },
+    { "name": "LANDSCAPE_ELEMENTS", "description": "Surrounding environment", "example": "mature birch trees, a gravel path, native grass landscaping" },
+    { "name": "MATERIALS", "description": "Building materials to highlight", "example": "light cedar wood cladding, exposed concrete, black steel frames, and natural stone base" },
+    { "name": "LIGHTING_CONDITIONS", "description": "Specific lighting qualities", "example": "warm golden sun creating long shadows, interior lights glowing warmly through the glass" }
+  ],
+  "tips": ["Use '--ar 16:9' for landscape format suitable for presentations", "Add specific material brand names like 'Kebony wood' for more accurate textures", "Request multiple viewpoints (front, rear, aerial) for a complete visual package"],
+  "exampleOutput": "A photorealistic render of a Scandinavian-minimalist three-story home with Japanese wabi-sabi touches. Light cedar cladding contrasts with exposed concrete. Floor-to-ceiling windows reveal a warm interior courtyard. A cantilevered upper floor creates a dramatic overhang. Golden hour light casts long shadows across the gravel path. Birch trees frame the composition. Professional architectural photography quality with corrected verticals.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Architectural Visualization Prompt for Midjourney",
+  "metaDescription": "Generate photorealistic architectural renders without 3D software. Try this Midjourney prompt for building visualization and design presentations."
+}

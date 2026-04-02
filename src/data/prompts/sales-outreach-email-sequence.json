@@ -1,0 +1,23 @@
+{
+  "title": "B2B Sales Outreach Email Sequence",
+  "slug": "sales-outreach-email-sequence",
+  "promptText": "You are a B2B sales development expert who has built outreach sequences with 40%+ open rates. Create a 5-email outreach sequence for selling [PRODUCT_SERVICE] to [TARGET_PERSONA] at [COMPANY_TYPE] companies. The prospect's likely pain point is [PAIN_POINT]. For each email in the sequence, provide: the send timing (days after previous email), subject line (under 50 characters), personalization placeholders for the first line, body copy under 100 words, a soft CTA (no aggressive selling in early emails), and the strategic purpose of that email in the sequence. Email 1 should be value-first (share an insight, not a pitch). Email 2 should reference a relevant case study. Email 3 should ask a question that reveals need. Email 4 should add urgency. Email 5 should be a polite breakup email. Include A/B test suggestions for subject lines.",
+  "description": "Cold outreach is still the most direct path to B2B pipeline generation, but most sequences fail because they lead with product features instead of prospect value. This prompt creates a psychologically sequenced email series that builds trust before asking for anything. The value-first approach in Email 1 establishes credibility, the case study in Email 2 provides social proof, and the question in Email 3 creates engagement. The breakup email in Email 5 leverages loss aversion psychology to reactivate non-responders. Each email has a specific strategic purpose that builds on the previous one. Essential for SDRs, founders doing outbound sales, and sales leaders building team playbooks.",
+  "tool": "claude",
+  "category": "marketing",
+  "tags": ["sales", "outreach", "email-sequence", "B2B", "prospecting"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "PRODUCT_SERVICE", "description": "What you are selling", "example": "an AI-powered code review tool that catches security vulnerabilities before deployment" },
+    { "name": "TARGET_PERSONA", "description": "Who you are emailing", "example": "VP of Engineering or Head of Security" },
+    { "name": "COMPANY_TYPE", "description": "Type of company to target", "example": "Series B+ SaaS companies with 50-500 engineers" },
+    { "name": "PAIN_POINT", "description": "Their likely pain point", "example": "spending too much engineering time on manual code reviews while still missing security issues that reach production" }
+  ],
+  "tips": ["Personalize the first line of every email with specific research about the prospect", "Send emails Tuesday through Thursday between 8-10 AM in the prospect's time zone", "Track response rates by email position to identify where the sequence loses momentum"],
+  "exampleOutput": "## Email 1: The Value-First Insight\n**Send:** Day 0 | **Purpose:** Establish credibility, not sell\n**Subject:** 3 CVEs your team might be missing\n**Subject B:** security blind spot in Node.js apps\n\nHi [FIRST_NAME],\n\n[PERSONALIZATION: Reference a recent blog post, conference talk, or open-source contribution by the prospect]\n\nI analyzed 200 production security incidents at SaaS companies your size last quarter. Three patterns kept showing up that traditional code review misses:\n\n1. Transitive dependency vulnerabilities (43% of incidents)\n2. Auth bypass through parameter pollution (28%)\n3. SSRF in internal API calls (19%)\n\nWe compiled the patterns into a free checklist. Want me to send it over?\n\n[NAME]\n\n**Strategic note:** No mention of our product. Pure value delivery builds trust and gets the 'yes' habit started with a low-commitment ask.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "B2B Sales Outreach Email Sequence for Claude",
+  "metaDescription": "Create high-converting B2B sales email sequences with psychological triggers. Try this Claude prompt for outbound prospecting and pipeline generation."
+}

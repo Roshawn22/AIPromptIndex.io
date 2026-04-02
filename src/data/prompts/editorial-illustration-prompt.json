@@ -1,0 +1,26 @@
+{
+  "title": "Editorial Magazine Illustration",
+  "slug": "editorial-illustration-prompt",
+  "promptText": "A bold editorial illustration for a magazine article about [ARTICLE_TOPIC]. The illustration uses [ART_STYLE] style with [COLOR_APPROACH] colors. The central visual metaphor depicts [VISUAL_METAPHOR]. Composition is [COMPOSITION_STYLE] with strong graphic shapes and negative space. Typography-friendly layout with clear areas for headline text overlay. The mood is [MOOD]. Inspired by the illustration style of [ARTIST_REFERENCE]. Print-ready quality, CMYK-friendly colors, editorial art direction sensibility. No photorealism, distinctly illustrated aesthetic.",
+  "description": "Editorial illustrations require a different skill set than other art forms: they must communicate complex ideas through visual metaphor while leaving space for typography and maintaining a bold graphic presence at magazine scale. This prompt generates illustrations that think like an art director, balancing visual metaphor, compositional clarity, and text-overlay readiness. The CMYK-friendly color specification ensures the images translate well to print production. The artist reference parameter channels specific editorial illustration traditions from classic New Yorker sophistication to modern Wired dynamism. Use these for blog headers, magazine features, podcast artwork, or presentation visuals.",
+  "tool": "midjourney",
+  "category": "image-generation",
+  "tags": ["editorial", "illustration", "magazine", "visual-metaphor", "graphic-design"],
+  "difficulty": "intermediate",
+  "promptType": "image",
+  "variables": [
+    { "name": "ARTICLE_TOPIC", "description": "What the article is about", "example": "the hidden costs of always-on work culture and digital burnout" },
+    { "name": "ART_STYLE", "description": "Illustration technique", "example": "cut-paper collage with digital texture" },
+    { "name": "COLOR_APPROACH", "description": "Color strategy", "example": "limited palette of coral, navy, and cream with one pop of electric yellow" },
+    { "name": "VISUAL_METAPHOR", "description": "The metaphor to illustrate", "example": "a person slowly dissolving into their smartphone screen while a lush garden grows unnoticed behind them" },
+    { "name": "COMPOSITION_STYLE", "description": "How the image is composed", "example": "asymmetric with the figure on the left third" },
+    { "name": "MOOD", "description": "Emotional tone", "example": "thought-provoking and slightly unsettling without being dark" },
+    { "name": "ARTIST_REFERENCE", "description": "Artist whose style to channel", "example": "Christoph Niemann meets Malika Favre" }
+  ],
+  "tips": ["Specify 'no text' in your prompt to prevent the AI from adding unwanted typography", "Use '--ar 3:2' for standard magazine spread proportions", "Request both horizontal and vertical versions for different layout needs"],
+  "exampleOutput": "A bold editorial illustration in cut-paper collage style. A figure dissolves into a glowing smartphone screen, their body fragmenting into digital pixels. Behind them, an untended garden bursts with life in coral and cream tones. Limited palette of navy, coral, cream, and electric yellow. Asymmetric composition with clear space on the right for text overlay. Christoph Niemann-inspired graphic simplicity with Malika Favre's bold shapes. Thought-provoking mood.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Editorial Magazine Illustration for Midjourney",
+  "metaDescription": "Create bold editorial illustrations with visual metaphors and text-overlay space. Try this Midjourney prompt for magazine and blog artwork."
+}

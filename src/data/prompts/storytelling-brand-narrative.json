@@ -1,0 +1,24 @@
+{
+  "title": "Brand Storytelling Narrative Creator",
+  "slug": "storytelling-brand-narrative",
+  "promptText": "You are a brand storytelling expert. Craft a compelling origin story narrative for [BRAND_NAME], a [BUSINESS_TYPE] founded by [FOUNDER_BACKGROUND]. The story should follow the hero's journey framework: start with the founder's personal struggle with [PROBLEM], the turning point that inspired the solution, the challenges faced while building the business, and the mission that drives the company today. Write in [TONE] tone, keep it under 500 words, and make it emotionally resonant enough to use on an About Us page or investor pitch deck.",
+  "description": "Every memorable brand has an origin story that connects with its audience on an emotional level. This prompt helps entrepreneurs and marketers craft that narrative using the proven hero's journey structure. It takes raw business details and transforms them into a compelling story arc that builds trust and emotional connection. Perfect for About Us pages, pitch decks, social media bios, and brand guidelines documents. The structured approach ensures the story hits all the right beats without feeling formulaic or generic.",
+  "tool": "chatgpt",
+  "category": "writing",
+  "tags": ["brand-story", "copywriting", "hero-journey", "about-us"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "BRAND_NAME", "description": "The name of the brand", "example": "GreenThread" },
+    { "name": "BUSINESS_TYPE", "description": "What the business does", "example": "sustainable fashion marketplace" },
+    { "name": "FOUNDER_BACKGROUND", "description": "Brief background of the founder", "example": "a former fast-fashion buyer who witnessed textile waste firsthand" },
+    { "name": "PROBLEM", "description": "The problem that inspired the business", "example": "the environmental devastation of fast fashion and lack of affordable sustainable alternatives" },
+    { "name": "TONE", "description": "The desired voice", "example": "authentic and passionate without being preachy" }
+  ],
+  "tips": ["Include specific sensory details in your founder background for more vivid storytelling", "Run the output through a readability checker to ensure it matches your audience level", "Use this as a foundation and add real anecdotes from the founder's experience"],
+  "exampleOutput": "In 2019, Maria Chen stood in a warehouse in Dhaka, surrounded by 40-foot mountains of unsold clothing destined for landfills. As a buyer for one of America's largest fast-fashion retailers, she had helped create this waste. That night in her hotel room, she made a decision that would cost her a six-figure salary but save her conscience...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Brand Storytelling Narrative Prompt for ChatGPT",
+  "metaDescription": "Create a compelling brand origin story using the hero's journey framework. Try this free prompt to craft your About Us page narrative."
+}

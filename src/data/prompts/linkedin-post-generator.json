@@ -1,0 +1,24 @@
+{
+  "title": "LinkedIn Post Generator for Thought Leadership",
+  "slug": "linkedin-post-generator",
+  "promptText": "You are a LinkedIn content strategist who helps professionals build authority. Write a LinkedIn post about [TOPIC] from the perspective of a [ROLE] with [EXPERIENCE_LEVEL] experience. Use the [POST_FORMAT] format. Open with a bold hook in the first line that stops the scroll (no hashtags in the first line). Structure the post with short paragraphs (1-2 sentences each), strategic line breaks for mobile readability, and a mix of insights, personal anecdotes, and data points. End with a thought-provoking question that encourages comments. Include 3-5 relevant hashtags at the very end. Keep it under 1,300 characters for optimal algorithm performance. The tone should be [TONE] and avoid corporate jargon.",
+  "description": "LinkedIn has become the most important platform for professional thought leadership, but most posts fail because they read like corporate press releases. This prompt generates posts optimized for LinkedIn's algorithm and mobile reading experience: short paragraphs, scroll-stopping hooks, and engagement-driving questions. The character limit constraint ensures your post displays fully without the 'see more' truncation that kills engagement. The personal anecdote requirement adds authenticity that resonates with LinkedIn audiences who are tired of generic business wisdom. Use it to build a consistent posting cadence that establishes you as a thought leader in your industry.",
+  "tool": "chatgpt",
+  "category": "marketing",
+  "tags": ["linkedin", "thought-leadership", "personal-branding", "social-media", "networking"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "TOPIC", "description": "What the post is about", "example": "why most companies are implementing AI wrong" },
+    { "name": "ROLE", "description": "Your professional role", "example": "CTO at a mid-stage startup" },
+    { "name": "EXPERIENCE_LEVEL", "description": "Years or level of experience", "example": "15 years" },
+    { "name": "POST_FORMAT", "description": "LinkedIn post format style", "example": "contrarian take with numbered lessons" },
+    { "name": "TONE", "description": "Voice of the post", "example": "direct and opinionated but not arrogant" }
+  ],
+  "tips": ["Post between 8-10 AM on Tuesday through Thursday for maximum reach", "Reply to every comment within the first 2 hours to boost algorithm distribution", "Batch-create a week of posts and schedule them for consistent presence"],
+  "exampleOutput": "I just watched a Fortune 500 company spend $2M on AI tools their employees actively avoid using.\n\nAfter 15 years building tech teams, I have seen this pattern kill more AI initiatives than budget cuts ever did.\n\nHere are 3 lessons from companies actually getting AI right:\n\n1. They started with the workflow, not the tool.\nThe companies winning at AI asked 'where do our people waste the most time?' before ever evaluating vendors.\n\n2. They let individual contributors choose their tools.\nTop-down AI mandates have a 23% adoption rate. Bottom-up tool selection? 78%.\n\n3. They measured time saved, not 'AI usage.'\nNobody cares how many prompts your team ran. They care that sprint velocity went up 40%.\n\nWhat is the biggest AI implementation mistake you have seen at your company?\n\n#AI #Leadership #TechStrategy #StartupLife",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "LinkedIn Post Generator for Thought Leadership",
+  "metaDescription": "Write scroll-stopping LinkedIn posts that build professional authority. Try this free ChatGPT prompt for thought leadership content."
+}

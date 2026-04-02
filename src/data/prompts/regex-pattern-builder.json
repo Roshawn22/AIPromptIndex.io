@@ -1,0 +1,23 @@
+{
+  "title": "Regex Pattern Builder and Explainer",
+  "slug": "regex-pattern-builder",
+  "promptText": "You are a regex expert. I need a regular expression pattern that [PATTERN_PURPOSE] for use in [PROGRAMMING_LANGUAGE]. Here are examples of strings that should MATCH: [MATCH_EXAMPLES]. Here are examples of strings that should NOT match: [NON_MATCH_EXAMPLES]. Please: 1) Write the regex pattern, 2) Explain each component of the pattern in plain English using a visual breakdown, 3) Provide test cases covering edge cases I might not have considered, 4) Show a code snippet demonstrating how to use this pattern in [PROGRAMMING_LANGUAGE] with proper error handling, 5) Note any performance concerns for large-scale text processing, and 6) Offer a simpler alternative if the pattern is complex, even if it sacrifices some edge case coverage.",
+  "description": "Regular expressions are notoriously difficult to write, read, and debug, yet they are essential for text processing, validation, and data extraction. This prompt generates correct regex patterns with the educational breakdown you need to actually understand and maintain them. The requirement for both matching and non-matching examples forces you to think through your requirements precisely, while the edge case test suggestions catch scenarios you may not have considered. The simpler alternative option acknowledges that the perfect regex is sometimes worse than a good-enough one that your team can maintain.",
+  "tool": "chatgpt",
+  "category": "coding",
+  "tags": ["regex", "pattern-matching", "validation", "text-processing"],
+  "difficulty": "beginner",
+  "promptType": "code",
+  "variables": [
+    { "name": "PATTERN_PURPOSE", "description": "What the regex should do", "example": "validates email addresses including subdomains and plus-addressing" },
+    { "name": "PROGRAMMING_LANGUAGE", "description": "Language for syntax and code example", "example": "JavaScript" },
+    { "name": "MATCH_EXAMPLES", "description": "Strings that should match", "example": "user@example.com, john.doe+work@sub.domain.co.uk, test_123@company.org" },
+    { "name": "NON_MATCH_EXAMPLES", "description": "Strings that should NOT match", "example": "user@, @domain.com, user@.com, user@domain, user name@domain.com" }
+  ],
+  "tips": ["Always test regex patterns against real-world data, not just your examples", "Use named capture groups for extraction patterns to make code more readable", "Consider using a library like validator.js for common validations instead of raw regex"],
+  "exampleOutput": "## Pattern\n```\n^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$\n```\n\n## Breakdown\n- `^` - Start of string (ensures no leading characters)\n- `[a-zA-Z0-9._%+-]+` - One or more valid local-part characters (letters, digits, dots, underscores, percent, plus, hyphen)\n- `@` - Literal @ symbol (exactly one)\n- `[a-zA-Z0-9.-]+` - One or more valid domain characters (supports subdomains via dots)\n- `\\.` - Literal dot before TLD\n- `[a-zA-Z]{2,}` - TLD must be at least 2 letters\n- `$` - End of string\n\n## Edge Cases to Test\n- `a@b.cc` (minimum valid email) - Should MATCH\n- `user@123.123.123.123` (IP address domain) - Currently does NOT match...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Regex Pattern Builder and Explainer for ChatGPT",
+  "metaDescription": "Build and understand regex patterns with plain-English explanations and test cases. Try this free ChatGPT prompt for text validation and parsing."
+}

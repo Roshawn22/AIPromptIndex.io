@@ -1,0 +1,25 @@
+{
+  "title": "Flat Lay Product Composition",
+  "slug": "flat-lay-product-composition",
+  "promptText": "A perfectly styled flat lay composition photographed from directly above. The main subject is [PRODUCT_DESCRIPTION] centered in the frame. Surrounded by carefully arranged [STYLING_PROPS] creating a [MOOD] aesthetic. Background surface is [SURFACE]. Color palette: [COLORS]. Natural window light from the [LIGHT_DIRECTION] creating soft, even illumination with minimal shadows. Negative space used intentionally for text overlay areas. Every element placed with deliberate art direction. Instagram-worthy lifestyle photography, editorial quality. Shot on a full-frame camera, f/8 for edge-to-edge sharpness.",
+  "description": "Flat lay photography is the visual language of Instagram, e-commerce, and lifestyle branding. This prompt creates meticulously styled overhead compositions where every prop placement feels intentional and the negative space accommodates text overlays for social media or advertising use. The f/8 aperture specification ensures edge-to-edge sharpness that overhead shots require, while the natural window light direction creates the authentic look that audiences prefer over obvious studio lighting. Perfect for product launches, social media campaigns, blog headers, or brand mood boards.",
+  "tool": "dall-e",
+  "category": "image-generation",
+  "tags": ["flat-lay", "product-styling", "instagram", "lifestyle", "photography"],
+  "difficulty": "beginner",
+  "promptType": "image",
+  "variables": [
+    { "name": "PRODUCT_DESCRIPTION", "description": "The main product to feature", "example": "a hardcover journal with a linen cover and gold foil title" },
+    { "name": "STYLING_PROPS", "description": "Complementary objects", "example": "a fountain pen, dried lavender sprigs, a cup of matcha latte, reading glasses, and scattered paper clips" },
+    { "name": "MOOD", "description": "The overall aesthetic", "example": "calm, organized, and sophisticated" },
+    { "name": "SURFACE", "description": "The background surface", "example": "light oak wood desk with visible grain" },
+    { "name": "COLORS", "description": "Color palette", "example": "cream, sage green, gold, and natural wood tones" },
+    { "name": "LIGHT_DIRECTION", "description": "Direction of natural light", "example": "upper left" }
+  ],
+  "tips": ["Leave intentional negative space in the composition for adding text overlays", "Odd numbers of props create more dynamic compositions than even numbers", "Match your surface texture to your brand aesthetic: marble for luxury, wood for organic"],
+  "exampleOutput": "An overhead flat lay photograph on a light oak desk. A linen-covered hardcover journal with gold foil sits slightly off-center. A brass fountain pen laid diagonally nearby. Dried lavender sprigs add organic texture. A matcha latte in a ceramic cup provides a pop of green. Reading glasses and scattered gold paper clips fill gaps. Natural light from upper left. Negative space in the lower right for text. Calm, sophisticated editorial quality.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Flat Lay Product Composition Prompt for DALL-E",
+  "metaDescription": "Create Instagram-worthy flat lay product photos with styled compositions. Try this DALL-E prompt for lifestyle photography and social media content."
+}

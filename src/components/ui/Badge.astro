@@ -1,0 +1,41 @@
+---
+interface Props {
+  variant?: 'green' | 'teal' | 'orange' | 'yellow' | 'red' | 'purple' | 'blue' | 'neutral';
+  color?: 'green' | 'teal' | 'orange' | 'yellow' | 'red' | 'purple' | 'blue' | 'neutral';
+  size?: 'sm' | 'md';
+  class?: string;
+}
+
+const {
+  variant,
+  color,
+  size = 'sm',
+  class: className,
+} = Astro.props;
+const tone = variant ?? color ?? 'neutral';
+
+const colors: Record<string, string> = {
+  green: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/20',
+  teal: 'bg-teal-500/15 text-teal-400 border-teal-500/20',
+  orange: 'bg-orange-500/15 text-orange-400 border-orange-500/20',
+  yellow: 'bg-amber-500/15 text-amber-400 border-amber-500/20',
+  red: 'bg-red-500/15 text-red-400 border-red-500/20',
+  purple: 'bg-violet-500/15 text-violet-400 border-violet-500/20',
+  blue: 'bg-blue-500/15 text-blue-400 border-blue-500/20',
+  neutral: 'bg-[var(--color-surface-3)] text-[var(--color-text-secondary)] border-[var(--color-border)]',
+};
+
+const sizes: Record<string, string> = {
+  sm: 'px-2 py-0.5 text-xs',
+  md: 'px-3 py-1 text-sm',
+};
+---
+
+<span class:list={[
+  'inline-flex items-center font-[var(--font-display)] font-medium rounded-full border transition-colors duration-200',
+  colors[tone],
+  sizes[size],
+  className,
+]}>
+  <slot />
+</span>

@@ -1,0 +1,24 @@
+{
+  "title": "Pricing Strategy Advisor",
+  "slug": "pricing-strategy-advisor",
+  "promptText": "You are a pricing strategy consultant who has helped [INDUSTRY] companies optimize their revenue. Develop a comprehensive pricing strategy for [PRODUCT_NAME], which [PRODUCT_DESCRIPTION]. Current pricing: [CURRENT_PRICING]. Target customers: [TARGET_CUSTOMERS]. Analyze and recommend: 1) Pricing model evaluation (flat rate vs. tiered vs. usage-based vs. freemium) with pros/cons for each given our specific product, 2) Recommended tier structure with feature gating rationale, 3) Price anchoring strategy using decoy pricing, 4) Annual vs. monthly pricing with recommended discount percentage, 5) Competitive positioning map (price vs. value relative to competitors), 6) Price sensitivity assessment and willingness-to-pay estimation framework, 7) Migration strategy from current pricing without angering existing customers, and 8) Metrics to track for pricing optimization over time.",
+  "description": "Pricing is the most impactful lever for revenue growth, yet most companies set prices based on gut feeling or competitor matching. This prompt provides a systematic pricing framework that considers psychological pricing principles, competitive positioning, and customer value perception. The tier structure recommendations with feature gating rationale help you create natural upgrade paths, while the decoy pricing strategy leverages behavioral economics to steer customers toward your preferred plan. The migration strategy is critical for companies repricing, as poorly handled price changes can trigger mass churn.",
+  "tool": "claude",
+  "category": "business",
+  "tags": ["pricing", "revenue", "strategy", "SaaS", "business-model"],
+  "difficulty": "advanced",
+  "promptType": "text",
+  "variables": [
+    { "name": "INDUSTRY", "description": "Your industry", "example": "B2B SaaS" },
+    { "name": "PRODUCT_NAME", "description": "Your product", "example": "DesignReview Pro" },
+    { "name": "PRODUCT_DESCRIPTION", "description": "What it does", "example": "a design feedback and approval platform for creative teams that reduces review cycles by 60%" },
+    { "name": "CURRENT_PRICING", "description": "Your current pricing", "example": "single plan at $29/user/month, no free tier" },
+    { "name": "TARGET_CUSTOMERS", "description": "Who buys your product", "example": "design agencies (5-50 people), in-house creative teams at mid-market companies, and freelance designers" }
+  ],
+  "tips": ["Include your current conversion rate and churn data for more targeted recommendations", "Mention your biggest competitor's pricing for accurate positioning analysis", "Test pricing changes with new customers before migrating existing ones"],
+  "exampleOutput": "## Recommended Pricing Model: Tiered with Usage Component\n\nGiven your three distinct customer segments (freelancers, agencies, enterprises), a pure per-seat model leaves significant revenue on the table from enterprise accounts while pricing out freelancers.\n\n### Recommended Tiers:\n**Starter (Decoy)** - $19/month - 1 user, 5 active projects, basic commenting\n*Purpose: Price anchor that makes Pro look like better value*\n\n**Pro (Target)** - $49/user/month - Unlimited projects, video annotations, version history, Figma integration\n*Purpose: Where 70% of revenue should come from. The jump from $19 to $49 is justified by unlimited projects alone.*\n\n**Team** - $39/user/month (minimum 5 seats) - Everything in Pro + admin controls, SSO, priority support\n*Purpose: Lower per-unit price incentivizes larger team adoption...*",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Pricing Strategy Advisor Prompt for Claude",
+  "metaDescription": "Develop a data-driven pricing strategy with tier design and competitive positioning. Try this Claude prompt to optimize your product revenue."
+}

@@ -1,0 +1,22 @@
+{
+  "title": "CSV Data Analysis Report Generator",
+  "slug": "csv-data-analysis-report",
+  "promptText": "You are a senior data analyst. I will provide you with a dataset about [DATASET_DESCRIPTION]. Analyze the data and produce a comprehensive report that includes: 1) Executive Summary with 3-5 key findings, 2) Data Quality Assessment noting missing values, outliers, and anomalies, 3) Descriptive Statistics for all numerical columns, 4) [ANALYSIS_TYPE] analysis with visualizations described in detail, 5) Trend identification and pattern recognition, 6) Correlation analysis between [KEY_VARIABLES], 7) Actionable recommendations based on the findings, and 8) Suggested next steps for deeper analysis. Present findings using clear headers, bullet points, and reference specific data points to support each conclusion.",
+  "description": "Turning raw data into actionable insights is where most analysis efforts stall. This prompt provides a structured analytical framework that ensures no important dimension of your data goes unexplored. From basic data quality checks to advanced correlation analysis, it guides the AI through a systematic investigation that mirrors how experienced analysts approach a new dataset. The inclusion of actionable recommendations transforms the output from a passive report into a strategic decision-making tool. Ideal for business analysts, product managers, and founders who need to extract meaning from their data quickly.",
+  "tool": "chatgpt",
+  "category": "data-analysis",
+  "tags": ["data-analysis", "reporting", "statistics", "business-intelligence"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "DATASET_DESCRIPTION", "description": "What the data contains", "example": "e-commerce sales transactions from January to December 2025" },
+    { "name": "ANALYSIS_TYPE", "description": "Primary type of analysis needed", "example": "time-series and seasonal decomposition" },
+    { "name": "KEY_VARIABLES", "description": "Variables to analyze relationships between", "example": "customer acquisition cost, lifetime value, and churn rate" }
+  ],
+  "tips": ["Paste a sample of your actual data headers and first few rows for more specific analysis", "Specify your business context so recommendations are actionable for your situation", "Ask for Python or R code snippets to reproduce the analysis on your full dataset"],
+  "exampleOutput": "## Executive Summary\n\n1. Revenue peaked in Q4 with a 34% increase over Q3, driven primarily by the holiday promotional campaign launched November 15.\n2. Customer acquisition cost (CAC) increased 22% year-over-year while lifetime value (LTV) decreased 8%, creating a concerning LTV:CAC ratio decline from 3.2 to 2.4.\n3. Mobile transactions now represent 67% of all orders, up from 51% in the prior year.\n4. Three product categories account for 78% of total revenue...",
+  "isFeatured": true,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "CSV Data Analysis Report Generator for ChatGPT",
+  "metaDescription": "Turn raw CSV data into actionable business reports with statistics and recommendations. Try this free ChatGPT data analysis prompt."
+}

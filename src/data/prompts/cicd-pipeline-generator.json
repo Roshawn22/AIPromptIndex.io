@@ -1,0 +1,24 @@
+{
+  "title": "CI/CD Pipeline Configuration Generator",
+  "slug": "cicd-pipeline-generator",
+  "promptText": "You are a DevOps engineer specializing in CI/CD automation. Generate a complete [CI_PLATFORM] pipeline configuration for a [PROJECT_TYPE] that deploys to [DEPLOYMENT_TARGET]. The pipeline should include these stages: 1) Install dependencies with caching for faster subsequent runs, 2) Linting and code formatting checks, 3) Run unit tests with coverage reporting (minimum [COVERAGE_THRESHOLD]% threshold), 4) Run integration tests in a [TEST_ENVIRONMENT], 5) Security scanning (dependency vulnerabilities and SAST), 6) Build production artifacts, 7) Deploy to staging with smoke tests, 8) Manual approval gate for production deployment, 9) Deploy to production with health check verification, 10) Automatic rollback if health checks fail. Include proper secret management, environment-specific variables, branch-based triggers (deploy to staging on develop, production on main), and notification configuration for failures.",
+  "description": "Setting up a comprehensive CI/CD pipeline from scratch involves dozens of configuration decisions that can take days to get right. This prompt generates a complete pipeline configuration with production-grade patterns: caching for speed, security scanning for safety, coverage thresholds for quality, and automatic rollback for reliability. The manual approval gate for production deployments adds the human oversight that most teams require. The branch-based trigger configuration implements the standard Git flow deployment pattern. Use it for new projects that need CI/CD from day one or existing projects upgrading from basic build-and-deploy setups.",
+  "tool": "github-copilot",
+  "category": "coding",
+  "tags": ["CI-CD", "devops", "automation", "deployment", "pipeline"],
+  "difficulty": "advanced",
+  "promptType": "code",
+  "variables": [
+    { "name": "CI_PLATFORM", "description": "CI/CD platform to use", "example": "GitHub Actions" },
+    { "name": "PROJECT_TYPE", "description": "Type of project", "example": "Next.js application with a PostgreSQL database" },
+    { "name": "DEPLOYMENT_TARGET", "description": "Where the app deploys", "example": "AWS ECS with Fargate" },
+    { "name": "COVERAGE_THRESHOLD", "description": "Minimum test coverage percentage", "example": "80" },
+    { "name": "TEST_ENVIRONMENT", "description": "How integration tests run", "example": "Docker Compose with PostgreSQL and Redis containers" }
+  ],
+  "tips": ["Start with a simpler pipeline and add stages incrementally rather than deploying all at once", "Monitor pipeline duration and optimize the slowest stages first", "Use branch protection rules to enforce pipeline passage before merging"],
+  "exampleOutput": "```yaml\nname: CI/CD Pipeline\n\non:\n  push:\n    branches: [main, develop]\n  pull_request:\n    branches: [main, develop]\n\nenv:\n  NODE_VERSION: '20'\n  REGISTRY: ${{ secrets.ECR_REGISTRY }}\n\njobs:\n  lint-and-test:\n    runs-on: ubuntu-latest\n    services:\n      postgres:\n        image: postgres:15\n        env:\n          POSTGRES_PASSWORD: test\n        options: >-\n          --health-cmd pg_isready\n          --health-interval 10s\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: ${{ env.NODE_VERSION }}\n          cache: 'npm'\n      - run: npm ci\n      - run: npm run lint\n      - run: npm test -- --coverage --coverageThreshold='{\"global\":{\"branches\":80}}'\n```",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "CI/CD Pipeline Generator for GitHub Copilot",
+  "metaDescription": "Generate production-grade CI/CD pipelines with testing, security scanning, and auto-rollback. Try this GitHub Copilot prompt for DevOps automation."
+}

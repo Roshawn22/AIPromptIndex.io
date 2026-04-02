@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/global/Header.astro';
+import Footer from '../../components/global/Footer.astro';
+import Button from '../../components/ui/Button.astro';
+---
+
+<BaseLayout
+  title="Prompt Engineering Guides"
+  description="Learn how to write better AI prompts with our free guides. Tips, techniques, and best practices for ChatGPT, Claude, Midjourney, and more."
+>
+  <Header slot="header" />
+
+  <section class="mx-auto max-w-3xl px-[var(--space-page)] py-16 text-center">
+    <h1>Prompt Engineering Guides</h1>
+    <p class="mt-4 text-lg text-[var(--color-text-secondary)]">
+      Learn how to write better AI prompts. Guides coming soon.
+    </p>
+    <div class="mt-8">
+      <Button href="/prompts/" variant="outline">Browse Prompts Instead</Button>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

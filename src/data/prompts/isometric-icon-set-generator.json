@@ -1,0 +1,23 @@
+{
+  "title": "Isometric Icon Set Generator",
+  "slug": "isometric-icon-set-generator",
+  "promptText": "A set of 6 isometric 3D icons for [ICON_THEME] displayed in a 2x3 grid on a clean white background. Each icon represents: [ICON_SUBJECTS]. Style: smooth rounded edges, [COLOR_SCHEME] color palette with subtle gradient shading. Consistent 30-degree isometric angle across all icons. Soft drop shadows for depth. Minimal detail, clean geometric shapes. Each icon sits on a small circular platform. Cohesive design language suitable for a modern [USE_CASE]. Vector-quality rendering, flat background, no text.",
+  "description": "Consistent icon sets are expensive to commission and time-consuming to design from scratch. This prompt generates cohesive isometric icon collections where every icon shares the same visual language, angle, and color treatment. The isometric perspective adds depth and visual interest beyond flat icons while maintaining the clean aesthetic that modern interfaces demand. The grid layout and circular platforms ensure visual consistency that would normally require careful design system work. Perfect for website feature sections, app interfaces, presentation slides, or marketing materials.",
+  "tool": "dall-e",
+  "category": "image-generation",
+  "tags": ["icons", "isometric", "UI-design", "illustration", "icon-set"],
+  "difficulty": "beginner",
+  "promptType": "image",
+  "variables": [
+    { "name": "ICON_THEME", "description": "The overall theme of the icon set", "example": "cloud computing services" },
+    { "name": "ICON_SUBJECTS", "description": "What each of the 6 icons depicts", "example": "server rack, cloud storage, security shield, data transfer arrows, API connection nodes, monitoring dashboard" },
+    { "name": "COLOR_SCHEME", "description": "Color palette to use", "example": "electric blue and soft purple" },
+    { "name": "USE_CASE", "description": "Where these icons will be used", "example": "SaaS landing page features section" }
+  ],
+  "tips": ["Generate multiple sets and mix-and-match the best individual icons", "Specify exact hex colors if you need brand-matched results", "Request individual icon generations for any that need refinement"],
+  "exampleOutput": "A clean 2x3 grid of isometric 3D icons on white background. Top row: a blue-purple server rack with blinking lights, a cloud shape with a folder inside it, a shield with a checkmark. Bottom row: two curved arrows showing data flow, interconnected hexagonal nodes, a small dashboard screen with bar charts. All icons share the same 30-degree angle, rounded corners, and soft gradient shading.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Isometric Icon Set Generator for DALL-E",
+  "metaDescription": "Create cohesive isometric icon sets for websites and apps with consistent style. Try this DALL-E prompt for professional UI illustrations."
+}

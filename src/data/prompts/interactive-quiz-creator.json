@@ -1,0 +1,23 @@
+{
+  "title": "Interactive Quiz and Assessment Creator",
+  "slug": "interactive-quiz-creator",
+  "promptText": "You are an instructional designer specializing in formative assessment. Create a [QUESTION_COUNT]-question assessment for [SUBJECT] covering [TOPICS] at the [DIFFICULTY] level. Include a mix of question types: multiple choice (4 options each), true/false with explanation, short answer, and one scenario-based question that requires applying knowledge to a real-world situation. For each question: write the question clearly, provide the correct answer, explain why the correct answer is right, explain why each wrong answer is wrong (for multiple choice), and note which learning objective the question assesses. Organize questions in order of increasing difficulty. Include a grading rubric for the short-answer and scenario questions.",
+  "description": "Creating effective assessments is a specialized skill that goes far beyond writing questions with correct answers. This prompt generates pedagogically sound quizzes where wrong answers are plausible distractors (not obviously incorrect options), explanations reinforce learning even when students get answers right, and the difficulty progression builds confidence before challenging students. The scenario-based question tests real application rather than rote memorization. The grading rubric ensures consistent evaluation whether you are teaching one section or twenty. Ideal for teachers, corporate trainers, and course creators on platforms like Udemy or Teachable.",
+  "tool": "gemini",
+  "category": "education",
+  "tags": ["quiz", "assessment", "instructional-design", "formative-assessment"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "QUESTION_COUNT", "description": "Number of questions to generate", "example": "15" },
+    { "name": "SUBJECT", "description": "The subject area", "example": "Introduction to Marketing" },
+    { "name": "TOPICS", "description": "Specific topics the quiz covers", "example": "the 4 Ps of marketing, market segmentation, and customer persona development" },
+    { "name": "DIFFICULTY", "description": "Target difficulty level", "example": "undergraduate introductory" }
+  ],
+  "tips": ["Specify your LMS platform for compatible formatting (Canvas, Moodle, etc.)", "Request Bloom's Taxonomy level tags for each question to ensure cognitive diversity", "Ask for the quiz in QTI or CSV format for direct LMS import"],
+  "exampleOutput": "**Question 1 (Multiple Choice - Easy)**\nWhich of the following is NOT one of the traditional 4 Ps of Marketing?\na) Product\nb) Price\nc) Promotion\nd) Persuasion\n\n**Correct Answer:** d) Persuasion\n**Explanation:** The 4 Ps are Product, Price, Place, and Promotion. 'Persuasion' is a common misconception because it sounds related to marketing, but the fourth P is 'Place' which refers to distribution channels and how the product reaches the customer.\n**Learning Objective:** LO1 - Identify the components of the marketing mix",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Quiz and Assessment Creator Prompt for Gemini",
+  "metaDescription": "Create pedagogically sound quizzes with explanations and grading rubrics. Try this free Gemini prompt for teachers and course creators."
+}

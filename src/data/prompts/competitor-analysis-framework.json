@@ -1,0 +1,22 @@
+{
+  "title": "Competitor Analysis Framework",
+  "slug": "competitor-analysis-framework",
+  "promptText": "You are a strategic business analyst. Conduct a detailed competitor analysis for [MY_COMPANY], a [BUSINESS_TYPE], against these competitors: [COMPETITORS]. Analyze each competitor across these dimensions: Value Proposition and positioning, Target audience and market segment, Pricing strategy and tiers, Product features comparison (create a feature matrix table), Marketing channels and messaging, Strengths and weaknesses, Customer sentiment summary based on publicly available reviews. Then provide: a SWOT analysis for my company relative to these competitors, three strategic opportunities we can exploit, two threats we need to mitigate, and a recommended differentiation strategy.",
+  "description": "Understanding your competitive landscape is essential for strategic decision-making, but thorough competitor analysis usually takes days of research. This prompt structures that analysis into a systematic framework that covers all critical dimensions from pricing to positioning to customer sentiment. The feature matrix table provides an at-a-glance comparison, while the SWOT analysis and strategic recommendations transform raw competitive intelligence into actionable strategy. Use it for investor presentations, strategic planning sessions, product roadmap prioritization, or marketing positioning work.",
+  "tool": "gemini",
+  "category": "business",
+  "tags": ["competitor-analysis", "SWOT", "strategy", "market-research", "positioning"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "MY_COMPANY", "description": "Your company name and brief description", "example": "TaskFlow, a project management tool for creative agencies" },
+    { "name": "BUSINESS_TYPE", "description": "Your business category", "example": "B2B SaaS project management" },
+    { "name": "COMPETITORS", "description": "List of competitors to analyze", "example": "Monday.com, Asana, ClickUp, and Teamwork" }
+  ],
+  "tips": ["Provide your own pricing and key features so the AI can make accurate comparisons", "Supplement AI analysis with real customer review data from G2 or Trustpilot", "Run this quarterly to track how the competitive landscape evolves"],
+  "exampleOutput": "## Competitor 1: Monday.com\n**Value Proposition:** Flexible work operating system that adapts to any workflow\n**Target Audience:** Mid-market to enterprise teams across all industries\n**Pricing:** $8-$16/seat/month across 4 tiers, with a free tier for up to 2 users\n**Strengths:** Brand recognition, extensive integrations (200+), visual workflow builder\n**Weaknesses:** Pricing escalates quickly for larger teams, steep learning curve for advanced features, less specialized for creative workflows\n\n## Feature Matrix\n| Feature | TaskFlow | Monday.com | Asana | ClickUp |\n|---------|----------|------------|-------|---------|\n| Creative brief templates | Yes | No | No | Limited |...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Competitor Analysis Framework Prompt for Gemini",
+  "metaDescription": "Generate a complete competitor analysis with SWOT, feature matrix, and strategy recommendations. Try this free Gemini business prompt."
+}

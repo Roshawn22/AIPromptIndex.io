@@ -1,0 +1,24 @@
+{
+  "title": "REST API Endpoint Builder",
+  "slug": "api-endpoint-builder",
+  "promptText": "Build a complete REST API endpoint for [ENDPOINT_PURPOSE] in [FRAMEWORK]. The endpoint should handle [HTTP_METHODS] requests at the path [ROUTE_PATH]. Include input validation using [VALIDATION_LIBRARY], proper error handling with appropriate HTTP status codes, authentication middleware check, rate limiting configuration, and comprehensive JSDoc or docstring documentation. Write the controller logic, service layer, and data access layer as separate files following clean architecture principles. Include example request/response payloads for each HTTP method and Swagger/OpenAPI documentation annotations.",
+  "description": "Building robust API endpoints involves much more than writing a route handler. This prompt generates the full stack of an endpoint including validation, error handling, authentication, and documentation layers. The clean architecture separation means you get maintainable code with proper separation of concerns from the start. The included Swagger annotations save you the tedious step of writing API documentation after the fact. This is especially valuable for backend developers starting new microservices or adding endpoints to existing APIs who want consistent, well-structured code.",
+  "tool": "github-copilot",
+  "category": "coding",
+  "tags": ["api", "rest", "backend", "clean-architecture", "swagger"],
+  "difficulty": "advanced",
+  "promptType": "code",
+  "variables": [
+    { "name": "ENDPOINT_PURPOSE", "description": "What the endpoint does", "example": "managing user subscription plans" },
+    { "name": "FRAMEWORK", "description": "Backend framework to use", "example": "Express.js with TypeScript" },
+    { "name": "HTTP_METHODS", "description": "Which HTTP methods to implement", "example": "GET, POST, PUT, DELETE" },
+    { "name": "ROUTE_PATH", "description": "The URL path for the endpoint", "example": "/api/v1/subscriptions" },
+    { "name": "VALIDATION_LIBRARY", "description": "Validation tool to use", "example": "Zod" }
+  ],
+  "tips": ["Specify your database ORM if you want the data access layer to match your stack", "Add authentication method details for more accurate middleware code", "Request integration tests as a follow-up prompt"],
+  "exampleOutput": "// subscriptions.controller.ts\nimport { Router, Request, Response, NextFunction } from 'express';\nimport { SubscriptionService } from './subscriptions.service';\nimport { CreateSubscriptionSchema, UpdateSubscriptionSchema } from './subscriptions.validation';\nimport { authenticate } from '../middleware/auth';\nimport { rateLimit } from '../middleware/rateLimit';\n\n/**\n * @swagger\n * /api/v1/subscriptions:\n *   get:\n *     summary: List all subscriptions for the authenticated user\n */",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "REST API Endpoint Builder Prompt for Copilot",
+  "metaDescription": "Generate complete REST API endpoints with validation, auth, and Swagger docs. Try this GitHub Copilot prompt for clean backend architecture."
+}

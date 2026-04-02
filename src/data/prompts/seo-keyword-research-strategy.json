@@ -1,0 +1,22 @@
+{
+  "title": "SEO Keyword Research Strategy",
+  "slug": "seo-keyword-research-strategy",
+  "promptText": "You are an SEO specialist with deep expertise in keyword research and search intent analysis. Develop a comprehensive keyword strategy for [WEBSITE_URL], a [BUSINESS_TYPE] targeting [TARGET_AUDIENCE]. Identify 30 keyword opportunities organized into three tiers: 10 high-volume head terms (informational and commercial intent), 10 mid-volume body keywords (transactional intent), and 10 long-tail keywords (high conversion intent). For each keyword, provide: estimated search volume range, keyword difficulty assessment, search intent classification, recommended content type, and a brief content angle suggestion. Also identify 5 question-based keywords for featured snippet opportunities and 3 emerging trend keywords in the niche.",
+  "description": "Keyword research is the foundation of any SEO strategy, but most people either target impossibly competitive terms or miss high-value long-tail opportunities. This prompt generates a structured keyword strategy with a balanced mix of difficulty levels and search intents. The three-tier approach ensures you have content targets for every stage of your SEO maturity, from quick wins with long-tail terms to aspirational head terms for long-term authority building. The featured snippet opportunities and trend keywords add an extra strategic layer that most keyword research tools miss.",
+  "tool": "claude",
+  "category": "marketing",
+  "tags": ["SEO", "keyword-research", "search-intent", "content-strategy"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "WEBSITE_URL", "description": "Your website domain", "example": "www.homebrewhelper.com" },
+    { "name": "BUSINESS_TYPE", "description": "What the business does", "example": "online homebrewing supply store and education platform" },
+    { "name": "TARGET_AUDIENCE", "description": "Who you want to reach", "example": "beginner and intermediate homebrewers in the US aged 25-50" }
+  ],
+  "tips": ["Cross-reference the suggested keywords with actual search volume data from Ahrefs or SEMrush", "Prioritize long-tail keywords first for faster ranking wins", "Group related keywords into content clusters for topical authority"],
+  "exampleOutput": "## Tier 1: Head Terms (High Volume)\n1. 'homebrewing for beginners' | Volume: 8,100-12,000/mo | Difficulty: High | Intent: Informational | Content: Ultimate guide (3,000+ words) | Angle: Step-by-step first brew guide with equipment checklist\n2. 'best homebrew kit' | Volume: 6,500-9,000/mo | Difficulty: High | Intent: Commercial | Content: Comparison review | Angle: Budget-tiered recommendations with hands-on testing\n\n## Tier 2: Body Keywords...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "SEO Keyword Research Strategy Prompt for Claude",
+  "metaDescription": "Generate a complete SEO keyword strategy with search intent and content recommendations. Try this Claude prompt for smarter keyword research."
+}

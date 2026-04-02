@@ -1,0 +1,26 @@
+{
+  "title": "Abstract Art Desktop Wallpaper",
+  "slug": "abstract-art-wallpaper",
+  "promptText": "An abstract digital artwork suitable for a desktop wallpaper. The composition features [ABSTRACT_ELEMENTS] with a sense of [MOVEMENT_QUALITY] movement and flow. Color palette: [PRIMARY_COLORS] transitioning into [SECONDARY_COLORS] through smooth gradients and [TEXTURE_TYPE] textures. The piece evokes [EMOTIONAL_QUALITY] without depicting any recognizable objects. Inspired by the abstract expressionism of [ARTIST_INFLUENCE] combined with modern digital art techniques. Subtle depth created through layering and transparency effects. Ultra-wide 21:9 aspect ratio, 4K resolution, suitable for both light and dark UI elements to overlay.",
+  "description": "A beautiful desktop wallpaper can subtly improve your daily experience, but finding abstract art that works behind desktop icons and UI elements requires specific design considerations. This prompt generates wallpapers that balance visual interest with functional usability, ensuring neither too-busy patterns nor too-flat expanses that make icons hard to see. The artist influence parameter channels specific abstract art traditions, from Rothko's color fields to Polke's layered textures. The ultra-wide specification covers modern monitor ratios. Use these for personal wallpapers, office displays, presentation backgrounds, or website hero sections that need abstract visual interest.",
+  "tool": "dall-e",
+  "category": "image-generation",
+  "tags": ["abstract-art", "wallpaper", "digital-art", "desktop", "background"],
+  "difficulty": "beginner",
+  "promptType": "image",
+  "variables": [
+    { "name": "ABSTRACT_ELEMENTS", "description": "Types of abstract shapes and forms", "example": "flowing organic curves intersecting with sharp geometric fragments" },
+    { "name": "MOVEMENT_QUALITY", "description": "How the composition feels in motion", "example": "gentle undulating" },
+    { "name": "PRIMARY_COLORS", "description": "Dominant colors", "example": "deep midnight blue and rich violet" },
+    { "name": "SECONDARY_COLORS", "description": "Accent colors", "example": "warm copper and soft rose gold" },
+    { "name": "TEXTURE_TYPE", "description": "Surface texture quality", "example": "watercolor wash with digital noise grain" },
+    { "name": "EMOTIONAL_QUALITY", "description": "The feeling it evokes", "example": "calm focus with subtle energy" },
+    { "name": "ARTIST_INFLUENCE", "description": "Abstract artist to reference", "example": "Zaha Hadid's parametric designs" }
+  ],
+  "tips": ["Test the wallpaper with your actual desktop icons to ensure readability", "Generate both dark and light variations for day/night mode switching", "Request slightly blurred versions for use as video call backgrounds"],
+  "exampleOutput": "An abstract digital artwork with flowing organic curves in deep midnight blue and violet, intersecting with sharp geometric fragments in warm copper. Gentle undulating movement across the composition. Watercolor wash textures with subtle digital grain. Zaha Hadid-inspired parametric curves create depth through layering and transparency. Smooth gradient transitions. Calming yet energetic mood. Ultra-wide 21:9 format, 4K resolution.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Abstract Art Desktop Wallpaper for DALL-E",
+  "metaDescription": "Generate stunning abstract art wallpapers optimized for desktop use. Try this DALL-E prompt for beautiful, functional digital backgrounds."
+}

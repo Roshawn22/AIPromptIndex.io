@@ -1,0 +1,22 @@
+{
+  "title": "Research Paper Summarizer and Critic",
+  "slug": "research-paper-summarizer",
+  "promptText": "You are an academic researcher with expertise in [FIELD]. I will share a research paper about [PAPER_TOPIC]. Please provide: 1) A 3-sentence plain-English summary that a non-expert could understand, 2) A structured summary covering: Research Question, Methodology, Key Findings, and Limitations, 3) An evaluation of the methodology's strengths and weaknesses (sample size, controls, potential biases, reproducibility), 4) How this paper fits into the broader research landscape on this topic, 5) Three questions this paper raises that future research should address, 6) Practical implications: how could [STAKEHOLDER] use these findings in their work, and 7) A difficulty rating and recommended background reading for someone who wants to understand this paper deeply.",
+  "description": "Research papers are dense, time-consuming to read, and often require specialized knowledge to evaluate critically. This prompt transforms any paper into multiple levels of understanding: a quick summary for busy professionals, a structured analysis for researchers, and a critical evaluation for academic purposes. The methodology critique helps readers assess whether the findings are trustworthy, while the practical implications section bridges the gap between academic research and real-world application. The recommended background reading creates a learning path for readers who want to go deeper. Invaluable for students, researchers conducting literature reviews, professionals staying current with their field, and science communicators.",
+  "tool": "claude",
+  "category": "education",
+  "tags": ["research", "academic", "literature-review", "critical-analysis", "summarization"],
+  "difficulty": "advanced",
+  "promptType": "text",
+  "variables": [
+    { "name": "FIELD", "description": "Academic field or discipline", "example": "cognitive psychology and behavioral economics" },
+    { "name": "PAPER_TOPIC", "description": "What the paper is about", "example": "the effect of decision fatigue on consumer purchasing behavior in online environments" },
+    { "name": "STAKEHOLDER", "description": "Who would benefit from these findings", "example": "e-commerce product managers and UX designers" }
+  ],
+  "tips": ["Paste the full paper abstract and methodology section for the most accurate analysis", "Ask for comparisons with specific papers you have already read", "Request a citation in your preferred format (APA, MLA, Chicago) for your reference list"],
+  "exampleOutput": "## Plain-English Summary\nResearchers found that people make worse purchasing decisions when they have already made many choices in an online shopping session. After about 12 product decisions, shoppers are 34% more likely to either impulse-buy or abandon their cart entirely. The effect is strongest in the evening hours.\n\n## Structured Summary\n**Research Question:** Does decision fatigue accumulate during online shopping sessions, and if so, how does it affect purchase quality and cart abandonment rates?\n**Methodology:** Randomized controlled experiment with 2,400 participants, tracked via eye-tracking and click-stream data across a simulated e-commerce platform over 3 sessions.\n**Key Findings:** Decision quality degraded significantly after 12+ product evaluations (p < 0.001)...\n\n## Methodology Critique\n**Strengths:** Large sample size (n=2,400), rigorous randomization, objective behavioral measures rather than self-report.\n**Weaknesses:** Simulated environment may not replicate real shopping motivation; participants knew they were being observed (Hawthorne effect).",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Research Paper Summarizer and Critic for Claude",
+  "metaDescription": "Summarize and critically evaluate research papers with methodology analysis. Try this Claude prompt for literature reviews and academic study."
+}

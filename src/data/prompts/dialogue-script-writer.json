@@ -1,0 +1,25 @@
+{
+  "title": "Dialogue Script Writer for Film/Video",
+  "slug": "dialogue-script-writer",
+  "promptText": "You are a screenwriter known for writing sharp, naturalistic dialogue. Write a [SCENE_LENGTH]-minute dialogue scene between [CHARACTER_A] and [CHARACTER_B]. The scene takes place in [LOCATION]. The dramatic tension comes from [CONFLICT]. The scene should end with [SCENE_GOAL]. Write in proper screenplay format with character names in caps, brief action lines in parentheses, and stage directions. Each character should have a distinct voice: give them different speech patterns, vocabulary levels, and rhythms. Include subtext where characters mean something different from what they say. Add at least one beat (pause) that carries emotional weight. The dialogue should sound natural when read aloud, not like written English.",
+  "description": "Great dialogue is the hardest element of screenwriting because it must simultaneously sound natural, reveal character, advance plot, and carry subtext. This prompt generates screenplay-formatted dialogue with distinct character voices that actors can actually perform. The emphasis on subtext ensures the scenes have depth beyond surface-level conversation, while the required beat adds the kind of dramatic pause that elevates good dialogue to great. The natural speech instruction prevents the common AI pitfall of overly articulate characters. Use it for short films, YouTube videos, podcast dramas, video game scripts, or stage plays.",
+  "tool": "claude",
+  "category": "creative",
+  "tags": ["screenplay", "dialogue", "scriptwriting", "film", "video-production"],
+  "difficulty": "advanced",
+  "promptType": "text",
+  "variables": [
+    { "name": "SCENE_LENGTH", "description": "Duration in minutes", "example": "3" },
+    { "name": "CHARACTER_A", "description": "First character description", "example": "Elena, 40s, a surgeon who speaks precisely and controls every conversation" },
+    { "name": "CHARACTER_B", "description": "Second character description", "example": "Marco, 40s, her ex-husband who masks vulnerability with humor" },
+    { "name": "LOCATION", "description": "Where the scene occurs", "example": "a hospital parking garage, late evening" },
+    { "name": "CONFLICT", "description": "Source of dramatic tension", "example": "Elena has been offered a position across the country and must tell Marco before he hears from their daughter" },
+    { "name": "SCENE_GOAL", "description": "What the scene should accomplish", "example": "Elena tells Marco, but the conversation reveals they both still have feelings they cannot act on" }
+  ],
+  "tips": ["Read the dialogue aloud with another person to test if it sounds natural", "Cut any line where both characters are being too articulate about their feelings", "The best subtext happens when characters talk about something mundane while avoiding the real issue"],
+  "exampleOutput": "INT. HOSPITAL PARKING GARAGE - NIGHT\n\nElena walks toward her car, keys already in hand. She spots Marco leaning against the hood of his truck two spaces away.\n\nELENA\nYou cannot keep showing up at my workplace.\n\nMARCO\nTechnically this is a parking garage. Your workplace is fourteen floors up.\n\nELENA\nMarco.\n\nMARCO\n(holds up a paper bag)\nSophie left her cleats at my place. She has practice tomorrow.\n\n(Beat. Elena takes the bag. Their fingers brush.)\n\nELENA\nYou could have left them with the front desk.\n\nMARCO\nI could have. Yeah.\n\n(He doesn't move. She doesn't walk away.)",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Dialogue Script Writer Prompt for Film/Video",
+  "metaDescription": "Write naturalistic screenplay dialogue with distinct character voices and subtext. Try this Claude prompt for film, video, and stage scripts."
+}

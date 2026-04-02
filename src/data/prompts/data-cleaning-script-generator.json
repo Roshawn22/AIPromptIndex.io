@@ -1,0 +1,24 @@
+{
+  "title": "Data Cleaning Script Generator",
+  "slug": "data-cleaning-script-generator",
+  "promptText": "You are a data engineer who specializes in data quality. Write a [LANGUAGE] script to clean and prepare a dataset about [DATASET_DESCRIPTION]. The raw data has these known issues: [DATA_ISSUES]. The script should: 1) Load the data and profile it (row count, column types, null percentages, unique values), 2) Handle missing values using appropriate strategies for each column (mean/median imputation, forward-fill, or flagging), 3) Detect and handle outliers using [OUTLIER_METHOD], 4) Standardize text fields (trim whitespace, consistent casing, fix encoding issues), 5) Validate data against business rules: [BUSINESS_RULES], 6) Create a cleaning report summarizing all changes made with before/after statistics, and 7) Export the cleaned dataset. Include logging, progress bars for large datasets, and the ability to run in both interactive and batch modes.",
+  "description": "Data cleaning typically consumes 60-80% of any analysis project, yet it is often done ad-hoc with no documentation of what transformations were applied. This prompt generates a structured cleaning pipeline that handles the most common data quality issues while producing a detailed change report. The profiling step catches issues you might not know about, and the business rule validation ensures the cleaned data actually makes sense for your domain. The batch mode capability means the script can be automated for recurring data loads. Essential for analysts working with messy real-world data, data engineers building ingestion pipelines, or anyone preparing data for machine learning training.",
+  "tool": "claude",
+  "category": "data-analysis",
+  "tags": ["data-cleaning", "ETL", "data-quality", "pandas", "preprocessing"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "LANGUAGE", "description": "Programming language for the script", "example": "Python with pandas" },
+    { "name": "DATASET_DESCRIPTION", "description": "What the dataset contains", "example": "customer transactions from an e-commerce platform with 500K rows" },
+    { "name": "DATA_ISSUES", "description": "Known data quality problems", "example": "duplicate transaction IDs, negative prices, inconsistent date formats (MM/DD/YYYY and YYYY-MM-DD mixed), null email addresses, and product names with special characters" },
+    { "name": "OUTLIER_METHOD", "description": "How to detect outliers", "example": "IQR method with 1.5x multiplier" },
+    { "name": "BUSINESS_RULES", "description": "Rules the data must satisfy", "example": "prices must be between $0.01 and $10,000, quantities must be positive integers, transaction dates must be within the last 2 years" }
+  ],
+  "tips": ["Always run the profiling step before defining your cleaning strategy", "Keep the original data untouched and create a cleaned copy", "Save the cleaning report for data lineage documentation"],
+  "exampleOutput": "```python\nimport pandas as pd\nimport numpy as np\nfrom datetime import datetime\nimport logging\nfrom tqdm import tqdm\n\nlogging.basicConfig(level=logging.INFO)\nlogger = logging.getLogger('data_cleaner')\n\nclass TransactionDataCleaner:\n    def __init__(self, filepath: str):\n        self.filepath = filepath\n        self.report = {'changes': [], 'stats': {}}\n    \n    def profile(self, df: pd.DataFrame) -> dict:\n        \"\"\"Generate data quality profile\"\"\"\n        profile = {\n            'total_rows': len(df),\n            'total_columns': len(df.columns),\n            'null_percentages': (df.isnull().sum() / len(df) * 100).to_dict(),\n            'duplicate_rows': df.duplicated().sum()\n        }\n        logger.info(f\"Profiled {profile['total_rows']} rows across {profile['total_columns']} columns\")\n        return profile\n```",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Data Cleaning Script Generator Prompt for Claude",
+  "metaDescription": "Generate automated data cleaning scripts with profiling, validation, and change reports. Try this Claude prompt for faster data preparation."
+}

@@ -1,0 +1,25 @@
+{
+  "title": "Poetry Workshop Assistant",
+  "slug": "poetry-workshop-assistant",
+  "promptText": "You are a poetry professor and published poet who runs writing workshops. Write a [POETRY_FORM] poem about [THEME] that evokes the feeling of [EMOTION]. Use [IMAGERY_FOCUS] as your central imagery. The poem should employ at least three of these literary devices: metaphor, alliteration, enjambment, assonance, personification, or synecdoche. Keep the tone [TONE] and aim for [LINE_COUNT] lines. After the poem, provide a brief craft analysis explaining your choices in form, imagery, and sound, as if you were workshopping the piece with a student. Suggest two revision directions the writer could explore.",
+  "description": "This prompt combines creative generation with educational craft analysis, making it a dual-purpose tool for both writing poetry and learning poetic technique. The inclusion of specific literary device requirements ensures the output demonstrates real craft rather than generic verse. The workshop-style analysis breaks down why certain choices work, which is invaluable for poets developing their skills. Use it to generate first drafts, study how form shapes content, or prepare teaching examples for creative writing classes.",
+  "tool": "claude",
+  "category": "creative",
+  "tags": ["poetry", "creative-writing", "literary-devices", "workshop", "craft"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "POETRY_FORM", "description": "The form or structure", "example": "free verse with irregular stanza breaks" },
+    { "name": "THEME", "description": "The subject or theme", "example": "the disorientation of returning to a childhood home that has changed" },
+    { "name": "EMOTION", "description": "The feeling to evoke", "example": "bittersweet nostalgia" },
+    { "name": "IMAGERY_FOCUS", "description": "Central image or image set", "example": "doors, thresholds, and hallways" },
+    { "name": "TONE", "description": "The voice of the poem", "example": "contemplative and restrained" },
+    { "name": "LINE_COUNT", "description": "Approximate number of lines", "example": "20-24" }
+  ],
+  "tips": ["Try constraining to a specific form (sonnet, villanelle) for more structured results", "Request the poem without the analysis first, then ask for the analysis separately", "Use the revision suggestions as prompts for follow-up generations"],
+  "exampleOutput": "The hallway is shorter than I remember.\nSomeone painted the walls the color\nof hospital waiting rooms, that particular beige\nthat means nothing has happened here\nfor a very long time.\n\nI press my palm to the doorframe\nwhere my mother once penciled my height—\nerased now, sanded smooth,\nthe wood remembering nothing.\n\n**Craft Analysis:** The poem opens with a concrete observation that doubles as metaphor—the hallway being 'shorter' speaks to both literal perception and the psychological shrinking of childhood spaces...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Poetry Workshop Assistant Prompt for Claude",
+  "metaDescription": "Generate poems with professional craft analysis and revision suggestions. Try this Claude prompt for creative writing workshops and practice."
+}

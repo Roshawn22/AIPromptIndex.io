@@ -1,0 +1,62 @@
+<div id="search-modal-root"></div>
+
+<script>
+  const globalWindow = window as Window & typeof globalThis & {
+    __apiSearchBootstrap?: boolean;
+  };
+
+  if (!globalWindow.__apiSearchBootstrap) {
+    globalWindow.__apiSearchBootstrap = true;
+
+    let loaderPromise: Promise<typeof import('./search-modal-loader')> | null = null;
+
+    function isEditableTarget(target: EventTarget | null): target is HTMLElement {
+      return (
+        target instanceof HTMLElement &&
+        (target.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName))
+      );
+    }
+
+    async function getSearchLoader(): Promise<typeof import('./search-modal-loader')> {
+      if (!loaderPromise) {
+        loaderPromise = import('./search-modal-loader');
+      }
+
+      return loaderPromise;
+    }
+
+    async function requestOpenSearch(): Promise<void> {
+      const loader = await getSearchLoader();
+      await loader.openSearchModal(document.getElementById('search-modal-root'));
+    }
+
+    document.addEventListener('keydown', (event) => {
+      const target = event.target;
+
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
+        event.preventDefault();
+        void requestOpenSearch();
+        return;
+      }
+
+      if (event.key === '/' && !isEditableTarget(target)) {
+        event.preventDefault();
+        void requestOpenSearch();
+      }
+    });
+
+    document.addEventListener(
+      'click',
+      (event) => {
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+
+        if (target.closest('[data-open-search]')) {
+          event.preventDefault();
+          void requestOpenSearch();
+        }
+      },
+      true
+    );
+  }
+</script>

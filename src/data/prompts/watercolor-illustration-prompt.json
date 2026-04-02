@@ -1,0 +1,22 @@
+{
+  "title": "Watercolor Botanical Illustration",
+  "slug": "watercolor-illustration-prompt",
+  "promptText": "A delicate watercolor botanical illustration of [PLANT_SUBJECT] on cream textured watercolor paper. Painted with transparent washes and wet-on-wet technique showing natural color bleeds. [COLOR_DESCRIPTION] with visible brushstrokes and intentional white space where the paper shows through. Scientific illustration accuracy in the plant anatomy combined with artistic loose watercolor style. Include subtle pencil sketch lines visible underneath the paint. Small [COMPLEMENTARY_ELEMENT] added for compositional balance. Natural light, soft shadows, vintage botanical print aesthetic. High resolution scan quality.",
+  "description": "Botanical watercolor illustration is experiencing a renaissance in branding, packaging, and editorial design. This prompt captures the specific techniques that define quality watercolor work: transparent washes, wet-on-wet bleeds, visible paper texture, and the interplay between tight botanical accuracy and loose artistic expression. The inclusion of pencil sketch lines underneath adds the authenticity of a real painting process. These images work beautifully for product packaging, wedding stationery, editorial illustrations, wall art prints, or brand identity materials that need an organic, artisanal feel.",
+  "tool": "midjourney",
+  "category": "image-generation",
+  "tags": ["watercolor", "botanical", "illustration", "fine-art", "painting"],
+  "difficulty": "beginner",
+  "promptType": "image",
+  "variables": [
+    { "name": "PLANT_SUBJECT", "description": "The plant or flower to illustrate", "example": "a blooming peony with three buds at different stages of opening" },
+    { "name": "COLOR_DESCRIPTION", "description": "Color palette for the painting", "example": "Soft blush pink and dusty rose petals with sage green and olive leaves" },
+    { "name": "COMPLEMENTARY_ELEMENT", "description": "Small additional element for composition", "example": "a honey bee approaching the largest bloom" }
+  ],
+  "tips": ["Add '--stylize 750' in Midjourney for more artistic interpretation", "Use '--no photorealistic' to prevent the AI from making it too photo-like", "Specify paper texture type (hot press, cold press, rough) for different effects"],
+  "exampleOutput": "A luminous watercolor painting of a peony in full bloom on cream paper, with three buds at various stages. Soft blush pink petals created with transparent washes that let the paper glow through. Sage green leaves painted wet-on-wet with natural color bleeds at edges. Faint pencil outlines visible beneath the paint. A small honey bee hovers near the largest flower. Vintage botanical print quality.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Watercolor Botanical Illustration for Midjourney",
+  "metaDescription": "Create beautiful watercolor botanical art with natural techniques and vintage aesthetics. Try this Midjourney prompt for stunning plant illustrations."
+}

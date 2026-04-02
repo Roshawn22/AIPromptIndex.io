@@ -1,0 +1,23 @@
+{
+  "title": "Database Schema Designer",
+  "slug": "database-schema-designer",
+  "promptText": "You are a database architect with expertise in [DATABASE_TYPE]. Design a complete database schema for [APPLICATION_TYPE] that handles [CORE_FUNCTIONALITY]. Include: entity-relationship diagram description with all tables, columns, data types, and constraints; primary keys and foreign key relationships; indexes for common query patterns; at least one many-to-many relationship with a junction table; enum types or check constraints for status fields; created_at and updated_at timestamps with appropriate defaults; soft delete implementation; and migration scripts in [MIGRATION_FORMAT]. Also provide 3 example queries that demonstrate the most common access patterns and explain your normalization decisions, noting any intentional denormalization for performance.",
+  "description": "A well-designed database schema is the foundation of any application, and mistakes made at this level are extremely expensive to fix later. This prompt generates production-ready schemas that incorporate best practices like soft deletes, audit timestamps, proper indexing, and thoughtful normalization decisions. The migration script output means you can apply the schema directly to your development database. The example queries help validate that the schema supports your actual access patterns efficiently. Invaluable for greenfield projects, significant feature additions that require new tables, or refactoring legacy schemas.",
+  "tool": "cursor",
+  "category": "coding",
+  "tags": ["database", "schema-design", "SQL", "data-modeling", "migrations"],
+  "difficulty": "advanced",
+  "promptType": "code",
+  "variables": [
+    { "name": "DATABASE_TYPE", "description": "Which database system", "example": "PostgreSQL" },
+    { "name": "APPLICATION_TYPE", "description": "What the application does", "example": "multi-tenant project management SaaS" },
+    { "name": "CORE_FUNCTIONALITY", "description": "Key features the schema must support", "example": "organizations with team members, projects with tasks and subtasks, file attachments, comments with mentions, and time tracking" },
+    { "name": "MIGRATION_FORMAT", "description": "Migration tool format", "example": "Prisma schema with migration SQL" }
+  ],
+  "tips": ["Describe your expected query patterns so indexes can be optimized for your use case", "Mention your expected data volume for appropriate partitioning suggestions", "Ask about Row Level Security if you are building a multi-tenant system"],
+  "exampleOutput": "```sql\n-- Organizations (tenant table)\nCREATE TABLE organizations (\n  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n  name VARCHAR(255) NOT NULL,\n  slug VARCHAR(100) UNIQUE NOT NULL,\n  plan_tier VARCHAR(20) DEFAULT 'free' CHECK (plan_tier IN ('free', 'pro', 'enterprise')),\n  created_at TIMESTAMPTZ DEFAULT NOW(),\n  updated_at TIMESTAMPTZ DEFAULT NOW(),\n  deleted_at TIMESTAMPTZ NULL -- soft delete\n);\n\nCREATE INDEX idx_organizations_slug ON organizations(slug) WHERE deleted_at IS NULL;\n\n-- Members (junction: users <-> organizations)\nCREATE TABLE organization_members (\n  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n  organization_id UUID REFERENCES organizations(id),\n  user_id UUID REFERENCES users(id),\n  role VARCHAR(20) DEFAULT 'member' CHECK (role IN ('owner', 'admin', 'member', 'viewer')),\n  UNIQUE(organization_id, user_id)\n);\n```",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Database Schema Designer Prompt for Cursor",
+  "metaDescription": "Design production-ready database schemas with indexes, migrations, and query examples. Try this Cursor prompt for better data architecture."
+}

@@ -1,0 +1,23 @@
+{
+  "title": "ATS-Optimized Resume Rewriter",
+  "slug": "resume-rewriter-ats-optimized",
+  "promptText": "You are a professional resume writer who specializes in getting resumes past Applicant Tracking Systems (ATS). Rewrite the following resume content for a [JOB_TITLE] position at [COMPANY_TYPE] companies. Here is my current experience: [CURRENT_RESUME]. Transform each bullet point using the XYZ formula (Accomplished [X] as measured by [Y] by doing [Z]). Naturally incorporate these keywords from the job description: [TARGET_KEYWORDS]. Ensure proper section ordering (Summary, Experience, Skills, Education), use standard section headings that ATS systems recognize, avoid tables/columns/graphics, and quantify achievements wherever possible. Also write a 3-sentence professional summary that positions me as the ideal candidate.",
+  "description": "Most resumes get rejected by ATS software before a human ever reads them. This prompt rewrites your experience using the Google-recommended XYZ formula while naturally integrating job description keywords that ATS systems scan for. The emphasis on quantified achievements transforms vague responsibility descriptions into compelling impact statements. The ATS-friendly formatting guidance ensures your resume structure does not trigger parsing errors that could disqualify you automatically. Essential for any job seeker who wants to maximize their interview callback rate.",
+  "tool": "chatgpt",
+  "category": "writing",
+  "tags": ["resume", "ATS", "job-search", "career", "XYZ-formula"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "JOB_TITLE", "description": "The position you are applying for", "example": "Senior Product Manager" },
+    { "name": "COMPANY_TYPE", "description": "Type of company you are targeting", "example": "Series B-D SaaS startups" },
+    { "name": "CURRENT_RESUME", "description": "Your existing resume text or bullet points", "example": "Managed product roadmap for analytics platform. Led team of 8 engineers. Launched new features." },
+    { "name": "TARGET_KEYWORDS", "description": "Keywords from the job description to include", "example": "product strategy, cross-functional leadership, data-driven decision making, stakeholder management, agile methodology" }
+  ],
+  "tips": ["Paste the exact job description for the most targeted keyword optimization", "Include metrics even if approximate, as quantified bullets perform 40% better", "Run the output through a free ATS checker like Jobscan to verify compatibility"],
+  "exampleOutput": "**Professional Summary:**\nResults-driven Senior Product Manager with 7+ years leading data-driven product strategy at high-growth SaaS companies. Proven track record of launching products that generated $4.2M in new ARR through cross-functional leadership of engineering, design, and marketing teams. Expert in translating complex stakeholder requirements into agile roadmaps that deliver measurable business outcomes.\n\n**Experience:**\n- Increased analytics platform ARR by $2.1M (34% growth) by leading product strategy and roadmap prioritization for a cross-functional team of 8 engineers and 2 designers",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "ATS-Optimized Resume Rewriter Prompt for ChatGPT",
+  "metaDescription": "Rewrite your resume to pass ATS systems and land more interviews. Try this free ChatGPT prompt with the Google XYZ formula for impact bullets."
+}

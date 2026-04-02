@@ -1,0 +1,54 @@
+---
+interface Props {
+  variant?: 'primary' | 'secondary' | 'ghost' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  loading?: boolean;
+  disabled?: boolean;
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { variant = 'primary', size = 'md', href, loading = false, disabled = false, class: className, ...rest } = Astro.props;
+
+const hasDisplayClass =
+  /\b(hidden|block|inline|inline-block|flex|inline-flex|grid|inline-grid|contents)\b/.test(
+    className || ""
+  );
+const displayClass = hasDisplayClass ? "" : "inline-flex";
+
+const baseStyles = `${displayClass} items-center justify-center gap-2 font-[var(--font-display)] font-medium rounded-[var(--radius-md)] transition-all duration-200 cursor-pointer whitespace-nowrap`;
+
+const variants: Record<string, string> = {
+  primary: 'bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] shadow-[0_0_20px_var(--color-accent-glow)]',
+  secondary: 'bg-[var(--color-surface-2)] text-[var(--color-text-primary)] hover:bg-[var(--color-surface-3)] border border-[var(--color-border)]',
+  ghost: 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-surface-2)]',
+  outline: 'border border-[var(--color-accent)] text-[var(--color-accent)] hover:bg-[var(--color-accent)] hover:text-white',
+};
+
+const sizes: Record<string, string> = {
+  sm: 'px-3 py-1.5 text-sm',
+  md: 'px-5 py-2.5 text-sm',
+  lg: 'px-7 py-3.5 text-base',
+};
+
+const stateStyles = loading ? 'opacity-70 pointer-events-none' : disabled ? 'opacity-50 cursor-not-allowed pointer-events-none' : '';
+const classes = `${baseStyles} ${variants[variant]} ${sizes[size]} ${stateStyles} ${className || ''}`;
+const Tag = href ? 'a' : 'button';
+---
+
+<Tag
+  href={href}
+  class={classes}
+  {...(loading ? { 'aria-busy': 'true' } : {})}
+  {...(disabled ? { 'aria-disabled': 'true' } : {})}
+  {...rest}
+>
+  {loading && (
+    <svg class="animate-spin-slow w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
+      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+    </svg>
+  )}
+  <slot />
+</Tag>

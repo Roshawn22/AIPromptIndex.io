@@ -1,0 +1,24 @@
+{
+  "title": "Meeting Agenda and Facilitator Guide",
+  "slug": "meeting-agenda-facilitator",
+  "promptText": "You are a professional meeting facilitator. Create a detailed agenda and facilitation guide for a [MEETING_DURATION] [MEETING_TYPE] meeting with [PARTICIPANT_COUNT] participants. The meeting objective is [MEETING_OBJECTIVE]. Attendees include [ATTENDEE_ROLES]. For each agenda item, provide: the topic, time allocation, the facilitator's talking points, discussion questions to pose, expected outcomes or decisions, and who should lead that section. Also include: a pre-meeting preparation checklist for attendees, ice-breaker or warm-up activity appropriate to the group, parking lot strategy for off-topic items, and a post-meeting follow-up template with action items format. Ensure the agenda leaves 10% buffer time for overruns.",
+  "description": "Unproductive meetings cost organizations an estimated $37 billion annually, and the root cause is almost always poor planning and facilitation. This prompt generates a complete meeting playbook that goes beyond a simple agenda to include facilitation techniques, discussion prompts, and time management strategies. The pre-meeting checklist ensures attendees arrive prepared, while the parking lot strategy prevents derailment without dismissing important tangential topics. The post-meeting template creates accountability through clear action items. Use it for team standups, strategic planning sessions, client workshops, or board meetings.",
+  "tool": "gemini",
+  "category": "business",
+  "tags": ["meetings", "facilitation", "agenda", "productivity", "leadership"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "MEETING_DURATION", "description": "How long the meeting is", "example": "60-minute" },
+    { "name": "MEETING_TYPE", "description": "Type of meeting", "example": "quarterly product roadmap review" },
+    { "name": "PARTICIPANT_COUNT", "description": "Number of attendees", "example": "12" },
+    { "name": "MEETING_OBJECTIVE", "description": "What the meeting should accomplish", "example": "align on Q3 priorities, resolve the feature vs. tech-debt allocation debate, and assign ownership for top 5 initiatives" },
+    { "name": "ATTENDEE_ROLES", "description": "Who will be in the meeting", "example": "VP of Product, 3 Product Managers, Engineering Director, 4 Tech Leads, UX Lead, and Head of Customer Success" }
+  ],
+  "tips": ["Share the agenda at least 24 hours before the meeting for maximum preparation", "Assign a dedicated note-taker so the facilitator can focus on guiding discussion", "Use the parking lot items to create future meeting agendas or async discussions"],
+  "exampleOutput": "## Q3 Product Roadmap Review\n**Duration:** 60 minutes | **Participants:** 12 | **Facilitator:** VP of Product\n\n### Pre-Meeting Checklist\n- [ ] PMs: Submit Q3 initiative proposals (template linked) by Monday EOD\n- [ ] Eng Director: Prepare capacity estimates for Q3 by team\n- [ ] Customer Success: Share top 10 customer-requested features with urgency ratings\n\n### Agenda Item 1: Context Setting (5 min)\n**Lead:** VP of Product\n**Talking Points:** Recap Q2 outcomes vs. plan (hit 7/10 OKRs), share Q3 company-level goals from leadership\n**Expected Outcome:** Shared understanding of strategic context",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Meeting Agenda and Facilitator Guide for Gemini",
+  "metaDescription": "Create productive meeting agendas with facilitation guides and follow-up templates. Try this free Gemini prompt to run better meetings."
+}

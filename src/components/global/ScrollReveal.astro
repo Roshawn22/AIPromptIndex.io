@@ -1,0 +1,44 @@
+---
+/**
+ * ScrollReveal — Initializes IntersectionObserver for [data-reveal] elements.
+ * Supports data-reveal-delay="N" for stagger timing (value in ms).
+ * Respects prefers-reduced-motion.
+ */
+---
+
+<script>
+  function initScrollReveal() {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReducedMotion) {
+      document.querySelectorAll('[data-reveal]').forEach((el) => {
+        el.setAttribute('data-visible', '');
+      });
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const el = entry.target as HTMLElement;
+          const delay = el.dataset.revealDelay;
+          if (delay) {
+            setTimeout(() => el.setAttribute('data-visible', ''), parseInt(delay, 10));
+          } else {
+            el.setAttribute('data-visible', '');
+          }
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    document.querySelectorAll('[data-reveal]').forEach((el) => {
+      observer.observe(el);
+    });
+  }
+
+  initScrollReveal();
+  document.addEventListener('astro:after-swap', initScrollReveal);
+</script>

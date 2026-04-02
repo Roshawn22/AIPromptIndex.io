@@ -1,0 +1,24 @@
+{
+  "title": "Online Course Curriculum Designer",
+  "slug": "course-curriculum-designer",
+  "promptText": "You are an instructional designer who creates online courses for platforms like Udemy, Coursera, and Teachable. Design a complete curriculum for a [COURSE_LENGTH] online course titled '[COURSE_TITLE]' targeting [TARGET_LEARNER]. The course should take students from [STARTING_LEVEL] to [ENDING_LEVEL]. Create: a course description and learning outcomes (5-7 specific skills students will gain), module breakdown (6-10 modules) with lesson titles and time estimates, for each module provide learning objectives, lecture topics with brief descriptions, one hands-on project or exercise, and a knowledge check method. Include a capstone project description, recommended prerequisites, suggested supplementary resources, and a student success metric framework. Ensure the curriculum follows adult learning principles with a 70/20/10 split (practice/collaboration/lecture).",
+  "description": "The online education market is projected to reach $350 billion by 2025, but course completion rates hover around 15% because most courses prioritize content delivery over learning design. This prompt creates curricula that follow adult learning principles, emphasizing hands-on practice over passive lectures. The 70/20/10 split ensures students spend most of their time doing, not just watching. The capstone project gives students a portfolio piece, while the success metrics framework helps you measure whether your course actually achieves its learning outcomes. Essential for course creators, corporate trainers, and educators transitioning content to digital platforms.",
+  "tool": "gemini",
+  "category": "education",
+  "tags": ["online-course", "curriculum-design", "e-learning", "instructional-design"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "COURSE_LENGTH", "description": "Total course duration", "example": "8-week" },
+    { "name": "COURSE_TITLE", "description": "Name of the course", "example": "Python for Data Analysis: From Spreadsheets to Scripts" },
+    { "name": "TARGET_LEARNER", "description": "Who the course is for", "example": "business analysts who know Excel well but have never coded" },
+    { "name": "STARTING_LEVEL", "description": "Where students begin", "example": "zero programming experience but strong analytical thinking" },
+    { "name": "ENDING_LEVEL", "description": "Where students end up", "example": "able to independently clean, analyze, and visualize datasets using Python, pandas, and matplotlib" }
+  ],
+  "tips": ["Validate the curriculum by teaching Module 1 to a test group before building the full course", "Include downloadable resources and templates to increase perceived course value", "Price based on transformation value, not content length"],
+  "exampleOutput": "## Course: Python for Data Analysis: From Spreadsheets to Scripts\n**Duration:** 8 weeks | **Total Time:** ~40 hours | **Format:** Video lectures + hands-on labs\n\n### Learning Outcomes\nBy the end of this course, students will be able to:\n1. Write Python scripts that automate repetitive Excel tasks\n2. Clean messy datasets using pandas (handling nulls, duplicates, type conversions)\n3. Perform exploratory data analysis including grouping, pivoting, and statistical summaries\n\n### Module 1: Your First Python Script (Week 1, ~5 hours)\n**Objective:** Write and run a Python script that processes a CSV file\n**Lectures:**\n- 1.1 Why Python Beats Excel (15 min) - Side-by-side comparison solving the same problem\n- 1.2 Setting Up Your Environment (20 min) - Installing Python, VS Code, and Jupyter\n**Hands-On Project:** Convert a multi-tab Excel report into a single cleaned CSV using Python",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Online Course Curriculum Designer for Gemini",
+  "metaDescription": "Design complete online course curricula with modules, projects, and learning outcomes. Try this Gemini prompt for course creation on any platform."
+}

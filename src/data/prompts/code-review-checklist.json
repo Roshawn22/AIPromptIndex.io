@@ -1,0 +1,22 @@
+{
+  "title": "Code Review Checklist and Feedback",
+  "slug": "code-review-checklist",
+  "promptText": "You are a principal engineer conducting a thorough code review. Review the following [LANGUAGE] code from a [CONTEXT] context: [CODE_TO_REVIEW]. Evaluate it against these categories and provide specific, actionable feedback for each: 1) Correctness - Does the logic work for all cases? Are there bugs or off-by-one errors? 2) Security - Are there injection vulnerabilities, improper input handling, or exposed secrets? 3) Performance - Are there N+1 queries, unnecessary loops, or memory leaks? 4) Readability - Are names descriptive? Is the code self-documenting? 5) Architecture - Does it follow SOLID principles? Is the coupling appropriate? 6) Error Handling - Are failures handled gracefully? Are errors logged? 7) Testing - What tests are needed that are missing? For each issue found, provide the severity (critical, major, minor, nit), the specific line or section, and a suggested fix with code. End with a summary: approve, approve with suggestions, or request changes.",
+  "description": "Code reviews are one of the highest-leverage activities in software engineering, but their quality varies enormously based on the reviewer's experience and time availability. This prompt provides a systematic review framework that covers the dimensions most often missed in casual reviews: security vulnerabilities, performance pitfalls, and architectural concerns. The severity ratings help developers prioritize fixes, and the suggested code alternatives make the feedback immediately actionable rather than vaguely critical. Use it for self-review before submitting PRs, as a supplementary check on team reviews, or as a teaching tool for junior developers learning review standards.",
+  "tool": "github-copilot",
+  "category": "coding",
+  "tags": ["code-review", "best-practices", "security", "performance", "SOLID"],
+  "difficulty": "advanced",
+  "promptType": "code",
+  "variables": [
+    { "name": "LANGUAGE", "description": "Programming language", "example": "Python" },
+    { "name": "CONTEXT", "description": "What this code does", "example": "payment processing webhook handler" },
+    { "name": "CODE_TO_REVIEW", "description": "The code to review", "example": "def handle_webhook(request):\n    data = json.loads(request.body)\n    user = User.objects.get(id=data['user_id'])\n    user.subscription_status = data['status']\n    user.save()\n    return HttpResponse(200)" }
+  ],
+  "tips": ["Include surrounding code context for more accurate architectural feedback", "Mention your team's coding standards for convention-specific suggestions", "Run this on your own code before asking colleagues for review to catch easy fixes"],
+  "exampleOutput": "## Code Review: Payment Webhook Handler\n\n### Critical Issues\n\n**1. No Webhook Signature Verification** (Security - Critical)\nLine 2: `data = json.loads(request.body)` processes the webhook payload without verifying it came from your payment provider. An attacker could forge requests to change any user's subscription status.\n```python\n# Fix: Verify webhook signature\nsignature = request.headers.get('Stripe-Signature')\ntry:\n    event = stripe.Webhook.construct_event(request.body, signature, webhook_secret)\nexcept stripe.error.SignatureVerificationError:\n    return HttpResponse(status=400)\n```\n\n**2. No Error Handling for Missing User** (Correctness - Critical)\nLine 3: `User.objects.get()` will raise `User.DoesNotExist` if the user_id is invalid, returning a 500 error.\n\n### Summary: Request Changes (2 critical issues must be addressed)",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Code Review Checklist Prompt for GitHub Copilot",
+  "metaDescription": "Get thorough code reviews covering security, performance, and architecture. Try this GitHub Copilot prompt for professional code review feedback."
+}

@@ -1,0 +1,26 @@
+{
+  "title": "Product Photography Studio Shot",
+  "slug": "product-photography-prompt",
+  "promptText": "Professional product photography of [PRODUCT_DESCRIPTION] on a [SURFACE_MATERIAL] surface. [LIGHTING_SETUP] lighting with soft shadows. The product is positioned at a [ANGLE] angle showing its best features. Background is [BACKGROUND_STYLE]. Styled with [PROPS] as complementary props. Shot with a macro lens for crisp detail, shallow depth of field on the background. Commercial advertising quality, color-accurate, 8K resolution. The overall mood is [MOOD].",
+  "description": "Creating professional product photos typically requires expensive equipment and studio time. This prompt generates commercial-grade product photography that rivals professional studio shots. By specifying surface materials, lighting setups, and complementary props, you get images that tell a visual story about your product's positioning and brand identity. The macro lens specification ensures the AI renders fine product details sharply. Use these images for e-commerce listings, social media ads, pitch decks, or mockups before investing in a real photo shoot.",
+  "tool": "dall-e",
+  "category": "image-generation",
+  "tags": ["product-photography", "commercial", "e-commerce", "advertising"],
+  "difficulty": "beginner",
+  "promptType": "image",
+  "variables": [
+    { "name": "PRODUCT_DESCRIPTION", "description": "What the product looks like", "example": "a matte black wireless earbuds case with rose gold accents" },
+    { "name": "SURFACE_MATERIAL", "description": "What the product sits on", "example": "polished dark marble" },
+    { "name": "LIGHTING_SETUP", "description": "Type of studio lighting", "example": "Three-point soft box" },
+    { "name": "ANGLE", "description": "Camera angle", "example": "45-degree overhead" },
+    { "name": "BACKGROUND_STYLE", "description": "Background treatment", "example": "gradient from charcoal to deep navy" },
+    { "name": "PROPS", "description": "Complementary objects in the scene", "example": "a single eucalyptus sprig and water droplets" },
+    { "name": "MOOD", "description": "Overall feeling of the image", "example": "premium, minimalist luxury" }
+  ],
+  "tips": ["Match props to your brand's visual identity for consistency", "Specify exact brand colors if your product has specific colorways", "Request multiple angles in separate prompts to build a complete product gallery"],
+  "exampleOutput": "A studio product photograph of matte black wireless earbuds case with rose gold accents, sitting on polished dark marble. Three-point soft box lighting creates gentle highlights on the metallic accents. Shot from a 45-degree overhead angle. Charcoal-to-navy gradient background. A single eucalyptus sprig adds organic contrast. Premium minimalist aesthetic.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Product Photography Prompt for DALL-E",
+  "metaDescription": "Generate professional product photography without a studio. Try this DALL-E prompt for commercial-quality e-commerce and advertising images."
+}

@@ -1,0 +1,24 @@
+{
+  "title": "OKR Framework Generator",
+  "slug": "okr-framework-generator",
+  "promptText": "You are a strategic planning consultant who has implemented OKR frameworks at companies from startups to Fortune 500. Create a comprehensive OKR (Objectives and Key Results) framework for [COMPANY_NAME], a [BUSINESS_DESCRIPTION], for [TIME_PERIOD]. Company-level strategic priorities are: [STRATEGIC_PRIORITIES]. Generate: 3-4 company-level Objectives that are ambitious and inspirational, each with 3-4 measurable Key Results with specific numeric targets. Then cascade these into department-level OKRs for [DEPARTMENTS], showing how each department's objectives ladder up to company goals. Include: alignment mapping between company and department OKRs, a grading rubric (0.0 to 1.0 scale with sweet spot explanation), a recommended check-in cadence, and 3 anti-patterns to avoid when implementing these OKRs.",
+  "description": "OKRs only work when they cascade properly from company strategy to team execution, and most OKR implementations fail because of poor alignment or unmeasurable key results. This prompt generates a complete OKR framework with proper cascading structure that shows every team how their work connects to company goals. The numeric targets in key results eliminate the ambiguity that makes OKRs useless. The anti-patterns section addresses the most common implementation mistakes like sandbagging targets or treating OKRs as a task list. Essential for quarterly planning, annual strategy sessions, or companies adopting OKRs for the first time.",
+  "tool": "gemini",
+  "category": "business",
+  "tags": ["OKR", "strategic-planning", "goal-setting", "management", "alignment"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "COMPANY_NAME", "description": "Your company name", "example": "TalentBridge" },
+    { "name": "BUSINESS_DESCRIPTION", "description": "What the company does", "example": "AI-powered recruiting platform for tech companies" },
+    { "name": "TIME_PERIOD", "description": "The OKR period", "example": "Q3 2026" },
+    { "name": "STRATEGIC_PRIORITIES", "description": "Top company priorities", "example": "expand into the enterprise segment, improve candidate matching accuracy, and reduce time-to-hire metric" },
+    { "name": "DEPARTMENTS", "description": "Teams to create OKRs for", "example": "Product, Engineering, Sales, and Customer Success" }
+  ],
+  "tips": ["Set OKRs that you expect to achieve at 70% for proper stretch goal calibration", "Limit to 3-4 objectives per level to maintain focus", "Review and adjust OKRs at the mid-quarter check-in, not just at the end"],
+  "exampleOutput": "## Company-Level OKRs - Q3 2026\n\n**Objective 1: Become the go-to recruiting platform for enterprise tech companies**\n- KR1: Close 5 new enterprise accounts (100+ employees) with ACV > $50K\n- KR2: Achieve 90-day enterprise retention rate of 95%\n- KR3: Reduce enterprise sales cycle from 62 days to 45 days\n- KR4: Launch enterprise-specific features (SSO, custom workflows, dedicated CSM dashboard)\n\n**Alignment Map:**\nObjective 1 -> Sales KR: Build enterprise pipeline of 25 qualified opportunities\nObjective 1 -> Product KR: Ship SSO and custom workflows by mid-Q3\nObjective 1 -> CS KR: Achieve enterprise NPS of 55+\n\n**Anti-Pattern 1:** Treating Key Results as tasks. 'Launch SSO' is a task. 'Enterprise customers rate security features 4.5/5 in satisfaction surveys' is a Key Result.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "OKR Framework Generator Prompt for Gemini",
+  "metaDescription": "Create cascading OKR frameworks with department alignment and measurable targets. Try this free Gemini prompt for strategic planning."
+}

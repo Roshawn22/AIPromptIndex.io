@@ -1,0 +1,71 @@
+---
+interface Props {
+  heading?: string;
+  subheading?: string;
+  compact?: boolean;
+}
+
+const {
+  heading = 'Get the Best AI Prompts Weekly',
+  subheading = 'Curated prompts, tips, and guides delivered to your inbox every week. Free.',
+  compact = false,
+} = Astro.props;
+
+const beehiivPublicationId = (import.meta.env.PUBLIC_BEEHIIV_PUBLICATION_ID as string | undefined)?.trim();
+---
+
+<section class:list={[
+  'border-t border-[var(--color-border)] bg-[var(--color-surface-1)]',
+  !compact && 'py-16',
+  compact && 'py-8',
+]}>
+  <div class:list={[
+    'mx-auto text-center',
+    !compact && 'max-w-7xl px-[var(--space-page)]',
+    compact && 'max-w-md px-4',
+  ]}>
+    <h2 class:list={[
+      'text-[var(--color-text-primary)]',
+      compact && '!text-lg',
+    ]}>{heading}</h2>
+    <p class:list={[
+      'mt-2 text-[var(--color-text-secondary)]',
+      compact && 'text-sm',
+    ]}>{subheading}</p>
+
+    {beehiivPublicationId ? (
+      <!-- Beehiiv embed -->
+      <div class="mt-6 mx-auto max-w-md">
+        <iframe
+          src={`https://embeds.beehiiv.com/subscribe/${beehiivPublicationId}?slim=true`}
+          data-test-id="beehiiv-embed"
+          style="margin: 0; border-radius: 0px !important; background-color: transparent;"
+          frameborder="0"
+          scrolling="no"
+          class="w-full"
+          height="52"
+        ></iframe>
+      </div>
+    ) : (
+      <!-- Fallback form (no Beehiiv configured) -->
+      <div class="mt-6 mx-auto max-w-md">
+        <form class="flex gap-2" data-newsletter-form>
+          <input
+            type="email"
+            name="email"
+            required
+            placeholder="Enter your email"
+            class="flex-1 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-0)] px-4 py-2.5 text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)] focus:border-[var(--color-accent)] focus:outline-none"
+          />
+          <button
+            type="submit"
+            class="inline-flex items-center justify-center gap-2 font-[var(--font-display)] font-medium rounded-[var(--radius-md)] bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] px-5 py-2.5 text-sm transition-all duration-200 cursor-pointer whitespace-nowrap"
+          >
+            Subscribe
+          </button>
+        </form>
+        <p class="mt-2 text-xs text-[var(--color-text-muted)]">No spam. Unsubscribe anytime.</p>
+      </div>
+    )}
+  </div>
+</section>

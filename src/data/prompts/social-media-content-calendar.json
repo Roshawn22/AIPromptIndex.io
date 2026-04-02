@@ -1,0 +1,23 @@
+{
+  "title": "30-Day Social Media Content Calendar",
+  "slug": "social-media-content-calendar",
+  "promptText": "You are a social media strategist with 10 years of experience. Create a 30-day content calendar for [BRAND_NAME], a [BUSINESS_TYPE], posting on [PLATFORMS]. The target audience is [AUDIENCE]. For each day, provide: the platform, content type (carousel, reel, story, text post, etc.), a headline or hook, a brief content description, relevant hashtags (5-8), and the best posting time. Mix educational content (40%), entertaining content (30%), and promotional content (30%). Include at least 2 trending format ideas and 3 user-generated content prompts. Format as a structured table.",
+  "description": "Planning a month of social media content is one of the most time-consuming marketing tasks. This prompt generates a complete 30-day calendar with platform-specific content ideas, posting schedules, and hashtag strategies. The 40/30/30 content mix follows proven engagement formulas that prevent your feed from becoming too salesy. It includes trending format suggestions to keep your content fresh and UGC prompts to boost community engagement. Use it as a starting framework that your team can customize and refine.",
+  "tool": "gemini",
+  "category": "marketing",
+  "tags": ["social-media", "content-calendar", "marketing-strategy", "hashtags"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "BRAND_NAME", "description": "Your brand or business name", "example": "Bloom Botanicals" },
+    { "name": "BUSINESS_TYPE", "description": "What your business does", "example": "organic skincare brand" },
+    { "name": "PLATFORMS", "description": "Social media platforms to plan for", "example": "Instagram, TikTok, and LinkedIn" },
+    { "name": "AUDIENCE", "description": "Your target audience", "example": "women aged 25-40 interested in clean beauty and wellness" }
+  ],
+  "tips": ["Add seasonal events or product launches to get more relevant content suggestions", "Request platform-specific adaptations of the same content theme to maximize efficiency", "Use the hashtag suggestions as starting points and verify their current popularity"],
+  "exampleOutput": "Day 1 | Instagram Carousel | '5 Ingredients You Should Never See on a Skincare Label' | Educational breakdown of harmful chemicals with clean alternatives. Use brand product photos as examples of clean formulations. | #CleanBeauty #OrganicSkincare #SkincareEducation #ToxinFree #GreenBeauty | 11:00 AM EST\n\nDay 2 | TikTok Reel | 'My Morning Skincare Routine in 60 Seconds' | Quick tutorial showing product application order with before/after results.",
+  "isFeatured": true,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "30-Day Social Media Content Calendar Prompt",
+  "metaDescription": "Generate a full month of social media content ideas with hashtags and posting times. Try this free Gemini prompt for your content strategy."
+}

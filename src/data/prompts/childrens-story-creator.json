@@ -1,0 +1,26 @@
+{
+  "title": "Children's Story Creator with Moral Lesson",
+  "slug": "childrens-story-creator",
+  "promptText": "You are a children's book author who creates engaging stories with meaningful lessons. Write a short story for children aged [AGE_RANGE] about [MAIN_CHARACTER] who [CHARACTER_SITUATION]. The story should teach the lesson of [MORAL_LESSON] without being preachy. Set the story in [SETTING]. Include: a clear three-act structure (setup, conflict, resolution), dialogue that sounds natural for the characters, at least one moment of humor, a satisfying emotional arc, and sensory details that bring the world alive. Keep the language at a [READING_LEVEL] reading level. The story should be [WORD_COUNT] words. End with a gentle reflection question for the child to discuss with their parent or teacher.",
+  "description": "The best children's stories entertain first and teach second, embedding moral lessons in adventures that children genuinely want to hear again. This prompt generates stories with proper narrative structure, age-appropriate language, and lessons that emerge naturally from the plot rather than being stated didactically. The humor requirement prevents the story from becoming a lecture, while the sensory details create the vivid mental pictures that help young readers develop imagination. The discussion question at the end turns story time into a bonding and learning opportunity. Ideal for parents, teachers, children's content creators, and self-publishing authors.",
+  "tool": "claude",
+  "category": "creative",
+  "tags": ["childrens-story", "creative-writing", "moral-lesson", "picture-book", "parenting"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "AGE_RANGE", "description": "Target age of the reader", "example": "4-7" },
+    { "name": "MAIN_CHARACTER", "description": "The protagonist", "example": "a shy octopus named Oliver who has too many arms and not enough confidence" },
+    { "name": "CHARACTER_SITUATION", "description": "The character's challenge", "example": "wants to join the school art show but is afraid everyone will laugh at his paintings because he uses all eight arms at once" },
+    { "name": "MORAL_LESSON", "description": "The lesson to convey", "example": "what makes you different is what makes you special" },
+    { "name": "SETTING", "description": "Where the story takes place", "example": "an underwater school called Coral Cove Academy" },
+    { "name": "READING_LEVEL", "description": "Language complexity", "example": "early reader (short sentences, simple vocabulary)" },
+    { "name": "WORD_COUNT", "description": "Target length", "example": "600" }
+  ],
+  "tips": ["Read the story aloud to test the rhythm and flow for young ears", "Add illustration notes if you plan to pair the text with artwork", "Request a series character bible to develop the character across multiple stories"],
+  "exampleOutput": "Oliver the octopus hid behind the biggest rock in the schoolyard. Again.\n\nFrom there, he could see the sign on the bulletin board: 'CORAL COVE ART SHOW - ALL STUDENTS WELCOME!' The letters sparkled like sea glass in the morning light.\n\n'All students,' Oliver whispered to himself. But he curled three of his arms into a tight knot. All students probably meant the ones with two arms. The normal number.\n\nOliver loved to paint. The problem was, he could not paint with just two arms. When he tried, the other six got bored and started painting on their own...\n\n**Discussion Question:** Oliver was worried about being different. Can you think of something that makes YOU different from your friends? How does it help you do something special?",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Children's Story Creator Prompt for Claude",
+  "metaDescription": "Create engaging children's stories with moral lessons and discussion questions. Try this Claude prompt for bedtime stories and classroom reading."
+}

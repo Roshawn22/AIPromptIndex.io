@@ -1,0 +1,22 @@
+{
+  "title": "Comprehensive Unit Test Generator",
+  "slug": "unit-test-generator",
+  "promptText": "You are a senior QA engineer who advocates for thorough test coverage. Write comprehensive unit tests for the following [LANGUAGE] code: [CODE_TO_TEST]. Use [TESTING_FRAMEWORK] as the testing framework. Generate tests that cover: happy path scenarios, edge cases (empty inputs, null values, boundary conditions), error handling and exception throwing, input validation, and any side effects. For each test, include a descriptive test name that explains the expected behavior using the pattern 'should [expected behavior] when [condition]'. Add comments explaining why each edge case matters. Group tests logically using describe/context blocks. Aim for at least 90% code coverage.",
+  "description": "Writing thorough unit tests is tedious but critical for code reliability. This prompt generates test suites that go far beyond basic happy-path testing to cover the edge cases and error conditions that cause production bugs. The descriptive naming convention makes test failures immediately understandable, and the logical grouping structure keeps large test files navigable. The emphasis on explaining why each edge case matters helps developers understand their own code's vulnerability surface. Invaluable for establishing testing patterns on legacy codebases or maintaining coverage standards on fast-moving teams.",
+  "tool": "github-copilot",
+  "category": "coding",
+  "tags": ["testing", "unit-tests", "TDD", "code-quality", "QA"],
+  "difficulty": "intermediate",
+  "promptType": "code",
+  "variables": [
+    { "name": "LANGUAGE", "description": "Programming language of the code", "example": "TypeScript" },
+    { "name": "CODE_TO_TEST", "description": "The function or class to write tests for", "example": "function calculateShippingCost(weight: number, destination: string, isExpedited: boolean): number" },
+    { "name": "TESTING_FRAMEWORK", "description": "Which testing framework to use", "example": "Jest with ts-jest" }
+  ],
+  "tips": ["Paste your actual function implementation for tests that match real behavior", "Ask for integration tests as a follow-up for functions with external dependencies", "Request mock setup for functions that call APIs or databases"],
+  "exampleOutput": "```typescript\ndescribe('calculateShippingCost', () => {\n  describe('standard shipping', () => {\n    it('should return base rate of $5.99 when weight is under 1lb', () => {\n      expect(calculateShippingCost(0.5, 'US', false)).toBe(5.99);\n    });\n\n    it('should add $1.50 per additional pound when weight exceeds 1lb', () => {\n      expect(calculateShippingCost(3, 'US', false)).toBe(8.99);\n    });\n  });\n\n  describe('edge cases', () => {\n    // Zero weight could indicate a digital product or data error\n    it('should throw InvalidWeightError when weight is zero', () => {\n      expect(() => calculateShippingCost(0, 'US', false)).toThrow(InvalidWeightError);\n    });\n```",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Unit Test Generator Prompt for GitHub Copilot",
+  "metaDescription": "Generate comprehensive unit tests with edge cases and error handling. Try this GitHub Copilot prompt for better test coverage and code quality."
+}

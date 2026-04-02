@@ -1,0 +1,72 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/global/Header.astro';
+import Footer from '../../components/global/Footer.astro';
+import PromptCard from '../../components/prompt/PromptCard.astro';
+import Breadcrumb from '../../components/common/Breadcrumb.astro';
+
+export async function getStaticPaths() {
+  const tools = await getCollection('tools');
+  return tools.map((tool) => ({
+    params: { slug: tool.data.slug },
+    props: { tool },
+  }));
+}
+
+const { tool } = Astro.props;
+const allPrompts = await getCollection('prompts');
+const prompts = allPrompts
+  .filter((p) => p.data.tool === tool.data.slug)
+  .sort((a, b) => {
+    if (a.data.isFeatured && !b.data.isFeatured) return -1;
+    if (!a.data.isFeatured && b.data.isFeatured) return 1;
+    return new Date(b.data.dateAdded).getTime() - new Date(a.data.dateAdded).getTime();
+  });
+---
+
+<BaseLayout
+  title={`Best ${tool.data.name} Prompts`}
+  description={`Discover the best AI prompts for ${tool.data.name}. ${prompts.length} curated prompts for ${tool.data.name} organized by use case and difficulty.`}
+>
+  <Header slot="header" />
+
+  <section class="mx-auto max-w-7xl px-[var(--space-page)] py-8">
+    <Breadcrumb items={[
+      { label: 'Home', href: '/' },
+      { label: 'Tools', href: '/tools/' },
+      { label: tool.data.name },
+    ]} />
+
+    <div class="mb-10">
+      <h1>Best {tool.data.name} Prompts</h1>
+      <p class="mt-2 text-lg text-[var(--color-text-secondary)]">
+        {prompts.length} curated prompts for {tool.data.name}
+      </p>
+      <p class="mt-4 text-[var(--color-text-secondary)]">{tool.data.description}</p>
+    </div>
+
+    {prompts.length > 0 ? (
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {prompts.map((prompt) => (
+          <PromptCard
+            title={prompt.data.title}
+            slug={prompt.data.slug}
+            description={prompt.data.description}
+            tool={prompt.data.tool}
+            category={prompt.data.category}
+            difficulty={prompt.data.difficulty}
+            tags={prompt.data.tags}
+            isFeatured={prompt.data.isFeatured}
+          />
+        ))}
+      </div>
+    ) : (
+      <p class="text-center text-[var(--color-text-muted)] py-12">
+        No prompts for {tool.data.name} yet. <a href="/submit/" class="text-[var(--color-accent)] hover:underline">Submit one!</a>
+      </p>
+    )}
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

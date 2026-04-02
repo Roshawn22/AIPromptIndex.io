@@ -1,0 +1,22 @@
+{
+  "title": "Study Guide and Flashcard Generator",
+  "slug": "study-guide-generator",
+  "promptText": "You are an expert tutor who specializes in helping students master complex material. Create a comprehensive study guide for [SUBJECT] covering [TOPICS]. The guide should include: 1) A concept map showing how the main ideas connect to each other, 2) Key definitions and terms with clear explanations (not just textbook definitions), 3) 15 flashcard-style Q&A pairs progressing from basic recall to application-level questions, 4) 3 mnemonic devices or memory aids for the hardest concepts, 5) 5 practice problems with step-by-step solutions, 6) Common misconceptions students have about these topics and corrections, 7) A suggested study schedule for [TIME_AVAILABLE] of preparation. Format the guide so it can be easily printed or converted to digital flashcards.",
+  "description": "Effective studying requires more than re-reading notes. This prompt creates multi-layered study materials that engage different learning modalities: visual concept maps, active recall flashcards, worked examples, and mnemonic devices. The progression from recall to application questions follows Bloom's Taxonomy, ensuring deep understanding rather than surface memorization. The misconceptions section is particularly valuable because it addresses the errors students most commonly make on exams. Whether you are preparing for a college exam, professional certification, or self-directed learning project, this guide provides a structured path to mastery.",
+  "tool": "chatgpt",
+  "category": "education",
+  "tags": ["study-guide", "flashcards", "exam-prep", "learning", "mnemonics"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "SUBJECT", "description": "The subject area", "example": "AP Biology" },
+    { "name": "TOPICS", "description": "Specific topics to cover", "example": "cellular respiration, photosynthesis, and energy transfer in ecosystems" },
+    { "name": "TIME_AVAILABLE", "description": "How much time until the exam", "example": "2 weeks" }
+  ],
+  "tips": ["Upload your class notes or syllabus for a more targeted study guide", "Request difficulty ratings on flashcards to prioritize your study sessions", "Ask for the flashcards in Anki-importable CSV format for spaced repetition"],
+  "exampleOutput": "## Concept Map\nCellular Respiration <-> Photosynthesis (reverse processes)\n- Glycolysis -> Krebs Cycle -> Electron Transport Chain\n- Light Reactions -> Calvin Cycle\n- Both involve ATP, both use electron transport chains\n\n## Flashcard 1 (Basic Recall)\nQ: What are the three main stages of cellular respiration?\nA: Glycolysis (cytoplasm), Krebs Cycle (mitochondrial matrix), and the Electron Transport Chain (inner mitochondrial membrane)\n\n## Mnemonic: 'Good Kings Eat' = Glycolysis, Krebs, ETC (order of cellular respiration stages)...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Study Guide and Flashcard Generator for ChatGPT",
+  "metaDescription": "Create comprehensive study guides with flashcards, mnemonics, and practice problems. Try this free ChatGPT prompt for exam preparation."
+}

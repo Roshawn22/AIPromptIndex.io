@@ -1,0 +1,115 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/global/Header.astro';
+import Footer from '../components/global/Footer.astro';
+import Badge from '../components/ui/Badge.astro';
+import PromptCodeBlock from '../components/prompt/PromptCodeBlock.tsx';
+import CopyButton from '../components/ui/CopyButton.tsx';
+import VoteButtons from '../components/prompt/VoteButtons.tsx';
+import ShareButtons from '../components/common/ShareButtons.astro';
+
+const allPrompts = await getCollection('prompts');
+
+// Deterministic daily selection based on date
+const today = new Date();
+const dayOfYear = Math.floor(
+  (today.getTime() - new Date(today.getFullYear(), 0, 0).getTime()) / (1000 * 60 * 60 * 24)
+);
+const promptIndex = dayOfYear % allPrompts.length;
+const prompt = allPrompts.sort((a, b) => a.data.slug.localeCompare(b.data.slug))[promptIndex];
+const data = prompt.data;
+
+const toolDisplayNames: Record<string, string> = {
+  chatgpt: 'ChatGPT',
+  claude: 'Claude',
+  gemini: 'Gemini',
+  midjourney: 'Midjourney',
+  'dall-e': 'DALL-E',
+  'stable-diffusion': 'Stable Diffusion',
+  cursor: 'Cursor',
+  'github-copilot': 'GitHub Copilot',
+};
+
+const difficultyColor = {
+  beginner: 'green' as const,
+  intermediate: 'yellow' as const,
+  advanced: 'red' as const,
+};
+
+const siteUrl = 'https://aipromptindex.io';
+const pageUrl = `${siteUrl}/prompt-of-the-day/`;
+const formattedDate = today.toLocaleDateString('en-US', {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout
+  title="Prompt of the Day"
+  description={`Today's featured AI prompt: ${data.title}. Discover a new curated prompt every day.`}
+  loadMonoFont={true}
+>
+  <Header slot="header" />
+
+  <section class="mx-auto max-w-3xl px-[var(--space-page)] py-12">
+    <div class="text-center mb-10">
+      <p class="text-sm font-[var(--font-display)] font-medium uppercase tracking-wider text-[var(--color-accent)] mb-2">
+        Prompt of the Day
+      </p>
+      <h1>{data.title}</h1>
+      <p class="mt-2 text-[var(--color-text-muted)]">{formattedDate}</p>
+      <div class="mt-4 flex items-center justify-center gap-2">
+        <Badge variant="teal" size="md">{toolDisplayNames[data.tool] || data.tool}</Badge>
+        <Badge variant={difficultyColor[data.difficulty]} size="md">{data.difficulty}</Badge>
+      </div>
+    </div>
+
+    <!-- Prompt -->
+    <div class="mb-6">
+      <PromptCodeBlock client:load promptText={data.promptText} promptSlug={data.slug} />
+    </div>
+
+    <div class="flex items-center justify-between mb-8">
+      <div class="flex items-center gap-3">
+        <CopyButton client:load text={data.promptText} label="Copy Prompt" size="lg" promptSlug={data.slug} />
+        <VoteButtons client:load promptSlug={data.slug} />
+      </div>
+      <ShareButtons url={pageUrl} title={`Prompt of the Day: ${data.title}`} />
+    </div>
+
+    <!-- Description -->
+    <div class="mb-8">
+      <h2 class="text-xl mb-3">About This Prompt</h2>
+      <p class="text-[var(--color-text-secondary)] leading-relaxed">{data.description}</p>
+    </div>
+
+    <!-- Variables -->
+    {data.variables.length > 0 && (
+      <div class="mb-8">
+        <h2 class="text-xl mb-3">Variables to Customize</h2>
+        <div class="space-y-3">
+          {data.variables.map((v) => (
+            <div class="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-4">
+              <code class="rounded bg-teal-500/10 px-2 py-0.5 text-sm font-[var(--font-mono)] text-[var(--color-accent)]">
+                [{v.name}]
+              </code>
+              <p class="mt-1 text-sm text-[var(--color-text-secondary)]">{v.description}</p>
+              <p class="mt-1 text-xs text-[var(--color-text-muted)]">Example: {v.example}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <div class="text-center mt-12">
+      <a href={`/prompts/${data.slug}/`} class="text-sm font-[var(--font-display)] font-medium text-[var(--color-accent)] hover:underline">
+        View full prompt details &rarr;
+      </a>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

@@ -1,0 +1,22 @@
+{
+  "title": "Technical Documentation Writer",
+  "slug": "technical-documentation-writer",
+  "promptText": "You are a senior technical writer specializing in developer documentation. Write clear, comprehensive documentation for [FEATURE_NAME] in a [PROJECT_TYPE] project. Include the following sections: Overview (what it does and why), Prerequisites, Installation/Setup steps, Configuration options in a table format, Usage examples with code snippets in [LANGUAGE], Common pitfalls and troubleshooting, and a FAQ section with at least 3 entries. Use a professional but approachable tone. Format everything in Markdown with proper headings, code blocks, and callout boxes for warnings and tips.",
+  "description": "Writing good technical documentation is one of the most undervalued skills in software development. This prompt produces professional-grade docs that follow industry standards like the Diataxis framework. It generates complete, structured documentation with real code examples, configuration tables, and troubleshooting guides. Whether you are documenting an API endpoint, a library feature, or an internal tool, this prompt ensures nothing important gets missed. It is particularly valuable for open source maintainers who want to lower the barrier to contribution.",
+  "tool": "claude",
+  "category": "writing",
+  "tags": ["documentation", "technical-writing", "developer-docs", "markdown"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "FEATURE_NAME", "description": "The feature or component to document", "example": "WebSocket authentication middleware" },
+    { "name": "PROJECT_TYPE", "description": "Type of project", "example": "Node.js Express API" },
+    { "name": "LANGUAGE", "description": "Programming language for code examples", "example": "TypeScript" }
+  ],
+  "tips": ["Provide context about your existing docs style for consistency", "Ask for version-specific notes if your project has multiple releases", "Request both basic and advanced usage examples to serve different reader levels"],
+  "exampleOutput": "# WebSocket Authentication Middleware\n\n## Overview\nThe WebSocket Authentication Middleware validates JWT tokens during the WebSocket handshake phase, ensuring only authorized clients can establish persistent connections.\n\n## Prerequisites\n- Node.js 18+\n- Express 4.x or 5.x\n- `jsonwebtoken` package installed\n\n## Installation\n```bash\nnpm install @myapp/ws-auth-middleware\n```",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Technical Documentation Writer Prompt for Claude",
+  "metaDescription": "Generate professional developer documentation with code examples and troubleshooting guides. Try this Claude prompt for your next project."
+}

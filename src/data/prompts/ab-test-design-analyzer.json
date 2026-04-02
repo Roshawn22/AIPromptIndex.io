@@ -1,0 +1,25 @@
+{
+  "title": "A/B Test Design and Results Analyzer",
+  "slug": "ab-test-design-analyzer",
+  "promptText": "You are a statistician and experimentation specialist. I want to run an A/B test for [TEST_PURPOSE] on [PLATFORM_OR_PRODUCT]. My primary metric is [PRIMARY_METRIC] and secondary metrics are [SECONDARY_METRICS]. Current baseline for the primary metric is [BASELINE]. Help me with: 1) Proper hypothesis formulation (null and alternative), 2) Sample size calculation with assumptions (significance level, power, minimum detectable effect), 3) Test duration estimation based on [DAILY_TRAFFIC] daily visitors, 4) Randomization strategy and potential confounders to control for, 5) Segmentation recommendations for deeper analysis, 6) A pre-analysis plan that specifies what decisions we will make based on each possible outcome. If I provide test results, also analyze them for statistical significance and provide a clear recommendation with confidence intervals.",
+  "description": "Most A/B tests fail not because of bad ideas but because of poor experimental design: underpowered tests, peeking at results too early, or no pre-defined success criteria. This prompt walks you through rigorous test design that would satisfy a statistician while remaining practical for product and marketing teams. The pre-analysis plan is especially important because it prevents the common trap of moving goalposts after seeing results. Whether you are testing landing page variations, pricing experiments, or feature changes, this structured approach dramatically increases the reliability of your conclusions.",
+  "tool": "claude",
+  "category": "data-analysis",
+  "tags": ["AB-testing", "experimentation", "statistics", "CRO", "hypothesis-testing"],
+  "difficulty": "advanced",
+  "promptType": "text",
+  "variables": [
+    { "name": "TEST_PURPOSE", "description": "What you want to test", "example": "whether adding customer testimonials above the fold increases trial sign-ups" },
+    { "name": "PLATFORM_OR_PRODUCT", "description": "Where the test runs", "example": "our SaaS landing page" },
+    { "name": "PRIMARY_METRIC", "description": "Main success metric", "example": "free trial conversion rate" },
+    { "name": "SECONDARY_METRICS", "description": "Additional metrics to track", "example": "bounce rate, time on page, and scroll depth" },
+    { "name": "BASELINE", "description": "Current performance", "example": "3.2% conversion rate" },
+    { "name": "DAILY_TRAFFIC", "description": "Daily visitor volume", "example": "approximately 2,500 unique visitors per day" }
+  ],
+  "tips": ["Always set your minimum detectable effect before running the test, not after", "Avoid peeking at results before reaching full sample size", "Run the test for full weeks to account for day-of-week effects"],
+  "exampleOutput": "## Hypothesis\n**Null (H0):** Adding customer testimonials above the fold has no effect on the free trial conversion rate (Control = Variant).\n**Alternative (H1):** Adding customer testimonials above the fold increases the free trial conversion rate (Variant > Control).\n\n## Sample Size Calculation\nAssumptions: Significance level (alpha) = 0.05, Power (1-beta) = 0.80, Minimum detectable effect = 20% relative lift (3.2% to 3.84%)\n**Required sample size: 12,400 per variation (24,800 total)**\n\n## Duration Estimate\nAt 2,500 daily visitors with a 50/50 split: **20 days minimum** (rounded up to 21 days to complete 3 full weeks).",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "A/B Test Design Analyzer Prompt for Claude",
+  "metaDescription": "Design statistically rigorous A/B tests with sample size calculations and pre-analysis plans. Try this Claude prompt for better experiments."
+}

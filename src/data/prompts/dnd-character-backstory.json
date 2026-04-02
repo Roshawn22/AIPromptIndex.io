@@ -1,0 +1,25 @@
+{
+  "title": "D&D Character Backstory Generator",
+  "slug": "dnd-character-backstory",
+  "promptText": "You are a master storyteller and tabletop RPG designer. Create a rich backstory for a [RACE] [CLASS] character named [CHARACTER_NAME] for a Dungeons & Dragons [EDITION] campaign. The character's personality trait is [PERSONALITY_TRAIT] and their fatal flaw is [FLAW]. Develop: a 500-word origin story with a pivotal moment that set them on the adventuring path, three important NPCs from their past (an ally, a rival, and a mysterious figure), a personal quest or unresolved goal that motivates them, two secrets (one the character knows and one they don't), connections to at least two established D&D lore elements, and a list of 5 roleplaying hooks the DM can use to weave this character into any campaign. Make the backstory compelling but not so detailed that it overshadows the actual campaign story.",
+  "description": "A great D&D backstory gives both the player and the Dungeon Master material to work with without dictating the campaign narrative. This prompt creates backstories with built-in story hooks, NPC relationships, and secrets that a DM can weave into sessions organically. The two-secret structure creates dramatic tension that can unfold over months of play. The explicit connection to D&D lore grounds the character in the established world while the roleplaying hooks give the DM concrete tools to make the player feel their backstory matters. Designed for both new players building their first character and veterans who want deeper narratives.",
+  "tool": "chatgpt",
+  "category": "creative",
+  "tags": ["D&D", "RPG", "character-creation", "backstory", "tabletop-gaming"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "RACE", "description": "Character's race", "example": "half-elf" },
+    { "name": "CLASS", "description": "Character's class", "example": "warlock" },
+    { "name": "CHARACTER_NAME", "description": "The character's name", "example": "Lyra Ashwood" },
+    { "name": "EDITION", "description": "D&D edition", "example": "5th Edition" },
+    { "name": "PERSONALITY_TRAIT", "description": "A defining personality characteristic", "example": "collects stories and legends obsessively, writing them in a leather journal she never lets anyone read" },
+    { "name": "FLAW", "description": "A character weakness", "example": "will make dangerous deals for forbidden knowledge, rationalizing the cost later" }
+  ],
+  "tips": ["Share this backstory with your DM before the campaign starts so they can integrate it", "Leave some elements intentionally vague so the DM has room to surprise you", "Use the NPC relationships as motivations for in-game decision making"],
+  "exampleOutput": "Lyra Ashwood grew up in the border town of Daggerford, the daughter of a human librarian and an elven cartographer who disappeared when she was nine. Her mother said he went to map the Underdark. The townspeople said he ran from his debts. Lyra suspected neither version was complete.\n\n**The Pivotal Moment:** On her sixteenth birthday, Lyra found a hidden compartment in her father's old desk containing a journal written in a script she couldn't read and a brass compass that always pointed somewhere far to the northeast...\n\n**NPC - The Ally:** Brother Aldric, a retired cleric of Oghma who recognized the script as Infernal and taught Lyra to read it, unlocking her father's research into patron pacts...\n\n**Secret (Known):** Lyra's warlock pact was not freely chosen. She accidentally activated a binding circle in her father's notes.\n**Secret (Unknown):** Her father is alive, serving as an unwilling advisor to a beholder crime lord in Skullport.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "D&D Character Backstory Generator for ChatGPT",
+  "metaDescription": "Create rich D&D character backstories with NPCs, secrets, and DM hooks. Try this free ChatGPT prompt for your next tabletop RPG character."
+}

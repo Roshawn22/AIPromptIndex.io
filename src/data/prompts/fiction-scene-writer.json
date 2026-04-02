@@ -1,0 +1,26 @@
+{
+  "title": "Fiction Scene Writer with Sensory Detail",
+  "slug": "fiction-scene-writer",
+  "promptText": "You are a published fiction author known for vivid, immersive prose. Write a [SCENE_LENGTH]-word scene set in [SETTING] featuring [CHARACTER_DESCRIPTION]. The scene should convey the mood of [MOOD] and advance the following plot point: [PLOT_POINT]. Use all five senses in your descriptions. Include at least one line of dialogue that reveals character. Vary your sentence structure between short punchy sentences and longer flowing ones. Avoid cliches and purple prose. Write in [POV] point of view, [TENSE] tense.",
+  "description": "This prompt is designed for fiction writers who want to break through creative blocks or explore new scene directions. It generates polished prose that balances sensory detail with narrative momentum. The emphasis on all five senses and varied sentence structure produces writing that feels crafted rather than AI-generated. Use it to draft first-pass scenes, explore alternate versions of key moments, or study how different POV and tense choices affect the same story beat. It works for any genre from literary fiction to thriller to fantasy.",
+  "tool": "claude",
+  "category": "creative",
+  "tags": ["fiction", "creative-writing", "scene-craft", "storytelling", "prose"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "SCENE_LENGTH", "description": "Approximate word count", "example": "800" },
+    { "name": "SETTING", "description": "Where and when the scene takes place", "example": "a rain-soaked Tokyo alley at 2 AM" },
+    { "name": "CHARACTER_DESCRIPTION", "description": "Brief character sketch", "example": "a retired detective who has returned to investigate the one case she never solved" },
+    { "name": "MOOD", "description": "The emotional atmosphere", "example": "tension and quiet dread" },
+    { "name": "PLOT_POINT", "description": "What happens in this scene", "example": "the character discovers a clue that implicates someone she trusted" },
+    { "name": "POV", "description": "Point of view", "example": "third-person limited" },
+    { "name": "TENSE", "description": "Past or present tense", "example": "past" }
+  ],
+  "tips": ["Try generating the same scene with different POVs to see which works best", "Use the output as a rough draft and revise with your own voice", "Specify genre conventions if you want genre-specific prose style"],
+  "exampleOutput": "The neon kanji bled pink and blue across wet asphalt. Keiko Tanaka pulled her collar higher and stepped over a gutter stream that smelled of sesame oil and rain. Twenty-three years. She had last stood in this alley when her hair was still black and her badge still meant something.\n\nA cat watched her from atop a dumpster, unblinking.\n\n'You remember me,' she said to no one.",
+  "isFeatured": true,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Fiction Scene Writer Prompt with Sensory Detail",
+  "metaDescription": "Write immersive fiction scenes with vivid sensory detail using this Claude prompt. Perfect for breaking through writer's block. Try it free."
+}

@@ -1,0 +1,23 @@
+{
+  "title": "Worldbuilding Culture and Society Creator",
+  "slug": "worldbuilding-culture-creator",
+  "promptText": "You are a worldbuilding consultant who has designed fictional cultures for bestselling fantasy and sci-fi authors. Create a detailed cultural profile for [CULTURE_NAME], a society that exists in [WORLD_SETTING]. Their core value system revolves around [CORE_VALUES]. Develop the following aspects: Governance structure and power dynamics, Economic system and primary industries, Religious or philosophical beliefs, Social hierarchy and class structure, Coming-of-age rituals and important ceremonies, Architecture and aesthetic style, Relationship to [NEIGHBORING_CULTURE], A unique cultural practice that would surprise outsiders, Common greetings and taboos, and Food culture including one signature dish with symbolic meaning. Make every element feel internally consistent and avoid real-world cultural appropriation by creating genuinely original traditions.",
+  "description": "Great worldbuilding creates cultures that feel lived-in rather than sketched. This prompt generates deeply interconnected cultural systems where governance, economics, religion, and daily life all reinforce each other logically. The emphasis on internal consistency prevents the common pitfall of cultures that feel like a grab bag of random cool ideas. The explicit instruction to avoid cultural appropriation ensures the output creates genuinely original traditions rather than reskinning real-world cultures. Perfect for fiction writers, game designers, tabletop RPG creators, and anyone building immersive fictional worlds.",
+  "tool": "chatgpt",
+  "category": "creative",
+  "tags": ["worldbuilding", "fiction", "culture-design", "fantasy", "game-design"],
+  "difficulty": "advanced",
+  "promptType": "text",
+  "variables": [
+    { "name": "CULTURE_NAME", "description": "Name of the fictional culture", "example": "the Veridari" },
+    { "name": "WORLD_SETTING", "description": "The broader world context", "example": "a continent of floating sky-islands connected by wind bridges" },
+    { "name": "CORE_VALUES", "description": "The fundamental values of this society", "example": "balance between innovation and preservation, with a deep reverence for wind patterns" },
+    { "name": "NEIGHBORING_CULTURE", "description": "A neighboring group for political context", "example": "the ground-dwelling Terrani who resent the sky-dwellers" }
+  ],
+  "tips": ["Build 2-3 cultures using this prompt to create rich political dynamics between them", "Ask for historical events that shaped each cultural element for deeper backstory", "Request a 'day in the life' narrative as a follow-up to bring the culture alive"],
+  "exampleOutput": "## The Veridari\n\n**Governance:** The Veridari are governed by the Windcouncil, a rotating body of seven Listeners—individuals born with the ability to interpret wind patterns as omens. Leadership is not inherited but discovered during the Breath Trial at age 14...\n\n**Unique Practice:** Every Veridari building has an 'echo chamber'—a room designed to amplify wind sounds. Families gather here during storms to 'read' messages they believe their ancestors send through air currents. Outsiders find this deeply unsettling.\n\n**Signature Dish:** Sky-root stew, made from tubers that only grow on the underside of floating islands. Served in bowls with a hole in the bottom (sealed with bread). Eating it requires balance and attention—symbolizing the Veridari belief that sustenance demands mindfulness.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Worldbuilding Culture Creator Prompt for ChatGPT",
+  "metaDescription": "Design rich, internally consistent fictional cultures for novels, games, and RPGs. Try this ChatGPT worldbuilding prompt for original societies."
+}

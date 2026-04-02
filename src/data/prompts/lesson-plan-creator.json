@@ -1,0 +1,24 @@
+{
+  "title": "Comprehensive Lesson Plan Creator",
+  "slug": "lesson-plan-creator",
+  "promptText": "You are an experienced curriculum designer with expertise in [SUBJECT_AREA]. Create a detailed lesson plan for teaching [TOPIC] to [GRADE_LEVEL] students. The lesson should span [DURATION]. Include: Learning Objectives aligned to [STANDARDS_FRAMEWORK] standards, a warm-up activity that activates prior knowledge, direct instruction with key vocabulary and concepts, a guided practice activity, an independent practice activity, differentiation strategies for advanced learners and struggling students, formative assessment methods, a closing reflection activity, required materials list, and homework or extension activities. Include at least one technology-integrated activity and one collaborative learning opportunity.",
+  "description": "Creating effective lesson plans requires balancing educational theory with practical classroom realities. This prompt generates comprehensive plans that follow established pedagogical frameworks while incorporating modern teaching strategies like differentiation and technology integration. The structure ensures every lesson has clear objectives, multiple engagement points, and built-in assessment opportunities. It saves teachers hours of planning time while maintaining the rigor that administrators and curriculum coordinators expect. Particularly useful for new teachers building their plan library or experienced educators exploring new topics.",
+  "tool": "chatgpt",
+  "category": "education",
+  "tags": ["lesson-plan", "curriculum", "teaching", "differentiation", "assessment"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "SUBJECT_AREA", "description": "The subject being taught", "example": "middle school science" },
+    { "name": "TOPIC", "description": "Specific topic for this lesson", "example": "the water cycle and its impact on weather patterns" },
+    { "name": "GRADE_LEVEL", "description": "Student age or grade level", "example": "7th grade" },
+    { "name": "DURATION", "description": "How long the lesson takes", "example": "90 minutes (block period)" },
+    { "name": "STANDARDS_FRAMEWORK", "description": "Educational standards to align with", "example": "Next Generation Science Standards (NGSS)" }
+  ],
+  "tips": ["Include your classroom technology setup for more relevant tech integration ideas", "Mention specific student needs for better differentiation strategies", "Request a rubric as a follow-up prompt for the assessment components"],
+  "exampleOutput": "## Lesson: The Water Cycle and Weather Patterns\n### Grade 7 Science | 90 Minutes | NGSS MS-ESS2-4\n\n**Learning Objectives:**\nStudents will be able to:\n1. Diagram and label the four main stages of the water cycle (evaporation, condensation, precipitation, collection)\n2. Explain how the water cycle drives local weather patterns using cause-and-effect reasoning\n\n**Warm-Up (10 min):** Show a 2-minute timelapse of cloud formation. Students write 3 observations and 2 questions in their science journals...",
+  "isFeatured": true,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Lesson Plan Creator Prompt for ChatGPT",
+  "metaDescription": "Generate detailed, standards-aligned lesson plans with differentiation and assessment. Try this free ChatGPT prompt for teachers."
+}

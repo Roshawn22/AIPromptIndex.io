@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/global/Header.astro';
+import Footer from '../../components/global/Footer.astro';
+import PromptCard from '../../components/prompt/PromptCard.astro';
+
+const allPrompts = await getCollection('prompts');
+const prompts = allPrompts.sort((a, b) => {
+  if (a.data.isFeatured && !b.data.isFeatured) return -1;
+  if (!a.data.isFeatured && b.data.isFeatured) return 1;
+  return new Date(b.data.dateAdded).getTime() - new Date(a.data.dateAdded).getTime();
+});
+---
+
+<BaseLayout
+  title="Browse All AI Prompts"
+  description="Explore our curated collection of AI prompts for ChatGPT, Claude, Midjourney, and more. Filter by tool, category, and difficulty level."
+>
+  <Header slot="header" />
+
+  <section class="mx-auto max-w-7xl px-[var(--space-page)] py-12">
+    <div class="mb-10">
+      <h1>All Prompts</h1>
+      <p class="mt-2 text-lg text-[var(--color-text-secondary)]">
+        {prompts.length} curated prompts across {new Set(prompts.map(p => p.data.category)).size} categories
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {prompts.map((prompt) => (
+        <PromptCard
+          title={prompt.data.title}
+          slug={prompt.data.slug}
+          description={prompt.data.description}
+          tool={prompt.data.tool}
+          category={prompt.data.category}
+          difficulty={prompt.data.difficulty}
+          tags={prompt.data.tags}
+          isFeatured={prompt.data.isFeatured}
+        />
+      ))}
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

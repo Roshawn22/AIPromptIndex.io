@@ -1,0 +1,228 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import Button from '../ui/Button.astro';
+import AuthButtons from '../auth/AuthButtons.tsx';
+
+const navLinks = [
+  { href: '/prompts/', label: 'Prompts' },
+  { href: '/categories/', label: 'Categories' },
+  { href: '/tools/', label: 'Tools' },
+  { href: '/guides/', label: 'Guides' },
+  { href: '/blog/', label: 'Blog' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 w-full border-b border-[var(--color-border)] bg-[var(--color-surface-0)]/80 backdrop-blur-xl max-md:bg-[var(--color-surface-0)]/95 max-md:backdrop-blur-none">
+  <div class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-[var(--space-page)]">
+    <!-- Logo -->
+    <a href="/" aria-label="AI Prompt Index home" class="group flex shrink-0 items-center gap-2">
+      <div class="flex h-8 w-8 items-center justify-center rounded-[var(--radius-sm)] bg-gradient-to-br from-teal-500 to-teal-700 shadow-[0_0_16px_rgba(13,148,136,0.3)]">
+        <svg class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+          <path d="M8 6h13M8 12h9M8 18h11" />
+          <circle cx="4" cy="6" r="1.5" fill="currentColor" />
+          <circle cx="4" cy="12" r="1.5" fill="currentColor" />
+          <circle cx="4" cy="18" r="1.5" fill="currentColor" />
+        </svg>
+      </div>
+      <span class="whitespace-nowrap font-[var(--font-display)] text-[17px] font-bold leading-none tracking-tight sm:text-lg">
+        <span class="text-[var(--color-text-primary)]">AI</span><span class="text-gradient">PromptIndex</span>
+      </span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden items-center gap-0.5 md:flex lg:gap-1" aria-label="Main navigation">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          aria-current={currentPath.startsWith(link.href) ? 'page' : undefined}
+          class:list={[
+            'rounded-[var(--radius-md)] px-2 py-2 text-sm font-[var(--font-display)] font-medium transition-colors lg:px-3',
+            currentPath.startsWith(link.href)
+              ? 'bg-[var(--color-accent-glow)] text-[var(--color-accent)]'
+              : 'text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-2)] hover:text-[var(--color-text-primary)]',
+          ]}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Right side -->
+    <div class="flex shrink-0 items-center gap-1.5 sm:gap-3">
+      <!-- Search trigger -->
+      <button
+        type="button"
+        data-open-search
+        class="flex h-11 w-11 items-center justify-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-2)] text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-accent-muted)] hover:text-[var(--color-text-secondary)] sm:h-auto sm:w-auto sm:px-3 sm:py-1.5"
+        aria-label="Open search"
+      >
+        <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.3-4.3" />
+        </svg>
+        <span class="hidden font-[var(--font-display)] font-medium text-sm sm:inline">Search</span>
+        <kbd aria-hidden="true" class="hidden rounded border border-[var(--color-border)] bg-[var(--color-surface-0)] px-1.5 py-0.5 font-[var(--font-mono)] text-[10px] sm:inline-flex">&Cmd;K</kbd>
+      </button>
+
+      <ThemeToggle />
+      <AuthButtons client:load />
+      <Button href="/submit/" size="sm" variant="outline" class="hidden sm:inline-flex">
+        Submit Prompt
+      </Button>
+
+      <!-- Mobile menu toggle -->
+      <button
+        id="mobile-menu-btn"
+        type="button"
+        class="flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-2)] md:hidden"
+        aria-label="Open menu"
+        aria-controls="mobile-menu"
+        aria-expanded="false"
+      >
+        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Nav -->
+  <div id="mobile-menu" class="mobile-menu-closed border-t border-[var(--color-border)] bg-[var(--color-surface-1)] md:hidden">
+    <nav class="flex flex-col gap-1 p-4" aria-label="Mobile navigation">
+      <button
+        type="button"
+        data-open-search
+        class="flex items-center justify-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-2)] px-4 py-3 text-sm font-[var(--font-display)] font-medium text-[var(--color-text-secondary)]"
+        aria-label="Open search"
+      >
+        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.3-4.3" />
+        </svg>
+        Search AI prompts
+      </button>
+
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          aria-current={currentPath.startsWith(link.href) ? 'page' : undefined}
+          class:list={[
+            'rounded-[var(--radius-md)] px-4 py-3 text-sm font-[var(--font-display)] font-medium',
+            currentPath.startsWith(link.href)
+              ? 'bg-[var(--color-accent-glow)] text-[var(--color-accent)]'
+              : 'text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-2)]',
+          ]}
+        >
+          {link.label}
+        </a>
+      ))}
+      <a
+        href="/submit/"
+        class="mt-2 rounded-[var(--radius-md)] border border-[var(--color-accent)] px-4 py-3 text-center text-sm font-[var(--font-display)] font-medium text-[var(--color-accent)]"
+      >
+        Submit a Prompt
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  let cleanupHeaderInteractions = () => {};
+
+  function initHeaderInteractions() {
+    cleanupHeaderInteractions();
+
+    const controller = new AbortController();
+    const { signal } = controller;
+
+    const mobileMenuButton = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const searchTriggers = document.querySelectorAll('[data-open-search]');
+
+    const closeMenu = (restoreFocus: boolean) => {
+      if (!mobileMenu || !mobileMenuButton) return;
+      const wasOpen = !mobileMenu.classList.contains('mobile-menu-closed');
+      if (!wasOpen) return;
+      mobileMenu.classList.remove('mobile-menu-open');
+      mobileMenu.classList.add('mobile-menu-exit');
+      mobileMenu.addEventListener('animationend', () => {
+        mobileMenu.classList.remove('mobile-menu-exit');
+        mobileMenu.classList.add('mobile-menu-closed');
+      }, { once: true });
+      mobileMenuButton.setAttribute('aria-expanded', 'false');
+      if (restoreFocus) {
+        mobileMenuButton.focus();
+      }
+    };
+
+    const toggleMenu = () => {
+      if (!mobileMenu || !mobileMenuButton) return;
+      const isOpen = !mobileMenu.classList.contains('mobile-menu-closed');
+      if (isOpen) {
+        closeMenu(false);
+      } else {
+        mobileMenu.classList.remove('mobile-menu-closed');
+        mobileMenu.classList.add('mobile-menu-open');
+        mobileMenuButton.setAttribute('aria-expanded', 'true');
+        const firstFocusable = mobileMenu.querySelector('a, button') as HTMLElement | null;
+        if (firstFocusable) firstFocusable.focus();
+      }
+    };
+
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener('click', toggleMenu, { signal });
+
+      document.addEventListener('click', (event) => {
+        const target = event.target;
+        if (!(target instanceof Node)) return;
+        const isOpen = !mobileMenu.classList.contains('mobile-menu-closed');
+        if (!isOpen) return;
+        if (mobileMenu.contains(target) || mobileMenuButton.contains(target)) return;
+        closeMenu(true);
+      }, { signal });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          closeMenu(true);
+          return;
+        }
+
+        if (event.key === 'Tab') {
+          const isOpen = !mobileMenu.classList.contains('mobile-menu-closed');
+          if (!isOpen) return;
+
+          const focusableEls = mobileMenu.querySelectorAll<HTMLElement>(
+            'a[href], button:not([disabled])'
+          );
+          if (focusableEls.length === 0) return;
+
+          const first = focusableEls[0];
+          const last = focusableEls[focusableEls.length - 1];
+
+          if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+          }
+        }
+      }, { signal });
+    }
+
+    for (const trigger of searchTriggers) {
+      if (!(trigger instanceof HTMLElement)) continue;
+      trigger.addEventListener('click', () => {
+        document.dispatchEvent(new CustomEvent('open-search'));
+        closeMenu(false);
+      }, { signal });
+    }
+
+    cleanupHeaderInteractions = () => controller.abort();
+  }
+
+  initHeaderInteractions();
+  document.addEventListener('astro:after-swap', initHeaderInteractions);
+</script>

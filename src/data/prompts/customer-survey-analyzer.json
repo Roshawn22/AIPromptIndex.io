@@ -1,0 +1,22 @@
+{
+  "title": "Customer Survey Response Analyzer",
+  "slug": "customer-survey-analyzer",
+  "promptText": "You are a market research analyst specializing in customer insights. Analyze the following customer survey responses for [COMPANY_NAME], a [BUSINESS_TYPE]: [SURVEY_DATA]. Produce a comprehensive analysis report including: 1) Overall sentiment breakdown (positive, neutral, negative) with percentages, 2) Top 5 themes identified from open-ended responses with representative quotes, 3) Net Promoter Score interpretation if applicable, 4) Customer satisfaction drivers ranked by frequency and impact, 5) Pain points and friction areas categorized by severity, 6) Demographic or segment-based patterns in responses, 7) Comparison to industry benchmarks where possible, 8) Five specific, actionable recommendations prioritized by expected impact and implementation effort. Use data-driven language and support every insight with specific response references.",
+  "description": "Customer survey data is only valuable if you can extract actionable insights from it, and many teams lack the analytical framework to do so systematically. This prompt transforms raw survey responses into a structured insights report that product, marketing, and leadership teams can act on immediately. The theme identification from open-ended responses is where the most valuable insights typically hide, and the severity-based pain point categorization helps teams prioritize fixes. The impact/effort prioritization of recommendations ensures you focus resources where they will have the greatest effect.",
+  "tool": "claude",
+  "category": "data-analysis",
+  "tags": ["survey-analysis", "customer-insights", "NPS", "market-research", "sentiment"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "COMPANY_NAME", "description": "Your company name", "example": "CloudKitchen Pro" },
+    { "name": "BUSINESS_TYPE", "description": "What your business does", "example": "ghost kitchen management platform" },
+    { "name": "SURVEY_DATA", "description": "The survey responses (paste raw data or summary)", "example": "Q1: How satisfied are you? (1-10 scale) Average: 7.2. Q2: What do you like most? [open ended responses]. Q3: What would you improve? [open ended responses]..." }
+  ],
+  "tips": ["Paste as many raw responses as possible for more accurate theme identification", "Include demographic data if available for segment-based analysis", "Ask for a follow-up survey design based on the gaps identified in this analysis"],
+  "exampleOutput": "## Sentiment Overview\n- Positive: 62% of respondents | Neutral: 23% | Negative: 15%\n- Overall satisfaction score of 7.2/10 is slightly below the SaaS industry benchmark of 7.5\n\n## Top 5 Themes from Open-Ended Responses\n1. **Ease of Menu Management** (mentioned by 34% of respondents)\n   Representative quote: 'Updating menus across all delivery platforms from one dashboard saves me 2 hours daily.'\n2. **Delivery Integration Issues** (mentioned by 28%)\n   Representative quote: 'The DoorDash sync breaks at least once a week during peak hours when we need it most.'",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Customer Survey Analyzer Prompt for Claude",
+  "metaDescription": "Turn survey responses into actionable insights with sentiment analysis and recommendations. Try this Claude prompt for customer research."
+}

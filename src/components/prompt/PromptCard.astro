@@ -1,0 +1,85 @@
+---
+import Badge from '../ui/Badge.astro';
+import Tag from '../ui/Tag.astro';
+
+interface Props {
+  title: string;
+  slug: string;
+  description: string;
+  tool: string;
+  category: string;
+  difficulty: 'beginner' | 'intermediate' | 'advanced';
+  tags?: string[];
+  isFeatured?: boolean;
+  class?: string;
+}
+
+const {
+  title,
+  slug,
+  description,
+  tool,
+  category,
+  difficulty,
+  tags = [],
+  isFeatured = false,
+  class: className,
+} = Astro.props;
+
+const difficultyColor = {
+  beginner: 'green' as const,
+  intermediate: 'yellow' as const,
+  advanced: 'red' as const,
+};
+
+const toolDisplayNames: Record<string, string> = {
+  chatgpt: 'ChatGPT',
+  claude: 'Claude',
+  gemini: 'Gemini',
+  midjourney: 'Midjourney',
+  'dall-e': 'DALL-E',
+  'stable-diffusion': 'Stable Diffusion',
+  cursor: 'Cursor',
+  'github-copilot': 'GitHub Copilot',
+};
+
+const truncatedDescription = description.length > 150
+  ? description.slice(0, 150).trimEnd() + '...'
+  : description;
+---
+
+<a
+  href={`/prompts/${slug}/`}
+  class:list={[
+    'group block rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-5 transition-all duration-200',
+    'hover:shadow-[var(--shadow-card-hover)] hover:border-[var(--color-accent-muted)]',
+    isFeatured && 'ring-1 ring-[var(--color-accent)]/20',
+    className,
+  ]}
+>
+  <!-- Top badges -->
+  <div class="flex items-center gap-2 mb-3">
+    <Badge variant="teal" size="sm">{toolDisplayNames[tool] || tool}</Badge>
+    <Badge variant={difficultyColor[difficulty]} size="sm">{difficulty}</Badge>
+    {isFeatured && <Badge variant="purple" size="sm">Featured</Badge>}
+  </div>
+
+  <!-- Title -->
+  <h3 class="font-[var(--font-display)] text-base font-semibold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors mb-2 line-clamp-2">
+    {title}
+  </h3>
+
+  <!-- Description -->
+  <p class="text-sm text-[var(--color-text-secondary)] mb-4 line-clamp-3">
+    {truncatedDescription}
+  </p>
+
+  <!-- Tags -->
+  {tags.length > 0 && (
+    <div class="flex flex-wrap gap-1.5">
+      {tags.slice(0, 3).map((tag) => (
+        <Tag>{tag}</Tag>
+      ))}
+    </div>
+  )}
+</a>

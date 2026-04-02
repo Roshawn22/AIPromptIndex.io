@@ -1,0 +1,24 @@
+{
+  "title": "Financial Model Assumptions Builder",
+  "slug": "financial-model-assumptions",
+  "promptText": "You are a financial analyst who builds models for [INDUSTRY] companies. Help me build the assumptions section of a 3-year financial model for [COMPANY_NAME], a [BUSINESS_DESCRIPTION]. Revenue model: [REVENUE_MODEL]. Current metrics: [CURRENT_METRICS]. For each assumption, provide: the assumption name, the base case value, a conservative scenario value, an aggressive scenario value, the rationale for each, and which industry benchmarks or data sources support it. Cover these categories: Revenue Drivers (pricing, volume, growth rate, churn), Cost Structure (COGS, headcount plan, marketing spend as % of revenue), Operating Expenses (rent, SaaS tools, professional services), and Capital Requirements (equipment, R&D capitalization). Format as a structured table with scenario columns.",
+  "description": "The assumptions page is the most scrutinized part of any financial model because every projection flows from it. This prompt generates a comprehensive assumptions framework with three-scenario analysis that shows investors or stakeholders you have considered multiple outcomes. Industry benchmark references add credibility to your projections and help identify where your assumptions deviate from norms. The structured table format makes it easy to transfer directly into Excel or Google Sheets. Essential for fundraising models, business plan financials, or annual budgeting exercises.",
+  "tool": "claude",
+  "category": "business",
+  "tags": ["financial-modeling", "assumptions", "scenario-analysis", "forecasting", "startup-finance"],
+  "difficulty": "advanced",
+  "promptType": "text",
+  "variables": [
+    { "name": "INDUSTRY", "description": "Your industry vertical", "example": "B2B SaaS" },
+    { "name": "COMPANY_NAME", "description": "Your company name", "example": "DataSync Pro" },
+    { "name": "BUSINESS_DESCRIPTION", "description": "What the business does", "example": "cloud data integration platform for mid-market companies" },
+    { "name": "REVENUE_MODEL", "description": "How you make money", "example": "monthly subscription with 3 tiers ($99, $299, $799/month) plus implementation fees" },
+    { "name": "CURRENT_METRICS", "description": "Your current financial metrics", "example": "$180K ARR, 45 customers, 3.2% monthly churn, $4,200 average ACV, 18-month average customer lifetime" }
+  ],
+  "tips": ["Validate all benchmark references with current industry reports", "Add seasonality assumptions if your business has seasonal patterns", "Request sensitivity analysis formulas as a follow-up for your spreadsheet"],
+  "exampleOutput": "## Revenue Drivers\n| Assumption | Conservative | Base Case | Aggressive | Rationale |\n|-----------|-------------|-----------|------------|----------|\n| Monthly customer growth rate | 8% | 12% | 18% | Base: Median B2B SaaS growth at $180K ARR (OpenView SaaS Benchmarks 2025). Conservative: Assumes current sales capacity only. Aggressive: Assumes new sales hire in Q2. |\n| Monthly gross churn | 4.0% | 3.2% | 2.5% | Base: Current trailing 6-month average. Industry median for mid-market SaaS: 3-5% (Bessemer Cloud Index). |",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Financial Model Assumptions Builder for Claude",
+  "metaDescription": "Build credible financial model assumptions with three-scenario analysis and industry benchmarks. Try this Claude prompt for startup financial planning."
+}

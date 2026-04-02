@@ -1,0 +1,25 @@
+{
+  "title": "Debug Error Detective",
+  "slug": "debug-error-detective",
+  "promptText": "You are a senior software engineer who excels at debugging. I am encountering the following error in my [LANGUAGE] [PROJECT_TYPE] project: [ERROR_MESSAGE]. The error occurs when [TRIGGER_CONTEXT]. Here is the relevant code: [CODE_SNIPPET]. My environment: [ENVIRONMENT_DETAILS]. Please: 1) Explain what this error means in plain English, 2) Identify the root cause (not just the symptom), 3) Provide a step-by-step fix with code changes, 4) Explain why the fix works, 5) Suggest how to prevent this class of error in the future (linting rules, type safety, etc.), and 6) List any related issues this error might be hiding that I should check for.",
+  "description": "Debugging is often the most frustrating part of development, especially when error messages are cryptic or misleading. This prompt turns the AI into a debugging partner that goes beyond fixing the immediate error to help you understand the root cause and prevent similar issues. The requirement to explain in plain English demystifies complex error messages, while the prevention suggestions help you write more defensive code going forward. The hidden issues check is particularly valuable because production bugs often mask underlying problems that surface later as harder-to-diagnose failures.",
+  "tool": "cursor",
+  "category": "coding",
+  "tags": ["debugging", "error-handling", "troubleshooting", "code-fix"],
+  "difficulty": "beginner",
+  "promptType": "code",
+  "variables": [
+    { "name": "LANGUAGE", "description": "Programming language", "example": "Python 3.11" },
+    { "name": "PROJECT_TYPE", "description": "Type of project", "example": "FastAPI web application" },
+    { "name": "ERROR_MESSAGE", "description": "The full error message and stack trace", "example": "TypeError: 'NoneType' object is not subscriptable at line 45 in user_service.py" },
+    { "name": "TRIGGER_CONTEXT", "description": "What you were doing when the error occurred", "example": "calling the /api/users/{id} endpoint with a valid user ID that exists in the database" },
+    { "name": "CODE_SNIPPET", "description": "The relevant code around the error", "example": "user = await db.fetch_one(query)\nreturn user['email']" },
+    { "name": "ENVIRONMENT_DETAILS", "description": "Your development environment", "example": "Python 3.11, FastAPI 0.104, asyncpg, PostgreSQL 15" }
+  ],
+  "tips": ["Include the full stack trace, not just the error message line", "Mention any recent changes that might have introduced the bug", "Provide your database schema if the error involves data access"],
+  "exampleOutput": "## Plain English Explanation\nYour code is trying to access the 'email' key on a variable that is None (null). This means `db.fetch_one(query)` returned None instead of a user record.\n\n## Root Cause\nThe `fetch_one` method returns None when no rows match the query, but your code assumes it always returns a valid row. Even though you say the user ID exists, the query might be using a different column or the connection might be hitting a different database/schema.\n\n## Fix\n```python\nuser = await db.fetch_one(query)\nif user is None:\n    raise HTTPException(status_code=404, detail=f'User {id} not found')\nreturn user['email']\n```",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Debug Error Detective Prompt for Cursor",
+  "metaDescription": "Fix coding errors fast with root cause analysis and prevention tips. Try this Cursor prompt to debug like a senior engineer."
+}

@@ -1,0 +1,24 @@
+{
+  "title": "Cohort Analysis Interpreter",
+  "slug": "cohort-analysis-interpreter",
+  "promptText": "You are a growth analytics expert specializing in cohort analysis for [BUSINESS_TYPE] businesses. I have cohort data for [METRIC] across [TIME_PERIOD]. Here is my data: [COHORT_DATA]. Analyze this data and provide: 1) A plain-English interpretation of what the cohort curves reveal about user behavior, 2) Identification of the strongest and weakest performing cohorts with hypotheses about why, 3) The critical drop-off point where most users churn and what this suggests about the product experience, 4) Month-over-month retention trend analysis (is retention improving, declining, or stable?), 5) Estimated customer lifetime value based on the retention curves, 6) Comparison to [INDUSTRY] benchmarks, 7) Three specific interventions to improve retention at the identified drop-off points. Visualize the analysis using a text-based cohort table and trend descriptions.",
+  "description": "Cohort analysis is the most powerful tool for understanding retention, but interpreting cohort tables requires pattern recognition skills that take years to develop. This prompt turns raw cohort data into actionable insights by identifying the critical moments where users disengage and suggesting specific interventions. The lifetime value calculation connects retention data directly to revenue impact, making it easier to justify investment in retention improvements. The benchmark comparison provides context for whether your numbers are good or bad relative to your industry. Essential for product managers, growth marketers, and founders tracking product-market fit.",
+  "tool": "claude",
+  "category": "data-analysis",
+  "tags": ["cohort-analysis", "retention", "growth", "LTV", "product-analytics"],
+  "difficulty": "advanced",
+  "promptType": "text",
+  "variables": [
+    { "name": "BUSINESS_TYPE", "description": "Your type of business", "example": "subscription SaaS" },
+    { "name": "METRIC", "description": "What metric you are tracking", "example": "monthly active user retention" },
+    { "name": "TIME_PERIOD", "description": "Time range of the data", "example": "January through December 2025, monthly cohorts" },
+    { "name": "COHORT_DATA", "description": "Your cohort data (paste table or describe)", "example": "Jan cohort: M0=1000, M1=680, M2=520, M3=440, M4=410... Feb cohort: M0=1200, M1=750..." },
+    { "name": "INDUSTRY", "description": "Your industry for benchmarking", "example": "B2B SaaS" }
+  ],
+  "tips": ["Include at least 6 months of cohort data for meaningful trend analysis", "Segment cohorts by acquisition channel for deeper insights", "Ask for a follow-up retention improvement experimentation plan"],
+  "exampleOutput": "## Key Findings\n\n**The Critical Drop-off:** Across all cohorts, the steepest retention decline occurs between Month 0 and Month 1, where you lose an average of 35% of users. This suggests a significant gap between sign-up and first value delivery. By Month 3, retention stabilizes around 40-44%, indicating that users who survive the first 90 days tend to stick.\n\n**Strongest Cohort:** September 2025 (M1 retention: 74% vs. average 65%). Hypothesis: This coincides with your product launch of the collaboration feature. Users acquired during this period likely had higher intent and found immediate value.\n\n**LTV Estimate:** Based on the average retention curve and $49/month pricing, estimated LTV = $588 (12-month horizon)...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Cohort Analysis Interpreter Prompt for Claude",
+  "metaDescription": "Turn cohort data into actionable retention insights with LTV estimates and benchmarks. Try this Claude prompt for growth analytics."
+}

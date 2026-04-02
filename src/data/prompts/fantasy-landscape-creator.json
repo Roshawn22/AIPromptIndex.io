@@ -1,0 +1,26 @@
+{
+  "title": "Fantasy Landscape Creator",
+  "slug": "fantasy-landscape-creator",
+  "promptText": "An epic fantasy landscape depicting [SCENE_DESCRIPTION]. The environment features [TERRAIN_ELEMENTS] under a [SKY_DESCRIPTION] sky. Atmospheric perspective with [WEATHER_CONDITIONS] creating volumetric light rays. Painted in the style of [ART_STYLE] with rich detail in both foreground and background. Color palette dominated by [COLORS]. Ultra-wide composition, matte painting quality, 4K wallpaper resolution. Include small scale references like [SCALE_ELEMENT] to convey the massive scope of the scene.",
+  "description": "This prompt generates breathtaking fantasy landscapes suitable for game concept art, book covers, desktop wallpapers, or worldbuilding reference images. The inclusion of scale references ensures the AI creates scenes with a sense of grandeur rather than miniature-looking environments. By specifying both terrain elements and atmospheric conditions, you get cohesive environments where every element works together. The art style parameter lets you channel specific visual traditions from classical landscape painting to modern concept art aesthetics.",
+  "tool": "stable-diffusion",
+  "category": "image-generation",
+  "tags": ["fantasy", "landscape", "concept-art", "environment", "worldbuilding"],
+  "difficulty": "intermediate",
+  "promptType": "image",
+  "variables": [
+    { "name": "SCENE_DESCRIPTION", "description": "The main scene to depict", "example": "an ancient elven city built into the side of a crystalline mountain" },
+    { "name": "TERRAIN_ELEMENTS", "description": "Key landscape features", "example": "cascading waterfalls, bioluminescent forests, and floating stone bridges" },
+    { "name": "SKY_DESCRIPTION", "description": "What the sky looks like", "example": "dual-moon twilight with aurora borealis" },
+    { "name": "WEATHER_CONDITIONS", "description": "Atmospheric effects", "example": "light mist rising from the valleys" },
+    { "name": "ART_STYLE", "description": "Visual style reference", "example": "Studio Ghibli meets classical Hudson River School painting" },
+    { "name": "COLORS", "description": "Main color palette", "example": "deep purples, ethereal blues, and warm gold accents" },
+    { "name": "SCALE_ELEMENT", "description": "Small details that show scale", "example": "a tiny caravan of travelers on a winding path" }
+  ],
+  "tips": ["Use negative prompts to exclude modern elements like power lines or cars", "Add 'trending on ArtStation' for higher quality concept art results", "Specify 'no text, no watermark' to keep the image clean for commercial use"],
+  "exampleOutput": "A sweeping matte painting of an ancient elven city carved into crystalline mountain faces, with cascading waterfalls catching the light of dual moons. Bioluminescent forests glow in the valleys below. Aurora borealis streaks across the twilight sky. A tiny caravan of travelers on a winding stone bridge provides scale to the massive environment.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-01",
+  "metaTitle": "Fantasy Landscape Creator for Stable Diffusion",
+  "metaDescription": "Generate epic fantasy landscape art for games, books, and wallpapers. Try this Stable Diffusion prompt for stunning environment concept art."
+}
