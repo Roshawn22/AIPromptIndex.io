@@ -33,6 +33,7 @@ export interface Tool {
   logoIcon: string;
   color: string;
   order: number;
+  affiliateUrl?: string;
 }
 
 export interface Category {

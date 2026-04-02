@@ -22,6 +22,12 @@ const toolLinks = [
   { href: '/tools/cursor/', label: 'Cursor Prompts' },
 ];
 
+const communityLinks = [
+  { href: 'https://www.skool.com/ai-freedom-lab', label: 'AI Freedom Lab', external: true },
+  { href: 'https://www.youtube.com/@AIHeavy', label: 'AI Heavy YouTube', external: true },
+  { href: 'https://aitoolindex.io', label: 'AIToolIndex.io', external: true },
+];
+
 const companyLinks = [
   { href: '/about/', label: 'About' },
   { href: '/contact/', label: 'Contact' },
@@ -42,7 +48,7 @@ const companyLinks = [
       </p>
     </div>
 
-    <div class="grid grid-cols-2 gap-8 sm:grid-cols-4">
+    <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-5">
       <!-- Directory -->
       <div>
         <h3 class="mb-4 font-[var(--font-display)] text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
@@ -84,6 +90,22 @@ const companyLinks = [
           {toolLinks.map((link) => (
             <li>
               <a href={link.href} class="text-sm text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text-primary)]">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Community -->
+      <div>
+        <h3 class="mb-4 font-[var(--font-display)] text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
+          Community
+        </h3>
+        <ul class="space-y-2.5">
+          {communityLinks.map((link) => (
+            <li>
+              <a href={link.href} target="_blank" rel="noopener noreferrer" class="text-sm text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text-primary)]">
                 {link.label}
               </a>
             </li>

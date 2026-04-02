@@ -1,0 +1,207 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/global/Header.astro';
+import Footer from '../../components/global/Footer.astro';
+import Badge from '../../components/ui/Badge.astro';
+import Tag from '../../components/ui/Tag.astro';
+import Breadcrumb from '../../components/common/Breadcrumb.astro';
+import ShareButtons from '../../components/common/ShareButtons.astro';
+import NewsletterSignup from '../../components/common/NewsletterSignup.astro';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guides');
+  return guides
+    .filter((guide) => guide.data.draft !== true)
+    .map((guide) => ({
+      params: { slug: guide.id },
+      props: { guide },
+    }));
+}
+
+const { guide } = Astro.props;
+const { data } = guide;
+const { Content, headings } = await render(guide);
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://aipromptindex.io';
+const pageUrl = `${siteUrl}/guides/${guide.id}/`;
+
+const pubDateStr = data.pubDate.toISOString();
+const updatedDateStr = data.updatedDate?.toISOString();
+
+const formattedPubDate = data.pubDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const formattedUpdatedDate = data.updatedDate?.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const difficultyColor = {
+  beginner: 'green' as const,
+  intermediate: 'yellow' as const,
+  advanced: 'red' as const,
+};
+
+const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
+
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: data.title,
+  description: data.description,
+  author: {
+    '@type': 'Person',
+    name: data.author,
+  },
+  datePublished: pubDateStr,
+  dateModified: updatedDateStr || pubDateStr,
+  url: pageUrl,
+  publisher: {
+    '@type': 'Organization',
+    name: 'AIPromptIndex',
+    url: siteUrl,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${siteUrl}/favicon.svg`,
+    },
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': pageUrl,
+  },
+  keywords: data.tags.join(', '),
+};
+---
+
+<BaseLayout
+  title={data.title}
+  description={data.description}
+  ogType="article"
+  publishedTime={pubDateStr}
+  articleModifiedTime={updatedDateStr || pubDateStr}
+  jsonLd={articleJsonLd}
+>
+  <Header slot="header" />
+
+  <article class="mx-auto max-w-7xl px-[var(--space-page)] py-8">
+    <Breadcrumb items={[
+      { label: 'Home', href: '/' },
+      { label: 'Guides', href: '/guides/' },
+      { label: data.title },
+    ]} />
+
+    <div class="lg:grid lg:grid-cols-[1fr_280px] lg:gap-10">
+      <!-- Main Content -->
+      <div>
+        <!-- Difficulty badge -->
+        <div class="flex flex-wrap items-center gap-2 mb-4">
+          <Badge variant={difficultyColor[data.difficulty]} size="md">{data.difficulty}</Badge>
+        </div>
+
+        <h1 class="mb-4">{data.title}</h1>
+
+        <!-- Author byline -->
+        <div class="flex items-center gap-3 text-sm text-[var(--color-text-muted)] mb-8">
+          <span>By <strong class="text-[var(--color-text-secondary)]">{data.author}</strong></span>
+          <span aria-hidden="true">&middot;</span>
+          <time datetime={pubDateStr}>{formattedPubDate}</time>
+          {formattedUpdatedDate && (
+            <>
+              <span aria-hidden="true">&middot;</span>
+              <span>Updated <time datetime={updatedDateStr}>{formattedUpdatedDate}</time></span>
+            </>
+          )}
+        </div>
+
+        <!-- Prose content -->
+        <div class="prose prose-lg prose-invert max-w-none
+          prose-headings:font-[var(--font-display)] prose-headings:text-[var(--color-text-primary)]
+          prose-p:text-[var(--color-text-secondary)] prose-p:leading-relaxed
+          prose-a:text-[var(--color-accent)] prose-a:no-underline hover:prose-a:underline
+          prose-strong:text-[var(--color-text-primary)]
+          prose-code:text-[var(--color-accent)] prose-code:bg-[var(--color-surface-2)] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-[var(--radius-sm)]
+          prose-pre:bg-[var(--color-surface-2)] prose-pre:border prose-pre:border-[var(--color-border)]
+          prose-blockquote:border-[var(--color-accent)] prose-blockquote:text-[var(--color-text-secondary)]
+          prose-li:text-[var(--color-text-secondary)]
+          prose-img:rounded-[var(--radius-lg)]
+          mb-8">
+          <Content />
+        </div>
+
+        <!-- Tags -->
+        {data.tags.length > 0 && (
+          <div class="mb-8">
+            <div class="flex flex-wrap gap-2">
+              {data.tags.map((tag) => (
+                <Tag>{tag}</Tag>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Share buttons -->
+        <div class="mb-8 border-t border-[var(--color-border)] pt-6">
+          <ShareButtons url={pageUrl} title={data.title} />
+        </div>
+      </div>
+
+      <!-- Sidebar: Table of Contents -->
+      <aside class="hidden lg:block">
+        <div class="sticky top-24 space-y-6">
+          {tocHeadings.length > 0 && (
+            <nav class="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-5">
+              <h3 class="font-[var(--font-display)] text-sm font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-4">
+                Table of Contents
+              </h3>
+              <ul class="space-y-2 text-sm">
+                {tocHeadings.map((heading) => (
+                  <li class:list={[heading.depth === 3 && 'ml-4']}>
+                    <a
+                      href={`#${heading.slug}`}
+                      class="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors"
+                    >
+                      {heading.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )}
+
+          <!-- Quick Info -->
+          <div class="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-5">
+            <h3 class="font-[var(--font-display)] text-sm font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-4">
+              Quick Info
+            </h3>
+            <dl class="space-y-3 text-sm">
+              <div class="flex justify-between">
+                <dt class="text-[var(--color-text-muted)]">Difficulty</dt>
+                <dd>
+                  <Badge variant={difficultyColor[data.difficulty]} size="sm">{data.difficulty}</Badge>
+                </dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="text-[var(--color-text-muted)]">Author</dt>
+                <dd class="font-medium text-[var(--color-text-primary)]">{data.author}</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="text-[var(--color-text-muted)]">Published</dt>
+                <dd class="font-medium text-[var(--color-text-primary)]">{formattedPubDate}</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </article>
+
+  <!-- Newsletter -->
+  <NewsletterSignup />
+
+  <Footer slot="footer" />
+</BaseLayout>

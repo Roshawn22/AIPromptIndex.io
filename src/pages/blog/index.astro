@@ -1,8 +1,23 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/global/Header.astro';
 import Footer from '../../components/global/Footer.astro';
+import Badge from '../../components/ui/Badge.astro';
+import Tag from '../../components/ui/Tag.astro';
 import Button from '../../components/ui/Button.astro';
+
+const posts = (await getCollection('blog'))
+  .filter((post) => post.data.draft !== true)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const categoryColors: Record<string, 'teal' | 'blue' | 'purple' | 'orange' | 'green' | 'neutral'> = {
+  tutorial: 'teal',
+  news: 'blue',
+  opinion: 'purple',
+  review: 'orange',
+  guide: 'green',
+};
 ---
 
 <BaseLayout
@@ -11,14 +26,58 @@ import Button from '../../components/ui/Button.astro';
 >
   <Header slot="header" />
 
-  <section class="mx-auto max-w-3xl px-[var(--space-page)] py-16 text-center">
-    <h1>Blog</h1>
-    <p class="mt-4 text-lg text-[var(--color-text-secondary)]">
-      AI prompting tips, tool reviews, and industry insights. Coming soon.
-    </p>
-    <div class="mt-8">
-      <Button href="/prompts/" variant="outline">Browse Prompts Instead</Button>
+  <section class="mx-auto max-w-4xl px-[var(--space-page)] py-16">
+    <div class="text-center mb-12">
+      <h1>Blog</h1>
+      <p class="mt-4 text-lg text-[var(--color-text-secondary)]">
+        AI prompting tips, tool reviews, and industry insights.
+      </p>
     </div>
+
+    {posts.length > 0 ? (
+      <div class="space-y-6">
+        {posts.map((post) => {
+          const formattedDate = post.data.pubDate.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+          });
+          return (
+            <a
+              href={`/blog/${post.id}/`}
+              class="block rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-6 transition-colors hover:bg-[var(--color-surface-2)] hover:border-[var(--color-border-hover)]"
+            >
+              <div class="flex flex-wrap items-center gap-2 mb-3">
+                <Badge variant={categoryColors[post.data.category] || 'neutral'} size="sm">
+                  {post.data.category}
+                </Badge>
+                <span class="text-xs text-[var(--color-text-muted)]">{formattedDate}</span>
+              </div>
+              <h2 class="text-xl font-[var(--font-display)] font-semibold text-[var(--color-text-primary)] mb-2">
+                {post.data.title}
+              </h2>
+              <p class="text-[var(--color-text-secondary)] text-sm leading-relaxed mb-3">
+                {post.data.description}
+              </p>
+              {post.data.tags.length > 0 && (
+                <div class="flex flex-wrap gap-1.5">
+                  {post.data.tags.slice(0, 4).map((tag) => (
+                    <span class="inline-flex items-center px-2 py-0.5 text-xs font-[var(--font-display)] rounded-[var(--radius-sm)] bg-[var(--color-surface-2)] text-[var(--color-text-muted)] border border-[var(--color-border-subtle)]">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </a>
+          );
+        })}
+      </div>
+    ) : (
+      <div class="text-center py-12">
+        <p class="text-lg text-[var(--color-text-muted)] mb-6">No blog posts yet. Check back soon!</p>
+        <Button href="/prompts/" variant="outline">Browse Prompts Instead</Button>
+      </div>
+    )}
   </section>
 
   <Footer slot="footer" />

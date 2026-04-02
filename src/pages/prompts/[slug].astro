@@ -11,6 +11,7 @@ import PromptCodeBlock from '../../components/prompt/PromptCodeBlock.tsx';
 import CopyButton from '../../components/ui/CopyButton.tsx';
 import VoteButtons from '../../components/prompt/VoteButtons.tsx';
 import { formatDate } from '../../lib/utils';
+import toolsData from '../../data/tools/tools.json';
 
 export async function getStaticPaths() {
   const prompts = await getCollection('prompts');
@@ -22,6 +23,10 @@ export async function getStaticPaths() {
 
 const { prompt } = Astro.props;
 const { data } = prompt;
+
+const currentTool = toolsData.find((t) => t.slug === data.tool);
+const toolAffiliateUrl = currentTool?.affiliateUrl;
+const toolName = currentTool?.name || data.tool;
 
 const allPrompts = await getCollection('prompts');
 const relatedPrompts = allPrompts
@@ -98,10 +103,23 @@ const pageUrl = `${siteUrl}/prompts/${data.slug}/`;
         </div>
 
         <!-- Big Copy Button + Vote -->
-        <div class="mb-8 flex items-center gap-3">
+        <div class="mb-8 flex flex-wrap items-center gap-3">
           <CopyButton client:load text={data.promptText} label="Copy Prompt" size="lg" promptSlug={data.slug} />
           <VoteButtons client:load promptSlug={data.slug} />
           <ShareButtons url={pageUrl} title={data.title} />
+          {toolAffiliateUrl && (
+            <a
+              href={toolAffiliateUrl}
+              target="_blank"
+              rel="noopener sponsored"
+              class="inline-flex items-center gap-2 rounded-[var(--radius-md)] border-2 border-[var(--color-accent)] px-5 py-2.5 text-sm font-semibold text-[var(--color-accent)] transition-colors hover:bg-[var(--color-accent)] hover:text-white"
+            >
+              Try in {toolName}
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" />
+              </svg>
+            </a>
+          )}
         </div>
 
         <!-- Description -->

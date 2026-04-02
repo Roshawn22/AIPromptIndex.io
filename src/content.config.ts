@@ -40,6 +40,7 @@ const tools = defineCollection({
     logoIcon: z.string(),
     color: z.string(),
     order: z.number(),
+    affiliateUrl: z.string().optional(),
   }),
 });
 
