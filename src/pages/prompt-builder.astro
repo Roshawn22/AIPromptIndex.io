@@ -1,0 +1,55 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/global/Header.astro';
+import Footer from '../components/global/Footer.astro';
+import PromptBuilder from '../components/prompt/PromptBuilder';
+
+import toolsJson from '../data/tools/tools.json';
+import categoriesJson from '../data/categories/categories.json';
+
+const allPrompts = await getCollection('prompts');
+
+// Serialize to plain objects for the React island
+const prompts = allPrompts.map((p) => ({
+  title: p.data.title,
+  slug: p.data.slug,
+  promptText: p.data.promptText,
+  tool: p.data.tool,
+  category: p.data.category,
+  difficulty: p.data.difficulty,
+  variables: p.data.variables ?? [],
+}));
+
+const tools = toolsJson.map((t: any) => ({
+  id: t.id,
+  name: t.name,
+  affiliateUrl: t.affiliateUrl,
+}));
+const categories = categoriesJson.map((c: any) => ({ id: c.id, name: c.name }));
+---
+
+<BaseLayout
+  title="AI Prompt Builder — Customize Any Prompt"
+  description="Customize any AI prompt with your own variables. Choose a template, fill in the blanks, and copy a ready-to-use prompt for ChatGPT, Claude, Midjourney, and more."
+>
+  <Header slot="header" />
+
+  <section class="mx-auto max-w-4xl px-[var(--space-page)] py-12">
+    <div class="mb-10">
+      <h1>Prompt Builder</h1>
+      <p class="mt-2 max-w-2xl text-lg text-[var(--color-text-secondary)]">
+        Pick a prompt template, fill in the variables with your own values, and copy a customized prompt ready to paste into any AI tool.
+      </p>
+    </div>
+
+    <PromptBuilder
+      client:load
+      prompts={prompts}
+      tools={tools}
+      categories={categories}
+    />
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

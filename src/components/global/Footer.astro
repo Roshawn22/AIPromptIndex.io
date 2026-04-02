@@ -14,6 +14,14 @@ const resourceLinks = [
   { href: '/submit/', label: 'Submit a Prompt' },
 ];
 
+const bestPromptsLinks = [
+  { href: '/best/', label: 'All Best-Of Lists' },
+  { href: '/best/chatgpt-prompts/', label: 'Best ChatGPT Prompts' },
+  { href: '/best/coding-prompts/', label: 'Best Coding Prompts' },
+  { href: '/best/writing-prompts/', label: 'Best Writing Prompts' },
+  { href: '/best/midjourney-prompts/', label: 'Best Midjourney Prompts' },
+];
+
 const toolLinks = [
   { href: '/tools/chatgpt/', label: 'ChatGPT Prompts' },
   { href: '/tools/claude/', label: 'Claude Prompts' },
@@ -48,7 +56,7 @@ const companyLinks = [
       </p>
     </div>
 
-    <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-5">
+    <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-6">
       <!-- Directory -->
       <div>
         <h3 class="mb-4 font-[var(--font-display)] text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
@@ -72,6 +80,22 @@ const companyLinks = [
         </h3>
         <ul class="space-y-2.5">
           {resourceLinks.map((link) => (
+            <li>
+              <a href={link.href} class="text-sm text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text-primary)]">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Best Prompts -->
+      <div>
+        <h3 class="mb-4 font-[var(--font-display)] text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
+          Best Prompts
+        </h3>
+        <ul class="space-y-2.5">
+          {bestPromptsLinks.map((link) => (
             <li>
               <a href={link.href} class="text-sm text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text-primary)]">
                 {link.label}

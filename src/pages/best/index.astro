@@ -1,0 +1,106 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/global/Header.astro';
+import Footer from '../../components/global/Footer.astro';
+import Breadcrumb from '../../components/common/Breadcrumb.astro';
+import NewsletterSignup from '../../components/common/NewsletterSignup.astro';
+
+const roundups = [
+  { slug: "chatgpt-prompts", title: "Best ChatGPT Prompts", description: "The most effective ChatGPT prompts for productivity, creativity, and problem-solving.", filter: { tool: "chatgpt" } },
+  { slug: "claude-prompts", title: "Best Claude Prompts", description: "Top Claude prompts for writing, analysis, coding, and research.", filter: { tool: "claude" } },
+  { slug: "midjourney-prompts", title: "Best Midjourney Prompts", description: "Stunning Midjourney prompts for photorealistic images, digital art, and illustrations.", filter: { tool: "midjourney" } },
+  { slug: "coding-prompts", title: "Best AI Coding Prompts", description: "The most useful coding prompts for debugging, code generation, and refactoring.", filter: { category: "coding" } },
+  { slug: "writing-prompts", title: "Best AI Writing Prompts", description: "Top writing prompts for blog posts, copywriting, and professional communication.", filter: { category: "writing" } },
+  { slug: "marketing-prompts", title: "Best AI Marketing Prompts", description: "High-converting marketing prompts for ad copy, SEO, social media, and email campaigns.", filter: { category: "marketing" } },
+  { slug: "business-prompts", title: "Best AI Business Prompts", description: "Essential business prompts for strategy, planning, analysis, and decision-making.", filter: { category: "business" } },
+  { slug: "image-generation-prompts", title: "Best AI Image Prompts", description: "Creative image generation prompts for Midjourney, DALL-E, and Stable Diffusion.", filter: { category: "image-generation" } },
+];
+
+const allPrompts = await getCollection('prompts');
+
+const roundupsWithCounts = roundups.map((r) => {
+  const count = allPrompts.filter((p) => {
+    if (r.filter.tool) return p.data.tool === r.filter.tool;
+    if (r.filter.category) return p.data.category === r.filter.category;
+    return false;
+  }).length;
+  return { ...r, count };
+});
+
+const byTool = roundupsWithCounts.filter((r) => r.filter.tool);
+const byCategory = roundupsWithCounts.filter((r) => r.filter.category);
+---
+
+<BaseLayout
+  title="Best AI Prompts by Tool & Category"
+  description="Curated collections of the best AI prompts organized by tool and category. Copy and paste ready prompts for ChatGPT, Claude, Midjourney, and more."
+>
+  <Header slot="header" />
+
+  <section class="mx-auto max-w-7xl px-[var(--space-page)] py-8">
+    <Breadcrumb items={[
+      { label: 'Home', href: '/' },
+      { label: 'Best Prompts' },
+    ]} />
+
+    <div class="mb-10">
+      <h1 class="mb-2">Best AI Prompts</h1>
+      <p class="text-lg text-[var(--color-text-secondary)]">
+        Curated collections of the best prompts, organized by tool and category.
+      </p>
+    </div>
+
+    <!-- By Tool -->
+    <div class="mb-12">
+      <h2 class="mb-6 text-xl">By Tool</h2>
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {byTool.map((r) => (
+          <a
+            href={`/best/${r.slug}/`}
+            class="group block rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-6 transition-all duration-200 hover:shadow-[var(--shadow-card-hover)] hover:border-[var(--color-accent-muted)]"
+          >
+            <h3 class="font-[var(--font-display)] text-lg font-semibold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
+              {r.title}
+            </h3>
+            <p class="mt-2 text-sm text-[var(--color-text-secondary)] line-clamp-2">{r.description}</p>
+            <p class="mt-3 text-sm font-medium text-[var(--color-accent)]">
+              {r.count} {r.count === 1 ? 'prompt' : 'prompts'}
+              <svg class="ml-1 inline h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </p>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- By Category -->
+    <div class="mb-12">
+      <h2 class="mb-6 text-xl">By Category</h2>
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {byCategory.map((r) => (
+          <a
+            href={`/best/${r.slug}/`}
+            class="group block rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-6 transition-all duration-200 hover:shadow-[var(--shadow-card-hover)] hover:border-[var(--color-accent-muted)]"
+          >
+            <h3 class="font-[var(--font-display)] text-lg font-semibold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
+              {r.title}
+            </h3>
+            <p class="mt-2 text-sm text-[var(--color-text-secondary)] line-clamp-2">{r.description}</p>
+            <p class="mt-3 text-sm font-medium text-[var(--color-accent)]">
+              {r.count} {r.count === 1 ? 'prompt' : 'prompts'}
+              <svg class="ml-1 inline h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <NewsletterSignup />
+
+  <Footer slot="footer" />
+</BaseLayout>
