@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/global/Header.astro';
+import Footer from '../components/global/Footer.astro';
+import PromptCompare from '../components/prompt/PromptCompare';
+
+const allPrompts = await getCollection('prompts');
+
+// Serialize to plain objects for the React island
+const prompts = allPrompts.map((p) => ({
+  title: p.data.title,
+  slug: p.data.slug,
+  promptText: p.data.promptText,
+  tool: p.data.tool,
+  category: p.data.category,
+  difficulty: p.data.difficulty,
+  tags: p.data.tags ?? [],
+  variables: (p.data.variables ?? []).map((v) => ({
+    name: v.name,
+    description: v.description,
+    example: v.example,
+  })),
+}));
+---
+
+<BaseLayout
+  title="Compare AI Prompts Side by Side"
+  description="Compare two AI prompts side by side. See differences in tools, categories, difficulty, and prompt text to find the best prompt for your needs."
+>
+  <Header slot="header" />
+
+  <section class="mx-auto max-w-7xl px-[var(--space-page)] py-12">
+    <div class="mb-10">
+      <h1>Compare Prompts</h1>
+      <p class="mt-2 text-lg text-[var(--color-text-secondary)]">
+        Select two prompts to compare side by side. Differences are highlighted.
+      </p>
+    </div>
+
+    <PromptCompare client:load prompts={prompts} />
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

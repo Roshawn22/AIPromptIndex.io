@@ -59,6 +59,16 @@ export default defineSchema({
   })
     .index("by_email", ["email"]),
 
+  // User collections / favorites
+  userCollections: defineTable({
+    clerkUserId: v.string(),
+    promptSlug: v.string(),
+    collectionName: v.string(),
+    savedAt: v.number(),
+  })
+    .index("by_user", ["clerkUserId"])
+    .index("by_user_prompt", ["clerkUserId", "promptSlug"]),
+
   // Submission rate limits
   submissionRateLimits: defineTable({
     key: v.string(),

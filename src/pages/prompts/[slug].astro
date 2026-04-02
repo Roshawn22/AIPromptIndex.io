@@ -10,6 +10,8 @@ import ShareButtons from '../../components/common/ShareButtons.astro';
 import PromptCodeBlock from '../../components/prompt/PromptCodeBlock.tsx';
 import CopyButton from '../../components/ui/CopyButton.tsx';
 import VoteButtons from '../../components/prompt/VoteButtons.tsx';
+import SaveButton from '../../components/prompt/SaveButton.tsx';
+import NewsletterSignup from '../../components/common/NewsletterSignup.astro';
 import { formatDate } from '../../lib/utils';
 import toolsData from '../../data/tools/tools.json';
 
@@ -106,6 +108,7 @@ const pageUrl = `${siteUrl}/prompts/${data.slug}/`;
         <div class="mb-8 flex flex-wrap items-center gap-3">
           <CopyButton client:load text={data.promptText} label="Copy Prompt" size="lg" promptSlug={data.slug} />
           <VoteButtons client:load promptSlug={data.slug} />
+          <SaveButton client:load promptSlug={data.slug} />
           <ShareButtons url={pageUrl} title={data.title} />
           {toolAffiliateUrl && (
             <a
@@ -249,6 +252,8 @@ const pageUrl = `${siteUrl}/prompts/${data.slug}/`;
       </aside>
     </div>
   </article>
+
+  <NewsletterSignup compact />
 
   <Footer slot="footer" />
 </BaseLayout>
