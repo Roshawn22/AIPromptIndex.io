@@ -205,6 +205,19 @@ const allJsonLd = [organizationJsonLd, pageJsonLd, ...pageJsonLdEntries];
       />
     )}
 
+    <!-- Ahrefs Web Analytics -->
+    <script is:inline>
+      (function() {
+        var hostname = window.location.hostname;
+        if (hostname !== 'aipromptindex.io' && hostname !== 'www.aipromptindex.io') return;
+        var script = document.createElement('script');
+        script.src = 'https://analytics.ahrefs.com/analytics.js';
+        script.setAttribute('data-key', 'Fi41ehtXEG8I6jUdGnC4DQ');
+        script.async = true;
+        document.head.appendChild(script);
+      })();
+    </script>
+
     <!-- Theme: light-first, prevent flash -->
     <script is:inline>
       (function() {
