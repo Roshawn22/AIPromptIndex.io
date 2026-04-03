@@ -1,0 +1,22 @@
+{
+  "title": "Copilot Regex Explainer",
+  "slug": "copilot-regex-explainer",
+  "promptText": "You are a regex expert and technical educator. I need help with regular expressions for a [LANGUAGE] project. My goal is to [REGEX_GOAL]. Here is the regex pattern I am working with (or need created): [REGEX_PATTERN]. Please provide: a character-by-character breakdown of the regex explaining what each part does, a visual diagram of the pattern showing groups, quantifiers, and alternations, at least 5 test cases showing strings that should match and 5 that should not match with explanations of why, performance analysis noting any potential for catastrophic backtracking or ReDoS vulnerabilities, an optimized version of the regex if improvements are possible, common edge cases this pattern might miss, and the equivalent pattern using named capture groups for better readability. If I provided a goal instead of a pattern, create the regex from scratch and walk through the design decisions. Format the explanation so a developer who rarely uses regex can understand it.",
+  "description": "This prompt demystifies regular expressions by providing character-by-character breakdowns, visual explanations, comprehensive test cases, and performance analysis. Regex is one of the most powerful yet confusing tools in a developer's toolkit, and this prompt makes it accessible by explaining every component in plain language. It also catches common regex pitfalls like catastrophic backtracking that can cause application crashes. Whether you need to understand an existing regex, create a new one from requirements, or optimize one that is running slowly, this prompt gives you both the working pattern and the knowledge to modify it confidently.",
+  "tool": "github-copilot",
+  "category": "coding",
+  "tags": ["regex", "pattern-matching", "debugging", "developer-tools", "code-explanation"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "LANGUAGE", "description": "Programming language using the regex", "example": "JavaScript" },
+    { "name": "REGEX_GOAL", "description": "What you want the regex to match or extract", "example": "validate and extract parts of an email address" },
+    { "name": "REGEX_PATTERN", "description": "Existing regex to explain, or 'create new' if you need one built", "example": "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$/" }
+  ],
+  "tips": ["Describe what you want to match in plain English if you do not have an existing pattern", "Always run the provided test cases against your actual implementation to verify behavior", "Pay attention to the performance analysis section for any regex used in user-facing input validation"],
+  "exampleOutput": "## Regex Breakdown: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$/\n\n^ - Anchors to start of string (ensures nothing before the email)\n[a-zA-Z0-9._%+-]+ - Local part: one or more letters, digits, or special chars (._%+-)\n@ - Literal @ symbol separating local and domain parts\n[a-zA-Z0-9.-]+ - Domain name: letters, digits, dots, hyphens\n\\. - Literal dot before TLD (escaped because . is special in regex)\n[a-zA-Z]{2,} - TLD: at least 2 letters (com, org, io, etc.)\n$ - Anchors to end of string\n\nMatches: user@example.com, first.last@company.co.uk\nDoes not match: @example.com (no local part), user@.com (empty domain)...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Regex Explainer Prompt for GitHub Copilot",
+  "metaDescription": "Understand and create regex patterns with GitHub Copilot. Get character-by-character breakdowns, test cases, and performance analysis."
+}

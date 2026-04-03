@@ -1,0 +1,23 @@
+{
+  "title": "Content Gap Analyzer",
+  "slug": "content-gap-analyzer",
+  "promptText": "You are a senior SEO content strategist. Perform a content gap analysis for [WEBSITE_OR_BRAND] in the [NICHE] space. My current content covers the following topics:\n\n[EXISTING_TOPICS]\n\nMy top 3 competitors are:\n[COMPETITORS]\n\nBased on this information, provide:\n\n1. Topic Gaps: List 10-15 high-value topics my competitors likely cover that I am missing. For each, include estimated search intent (informational, commercial, transactional, navigational) and priority level (high, medium, low).\n\n2. Content Format Gaps: What content types am I likely underutilizing? (comparison posts, how-to guides, listicles, case studies, tools/calculators, glossaries, etc.)\n\n3. Keyword Opportunity Clusters: Group the missing topics into 4-5 keyword clusters that could each support a content hub or pillar page strategy.\n\n4. Quick Wins: Identify 3-5 topics with likely low competition but decent search volume that I could rank for relatively quickly.\n\n5. Content Refresh Opportunities: Based on my existing topics, which ones likely need updating or expanding to remain competitive?\n\n6. Recommended 90-Day Content Calendar: Prioritize the gaps into a 12-week publishing schedule with 2 pieces per week.\n\nBe specific with topic suggestions — provide actual article title ideas, not just broad categories.",
+  "description": "This prompt delivers a comprehensive content gap analysis that identifies exactly where your content strategy falls short compared to competitors. It goes beyond simple keyword suggestions by organizing opportunities into strategic clusters, prioritizing quick wins, and providing a ready-to-execute 90-day content calendar. This is the kind of analysis that SEO agencies charge thousands of dollars for, and it gives content teams a clear roadmap for closing competitive gaps. It is especially valuable during quarterly planning sessions or when a site's organic traffic has plateaued and the team needs fresh direction on what to publish next.",
+  "tool": "claude",
+  "category": "marketing",
+  "tags": ["SEO", "content-strategy", "competitive-analysis", "content-gap", "keyword-research"],
+  "difficulty": "advanced",
+  "promptType": "text",
+  "variables": [
+    { "name": "WEBSITE_OR_BRAND", "description": "Your website URL or brand name", "example": "AIPromptIndex.io" },
+    { "name": "NICHE", "description": "Your industry or content niche", "example": "AI tools and prompt engineering" },
+    { "name": "EXISTING_TOPICS", "description": "List of topics your content currently covers", "example": "ChatGPT prompts for marketing, Midjourney tips, Claude vs ChatGPT comparison, prompt engineering basics" },
+    { "name": "COMPETITORS", "description": "Top 3 competitor websites or brands", "example": "PromptHero.com, FlowGPT.com, PromptBase.com" }
+  ],
+  "tips": ["Be thorough when listing your existing topics — the more complete your inventory, the more accurate the gap analysis", "Include competitor URLs so the analysis can be more specific about what they cover", "Use the 90-day calendar output as a starting point and adjust based on your actual publishing capacity"],
+  "exampleOutput": "CONTENT GAP ANALYSIS: AIPromptIndex.io\n\n1. TOPIC GAPS (Top 10)\n\n1. 'Best AI Prompts for Small Business Owners' — Intent: Commercial | Priority: HIGH\n   You cover marketing prompts but miss the broader small business angle that captures a wider audience.\n\n2. 'How to Write System Prompts for Custom GPTs' — Intent: Informational | Priority: HIGH\n   Competitors have detailed guides on system prompt engineering that you lack.\n\n3. 'AI Prompt Templates for Teachers (Free Download)' — Intent: Transactional | Priority: MEDIUM...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Content Gap Analyzer Prompt for Claude",
+  "metaDescription": "Find gaps in your SEO content strategy with this free Claude prompt. Get topic ideas, keyword clusters, and a 90-day content calendar."
+}

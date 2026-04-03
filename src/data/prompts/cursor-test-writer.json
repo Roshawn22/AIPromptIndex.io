@@ -1,0 +1,25 @@
+{
+  "title": "Cursor Test Writer",
+  "slug": "cursor-test-writer",
+  "promptText": "You are a test engineering specialist. Write comprehensive tests for the following [LANGUAGE] code using [TEST_FRAMEWORK]. The code implements [FUNCTIONALITY] in a [PROJECT_TYPE] project.\n\n[CODE_BLOCK]\n\nGenerate tests covering these categories: Happy Path tests (expected inputs producing expected outputs), Edge Cases (boundary values, empty inputs, null/undefined values, maximum limits), Error Handling (invalid inputs, network failures, timeout scenarios), Integration Points (how this code interacts with dependencies), and Regression Guards (tests that would catch common bugs in this type of code). For each test, include a descriptive test name following the pattern 'should [expected behavior] when [condition]', arrange-act-assert structure with clear separation, meaningful assertion messages, and appropriate use of mocks, stubs, or fixtures for external dependencies. Group related tests in describe blocks. Include setup and teardown helpers where needed. Aim for at least [COVERAGE_TARGET] code coverage across all branches.",
+  "description": "This prompt generates comprehensive test suites that go far beyond basic happy-path testing. It produces tests organized into logical categories covering edge cases, error handling, integration points, and regression scenarios that developers often miss. Each test follows the arrange-act-assert pattern with descriptive naming conventions that serve as living documentation. The prompt handles mock setup, fixture creation, and test organization so you get a production-ready test file. This is invaluable for developers who know they should write more tests but struggle with identifying what to test, and for teams looking to increase their code coverage systematically.",
+  "tool": "cursor",
+  "category": "coding",
+  "tags": ["testing", "unit-tests", "test-driven-development", "code-quality", "software-engineering"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "LANGUAGE", "description": "Programming language of the code to test", "example": "TypeScript" },
+    { "name": "TEST_FRAMEWORK", "description": "Testing framework to use", "example": "Jest with React Testing Library" },
+    { "name": "FUNCTIONALITY", "description": "What the code does", "example": "a shopping cart service with add, remove, and calculate total operations" },
+    { "name": "PROJECT_TYPE", "description": "Type of application", "example": "e-commerce React application" },
+    { "name": "CODE_BLOCK", "description": "The code to write tests for", "example": "// paste your code here" },
+    { "name": "COVERAGE_TARGET", "description": "Target code coverage percentage", "example": "90%" }
+  ],
+  "tips": ["Include your actual code for the most accurate and relevant test generation", "Focus on testing behavior rather than implementation details for more resilient tests", "Use the generated tests as a starting point and add domain-specific edge cases you know about"],
+  "exampleOutput": "describe('ShoppingCartService', () => {\n  let cart: ShoppingCartService;\n  let mockProductRepo: jest.Mocked<ProductRepository>;\n\n  beforeEach(() => {\n    mockProductRepo = createMockProductRepo();\n    cart = new ShoppingCartService(mockProductRepo);\n  });\n\n  describe('addItem', () => {\n    it('should add a new item with quantity 1 when item is not in cart', async () => {\n      // Arrange\n      const product = createTestProduct({ id: '1', price: 29.99 });\n      mockProductRepo.findById.mockResolvedValue(product);\n\n      // Act\n      await cart.addItem('1');\n\n      // Assert\n      expect(cart.getItems()).toHaveLength(1);\n      expect(cart.getItems()[0].quantity).toBe(1);\n    });\n\n    it('should increment quantity when adding an existing item', ...\n    it('should throw InvalidProductError when product ID does not exist', ...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Test Writer Prompt for Cursor",
+  "metaDescription": "Generate comprehensive test suites with Cursor. Get happy path, edge case, error handling, and integration tests with full coverage."
+}

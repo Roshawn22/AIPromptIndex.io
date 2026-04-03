@@ -1,0 +1,26 @@
+{
+  "title": "Rubric Generator",
+  "slug": "rubric-generator",
+  "promptText": "You are an assessment design expert with extensive experience creating standards-aligned rubrics. Create a detailed grading rubric for the following assignment:\n\nAssignment Title: [ASSIGNMENT_TITLE]\nSubject: [SUBJECT]\nGrade Level: [GRADE_LEVEL]\nAssignment Description: [ASSIGNMENT_DESCRIPTION]\nLearning Standards: [STANDARDS]\nNumber of Criteria: [NUM_CRITERIA]\nScale: [SCALE_TYPE]\n\nFor each criterion:\n1. Provide a clear, measurable criterion name\n2. Write detailed descriptors for each performance level that use observable, specific language (avoid vague terms like 'good' or 'adequate')\n3. Include exemplar indicators — specific examples of what student work looks like at each level\n4. Assign point values that reflect the relative importance of each criterion\n\nAdditionally provide:\n- A student-friendly version of the rubric with simplified language suitable for the grade level\n- Self-assessment checklist students can use before submitting their work\n- Common mistakes to watch for at each performance level\n- Suggestions for how to use the rubric for peer review\n\nFormat the rubric as a clean table that can be easily copied into a document or learning management system.",
+  "description": "This prompt generates comprehensive, standards-aligned grading rubrics complete with detailed performance descriptors, exemplar indicators, and student-friendly versions. Creating effective rubrics is one of the most time-consuming aspects of assessment design, yet good rubrics are essential for fair, consistent grading and clear student expectations. This prompt produces rubrics that go beyond basic descriptors by including specific examples of what student work looks like at each level, self-assessment checklists, and peer review guidance. It is invaluable for teachers creating new assignments, department heads standardizing grading across sections, and curriculum designers building assessment libraries.",
+  "tool": "claude",
+  "category": "education",
+  "tags": ["rubric", "assessment", "grading", "teaching", "standards-aligned"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "ASSIGNMENT_TITLE", "description": "Name of the assignment being assessed", "example": "Persuasive Essay on a Current Social Issue" },
+    { "name": "SUBJECT", "description": "Subject area", "example": "English Language Arts" },
+    { "name": "GRADE_LEVEL", "description": "Grade level", "example": "10th grade" },
+    { "name": "ASSIGNMENT_DESCRIPTION", "description": "Brief description of what students must produce", "example": "Students write a 5-paragraph persuasive essay arguing a position on a current social issue, using at least 3 credible sources" },
+    { "name": "STANDARDS", "description": "Relevant learning standards", "example": "CCSS.ELA-LITERACY.W.9-10.1 — Write arguments to support claims with clear reasons and relevant evidence" },
+    { "name": "NUM_CRITERIA", "description": "Number of grading criteria to include", "example": "5" },
+    { "name": "SCALE_TYPE", "description": "Scoring scale to use", "example": "4-point scale (Exemplary, Proficient, Developing, Beginning)" }
+  ],
+  "tips": ["Align criteria directly to your learning standards for easier grade justification", "Share the rubric with students before they begin the assignment so expectations are transparent", "Use the student-friendly version for formative self-assessment during the drafting process"],
+  "exampleOutput": "PERSUASIVE ESSAY RUBRIC — 10th Grade ELA\n\nCriterion 1: Thesis & Claim (20 points)\nExemplary (20): Presents a nuanced, debatable thesis that takes a clear position and acknowledges complexity. Example: 'While social media connects communities, mandatory digital literacy education starting in middle school would reduce cyberbullying by equipping students with critical thinking skills before they encounter online conflict.'\nProficient (15): States a clear, arguable thesis with a defined position. May lack nuance or acknowledgment of counterarguments in the thesis itself.\nDeveloping (10): Thesis is present but vague, overly broad, or states a fact rather than an arguable claim.\nBeginning (5): No clear thesis, or thesis is a question or statement of topic rather than a position...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Rubric Generator Prompt for Claude",
+  "metaDescription": "Create detailed grading rubrics with performance descriptors and student checklists using this free Claude prompt for teachers."
+}

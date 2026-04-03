@@ -1,0 +1,25 @@
+{
+  "title": "Content Calendar Generator",
+  "slug": "content-calendar-generator",
+  "promptText": "You are a content marketing strategist. Generate a [TIMEFRAME] content calendar for a [BUSINESS_TYPE] targeting [TARGET_AUDIENCE]. The calendar should cover these platforms: [PLATFORMS]. For each piece of content, include the publish date, platform, content type (blog post, reel, carousel, story, tweet, newsletter, etc.), topic/title, a one-line description of the content angle, the primary content pillar it falls under, and any relevant hashtags or keywords. Organize the calendar around [NUM_PILLARS] content pillars that you define based on the business type and audience. Include at least 2 pieces of repurposed content per week where a single idea is adapted across multiple platforms. Factor in relevant industry events, seasonal trends, and awareness days for [MONTH_YEAR]. Ensure a healthy mix of educational, entertaining, promotional, and community-building content following an 80/20 value-to-promotion ratio.",
+  "description": "This prompt creates a comprehensive multi-platform content calendar that eliminates the daily struggle of figuring out what to post. It generates weeks of planned content organized around strategic pillars, with built-in content repurposing to maximize your output while minimizing effort. The calendar follows the 80/20 rule of providing value before promoting, includes relevant seasonal hooks, and specifies exact content formats for each platform. This is essential for content creators, marketing teams, and small business owners who want to maintain a consistent publishing cadence without burning out on content ideation.",
+  "tool": "chatgpt",
+  "category": "marketing",
+  "tags": ["content-calendar", "content-marketing", "social-media", "planning", "content-strategy"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "TIMEFRAME", "description": "How long the calendar should cover", "example": "4-week" },
+    { "name": "BUSINESS_TYPE", "description": "The type of business or brand", "example": "SaaS project management tool" },
+    { "name": "TARGET_AUDIENCE", "description": "Who the content is for", "example": "remote team leads and project managers" },
+    { "name": "PLATFORMS", "description": "Social platforms and channels to include", "example": "LinkedIn, Twitter, blog, and email newsletter" },
+    { "name": "NUM_PILLARS", "description": "Number of content pillars to create", "example": "4" },
+    { "name": "MONTH_YEAR", "description": "The month and year for seasonal relevance", "example": "April 2026" }
+  ],
+  "tips": ["Batch-create the content for each pillar in a single session for consistency", "Use the repurposed content entries to save time across platforms", "Review and adjust the calendar weekly based on what performs best"],
+  "exampleOutput": "Content Pillars:\n1. Productivity Hacks - Tips and workflows for remote teams\n2. Tool Tutorials - How-to guides for the product\n3. Industry Insights - Remote work trends and data\n4. Community Stories - User spotlights and team culture\n\nWeek 1:\nMon Apr 6 - LinkedIn: Carousel - '5 Signs Your Remote Team Needs Better Project Management' (Pillar 1) #RemoteWork #Productivity\nMon Apr 6 - Blog: Long-form article expanding on the same topic with SEO keywords...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Content Calendar Generator Prompt for ChatGPT",
+  "metaDescription": "Generate a complete multi-platform content calendar with ChatGPT. Get weeks of planned posts, content pillars, and repurposing ideas."
+}

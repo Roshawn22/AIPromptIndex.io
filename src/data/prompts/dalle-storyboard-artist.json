@@ -1,0 +1,26 @@
+{
+  "title": "DALL-E Storyboard Artist",
+  "slug": "dalle-storyboard-artist",
+  "promptText": "Create a professional storyboard panel layout for a [CONTENT_TYPE] about [SCENE_DESCRIPTION]. The storyboard should show [NUM_PANELS] sequential panels arranged in a [LAYOUT] grid layout. Each panel should depict a key moment in the sequence: [PANEL_DESCRIPTIONS]. Use a [ART_STYLE] illustration style with clear compositional framing showing camera angles and shot types (wide, medium, close-up). Include directional arrows between panels indicating sequence flow, simple annotation areas below each panel for notes, and consistent character designs across all panels. The overall style should be clean black and white with [ACCENT_COLOR] accent color for emphasis. Professional storyboard quality suitable for pre-production planning.",
+  "description": "This prompt generates professional storyboard layouts that help visualize narratives before production begins. Storyboards are critical for video production, animation, advertising, and film to plan shots, communicate vision to teams, and identify potential issues before expensive production starts. The output provides sequential panels with consistent character styling, camera angle suggestions, and flow indicators. This saves significant time compared to hand-drawing storyboards and gives non-artists a way to communicate their visual ideas clearly. It is valuable for video creators, ad agencies, animation studios, and anyone planning visual narratives.",
+  "tool": "dall-e",
+  "category": "image-generation",
+  "tags": ["storyboard", "video-production", "animation", "pre-production", "visual-narrative"],
+  "difficulty": "intermediate",
+  "promptType": "image",
+  "variables": [
+    { "name": "CONTENT_TYPE", "description": "Type of content being storyboarded", "example": "30-second product commercial" },
+    { "name": "SCENE_DESCRIPTION", "description": "Brief overview of the scene", "example": "a person discovering and using a new productivity app throughout their workday" },
+    { "name": "NUM_PANELS", "description": "Number of panels to include", "example": "6" },
+    { "name": "LAYOUT", "description": "Grid arrangement of panels", "example": "2x3" },
+    { "name": "PANEL_DESCRIPTIONS", "description": "Key moment for each panel", "example": "1) frustrated at messy desk, 2) discovers app on phone, 3) organizing tasks, 4) productive flow state, 5) end of day satisfaction, 6) product logo reveal" },
+    { "name": "ART_STYLE", "description": "Drawing style for the storyboard", "example": "clean sketch" },
+    { "name": "ACCENT_COLOR", "description": "Accent color for visual emphasis", "example": "blue" }
+  ],
+  "tips": ["Label each panel description clearly for the most accurate sequential narrative", "Use this as a visual starting point and annotate with specific camera directions in your planning tool", "Generate individual panels separately if you need more detail in specific scenes"],
+  "exampleOutput": "A professional 2x3 storyboard grid showing 6 sequential panels for a product commercial: Panel 1 (wide shot) frustrated person at cluttered desk, Panel 2 (close-up) hand picking up phone showing app, Panel 3 (medium shot) person tapping tasks into the app, Panel 4 (wide shot) clean organized workspace with person in flow state, Panel 5 (medium) satisfied smile at end of day, Panel 6 (product shot) app logo reveal. Clean sketch style with blue accents, directional arrows, annotation areas below each panel.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Storyboard Artist Prompt for DALL-E",
+  "metaDescription": "Create professional storyboard layouts with DALL-E. Visualize video sequences with multi-panel layouts and camera angle guides."
+}

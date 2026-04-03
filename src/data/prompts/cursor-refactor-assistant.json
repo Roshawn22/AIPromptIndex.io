@@ -1,0 +1,23 @@
+{
+  "title": "Cursor Refactor Assistant",
+  "slug": "cursor-refactor-assistant",
+  "promptText": "You are a senior software engineer conducting a code refactoring session. Analyze the following [LANGUAGE] code and refactor it for improved readability, maintainability, and performance. The code is from a [PROJECT_TYPE] project and currently handles [FUNCTIONALITY]. Here is the code to refactor:\n\n[CODE_BLOCK]\n\nFor your refactoring, follow these principles: extract repeated logic into reusable functions, apply the Single Responsibility Principle to any functions doing more than one thing, replace magic numbers and strings with named constants, improve variable and function names to be self-documenting, add appropriate TypeScript types or type hints if applicable, reduce nesting depth to a maximum of 3 levels, replace imperative loops with functional patterns where it improves clarity, and handle edge cases and errors gracefully. Provide the refactored code with inline comments explaining each significant change. After the code, include a summary of changes made and the rationale behind each decision. Flag any potential breaking changes that downstream code should be aware of.",
+  "description": "This prompt transforms messy, hard-to-maintain code into clean, well-structured code following industry best practices. It applies key software engineering principles like Single Responsibility, DRY, and meaningful naming to produce code that is easier to read, test, and extend. The refactoring includes detailed explanations for every change so you understand the reasoning and can learn from the improvements. It also flags potential breaking changes to prevent introducing bugs during the refactoring process. This is essential for developers working with legacy code, preparing code for review, or wanting to level up their coding standards.",
+  "tool": "cursor",
+  "category": "coding",
+  "tags": ["refactoring", "code-quality", "clean-code", "best-practices", "software-engineering"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "LANGUAGE", "description": "The programming language of the code", "example": "TypeScript" },
+    { "name": "PROJECT_TYPE", "description": "Type of project the code belongs to", "example": "Next.js web application" },
+    { "name": "FUNCTIONALITY", "description": "What the code currently does", "example": "user authentication and session management" },
+    { "name": "CODE_BLOCK", "description": "The actual code to refactor", "example": "// paste your code here" }
+  ],
+  "tips": ["Include the full function or module rather than snippets for the best refactoring suggestions", "Mention specific pain points like performance issues or testing difficulty for targeted improvements", "Apply refactoring changes incrementally and run tests between each change to catch issues early"],
+  "exampleOutput": "// REFACTORED: Extracted authentication logic into dedicated service\n// BEFORE: All auth logic was in a single 200-line route handler\n\n// auth.service.ts\nexport class AuthService {\n  private static readonly SESSION_DURATION_MS = 24 * 60 * 60 * 1000; // 24 hours\n  private static readonly MAX_LOGIN_ATTEMPTS = 5;\n\n  async validateCredentials(email: string, password: string): Promise<AuthResult> {\n    // Single responsibility: only validates credentials\n    ...\n  }\n}\n\nChanges Summary:\n1. Extracted AuthService class (SRP) - route handler was doing validation, session creation, and logging\n2. Replaced magic number 86400000 with named constant SESSION_DURATION_MS\n3. Added proper TypeScript return types...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Refactor Assistant Prompt for Cursor",
+  "metaDescription": "Refactor messy code into clean, maintainable code with Cursor. Get detailed explanations for every improvement and breaking change flags."
+}

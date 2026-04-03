@@ -1,0 +1,23 @@
+{
+  "title": "Small Business Social Media Strategy",
+  "slug": "small-business-social-media-strategy",
+  "promptText": "You are a social media marketing expert who works exclusively with small businesses. Develop a complete social media strategy for a [BUSINESS_TYPE] that wants to build a strong presence on [PLATFORMS]. The business targets [TARGET_AUDIENCE] and has [TIME_AVAILABLE] per week to dedicate to social media. Create a content strategy that includes content pillars (at least 4), a weekly posting schedule with specific post types for each day, caption templates for each content pillar, hashtag strategy with 20 relevant hashtags organized by reach level, engagement tactics to build community, and a month-one content calendar with 20 post ideas. Also include guidance on optimal posting times, story and reel ideas, and metrics to track weekly. Keep everything achievable for a small team without a dedicated social media manager.",
+  "description": "This prompt creates a complete social media strategy designed for small businesses that do not have a dedicated marketing team. It produces actionable content pillars, a realistic posting schedule, ready-to-use caption templates, and a full month of content ideas. The strategy accounts for limited time and resources while maximizing engagement and reach. Instead of overwhelming you with enterprise-level tactics, it focuses on sustainable practices that a business owner or small team can actually execute consistently week after week.",
+  "tool": "chatgpt",
+  "category": "marketing",
+  "tags": ["social-media", "small-business", "content-strategy", "instagram", "marketing"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "BUSINESS_TYPE", "description": "Type of small business", "example": "boutique fitness studio" },
+    { "name": "PLATFORMS", "description": "Social media platforms to focus on", "example": "Instagram and TikTok" },
+    { "name": "TARGET_AUDIENCE", "description": "Who the business wants to reach", "example": "women aged 25-45 interested in wellness" },
+    { "name": "TIME_AVAILABLE", "description": "Hours available per week for social media", "example": "5 hours" }
+  ],
+  "tips": ["Start with just 1-2 platforms rather than trying to be everywhere at once", "Use the caption templates as starting points and add your own personality", "Batch-create content using the content calendar to save time each week"],
+  "exampleOutput": "Social Media Strategy for Boutique Fitness Studio\n\nContent Pillars:\n1. Transformation Stories - Member spotlights and before/after journeys\n2. Quick Tips - 30-second workout demos and nutrition advice\n3. Behind the Scenes - Studio life, trainer prep, class setup\n4. Community & Culture - Events, challenges, member shoutouts\n\nWeekly Schedule:\nMonday: Motivation post (Pillar 1) - Reel format\nTuesday: Quick Tip (Pillar 2) - Carousel...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Small Business Social Media Strategy Prompt for ChatGPT",
+  "metaDescription": "Build a complete social media strategy for your small business with ChatGPT. Get content pillars, posting schedules, and caption templates."
+}

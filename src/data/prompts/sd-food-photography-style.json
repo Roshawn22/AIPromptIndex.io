@@ -1,0 +1,26 @@
+{
+  "title": "SD Food Photography Style",
+  "slug": "sd-food-photography-style",
+  "promptText": "Professional food photography, [DISH_DESCRIPTION], [PLATING_STYLE] plating on [PLATE_TYPE], [LIGHTING_SETUP] lighting, [BACKGROUND_STYLE] background, garnished with [GARNISH_DETAILS], steam rising from the dish indicating freshness, shallow depth of field with bokeh, shot on Canon EOS R5 with 85mm f/1.4 lens, color-graded in [COLOR_MOOD] tones, styled with complementary props including linen napkin and artisan cutlery, overhead and 45-degree angle composition, Michelin-star restaurant presentation, editorial food photography for cookbook or food magazine, 8k resolution, appetizing and vibrant",
+  "description": "This prompt creates stunning food photography images that rival professional studio shoots. It incorporates the technical parameters that real food photographers use, including specific camera settings, lens choices, lighting setups, and color grading to produce images that look appetizing and editorial-ready. The prompt handles plating style, props, garnishes, and composition angles to create the kind of imagery used in cookbooks, restaurant menus, food blogs, and social media marketing. It is ideal for food bloggers, restaurant owners, cookbook authors, and food brands that need high-quality food visuals without the cost of a professional photo shoot.",
+  "tool": "stable-diffusion",
+  "category": "image-generation",
+  "tags": ["food-photography", "culinary", "restaurant", "product-photography", "editorial"],
+  "difficulty": "intermediate",
+  "promptType": "image",
+  "variables": [
+    { "name": "DISH_DESCRIPTION", "description": "Detailed description of the food dish", "example": "pan-seared salmon fillet with crispy skin" },
+    { "name": "PLATING_STYLE", "description": "How the food is arranged on the plate", "example": "minimalist fine dining" },
+    { "name": "PLATE_TYPE", "description": "Style and color of the plate or surface", "example": "matte black ceramic plate" },
+    { "name": "LIGHTING_SETUP", "description": "The lighting approach", "example": "soft natural window light from the left" },
+    { "name": "BACKGROUND_STYLE", "description": "What appears behind and around the dish", "example": "dark rustic wooden table" },
+    { "name": "GARNISH_DETAILS", "description": "Garnish and finishing touches", "example": "microgreens, lemon zest, and a drizzle of herb oil" },
+    { "name": "COLOR_MOOD", "description": "Color grading and mood of the image", "example": "warm and moody" }
+  ],
+  "tips": ["Mention 'steam rising' for hot dishes to add a sense of freshness and immediacy", "Dark backgrounds make colorful dishes pop while light backgrounds feel more airy and fresh", "Specify both overhead and angled shots to get the most versatile results"],
+  "exampleOutput": "A professional food photograph of pan-seared salmon fillet with crispy golden skin, plated in minimalist fine dining style on a matte black ceramic plate, soft window light from the left casting gentle shadows, dark rustic wooden table background, garnished with microgreens, lemon zest, and herb oil drizzle, steam rising, shot at 85mm f/1.4 with shallow depth of field, warm moody color grading.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Food Photography Style Prompt for Stable Diffusion",
+  "metaDescription": "Create mouthwatering food photography with Stable Diffusion. Generate editorial-quality dish images with professional lighting and styling."
+}

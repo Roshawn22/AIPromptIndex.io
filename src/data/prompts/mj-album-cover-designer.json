@@ -1,0 +1,26 @@
+{
+  "title": "MJ Album Cover Designer",
+  "slug": "mj-album-cover-designer",
+  "promptText": "[ALBUM_CONCEPT] album cover art, [MUSIC_GENRE] genre aesthetic, [VISUAL_STYLE] visual style, [COLOR_MOOD] color mood, [CENTRAL_IMAGERY] as the focal point, typography-ready composition with clear space for album title at [TEXT_POSITION], atmospheric and emotionally evocative, square format 1:1 aspect ratio, record label quality, vinyl-worthy artwork, inspired by the visual language of [REFERENCE_ERA] era album art, high detail, dramatic composition, professional album artwork, print resolution quality --ar 1:1 --s 750 --q 2",
+  "description": "This prompt generates striking album cover artwork that captures the mood and genre of your music. Album covers are the visual identity of a musical release, and this prompt creates artwork that communicates genre, mood, and artistic vision at a glance. It produces square-format compositions with intentional space for typography, ensuring the art works with your album title and artist name overlaid. The prompt draws on era-specific visual traditions while maintaining a contemporary edge. It is perfect for independent musicians, bands, producers, and record labels who need professional cover art for streaming platforms, vinyl releases, and promotional materials.",
+  "tool": "midjourney",
+  "category": "image-generation",
+  "tags": ["album-cover", "music", "artwork", "graphic-design", "creative"],
+  "difficulty": "intermediate",
+  "promptType": "image",
+  "variables": [
+    { "name": "ALBUM_CONCEPT", "description": "The conceptual theme of the album", "example": "solitude in a neon-lit city at night" },
+    { "name": "MUSIC_GENRE", "description": "The genre of music", "example": "synthwave and electronic" },
+    { "name": "VISUAL_STYLE", "description": "Artistic visual approach", "example": "cyberpunk digital painting" },
+    { "name": "COLOR_MOOD", "description": "Color palette and emotional tone", "example": "deep purple and neon pink with cool blue shadows" },
+    { "name": "CENTRAL_IMAGERY", "description": "Main visual element of the cover", "example": "a lone figure walking through rain-soaked streets with neon reflections" },
+    { "name": "TEXT_POSITION", "description": "Where album title text will be placed", "example": "top center" },
+    { "name": "REFERENCE_ERA", "description": "Era of album art to draw inspiration from", "example": "1980s" }
+  ],
+  "tips": ["Leave clear space at the top or bottom for your album title and artist name", "Consider how the cover looks as a tiny thumbnail on Spotify since most listeners see it small", "Generate multiple variations and pick the one that best captures your album mood"],
+  "exampleOutput": "A cyberpunk digital painting album cover showing a lone figure walking through rain-soaked neon-lit city streets, deep purple sky with neon pink building signs reflecting in wet pavement, cool blue shadows, clear space at top center for album title typography, synthwave aesthetic inspired by 1980s album art, atmospheric and moody, square 1:1 format, vinyl-quality detail.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Album Cover Designer Prompt for Midjourney",
+  "metaDescription": "Design professional album cover art with Midjourney. Create genre-specific artwork with typography-ready compositions for any music style."
+}

@@ -1,0 +1,24 @@
+{
+  "title": "YouTube Thumbnail Concept",
+  "slug": "youtube-thumbnail-concept",
+  "promptText": "Create a high-impact YouTube thumbnail image concept for a video titled [VIDEO_TITLE] in the [NICHE] niche. The thumbnail should feature [SUBJECT_DESCRIPTION] with an expression of [EMOTION]. Use a [COLOR_SCHEME] color palette with high contrast between the background and foreground elements. The composition should follow the rule of thirds with the main subject on the left side and negative space on the right for text overlay. Style: professional YouTube thumbnail, 16:9 aspect ratio, bold and eye-catching, slightly exaggerated expressions, cinematic lighting from the upper left, shallow depth of field background, vibrant saturation boosted by 20 percent, clean edges suitable for small mobile screens. Avoid cluttered backgrounds and ensure the subject is clearly visible at thumbnail size.",
+  "description": "This prompt generates attention-grabbing YouTube thumbnail concepts optimized for click-through rates. It incorporates proven thumbnail design principles including the rule of thirds composition, strategic negative space for text overlays, high contrast color palettes, and mobile-first visibility. The prompt accounts for the fact that most viewers see thumbnails at very small sizes on mobile devices, so it emphasizes bold subjects, clean compositions, and exaggerated visual elements that stand out in a crowded feed. Perfect for content creators who want professional-quality thumbnail concepts without a graphic designer.",
+  "tool": "midjourney",
+  "category": "image-generation",
+  "tags": ["youtube", "thumbnail", "content-creation", "video-marketing", "graphic-design"],
+  "difficulty": "intermediate",
+  "promptType": "image",
+  "variables": [
+    { "name": "VIDEO_TITLE", "description": "The title of the YouTube video", "example": "I Tried AI Tools for 30 Days" },
+    { "name": "NICHE", "description": "The YouTube channel niche", "example": "tech review" },
+    { "name": "SUBJECT_DESCRIPTION", "description": "What should appear as the main subject", "example": "a person holding a glowing laptop" },
+    { "name": "EMOTION", "description": "The facial expression or mood to convey", "example": "shocked excitement" },
+    { "name": "COLOR_SCHEME", "description": "Primary colors for the thumbnail", "example": "electric blue and bright orange" }
+  ],
+  "tips": ["Keep the right third of the image clear for text overlay in your video editor", "Test your thumbnail at a small size to make sure it reads well on mobile", "Use complementary colors for maximum visual pop in the YouTube feed"],
+  "exampleOutput": "A cinematic YouTube thumbnail showing a person holding a glowing laptop with a shocked expression, electric blue and orange color palette, dramatic upper-left lighting, shallow depth of field background with bokeh effects, rule of thirds composition with subject on the left, clean negative space on the right for text overlay, 16:9 aspect ratio, vibrant and eye-catching.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "YouTube Thumbnail Concept Prompt for Midjourney",
+  "metaDescription": "Design click-worthy YouTube thumbnails with Midjourney. Get optimized compositions with bold colors and mobile-friendly visibility."
+}

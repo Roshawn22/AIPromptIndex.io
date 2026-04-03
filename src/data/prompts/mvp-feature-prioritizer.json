@@ -1,0 +1,25 @@
+{
+  "title": "MVP Feature Prioritizer",
+  "slug": "mvp-feature-prioritizer",
+  "promptText": "You are a product strategist who has launched over 50 MVPs for startups. Help me prioritize features for an MVP of a [PRODUCT_TYPE] that solves [CORE_PROBLEM] for [TARGET_USERS]. Here is my full feature wishlist: [FEATURE_LIST]. For each feature, score it on these dimensions (1-10 scale): Impact on Core Value Proposition, User Demand (how much do users need this on day one), Implementation Complexity, Risk if Excluded, and Revenue Impact. Then categorize every feature into one of four buckets: Must Have (launch blockers), Should Have (include if time allows), Nice to Have (post-launch V1.1), and Future Roadmap (V2+). Present the results in a prioritized table format. Finally, recommend a realistic MVP scope that could be built in [TIMELINE] by a [TEAM_SIZE] team, explain your reasoning for the top 3 cuts from the wishlist, and suggest one feature I probably have not thought of that would significantly increase early adoption.",
+  "description": "This prompt applies a rigorous scoring framework to help founders and product teams ruthlessly prioritize their MVP features. Instead of trying to build everything, it forces a data-driven evaluation of each feature across five dimensions that matter most for early-stage products. The output includes a scored comparison table, clear categorization into build tiers, and a recommended scope that fits your actual timeline and team capacity. It also challenges your assumptions by suggesting features you may have overlooked. This is essential for any team that struggles with scope creep or analysis paralysis during the MVP planning phase.",
+  "tool": "gemini",
+  "category": "business",
+  "tags": ["mvp", "product-management", "feature-prioritization", "startup", "product-strategy"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "PRODUCT_TYPE", "description": "What you are building", "example": "freelancer invoicing and payment platform" },
+    { "name": "CORE_PROBLEM", "description": "The main problem it solves", "example": "freelancers losing revenue due to late payments and manual invoicing" },
+    { "name": "TARGET_USERS", "description": "Who the product is for", "example": "independent freelancers and consultants" },
+    { "name": "FEATURE_LIST", "description": "Comma-separated list of desired features", "example": "invoice builder, payment tracking, recurring invoices, client portal, expense tracking, tax calculator, proposal generator, time tracking, contracts, multi-currency support" },
+    { "name": "TIMELINE", "description": "Available development timeline", "example": "8 weeks" },
+    { "name": "TEAM_SIZE", "description": "Size and composition of the development team", "example": "2 full-stack developers" }
+  ],
+  "tips": ["Be honest and complete with your feature list for the most useful prioritization", "Challenge the AI reasoning if a scoring does not match your customer research", "Use this output as a starting point for team discussions rather than a final decision"],
+  "exampleOutput": "MVP Feature Prioritization Matrix:\n\n| Feature | Core Impact | User Demand | Complexity | Risk if Cut | Revenue | Total | Tier |\n|---------|-----------|-------------|------------|-------------|---------|-------|------|\n| Invoice Builder | 10 | 10 | 4 | 10 | 9 | 43 | Must Have |\n| Payment Tracking | 9 | 9 | 5 | 9 | 8 | 40 | Must Have |\n| Recurring Invoices | 7 | 6 | 6 | 4 | 7 | 30 | Should Have |...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "MVP Feature Prioritizer Prompt for Gemini",
+  "metaDescription": "Prioritize your MVP features with Gemini. Get scored rankings, build tier categorization, and scope recommendations for your timeline."
+}

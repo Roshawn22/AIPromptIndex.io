@@ -1,0 +1,25 @@
+{
+  "title": "DALL-E Brand Mascot Creator",
+  "slug": "dalle-brand-mascot-creator",
+  "promptText": "Design a friendly brand mascot character for a [BRAND_TYPE] called [BRAND_NAME]. The mascot should be a [CHARACTER_TYPE] with [PERSONALITY_TRAITS] personality. Use [COLOR_SCHEME] as the primary colors matching the brand identity. The mascot should be shown in a simple standing pose with a welcoming expression, designed in a [ART_STYLE] illustration style. The character should be versatile enough to work as a small app icon, website hero image, and social media avatar. Clean vector-style illustration with bold outlines, minimal detail that scales well at small sizes, expressive eyes and simple facial features, a signature accessory or detail that makes it instantly recognizable. White background, centered composition, full body visible.",
+  "description": "This prompt creates memorable brand mascot characters that can become the face of your business across all touchpoints. Great mascots build emotional connections with customers and make brands instantly recognizable. This prompt generates mascots designed for versatility, working equally well as tiny app icons and large hero images. The output emphasizes clean lines, bold colors, and distinctive features that make the character memorable and scalable. It is ideal for startups, apps, food brands, tech companies, and any business that wants to add personality to their brand through a custom character.",
+  "tool": "dall-e",
+  "category": "image-generation",
+  "tags": ["mascot-design", "branding", "character-design", "logo", "brand-identity"],
+  "difficulty": "beginner",
+  "promptType": "image",
+  "variables": [
+    { "name": "BRAND_TYPE", "description": "Type of business or product", "example": "children's educational app" },
+    { "name": "BRAND_NAME", "description": "The name of the brand", "example": "BrainBuddy" },
+    { "name": "CHARACTER_TYPE", "description": "What the mascot character is", "example": "friendly owl wearing glasses" },
+    { "name": "PERSONALITY_TRAITS", "description": "Character personality to convey", "example": "curious, smart, and encouraging" },
+    { "name": "COLOR_SCHEME", "description": "Brand colors for the mascot", "example": "bright purple and teal" },
+    { "name": "ART_STYLE", "description": "Illustration style", "example": "modern flat design with rounded shapes" }
+  ],
+  "tips": ["Keep the mascot design simple so it reads well at icon size (32x32 pixels)", "Give the mascot one signature element like glasses, a hat, or a specific color that makes it instantly recognizable", "Generate multiple variations and test which one your audience responds to best"],
+  "exampleOutput": "A charming owl mascot character for BrainBuddy in modern flat design style, wearing round glasses, bright purple body with teal wing accents, curious and welcoming expression with large expressive eyes, standing pose with one wing waving, clean bold outlines, simple rounded shapes, white background, full body centered, scalable vector-style illustration.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Brand Mascot Creator Prompt for DALL-E",
+  "metaDescription": "Design a unique brand mascot with DALL-E. Create memorable, scalable characters that work as icons, avatars, and hero images."
+}

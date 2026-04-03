@@ -1,0 +1,24 @@
+{
+  "title": "Flashcard Generator",
+  "slug": "flashcard-generator",
+  "promptText": "You are a study skills expert who creates highly effective flashcards based on cognitive science principles (active recall, spaced repetition, and elaborative interrogation). Generate a set of [NUM_CARDS] flashcards from the following study material:\n\nSubject: [SUBJECT]\nTopic: [TOPIC]\nSource Material: [SOURCE_MATERIAL]\nDifficulty Level: [DIFFICULTY]\n\nFor each flashcard:\n- Front: Write a clear, focused question that tests one specific concept (avoid questions that can be answered with a simple yes/no)\n- Back: Provide a concise but complete answer, followed by a one-sentence 'memory hook' (mnemonic, analogy, or connection) to aid retention\n- Tag: Categorize each card by subtopic for organized study sessions\n\nFlashcard types to include (mix these throughout the set):\n- Definition cards: 'What is [term]?'\n- Process cards: 'What are the steps of [process]?'\n- Comparison cards: 'How does [X] differ from [Y]?'\n- Application cards: 'In what situation would you use [concept]?'\n- Why cards: 'Why does [phenomenon] occur?'\n\nAfter generating all cards, provide:\n- A recommended study schedule using spaced repetition intervals (Day 1, Day 3, Day 7, Day 14, Day 30)\n- 3 self-testing strategies beyond simple card flipping\n- Which 5 cards are the highest priority based on exam likelihood",
+  "description": "This prompt creates study flashcards grounded in cognitive science principles like active recall and spaced repetition, producing cards that are far more effective than what students typically create on their own. Instead of simple definition-answer pairs, the output includes multiple question types — comparison, application, process, and reasoning — plus memory hooks for each card and a recommended study schedule. It is designed for students preparing for exams, professionals studying for certifications, or anyone who wants to learn new material efficiently. The structured output can be easily imported into Anki, Quizlet, or any other flashcard app.",
+  "tool": "chatgpt",
+  "category": "education",
+  "tags": ["flashcards", "study-skills", "active-recall", "spaced-repetition", "exam-prep"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "NUM_CARDS", "description": "Number of flashcards to generate", "example": "20" },
+    { "name": "SUBJECT", "description": "Academic subject", "example": "Biology" },
+    { "name": "TOPIC", "description": "Specific topic to study", "example": "Cell division — mitosis and meiosis" },
+    { "name": "SOURCE_MATERIAL", "description": "Notes, textbook excerpts, or key concepts to base cards on", "example": "Chapter 10 notes covering the cell cycle, phases of mitosis (prophase, metaphase, anaphase, telophase), differences between mitosis and meiosis, and the role of checkpoints in cell division" },
+    { "name": "DIFFICULTY", "description": "Desired difficulty level", "example": "AP Biology level" }
+  ],
+  "tips": ["Paste your actual class notes or textbook highlights into SOURCE_MATERIAL for cards that match exactly what your teacher covers", "Start with 20-25 cards per topic and add more as you identify knowledge gaps during study sessions", "Import the cards into Anki and use the recommended spaced repetition schedule for maximum retention"],
+  "exampleOutput": "FLASHCARD 1\nFront: What are the four phases of mitosis in order, and what is the key event of each phase?\nBack: Prophase (chromosomes condense, spindle forms), Metaphase (chromosomes align at cell equator), Anaphase (sister chromatids separate), Telophase (nuclear envelopes reform, chromosomes decondense).\nMemory Hook: 'PMAT — Please Make Another Taco' — each letter matches a phase in order.\nTag: Mitosis Phases\n\nFLASHCARD 2\nFront: How does meiosis I differ from mitosis in terms of what is separated?\nBack: In meiosis I, homologous chromosome pairs are separated (reducing chromosome number by half), while in mitosis, sister chromatids are separated (maintaining chromosome number).\nMemory Hook: Think of meiosis I as 'splitting up couples' and mitosis as 'splitting up twins.'\nTag: Mitosis vs Meiosis...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Flashcard Generator Prompt for ChatGPT",
+  "metaDescription": "Generate effective study flashcards from your notes with this free ChatGPT prompt. Includes memory hooks and spaced repetition schedules."
+}

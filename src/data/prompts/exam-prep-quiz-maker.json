@@ -1,0 +1,25 @@
+{
+  "title": "Exam Prep Quiz Maker",
+  "slug": "exam-prep-quiz-maker",
+  "promptText": "You are a test preparation expert who creates practice quizzes that closely mirror real exam formats and difficulty levels. Create a practice quiz based on the following:\n\nSubject: [SUBJECT]\nTopic(s): [TOPICS]\nExam Format: [EXAM_FORMAT]\nNumber of Questions: [NUM_QUESTIONS]\nDifficulty Distribution: [DIFFICULTY_MIX]\nStudy Material: [STUDY_MATERIAL]\n\nFor the quiz:\n1. Generate questions that match the style and cognitive demand of the actual exam\n2. Mix question types as specified: multiple choice, short answer, true/false with explanation, matching, and/or free response\n3. Include distractor analysis for multiple choice questions — explain why each wrong answer might be tempting\n4. Tag each question with its Bloom's Taxonomy level (Remember, Understand, Apply, Analyze, Evaluate, Create)\n5. Note which questions test commonly confused concepts or frequent exam pitfalls\n\nAfter the quiz, provide:\n- Complete answer key with detailed explanations for every question\n- For each wrong answer on multiple choice, explain the specific misconception it tests\n- Score interpretation guide: What does scoring 90%+, 70-89%, 50-69%, or below 50% suggest about readiness?\n- Targeted study recommendations based on likely weak areas\n- 5 bonus challenge questions at a higher difficulty level for students who scored 90%+",
+  "description": "This prompt creates realistic practice quizzes that mirror actual exam formats, complete with distractor analysis, Bloom's Taxonomy tags, and detailed answer explanations. Unlike generic practice questions, these quizzes are designed to expose the specific misconceptions and knowledge gaps that commonly trip students up on real exams. The distractor analysis for multiple choice questions teaches students not just what the right answer is, but why the wrong answers seem plausible — building deeper understanding. It is perfect for students studying for midterms, finals, AP exams, or professional certifications who want practice that feels like the real thing.",
+  "tool": "gemini",
+  "category": "education",
+  "tags": ["exam-prep", "quiz", "practice-test", "study-skills", "test-preparation"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "SUBJECT", "description": "Academic subject", "example": "AP Psychology" },
+    { "name": "TOPICS", "description": "Specific topics to cover", "example": "Unit 5: Cognitive Psychology — memory types, encoding, storage, retrieval, forgetting" },
+    { "name": "EXAM_FORMAT", "description": "Format of the actual exam being prepared for", "example": "AP exam style — 70 multiple choice (70 min) + 2 free response (50 min)" },
+    { "name": "NUM_QUESTIONS", "description": "Number of practice questions", "example": "15 multiple choice + 1 free response" },
+    { "name": "DIFFICULTY_MIX", "description": "Distribution of difficulty levels", "example": "40% easy recall, 40% medium application, 20% hard analysis" },
+    { "name": "STUDY_MATERIAL", "description": "Notes or textbook content to base questions on", "example": "Chapter 7 of Myers AP Psychology covering sensory memory, short-term/working memory, long-term memory, encoding strategies, and Ebbinghaus forgetting curve" }
+  ],
+  "tips": ["Match the EXAM_FORMAT as closely as possible to your actual test for the most realistic practice", "Take the quiz under timed conditions to build test-taking stamina and time management skills", "Review every wrong answer explanation even for questions you got right — distractor analysis builds deeper understanding"],
+  "exampleOutput": "AP PSYCHOLOGY PRACTICE QUIZ: Cognitive Psychology — Memory\n\nQ1 (Remember): Which type of sensory memory stores visual information for approximately 0.5 seconds?\nA) Echoic memory\nB) Iconic memory\nC) Working memory\nD) Procedural memory\n\nDistractor Analysis:\nA) Echoic memory — Tempting because it IS a type of sensory memory, but it stores auditory information (3-4 seconds)\nC) Working memory — Common confusion; students mix up sensory memory with the broader working memory model\nD) Procedural memory — A type of long-term memory; included to catch students who confuse memory classification levels\n\nCorrect Answer: B) Iconic memory\nBloom's Level: Remember\nExam Pitfall: Students frequently swap iconic (visual) and echoic (auditory) — mnemonic: 'Icon = Image = Visual'...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Exam Prep Quiz Maker Prompt for Gemini",
+  "metaDescription": "Create realistic practice quizzes with answer explanations and distractor analysis using this free Gemini prompt for exam prep."
+}

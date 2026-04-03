@@ -1,0 +1,24 @@
+{
+  "title": "Resume Achievement Rewriter",
+  "slug": "resume-achievement-rewriter",
+  "promptText": "You are a professional resume writer who specializes in transforming vague job descriptions into powerful, quantified achievement bullets. I will provide my current resume bullets and you will rewrite each one using the following framework:\n\nMy Current Role: [JOB_TITLE] at [COMPANY]\nIndustry: [INDUSTRY]\nTarget Role: [TARGET_ROLE]\n\nCurrent Resume Bullets:\n[CURRENT_BULLETS]\n\nFor each bullet, provide:\n1. Rewritten Version: Transform the duty-focused bullet into an achievement-focused statement using the formula: [Strong Action Verb] + [Specific Task/Project] + [Quantified Result/Impact]. If I did not provide numbers, suggest realistic metrics I should try to recall or estimate.\n2. Power Score: Rate the original bullet 1-10 and the rewritten version 1-10, with explanation.\n3. Keywords Added: List any industry-relevant keywords incorporated that will help with ATS (Applicant Tracking System) screening.\n4. Alternative Version: Provide a second rewrite option with a different angle or emphasis.\n\nAfter rewriting all bullets, provide:\n- A summary of the 5 strongest action verbs used and why they work\n- ATS optimization notes: keywords that should appear throughout the resume for the target role\n- A before/after comparison showing the overall improvement in impact",
+  "description": "This prompt transforms bland, responsibility-focused resume bullets into compelling, quantified achievement statements that catch the attention of both ATS systems and hiring managers. Most job seekers describe what they did rather than what they accomplished, and this prompt fixes that by applying the proven action-verb-plus-metrics formula that professional resume writers use. Each bullet gets a power score, ATS-friendly keywords, and an alternative version, giving job seekers multiple options to choose from. It is invaluable for career changers who need to reframe their experience for a new industry, or for anyone whose resume reads like a job description rather than a highlight reel of achievements.",
+  "tool": "claude",
+  "category": "writing",
+  "tags": ["resume", "career", "job-search", "ATS-optimization", "professional-writing"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "JOB_TITLE", "description": "Your current or most recent job title", "example": "Marketing Coordinator" },
+    { "name": "COMPANY", "description": "Company where you held this role", "example": "TechStart Inc." },
+    { "name": "INDUSTRY", "description": "Your industry", "example": "B2B SaaS" },
+    { "name": "TARGET_ROLE", "description": "The role you are targeting next", "example": "Marketing Manager at a mid-size tech company" },
+    { "name": "CURRENT_BULLETS", "description": "Your existing resume bullets to rewrite", "example": "- Managed social media accounts\n- Helped with email marketing campaigns\n- Responsible for creating content\n- Worked on product launches\n- Assisted with event planning" }
+  ],
+  "tips": ["Include as many numbers and metrics as you can remember — even estimates make bullets dramatically stronger", "Specify your target role so the rewrite emphasizes the most relevant skills and keywords", "Use the alternative versions to tailor bullets for different job applications"],
+  "exampleOutput": "ORIGINAL: Managed social media accounts\nPOWER SCORE: 3/10 — Generic duty statement with no specifics or results.\n\nREWRITTEN: Grew organic social media following by 145% across LinkedIn and Twitter (2K to 4.9K) by implementing a data-driven content calendar and engagement strategy, generating 30+ qualified inbound leads monthly.\nPOWER SCORE: 9/10 — Specific platform names, quantified growth, clear methodology, and business outcome.\n\nKEYWORDS ADDED: organic social, content calendar, engagement strategy, inbound leads, data-driven\n\nALTERNATIVE: Spearheaded B2B social media strategy across 3 platforms, achieving 145% follower growth and reducing cost-per-lead by 22% through organic content optimization.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Resume Achievement Rewriter Prompt for Claude",
+  "metaDescription": "Transform weak resume bullets into powerful achievement statements with this free Claude prompt. Get quantified, ATS-optimized rewrites."
+}

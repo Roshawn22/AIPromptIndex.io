@@ -1,0 +1,23 @@
+{
+  "title": "Cursor API Client Generator",
+  "slug": "cursor-api-client-generator",
+  "promptText": "You are a senior backend engineer specializing in API integrations. Generate a fully typed [LANGUAGE] API client for the [API_NAME] API. The client should interact with these endpoints: [ENDPOINTS]. Build the client with these requirements: a base client class with configurable base URL, authentication handling for [AUTH_TYPE], automatic request/response serialization, comprehensive error handling with custom error classes for different HTTP status codes (400, 401, 403, 404, 429, 500), automatic retry logic with exponential backoff for transient failures, request timeout configuration, response type interfaces for every endpoint, request parameter validation before sending, rate limit awareness with automatic throttling, logging hooks for debugging, and a clean public API that abstracts away HTTP details. Include full TypeScript types or type annotations, JSDoc/docstring documentation for every public method, and usage examples for each endpoint. Structure the code for easy testing with dependency injection for the HTTP layer.",
+  "description": "This prompt generates production-ready API client libraries that handle all the complexity of external API integration. Instead of making raw HTTP calls scattered throughout your codebase, you get a clean, typed, well-documented client with built-in error handling, retry logic, rate limiting, and authentication. The generated client follows best practices for API consumption including proper error classification, exponential backoff, and dependency injection for testability. This saves developers hours of boilerplate work and prevents common integration bugs like missing error handling, retry storms, and untyped responses.",
+  "tool": "cursor",
+  "category": "coding",
+  "tags": ["api-integration", "typescript", "http-client", "backend", "software-architecture"],
+  "difficulty": "advanced",
+  "promptType": "text",
+  "variables": [
+    { "name": "LANGUAGE", "description": "Programming language for the client", "example": "TypeScript" },
+    { "name": "API_NAME", "description": "The API to build a client for", "example": "Stripe Payments" },
+    { "name": "ENDPOINTS", "description": "List of endpoints to support", "example": "create payment intent, retrieve payment, list payments, create refund, retrieve customer" },
+    { "name": "AUTH_TYPE", "description": "Authentication method used by the API", "example": "Bearer token in Authorization header" }
+  ],
+  "tips": ["Provide the actual API documentation URL for the most accurate endpoint typing", "Include rate limit specifications if known to generate accurate throttling logic", "Use the generated client as a foundation and add endpoint-specific validation as needed"],
+  "exampleOutput": "// stripe-client.ts\n\nexport interface PaymentIntent {\n  id: string;\n  amount: number;\n  currency: string;\n  status: 'requires_payment_method' | 'requires_confirmation' | 'succeeded' | 'canceled';\n  created: number;\n}\n\nexport class StripeApiError extends Error {\n  constructor(public statusCode: number, public code: string, message: string) {\n    super(message);\n    this.name = 'StripeApiError';\n  }\n}\n\nexport class StripeClient {\n  private readonly baseUrl = 'https://api.stripe.com/v1';\n  private readonly maxRetries = 3;\n\n  constructor(private readonly apiKey: string, private readonly httpClient: HttpClient = new FetchHttpClient()) {}\n\n  async createPaymentIntent(params: CreatePaymentIntentParams): Promise<PaymentIntent> {\n    ...\n  }\n}",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "API Client Generator Prompt for Cursor",
+  "metaDescription": "Generate typed, production-ready API clients with Cursor. Get error handling, retries, rate limiting, and full documentation built in."
+}

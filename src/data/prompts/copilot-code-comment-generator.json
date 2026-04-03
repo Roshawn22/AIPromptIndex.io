@@ -1,0 +1,23 @@
+{
+  "title": "Copilot Code Comment Generator",
+  "slug": "copilot-code-comment-generator",
+  "promptText": "You are a technical documentation specialist. Add comprehensive, meaningful comments to the following [LANGUAGE] code from a [PROJECT_TYPE] project. The code handles [FUNCTIONALITY].\n\n[CODE_BLOCK]\n\nApply these commenting standards: add a file-level docstring explaining the module's purpose and its role in the larger system, add JSDoc/docstring comments to every function and class with parameters, return types, exceptions thrown, and usage examples, add inline comments only where the code does something non-obvious or uses a workaround with a brief explanation of why, mark any technical debt or known limitations with TODO or FIXME comments, add section separator comments for logical code blocks within long functions, include complexity notes (Big O) for algorithms and data structure operations, and document any implicit assumptions or prerequisites. Do not add comments that merely restate what the code does in English. Every comment should add context, explain reasoning, or warn about gotchas that the code alone does not convey. Preserve all original code exactly as written.",
+  "description": "This prompt adds professional-quality documentation comments to existing code without modifying the code itself. Good comments explain the why, not the what, and this prompt follows that principle by adding context about design decisions, complexity implications, known limitations, and non-obvious behavior. The output includes file-level documentation, function signatures with full parameter descriptions, strategic inline comments, and technical debt markers. This is particularly useful when onboarding new team members to a codebase, preparing code for open-source release, or retrofitting documentation into legacy code that lacks it.",
+  "tool": "github-copilot",
+  "category": "coding",
+  "tags": ["documentation", "code-comments", "jsdoc", "code-quality", "developer-experience"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "LANGUAGE", "description": "The programming language", "example": "Python" },
+    { "name": "PROJECT_TYPE", "description": "Type of project", "example": "Django REST API" },
+    { "name": "FUNCTIONALITY", "description": "What this code does", "example": "user permission checking and role-based access control" },
+    { "name": "CODE_BLOCK", "description": "The code to add comments to", "example": "# paste your code here" }
+  ],
+  "tips": ["Include the broader project context so comments can reference how this module fits into the system", "Review generated comments and remove any that merely restate obvious code behavior", "Use this as a starting point and add domain-specific context that only you know about"],
+  "exampleOutput": "\"\"\"\nPermission Service - Role-Based Access Control (RBAC)\n\nCentral authorization layer for the API. All endpoint decorators\nand middleware route through this module to verify user permissions.\n\nArchitecture note: Uses a hierarchical role model where admin > editor > viewer.\nPermissions are cached per-request in the user object to avoid repeated DB queries.\n\nSee also: auth/models.py for Role definitions, middleware/auth.py for request integration.\n\"\"\"\n\ndef check_permission(user: User, resource: str, action: str) -> bool:\n    \"\"\"\n    Verify if a user has permission to perform an action on a resource.\n    \n    Args:\n        user: Authenticated user object with .roles populated\n        resource: Resource identifier (e.g., 'posts', 'users', 'settings')\n        action: CRUD action ('create', 'read', 'update', 'delete')\n    \n    Returns:\n        True if the user has sufficient permissions\n    \n    Raises:\n        PermissionDenied: If user.roles is empty (indicates auth middleware was bypassed)\n    \n    Example:\n        if check_permission(request.user, 'posts', 'delete'):\n            post.delete()\n    \"\"\"\n    # FIXME: Role cache is not invalidated when admin changes user roles mid-session\n    ...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Code Comment Generator Prompt for GitHub Copilot",
+  "metaDescription": "Add professional documentation comments to your code with GitHub Copilot. Get JSDoc, inline comments, and complexity notes automatically."
+}

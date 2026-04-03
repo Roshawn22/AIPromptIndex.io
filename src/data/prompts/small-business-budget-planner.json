@@ -1,0 +1,23 @@
+{
+  "title": "Small Business Budget Planner",
+  "slug": "small-business-budget-planner",
+  "promptText": "You are a small business financial advisor with expertise in budgeting and cash flow management. Create a detailed monthly budget plan for a [BUSINESS_TYPE] with monthly revenue of approximately [MONTHLY_REVENUE] and [NUM_EMPLOYEES] employees. The business is currently in the [BUSINESS_STAGE] stage. Break down the budget into these categories: fixed costs (rent, insurance, subscriptions), variable costs (inventory, supplies, commissions), payroll and benefits, marketing and advertising, technology and tools, emergency fund allocation, and growth investment. For each category, provide a recommended percentage of revenue, specific line items with estimated amounts, and cost-saving tips. Include a cash flow projection template showing weekly inflows and outflows. Flag any spending ratios that are outside healthy benchmarks for this business type and provide a prioritized list of expenses to cut if revenue drops by 20 percent.",
+  "description": "This prompt produces a comprehensive monthly budget framework tailored to your specific business type, revenue level, and growth stage. It goes beyond simple expense tracking by providing industry-appropriate spending benchmarks, cash flow projections, and contingency planning for revenue downturns. The budget includes specific line items with estimated dollar amounts so you can immediately compare it against your actual spending. It is ideal for small business owners who need financial structure but cannot yet afford a bookkeeper or fractional CFO.",
+  "tool": "claude",
+  "category": "business",
+  "tags": ["budgeting", "small-business", "financial-planning", "cash-flow", "business-finance"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "BUSINESS_TYPE", "description": "The type of small business", "example": "digital marketing agency" },
+    { "name": "MONTHLY_REVENUE", "description": "Average monthly revenue", "example": "$25,000" },
+    { "name": "NUM_EMPLOYEES", "description": "Number of employees including the owner", "example": "4" },
+    { "name": "BUSINESS_STAGE", "description": "Current stage of the business", "example": "growth (2 years in)" }
+  ],
+  "tips": ["Update this budget monthly as your revenue and costs change", "Pay special attention to the spending ratio flags to catch problems early", "Use the contingency plan proactively rather than waiting for a downturn"],
+  "exampleOutput": "Monthly Budget Plan - Digital Marketing Agency ($25K Revenue)\n\nFixed Costs (22% of revenue = $5,500):\n- Office/coworking space: $1,200\n- Business insurance: $300\n- Software subscriptions: $800 (project management, design tools, analytics)\n- Internet and phone: $200\n- Accounting software: $50\n\nPayroll & Benefits (45% = $11,250):\n- Owner salary: $5,000\n- 3 employees: $6,250 combined...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Small Business Budget Planner Prompt for Claude",
+  "metaDescription": "Build a detailed monthly budget for your small business with Claude. Get spending benchmarks, cash flow projections, and contingency plans."
+}

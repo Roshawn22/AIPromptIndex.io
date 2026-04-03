@@ -1,0 +1,23 @@
+{
+  "title": "Market Opportunity Analyzer",
+  "slug": "market-opportunity-analyzer",
+  "promptText": "You are a market research analyst with expertise in opportunity assessment. Conduct a comprehensive market opportunity analysis for a [PRODUCT_TYPE] targeting [TARGET_MARKET] in the [INDUSTRY] industry. The proposed price point is [PRICE_POINT]. Provide the following analysis: Market Sizing (estimate TAM, SAM, and SOM with your reasoning and assumptions clearly stated), Customer Segments (identify 3-4 distinct buyer personas with their pain points, willingness to pay, and acquisition channels), Competitive Landscape (map existing solutions into tiers: direct competitors, indirect competitors, and substitutes, noting gaps in the market), Market Trends (5 macro trends that support or threaten this opportunity over the next 3 years), Barriers to Entry (what makes this market hard to enter and what advantages a new entrant would need), Go-to-Market Recommendations (top 3 channels to reach early adopters and a suggested launch sequence), and a Risk Assessment scoring the opportunity on market timing, competition intensity, customer accessibility, and revenue potential on a 1-10 scale with justification.",
+  "description": "This prompt delivers a structured market opportunity analysis that covers every dimension an entrepreneur or product team needs to evaluate before committing resources to a new venture. It provides market sizing with transparent assumptions, detailed customer personas, competitive mapping, trend analysis, and a scored risk assessment. The output mirrors what a consulting firm would produce in a market study, giving you the data framework to make informed go or no-go decisions. It is particularly useful for founders validating new ideas, product managers evaluating expansion opportunities, and business strategists assessing adjacent markets.",
+  "tool": "claude",
+  "category": "business",
+  "tags": ["market-research", "competitive-analysis", "startup", "business-strategy", "market-sizing"],
+  "difficulty": "advanced",
+  "promptType": "text",
+  "variables": [
+    { "name": "PRODUCT_TYPE", "description": "The product or service being analyzed", "example": "AI-powered meal planning app" },
+    { "name": "TARGET_MARKET", "description": "Primary market or geography", "example": "health-conscious millennials in the US" },
+    { "name": "INDUSTRY", "description": "The broader industry category", "example": "health tech and wellness" },
+    { "name": "PRICE_POINT", "description": "Proposed pricing for the product", "example": "$14.99/month subscription" }
+  ],
+  "tips": ["Cross-reference the market sizing estimates with publicly available industry reports", "Use the buyer personas to validate your assumptions through customer interviews", "Pay special attention to the risk scores to identify where you need more data"],
+  "exampleOutput": "Market Opportunity Analysis: AI-Powered Meal Planning App\n\nMarket Sizing:\nTAM: $8.2B (global digital health and wellness app market)\nSAM: $1.4B (US meal planning and nutrition app segment)\nSOM: $28M (achievable share targeting health-conscious millennials in Year 1-3)\nAssumptions: 45M US millennials actively tracking health metrics, 12% adoption rate for paid nutrition apps...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Market Opportunity Analyzer Prompt for Claude",
+  "metaDescription": "Analyze market opportunities with Claude. Get TAM/SAM/SOM sizing, competitive mapping, buyer personas, and risk scoring for your idea."
+}

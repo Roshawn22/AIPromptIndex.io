@@ -1,0 +1,22 @@
+{
+  "title": "SD Character Design Sheet",
+  "slug": "sd-character-design-sheet",
+  "promptText": "Character design sheet, multiple views, front view, side view, back view, three-quarter view, [CHARACTER_DESCRIPTION], [ART_STYLE] art style, [COLOR_PALETTE] color palette, clean white background, consistent proportions across all views, detailed clothing and accessories, expressive pose variations showing personality, professional character turnaround sheet layout, high detail, clean linework, concept art quality, full body, reference sheet format, symmetrical layout, studio lighting, 4k resolution, trending on ArtStation",
+  "description": "This prompt generates professional character design reference sheets showing your character from multiple angles in a consistent style. Character turnaround sheets are essential for game developers, animators, comic artists, and anyone who needs to maintain visual consistency across multiple illustrations. The prompt produces front, side, back, and three-quarter views arranged in a clean reference sheet layout, making it easy to hand off to other artists or use as your own reference for future illustrations. It works particularly well for fantasy, sci-fi, and stylized characters.",
+  "tool": "stable-diffusion",
+  "category": "image-generation",
+  "tags": ["character-design", "concept-art", "reference-sheet", "game-art", "illustration"],
+  "difficulty": "intermediate",
+  "promptType": "image",
+  "variables": [
+    { "name": "CHARACTER_DESCRIPTION", "description": "Detailed description of the character", "example": "young female elf ranger with short silver hair, leather armor, carrying a longbow" },
+    { "name": "ART_STYLE", "description": "The artistic style to use", "example": "semi-realistic anime" },
+    { "name": "COLOR_PALETTE", "description": "Primary colors for the character", "example": "forest green and brown earth tones" }
+  ],
+  "tips": ["Include specific details about accessories and weapons for consistent designs", "Use 'clean white background' to ensure the character stands out clearly", "Generate at higher resolutions and use img2img to refine individual views"],
+  "exampleOutput": "A professional character turnaround sheet on a white background showing four views of a young female elf ranger with short silver hair wearing forest green leather armor, carrying a longbow, rendered in semi-realistic anime style with clean linework and consistent proportions across all views.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Character Design Sheet Prompt for Stable Diffusion",
+  "metaDescription": "Create professional character turnaround sheets with Stable Diffusion. Get multi-angle reference sheets in your chosen art style."
+}

@@ -1,0 +1,25 @@
+{
+  "title": "Essay Outline Builder",
+  "slug": "essay-outline-builder",
+  "promptText": "You are an academic writing coach who helps students build strong, well-organized essay outlines. Create a detailed essay outline for the following assignment:\n\nEssay Type: [ESSAY_TYPE]\nTopic/Prompt: [ESSAY_PROMPT]\nThesis or Argument: [THESIS]\nRequired Length: [LENGTH]\nSources Available: [SOURCES]\nAcademic Level: [ACADEMIC_LEVEL]\n\nProvide a comprehensive outline that includes:\n\n1. Introduction\n   - Hook: 3 options (startling statistic, provocative question, brief anecdote) — let me choose which works best\n   - Background context (2-3 sentences of necessary context)\n   - Thesis statement: Refine my thesis into a clear, arguable, specific claim\n\n2. Body Paragraphs (one for each main argument)\n   For each paragraph provide:\n   - Topic sentence that directly supports the thesis\n   - Evidence placeholder: What type of evidence to use and where it might come from\n   - Analysis prompt: 2-3 guiding questions to help me write the analysis connecting evidence to the argument\n   - Transition sentence suggestion to the next paragraph\n\n3. Counterargument Paragraph\n   - Strongest opposing argument to address\n   - Strategy for refuting it (concede and redirect, undermine the evidence, or expose logical flaws)\n\n4. Conclusion\n   - Thesis restatement (rephrased, not copied)\n   - Synthesis of main arguments\n   - Broader significance or call to action\n\nAlso provide:\n- A logical ordering recommendation if my arguments should be rearranged for maximum persuasive impact\n- Warnings about common pitfalls for this essay type\n- 3 ways to strengthen my thesis if it needs more specificity",
+  "description": "This prompt helps students build structured, thesis-driven essay outlines that provide a clear roadmap for writing. Instead of generating the essay itself, it creates the scaffolding students need to write effectively on their own — including refined thesis statements, topic sentences, evidence strategies, analysis prompts, and counterargument approaches. The output teaches essay architecture while the student does the actual writing and thinking. It is ideal for high school and college students who struggle with essay organization, ESL students learning academic writing conventions, and writing center tutors who need quick outline templates for common essay types.",
+  "tool": "claude",
+  "category": "education",
+  "tags": ["essay-writing", "academic-writing", "outline", "thesis", "student-study"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "ESSAY_TYPE", "description": "Type of essay to outline", "example": "argumentative essay" },
+    { "name": "ESSAY_PROMPT", "description": "The essay question or assignment prompt", "example": "Should colleges require standardized test scores for admissions? Take a position and defend it with evidence." },
+    { "name": "THESIS", "description": "Your initial thesis or argument (will be refined)", "example": "Colleges should drop standardized test requirements because they are biased and do not predict success" },
+    { "name": "LENGTH", "description": "Required essay length", "example": "1500-2000 words (5-7 pages)" },
+    { "name": "SOURCES", "description": "Sources you have access to or plan to use", "example": "3 peer-reviewed studies on SAT bias, 2 articles about test-optional colleges, UC system data on post-test-optional admissions" },
+    { "name": "ACADEMIC_LEVEL", "description": "Your academic level", "example": "college freshman (English Composition 101)" }
+  ],
+  "tips": ["Start with a rough thesis even if it is not perfect — the prompt will help refine it", "List your actual sources so the evidence suggestions align with what you have available", "Use the analysis guiding questions to push yourself beyond summary into genuine critical thinking"],
+  "exampleOutput": "REFINED THESIS:\n'Colleges should permanently adopt test-optional admissions policies because standardized tests disproportionately measure socioeconomic advantage rather than academic potential, fail to predict college success better than GPA, and their removal has increased campus diversity without lowering academic standards.'\n\nStrengthening options:\n1. Add a scope qualifier: '...for undergraduate liberal arts programs'\n2. Add a concession: 'While standardized tests provide one useful data point,...'\n3. Add a timeframe: '...as demonstrated by data from the 200+ institutions that went test-optional since 2020'\n\nBODY PARAGRAPH 1: Socioeconomic Bias\nTopic sentence: Standardized tests function less as measures of aptitude and more as reflections of family income and access to test preparation resources.\nEvidence: Use your peer-reviewed studies on SAT score correlation with household income...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Essay Outline Builder Prompt for Claude",
+  "metaDescription": "Build structured essay outlines with thesis refinement and evidence strategies using this free Claude prompt for students."
+}

@@ -1,0 +1,27 @@
+{
+  "title": "MJ Architecture Visualizer",
+  "slug": "mj-architecture-visualizer",
+  "promptText": "Architectural visualization of a [BUILDING_TYPE], [ARCHITECTURAL_STYLE] style, located in [SETTING], [TIME_OF_DAY] lighting conditions, featuring [KEY_FEATURES]. Materials include [MATERIALS]. Surrounded by [LANDSCAPING]. Photorealistic exterior rendering, shot from a [CAMERA_ANGLE] perspective, professional architectural photography quality, dramatic sky, people for scale, environmental context showing the building in its neighborhood, high dynamic range lighting, crisp details on material textures, reflections in glass surfaces, 16:9 cinematic composition --ar 16:9 --s 800 --q 2",
+  "description": "This prompt generates photorealistic architectural visualizations that showcase buildings in their intended environment with stunning detail. Architectural rendering is typically expensive and time-consuming, requiring specialized 3D software and skilled artists. This prompt produces high-quality exterior visualizations that can be used for concept presentations, design exploration, client pitches, and portfolio pieces. The output includes realistic material textures, environmental context, human figures for scale, and dramatic lighting that brings architectural concepts to life. It is invaluable for architects, real estate developers, design students, and urban planners who need to visualize building concepts quickly.",
+  "tool": "midjourney",
+  "category": "image-generation",
+  "tags": ["architecture", "3d-rendering", "visualization", "real-estate", "building-design"],
+  "difficulty": "advanced",
+  "promptType": "image",
+  "variables": [
+    { "name": "BUILDING_TYPE", "description": "Type of building to visualize", "example": "three-story mixed-use residential and retail building" },
+    { "name": "ARCHITECTURAL_STYLE", "description": "Architectural design style", "example": "contemporary Scandinavian" },
+    { "name": "SETTING", "description": "Location and context", "example": "a tree-lined urban street in a coastal city" },
+    { "name": "TIME_OF_DAY", "description": "Lighting time for the scene", "example": "golden hour sunset" },
+    { "name": "KEY_FEATURES", "description": "Notable architectural elements", "example": "large balconies with glass railings, rooftop garden, ground-floor cafe with outdoor seating" },
+    { "name": "MATERIALS", "description": "Building materials and finishes", "example": "warm timber cladding, white stucco, and floor-to-ceiling glass" },
+    { "name": "LANDSCAPING", "description": "Surrounding landscape elements", "example": "mature birch trees, native grasses, and a cobblestone pedestrian path" },
+    { "name": "CAMERA_ANGLE", "description": "Viewing perspective", "example": "street-level three-quarter view" }
+  ],
+  "tips": ["Include people and street-level context for more realistic and relatable visualizations", "Golden hour and blue hour lighting produces the most dramatic and appealing renders", "Specify real material brands or references for more accurate texture rendering"],
+  "exampleOutput": "A photorealistic architectural rendering of a contemporary Scandinavian three-story mixed-use building on a tree-lined coastal street, warm timber cladding with white stucco and floor-to-ceiling glass, large balconies with glass railings, rooftop garden visible, ground-floor cafe with outdoor seating, golden hour sunset lighting, mature birch trees and native grasses, pedestrians for scale, street-level three-quarter view, cinematic 16:9 composition.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Architecture Visualizer Prompt for Midjourney",
+  "metaDescription": "Create photorealistic architectural renderings with Midjourney. Visualize buildings with realistic materials, lighting, and environments."
+}

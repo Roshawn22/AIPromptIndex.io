@@ -1,0 +1,25 @@
+{
+  "title": "Classroom Discussion Facilitator",
+  "slug": "classroom-discussion-facilitator",
+  "promptText": "You are a master educator skilled in Socratic questioning and facilitating deep classroom discussions. Generate a comprehensive discussion guide for the following topic:\n\nSubject: [SUBJECT]\nGrade Level: [GRADE_LEVEL]\nTopic: [TOPIC]\nPrior Knowledge: [PRIOR_KNOWLEDGE]\nDiscussion Length: [DURATION] minutes\nDiscussion Format: [FORMAT]\n\nProvide the following:\n\n1. Opening Hook (2-3 minutes): A provocative question, scenario, or brief activity that immediately engages students and activates prior knowledge.\n\n2. Level 1 Questions — Recall and Understanding (3-4 questions): Questions that check comprehension and establish shared understanding of key concepts. Include expected student responses.\n\n3. Level 2 Questions — Analysis and Application (4-5 questions): Questions that require students to analyze, compare, connect, or apply concepts. Include follow-up probing questions for each.\n\n4. Level 3 Questions — Evaluation and Creation (3-4 questions): Questions that challenge students to evaluate, defend positions, propose solutions, or think creatively. These should have multiple valid perspectives.\n\n5. Discussion Protocols: Specific sentence starters, accountable talk stems, and norms to promote equitable participation (especially for quieter students).\n\n6. Formative Check: A quick exit ticket question or reflection prompt that assesses whether the discussion achieved its learning goals.\n\n7. Contingency Questions: 3 backup questions in case the discussion stalls or goes off track.\n\nEnsure questions build progressively in cognitive demand following Bloom's Taxonomy.",
+  "description": "This prompt creates a complete discussion facilitation guide with questions organized by Bloom's Taxonomy levels, participation protocols, and contingency plans for when conversations stall. Classroom discussions are one of the most powerful learning strategies, but they require careful planning to move beyond surface-level recall into genuine critical thinking. This prompt provides the full scaffolding teachers need — from attention-grabbing hooks to exit ticket assessments — to run discussions that engage every student. It is especially useful for new teachers learning to facilitate Socratic seminars, veteran teachers exploring unfamiliar topics, and instructional coaches modeling discussion techniques.",
+  "tool": "gemini",
+  "category": "education",
+  "tags": ["classroom-discussion", "Socratic-method", "questioning", "teaching", "critical-thinking"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "SUBJECT", "description": "Subject area for the discussion", "example": "US History" },
+    { "name": "GRADE_LEVEL", "description": "Grade level of students", "example": "11th grade" },
+    { "name": "TOPIC", "description": "Discussion topic", "example": "The ethics and consequences of dropping atomic bombs on Hiroshima and Nagasaki" },
+    { "name": "PRIOR_KNOWLEDGE", "description": "What students already know about this topic", "example": "Students have read about the Manhattan Project and the Pacific Theater of WWII" },
+    { "name": "DURATION", "description": "Length of discussion in minutes", "example": "35" },
+    { "name": "FORMAT", "description": "Discussion format to use", "example": "Socratic seminar with inner/outer circle" }
+  ],
+  "tips": ["Share Level 1 questions with students the night before so they come prepared with baseline knowledge", "Print the accountable talk stems on table tents so students can reference them during discussion", "Assign a student observer in the outer circle to track participation patterns and report back"],
+  "exampleOutput": "DISCUSSION GUIDE: The Ethics of Atomic Warfare — 11th Grade US History\n\nOPENING HOOK (3 minutes):\nDisplay two photographs side by side: the jubilant celebration in Times Square on V-J Day and the aftermath in Hiroshima. Ask students to write a one-sentence reaction in their journals. Then ask: 'Can both of these images represent the truth about the same event? How?'\n\nLEVEL 1 — RECALL & UNDERSTANDING:\nQ1: What were the stated reasons President Truman gave for authorizing the use of atomic weapons?\nExpected response: End the war quickly, save American lives from a land invasion, demonstrate power to the Soviet Union...\n\nLEVEL 2 — ANALYSIS & APPLICATION:\nQ1: How did the concept of 'total war' that developed throughout WWII make the decision to use atomic weapons seem more acceptable to military leaders?\nProbing follow-up: Was there a meaningful ethical line between firebombing Tokyo and dropping the atomic bomb?...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Classroom Discussion Facilitator Prompt for Gemini",
+  "metaDescription": "Generate Bloom's Taxonomy discussion questions for any topic with this free Gemini prompt. Get hooks, protocols, and exit tickets."
+}

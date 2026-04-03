@@ -1,0 +1,24 @@
+{
+  "title": "Customer Onboarding Email Sequence",
+  "slug": "customer-onboarding-email-sequence",
+  "promptText": "You are an email marketing specialist who designs high-converting onboarding sequences. Create a [NUM_EMAILS]-email onboarding sequence for a [BUSINESS_TYPE] that just acquired a new customer who purchased [PRODUCT_SERVICE]. The sequence should span [TIMEFRAME] and accomplish these goals: welcome the customer and set expectations, educate them on getting the most value from their purchase, reduce buyer's remorse, encourage a second purchase or upsell, and generate a review or referral. For each email, provide the subject line (with an A/B variant), preview text, full email body copy, a clear call to action, and the optimal send timing relative to purchase. Include personalization tokens where appropriate. Write in a [BRAND_TONE] tone. Keep each email under 200 words for maximum readability.",
+  "description": "This prompt generates a complete customer onboarding email sequence that nurtures new buyers from their first purchase through becoming loyal advocates. Each email comes with subject lines, preview text, full copy, and strategic timing so you can load it directly into your email platform. The sequence is designed to reduce churn, increase lifetime value, and generate social proof through reviews and referrals. It is particularly valuable for small businesses and e-commerce stores that want to automate their post-purchase experience without hiring a copywriter.",
+  "tool": "claude",
+  "category": "marketing",
+  "tags": ["email-marketing", "onboarding", "customer-retention", "automation", "copywriting"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "NUM_EMAILS", "description": "Number of emails in the sequence", "example": "6" },
+    { "name": "BUSINESS_TYPE", "description": "Type of business sending the emails", "example": "online skincare brand" },
+    { "name": "PRODUCT_SERVICE", "description": "What the customer bought", "example": "a vitamin C serum starter kit" },
+    { "name": "TIMEFRAME", "description": "How long the sequence should span", "example": "21 days" },
+    { "name": "BRAND_TONE", "description": "The brand voice and personality", "example": "friendly and educational" }
+  ],
+  "tips": ["Test both subject line variants to see which resonates with your audience", "Adjust send timing based on your product usage cycle", "Add your own product images and brand styling before loading into your email platform"],
+  "exampleOutput": "Email 1 - Welcome (Send: Immediately after purchase)\nSubject A: Welcome to glowing skin, [FIRST_NAME]!\nSubject B: Your vitamin C journey starts now\nPreview: Here is exactly what to expect over the next 30 days\n\nHi [FIRST_NAME],\n\nYou just made your skin's new best friend. Your Vitamin C Serum Starter Kit is on its way, and we cannot wait for you to see the results...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Customer Onboarding Email Sequence Prompt for Claude",
+  "metaDescription": "Create a complete post-purchase email sequence with Claude. Get subject lines, copy, timing, and CTAs for your onboarding automation."
+}

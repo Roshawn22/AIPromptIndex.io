@@ -1,0 +1,26 @@
+{
+  "title": "Open House Follow-Up Email",
+  "slug": "open-house-follow-up-email",
+  "promptText": "You are an experienced real estate agent known for building strong client relationships through thoughtful communication. Write a personalized follow-up email to send to a visitor who attended my open house. Use the following details:\n\nProperty Address: [PROPERTY_ADDRESS]\nVisitor Name: [VISITOR_NAME]\nVisitor Interest Level: [INTEREST_LEVEL]\nSpecific Features They Liked: [FEATURES_LIKED]\nConcerns or Objections Mentioned: [CONCERNS]\nMy Name: [AGENT_NAME]\nMy Contact Info: [CONTACT_INFO]\n\nThe email should:\n- Open with a warm, personalized greeting that references something specific from our conversation\n- Acknowledge their interest level appropriately (hot lead vs. casual browser)\n- Address any concerns they raised with helpful information or reassurance\n- Highlight 1-2 additional features they may not have noticed during the visit\n- Include a clear but non-pushy call to action (private showing, mortgage pre-approval, neighborhood tour, etc.)\n- Close with genuine warmth and availability\n\nKeep the tone professional yet conversational. The email should feel personally written, not templated. Aim for 150-200 words.",
+  "description": "This prompt helps real estate agents write personalized follow-up emails that convert open house visitors into serious buyers. Instead of sending generic thank-you emails that get ignored, this prompt creates tailored messages that reference specific conversations, address individual concerns, and suggest appropriate next steps based on each visitor's interest level. It is designed for agents who host frequent open houses and need to follow up with dozens of visitors efficiently without sacrificing the personal touch that builds trust. The structured input ensures no important detail from the open house conversation is forgotten, while the output reads like a hand-crafted message rather than a mass email.",
+  "tool": "chatgpt",
+  "category": "marketing",
+  "tags": ["real-estate", "email-marketing", "follow-up", "lead-nurturing", "sales"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "PROPERTY_ADDRESS", "description": "Address of the open house property", "example": "742 Evergreen Terrace, Springfield" },
+    { "name": "VISITOR_NAME", "description": "Name of the open house visitor", "example": "Sarah and Mike Johnson" },
+    { "name": "INTEREST_LEVEL", "description": "How interested the visitor seemed", "example": "Very interested, asked about offer process" },
+    { "name": "FEATURES_LIKED", "description": "Specific features the visitor commented on positively", "example": "loved the updated kitchen and backyard size" },
+    { "name": "CONCERNS", "description": "Any objections or concerns they expressed", "example": "worried about the roof age and proximity to the highway" },
+    { "name": "AGENT_NAME", "description": "Your name as the listing agent", "example": "Marcus Thompson" },
+    { "name": "CONTACT_INFO", "description": "Your phone number and email", "example": "555-0123, marcus@realtypro.com" }
+  ],
+  "tips": ["Fill in the FEATURES_LIKED and CONCERNS fields immediately after the open house while details are fresh", "For hot leads, adjust the call to action toward scheduling a private showing or discussing offer strategy", "Send within 24 hours of the open house for maximum impact"],
+  "exampleOutput": "Subject: Great meeting you at 742 Evergreen Terrace, Sarah and Mike!\n\nHi Sarah and Mike,\n\nIt was such a pleasure meeting you both at yesterday's open house — I could tell right away that the backyard had you envisioning summer cookouts! You two clearly have great taste, and I loved hearing about your plans for the space.\n\nI wanted to follow up on the roof question you raised. The roof was replaced in 2019 with 30-year architectural shingles, and I can provide the full inspection report and warranty documentation...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Open House Follow-Up Email Prompt for ChatGPT",
+  "metaDescription": "Write personalized open house follow-up emails that convert visitors to buyers. Try this free ChatGPT prompt for real estate agents."
+}

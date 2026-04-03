@@ -1,0 +1,23 @@
+{
+  "title": "SEO Blog Post Optimizer",
+  "slug": "seo-blog-post-optimizer",
+  "promptText": "You are an expert SEO content strategist with years of experience optimizing blog content for search engines. I need you to optimize the following blog post for the target keyword [TARGET_KEYWORD]. The blog post is about [TOPIC] and targets [AUDIENCE].\n\nHere is the current blog post:\n[BLOG_POST_TEXT]\n\nPlease provide:\n1. Optimized Title Tag (under 60 characters, keyword near the front)\n2. Meta Description (150-160 characters, includes keyword and a compelling CTA)\n3. Recommended H2 and H3 subheadings that incorporate related keywords naturally\n4. Opening paragraph rewrite that hooks readers and includes the target keyword within the first 100 words\n5. Internal linking suggestions (describe what anchor text to use and what type of content to link to)\n6. Content gaps: What subtopics or questions should be added to make this more comprehensive?\n7. Keyword density check: Is the keyword used naturally enough? Too much? Suggest adjustments.\n8. Featured snippet optimization: Rewrite one section as a concise definition, list, or table that could win a featured snippet\n9. Readability improvements: Flag any sentences that are too long, passive, or jargon-heavy\n\nMaintain the original voice and tone while making these SEO improvements.",
+  "description": "This prompt turns ChatGPT into a hands-on SEO editor that reviews and optimizes existing blog content for better search engine rankings. Rather than just giving generic SEO advice, it provides specific, actionable rewrites and recommendations across nine critical optimization areas — from title tags and meta descriptions to featured snippet formatting and content gap analysis. It is designed for content marketers and bloggers who have already written their posts and need a thorough SEO review before publishing. The structured output makes it easy to implement changes systematically without losing the original voice and quality of the writing.",
+  "tool": "chatgpt",
+  "category": "marketing",
+  "tags": ["SEO", "content-optimization", "blog", "keyword-optimization", "on-page-SEO"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "TARGET_KEYWORD", "description": "Primary keyword to optimize for", "example": "best project management tools for small teams" },
+    { "name": "TOPIC", "description": "Subject of the blog post", "example": "comparing project management software options" },
+    { "name": "AUDIENCE", "description": "Target reader for this content", "example": "small business owners and startup founders" },
+    { "name": "BLOG_POST_TEXT", "description": "Full text of the blog post to optimize", "example": "[Paste your full blog post here]" }
+  ],
+  "tips": ["Paste the complete blog post for the most accurate optimization suggestions", "Research your target keyword's search volume and competition before running this prompt", "Apply the featured snippet optimization section to your most informative paragraph for quick wins"],
+  "exampleOutput": "1. OPTIMIZED TITLE TAG\nBest Project Management Tools for Small Teams in 2026 (Compared)\n\n2. META DESCRIPTION\nDiscover the 8 best project management tools for small teams. Compare features, pricing, and real user reviews to find your perfect fit.\n\n3. RECOMMENDED SUBHEADINGS\nH2: What Makes a Great Project Management Tool for Small Teams?\nH2: Top 8 Project Management Tools Compared\nH3: Asana — Best for Task-Heavy Workflows\nH3: Monday.com — Best for Visual Project Tracking...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "SEO Blog Post Optimizer Prompt for ChatGPT",
+  "metaDescription": "Optimize your blog posts for search engines with this free ChatGPT prompt. Get title tags, meta descriptions, and content gap analysis."
+}

@@ -1,0 +1,26 @@
+{
+  "title": "Startup Pitch One-Pager",
+  "slug": "startup-pitch-one-pager",
+  "promptText": "You are a startup advisor who has helped companies raise over $100M in funding. Create a compelling one-page pitch document for a [STARTUP_TYPE] startup called [COMPANY_NAME] that [VALUE_PROPOSITION]. The target market is [TARGET_MARKET] with an estimated market size of [MARKET_SIZE]. The startup is at the [STAGE] stage and is seeking [FUNDING_AMOUNT] in funding. Structure the one-pager with these sections: Problem (2-3 sentences describing the pain point with a specific statistic), Solution (how the product uniquely solves it), Market Opportunity (TAM/SAM/SOM breakdown), Business Model (how it makes money), Traction (key metrics or milestones achieved so far, use placeholders if needed), Competitive Advantage (what makes this defensible), Team (key roles and why they are the right team), The Ask (funding amount and use of funds breakdown), and a memorable closing hook. Keep each section concise and use power words that create urgency. Format for easy scanning with bold headers.",
+  "description": "This prompt generates a professional startup pitch one-pager that distills your entire business case onto a single page. Investors see hundreds of pitches, so your one-pager needs to communicate the problem, solution, market opportunity, and ask within a 60-second read. This prompt structures your pitch using the same framework that top accelerators like Y Combinator and Techstars recommend, with each section optimized for maximum impact in minimum words. It is invaluable for founders preparing for investor meetings, pitch competitions, or cold outreach to potential backers.",
+  "tool": "chatgpt",
+  "category": "business",
+  "tags": ["startup", "pitch-deck", "fundraising", "investor-relations", "entrepreneurship"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "STARTUP_TYPE", "description": "The industry or type of startup", "example": "B2B SaaS" },
+    { "name": "COMPANY_NAME", "description": "Name of the startup", "example": "FlowBoard" },
+    { "name": "VALUE_PROPOSITION", "description": "What the startup does in one sentence", "example": "automates project handoffs between design and engineering teams" },
+    { "name": "TARGET_MARKET", "description": "Primary customer segment", "example": "mid-size tech companies with 50-500 employees" },
+    { "name": "MARKET_SIZE", "description": "Estimated total addressable market", "example": "$12 billion" },
+    { "name": "STAGE", "description": "Current startup stage", "example": "seed" },
+    { "name": "FUNDING_AMOUNT", "description": "Amount of funding being raised", "example": "$1.5M" }
+  ],
+  "tips": ["Replace placeholder metrics with your real traction numbers before sending to investors", "Customize the competitive advantage section with specifics about your moat", "Print the one-pager and check if each section can be read in under 10 seconds"],
+  "exampleOutput": "FLOWBOARD - Automating the Design-to-Dev Handoff\n\nThe Problem:\n67% of product teams report that design handoffs cause an average 2-week delay per sprint cycle. Miscommunication between designers and engineers costs mid-size companies $340K annually in rework and missed deadlines.\n\nThe Solution:\nFlowBoard automatically translates design files into developer-ready specifications with pixel-perfect accuracy...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Startup Pitch One-Pager Prompt for ChatGPT",
+  "metaDescription": "Create a compelling startup pitch one-pager with ChatGPT. Get investor-ready formatting with problem, solution, market, and ask sections."
+}

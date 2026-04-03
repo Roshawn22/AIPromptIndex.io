@@ -1,0 +1,340 @@
+[
+  {
+    "slug": "chatgpt-prompts",
+    "title": "Best ChatGPT Prompts",
+    "description": "The most effective ChatGPT prompts across every category, curated for quality and real-world usefulness.",
+    "filter": { "tool": "chatgpt" }
+  },
+  {
+    "slug": "claude-prompts",
+    "title": "Best Claude Prompts",
+    "description": "Top Claude prompts that leverage its large context window, strong reasoning, and nuanced writing abilities.",
+    "filter": { "tool": "claude" }
+  },
+  {
+    "slug": "midjourney-prompts",
+    "title": "Best Midjourney Prompts",
+    "description": "Stunning Midjourney prompts for photorealistic images, fantasy art, and professional visual design.",
+    "filter": { "tool": "midjourney" }
+  },
+  {
+    "slug": "coding-prompts",
+    "title": "Best AI Coding Prompts",
+    "description": "The most useful coding prompts for generating code, debugging, refactoring, and writing tests across all AI tools.",
+    "filter": { "category": "coding" }
+  },
+  {
+    "slug": "writing-prompts",
+    "title": "Best AI Writing Prompts",
+    "description": "Top writing prompts for blog posts, essays, copywriting, and long-form content creation with AI.",
+    "filter": { "category": "writing" }
+  },
+  {
+    "slug": "marketing-prompts",
+    "title": "Best AI Marketing Prompts",
+    "description": "High-converting marketing prompts for social media, email campaigns, ad copy, and content strategy.",
+    "filter": { "category": "marketing" }
+  },
+  {
+    "slug": "business-prompts",
+    "title": "Best AI Business Prompts",
+    "description": "Essential business prompts for strategy, proposals, operations, and professional communication.",
+    "filter": { "category": "business" }
+  },
+  {
+    "slug": "image-generation-prompts",
+    "title": "Best AI Image Prompts",
+    "description": "Creative image generation prompts for Midjourney, DALL-E, Stable Diffusion, and other visual AI tools.",
+    "filter": { "category": "image-generation" }
+  },
+  {
+    "slug": "prompt-templates",
+    "title": "Best AI Prompt Templates",
+    "description": "Reusable AI prompt templates with fill-in-the-blank structures for any use case. Copy, customize, and get results fast.",
+    "filter": { "tag": "template" },
+    "metaTitle": "Best AI Prompt Templates (2026) — Fill-in-the-Blank Ready",
+    "metaDescription": "Reusable AI prompt templates for ChatGPT, Claude, and Gemini. Fill-in-the-blank structures for writing, coding, marketing, and more.",
+    "keyword": "ai prompt templates",
+    "intro": "Prompt templates are the fastest way to get consistent, high-quality results from any AI tool. Instead of crafting prompts from scratch every time, these templates give you proven structures with blank fields you can customize for your specific needs. Whether you need a marketing email, code review, or data analysis, these AI prompt templates have been tested across ChatGPT, Claude, and Gemini to deliver reliable outputs. Save them to your prompt library and use them as starting points for any project.",
+    "tips": [
+      "Save your best-performing templates in a personal prompt library so you can reuse and refine them over time.",
+      "Customize the tone, audience, and context fields in each template to match your specific project requirements.",
+      "Chain multiple templates together for complex workflows — use an outline template first, then expand with a content template."
+    ],
+    "faqs": [
+      {
+        "q": "What is an AI prompt template?",
+        "a": "An AI prompt template is a pre-structured prompt with placeholder fields that you fill in with your specific details. Templates ensure you include all the context AI needs — audience, tone, format, constraints — for consistently high-quality results."
+      },
+      {
+        "q": "Do prompt templates work with all AI tools?",
+        "a": "Yes. Well-structured templates work across ChatGPT, Claude, Gemini, and other AI assistants. You may need minor adjustments for tool-specific features, but the core structure transfers between platforms."
+      },
+      {
+        "q": "How do I create my own prompt templates?",
+        "a": "Start with a prompt that produced great results. Replace the specific details with labeled placeholders like [TOPIC], [AUDIENCE], and [TONE]. Add instructions for each field so anyone on your team can use the template effectively."
+      }
+    ]
+  },
+  {
+    "slug": "chatgpt-prompt-examples",
+    "title": "ChatGPT Prompt Examples",
+    "description": "Real-world ChatGPT prompt examples with outputs showing exactly what to type and what you will get back.",
+    "filter": { "tool": "chatgpt" },
+    "metaTitle": "ChatGPT Prompt Examples (2026) — Real Prompts with Real Results",
+    "metaDescription": "See real ChatGPT prompt examples with actual outputs. Learn what to type for writing, coding, marketing, and business tasks.",
+    "keyword": "chatgpt prompt examples",
+    "intro": "Seeing real prompt examples with actual outputs is the fastest way to learn effective ChatGPT prompting. Abstract tips only get you so far — you need to see exactly what to type and what ChatGPT produces in response. These ChatGPT prompt examples span writing, coding, marketing, business, and creative tasks, each showing the complete prompt and a representative output. Study the patterns in these examples to understand why certain prompts work better than others, then adapt them for your own use cases.",
+    "tips": [
+      "Study what makes each example prompt effective — notice how they specify format, audience, tone, and constraints.",
+      "Modify the example prompts incrementally rather than rewriting from scratch to maintain their proven structure.",
+      "Test each example in your own ChatGPT session and compare results — small wording changes can significantly affect output quality."
+    ],
+    "faqs": [
+      {
+        "q": "Where can I find good ChatGPT prompt examples?",
+        "a": "AI Prompt Index curates tested ChatGPT prompt examples across every category. Each example includes the complete prompt text so you can copy it directly into ChatGPT and see similar results immediately."
+      },
+      {
+        "q": "Why do some ChatGPT prompts work better than others?",
+        "a": "Effective prompts provide clear context (who the output is for), specific format requirements (word count, structure), constraints (tone, style), and examples of desired quality. Vague prompts produce vague results."
+      },
+      {
+        "q": "Can I use these ChatGPT examples for GPT-4o?",
+        "a": "Yes. These examples work across all ChatGPT models including GPT-4o. More capable models may produce richer outputs, but the prompt structures remain effective regardless of the model version."
+      }
+    ]
+  },
+  {
+    "slug": "chatgpt-cover-letter-prompts",
+    "title": "Best ChatGPT Cover Letter Prompts",
+    "description": "AI prompts specifically designed to generate personalized, professional cover letters that stand out to hiring managers.",
+    "filter": { "tool": "chatgpt", "tag": "cover-letter" },
+    "metaTitle": "Best ChatGPT Cover Letter Prompts (2026) — Land More Interviews",
+    "metaDescription": "Write personalized cover letters with ChatGPT. Prompts for tailoring to job descriptions, highlighting achievements, and matching company culture.",
+    "keyword": "chatgpt cover letter prompts",
+    "intro": "Writing cover letters is one of the most tedious parts of job searching, but a well-crafted cover letter can be the difference between landing an interview and getting filtered out. ChatGPT can generate personalized, compelling cover letters in seconds when you give it the right prompts. These curated cover letter prompts help you tailor each letter to the specific job description, highlight your most relevant achievements, and match the company's tone and culture. Stop sending generic templates and start writing cover letters that get callbacks.",
+    "tips": [
+      "Always paste the full job description and your resume into the prompt so ChatGPT can match your experience to the role's requirements.",
+      "Ask ChatGPT to highlight specific achievements with metrics rather than listing generic responsibilities.",
+      "Generate three versions in different tones (formal, confident, conversational) and choose the one that best fits the company culture."
+    ],
+    "faqs": [
+      {
+        "q": "Can ChatGPT write a good cover letter?",
+        "a": "Yes, when properly prompted. Provide the job description, your resume, and any specific points you want to emphasize. ChatGPT can produce tailored cover letters that highlight relevant experience and match the company's tone."
+      },
+      {
+        "q": "How do I make my AI cover letter sound human?",
+        "a": "Add personal anecdotes, specific company details that show you researched them, and genuine enthusiasm for the role. Ask ChatGPT to write in a natural, conversational tone and then edit to add your authentic voice."
+      },
+      {
+        "q": "Should I tell employers my cover letter was AI-generated?",
+        "a": "You are not obligated to disclose AI use in cover letter writing. However, always review and personalize AI-generated content. The cover letter should accurately represent your experience and voice."
+      }
+    ]
+  },
+  {
+    "slug": "best-ai-prompts",
+    "title": "Best AI Prompts",
+    "description": "The ultimate collection of the highest-rated AI prompts across all tools and categories, curated by the community.",
+    "filter": { "sort": "top-rated" },
+    "metaTitle": "Best AI Prompts (2026) — Top-Rated Prompts for Every AI Tool",
+    "metaDescription": "The best AI prompts for ChatGPT, Claude, Gemini, Midjourney, and more. Community-curated and copy-paste ready for any task.",
+    "keyword": "best ai prompts",
+    "intro": "Finding the best AI prompts means sifting through thousands of options to find the ones that consistently deliver exceptional results. This collection brings together the highest-rated prompts from our community across every AI tool and category. Whether you need prompts for writing, coding, marketing, image generation, or data analysis, these are the proven performers that users return to again and again. Each prompt has been tested across multiple AI tools and refined based on real-world feedback to ensure quality.",
+    "tips": [
+      "Bookmark your favorites and build a personal prompt library organized by task type for quick access during your workflow.",
+      "Test top-rated prompts across different AI tools — a prompt that excels in ChatGPT may produce even better results in Claude or vice versa.",
+      "Adapt highly-rated prompts to your specific needs by swapping the topic, audience, and format while keeping the proven structure."
+    ],
+    "faqs": [
+      {
+        "q": "What makes an AI prompt the 'best'?",
+        "a": "The best AI prompts are specific (clear audience, format, constraints), contextual (provide enough background), and actionable (produce ready-to-use outputs). Community ratings on AI Prompt Index reflect real-world effectiveness across thousands of users."
+      },
+      {
+        "q": "Do the best prompts work across all AI tools?",
+        "a": "Most well-structured prompts work across ChatGPT, Claude, Gemini, and other tools. Results may vary based on each tool's strengths, but the prompt engineering principles are universal."
+      },
+      {
+        "q": "How often are the best AI prompts updated?",
+        "a": "Our collection is continuously updated as new AI models launch and prompting techniques evolve. Community submissions and ratings ensure the library reflects current best practices for the latest AI capabilities."
+      }
+    ]
+  },
+  {
+    "slug": "free-ai-prompts",
+    "title": "Free AI Prompts",
+    "description": "High-quality AI prompts that work with free tiers of ChatGPT, Claude, Gemini, and other AI tools. No subscription required.",
+    "filter": { "tag": "free" },
+    "metaTitle": "Free AI Prompts (2026) — No Subscription Required",
+    "metaDescription": "Free AI prompts that work with ChatGPT Free, Claude Free, and Gemini. Get professional results without paying for premium AI subscriptions.",
+    "keyword": "free ai prompts",
+    "intro": "You do not need a paid AI subscription to get professional-quality results. These free AI prompts are specifically optimized to work within the limitations of free-tier AI tools like ChatGPT Free, Claude Free, and Gemini. Every prompt in this collection has been tested on free plans to ensure it produces useful outputs without hitting context limits or requiring premium features. Whether you are a student, hobbyist, or budget-conscious professional, these prompts prove that effective AI usage is about prompt quality, not subscription tier.",
+    "tips": [
+      "Free-tier models have shorter context windows, so keep your prompts concise and focused on one task at a time.",
+      "Break complex tasks into smaller steps — instead of asking for a full blog post, generate an outline first, then expand each section.",
+      "Use the free tiers of multiple AI tools to compare results and find which tool handles your specific use case best."
+    ],
+    "faqs": [
+      {
+        "q": "Can I get good AI results without paying?",
+        "a": "Absolutely. Free tiers of ChatGPT, Claude, and Gemini are powerful enough for most tasks. The quality of your prompts matters more than the model version. Well-crafted prompts on free plans often outperform vague prompts on paid plans."
+      },
+      {
+        "q": "What are the limitations of free AI tools?",
+        "a": "Free tiers typically have usage limits (messages per day), shorter context windows, and may use slightly older models. These prompts are designed to work within those constraints while still delivering high-quality outputs."
+      },
+      {
+        "q": "Which free AI tool is the best?",
+        "a": "It depends on your task. ChatGPT Free is great for general writing and coding. Claude Free excels at analysis and long-form content. Gemini Free integrates with Google tools. Try all three to find your preference."
+      }
+    ]
+  },
+  {
+    "slug": "stable-diffusion-prompts",
+    "title": "Best Stable Diffusion Prompts",
+    "description": "Curated Stable Diffusion prompts with negative prompts, sampler settings, and model recommendations for stunning AI art.",
+    "filter": { "tool": "stable-diffusion" },
+    "metaTitle": "Best Stable Diffusion Prompts (2026) — With Negative Prompts & Settings",
+    "metaDescription": "Curated Stable Diffusion prompts for photorealism, anime, concept art, and more. Includes negative prompts and recommended settings.",
+    "keyword": "stable diffusion prompts",
+    "intro": "Stable Diffusion's open-source architecture gives you more control over AI image generation than any other tool, but that control comes with a steeper learning curve. Knowing which keywords, weights, and negative prompts to use makes the difference between mediocre and stunning results. These curated Stable Diffusion prompts include positive prompts, negative prompts, and recommended sampler and model settings for each style. Whether you want photorealistic portraits, anime illustrations, or concept art, these prompts give you a proven starting point.",
+    "tips": [
+      "Pair every positive prompt with a tailored negative prompt — generic negatives work, but style-specific negatives produce dramatically better results.",
+      "Use token weighting (word:1.3) to emphasize important elements and (word:0.7) to de-emphasize secondary details.",
+      "Experiment with different checkpoint models from Civitai — the model matters as much as the prompt for achieving specific styles."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best Stable Diffusion prompts?",
+        "a": "The best Stable Diffusion prompts use quality tags, specific art style references, weighted tokens, and detailed negative prompts. They also specify the model, sampler, and CFG scale for reproducible results."
+      },
+      {
+        "q": "How do negative prompts work in Stable Diffusion?",
+        "a": "Negative prompts tell the model what to avoid generating. Common entries include 'low quality, blurry, deformed hands, extra fingers, watermark.' Customize negatives based on your subject for the cleanest outputs."
+      },
+      {
+        "q": "Is Stable Diffusion free to use?",
+        "a": "Yes. Stable Diffusion is open source and can run locally on a GPU with at least 6GB VRAM. Cloud options like RunDiffusion and services on Civitai offer pay-per-use access if you do not have local hardware."
+      }
+    ]
+  },
+  {
+    "slug": "dall-e-art-prompts",
+    "title": "Best DALL-E Art Prompts",
+    "description": "Creative DALL-E prompts for digital art, illustrations, concept art, and professional visual design projects.",
+    "filter": { "tool": "dall-e", "category": "image-generation" },
+    "metaTitle": "Best DALL-E Art Prompts (2026) — Create Stunning AI Art",
+    "metaDescription": "Creative DALL-E art prompts for illustrations, concept art, product visuals, and graphic design. Copy and paste into ChatGPT or the API.",
+    "keyword": "dall-e art prompts",
+    "intro": "DALL-E makes AI art creation accessible to everyone through natural language prompting, whether you access it through ChatGPT or the OpenAI API. Its strength lies in understanding complex scene descriptions and producing polished, commercially usable images. These curated DALL-E art prompts cover digital illustration, concept art, product visualization, abstract art, and graphic design. Each prompt uses the descriptive techniques that DALL-E responds to best, including composition direction, lighting descriptions, and style references that produce gallery-worthy results.",
+    "tips": [
+      "Describe the scene in layers — start with the main subject, then add background, lighting, mood, and artistic style for comprehensive results.",
+      "Reference specific art movements and techniques (Art Nouveau, film noir, watercolor wash) to guide DALL-E's visual interpretation.",
+      "Use ChatGPT to iterate on DALL-E prompts — describe what you liked and disliked about each generation to refine the next attempt."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best DALL-E art prompts?",
+        "a": "The best DALL-E art prompts combine a clear subject with style references, mood descriptors, and technical details. Prompts like 'an Art Deco poster of a futuristic cityscape, gold and teal color palette, geometric shapes, vintage grain texture' produce distinctive results."
+      },
+      {
+        "q": "Can I use DALL-E images commercially?",
+        "a": "Yes. OpenAI grants full commercial usage rights for images generated with DALL-E. You own the images you create and can use them for products, marketing, publications, and client work."
+      },
+      {
+        "q": "How do I get consistent art styles with DALL-E?",
+        "a": "Use the same style descriptors, color palette references, and artistic technique keywords across all prompts in a series. Creating a style template with your preferred parameters ensures visual cohesion across multiple generations."
+      }
+    ]
+  },
+  {
+    "slug": "gemini-prompts",
+    "title": "Best Gemini Prompts",
+    "description": "Top Google Gemini prompts that leverage its multimodal capabilities, real-time web access, and Google Workspace integration.",
+    "filter": { "tool": "gemini" },
+    "metaTitle": "Best Gemini Prompts (2026) — Google AI at Its Best",
+    "metaDescription": "Curated Google Gemini prompts for research, analysis, writing, and productivity. Leverage web access and Google Workspace integration.",
+    "keyword": "gemini prompts",
+    "intro": "Google Gemini brings unique advantages that other AI tools cannot match — real-time web access, native Google Workspace integration, and strong multimodal understanding. These capabilities make it the ideal choice for research, data analysis, and tasks that benefit from current information. These curated Gemini prompts help you leverage its full potential across writing, analysis, coding, and creative tasks. Each prompt is designed to take advantage of what Gemini does best, from searching the web for recent data to analyzing images and documents within your Google Drive.",
+    "tips": [
+      "Leverage Gemini's real-time web access for tasks that require current information like market research, news analysis, and trend tracking.",
+      "Connect Gemini to your Google Workspace to analyze Sheets, Docs, and Slides content directly in your prompts.",
+      "Use Gemini's multimodal capabilities by uploading images, screenshots, and documents alongside your text prompts for richer analysis."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best Gemini prompts?",
+        "a": "The best Gemini prompts leverage its unique strengths: real-time web search, Google Workspace integration, and multimodal input. Use it for research requiring current data, analysis of Google Sheets, and tasks that combine text and images."
+      },
+      {
+        "q": "How is Gemini different from ChatGPT?",
+        "a": "Gemini has built-in web access for current information, native Google Workspace integration, and strong multimodal capabilities. ChatGPT has a larger plugin ecosystem and is generally better for creative writing. Choose based on your primary needs."
+      },
+      {
+        "q": "Is Gemini free to use?",
+        "a": "Yes, Gemini offers a generous free tier that includes the base model with web access and Google integration. Gemini Advanced (paid) provides access to the most capable model and longer context windows."
+      }
+    ]
+  },
+  {
+    "slug": "cursor-ai-prompts",
+    "title": "Best Cursor AI Prompts",
+    "description": "Curated prompts for Cursor AI that leverage its codebase indexing, multi-file editing, and intelligent code generation capabilities.",
+    "filter": { "tool": "cursor" },
+    "metaTitle": "Best Cursor AI Prompts (2026) — Code Smarter with AI",
+    "metaDescription": "Curated Cursor AI prompts for code generation, refactoring, debugging, and multi-file editing. Boost your development speed.",
+    "keyword": "cursor ai prompts",
+    "intro": "Cursor has redefined AI-assisted coding by indexing your entire codebase and offering context-aware completions that understand your project's architecture, conventions, and dependencies. Unlike general-purpose AI tools, Cursor's prompts can reference specific files, functions, and patterns across your repository. These curated Cursor AI prompts cover code generation, multi-file refactoring, debugging, test creation, and architecture exploration. Each prompt uses Cursor-specific features like @ mentions and composer mode to help you get the most out of this powerful coding tool.",
+    "tips": [
+      "Use @ mentions to reference specific files, functions, or documentation so Cursor includes the right context in its response.",
+      "Switch between chat mode (explanations, single-file edits) and composer mode (multi-file coordinated changes) based on the task.",
+      "Start complex tasks by asking Cursor to explain the existing code before making changes — this reduces errors in generated code."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best Cursor AI prompts?",
+        "a": "The best Cursor prompts use @ file references, specify the desired behavior clearly, and leverage composer mode for multi-file changes. Effective prompts include code generation, refactoring, debugging with error context, and codebase exploration."
+      },
+      {
+        "q": "How do I get better code from Cursor?",
+        "a": "Reference relevant files with @, provide clear acceptance criteria, and specify your coding style and framework version. For complex changes, break the task into smaller steps and verify each before proceeding."
+      },
+      {
+        "q": "Is Cursor better than GitHub Copilot?",
+        "a": "Cursor and Copilot serve different needs. Cursor excels at multi-file edits, codebase understanding, and chat-driven development. Copilot is better for inline completions and quick suggestions. Many developers use both."
+      }
+    ]
+  },
+  {
+    "slug": "copilot-prompts",
+    "title": "Best GitHub Copilot Prompts",
+    "description": "Curated GitHub Copilot prompts and comment patterns for better autocomplete, code generation, and pair programming.",
+    "filter": { "tool": "github-copilot" },
+    "metaTitle": "Best GitHub Copilot Prompts (2026) — Get Better Code Suggestions",
+    "metaDescription": "Curated GitHub Copilot prompts for autocomplete, code generation, testing, and debugging. Comment patterns that unlock better suggestions.",
+    "keyword": "github copilot prompts",
+    "intro": "GitHub Copilot's inline suggestions are only as good as the context you provide. The most productive Copilot users have mastered the art of writing comments and code structures that guide Copilot toward accurate, useful completions. These curated GitHub Copilot prompts cover comment patterns for code generation, Copilot Chat prompts for debugging and explanations, and techniques for getting better autocomplete suggestions. Each prompt is tested across popular languages and frameworks to help you write code faster without sacrificing quality.",
+    "tips": [
+      "Write a descriptive function comment with parameter types, return values, and example usage before letting Copilot generate the implementation.",
+      "Use Copilot Chat (/explain, /fix, /tests) for interactive coding assistance beyond inline completions.",
+      "Keep related files open in your editor — Copilot uses open tabs as context for more accurate suggestions."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best GitHub Copilot prompts?",
+        "a": "The best Copilot prompts are well-structured comments that describe the function's purpose, inputs, outputs, and edge cases. Copilot Chat prompts for /explain, /fix, and /tests are also highly effective for interactive development."
+      },
+      {
+        "q": "How do I get better suggestions from Copilot?",
+        "a": "Write clear comments, keep relevant files open, use descriptive variable names, and provide type annotations. Copilot generates better code when it has clear intent and strong context from your codebase."
+      },
+      {
+        "q": "Does GitHub Copilot work with all programming languages?",
+        "a": "Copilot supports most popular languages including Python, JavaScript, TypeScript, Java, Go, Rust, and C++. It performs best with languages that have large representation in its training data."
+      }
+    ]
+  }
+]

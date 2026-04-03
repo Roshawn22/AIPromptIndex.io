@@ -1,0 +1,22 @@
+{
+  "title": "Real Estate Market Analyzer",
+  "slug": "real-estate-market-analyzer",
+  "promptText": "You are a real estate market analyst with deep expertise in local housing trends. Analyze the current real estate market conditions for [LOCATION] and provide a comprehensive market report covering the following:\n\n1. Market Overview: Is it currently a buyer's or seller's market? What are the key indicators?\n2. Price Trends: What is the median home price trend over the past [TIME_PERIOD]? Are prices rising, stabilizing, or declining?\n3. Inventory Analysis: What is the current months of supply? How does this compare to a balanced market (typically 4-6 months)?\n4. Demand Indicators: Average days on market, sale-to-list price ratio, and multiple offer frequency.\n5. Key Drivers: What economic, demographic, or policy factors are influencing this market?\n6. Forecast: What is the likely trajectory for the next 6-12 months?\n7. Opportunities: Where are the best opportunities for [INVESTOR_TYPE] in this market?\n\nPresent your analysis in a structured format with clear section headers. Use data-driven language and include specific metrics where possible. Flag any risks or red flags investors should watch for.",
+  "description": "This prompt turns Claude into a real estate market analyst capable of delivering structured, data-driven market assessments for any location. It covers all the essential metrics that investors and agents need: price trends, inventory levels, demand indicators, and economic drivers. The output is designed to mirror professional market reports from firms like Redfin or Zillow Research, giving users a comprehensive snapshot they can use for investment decisions, client presentations, or strategic planning. It is particularly valuable for real estate professionals who serve multiple markets and need quick, thorough analyses without hours of manual research.",
+  "tool": "claude",
+  "category": "business",
+  "tags": ["real-estate", "market-analysis", "investing", "housing-trends", "data-analysis"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "LOCATION", "description": "City, neighborhood, or metro area to analyze", "example": "Austin, TX metro area" },
+    { "name": "TIME_PERIOD", "description": "Historical timeframe for trend analysis", "example": "12 months" },
+    { "name": "INVESTOR_TYPE", "description": "Type of buyer or investor seeking opportunities", "example": "first-time homebuyers" }
+  ],
+  "tips": ["Be as specific as possible with location — neighborhood-level analysis yields more actionable insights than city-wide", "Pair this with current data from Redfin or Zillow for the most accurate analysis", "Run the prompt for multiple locations to compare markets side by side"],
+  "exampleOutput": "Market Overview: Austin, TX is currently transitioning from a strong seller's market to a more balanced environment. After two years of aggressive price appreciation, rising inventory and higher mortgage rates have shifted negotiating power slightly toward buyers.\n\nPrice Trends: Median home price over the past 12 months has stabilized at approximately $485,000, representing a 2.1% year-over-year increase — a significant deceleration from the 15%+ gains seen in 2022-2023...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Real Estate Market Analyzer Prompt for Claude",
+  "metaDescription": "Analyze local real estate market trends with this free Claude prompt. Get structured reports on prices, inventory, and investment opportunities."
+}

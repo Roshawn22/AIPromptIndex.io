@@ -1,0 +1,24 @@
+{
+  "title": "Small Business Marketing Plan",
+  "slug": "small-business-marketing-plan",
+  "promptText": "You are an experienced marketing strategist who specializes in small business growth. Create a comprehensive 90-day marketing plan for a [BUSINESS_TYPE] located in [LOCATION] with a monthly marketing budget of [BUDGET]. The business currently has [CURRENT_CUSTOMERS] customers and wants to grow to [TARGET_CUSTOMERS] within the next quarter. Include specific channel recommendations (social media, local SEO, email, partnerships), weekly action items broken down by priority, estimated cost allocation per channel, key performance indicators to track progress, and realistic milestones for each 30-day period. Factor in seasonal trends relevant to the business type and local market conditions. Provide at least three low-cost guerrilla marketing tactics that can generate quick wins in the first two weeks.",
+  "description": "This prompt generates a detailed, actionable 90-day marketing plan tailored specifically for small businesses with limited budgets. Rather than generic advice, it produces week-by-week action items with cost estimates and KPIs so you can track real progress. The plan covers digital and local marketing channels, includes guerrilla tactics for quick wins, and accounts for your specific budget constraints. Whether you are launching a new business or trying to accelerate growth of an existing one, this prompt gives you a structured roadmap that a marketing consultant would typically charge hundreds of dollars to create.",
+  "tool": "chatgpt",
+  "category": "business",
+  "tags": ["small-business", "marketing-plan", "growth-strategy", "local-marketing", "budget-marketing"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "BUSINESS_TYPE", "description": "The type of small business", "example": "neighborhood coffee shop" },
+    { "name": "LOCATION", "description": "City or region where the business operates", "example": "Austin, Texas" },
+    { "name": "BUDGET", "description": "Monthly marketing budget in dollars", "example": "$500" },
+    { "name": "CURRENT_CUSTOMERS", "description": "Approximate number of current regular customers", "example": "200" },
+    { "name": "TARGET_CUSTOMERS", "description": "Desired number of customers after 90 days", "example": "400" }
+  ],
+  "tips": ["Include specific details about your business niche for more targeted channel recommendations", "Be honest about your budget so the plan stays realistic and executable", "Run this prompt quarterly and adjust based on what worked in the previous cycle"],
+  "exampleOutput": "90-Day Marketing Plan for Neighborhood Coffee Shop in Austin, TX\n\nMonth 1 - Foundation & Quick Wins:\nWeek 1: Set up Google Business Profile, launch Instagram account with 10 pre-scheduled posts ($50 for Canva Pro). Partner with 2 nearby businesses for cross-promotion flyers.\nWeek 2: Guerrilla Tactic - Host a free 'Coffee Cupping' event and invite local food bloggers...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Small Business Marketing Plan Prompt for ChatGPT",
+  "metaDescription": "Generate a detailed 90-day marketing plan for your small business with ChatGPT. Get weekly action items, budget allocation, and KPIs."
+}

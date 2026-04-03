@@ -1,0 +1,24 @@
+{
+  "title": "DALL-E Infographic Designer",
+  "slug": "dalle-infographic-designer",
+  "promptText": "Create a clean, professional infographic layout about [TOPIC] with a [COLOR_SCHEME] color scheme. The infographic should have a bold title header at the top, followed by [NUM_SECTIONS] distinct sections arranged in a vertical flow. Each section should have an icon-style illustration representing [SECTION_TOPICS]. Use a [DESIGN_STYLE] design aesthetic with clear visual hierarchy, generous white space between sections, modern sans-serif typography placeholder areas, data visualization elements like simple charts and percentage bars, directional flow arrows connecting sections, and a branded footer area. The overall style should be flat design with subtle shadows, suitable for sharing on social media and embedding in blog posts. Portrait orientation, 1080x1920 pixels equivalent aspect ratio.",
+  "description": "This prompt generates professional infographic layouts with clear visual hierarchy, icon illustrations, and data visualization placeholders. Infographics are one of the most shared content types on social media and can drive significant traffic when embedded in blog posts. This prompt produces clean, modern layouts that you can use as visual templates or inspiration for your final designed piece. The output includes section organization, icon concepts, and flow design that would take a graphic designer hours to conceptualize. It is perfect for marketers, educators, and content creators who need visual content but lack advanced design skills.",
+  "tool": "dall-e",
+  "category": "image-generation",
+  "tags": ["infographic", "data-visualization", "graphic-design", "content-marketing", "visual-content"],
+  "difficulty": "beginner",
+  "promptType": "image",
+  "variables": [
+    { "name": "TOPIC", "description": "The subject of the infographic", "example": "10 Steps to Start a Successful Side Hustle" },
+    { "name": "COLOR_SCHEME", "description": "Primary colors for the design", "example": "navy blue and coral orange" },
+    { "name": "NUM_SECTIONS", "description": "Number of content sections", "example": "5" },
+    { "name": "SECTION_TOPICS", "description": "Brief description of each section topic", "example": "idea validation, market research, branding, launch strategy, scaling" },
+    { "name": "DESIGN_STYLE", "description": "Visual design aesthetic", "example": "modern minimalist" }
+  ],
+  "tips": ["Use the generated layout as a structural template and add your actual data in Canva or Figma", "Keep to 5-7 sections maximum for readability on mobile devices", "Choose high-contrast color schemes for better social media visibility"],
+  "exampleOutput": "A clean vertical infographic with a bold navy header reading the topic title, 5 sections flowing downward connected by coral orange arrows, each section featuring a flat-design icon (lightbulb, magnifying glass, paintbrush, rocket, graph) with placeholder text areas, percentage bars and mini charts, generous white space, modern minimalist aesthetic, portrait orientation.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Infographic Designer Prompt for DALL-E",
+  "metaDescription": "Design professional infographic layouts with DALL-E. Get clean visual templates with icons, data elements, and modern styling."
+}

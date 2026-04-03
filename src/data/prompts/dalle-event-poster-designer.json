@@ -1,0 +1,26 @@
+{
+  "title": "DALL-E Event Poster Designer",
+  "slug": "dalle-event-poster-designer",
+  "promptText": "Design a striking event poster for [EVENT_NAME], a [EVENT_TYPE] happening on [EVENT_DATE]. The poster should feature [VISUAL_THEME] as the central visual element with a [COLOR_SCHEME] color palette. Style: [DESIGN_STYLE] aesthetic with bold typography placeholder areas for the event name at the top (large and prominent), date and time in the middle section, venue and location near the bottom, and a call-to-action area for ticket information. The composition should have strong visual impact that works both as a printed poster and digital social media graphic. Include decorative elements that reflect the [EVENT_MOOD] atmosphere. Portrait orientation 2:3 aspect ratio, high contrast for readability, professional event marketing quality.",
+  "description": "This prompt generates eye-catching event posters that serve as the visual anchor for your event marketing. Whether you are promoting a conference, concert, workshop, or community gathering, the poster is designed with proper hierarchy for essential information: event name, date, venue, and call to action. The output provides a strong visual concept that you can refine with your actual event details in a design tool. It accounts for both print and digital use cases, ensuring the design works as a physical poster and a social media graphic. Essential for event organizers, community managers, and marketing teams who need professional promotional materials quickly.",
+  "tool": "dall-e",
+  "category": "image-generation",
+  "tags": ["event-poster", "graphic-design", "event-marketing", "promotional", "print-design"],
+  "difficulty": "beginner",
+  "promptType": "image",
+  "variables": [
+    { "name": "EVENT_NAME", "description": "Name of the event", "example": "Future of AI Summit 2026" },
+    { "name": "EVENT_TYPE", "description": "Type of event", "example": "technology conference" },
+    { "name": "EVENT_DATE", "description": "Date of the event", "example": "June 15-16, 2026" },
+    { "name": "VISUAL_THEME", "description": "Central visual concept for the poster", "example": "abstract neural network patterns forming a cityscape" },
+    { "name": "COLOR_SCHEME", "description": "Color palette for the poster", "example": "electric blue and white on dark background" },
+    { "name": "DESIGN_STYLE", "description": "Overall design aesthetic", "example": "futuristic tech" },
+    { "name": "EVENT_MOOD", "description": "The atmosphere or feeling to convey", "example": "innovative and exciting" }
+  ],
+  "tips": ["Leave clear space for text overlays since AI-generated text is often imperfect", "Use high-contrast color combinations to ensure readability at a distance", "Generate the poster concept first, then add precise text and details in Canva or Photoshop"],
+  "exampleOutput": "A striking portrait-orientation event poster with abstract neural network patterns forming a futuristic cityscape silhouette, electric blue glowing lines on a dark navy background, bold white typography placeholder areas at top for event name, date centered in mid-section, venue and CTA at bottom, geometric decorative elements suggesting innovation, high contrast, professional conference marketing quality.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Event Poster Designer Prompt for DALL-E",
+  "metaDescription": "Create professional event posters with DALL-E. Generate eye-catching promotional designs for conferences, concerts, and workshops."
+}

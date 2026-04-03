@@ -1,0 +1,29 @@
+{
+  "title": "Student Progress Report Writer",
+  "slug": "student-progress-report-writer",
+  "promptText": "You are an experienced teacher who writes thoughtful, individualized student progress reports that are both honest and encouraging. Write a progress report for the following student:\n\nStudent First Name: [STUDENT_NAME]\nGrade Level: [GRADE_LEVEL]\nSubject: [SUBJECT]\nReporting Period: [REPORTING_PERIOD]\nCurrent Grade/Performance Level: [PERFORMANCE_LEVEL]\nAcademic Strengths: [STRENGTHS]\nAreas for Growth: [GROWTH_AREAS]\nBehavior/Social Notes: [BEHAVIOR_NOTES]\nSpecific Examples: [SPECIFIC_EXAMPLES]\nGoals for Next Period: [GOALS]\n\nThe progress report should:\n- Open with a genuine positive observation about the student\n- Describe academic performance with specific examples rather than generic statements\n- Frame areas for growth constructively — focus on next steps rather than deficiencies\n- Include at least one specific anecdote or classroom moment that shows you know this student as an individual\n- Provide 2-3 actionable recommendations for parents to support learning at home\n- Close with an encouraging statement about the student's potential\n- Use professional, warm language appropriate for parent communication\n- Avoid educational jargon that parents may not understand\n\nKeep the report to 200-250 words. Write in third person using the student's first name.",
+  "description": "This prompt helps teachers write individualized progress reports that go beyond generic comments like 'a pleasure to have in class' to provide specific, meaningful feedback that parents and students actually find useful. Writing personalized reports for 25-30 students is one of the most time-consuming tasks teachers face each marking period, and this prompt dramatically accelerates the process while maintaining the thoughtful, individual touch that parents expect. The output balances honest assessment with constructive framing, includes specific examples and anecdotes, and provides actionable home support recommendations. It is ideal for teachers during report card season, special education teachers writing IEP progress updates, and administrators who want to raise the quality of school-wide progress communications.",
+  "tool": "chatgpt",
+  "category": "education",
+  "tags": ["progress-report", "student-assessment", "parent-communication", "teaching", "report-card"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "STUDENT_NAME", "description": "Student's first name", "example": "Jaylen" },
+    { "name": "GRADE_LEVEL", "description": "Student's grade level", "example": "5th grade" },
+    { "name": "SUBJECT", "description": "Subject being reported on", "example": "Mathematics" },
+    { "name": "REPORTING_PERIOD", "description": "Marking period or quarter", "example": "Quarter 3, 2025-2026" },
+    { "name": "PERFORMANCE_LEVEL", "description": "Current academic standing", "example": "B- (approaching proficient, 78%)" },
+    { "name": "STRENGTHS", "description": "What the student does well", "example": "Strong mental math skills, excellent participation in class discussions, helps peers understand concepts" },
+    { "name": "GROWTH_AREAS", "description": "Where the student needs improvement", "example": "Showing work on multi-step word problems, completing homework consistently, test anxiety affects performance" },
+    { "name": "BEHAVIOR_NOTES", "description": "Social and behavioral observations", "example": "Natural leader in group work, sometimes talks during independent work time" },
+    { "name": "SPECIFIC_EXAMPLES", "description": "Concrete classroom moments or work samples", "example": "Solved a challenge problem on the board that stumped the class, but left 3 word problems blank on the last test" },
+    { "name": "GOALS", "description": "Targets for the next reporting period", "example": "Show all work on word problems, complete 90% of homework assignments, practice test-taking strategies" }
+  ],
+  "tips": ["Jot down one specific anecdote per student throughout the marking period so you have material ready at report time", "Be specific in the GROWTH_AREAS field — vague inputs produce vague reports", "Review the output to ensure it accurately reflects each student before sending to parents"],
+  "exampleOutput": "Jaylen continues to impress with his natural mathematical reasoning and ability to solve complex problems mentally — during our fractions unit, he volunteered to explain his strategy for comparing unlike denominators at the board, and his explanation helped several classmates grasp the concept. His enthusiasm for math is contagious, and he is often the first to offer help to peers during group work.\n\nWhile Jaylen's conceptual understanding is strong, showing his work on multi-step word problems remains an important area of growth. On recent assessments, he arrived at correct answers but could not receive full credit because the problem-solving process was not documented...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Student Progress Report Writer Prompt for ChatGPT",
+  "metaDescription": "Write individualized student progress reports in minutes with this free ChatGPT prompt. Get specific, encouraging parent communication."
+}

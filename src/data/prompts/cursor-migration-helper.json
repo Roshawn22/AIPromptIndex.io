@@ -1,0 +1,26 @@
+{
+  "title": "Cursor Migration Helper",
+  "slug": "cursor-migration-helper",
+  "promptText": "You are a database and system migration expert. Help me plan and execute a migration from [SOURCE_SYSTEM] to [TARGET_SYSTEM] for a [PROJECT_TYPE] project. The current system handles [CURRENT_FUNCTIONALITY] with approximately [DATA_VOLUME] of data. Generate a complete migration plan that includes: a pre-migration checklist (data audit, dependency mapping, backup strategy), schema mapping between source and target with transformation rules for each field, migration scripts in [LANGUAGE] with transaction safety and rollback capabilities, data validation queries that compare source and target after migration, a feature flag strategy for gradual rollout, a rollback plan with specific triggers for when to abort, estimated downtime calculation and strategies to minimize it, and post-migration verification steps. For the migration scripts, handle these specific challenges: [MIGRATION_CHALLENGES]. Include error handling for partial failures and a progress tracking mechanism. Write the scripts to be idempotent so they can be safely re-run.",
+  "description": "This prompt generates comprehensive database and system migration plans with executable scripts that handle the full lifecycle from planning through verification. Migrations are among the riskiest operations in software development, and this prompt addresses that risk with transaction-safe scripts, rollback plans, validation queries, and gradual rollout strategies. The output includes idempotent migration scripts that can be safely re-run if interrupted, along with data validation to ensure nothing is lost or corrupted. This is essential for engineering teams migrating databases, upgrading frameworks, switching providers, or refactoring data models in production systems.",
+  "tool": "cursor",
+  "category": "coding",
+  "tags": ["database-migration", "devops", "data-engineering", "backend", "system-architecture"],
+  "difficulty": "advanced",
+  "promptType": "text",
+  "variables": [
+    { "name": "SOURCE_SYSTEM", "description": "The current system being migrated from", "example": "MongoDB with Mongoose ODM" },
+    { "name": "TARGET_SYSTEM", "description": "The system being migrated to", "example": "PostgreSQL with Prisma ORM" },
+    { "name": "PROJECT_TYPE", "description": "Type of application", "example": "SaaS multi-tenant application" },
+    { "name": "CURRENT_FUNCTIONALITY", "description": "What the current system manages", "example": "user accounts, subscriptions, invoices, and activity logs" },
+    { "name": "DATA_VOLUME", "description": "Approximate amount of data", "example": "2 million records across 15 collections" },
+    { "name": "LANGUAGE", "description": "Programming language for migration scripts", "example": "TypeScript with Node.js" },
+    { "name": "MIGRATION_CHALLENGES", "description": "Specific challenges to address", "example": "nested MongoDB documents need to be flattened into relational tables, ObjectId references need to map to integer foreign keys, and some fields have inconsistent data types" }
+  ],
+  "tips": ["Always test the migration on a staging copy of production data before running it live", "Use the generated validation queries after every migration run to catch data integrity issues", "Plan for twice the estimated downtime as a safety margin"],
+  "exampleOutput": "# Migration Plan: MongoDB to PostgreSQL\n\n## Pre-Migration Checklist\n- [ ] Full MongoDB backup completed and verified\n- [ ] Schema audit: 15 collections mapped to relational tables\n- [ ] Dependency map: 23 services read from MongoDB, 8 write\n\n## Schema Mapping\n| MongoDB Collection | PostgreSQL Table | Key Transformations |\n|---|---|---|\n| users | users | ObjectId -> UUID, nested address -> addresses table |\n| subscriptions | subscriptions | embedded plan -> FK to plans table |\n\n## Migration Script (Phase 1: Users)\n```typescript\nasync function migrateUsers(batchSize = 1000) {\n  const client = await pool.connect();\n  try {\n    await client.query('BEGIN');\n    ...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Migration Helper Prompt for Cursor",
+  "metaDescription": "Plan and execute safe database migrations with Cursor. Get migration scripts, rollback plans, and validation queries for any system move."
+}

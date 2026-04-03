@@ -1,0 +1,590 @@
+[
+  {
+    "tool": "github-copilot",
+    "category": "coding",
+    "title": "Best GitHub Copilot Prompts for Coding",
+    "metaTitle": "Best GitHub Copilot Coding Prompts (2026) — Copy & Paste Ready",
+    "metaDescription": "Curated GitHub Copilot coding prompts for autocomplete, refactoring, debugging, and test generation. Ready to copy and paste.",
+    "keyword": "github copilot prompts for coding",
+    "intro": "GitHub Copilot has transformed the way developers write code, offering intelligent autocomplete and context-aware suggestions directly in your editor. Whether you are building a new feature from scratch, refactoring legacy code, or writing unit tests, the right prompts can dramatically improve Copilot's output quality. These curated GitHub Copilot coding prompts help you get more accurate completions, generate boilerplate faster, and debug tricky issues with minimal effort. Each prompt is tested and ready to paste into your IDE.",
+    "tips": [
+      "Write a clear comment describing the function's purpose and expected inputs before letting Copilot generate the implementation.",
+      "Use Copilot Chat to ask follow-up questions about generated code, such as edge cases or performance trade-offs.",
+      "Keep your file context focused — close unrelated tabs so Copilot draws from relevant code only."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best GitHub Copilot prompts for coding?",
+        "a": "The best GitHub Copilot coding prompts include detailed comments describing function behavior, type annotations, and example inputs/outputs. Prompts that specify the language, framework, and coding style yield the most accurate completions."
+      },
+      {
+        "q": "How do I get better code suggestions from GitHub Copilot?",
+        "a": "Provide clear context by writing descriptive comments, keeping relevant files open, and specifying edge cases. Breaking complex tasks into smaller functions also helps Copilot generate more accurate code."
+      },
+      {
+        "q": "Can GitHub Copilot write unit tests?",
+        "a": "Yes. Describe the function under test and the testing framework you use (Jest, pytest, etc.) in a comment, then let Copilot generate test cases covering happy paths, edge cases, and error handling."
+      }
+    ]
+  },
+  {
+    "tool": "chatgpt",
+    "category": "writing",
+    "title": "Best ChatGPT Prompts for Writing",
+    "metaTitle": "Best ChatGPT Writing Prompts (2026) — Copy & Paste Ready",
+    "metaDescription": "Curated ChatGPT writing prompts for blog posts, essays, emails, and creative fiction. Ready to copy and paste.",
+    "keyword": "chatgpt prompts for writing",
+    "intro": "ChatGPT is one of the most versatile AI writing assistants available, capable of producing everything from polished blog posts to compelling fiction. The key to getting high-quality output lies in how you prompt it. These curated ChatGPT writing prompts cover a range of formats including articles, emails, social media captions, and long-form content. Each prompt is designed to give ChatGPT the context it needs — tone, audience, structure — so you spend less time editing and more time publishing.",
+    "tips": [
+      "Specify your target audience, desired tone, and word count in every writing prompt for more consistent results.",
+      "Ask ChatGPT to produce an outline first, then expand each section individually for better long-form content.",
+      "Use follow-up prompts to refine voice, add examples, or adjust reading level after the initial draft."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best ChatGPT prompts for writing?",
+        "a": "The best ChatGPT writing prompts include specific details about format, tone, audience, and purpose. For example, prompts that specify 'write a 500-word blog post in a conversational tone for small business owners' produce far better results than vague requests."
+      },
+      {
+        "q": "Can ChatGPT write a full blog post?",
+        "a": "Yes. Provide the topic, target keyword, audience, desired length, and structure. For best results, generate an outline first, then ask ChatGPT to expand each section with examples and data."
+      },
+      {
+        "q": "How do I make ChatGPT match my writing style?",
+        "a": "Paste a sample of your writing and ask ChatGPT to analyze the tone, sentence structure, and vocabulary. Then instruct it to write new content matching that style profile."
+      }
+    ]
+  },
+  {
+    "tool": "cursor",
+    "category": "coding",
+    "title": "Best Cursor Prompts for Coding",
+    "metaTitle": "Best Cursor AI Coding Prompts (2026) — Copy & Paste Ready",
+    "metaDescription": "Curated Cursor AI coding prompts for code generation, refactoring, debugging, and architecture. Ready to copy and paste.",
+    "keyword": "cursor prompts for coding",
+    "intro": "Cursor has quickly become the go-to AI-powered code editor for developers who want deep codebase understanding paired with intelligent code generation. Unlike generic AI assistants, Cursor indexes your entire project, making its suggestions contextually aware and highly relevant. These curated Cursor coding prompts help you leverage its unique capabilities — from multi-file refactors to architecture decisions. Whether you are prototyping a new feature or navigating an unfamiliar codebase, these prompts will accelerate your workflow.",
+    "tips": [
+      "Reference specific files or functions in your prompt using @ mentions so Cursor pulls the right context into its response.",
+      "Use Cursor's composer mode for multi-file changes and chat mode for explanations or single-file edits.",
+      "Ask Cursor to explain existing code before modifying it — this ensures the AI understands the logic before making changes."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best Cursor AI prompts for coding?",
+        "a": "The best Cursor coding prompts reference specific files with @ mentions, describe the desired behavior clearly, and specify constraints like framework versions or coding conventions. Cursor excels when you give it project-level context."
+      },
+      {
+        "q": "How is Cursor different from GitHub Copilot for coding prompts?",
+        "a": "Cursor indexes your entire codebase and supports multi-file edits through its composer mode. This means prompts can reference multiple files and request coordinated changes across your project, which Copilot cannot do natively."
+      },
+      {
+        "q": "Can Cursor refactor code across multiple files?",
+        "a": "Yes. Use composer mode and describe the refactor — for example, 'extract the authentication logic from these three files into a shared middleware.' Cursor will propose changes across all referenced files."
+      }
+    ]
+  },
+  {
+    "tool": "claude",
+    "category": "data-analysis",
+    "title": "Best Claude Prompts for Data Analysis",
+    "metaTitle": "Best Claude Data Analysis Prompts (2026) — Copy & Paste Ready",
+    "metaDescription": "Curated Claude prompts for data analysis, visualization, statistical modeling, and insight extraction. Ready to copy and paste.",
+    "keyword": "claude prompts for data analysis",
+    "intro": "Claude excels at data analysis tasks thanks to its large context window and strong reasoning capabilities. You can feed it entire datasets, complex spreadsheets, or raw CSV files and get meaningful insights, statistical summaries, and actionable recommendations. These curated Claude data analysis prompts cover everything from exploratory analysis and trend identification to building pivot tables and writing Python analysis scripts. Whether you are a data analyst or a business owner making data-driven decisions, these prompts will save you hours.",
+    "tips": [
+      "Upload your CSV or paste your data directly — Claude's large context window handles thousands of rows effectively.",
+      "Ask Claude to explain its methodology before running calculations so you can verify the analytical approach.",
+      "Request outputs in specific formats like markdown tables, Python code, or bullet-point summaries for easier downstream use."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best Claude prompts for data analysis?",
+        "a": "The best Claude data analysis prompts include the dataset (or a representative sample), the specific question you want answered, and the desired output format. Claude performs best when you specify whether you want statistical analysis, visualizations, or narrative insights."
+      },
+      {
+        "q": "Can Claude analyze CSV files?",
+        "a": "Yes. You can upload CSV files directly or paste the data into your prompt. Claude can summarize distributions, find outliers, calculate correlations, and generate Python or SQL code for further analysis."
+      },
+      {
+        "q": "How does Claude compare to ChatGPT for data analysis?",
+        "a": "Claude's larger context window allows it to process bigger datasets in a single prompt. It also tends to show its reasoning step by step, making it easier to verify the accuracy of its analysis."
+      }
+    ]
+  },
+  {
+    "tool": "midjourney",
+    "category": "image-generation",
+    "title": "Best Midjourney Prompts for Image Generation",
+    "metaTitle": "Best Midjourney Image Generation Prompts (2026) — Copy & Paste Ready",
+    "metaDescription": "Curated Midjourney prompts for stunning AI art, photography, illustrations, and graphic design. Ready to copy and paste.",
+    "keyword": "midjourney prompts for image generation",
+    "intro": "Midjourney remains the gold standard for AI image generation, producing stunning visuals that rival professional photography and illustration. The secret to getting exceptional results lies in prompt engineering — knowing which keywords, styles, and parameters to use. These curated Midjourney image generation prompts cover photorealistic portraits, fantasy landscapes, product mockups, and abstract art. Each prompt includes recommended parameters and style modifiers so you can generate gallery-worthy images on your first try.",
+    "tips": [
+      "Include specific art styles, lighting conditions, and camera angles in your prompts for more predictable and professional results.",
+      "Use the --ar parameter to set aspect ratios (16:9 for landscapes, 9:16 for portraits) before generating.",
+      "Combine multiple style references with --sref to create a consistent aesthetic across a series of images."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best Midjourney prompts for image generation?",
+        "a": "The best Midjourney prompts combine a clear subject description with style keywords (cinematic, watercolor, isometric), lighting (golden hour, studio lighting), and technical parameters like --ar and --stylize for fine-tuned control."
+      },
+      {
+        "q": "How do I get photorealistic images from Midjourney?",
+        "a": "Use keywords like 'photorealistic,' 'DSLR photography,' '85mm lens,' and 'natural lighting.' Specify the camera model and film stock for even more realistic results. Adding --style raw reduces Midjourney's artistic interpretation."
+      },
+      {
+        "q": "What Midjourney parameters should I use?",
+        "a": "Key parameters include --ar for aspect ratio, --stylize (0-1000) to control artistic interpretation, --chaos for variation, and --quality for detail level. Start with default settings and adjust based on your results."
+      }
+    ]
+  },
+  {
+    "tool": "claude",
+    "category": "creative",
+    "title": "Best Claude Prompts for Creative Projects",
+    "metaTitle": "Best Claude Creative Prompts (2026) — Copy & Paste Ready",
+    "metaDescription": "Curated Claude prompts for creative writing, brainstorming, storytelling, and artistic projects. Ready to copy and paste.",
+    "keyword": "claude prompts for creative",
+    "intro": "Claude brings a thoughtful and nuanced approach to creative work that sets it apart from other AI assistants. Its ability to maintain consistent voice across long-form content, explore unconventional ideas, and provide detailed creative feedback makes it an ideal collaborator for writers, artists, and creators. These curated Claude creative prompts span fiction writing, worldbuilding, brainstorming sessions, poetry, and creative problem-solving. Each prompt is crafted to unlock Claude's creative potential while giving you full control over direction and tone.",
+    "tips": [
+      "Give Claude a specific creative persona or voice to adopt — it excels at maintaining character consistency across long conversations.",
+      "Use Claude's extended thinking mode for complex creative tasks like plot development or thematic analysis.",
+      "Ask Claude to generate multiple creative variations, then refine your favorite direction with follow-up prompts."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best Claude prompts for creative writing?",
+        "a": "The best Claude creative prompts provide genre, tone, audience, and constraints. For example, specifying a POV, time period, and emotional arc gives Claude enough structure to produce compelling fiction while leaving room for creative expression."
+      },
+      {
+        "q": "Can Claude help with worldbuilding?",
+        "a": "Yes. Claude excels at creating consistent, detailed fictional worlds. Provide your genre, key themes, and any established lore, and ask Claude to develop geography, cultures, magic systems, or political structures."
+      },
+      {
+        "q": "How do I brainstorm ideas with Claude?",
+        "a": "Start with a broad creative brief and ask Claude to generate 10-15 diverse ideas. Then pick your favorites and ask Claude to expand on each with specific details, potential challenges, and next steps."
+      }
+    ]
+  },
+  {
+    "tool": "chatgpt",
+    "category": "education",
+    "title": "Best ChatGPT Prompts for Education",
+    "metaTitle": "Best ChatGPT Education Prompts (2026) — Copy & Paste Ready",
+    "metaDescription": "Curated ChatGPT prompts for lesson plans, study guides, quizzes, and tutoring. Ready to copy and paste.",
+    "keyword": "chatgpt prompts for education",
+    "intro": "ChatGPT has become an indispensable tool for educators and students alike, capable of generating lesson plans, creating study materials, and providing personalized tutoring. The right prompts transform ChatGPT from a simple Q&A bot into a sophisticated educational assistant that adapts to any grade level, subject, or learning style. These curated ChatGPT education prompts cover curriculum planning, quiz generation, concept explanations, and differentiated instruction. Each prompt is designed for real classroom and study scenarios.",
+    "tips": [
+      "Always specify the grade level, subject area, and learning objectives when creating educational content with ChatGPT.",
+      "Ask ChatGPT to explain concepts using analogies and real-world examples suited to your students' interests and background.",
+      "Use ChatGPT to generate tiered assignments at different difficulty levels for differentiated instruction."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best ChatGPT prompts for education?",
+        "a": "The best ChatGPT education prompts specify the grade level, subject, learning objectives, and desired output format. For example, 'Create a 5th-grade science quiz on the water cycle with 10 multiple-choice questions and an answer key' produces ready-to-use materials."
+      },
+      {
+        "q": "Can ChatGPT create lesson plans?",
+        "a": "Yes. Provide the subject, grade level, duration, learning standards, and any required accommodations. ChatGPT can generate complete lesson plans including objectives, activities, assessments, and differentiation strategies."
+      },
+      {
+        "q": "How can students use ChatGPT for studying?",
+        "a": "Students can ask ChatGPT to explain complex topics in simple terms, generate practice problems, create flashcards, and quiz them on material. The key is to use it as a study partner rather than having it write assignments."
+      }
+    ]
+  },
+  {
+    "tool": "dall-e",
+    "category": "image-generation",
+    "title": "Best DALL-E Prompts for Image Generation",
+    "metaTitle": "Best DALL-E Image Generation Prompts (2026) — Copy & Paste Ready",
+    "metaDescription": "Curated DALL-E prompts for AI art, illustrations, product visuals, and graphic design. Ready to copy and paste.",
+    "keyword": "dall-e prompts for image generation",
+    "intro": "DALL-E by OpenAI delivers impressive image generation capabilities with a natural language interface that makes it accessible to everyone. Whether you need product mockups, social media graphics, or artistic illustrations, DALL-E can produce high-quality visuals from text descriptions alone. These curated DALL-E image generation prompts are optimized for the latest model and cover a variety of use cases including marketing assets, concept art, and photorealistic scenes. Each prompt includes style and composition details to help you get polished results quickly.",
+    "tips": [
+      "Be specific about composition, perspective, and lighting — DALL-E responds well to detailed spatial descriptions.",
+      "Include the intended use case in your prompt (social media post, website hero image) to get appropriately sized and styled results.",
+      "Use iterative prompting — start with a basic concept, then add details like textures, colors, and mood in follow-up generations."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best DALL-E prompts for image generation?",
+        "a": "The best DALL-E prompts describe the subject, setting, style, mood, and technical details like lighting and perspective. Structured prompts like 'a watercolor painting of a cozy bookshop interior, warm lighting, afternoon sun through windows' produce the best results."
+      },
+      {
+        "q": "How do I get consistent images from DALL-E?",
+        "a": "Use detailed style descriptions and reference specific art movements or techniques in every prompt. Maintaining the same descriptive language across prompts helps produce a cohesive visual series."
+      },
+      {
+        "q": "Can DALL-E create images for commercial use?",
+        "a": "Yes, OpenAI grants full usage rights for images generated with DALL-E, including commercial use. Always review the current terms of service to stay compliant with any updates to their policy."
+      }
+    ]
+  },
+  {
+    "tool": "claude",
+    "category": "business",
+    "title": "Best Claude Prompts for Business",
+    "metaTitle": "Best Claude Business Prompts (2026) — Copy & Paste Ready",
+    "metaDescription": "Curated Claude prompts for business strategy, proposals, analysis, and operations. Ready to copy and paste.",
+    "keyword": "claude prompts for business",
+    "intro": "Claude is an exceptional AI partner for business tasks, combining strong analytical reasoning with clear, professional communication. Its large context window lets you feed in entire business documents, financial reports, or meeting transcripts for comprehensive analysis. These curated Claude business prompts cover strategic planning, competitive analysis, proposal writing, and operational efficiency. Whether you are a startup founder, consultant, or corporate professional, these prompts will help you make better decisions and produce polished business deliverables faster.",
+    "tips": [
+      "Upload full documents like business plans or financial statements — Claude's context window can process lengthy materials in one go.",
+      "Ask Claude to present analysis in structured formats like SWOT matrices, decision frameworks, or executive summaries.",
+      "Use Claude's extended thinking for complex strategic questions that require weighing multiple factors and trade-offs."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best Claude prompts for business?",
+        "a": "The best Claude business prompts provide context about your industry, company size, and specific challenge. Include relevant data and ask for structured outputs like action plans, risk assessments, or competitive analysis frameworks."
+      },
+      {
+        "q": "Can Claude write business proposals?",
+        "a": "Yes. Provide the client name, project scope, timeline, and key deliverables. Claude can generate professional proposals with executive summaries, methodology sections, pricing structures, and terms."
+      },
+      {
+        "q": "How do I use Claude for competitive analysis?",
+        "a": "Share information about your competitors and market. Ask Claude to identify strengths, weaknesses, market positioning, and potential threats. It can create comparison matrices and recommend strategic responses."
+      }
+    ]
+  },
+  {
+    "tool": "gemini",
+    "category": "business",
+    "title": "Best Gemini Prompts for Business",
+    "metaTitle": "Best Gemini Business Prompts (2026) — Copy & Paste Ready",
+    "metaDescription": "Curated Gemini prompts for business strategy, market research, forecasting, and operations. Ready to copy and paste.",
+    "keyword": "gemini prompts for business",
+    "intro": "Google Gemini brings unique advantages to business tasks with its deep integration into the Google ecosystem and strong multimodal capabilities. From analyzing Google Sheets data to summarizing market research documents, Gemini streamlines business workflows that span multiple tools and formats. These curated Gemini business prompts help you leverage its strengths for strategic planning, financial modeling, presentation creation, and operational decisions. Each prompt is designed to produce actionable business outputs you can use immediately.",
+    "tips": [
+      "Connect Gemini to your Google Workspace for seamless analysis of Sheets, Docs, and Slides data in your prompts.",
+      "Ask Gemini to cross-reference multiple data sources when conducting market research or competitive intelligence.",
+      "Use Gemini's multimodal capabilities to analyze charts, graphs, and screenshots alongside text-based business data."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best Gemini prompts for business?",
+        "a": "The best Gemini business prompts take advantage of its Google integration. Ask it to analyze Sheets data, summarize Drive documents, or draft Slides presentations. Include your industry context and desired output format for best results."
+      },
+      {
+        "q": "Can Gemini help with financial forecasting?",
+        "a": "Yes. Provide historical data and assumptions, then ask Gemini to build projections. It can create revenue models, expense forecasts, and scenario analyses with clear assumptions stated for each projection."
+      },
+      {
+        "q": "How does Gemini compare to Claude for business tasks?",
+        "a": "Gemini excels when your workflow is centered on Google Workspace tools, while Claude handles longer documents and complex reasoning. Choose based on your primary tools and the complexity of the analysis needed."
+      }
+    ]
+  },
+  {
+    "tool": "chatgpt",
+    "category": "marketing",
+    "title": "Best ChatGPT Prompts for Marketing",
+    "metaTitle": "Best ChatGPT Marketing Prompts (2026) — Copy & Paste Ready",
+    "metaDescription": "Curated ChatGPT marketing prompts for social media, SEO, email campaigns, and ad copy. Ready to copy and paste.",
+    "keyword": "chatgpt prompts for marketing",
+    "intro": "ChatGPT has become an essential tool in every marketer's toolkit, capable of generating everything from viral social media hooks to comprehensive content strategies. The right prompts turn ChatGPT into a marketing team member that can produce ad copy, email sequences, SEO content, and campaign ideas on demand. These curated ChatGPT marketing prompts are battle-tested across real campaigns and cover social media, content marketing, paid advertising, and email marketing. Each prompt includes the context ChatGPT needs to deliver results that convert.",
+    "tips": [
+      "Include your brand voice guidelines, target audience demographics, and campaign goals in every marketing prompt.",
+      "Ask ChatGPT to generate multiple variations of headlines and CTAs so you can A/B test the best performers.",
+      "Provide examples of past high-performing content and ask ChatGPT to analyze what made them work, then replicate that formula."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best ChatGPT prompts for marketing?",
+        "a": "The best ChatGPT marketing prompts specify your target audience, brand voice, platform, and conversion goal. For example, 'Write 5 Instagram carousel hooks for a SaaS product targeting small business owners, focusing on time-saving benefits' produces targeted, usable content."
+      },
+      {
+        "q": "How do I use ChatGPT for SEO?",
+        "a": "Provide your target keyword, search intent, and competitor URLs. Ask ChatGPT to create SEO-optimized outlines, meta descriptions, and content briefs that address user intent while naturally incorporating your target keywords."
+      },
+      {
+        "q": "Can ChatGPT write social media captions?",
+        "a": "Yes. Provide your brand voice, platform, post topic, and any hashtag strategy. ChatGPT can generate engaging captions with hooks, CTAs, and appropriate emoji usage tailored to each social platform's best practices."
+      }
+    ]
+  },
+  {
+    "tool": "claude",
+    "category": "writing",
+    "title": "Best Claude Prompts for Writing",
+    "metaTitle": "Best Claude Writing Prompts (2026) — Copy & Paste Ready",
+    "metaDescription": "Curated Claude prompts for blog posts, essays, copywriting, and long-form content. Ready to copy and paste.",
+    "keyword": "claude prompts for writing",
+    "intro": "Claude stands out as a writing assistant thanks to its ability to maintain consistent voice across long documents and its nuanced understanding of tone, style, and audience. Whether you are drafting a 5,000-word article, crafting persuasive copy, or editing an existing manuscript, Claude delivers polished prose that requires minimal revision. These curated Claude writing prompts cover blog posts, newsletters, sales copy, technical writing, and creative nonfiction. Each prompt gives Claude the structure it needs to produce publication-ready content.",
+    "tips": [
+      "Paste your existing writing sample and ask Claude to match your voice — it excels at style mimicry across long-form content.",
+      "Use Claude's large context window to provide full briefs, style guides, and reference materials in a single prompt.",
+      "Ask Claude to critique its own drafts and suggest improvements before you review — this self-editing step often catches issues."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best Claude prompts for writing?",
+        "a": "The best Claude writing prompts include your target audience, desired tone, word count, and structure. Claude performs exceptionally well with detailed briefs that specify the purpose, key points to cover, and examples of the desired style."
+      },
+      {
+        "q": "Can Claude write long-form content?",
+        "a": "Yes. Claude's large context window makes it ideal for long-form writing. Provide a detailed outline and ask Claude to expand each section. It maintains consistent voice and logical flow across thousands of words."
+      },
+      {
+        "q": "How does Claude compare to ChatGPT for writing?",
+        "a": "Claude tends to produce more nuanced, less formulaic prose and excels at maintaining voice consistency in long documents. ChatGPT is faster for short-form content. Choose based on your content length and quality requirements."
+      }
+    ]
+  },
+  {
+    "tool": "claude",
+    "category": "marketing",
+    "title": "Best Claude Prompts for Marketing",
+    "metaTitle": "Best Claude Marketing Prompts (2026) — Copy & Paste Ready",
+    "metaDescription": "Curated Claude prompts for marketing strategy, content marketing, email campaigns, and brand messaging. Ready to copy and paste.",
+    "keyword": "claude prompts for marketing",
+    "intro": "Claude offers a strategic edge for marketing professionals who need more than just content generation. Its analytical depth makes it ideal for building comprehensive marketing strategies, analyzing campaign performance, and crafting messaging that resonates with specific audiences. These curated Claude marketing prompts go beyond basic copywriting to cover brand positioning, customer journey mapping, competitive messaging, and data-driven campaign optimization. Each prompt leverages Claude's reasoning capabilities to produce marketing outputs with strategic substance.",
+    "tips": [
+      "Upload your existing marketing data and brand guidelines so Claude can tailor recommendations to your specific business context.",
+      "Ask Claude to analyze competitor messaging before drafting your own — it excels at identifying positioning gaps and opportunities.",
+      "Use Claude to create full marketing frameworks (personas, journey maps, content calendars) rather than one-off copy."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best Claude prompts for marketing?",
+        "a": "The best Claude marketing prompts provide business context, target audience details, and strategic goals. Claude excels at strategy-level tasks like positioning, messaging frameworks, and campaign planning rather than just generating ad copy."
+      },
+      {
+        "q": "Can Claude build a content marketing strategy?",
+        "a": "Yes. Share your business goals, target audience, and competitive landscape. Claude can create comprehensive content strategies including pillar topics, content calendars, distribution plans, and KPI frameworks."
+      },
+      {
+        "q": "How do I use Claude for email marketing?",
+        "a": "Provide your email list segment, campaign goal, and brand voice. Claude can write complete email sequences with subject lines, preview text, body copy, and CTAs optimized for open rates and conversions."
+      }
+    ]
+  },
+  {
+    "tool": "gemini",
+    "category": "marketing",
+    "title": "Best Gemini Prompts for Marketing",
+    "metaTitle": "Best Gemini Marketing Prompts (2026) — Copy & Paste Ready",
+    "metaDescription": "Curated Gemini prompts for marketing campaigns, Google Ads, content strategy, and audience research. Ready to copy and paste.",
+    "keyword": "gemini prompts for marketing",
+    "intro": "Gemini is a powerful marketing tool, especially for teams already embedded in the Google ecosystem. Its integration with Google Ads, Analytics, and Search Console data gives it a unique advantage for search marketing and paid media optimization. These curated Gemini marketing prompts cover Google Ads copywriting, audience research, content strategy, and campaign analysis. Each prompt is designed to leverage Gemini's strengths in data-connected marketing workflows, helping you create campaigns that are grounded in real performance data.",
+    "tips": [
+      "Connect your Google Ads and Analytics data to Gemini for prompts that reference actual campaign performance metrics.",
+      "Use Gemini to analyze Google Trends data alongside your marketing content for timely, relevant campaign ideas.",
+      "Ask Gemini to draft Google Ads copy with proper character limits and extension text for each ad format."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best Gemini prompts for marketing?",
+        "a": "The best Gemini marketing prompts leverage its Google ecosystem integration. Ask it to optimize Google Ads copy, analyze Search Console data for content gaps, or draft campaigns based on Google Trends insights for data-driven marketing."
+      },
+      {
+        "q": "Can Gemini help with Google Ads?",
+        "a": "Yes. Gemini can write responsive search ad headlines and descriptions within character limits, suggest negative keywords, and help structure ad groups. Provide your product, target audience, and campaign goals for best results."
+      },
+      {
+        "q": "How do I use Gemini for content marketing?",
+        "a": "Share your target keywords and audience personas. Gemini can identify content gaps, suggest topic clusters, and draft SEO-optimized content briefs that align with your overall marketing strategy."
+      }
+    ]
+  },
+  {
+    "tool": "stable-diffusion",
+    "category": "image-generation",
+    "title": "Best Stable Diffusion Prompts for Image Generation",
+    "metaTitle": "Best Stable Diffusion Image Generation Prompts (2026) — Copy & Paste Ready",
+    "metaDescription": "Curated Stable Diffusion prompts for AI art, photorealism, concept art, and custom image generation. Ready to copy and paste.",
+    "keyword": "stable diffusion prompts for image generation",
+    "intro": "Stable Diffusion gives you unmatched control over AI image generation with its open-source architecture, custom models, and extensive parameter tuning. Unlike cloud-based alternatives, you can run it locally, fine-tune on your own datasets, and use community-created models for specialized styles. These curated Stable Diffusion image generation prompts cover photorealistic portraits, fantasy art, product photography, and architectural visualization. Each prompt includes recommended negative prompts and sampler settings for optimal output quality.",
+    "tips": [
+      "Always include negative prompts to exclude common artifacts like extra fingers, blurry backgrounds, and distorted faces.",
+      "Experiment with different samplers (DPM++ 2M Karras, Euler a) and step counts to find the best balance of quality and speed.",
+      "Use LoRA models and embeddings to achieve specific styles that base prompts alone cannot replicate."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best Stable Diffusion prompts for image generation?",
+        "a": "The best Stable Diffusion prompts use weighted tokens, quality tags like 'masterpiece' and 'best quality,' specific art style references, and detailed negative prompts. The combination of positive and negative prompting is what sets Stable Diffusion apart."
+      },
+      {
+        "q": "How do I write negative prompts for Stable Diffusion?",
+        "a": "Include common artifacts you want to avoid: 'low quality, blurry, deformed, extra fingers, bad anatomy, watermark, text.' Tailor negative prompts to your subject — portraits need different negatives than landscapes."
+      },
+      {
+        "q": "What Stable Diffusion model should I use?",
+        "a": "SDXL is the best general-purpose model. For photorealism, try Realistic Vision or Juggernaut XL. For anime, use Anything V5 or Counterfeit. Community fine-tuned models on Civitai offer specialized styles."
+      }
+    ]
+  },
+  {
+    "tool": "gemini",
+    "category": "education",
+    "title": "Best Gemini Prompts for Education",
+    "metaTitle": "Best Gemini Education Prompts (2026) — Copy & Paste Ready",
+    "metaDescription": "Curated Gemini prompts for lesson planning, student assessments, study guides, and classroom activities. Ready to copy and paste.",
+    "keyword": "gemini prompts for education",
+    "intro": "Gemini is an excellent educational companion, particularly for educators and students who rely on Google Workspace tools like Docs, Slides, and Classroom. Its ability to search the web in real time and synthesize information from multiple sources makes it ideal for creating up-to-date lesson materials and research-backed study guides. These curated Gemini education prompts cover lesson planning, assessment creation, student feedback, and interactive learning activities. Each prompt is designed to produce materials that meet modern educational standards.",
+    "tips": [
+      "Use Gemini's real-time web access to create lesson materials with the most current statistics, events, and research.",
+      "Ask Gemini to align materials with specific educational standards like Common Core, NGSS, or state-specific frameworks.",
+      "Leverage Gemini's Google Slides integration to generate complete slide decks for classroom presentations directly."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best Gemini prompts for education?",
+        "a": "The best Gemini education prompts specify grade level, subject, learning standards, and desired format. Gemini's web access means it can include current events and recent research in educational materials, unlike offline AI tools."
+      },
+      {
+        "q": "Can Gemini create assessments and quizzes?",
+        "a": "Yes. Specify the topic, question types (multiple choice, short answer, essay), difficulty level, and any standards alignment. Gemini can generate complete assessments with answer keys and grading rubrics."
+      },
+      {
+        "q": "How can students use Gemini for studying?",
+        "a": "Students can ask Gemini to explain concepts with up-to-date examples, create study plans, generate practice questions, and summarize textbook chapters. Its web access helps students find the latest information on any topic."
+      }
+    ]
+  },
+  {
+    "tool": "chatgpt",
+    "category": "data-analysis",
+    "title": "Best ChatGPT Prompts for Data Analysis",
+    "metaTitle": "Best ChatGPT Data Analysis Prompts (2026) — Copy & Paste Ready",
+    "metaDescription": "Curated ChatGPT prompts for data analysis, spreadsheets, Python scripts, and data visualization. Ready to copy and paste.",
+    "keyword": "chatgpt prompts for data analysis",
+    "intro": "ChatGPT with Code Interpreter has become a powerful data analysis tool, capable of processing uploaded files, running Python code, and generating visualizations all within the chat interface. Whether you are cleaning messy data, building pivot tables, or creating charts, ChatGPT can handle it with the right prompts. These curated ChatGPT data analysis prompts cover exploratory analysis, statistical testing, data cleaning, and visualization creation. Each prompt is designed to work with ChatGPT's Code Interpreter for hands-on data work.",
+    "tips": [
+      "Upload your dataset directly and ask ChatGPT to describe its structure before diving into analysis.",
+      "Request Python code alongside results so you can reproduce the analysis in your own environment later.",
+      "Ask ChatGPT to check for data quality issues like missing values, duplicates, and outliers before running any analysis."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best ChatGPT prompts for data analysis?",
+        "a": "The best ChatGPT data analysis prompts upload a dataset and ask specific questions. For example, 'Analyze this CSV and identify the top 3 factors correlated with customer churn' is more effective than vague requests like 'analyze this data.'"
+      },
+      {
+        "q": "Can ChatGPT create data visualizations?",
+        "a": "Yes. With Code Interpreter enabled, ChatGPT can generate charts using matplotlib, seaborn, and plotly. Specify the chart type, variables, and styling preferences for publication-ready visualizations."
+      },
+      {
+        "q": "How do I clean data with ChatGPT?",
+        "a": "Upload your file and ask ChatGPT to identify missing values, duplicates, and formatting inconsistencies. It can write and execute Python scripts to handle missing data, standardize formats, and remove outliers."
+      }
+    ]
+  },
+  {
+    "tool": "gemini",
+    "category": "data-analysis",
+    "title": "Best Gemini Prompts for Data Analysis",
+    "metaTitle": "Best Gemini Data Analysis Prompts (2026) — Copy & Paste Ready",
+    "metaDescription": "Curated Gemini prompts for data analysis, Google Sheets, visualization, and business intelligence. Ready to copy and paste.",
+    "keyword": "gemini prompts for data analysis",
+    "intro": "Gemini offers seamless data analysis capabilities, especially for teams that store their data in Google Sheets and BigQuery. Its native integration with Google Workspace means you can analyze spreadsheets, generate charts, and create reports without leaving your existing workflow. These curated Gemini data analysis prompts cover spreadsheet analysis, trend identification, dashboard creation, and statistical summaries. Each prompt is optimized for Gemini's strengths in connected, real-time data analysis across Google tools.",
+    "tips": [
+      "Reference your Google Sheets data directly in prompts for seamless analysis without manual data uploads.",
+      "Ask Gemini to create formulas and Apps Script code that you can paste directly into your spreadsheets.",
+      "Use Gemini to translate complex data findings into plain-language summaries for non-technical stakeholders."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best Gemini prompts for data analysis?",
+        "a": "The best Gemini data analysis prompts connect to your Google Sheets or uploaded data and ask specific analytical questions. Gemini works best when you specify the metrics, time periods, and comparison dimensions you care about."
+      },
+      {
+        "q": "Can Gemini analyze Google Sheets data?",
+        "a": "Yes. Gemini can read and analyze Google Sheets data natively. Ask it to identify trends, create pivot table summaries, suggest formulas, or generate chart recommendations based on your spreadsheet structure."
+      },
+      {
+        "q": "How does Gemini handle large datasets?",
+        "a": "For large datasets, ask Gemini to focus on specific columns or date ranges. It can write Google Sheets formulas, Apps Script, or BigQuery SQL to process data that exceeds conversational limits."
+      }
+    ]
+  },
+  {
+    "tool": "chatgpt",
+    "category": "creative",
+    "title": "Best ChatGPT Prompts for Creative Projects",
+    "metaTitle": "Best ChatGPT Creative Prompts (2026) — Copy & Paste Ready",
+    "metaDescription": "Curated ChatGPT prompts for creative writing, brainstorming, storytelling, and artistic projects. Ready to copy and paste.",
+    "keyword": "chatgpt prompts for creative",
+    "intro": "ChatGPT is a versatile creative partner that can help with everything from writing short stories and poetry to brainstorming product names and designing game mechanics. Its strength lies in rapid ideation and the ability to quickly iterate on creative concepts across any genre or medium. These curated ChatGPT creative prompts cover fiction writing, worldbuilding, songwriting, brainstorming sessions, and creative problem-solving. Each prompt gives ChatGPT the creative constraints it needs to produce original, engaging ideas you can build upon.",
+    "tips": [
+      "Set creative constraints in your prompts — word limits, genre rules, and style requirements often produce more interesting results.",
+      "Use the 'yes, and' technique: build on ChatGPT's ideas with follow-up prompts rather than starting over each time.",
+      "Ask ChatGPT to adopt specific creative personas (novelist, screenwriter, poet) for style-appropriate output."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best ChatGPT prompts for creative projects?",
+        "a": "The best ChatGPT creative prompts provide genre, format, tone, and creative constraints. Prompts like 'Write a flash fiction story under 500 words in the style of magical realism about a librarian who discovers...' produce focused, creative output."
+      },
+      {
+        "q": "Can ChatGPT help with brainstorming?",
+        "a": "Yes. Ask ChatGPT to generate a large number of ideas quickly, then use follow-up prompts to evaluate, combine, and refine the most promising concepts. It excels at rapid ideation across diverse creative domains."
+      },
+      {
+        "q": "How do I use ChatGPT for storytelling?",
+        "a": "Provide the genre, setting, main characters, and central conflict. Ask ChatGPT to outline the story arc first, then expand scene by scene. Use follow-up prompts to develop dialogue, descriptions, and plot twists."
+      }
+    ]
+  },
+  {
+    "tool": "claude",
+    "category": "education",
+    "title": "Best Claude Prompts for Education",
+    "metaTitle": "Best Claude Education Prompts (2026) — Copy & Paste Ready",
+    "metaDescription": "Curated Claude prompts for teaching, tutoring, curriculum design, and student assessments. Ready to copy and paste.",
+    "keyword": "claude prompts for education",
+    "intro": "Claude brings exceptional depth to educational applications with its ability to explain complex concepts clearly, adapt explanations to different learning levels, and maintain patience through extended tutoring sessions. Its large context window allows educators to upload entire curricula, textbook chapters, or student work for comprehensive analysis. These curated Claude education prompts cover tutoring, lesson design, rubric creation, and personalized learning paths. Each prompt leverages Claude's strengths in clear explanation and thoughtful feedback.",
+    "tips": [
+      "Upload your curriculum standards or textbook sections so Claude can align its outputs to your specific educational requirements.",
+      "Ask Claude to explain concepts using the Socratic method — it excels at guiding students to answers through questions rather than lecturing.",
+      "Use Claude to generate differentiated materials for students at various skill levels from the same base lesson."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best Claude prompts for education?",
+        "a": "The best Claude education prompts specify the student's level, the concept being taught, and the desired pedagogical approach. Claude excels at adaptive explanations, so tell it to adjust complexity based on the learner's background."
+      },
+      {
+        "q": "Can Claude tutor students in math and science?",
+        "a": "Yes. Claude can work through problems step by step, explain the reasoning behind each step, and generate similar practice problems. It is especially strong at identifying where students get stuck and offering alternative explanations."
+      },
+      {
+        "q": "How do I use Claude for creating assessments?",
+        "a": "Provide the learning objectives, subject matter, and assessment type. Claude can create rubrics, test questions at various Bloom's taxonomy levels, and even generate sample student responses at different grade levels for calibration."
+      }
+    ]
+  },
+  {
+    "tool": "chatgpt",
+    "category": "business",
+    "title": "Best ChatGPT Prompts for Business",
+    "metaTitle": "Best ChatGPT Business Prompts (2026) — Copy & Paste Ready",
+    "metaDescription": "Curated ChatGPT prompts for business plans, emails, strategy, and operations. Ready to copy and paste.",
+    "keyword": "chatgpt prompts for business",
+    "intro": "ChatGPT is a practical business tool that helps professionals draft communications, develop strategies, and streamline daily operations. From writing professional emails and meeting agendas to creating business plans and analyzing market opportunities, ChatGPT handles a wide range of business tasks effectively. These curated ChatGPT business prompts cover professional communication, strategic planning, process optimization, and decision-making frameworks. Each prompt is structured to produce business-ready outputs that save you time and improve the quality of your work.",
+    "tips": [
+      "Provide your company context, industry, and role when asking business questions for more relevant and actionable advice.",
+      "Ask ChatGPT to structure outputs as frameworks, templates, or checklists that your team can reuse across projects.",
+      "Use ChatGPT to role-play business scenarios like investor pitches, negotiations, or client objections for preparation."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best ChatGPT prompts for business?",
+        "a": "The best ChatGPT business prompts specify your industry, company stage, and the specific business challenge. For example, 'Draft a cold outreach email for a B2B SaaS targeting HR directors at mid-market companies' is far more effective than generic requests."
+      },
+      {
+        "q": "Can ChatGPT write a business plan?",
+        "a": "Yes. Provide your business idea, target market, revenue model, and competitive landscape. ChatGPT can generate complete business plans with executive summaries, market analysis, financial projections, and go-to-market strategies."
+      },
+      {
+        "q": "How do I use ChatGPT for professional emails?",
+        "a": "Specify the recipient, context, desired tone (formal, friendly, urgent), and the key message. ChatGPT can draft emails for any business scenario including follow-ups, proposals, apologies, and introductions."
+      }
+    ]
+  }
+]

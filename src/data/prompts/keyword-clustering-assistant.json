@@ -1,0 +1,22 @@
+{
+  "title": "Keyword Clustering Assistant",
+  "slug": "keyword-clustering-assistant",
+  "promptText": "You are an expert SEO strategist specializing in keyword research and topic clustering. I have the following list of keywords related to [NICHE]:\n\n[KEYWORD_LIST]\n\nPlease organize these keywords into logical topic clusters following these steps:\n\n1. Cluster Identification: Group the keywords into distinct topic clusters based on search intent and semantic similarity. Name each cluster with a clear, descriptive label.\n\n2. Pillar Page Mapping: For each cluster, identify one keyword that should serve as the pillar page (highest volume, broadest intent) and label the rest as supporting content.\n\n3. Search Intent Classification: Tag each keyword with its primary search intent (informational, commercial investigation, transactional, or navigational).\n\n4. Content Type Recommendation: For each keyword, suggest the best content format (blog post, comparison page, how-to guide, product page, landing page, FAQ, etc.).\n\n5. Internal Linking Strategy: Describe how the supporting pages should link to the pillar page and to each other within each cluster.\n\n6. Priority Ranking: Rank the clusters from highest to lowest priority based on likely search volume, competition level, and business value for a [BUSINESS_TYPE].\n\nPresent the results in a clean, structured format that can be easily transferred to a content planning spreadsheet.",
+  "description": "This prompt organizes a raw list of keywords into strategic topic clusters complete with pillar page assignments, search intent tags, and content type recommendations. Keyword clustering is one of the most time-consuming parts of SEO planning, and this prompt automates the strategic thinking that typically requires an experienced SEO consultant. The output gives you a publication-ready content plan with clear internal linking architecture. It is ideal for SEO managers starting a new content strategy, bloggers trying to organize hundreds of keyword ideas, or agencies onboarding new clients who need a structured content roadmap built from keyword research data.",
+  "tool": "gemini",
+  "category": "marketing",
+  "tags": ["SEO", "keyword-clustering", "content-strategy", "topic-clusters", "pillar-page"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "NICHE", "description": "Your industry or content niche", "example": "personal finance for millennials" },
+    { "name": "KEYWORD_LIST", "description": "Raw list of keywords to cluster", "example": "budgeting apps, how to save money in your 20s, best savings accounts 2026, emergency fund tips, how to invest with little money, Roth IRA vs traditional IRA, side hustle ideas, debt payoff strategies, credit score improvement, first-time homebuyer tips" },
+    { "name": "BUSINESS_TYPE", "description": "Type of business these keywords serve", "example": "personal finance blog monetized through affiliate links" }
+  ],
+  "tips": ["Include at least 15-20 keywords for more meaningful clusters", "Mix head terms and long-tail keywords for better cluster balance", "Export the clustered output to a spreadsheet and add search volume data from Ahrefs or SEMrush for prioritization"],
+  "exampleOutput": "CLUSTER 1: Saving & Budgeting (Priority: HIGH)\nPillar Page: 'how to save money in your 20s' — Intent: Informational — Format: Ultimate Guide\nSupporting:\n  - 'budgeting apps' — Intent: Commercial Investigation — Format: Comparison/Listicle\n  - 'best savings accounts 2026' — Intent: Commercial Investigation — Format: Comparison Post\n  - 'emergency fund tips' — Intent: Informational — Format: How-To Guide\nInternal Linking: All supporting pages link to pillar with contextual anchor text. Budgeting apps page links to savings accounts page (natural cross-reference).\n\nCLUSTER 2: Investing Basics (Priority: HIGH)...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Keyword Clustering Assistant Prompt for Gemini",
+  "metaDescription": "Organize keywords into strategic topic clusters with this free Gemini prompt. Get pillar pages, intent tags, and content recommendations."
+}

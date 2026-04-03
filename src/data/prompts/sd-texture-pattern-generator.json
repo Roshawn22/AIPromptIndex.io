@@ -1,0 +1,23 @@
+{
+  "title": "SD Texture Pattern Generator",
+  "slug": "sd-texture-pattern-generator",
+  "promptText": "Seamless tileable texture pattern, [MATERIAL_TYPE] material, [PATTERN_STYLE] pattern design, [COLOR_SCHEME] color scheme, high resolution texture map, physically based rendering ready, uniform lighting with no directional shadows, perfectly seamless edges for tiling, [SURFACE_QUALITY] surface quality, 2048x2048 resolution, top-down orthographic view, no perspective distortion, suitable for 3D modeling and game assets, detailed surface variation, natural imperfections for realism, PBR material reference, photorealistic quality",
+  "description": "This prompt generates seamless, tileable texture patterns that are ready for use in 3D modeling, game development, and graphic design projects. The textures are designed to tile perfectly without visible seams, feature uniform lighting to avoid baking in directional shadows, and include natural surface variations for realism. Whether you need wood grain, stone, fabric, metal, or any other material, this prompt produces textures that can be used directly as diffuse maps or as reference for creating full PBR material sets. It saves hours compared to photographing and editing textures manually.",
+  "tool": "stable-diffusion",
+  "category": "image-generation",
+  "tags": ["texture", "3d-modeling", "game-dev", "seamless-pattern", "material-design"],
+  "difficulty": "intermediate",
+  "promptType": "image",
+  "variables": [
+    { "name": "MATERIAL_TYPE", "description": "The type of material to generate", "example": "weathered red brick" },
+    { "name": "PATTERN_STYLE", "description": "Pattern arrangement or style", "example": "herringbone layout" },
+    { "name": "COLOR_SCHEME", "description": "Color range for the texture", "example": "warm terracotta reds and dusty brown" },
+    { "name": "SURFACE_QUALITY", "description": "Surface finish characteristics", "example": "rough and worn with moss in crevices" }
+  ],
+  "tips": ["Use the 'tiling' option in your Stable Diffusion interface for better seamless results", "Generate at the highest resolution possible for textures used in close-up renders", "Use the output as a base and refine with texture editing tools for production use"],
+  "exampleOutput": "A perfectly seamless tileable texture of weathered red brick in a herringbone layout pattern, warm terracotta and dusty brown tones, rough worn surface with moss growing in crevices, uniform top-down lighting, no perspective distortion, photorealistic quality suitable for PBR rendering.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Texture Pattern Generator Prompt for Stable Diffusion",
+  "metaDescription": "Generate seamless tileable textures with Stable Diffusion. Create PBR-ready materials for 3D modeling, games, and design projects."
+}

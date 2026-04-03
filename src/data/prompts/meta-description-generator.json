@@ -1,0 +1,24 @@
+{
+  "title": "Meta Description Generator",
+  "slug": "meta-description-generator",
+  "promptText": "You are an SEO specialist who writes high-converting meta descriptions. Generate [NUMBER_OF_VERSIONS] unique meta description variations for the following page:\n\nPage Title: [PAGE_TITLE]\nTarget Keyword: [TARGET_KEYWORD]\nPage Type: [PAGE_TYPE]\nKey Value Proposition: [VALUE_PROPOSITION]\n\nFor each variation, follow these rules:\n- Keep it between 150-160 characters (count precisely)\n- Include the target keyword naturally within the first 80 characters when possible\n- Include a clear call to action or value hook\n- Use active voice and power words that drive clicks\n- Avoid clickbait — the description must accurately reflect the page content\n- Do not use quotation marks (they get truncated in SERPs)\n\nAfter generating all versions, recommend your top pick and explain why it will likely achieve the highest click-through rate. Also provide the exact character count for each variation.",
+  "description": "This prompt generates multiple SEO-optimized meta description options for any web page, complete with precise character counts and a recommended top pick. Meta descriptions are one of the highest-leverage SEO elements — they directly influence click-through rates from search results. Yet most marketers either leave them blank or write them as an afterthought. This prompt produces professionally crafted descriptions that balance keyword inclusion with compelling copy that drives clicks. It is ideal for SEO managers handling large sites with hundreds of pages that need unique meta descriptions, or for content creators who want to A/B test different approaches.",
+  "tool": "chatgpt",
+  "category": "marketing",
+  "tags": ["SEO", "meta-description", "SERP", "click-through-rate", "on-page-SEO"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "NUMBER_OF_VERSIONS", "description": "How many meta description variations to generate", "example": "5" },
+    { "name": "PAGE_TITLE", "description": "Title of the page needing a meta description", "example": "How to Start a Podcast in 2026: Complete Beginner Guide" },
+    { "name": "TARGET_KEYWORD", "description": "Primary keyword for this page", "example": "how to start a podcast" },
+    { "name": "PAGE_TYPE", "description": "Type of page (blog post, product page, landing page, etc.)", "example": "long-form blog post" },
+    { "name": "VALUE_PROPOSITION", "description": "Main benefit or unique angle of this page", "example": "step-by-step guide covering equipment, hosting, and launch strategy for under $100" }
+  ],
+  "tips": ["Generate at least 3-5 variations so you have options to test", "Check that the character count is accurate — Google truncates anything over 160 characters", "Include numbers or specific details in your VALUE_PROPOSITION for more compelling output"],
+  "exampleOutput": "Version 1 (158 chars): Learn how to start a podcast from scratch with our step-by-step 2026 guide. Equipment, hosting, and launch strategy — all for under $100.\n\nVersion 2 (155 chars): How to start a podcast on a budget. This complete guide covers gear, recording, editing, and launching your show in 30 days or less.\n\nVersion 3 (152 chars): Start a podcast today with this beginner-friendly guide. Get equipment picks, free hosting options, and a proven launch checklist inside.\n\nRecommended: Version 1 — It front-loads the keyword, includes specific details ($100 budget), and creates curiosity about what the full guide covers.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Meta Description Generator Prompt for ChatGPT",
+  "metaDescription": "Generate SEO meta descriptions with precise character counts using this free ChatGPT prompt. Get multiple variations and a top pick."
+}

@@ -1,0 +1,29 @@
+{
+  "title": "Freelance Rate Calculator",
+  "slug": "freelance-rate-calculator",
+  "promptText": "You are a freelance business strategist who helps independent professionals price their services profitably and competitively. Help me calculate and justify my freelance hourly rate based on the following information:\n\nMy Profession: [PROFESSION]\nYears of Experience: [EXPERIENCE_YEARS]\nSpecialization: [SPECIALIZATION]\nLocation: [LOCATION]\nTarget Annual Income: [TARGET_INCOME]\nDesired Work Hours Per Week: [WORK_HOURS]\nWeeks of Vacation/Year: [VACATION_WEEKS]\nCurrent Rate (if any): [CURRENT_RATE]\nKey Skills/Certifications: [SKILLS]\nTypical Client Type: [CLIENT_TYPE]\n\nProvide the following analysis:\n\n1. Cost-Based Calculation: Calculate my minimum viable rate by factoring in:\n   - Self-employment taxes (estimated 15.3% in the US)\n   - Health insurance ($500-800/month estimate)\n   - Retirement savings (15% of target income)\n   - Business expenses (software, equipment, professional development)\n   - Non-billable hours (admin, marketing, sales — typically 30-40% of total hours)\n   Show the math step by step.\n\n2. Market-Based Rate Range: What are freelancers with my profile typically charging? Provide low, median, and high ranges.\n\n3. Value-Based Pricing Guide: How to price based on the value delivered rather than hours worked. Include 3 examples of how to frame my rate in terms of ROI for clients.\n\n4. Rate Justification Script: Write a confident, professional response I can use when clients ask 'Why are you so expensive?' or try to negotiate down.\n\n5. Pricing Strategy Recommendations:\n   - When to charge hourly vs. project-based vs. retainer\n   - How to structure pricing tiers (good/better/best)\n   - When and how to raise rates with existing clients\n\n6. Rate Card Template: A professional rate card I can share with prospective clients.",
+  "description": "This prompt provides a complete freelance pricing strategy that goes far beyond a simple hourly rate calculation. It factors in the hidden costs most freelancers forget — self-employment taxes, health insurance, non-billable hours, and retirement savings — to ensure the rate is actually profitable. Then it layers on market comparison data, value-based pricing frameworks, negotiation scripts, and a professional rate card template. Most freelancers significantly undercharge because they base their rate on their previous salary divided by 2,000 hours, ignoring the 30-40% of time spent on non-billable work. This prompt corrects that mistake and provides the confidence and language needed to charge what the work is truly worth. It is essential for new freelancers setting rates for the first time, experienced freelancers who suspect they are undercharging, and consultants transitioning from employment to independent work.",
+  "tool": "chatgpt",
+  "category": "business",
+  "tags": ["freelancing", "pricing-strategy", "rate-calculation", "business-planning", "consulting"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "PROFESSION", "description": "Your freelance profession", "example": "web developer" },
+    { "name": "EXPERIENCE_YEARS", "description": "Years of professional experience", "example": "5 years" },
+    { "name": "SPECIALIZATION", "description": "Your area of specialization", "example": "React/Next.js e-commerce development" },
+    { "name": "LOCATION", "description": "Where you are based", "example": "Denver, CO (working remotely with US clients)" },
+    { "name": "TARGET_INCOME", "description": "Desired annual take-home income", "example": "$120,000" },
+    { "name": "WORK_HOURS", "description": "Desired billable hours per week", "example": "30 hours" },
+    { "name": "VACATION_WEEKS", "description": "Weeks off per year", "example": "4 weeks" },
+    { "name": "CURRENT_RATE", "description": "Current hourly rate if you have one", "example": "$75/hour" },
+    { "name": "SKILLS", "description": "Key skills, certifications, or differentiators", "example": "React, Next.js, TypeScript, Shopify Plus certified, AWS Solutions Architect" },
+    { "name": "CLIENT_TYPE", "description": "Types of clients you work with", "example": "mid-size e-commerce brands doing $1-10M annually" }
+  ],
+  "tips": ["Be honest about your non-billable hours — most freelancers only bill 60-70% of their working time", "Use the value-based pricing examples when talking to larger clients who care about ROI, not hourly costs", "Review and adjust your rate every 6 months as your skills and market position evolve"],
+  "exampleOutput": "1. COST-BASED CALCULATION\n\nTarget Take-Home Income: $120,000\n\nStep 1: Add Self-Employment Taxes\n$120,000 / (1 - 0.153) = $141,676 gross needed\n\nStep 2: Add Business Expenses\nHealth Insurance: $7,200/year\nRetirement (15%): $18,000/year\nSoftware/Tools: $3,600/year\nProfessional Development: $2,400/year\nTotal Expenses: $31,200\nRequired Gross Revenue: $172,876\n\nStep 3: Calculate Available Billable Hours\n52 weeks - 4 vacation = 48 working weeks\n30 billable hours/week x 48 weeks = 1,440 billable hours/year\n\nStep 4: Minimum Hourly Rate\n$172,876 / 1,440 hours = $120.05/hour\n\nYour minimum viable rate is $120/hour. Your current rate of $75/hour is leaving approximately $64,800/year on the table...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Freelance Rate Calculator Prompt for ChatGPT",
+  "metaDescription": "Calculate your ideal freelance rate with this free ChatGPT prompt. Get cost analysis, market comparison, and rate negotiation scripts."
+}

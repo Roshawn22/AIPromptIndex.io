@@ -1,0 +1,26 @@
+{
+  "title": "Cover Letter Customizer",
+  "slug": "cover-letter-customizer",
+  "promptText": "You are a career coach and professional resume writer with expertise in crafting cover letters that get interviews. Write a customized cover letter for the following job application:\n\nJob Title: [JOB_TITLE]\nCompany Name: [COMPANY_NAME]\nJob Description Key Requirements: [KEY_REQUIREMENTS]\nMy Relevant Experience: [MY_EXPERIENCE]\nMy Top 3 Achievements: [ACHIEVEMENTS]\nWhy I Want This Role: [MOTIVATION]\nCompany Value or Mission I Admire: [COMPANY_VALUE]\n\nThe cover letter should:\n- Open with a compelling hook that immediately connects my background to the role (no generic 'I am writing to apply' openings)\n- Draw clear parallels between the job requirements and my specific experience using the STAR method (Situation, Task, Action, Result) for at least one achievement\n- Demonstrate genuine knowledge of and enthusiasm for the company without being sycophantic\n- Address any potential concerns (career change, employment gap, overqualification) if applicable\n- Close with a confident call to action that suggests a specific next step\n- Maintain a professional yet authentic tone that lets my personality come through\n\nKeep the letter to 300-350 words. Format it as a proper business letter.",
+  "description": "This prompt creates tailored cover letters that directly connect your experience to specific job requirements, moving far beyond the generic templates that hiring managers see hundreds of times. By incorporating the STAR method for achievements and requiring genuine company research, the output reads like it was carefully crafted by a professional career coach. It is particularly valuable for job seekers applying to multiple positions who need to efficiently customize each letter without starting from scratch. The structured inputs ensure that every cover letter hits the key persuasion points that recruiters look for, while the personality guidelines prevent the output from sounding robotic or formulaic.",
+  "tool": "chatgpt",
+  "category": "writing",
+  "tags": ["cover-letter", "job-application", "career", "resume", "professional-writing"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "JOB_TITLE", "description": "Title of the position you are applying for", "example": "Senior Product Marketing Manager" },
+    { "name": "COMPANY_NAME", "description": "Name of the hiring company", "example": "Notion" },
+    { "name": "KEY_REQUIREMENTS", "description": "Top requirements from the job posting", "example": "5+ years B2B SaaS marketing, product launch experience, cross-functional collaboration, data-driven decision making" },
+    { "name": "MY_EXPERIENCE", "description": "Your relevant background and skills", "example": "7 years in B2B SaaS marketing at HubSpot and Asana, led 4 major product launches, managed $2M annual budget" },
+    { "name": "ACHIEVEMENTS", "description": "Three quantified accomplishments", "example": "1) Launched Asana AI features campaign driving 40% increase in enterprise trials 2) Built product marketing team from 2 to 8 people 3) Created competitive intelligence program adopted company-wide" },
+    { "name": "MOTIVATION", "description": "Why you want this specific role", "example": "Passionate about productivity tools and want to shape how teams collaborate with AI" },
+    { "name": "COMPANY_VALUE", "description": "Something specific about the company you admire", "example": "Notion's mission to make toolmaking accessible and their approach to building an all-in-one workspace" }
+  ],
+  "tips": ["Copy the exact language from the job posting into KEY_REQUIREMENTS — this helps mirror the employer's terminology", "Quantify every achievement with numbers, percentages, or dollar amounts for maximum impact", "Research the company's recent news or product launches and reference them in COMPANY_VALUE for extra personalization"],
+  "exampleOutput": "Dear Hiring Team,\n\nWhen Notion launched its AI features last year, I found myself explaining the product to every colleague who would listen — not because I had to, but because I genuinely believe in what you are building. That same passion for productivity tools has driven my 7 years of B2B SaaS marketing, and I would love to bring that energy to the Senior Product Marketing Manager role.\n\nAt Asana, I led the go-to-market strategy for their AI-powered features — a campaign that drove a 40% increase in enterprise trial signups within 90 days...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Cover Letter Customizer Prompt for ChatGPT",
+  "metaDescription": "Write tailored cover letters for any job posting with this free ChatGPT prompt. Get interview-winning letters in minutes, not hours."
+}

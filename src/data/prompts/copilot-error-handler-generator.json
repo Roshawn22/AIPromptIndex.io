@@ -1,0 +1,22 @@
+{
+  "title": "Copilot Error Handler Generator",
+  "slug": "copilot-error-handler-generator",
+  "promptText": "You are a reliability engineer specializing in error handling and fault tolerance. Generate a comprehensive error handling system for a [LANGUAGE] [PROJECT_TYPE] project. The application needs to handle errors from: [ERROR_SOURCES]. Create the following components: a custom error class hierarchy with specific error types for each source (e.g., ValidationError, DatabaseError, ExternalServiceError, AuthenticationError), each with appropriate status codes and metadata, a centralized error handler middleware that catches all errors, logs them with structured context, and returns consistent API error responses, error response format with a unique error code, human-readable message, debug details (only in development), and request correlation ID, retry logic utilities for transient failures with configurable max retries, backoff strategy, and circuit breaker pattern, graceful degradation strategies for when external dependencies fail, error monitoring integration points for services like Sentry or Datadog, and user-friendly error messages that never expose internal system details. Include usage examples showing how each component integrates into the application flow.",
+  "description": "This prompt generates a production-grade error handling system that goes far beyond simple try-catch blocks. It creates a structured error hierarchy, centralized handling middleware, retry utilities with circuit breaker patterns, and graceful degradation strategies. The system ensures consistent error responses across your entire API, proper logging for debugging, and user-safe messages that never leak internal details. This is critical infrastructure that many projects implement poorly or inconsistently, leading to confusing error messages, silent failures, and difficult debugging. The output gives you a complete error handling architecture ready for production.",
+  "tool": "github-copilot",
+  "category": "coding",
+  "tags": ["error-handling", "reliability", "backend", "api-design", "fault-tolerance"],
+  "difficulty": "advanced",
+  "promptType": "text",
+  "variables": [
+    { "name": "LANGUAGE", "description": "Programming language", "example": "TypeScript" },
+    { "name": "PROJECT_TYPE", "description": "Type of project", "example": "Express.js REST API" },
+    { "name": "ERROR_SOURCES", "description": "Where errors can originate in the system", "example": "input validation, PostgreSQL database, Stripe payment API, Redis cache, JWT authentication" }
+  ],
+  "tips": ["Implement the error hierarchy first and update existing code to throw specific error types gradually", "Configure the circuit breaker thresholds based on your actual dependency SLA requirements", "Never expose stack traces or internal error details to end users in production"],
+  "exampleOutput": "// errors/base.ts\nexport abstract class AppError extends Error {\n  abstract readonly statusCode: number;\n  abstract readonly errorCode: string;\n  abstract readonly isOperational: boolean;\n\n  constructor(message: string, public readonly context?: Record<string, unknown>) {\n    super(message);\n    this.name = this.constructor.name;\n    Error.captureStackTrace(this, this.constructor);\n  }\n}\n\n// errors/validation.ts\nexport class ValidationError extends AppError {\n  readonly statusCode = 400;\n  readonly errorCode = 'VALIDATION_ERROR';\n  readonly isOperational = true;\n\n  constructor(public readonly fields: FieldError[], context?: Record<string, unknown>) {\n    super('Input validation failed', context);\n  }\n}\n\n// middleware/error-handler.ts\nexport function errorHandler(err: Error, req: Request, res: Response, next: NextFunction) {\n  const correlationId = req.headers['x-correlation-id'] || uuid();\n  ...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Error Handler Generator Prompt for GitHub Copilot",
+  "metaDescription": "Build a production-grade error handling system with GitHub Copilot. Get custom error classes, middleware, retry logic, and circuit breakers."
+}

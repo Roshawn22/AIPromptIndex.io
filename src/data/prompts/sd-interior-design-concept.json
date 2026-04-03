@@ -1,0 +1,25 @@
+{
+  "title": "SD Interior Design Concept",
+  "slug": "sd-interior-design-concept",
+  "promptText": "Professional interior design photography, [ROOM_TYPE] room, [DESIGN_STYLE] style, [COLOR_SCHEME] color palette, [KEY_FURNITURE] as focal pieces, natural light streaming through [WINDOW_TYPE] windows, [FLOORING_TYPE] flooring, carefully curated decor accessories, architectural details visible, shot on Canon EOS R5 with 24mm wide-angle lens, soft ambient lighting with warm undertones, editorial quality for design magazine, high-end residential interior, 8k resolution, depth of field, photorealistic rendering, interior design visualization, styled and staged for photography",
+  "description": "This prompt generates photorealistic interior design concept visualizations that look like they belong in an architectural digest magazine. It produces fully styled room concepts with specific furniture, materials, lighting, and color palettes that help clients and designers visualize spaces before any work begins. The prompt mimics professional interior photography with specific camera and lens parameters for realistic perspective and depth of field. It is invaluable for interior designers creating mood boards, real estate stagers previewing concepts, homeowners exploring renovation ideas, and furniture brands creating lifestyle imagery.",
+  "tool": "stable-diffusion",
+  "category": "image-generation",
+  "tags": ["interior-design", "architecture", "home-decor", "visualization", "photorealistic"],
+  "difficulty": "intermediate",
+  "promptType": "image",
+  "variables": [
+    { "name": "ROOM_TYPE", "description": "Type of room to design", "example": "open-plan living and dining" },
+    { "name": "DESIGN_STYLE", "description": "Interior design style", "example": "mid-century modern" },
+    { "name": "COLOR_SCHEME", "description": "Primary and accent colors", "example": "warm walnut and mustard yellow with sage green accents" },
+    { "name": "KEY_FURNITURE", "description": "Specific furniture pieces to include", "example": "Eames lounge chair, walnut credenza, and round marble dining table" },
+    { "name": "WINDOW_TYPE", "description": "Style of windows in the room", "example": "floor-to-ceiling" },
+    { "name": "FLOORING_TYPE", "description": "Type of flooring material", "example": "light oak hardwood" }
+  ],
+  "tips": ["Specify a design era or designer reference for more cohesive styling results", "Include architectural details like ceiling height and molding for added realism", "Use img2img with a floor plan sketch for better room layout control"],
+  "exampleOutput": "A photorealistic interior photograph of an open-plan living and dining room in mid-century modern style, warm walnut and mustard yellow tones with sage green accents, featuring an Eames lounge chair, walnut credenza, and round marble dining table, natural light through floor-to-ceiling windows, light oak hardwood floors, shot with 24mm wide-angle lens, editorial magazine quality.",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Interior Design Concept Prompt for Stable Diffusion",
+  "metaDescription": "Visualize stunning interior designs with Stable Diffusion. Generate photorealistic room concepts in any style with specific furniture."
+}

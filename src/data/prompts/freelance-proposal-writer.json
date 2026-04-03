@@ -1,0 +1,27 @@
+{
+  "title": "Freelance Proposal Writer",
+  "slug": "freelance-proposal-writer",
+  "promptText": "You are a successful freelancer who has won hundreds of projects through compelling proposals. Write a winning project proposal for the following opportunity:\n\nProject Title: [PROJECT_TITLE]\nClient Industry: [CLIENT_INDUSTRY]\nProject Description from Client: [PROJECT_DESCRIPTION]\nMy Relevant Skills: [MY_SKILLS]\nMy Relevant Experience: [MY_EXPERIENCE]\nProposed Timeline: [TIMELINE]\nProposed Budget: [BUDGET]\nPlatform: [PLATFORM]\n\nThe proposal should include:\n\n1. Personalized Opening (2-3 sentences): Show you read and understand their specific project — reference a detail from their description. Do not start with 'Hi, I am a...' or 'I would love to help you with...'\n\n2. Problem Restatement: Demonstrate understanding by restating their challenge in your own words, showing insight they may not have articulated themselves.\n\n3. Proposed Approach: A clear, phased approach to the project (3-5 steps) that shows expertise without giving away the full solution.\n\n4. Relevant Proof: 2-3 brief examples of similar work you have completed with specific results. Use the STAR format (Situation, Task, Action, Result) in 1-2 sentences each.\n\n5. What Makes This Proposal Different: One specific value-add or insight that other freelancers will not offer.\n\n6. Timeline and Investment: Clear deliverables, milestones, and pricing with brief justification of value.\n\n7. Risk-Free Next Step: A low-commitment call to action (quick call, free sample, strategy outline) that makes saying yes easy.\n\nKeep the total proposal to 250-350 words. Tone should be confident but not arrogant, professional but conversational.",
+  "description": "This prompt creates personalized freelance project proposals that stand out from the hundreds of generic copy-paste responses clients receive on platforms like Upwork, Fiverr, and Toptal. It follows a proven proposal structure that leads with client understanding rather than self-promotion, demonstrates expertise through specific examples, and closes with a low-risk next step that makes hiring you an easy decision. The output avoids every common proposal mistake — generic openings, feature-dumping, vague timelines, and missing proof points. It is ideal for freelancers who want to increase their win rate, consultants responding to RFPs, and agency owners who need to systematize their business development process.",
+  "tool": "chatgpt",
+  "category": "business",
+  "tags": ["freelancing", "proposal-writing", "business-development", "Upwork", "client-acquisition"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "PROJECT_TITLE", "description": "Title of the project posting", "example": "Website Redesign for E-commerce Pet Supply Store" },
+    { "name": "CLIENT_INDUSTRY", "description": "Client's industry", "example": "Pet supplies e-commerce" },
+    { "name": "PROJECT_DESCRIPTION", "description": "Client's project description (paste from the posting)", "example": "We need to redesign our Shopify store. Current site is slow, conversion rate is 1.2%, and mobile experience is poor. Want a modern design that matches our premium brand positioning. Budget is $5-8K." },
+    { "name": "MY_SKILLS", "description": "Your relevant skills", "example": "Shopify development, UI/UX design, conversion rate optimization, page speed optimization" },
+    { "name": "MY_EXPERIENCE", "description": "Relevant past projects", "example": "Redesigned 12 Shopify stores in the past year, average conversion rate improvement of 45%, specialized in e-commerce for DTC brands" },
+    { "name": "TIMELINE", "description": "Your proposed project timeline", "example": "4-5 weeks from kickoff to launch" },
+    { "name": "BUDGET", "description": "Your proposed pricing", "example": "$6,500 for complete redesign including 2 rounds of revisions" },
+    { "name": "PLATFORM", "description": "Platform where the project is posted", "example": "Upwork" }
+  ],
+  "tips": ["Always paste the client's actual project description — the more context you provide, the more personalized the proposal", "Include specific metrics from past projects in MY_EXPERIENCE for maximum credibility", "Customize the risk-free next step based on the project size — larger projects warrant a free strategy call, smaller ones might offer a sample"],
+  "exampleOutput": "A 1.2% conversion rate on Shopify with a premium brand positioning tells me your current design is likely creating friction between what customers expect from your brand and what the shopping experience delivers — that gap is where you are losing sales.\n\nI have redesigned 12 Shopify stores for DTC brands in the past year, and the pattern I see most often matches your situation: strong products and brand identity undermined by a template-based design that does not convert on mobile...\n\nProposed Approach:\nPhase 1 (Week 1): Conversion audit of your current store — heatmaps, funnel analysis, and mobile UX review\nPhase 2 (Weeks 2-3): Custom design with mobile-first approach, optimized product pages, and streamlined checkout...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Freelance Proposal Writer Prompt for ChatGPT",
+  "metaDescription": "Write winning freelance proposals that stand out on Upwork and Fiverr. Try this free ChatGPT prompt to boost your project win rate."
+}

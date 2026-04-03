@@ -1,0 +1,24 @@
+{
+  "title": "Lesson Plan Differentiation",
+  "slug": "lesson-plan-differentiation",
+  "promptText": "You are an experienced instructional designer and special education consultant. I need you to differentiate the following lesson plan for diverse learners in my classroom.\n\nSubject: [SUBJECT]\nGrade Level: [GRADE_LEVEL]\nLesson Topic: [LESSON_TOPIC]\nLearning Objective: [LEARNING_OBJECTIVE]\nClass Composition: [CLASS_COMPOSITION]\n\nProvide differentiated versions of this lesson across three tiers:\n\n1. Tier 1 — Approaching Grade Level: Modify the lesson for students who need additional scaffolding. Include simplified language, visual supports, graphic organizers, sentence starters, and chunked instructions. Specify accommodations (not modifications to standards).\n\n2. Tier 2 — At Grade Level: Refine the core lesson with engagement strategies, collaborative learning opportunities, and formative assessment checkpoints to ensure all on-level students stay engaged and demonstrate understanding.\n\n3. Tier 3 — Above Grade Level: Extend the lesson with enrichment activities that deepen critical thinking, encourage independent inquiry, and connect to real-world applications. Include extension questions and project-based options.\n\nFor each tier also provide:\n- Specific materials or resources needed\n- Suggested grouping strategy (individual, pairs, small group)\n- Formative assessment method tailored to that tier\n- Estimated time adjustments\n\nEnsure all three tiers address the same core learning objective while providing appropriate access points.",
+  "description": "This prompt helps teachers create differentiated lesson plans that meet the needs of all learners in a diverse classroom. It takes a single lesson plan and produces three tiered versions — approaching, at, and above grade level — each with specific scaffolding strategies, materials, grouping recommendations, and assessment methods. This saves teachers hours of planning time while ensuring compliance with differentiation requirements that administrators and IEP teams expect. It is particularly valuable for general education teachers with inclusive classrooms, new teachers learning to differentiate, and instructional coaches who need model lessons to share with their teams.",
+  "tool": "chatgpt",
+  "category": "education",
+  "tags": ["lesson-planning", "differentiation", "special-education", "teaching", "inclusive-classroom"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "SUBJECT", "description": "Subject area for the lesson", "example": "8th Grade Science" },
+    { "name": "GRADE_LEVEL", "description": "Grade level of students", "example": "8th grade" },
+    { "name": "LESSON_TOPIC", "description": "Specific topic of the lesson", "example": "Photosynthesis and cellular energy" },
+    { "name": "LEARNING_OBJECTIVE", "description": "What students should know or be able to do by the end", "example": "Students will explain the process of photosynthesis and identify the inputs, outputs, and where it occurs in a plant cell" },
+    { "name": "CLASS_COMPOSITION", "description": "Description of learner diversity in your classroom", "example": "28 students: 5 with IEPs (2 specific learning disabilities, 1 ADHD, 1 ELL newcomer, 1 gifted), 6 approaching grade level, 12 at grade level, 5 above grade level" }
+  ],
+  "tips": ["Be specific about your class composition — the more detail you provide about student needs, the more targeted the differentiation", "Share the learning objective exactly as it appears in your curriculum guide for standards alignment", "Use the Tier 1 scaffolds as a starting point and adjust based on individual IEP goals"],
+  "exampleOutput": "TIER 1 — APPROACHING GRADE LEVEL\n\nModified Lesson:\nBegin with a 3-minute video showing a time-lapse of a plant growing toward sunlight. Provide a pre-filled graphic organizer with the photosynthesis equation partially completed (blanks for students to fill in). Use color-coded labels: green for inputs, red for outputs, blue for location.\n\nScaffolding:\n- Word bank with key vocabulary (chloroplast, glucose, carbon dioxide, oxygen) and student-friendly definitions\n- Sentence starters for written responses: 'Photosynthesis happens when a plant...'\n- Chunked instructions: Steps 1-3 on board at a time, not all at once\n\nGrouping: Pairs (strategic pairing with at-level peer buddy)\nAssessment: Label a diagram with word bank support\nTime: Add 10 minutes to core lesson time...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Lesson Plan Differentiation Prompt for ChatGPT",
+  "metaDescription": "Differentiate lesson plans for diverse learners with this free ChatGPT prompt. Get tiered activities, scaffolds, and assessments."
+}

@@ -1,0 +1,28 @@
+{
+  "title": "Podcast Show Notes Writer",
+  "slug": "podcast-show-notes-writer",
+  "promptText": "You are a podcast producer and content strategist. Write comprehensive show notes for a podcast episode titled [EPISODE_TITLE] from the show [PODCAST_NAME] in the [NICHE] space. The episode features [HOST_NAME] and [GUEST_INFO]. Based on these key topics discussed: [KEY_TOPICS], create the following: a compelling episode description (150-200 words) optimized for podcast directories, a bullet-point summary of key takeaways (8-10 points), timestamps for major topic transitions (estimate logical timestamps across a [EPISODE_LENGTH] episode), notable quotes from the episode formatted for social media sharing, a list of resources and links mentioned, 3 discussion questions for audience engagement, SEO-optimized title tag and meta description for the episode web page, and a short social media caption for promoting the episode on [SOCIAL_PLATFORM]. Write in a [TONE] tone that matches the podcast brand.",
+  "description": "This prompt transforms rough episode notes into polished, professional show notes that serve multiple purposes: podcast directory optimization, website SEO, social media promotion, and audience engagement. It generates everything a podcast producer needs in one output, from the episode description to shareable quotes to promotional captions. The show notes are structured to improve discoverability across Apple Podcasts, Spotify, and Google while also providing value to listeners who want a quick summary. This saves podcast creators hours of post-production work that typically goes into writing and formatting show notes for each episode.",
+  "tool": "claude",
+  "category": "writing",
+  "tags": ["podcast", "show-notes", "content-creation", "SEO", "audio-content"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "EPISODE_TITLE", "description": "The title of the podcast episode", "example": "How to Build a Six-Figure Online Course" },
+    { "name": "PODCAST_NAME", "description": "Name of the podcast", "example": "The Creator Economy Show" },
+    { "name": "NICHE", "description": "The podcast niche or industry", "example": "online business and digital products" },
+    { "name": "HOST_NAME", "description": "Name of the podcast host", "example": "Sarah Chen" },
+    { "name": "GUEST_INFO", "description": "Guest name and brief bio", "example": "James Rivera, course creator who generated $2M in his first year" },
+    { "name": "KEY_TOPICS", "description": "Main topics covered in the episode", "example": "course topic validation, pricing strategies, launch sequences, student retention" },
+    { "name": "EPISODE_LENGTH", "description": "Approximate length of the episode", "example": "45-minute" },
+    { "name": "SOCIAL_PLATFORM", "description": "Primary social platform for promotion", "example": "LinkedIn" },
+    { "name": "TONE", "description": "The brand voice of the podcast", "example": "conversational and inspiring" }
+  ],
+  "tips": ["Feed in actual episode notes or a transcript summary for the most accurate show notes", "Adjust the estimated timestamps once you have the final edited episode", "Use the shareable quotes directly as social media graphics"],
+  "exampleOutput": "Episode Description:\nIn this episode of The Creator Economy Show, Sarah Chen sits down with James Rivera, the course creator who turned a simple idea into a $2M business in just 12 months. James breaks down his exact framework for validating course topics, pricing for premium positioning, and building launch sequences that convert...\n\nKey Takeaways:\n- Validate your course idea by pre-selling to 50 people before creating content\n- Price based on transformation value, not content length...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Podcast Show Notes Writer Prompt for Claude",
+  "metaDescription": "Write professional podcast show notes with Claude. Get episode descriptions, timestamps, shareable quotes, and social media captions."
+}

@@ -1,0 +1,32 @@
+{
+  "title": "Property Investment Analyzer",
+  "slug": "property-investment-analyzer",
+  "promptText": "You are a real estate investment analyst specializing in residential and commercial property evaluation. Analyze the following property as a potential investment and provide a comprehensive financial assessment:\n\nProperty Details:\n- Property Type: [PROPERTY_TYPE]\n- Purchase Price: [PURCHASE_PRICE]\n- Location: [LOCATION]\n- Estimated Monthly Rent: [MONTHLY_RENT]\n- Down Payment: [DOWN_PAYMENT_PERCENT]%\n- Interest Rate: [INTEREST_RATE]%\n- Loan Term: [LOAN_TERM] years\n- Estimated Annual Property Tax: [PROPERTY_TAX]\n- Estimated Monthly Insurance: [INSURANCE]\n- Estimated Monthly Maintenance/Reserves: [MAINTENANCE]\n- HOA Fees (if applicable): [HOA_FEES]\n\nProvide the following analysis:\n1. Cash Flow Analysis: Monthly and annual net operating income, mortgage payment breakdown, and cash flow after debt service\n2. Key Investment Metrics: Cap rate, cash-on-cash return, gross rent multiplier, and debt service coverage ratio\n3. Break-Even Analysis: Occupancy rate needed to break even\n4. 5-Year Projection: Projected returns assuming [APPRECIATION_RATE]% annual appreciation and [RENT_INCREASE]% annual rent increases\n5. Risk Assessment: Key risks specific to this investment and location\n6. Verdict: Clear buy/hold/pass recommendation with reasoning\n\nShow all calculations step by step so the investor can verify the math.",
+  "description": "This prompt transforms Gemini into a real estate investment calculator and advisor that evaluates properties using the same financial metrics professional investors rely on. It covers cash flow analysis, cap rates, cash-on-cash returns, break-even points, and multi-year projections — all with transparent, step-by-step calculations. This is particularly useful for new investors who need help understanding whether a deal makes financial sense, or for experienced investors who want to quickly screen properties before conducting deeper due diligence. The structured output format makes it easy to compare multiple properties side by side and present findings to partners or lenders.",
+  "tool": "gemini",
+  "category": "data-analysis",
+  "tags": ["real-estate", "investment-analysis", "financial-modeling", "ROI", "property-evaluation"],
+  "difficulty": "advanced",
+  "promptType": "text",
+  "variables": [
+    { "name": "PROPERTY_TYPE", "description": "Type of investment property", "example": "single-family rental" },
+    { "name": "PURCHASE_PRICE", "description": "Total purchase price", "example": "$285,000" },
+    { "name": "LOCATION", "description": "Property location", "example": "Indianapolis, IN" },
+    { "name": "MONTHLY_RENT", "description": "Expected monthly rental income", "example": "$2,100" },
+    { "name": "DOWN_PAYMENT_PERCENT", "description": "Down payment as percentage", "example": "20" },
+    { "name": "INTEREST_RATE", "description": "Mortgage interest rate", "example": "6.5" },
+    { "name": "LOAN_TERM", "description": "Mortgage term in years", "example": "30" },
+    { "name": "PROPERTY_TAX", "description": "Annual property tax amount", "example": "$3,400" },
+    { "name": "INSURANCE", "description": "Monthly insurance cost", "example": "$150" },
+    { "name": "MAINTENANCE", "description": "Monthly maintenance and reserve amount", "example": "$200" },
+    { "name": "HOA_FEES", "description": "Monthly HOA fees if applicable", "example": "$0" },
+    { "name": "APPRECIATION_RATE", "description": "Expected annual property appreciation", "example": "3" },
+    { "name": "RENT_INCREASE", "description": "Expected annual rent increase percentage", "example": "2" }
+  ],
+  "tips": ["Use conservative estimates for rent and appreciation — it is better to be pleasantly surprised than overextended", "Include a vacancy factor of 5-8% in your MONTHLY_RENT estimate for more realistic projections", "Run the analysis multiple times with different interest rates to stress-test the deal"],
+  "exampleOutput": "PROPERTY INVESTMENT ANALYSIS: Single-Family Rental — Indianapolis, IN\n\n1. CASH FLOW ANALYSIS\nPurchase Price: $285,000\nDown Payment (20%): $57,000\nLoan Amount: $228,000\nMonthly Mortgage Payment (P&I): $1,440.58\n\nMonthly Income: $2,100\nMonthly Expenses:\n  - Mortgage: $1,440.58\n  - Property Tax: $283.33\n  - Insurance: $150.00\n  - Maintenance/Reserves: $200.00\n  - HOA: $0\nTotal Monthly Expenses: $2,073.91\nMonthly Cash Flow: $26.09\nAnnual Cash Flow: $313.08...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Property Investment Analyzer Prompt for Gemini",
+  "metaDescription": "Evaluate rental property investments with this free Gemini prompt. Calculate cap rates, cash flow, ROI, and get buy/pass recommendations."
+}
