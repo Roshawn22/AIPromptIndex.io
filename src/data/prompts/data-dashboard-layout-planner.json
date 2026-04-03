@@ -1,0 +1,25 @@
+{
+  "title": "Data Dashboard Layout Planner",
+  "slug": "data-dashboard-layout-planner",
+  "promptText": "You are a data visualization and UX design expert specializing in dashboard design. Plan a comprehensive dashboard layout for a [DASHBOARD_PURPOSE] dashboard that will be used by [USER_ROLE] at a [COMPANY_TYPE]. The dashboard needs to display these key metrics: [KEY_METRICS]. Design the dashboard with these components: a KPI summary row at the top showing [NUM_KPIS] critical numbers with trend indicators, the main visualization area with recommended chart types for each metric and justification for why that chart type is optimal, a filters and controls section specifying which dimensions users should be able to filter by, secondary detail panels for drill-down analysis, the information hierarchy organized by frequency of use and decision-making importance, responsive layout specifications for desktop (1440px), tablet (768px), and mobile (375px), color coding system for status indicators and thresholds, data refresh frequency recommendations for each section, and interaction patterns (hover states, click-through drill-downs, export options). Include a wireframe description detailed enough for a developer to implement and specify which charting library ([CHART_LIBRARY]) components to use for each visualization.",
+  "description": "This prompt produces a complete dashboard design specification including layout structure, chart type recommendations, interaction patterns, and responsive breakpoints. It goes beyond picking charts by explaining why each visualization type is optimal for its data, how users should interact with the dashboard, and how to organize information hierarchy for different decision-making needs. The output is detailed enough to hand directly to a frontend developer for implementation. It is essential for data analysts, product managers, and designers who need to create effective dashboards that users actually find useful rather than overwhelming.",
+  "tool": "chatgpt",
+  "category": "data-analysis",
+  "tags": ["dashboard", "data-visualization", "ux-design", "analytics", "business-intelligence"],
+  "difficulty": "advanced",
+  "promptType": "text",
+  "variables": [
+    { "name": "DASHBOARD_PURPOSE", "description": "The primary purpose of the dashboard", "example": "SaaS subscription analytics" },
+    { "name": "USER_ROLE", "description": "Who will use the dashboard", "example": "VP of Growth and marketing managers" },
+    { "name": "COMPANY_TYPE", "description": "Type of company", "example": "B2B SaaS startup with 5,000 customers" },
+    { "name": "KEY_METRICS", "description": "Metrics the dashboard needs to display", "example": "MRR, churn rate, LTV, CAC, trial-to-paid conversion, NPS, feature adoption rates, revenue by plan tier" },
+    { "name": "NUM_KPIS", "description": "Number of top-level KPI cards", "example": "5" },
+    { "name": "CHART_LIBRARY", "description": "Preferred charting library", "example": "Recharts" }
+  ],
+  "tips": ["Start with the 3-5 most critical metrics and progressively add complexity", "Test the dashboard layout with actual users to validate the information hierarchy", "Use the responsive specifications to ensure the dashboard is useful on all devices"],
+  "exampleOutput": "## SaaS Subscription Analytics Dashboard\n\n### KPI Summary Row (Top)\n5 cards in a horizontal row, each showing:\n- MRR: $485K (+3.2%) - Recharts <StatCard> with sparkline\n- Churn Rate: 2.1% (-0.3%) - Red/green threshold coloring\n- LTV: $4,200 - vs. previous period comparison\n- CAC: $380 - with LTV:CAC ratio badge\n- Trial Conversion: 24% - funnel mini-chart\n\n### Main Visualization Area (Grid: 2 columns)\nLeft column (60% width):\n- MRR Trend: Area chart (Recharts <AreaChart>) showing 12-month trend with plan tier breakdown. Area chart chosen because it shows both total and composition over time.\n\nRight column (40% width):\n- Churn Cohort Analysis: Heatmap grid showing retention by signup month...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Data Dashboard Layout Planner Prompt for ChatGPT",
+  "metaDescription": "Design effective data dashboards with ChatGPT. Get layout specs, chart recommendations, interaction patterns, and responsive breakpoints."
+}

@@ -1,0 +1,23 @@
+{
+  "title": "Copilot Interface Generator",
+  "slug": "copilot-interface-generator",
+  "promptText": "You are a TypeScript architect specializing in type system design. Generate comprehensive TypeScript interfaces and types for a [DOMAIN] module in a [PROJECT_TYPE] project. The module handles [FUNCTIONALITY] and interacts with [EXTERNAL_SYSTEMS]. Create the following: entity interfaces for all domain objects with proper typing (no 'any' types), request and response DTOs for API endpoints, union types and discriminated unions for state management, utility types using TypeScript generics (Partial, Pick, Omit, Record patterns) for common transformations, enum definitions for fixed value sets, type guards and assertion functions for runtime type checking, Zod or io-ts validation schemas that mirror the interfaces for runtime validation, and a barrel export file organizing all types logically. Follow these conventions: use PascalCase for types and interfaces, prefix interfaces with 'I' only if the project convention requires it, make fields readonly where mutation is not intended, use branded types for IDs to prevent mixing different entity IDs, and document every interface with JSDoc including field descriptions and usage examples.",
+  "description": "This prompt generates a complete TypeScript type system for any domain, producing interfaces, DTOs, union types, utility types, type guards, and runtime validators in one cohesive output. A well-designed type system catches bugs at compile time, serves as living documentation, and makes refactoring safer. This prompt applies TypeScript best practices like branded types for IDs, discriminated unions for state, and Zod schemas for runtime validation. It is especially valuable when starting a new module, migrating from JavaScript to TypeScript, or cleaning up a codebase that overuses 'any' types.",
+  "tool": "github-copilot",
+  "category": "coding",
+  "tags": ["typescript", "type-system", "interfaces", "api-design", "software-architecture"],
+  "difficulty": "advanced",
+  "promptType": "text",
+  "variables": [
+    { "name": "DOMAIN", "description": "The business domain for the types", "example": "e-commerce orders" },
+    { "name": "PROJECT_TYPE", "description": "Type of application", "example": "Next.js full-stack application" },
+    { "name": "FUNCTIONALITY", "description": "What the module manages", "example": "order creation, status tracking, payment processing, and fulfillment" },
+    { "name": "EXTERNAL_SYSTEMS", "description": "External APIs and services involved", "example": "Stripe payments API, warehouse fulfillment API, and email notification service" }
+  ],
+  "tips": ["Use branded types for entity IDs to catch bugs where you accidentally pass a userId where an orderId is expected", "Generate Zod schemas alongside interfaces to get both compile-time and runtime type safety", "Export types from a central barrel file so imports stay clean throughout the project"],
+  "exampleOutput": "// types/order.ts\n\n/** Branded type to prevent mixing Order IDs with other entity IDs */\ntype OrderId = string & { readonly __brand: 'OrderId' };\ntype UserId = string & { readonly __brand: 'UserId' };\n\n/** All possible states an order can be in */\ntype OrderStatus = 'pending' | 'confirmed' | 'processing' | 'shipped' | 'delivered' | 'cancelled' | 'refunded';\n\n/** Core order entity as stored in the database */\ninterface Order {\n  readonly id: OrderId;\n  readonly userId: UserId;\n  readonly items: readonly OrderItem[];\n  readonly status: OrderStatus;\n  readonly total: number;\n  readonly currency: string;\n  readonly createdAt: Date;\n  readonly updatedAt: Date;\n}\n\n/** Request DTO for creating a new order */\ninterface CreateOrderRequest {\n  items: Array<{ productId: string; quantity: number }>;\n  shippingAddress: Address;\n  paymentMethodId: string;\n}\n\n// Zod validation schema\nconst createOrderSchema = z.object({\n  items: z.array(z.object({ productId: z.string().uuid(), quantity: z.number().int().positive() })).min(1),\n  ...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Interface Generator Prompt for GitHub Copilot",
+  "metaDescription": "Generate complete TypeScript type systems with GitHub Copilot. Get interfaces, DTOs, type guards, and Zod validators for any domain."
+}

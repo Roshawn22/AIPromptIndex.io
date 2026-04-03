@@ -1,0 +1,24 @@
+{
+  "title": "Chart Type Recommender",
+  "slug": "chart-type-recommender",
+  "promptText": "You are a data visualization expert who follows the principles of Edward Tufte and Stephen Few. I need to visualize the following data for a [AUDIENCE_TYPE] audience: [DATA_DESCRIPTION]. The visualization will be used for [PURPOSE] and displayed in [CONTEXT]. Recommend the optimal chart type by analyzing: the nature of the data (categorical, temporal, quantitative, geographic, hierarchical), the relationship being shown (comparison, composition, distribution, trend, correlation, flow), the number of data points and dimensions, and the audience's data literacy level. For your recommendation, provide: your top recommended chart type with a detailed justification, two alternative chart types ranked by suitability with trade-off analysis, specific design guidance including axis labels, color usage, annotations, and grid lines, common mistakes to avoid with this chart type and data combination, accessibility considerations for colorblind users and screen readers, a sample implementation snippet using [VIZ_TOOL], and an explanation of what NOT to use and why (the anti-recommendation). If the data would benefit from a small multiples approach or a combined visualization, explain that option as well.",
+  "description": "This prompt provides expert-level data visualization guidance by analyzing your specific data and recommending the optimal chart type with detailed justification. Instead of guessing whether to use a bar chart or a line chart, you get a recommendation backed by data visualization principles from leading experts. The output includes design specifications, accessibility guidance, common mistakes to avoid, and working code snippets. It also explains what chart types to avoid and why, which is just as valuable as knowing what to use. This is essential for data analysts, researchers, product managers, and anyone who needs to communicate data effectively to stakeholders.",
+  "tool": "gemini",
+  "category": "data-analysis",
+  "tags": ["data-visualization", "charts", "analytics", "data-science", "presentation"],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    { "name": "AUDIENCE_TYPE", "description": "Who will view the visualization", "example": "non-technical executive leadership team" },
+    { "name": "DATA_DESCRIPTION", "description": "Description of the data to visualize", "example": "quarterly revenue broken down by 5 product lines over the past 3 years, with target vs actual comparisons" },
+    { "name": "PURPOSE", "description": "What decision or insight the visualization should support", "example": "identifying which product lines are underperforming relative to targets and showing trend direction" },
+    { "name": "CONTEXT", "description": "Where the visualization will appear", "example": "a quarterly board presentation slide deck" },
+    { "name": "VIZ_TOOL", "description": "Preferred visualization tool or library", "example": "Python matplotlib with seaborn" }
+  ],
+  "tips": ["Describe your data in detail including the number of categories, time periods, and data points for the best recommendation", "Consider your audience's data literacy when choosing between simpler and more complex chart types", "Always test your visualization with someone unfamiliar with the data to check if the message comes through clearly"],
+  "exampleOutput": "## Recommended: Grouped Bar Chart with Target Line Overlay\n\n### Why This Chart Type\nYour data has two key dimensions: 5 categorical product lines and 12 temporal periods (quarters). For an executive audience, grouped bar charts are immediately readable and allow quick comparison across products within each quarter. The target overlay adds a clear benchmark without adding cognitive load.\n\n### Alternative 1: Small Multiples Line Chart (Suitability: 8/10)\nFive separate line charts, one per product line, each showing actual vs. target. Better for trend analysis but requires more space and makes cross-product comparison harder.\n\n### Alternative 2: Slope Chart (Suitability: 6/10)\nGood for showing change between two time points but loses the quarterly granularity.\n\n### Anti-Recommendation: Stacked Bar Chart\nDo NOT use stacked bars here. With 5 product lines, the middle segments become impossible to compare accurately because they share neither a common baseline nor a common top.\n\n### Design Specifications:\n- Color: Use a 5-color sequential palette; highlight underperforming lines in red...",
+  "isFeatured": false,
+  "dateAdded": "2026-04-02",
+  "metaTitle": "Chart Type Recommender Prompt for Gemini",
+  "metaDescription": "Get expert chart type recommendations with Gemini. Analyze your data and get the optimal visualization with design specs and code snippets."
+}

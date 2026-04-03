@@ -1,38 +1,41 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/global/Header.astro';
-import Footer from '../../components/global/Footer.astro';
-import { TOOL_DISPLAY_NAMES as toolDisplayNames, CATEGORY_DISPLAY_NAMES as categoryDisplayNames } from '../../lib/constants';
-import PromptCard from '../../components/prompt/PromptCard.astro';
-import Breadcrumb from '../../components/common/Breadcrumb.astro';
-import NewsletterSignup from '../../components/common/NewsletterSignup.astro';
-import bestofPages from '../../data/seo/bestof-pages.json';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/global/Header.astro';
+import Footer from '../../../components/global/Footer.astro';
+import PromptCard from '../../../components/prompt/PromptCard.astro';
+import Breadcrumb from '../../../components/common/Breadcrumb.astro';
+import NewsletterSignup from '../../../components/common/NewsletterSignup.astro';
+import { TOOL_DISPLAY_NAMES as toolDisplayNames, CATEGORY_DISPLAY_NAMES as categoryDisplayNames } from '../../../lib/constants';
+import audiencePages from '../../../data/seo/audience-pages.json';
 
 export async function getStaticPaths() {
-  return bestofPages.map((r: any) => ({
-    params: { slug: r.slug },
-    props: { roundup: r, allRoundups: bestofPages },
-  }));
+  const allPrompts = await getCollection('prompts');
+
+  return audiencePages
+    .filter((page: any) => {
+      const count = allPrompts.filter((p) => {
+        const categoryMatch = page.filterCategories?.some((c: string) => p.data.category === c);
+        const tagMatch = page.filterTags?.some((t: string) => p.data.tags?.includes(t));
+        return categoryMatch || tagMatch;
+      }).length;
+      return count >= 3;
+    })
+    .map((page: any) => ({
+      params: { slug: page.slug },
+      props: { page, allPages: audiencePages },
+    }));
 }
 
-const { roundup, allRoundups } = Astro.props;
+const { page, allPages } = Astro.props;
 
 const allPrompts = await getCollection('prompts');
 
 const prompts = allPrompts
   .filter((p) => {
-    if (roundup.filter.tool && roundup.filter.category) {
-      return p.data.tool === roundup.filter.tool && p.data.category === roundup.filter.category;
-    }
-    if (roundup.filter.tool && roundup.filter.tag) {
-      return p.data.tool === roundup.filter.tool && p.data.tags?.includes(roundup.filter.tag);
-    }
-    if (roundup.filter.tool) return p.data.tool === roundup.filter.tool;
-    if (roundup.filter.category) return p.data.category === roundup.filter.category;
-    if (roundup.filter.tag) return p.data.tags?.includes(roundup.filter.tag);
-    if (roundup.filter.sort === 'top-rated') return true;
-    return false;
+    const categoryMatch = page.filterCategories?.some((c: string) => p.data.category === c);
+    const tagMatch = page.filterTags?.some((t: string) => p.data.tags?.includes(t));
+    return categoryMatch || tagMatch;
   })
   .sort((a, b) => {
     if (a.data.isFeatured && !b.data.isFeatured) return -1;
@@ -40,27 +43,17 @@ const prompts = allPrompts
     return new Date(b.data.dateAdded).getTime() - new Date(a.data.dateAdded).getTime();
   });
 
-const relatedRoundups = allRoundups.filter((r: any) => r.slug !== roundup.slug).slice(0, 4);
-
-const filterType = roundup.filter.tool ? 'tool' : 'category';
-const filterValue = roundup.filter.tool || roundup.filter.category;
-const linkTarget = filterType === 'tool' ? `/tools/${filterValue}/` : `/categories/${filterValue}/`;
-
-const displayName = filterType === 'tool'
-  ? toolDisplayNames[filterValue!] || filterValue
-  : categoryDisplayNames[filterValue!] || filterValue;
-
 const currentYear = new Date().getFullYear();
-const seoTitle = roundup.metaTitle || `${prompts.length} ${roundup.title} (${currentYear}) — Copy & Paste Ready`;
-const seoDescription = roundup.metaDescription || roundup.description;
+const seoTitle = page.metaTitle || `${prompts.length} ${page.title} (${currentYear}) — Copy & Paste Ready`;
+const seoDescription = page.metaDescription || page.intro?.slice(0, 160) || `Curated AI prompts for ${page.audience}.`;
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://aipromptindex.io';
 
 const itemListJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: roundup.title,
-  description: roundup.description,
+  name: page.title,
+  description: seoDescription,
   numberOfItems: prompts.length,
   itemListElement: prompts.map((p, i) => ({
     '@type': 'ListItem',
@@ -72,11 +65,11 @@ const itemListJsonLd = {
 
 const allJsonLd: Record<string, unknown>[] = [itemListJsonLd];
 
-if (roundup.faqs && roundup.faqs.length > 0) {
+if (page.faqs && page.faqs.length > 0) {
   allJsonLd.push({
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: roundup.faqs.map((faq: any) => ({
+    mainEntity: page.faqs.map((faq: any) => ({
       '@type': 'Question',
       name: faq.q,
       acceptedAnswer: {
@@ -86,6 +79,11 @@ if (roundup.faqs && roundup.faqs.length > 0) {
     })),
   });
 }
+
+// Related audience pages, excluding current
+const relatedPages = allPages
+  .filter((p: any) => p.slug !== page.slug)
+  .slice(0, 4);
 
 const firstBatch = prompts.slice(0, 5);
 const secondBatch = prompts.slice(5);
@@ -101,20 +99,21 @@ const secondBatch = prompts.slice(5);
   <section class="mx-auto max-w-7xl px-[var(--space-page)] py-8">
     <Breadcrumb items={[
       { label: 'Home', href: '/' },
-      { label: 'Best Prompts', href: '/best/' },
-      { label: roundup.title },
+      { label: 'Prompts', href: '/prompts/' },
+      { label: `For ${page.audience}` },
     ]} />
 
     <!-- Hero -->
     <div class="mb-10">
-      <h1 class="mb-2">{roundup.title}</h1>
+      <h1 class="mb-2">{page.title}</h1>
       <p class="text-lg text-[var(--color-text-secondary)]">
-        {prompts.length} curated prompts — copy & paste ready
+        <span class="inline-flex items-center gap-1.5 rounded-full bg-[var(--color-accent)]/10 px-3 py-0.5 text-sm font-semibold text-[var(--color-accent)]">
+          {prompts.length} prompts
+        </span>
+        <span class="ml-2">— copy &amp; paste ready</span>
       </p>
-      {roundup.intro ? (
-        <p class="mt-4 max-w-3xl text-[var(--color-text-secondary)]">{roundup.intro}</p>
-      ) : (
-        <p class="mt-4 max-w-3xl text-[var(--color-text-secondary)]">{roundup.description}</p>
+      {page.intro && (
+        <p class="mt-4 max-w-3xl text-[var(--color-text-secondary)]">{page.intro}</p>
       )}
     </div>
 
@@ -145,7 +144,7 @@ const secondBatch = prompts.slice(5);
         {prompts.length > 5 && (
           <div class="my-10">
             <NewsletterSignup
-              heading={`Get More ${displayName} Prompts Weekly`}
+              heading={`Get More AI Prompts for ${page.audience} Weekly`}
               subheading="New prompts, tips, and guides delivered to your inbox every week. Free."
               compact
             />
@@ -174,34 +173,19 @@ const secondBatch = prompts.slice(5);
             ))}
           </ol>
         )}
-
-        <!-- Link to full tool/category page -->
-        {filterValue && (
-          <div class="mt-8 text-center">
-            <a
-              href={linkTarget}
-              class="inline-flex items-center gap-2 font-[var(--font-display)] font-semibold text-[var(--color-accent)] hover:underline"
-            >
-              See all {displayName} prompts
-              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </a>
-          </div>
-        )}
       </>
     ) : (
       <p class="text-center text-[var(--color-text-muted)] py-12">
-        No prompts in this roundup yet. <a href="/submit/" class="text-[var(--color-accent)] hover:underline">Submit one!</a>
+        No prompts in this collection yet. <a href="/submit/" class="text-[var(--color-accent)] hover:underline">Submit one!</a>
       </p>
     )}
 
     <!-- Tips section -->
-    {roundup.tips && roundup.tips.length > 0 && (
+    {page.tips && page.tips.length > 0 && (
       <div class="mt-16 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-8">
         <h2 class="mb-4 text-xl">How to Get the Best Results</h2>
         <ul class="space-y-3">
-          {roundup.tips.map((tip: string) => (
+          {page.tips.map((tip: string) => (
             <li class="flex items-start gap-3 text-[var(--color-text-secondary)]">
               <svg class="mt-1 h-5 w-5 flex-shrink-0 text-[var(--color-accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -214,11 +198,11 @@ const secondBatch = prompts.slice(5);
     )}
 
     <!-- FAQ section -->
-    {roundup.faqs && roundup.faqs.length > 0 && (
+    {page.faqs && page.faqs.length > 0 && (
       <div class="mt-16">
         <h2 class="mb-6 text-xl">Frequently Asked Questions</h2>
         <dl class="space-y-6">
-          {roundup.faqs.map((faq: any) => (
+          {page.faqs.map((faq: any) => (
             <div class="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-6">
               <dt class="font-[var(--font-display)] font-semibold text-[var(--color-text-primary)]">{faq.q}</dt>
               <dd class="mt-2 text-[var(--color-text-secondary)]">{faq.a}</dd>
@@ -228,23 +212,25 @@ const secondBatch = prompts.slice(5);
       </div>
     )}
 
-    <!-- Related roundups -->
-    <div class="mt-16 border-t border-[var(--color-border)] pt-10">
-      <h2 class="mb-6 text-xl">You Might Also Like</h2>
-      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {relatedRoundups.map((r: any) => (
-          <a
-            href={`/best/${r.slug}/`}
-            class="block rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-5 transition-all duration-200 hover:shadow-[var(--shadow-card-hover)] hover:border-[var(--color-accent-muted)]"
-          >
-            <h3 class="font-[var(--font-display)] text-base font-semibold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
-              {r.title}
-            </h3>
-            <p class="mt-2 text-sm text-[var(--color-text-secondary)] line-clamp-2">{r.description}</p>
-          </a>
-        ))}
+    <!-- Related collections -->
+    {relatedPages.length > 0 && (
+      <div class="mt-16 border-t border-[var(--color-border)] pt-10">
+        <h2 class="mb-6 text-xl">Related Collections</h2>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {relatedPages.map((r: any) => (
+            <a
+              href={`/prompts/for/${r.slug}/`}
+              class="block rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-5 transition-all duration-200 hover:shadow-[var(--shadow-card-hover)] hover:border-[var(--color-accent-muted)]"
+            >
+              <h3 class="font-[var(--font-display)] text-base font-semibold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
+                {r.title}
+              </h3>
+              <p class="mt-2 text-sm text-[var(--color-text-secondary)] line-clamp-2">{r.metaDescription}</p>
+            </a>
+          ))}
+        </div>
       </div>
-    </div>
+    )}
   </section>
 
   <!-- Bottom Newsletter CTA -->
