@@ -202,6 +202,42 @@ const tools = [
     </div>
   </section>
 
+  <!-- Popular Prompt Collections -->
+  <section class="mx-auto max-w-7xl px-[var(--space-page)] py-16 border-t border-[var(--color-border)]" data-reveal>
+    <div class="mb-10 flex items-end justify-between">
+      <div>
+        <h2 class="text-[var(--color-text-primary)]">Popular Prompt Collections</h2>
+        <p class="mt-2 text-[var(--color-text-secondary)]">Curated collections for the most popular tools and audiences</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {[
+        { title: 'Best ChatGPT Prompts for Marketing', description: 'High-converting marketing prompts for campaigns, ad copy, and content strategy.', href: '/prompts/chatgpt/marketing/' },
+        { title: 'AI Prompts for Teachers', description: 'Lesson plans, quizzes, rubrics, and differentiated instruction materials.', href: '/prompts/for/teachers/' },
+        { title: 'Best Cursor Coding Prompts', description: 'Code generation, refactoring, debugging, and multi-file editing prompts.', href: '/prompts/cursor/coding/' },
+        { title: 'DALL-E Art Prompts', description: 'Creative prompts for illustrations, concept art, and visual design.', href: '/best/dall-e-art-prompts/' },
+        { title: 'AI Prompts for Entrepreneurs', description: 'Validate ideas, build MVPs, create pitch decks, and grow startups.', href: '/prompts/for/entrepreneurs/' },
+        { title: 'Best Claude Writing Prompts', description: 'Leverage Claude\'s nuanced writing for blog posts, essays, and long-form content.', href: '/prompts/claude/writing/' },
+      ].map((collection) => (
+        <a
+          href={collection.href}
+          class="group rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-5 transition-all duration-200 hover:shadow-[var(--shadow-card-hover)] hover:border-[var(--color-accent-muted)]"
+        >
+          <h3 class="font-[var(--font-display)] text-base font-semibold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
+            {collection.title}
+          </h3>
+          <p class="mt-1 text-sm text-[var(--color-text-muted)]">
+            {collection.description}
+          </p>
+          <span class="mt-3 inline-flex items-center text-sm font-[var(--font-display)] font-medium text-[var(--color-accent)]">
+            Browse collection &rarr;
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+
   <!-- Cross-Promo -->
   <section class="mx-auto max-w-7xl px-[var(--space-page)] pb-16" data-reveal>
     <div class="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-gradient-to-r from-teal-500/5 to-emerald-500/5 p-8 text-center">

@@ -15,6 +15,9 @@ import SaveButton from '../../components/prompt/SaveButton.tsx';
 import NewsletterSignup from '../../components/common/NewsletterSignup.astro';
 import { formatDate } from '../../lib/utils';
 import toolsData from '../../data/tools/tools.json';
+import toolCategoryPages from '../../data/seo/tool-category-pages.json';
+import audiencePages from '../../data/seo/audience-pages.json';
+import bestofPages from '../../data/seo/bestof-pages.json';
 
 export async function getStaticPaths() {
   const prompts = await getCollection('prompts');
@@ -37,6 +40,33 @@ const relatedPrompts = allPrompts
   .slice(0, 4);
 
 /* toolDisplayNames, categoryDisplayNames, difficultyColor imported from lib/constants */
+
+// Compute which collection pages feature this prompt
+const collections: { title: string; url: string }[] = [];
+
+// Tier 1: tool + category match
+for (const page of toolCategoryPages) {
+  if (page.tool === data.tool && page.category === data.category) {
+    collections.push({ title: page.title, url: `/prompts/${page.tool}/${page.category}/` });
+  }
+}
+
+// Tier 2: audience pages — match by category or tag
+for (const page of audiencePages) {
+  const categoryMatch = page.filterCategories?.includes(data.category);
+  const tagMatch = page.filterTags?.some((ft: string) => data.tags.includes(ft));
+  if (categoryMatch || tagMatch) {
+    collections.push({ title: page.title, url: `/prompts/for/${page.slug}/` });
+  }
+}
+
+// Tier 3: best-of pages — match by tool or category in filter
+for (const page of bestofPages) {
+  const filter = (page as any).filter || {};
+  if (filter.tool === data.tool || filter.category === data.category) {
+    collections.push({ title: page.title, url: `/best/${page.slug}/` });
+  }
+}
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://aipromptindex.io';
 const pageUrl = `${siteUrl}/prompts/${data.slug}/`;
@@ -226,6 +256,19 @@ const pageUrl = `${siteUrl}/prompts/${data.slug}/`;
         </div>
       </aside>
     </div>
+
+    {collections.length > 0 && (
+      <div class="mt-10 border-t border-[var(--color-border)] pt-8">
+        <h3 class="text-lg font-[var(--font-display)] font-semibold mb-4">Also Featured In</h3>
+        <div class="flex flex-wrap gap-2">
+          {collections.map(c => (
+            <a href={c.url} class="inline-flex items-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-1 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:border-[var(--color-accent-muted)] hover:text-[var(--color-accent)]">
+              {c.title}
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
   </article>
 
   <NewsletterSignup compact />
