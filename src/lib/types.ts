@@ -49,7 +49,43 @@ export interface SearchItem {
   name: string;
   description: string;
   url: string;
-  type: 'prompt' | 'guide' | 'blog';
+  type: 'prompt' | 'guide' | 'blog' | 'collection';
   category?: string;
   tags?: string[];
+}
+
+// SEO Programmatic Pages
+export interface SEOPageConfig {
+  title: string;
+  metaTitle: string;
+  metaDescription: string;
+  keyword: string;
+  intro: string;
+  tips: string[];
+  faqs: Array<{ q: string; a: string }>;
+}
+
+export interface ToolCategoryPage extends SEOPageConfig {
+  tool: string;
+  category: string;
+}
+
+export interface AudiencePage extends SEOPageConfig {
+  audience: string;
+  slug: string;
+  filterTags: string[];
+  filterCategories: string[];
+}
+
+export interface BestOfPage {
+  slug: string;
+  title: string;
+  description: string;
+  filter: { tool?: string; category?: string; tags?: string[] };
+  metaTitle?: string;
+  metaDescription?: string;
+  keyword?: string;
+  intro?: string;
+  tips?: string[];
+  faqs?: Array<{ q: string; a: string }>;
 }
