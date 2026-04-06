@@ -6,11 +6,11 @@
   id="theme-toggle"
   type="button"
   aria-label="Toggle dark/light mode"
-  class="relative flex items-center justify-center w-11 h-11 rounded-[var(--radius-md)] bg-[var(--color-surface-2)] border border-[var(--color-border)] hover:bg-[var(--color-surface-3)] transition-colors"
+  class="surface-glass-ui relative flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] transition-colors"
 >
   <!-- Moon icon (shown in light mode — click to go dark) -->
   <svg
-    class="theme-icon-moon w-4 h-4 text-neutral-500"
+    class="theme-icon-moon h-4 w-4 text-[var(--color-text-muted)]"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
@@ -21,7 +21,7 @@
   </svg>
   <!-- Sun icon (shown in dark mode — click to go light) -->
   <svg
-    class="theme-icon-sun w-4 h-4 text-amber-400 hidden"
+    class="theme-icon-sun hidden h-4 w-4 text-amber-400"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
