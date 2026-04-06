@@ -142,7 +142,7 @@ const pageUrl = `${siteUrl}/prompts/${data.slug}/`;
             <h2 class="text-xl mb-3">Variables to Customize</h2>
             <div class="space-y-3">
               {data.variables.map((v) => (
-                <div class="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-4">
+                <div class="surface-solid-content rounded-[var(--radius-md)] p-4">
                   <div class="flex items-center gap-2 mb-1">
                     <code class="rounded bg-teal-500/10 px-2 py-0.5 text-sm font-[var(--font-mono)] text-[var(--color-accent)]">
                       [{v.name}]
@@ -177,7 +177,7 @@ const pageUrl = `${siteUrl}/prompts/${data.slug}/`;
         {data.exampleOutput && (
           <div class="mb-8">
             <h2 class="text-xl mb-3">Example Output</h2>
-            <div class="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-2)] p-4">
+            <div class="surface-solid-content rounded-[var(--radius-md)] p-4">
               <pre class="whitespace-pre-wrap text-sm text-[var(--color-text-secondary)]">{data.exampleOutput}</pre>
             </div>
           </div>
@@ -199,7 +199,7 @@ const pageUrl = `${siteUrl}/prompts/${data.slug}/`;
       <aside class="hidden lg:block">
         <div class="sticky top-24 space-y-6">
           <!-- Quick Info -->
-          <div class="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-5">
+          <div class="surface-solid-content rounded-[var(--radius-lg)] p-5">
             <h3 class="font-[var(--font-display)] text-sm font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-4">
               Quick Info
             </h3>
@@ -233,7 +233,7 @@ const pageUrl = `${siteUrl}/prompts/${data.slug}/`;
 
           <!-- Related Prompts -->
           {relatedPrompts.length > 0 && (
-            <div class="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-5">
+            <div class="surface-solid-content rounded-[var(--radius-lg)] p-5">
               <h3 class="font-[var(--font-display)] text-sm font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-4">
                 Related Prompts
               </h3>
@@ -262,7 +262,7 @@ const pageUrl = `${siteUrl}/prompts/${data.slug}/`;
         <h3 class="text-lg font-[var(--font-display)] font-semibold mb-4">Also Featured In</h3>
         <div class="flex flex-wrap gap-2">
           {collections.map(c => (
-            <a href={c.url} class="inline-flex items-center rounded-full border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-1 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:border-[var(--color-accent-muted)] hover:text-[var(--color-accent)]">
+            <a href={c.url} class="surface-solid-content inline-flex items-center rounded-full px-3 py-1 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:border-[var(--color-accent-muted)] hover:text-[var(--color-accent)]">
               {c.title}
             </a>
           ))}

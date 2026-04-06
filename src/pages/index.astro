@@ -3,9 +3,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/global/Header.astro';
 import Footer from '../components/global/Footer.astro';
 import Badge from '../components/ui/Badge.astro';
-import Button from '../components/ui/Button.astro';
 import NewsletterSignup from '../components/common/NewsletterSignup.astro';
 import PromptCard from '../components/prompt/PromptCard.astro';
+import HeroEntrance from '../components/motion/HeroEntrance';
+import CategoryGrid from '../components/motion/CategoryGrid';
+import CollectionGrid from '../components/motion/CollectionGrid';
 import { getCollection } from 'astro:content';
 import { TOOL_DISPLAY_NAMES as toolDisplayNames } from '../lib/constants';
 
@@ -20,14 +22,14 @@ const latestPrompts = [...allPrompts]
   .slice(0, 5);
 
 const categories = [
-  { name: 'Writing', slug: 'writing', icon: 'PenLine', description: 'Blog posts, emails, copywriting' },
-  { name: 'Coding', slug: 'coding', icon: 'Code', description: 'Code generation, debugging, review' },
-  { name: 'Marketing', slug: 'marketing', icon: 'Megaphone', description: 'Campaigns, social media, SEO' },
-  { name: 'Image Generation', slug: 'image-generation', icon: 'Image', description: 'AI art, logos, illustrations' },
-  { name: 'Business', slug: 'business', icon: 'Briefcase', description: 'Strategy, analysis, operations' },
-  { name: 'Data Analysis', slug: 'data-analysis', icon: 'BarChart3', description: 'Exploration, visualization, reports' },
-  { name: 'Education', slug: 'education', icon: 'GraduationCap', description: 'Learning, tutoring, study aids' },
-  { name: 'Creative', slug: 'creative', icon: 'Sparkles', description: 'Storytelling, brainstorming, ideation' },
+  { name: 'Writing', slug: 'writing', description: 'Blog posts, emails, copywriting' },
+  { name: 'Coding', slug: 'coding', description: 'Code generation, debugging, review' },
+  { name: 'Marketing', slug: 'marketing', description: 'Campaigns, social media, SEO' },
+  { name: 'Image Generation', slug: 'image-generation', description: 'AI art, logos, illustrations' },
+  { name: 'Business', slug: 'business', description: 'Strategy, analysis, operations' },
+  { name: 'Data Analysis', slug: 'data-analysis', description: 'Exploration, visualization, reports' },
+  { name: 'Education', slug: 'education', description: 'Learning, tutoring, study aids' },
+  { name: 'Creative', slug: 'creative', description: 'Storytelling, brainstorming, ideation' },
 ];
 
 const tools = [
@@ -40,6 +42,15 @@ const tools = [
   { name: 'GitHub Copilot', slug: 'github-copilot', color: '#000000' },
   { name: 'Stable Diffusion', slug: 'stable-diffusion', color: '#a855f7' },
 ];
+
+const collections = [
+  { title: 'Best ChatGPT Prompts for Marketing', description: 'High-converting marketing prompts for campaigns, ad copy, and content strategy.', href: '/prompts/chatgpt/marketing/' },
+  { title: 'AI Prompts for Teachers', description: 'Lesson plans, quizzes, rubrics, and differentiated instruction materials.', href: '/prompts/for/teachers/' },
+  { title: 'Best Cursor Coding Prompts', description: 'Code generation, refactoring, debugging, and multi-file editing prompts.', href: '/prompts/cursor/coding/' },
+  { title: 'DALL-E Art Prompts', description: 'Creative prompts for illustrations, concept art, and visual design.', href: '/best/dall-e-art-prompts/' },
+  { title: 'AI Prompts for Entrepreneurs', description: 'Validate ideas, build MVPs, create pitch decks, and grow startups.', href: '/prompts/for/entrepreneurs/' },
+  { title: 'Best Claude Writing Prompts', description: 'Leverage Claude\'s nuanced writing for blog posts, essays, and long-form content.', href: '/prompts/claude/writing/' },
+];
 ---
 
 <BaseLayout
@@ -49,54 +60,24 @@ const tools = [
   <Header slot="header" />
 
   <!-- Hero Section -->
-  <section class="relative overflow-hidden border-b border-[var(--color-border)]">
-    <!-- Glow orbs -->
+  <section class="relative overflow-hidden border-b border-[var(--glass-border)]">
     <div class="absolute top-0 left-1/4 h-96 w-96 rounded-full bg-teal-500/5 blur-3xl" aria-hidden="true"></div>
-    <div class="absolute bottom-0 right-1/4 h-96 w-96 rounded-full bg-violet-500/5 blur-3xl" aria-hidden="true"></div>
+    <div class="absolute bottom-0 right-1/4 h-96 w-96 rounded-full bg-amber-500/5 blur-3xl" aria-hidden="true"></div>
 
-    <div class="relative mx-auto max-w-7xl px-[var(--space-page)] py-20 text-center sm:py-28">
-      <div class="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface-1)] px-4 py-1.5 mb-6">
-        <span class="relative flex h-2 w-2">
-          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal-400 opacity-75"></span>
-          <span class="relative inline-flex h-2 w-2 rounded-full bg-teal-500"></span>
-        </span>
-        <span class="text-xs font-[var(--font-display)] font-medium text-[var(--color-text-secondary)]">
-          {allPrompts.length}+ Curated Prompts &middot; 8 Categories &middot; 8 AI Tools
-        </span>
-      </div>
-
-      <h1 class="mx-auto max-w-4xl">
-        <span class="text-[var(--color-text-primary)]">The AI Prompt Library</span>
-        <br />
-        <span class="text-gradient">for Entrepreneurs</span>
-      </h1>
-
-      <p class="mx-auto mt-6 max-w-2xl text-lg text-[var(--color-text-secondary)]">
-        Discover, copy, and use curated prompts for ChatGPT, Claude, Midjourney, and more. Free and community-driven.
-      </p>
-
-      <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
-        <Button href="/prompts/" size="lg">
-          Browse Prompts
-        </Button>
-        <Button href="/submit/" size="lg" variant="outline">
-          Submit a Prompt
-        </Button>
-      </div>
-    </div>
+    <HeroEntrance promptCount={allPrompts.length} client:load />
   </section>
 
   <!-- Tool Quick-Filter Bar -->
-  <section class="border-b border-[var(--color-border)] bg-[var(--color-surface-1)]">
+  <section class="border-b border-[var(--glass-border)] bg-transparent">
     <div class="mx-auto max-w-7xl px-[var(--space-page)] py-4">
-      <div class="flex items-center gap-3 overflow-x-auto pb-1 scrollbar-none">
+      <div class="surface-glass-ui flex items-center gap-3 overflow-x-auto rounded-full px-4 py-3 scrollbar-none scroll-fade-x">
         <span class="shrink-0 text-xs font-[var(--font-display)] font-medium uppercase tracking-wider text-[var(--color-text-muted)]">
           By Tool:
         </span>
         {tools.map((tool) => (
           <a
             href={`/tools/${tool.slug}/`}
-            class="shrink-0 rounded-full border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-1.5 text-sm font-[var(--font-display)] font-medium text-[var(--color-text-secondary)] transition-colors hover:border-[var(--color-accent-muted)] hover:text-[var(--color-accent)]"
+            class="surface-glass-ui shrink-0 rounded-full px-3 py-1.5 text-sm font-[var(--font-display)] font-medium text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-accent)]"
           >
             {tool.name}
           </a>
@@ -117,26 +98,7 @@ const tools = [
       </a>
     </div>
 
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {categories.map((cat) => (
-        <a
-          href={`/categories/${cat.slug}/`}
-          class="group rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-5 transition-all duration-200 hover:shadow-[var(--shadow-card-hover)] hover:border-[var(--color-accent-muted)]"
-        >
-          <div class="mb-3 flex h-10 w-10 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-accent-glow)]">
-            <svg class="h-5 w-5 text-[var(--color-accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-            </svg>
-          </div>
-          <h3 class="font-[var(--font-display)] text-base font-semibold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
-            {cat.name}
-          </h3>
-          <p class="mt-1 text-sm text-[var(--color-text-muted)]">
-            {cat.description}
-          </p>
-        </a>
-      ))}
-    </div>
+    <CategoryGrid categories={categories} client:visible />
   </section>
 
   <!-- Featured Prompts -->
@@ -181,11 +143,11 @@ const tools = [
       </a>
     </div>
 
-    <div class="divide-y divide-[var(--color-border)] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)]">
+    <div class="surface-glass-prominent divide-y divide-[var(--glass-border)] rounded-[var(--radius-lg)]">
       {latestPrompts.map((prompt) => (
         <a
           href={`/prompts/${prompt.data.slug}/`}
-          class="flex items-center justify-between gap-4 px-5 py-4 transition-colors hover:bg-[var(--color-surface-2)]"
+          class="flex items-center justify-between gap-4 px-5 py-4 transition-colors hover:bg-[var(--glass-highlight-soft)]"
         >
           <div class="flex items-center gap-3 min-w-0">
             <span class="font-[var(--font-display)] font-semibold text-[var(--color-text-primary)] truncate">
@@ -211,45 +173,24 @@ const tools = [
       </div>
     </div>
 
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {[
-        { title: 'Best ChatGPT Prompts for Marketing', description: 'High-converting marketing prompts for campaigns, ad copy, and content strategy.', href: '/prompts/chatgpt/marketing/' },
-        { title: 'AI Prompts for Teachers', description: 'Lesson plans, quizzes, rubrics, and differentiated instruction materials.', href: '/prompts/for/teachers/' },
-        { title: 'Best Cursor Coding Prompts', description: 'Code generation, refactoring, debugging, and multi-file editing prompts.', href: '/prompts/cursor/coding/' },
-        { title: 'DALL-E Art Prompts', description: 'Creative prompts for illustrations, concept art, and visual design.', href: '/best/dall-e-art-prompts/' },
-        { title: 'AI Prompts for Entrepreneurs', description: 'Validate ideas, build MVPs, create pitch decks, and grow startups.', href: '/prompts/for/entrepreneurs/' },
-        { title: 'Best Claude Writing Prompts', description: 'Leverage Claude\'s nuanced writing for blog posts, essays, and long-form content.', href: '/prompts/claude/writing/' },
-      ].map((collection) => (
-        <a
-          href={collection.href}
-          class="group rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-5 transition-all duration-200 hover:shadow-[var(--shadow-card-hover)] hover:border-[var(--color-accent-muted)]"
-        >
-          <h3 class="font-[var(--font-display)] text-base font-semibold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
-            {collection.title}
-          </h3>
-          <p class="mt-1 text-sm text-[var(--color-text-muted)]">
-            {collection.description}
-          </p>
-          <span class="mt-3 inline-flex items-center text-sm font-[var(--font-display)] font-medium text-[var(--color-accent)]">
-            Browse collection &rarr;
-          </span>
-        </a>
-      ))}
-    </div>
+    <CollectionGrid collections={collections} client:visible />
   </section>
 
   <!-- Cross-Promo -->
   <section class="mx-auto max-w-7xl px-[var(--space-page)] pb-16" data-reveal>
-    <div class="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-gradient-to-r from-teal-500/5 to-emerald-500/5 p-8 text-center">
+    <div class="surface-glass-prominent rounded-[var(--radius-lg)] p-8 text-center">
       <h2 class="text-xl font-[var(--font-display)] font-bold text-[var(--color-text-primary)]">
         Looking for AI tools?
       </h2>
       <p class="mt-2 text-[var(--color-text-secondary)]">
         Explore 200+ curated AI tools on our sister site
       </p>
-      <Button href="https://aitoolindex.io" size="md" variant="outline" class="mt-4">
+      <a
+        href="https://aitoolindex.io"
+        class="surface-glass-ui mt-4 inline-flex items-center justify-center rounded-[var(--radius-md)] px-5 py-2.5 text-sm font-[var(--font-display)] font-medium text-[var(--color-text-primary)] transition-all duration-200 hover:text-[var(--color-accent)]"
+      >
         Visit AIToolIndex.io &rarr;
-      </Button>
+      </a>
     </div>
   </section>
 
