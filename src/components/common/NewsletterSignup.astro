@@ -10,62 +10,95 @@ const {
   subheading = 'Curated prompts, tips, and guides delivered to your inbox every week. Free.',
   compact = false,
 } = Astro.props;
-
-const beehiivPublicationId = (import.meta.env.PUBLIC_BEEHIIV_PUBLICATION_ID as string | undefined)?.trim();
 ---
 
-<section class:list={[
+<section data-reveal class:list={[
   'border-t border-[var(--color-border)] bg-[var(--color-surface-1)]',
   !compact && 'py-16',
   compact && 'py-8',
 ]}>
   <div class:list={[
-    'mx-auto text-center',
+    'mx-auto',
     !compact && 'max-w-7xl px-[var(--space-page)]',
     compact && 'max-w-md px-4',
   ]}>
-    <h2 class:list={[
-      'text-[var(--color-text-primary)]',
-      compact && '!text-lg',
-    ]}>{heading}</h2>
-    <p class:list={[
-      'mt-2 text-[var(--color-text-secondary)]',
-      compact && 'text-sm',
-    ]}>{subheading}</p>
+    <div class:list={[
+      'relative mx-auto overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)]',
+      !compact && 'max-w-xl p-8',
+      compact && 'p-5',
+    ]}>
+      <div class="newsletter-sweep absolute inset-x-0 top-0 h-[2px]" aria-hidden="true"></div>
 
-    {beehiivPublicationId ? (
-      <!-- Beehiiv embed -->
-      <div class="mt-6 mx-auto max-w-md">
-        <iframe
-          src={`https://embeds.beehiiv.com/subscribe/${beehiivPublicationId}?slim=true`}
-          data-test-id="beehiiv-embed"
-          style="margin: 0; border-radius: 0px !important; background-color: transparent;"
-          frameborder="0"
-          scrolling="no"
-          class="w-full"
-          height="52"
-        ></iframe>
+      <div class="text-center">
+        <div class:list={['newsletter-float nl-stagger nl-stagger-1 mx-auto mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-accent-glow)]', compact && 'h-8 w-8 mb-3']}>
+          <svg class:list={['text-[var(--color-accent)]', !compact && 'h-5 w-5', compact && 'h-4 w-4']} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="2" y="4" width="20" height="16" rx="2" />
+            <path d="M22 6l-10 7L2 6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </div>
+
+        <h2 class:list={[
+          'nl-stagger nl-stagger-2 text-[var(--color-text-primary)]',
+          compact && '!text-lg',
+        ]}>{heading}</h2>
+        <p class:list={[
+          'nl-stagger nl-stagger-3 mt-2 text-[var(--color-text-secondary)]',
+          compact && 'text-sm',
+        ]}>{subheading}</p>
       </div>
-    ) : (
-      <!-- Fallback form (no Beehiiv configured) -->
-      <div class="mt-6 mx-auto max-w-md">
-        <form class="flex gap-2" data-newsletter-form>
+
+      <div class:list={['nl-stagger nl-stagger-4 mx-auto', !compact && 'mt-6 max-w-sm', compact && 'mt-4']}>
+        <form class="newsletter-form flex gap-2" data-newsletter-form>
           <input
             type="email"
             name="email"
             required
-            placeholder="Enter your email"
-            class="flex-1 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-0)] px-4 py-2.5 text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)] focus:border-[var(--color-accent)] focus:outline-none"
+            placeholder="you@example.com"
+            autocomplete="email"
+            class="flex-1 min-w-0 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-0)] px-4 py-2.5 text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)] transition-colors focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent-glow)] focus:outline-none"
           />
           <button
             type="submit"
-            class="inline-flex items-center justify-center gap-2 font-[var(--font-display)] font-medium rounded-[var(--radius-md)] bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] px-5 py-2.5 text-sm transition-all duration-200 cursor-pointer whitespace-nowrap"
+            class="inline-flex shrink-0 items-center justify-center gap-2 font-[var(--font-display)] font-medium rounded-[var(--radius-md)] bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] px-5 py-2.5 text-sm transition-all duration-200 cursor-pointer whitespace-nowrap shadow-[0_0_16px_var(--color-accent-glow)]"
           >
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
             Subscribe
           </button>
         </form>
-        <p class="mt-2 text-xs text-[var(--color-text-muted)]">No spam. Unsubscribe anytime.</p>
+
+        <div class="newsletter-success hidden mt-4 rounded-[var(--radius-md)] border border-emerald-500/20 bg-emerald-500/5 px-4 py-3 text-center">
+          <p class="text-sm font-medium text-emerald-600 dark:text-emerald-400">You're in! Check your inbox to confirm.</p>
+        </div>
+
+        <p class="mt-3 text-center text-xs text-[var(--color-text-muted)]">
+          No spam, ever. Unsubscribe anytime.
+        </p>
       </div>
-    )}
+    </div>
   </div>
 </section>
+
+<script>
+  function initNewsletterForms() {
+    document.querySelectorAll<HTMLFormElement>('[data-newsletter-form]').forEach((form) => {
+      if (form.dataset.initialized) return;
+      form.dataset.initialized = 'true';
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const wrapper = form.closest('.newsletter-form')?.parentElement;
+        if (!wrapper) return;
+        const success = wrapper.querySelector('.newsletter-success');
+        if (!success) return;
+
+        form.classList.add('hidden');
+        success.classList.remove('hidden');
+      });
+    });
+  }
+
+  initNewsletterForms();
+  document.addEventListener('astro:after-swap', initNewsletterForms);
+</script>

@@ -20,7 +20,7 @@ interface Props {
 const {
   title,
   description,
-  ogImage = '/favicon.svg',
+  ogImage = '/og-default.svg',
   ogType = 'website',
   canonicalUrl,
   noindex = false,
@@ -45,7 +45,7 @@ const gaMeasurementId = rawGaMeasurementId && rawGaMeasurementId !== 'G-XXXXXXXX
 const googleSiteVerification = (
   import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION as string | undefined
 )?.trim();
-const ogImageType = fullOgImage.endsWith('.png') ? 'image/png' : fullOgImage.endsWith('.svg') ? 'image/svg+xml' : undefined;
+const ogImageType = fullOgImage.endsWith('.png') ? 'image/png' : fullOgImage.endsWith('.jpg') || fullOgImage.endsWith('.jpeg') ? 'image/jpeg' : fullOgImage.endsWith('.svg') ? 'image/svg+xml' : undefined;
 const organizationJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',

@@ -231,6 +231,52 @@ html.dark .glass {
 .stagger-5 { animation-delay: 250ms; }
 .stagger-6 { animation-delay: 300ms; }
 
+/* — Newsletter Motion — */
+@keyframes border-sweep {
+  0% { background-position: -100% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+.newsletter-sweep {
+  background: linear-gradient(
+    90deg,
+    var(--color-accent) 0%,
+    var(--color-accent-muted) 40%,
+    #fff 50%,
+    var(--color-accent-muted) 60%,
+    var(--color-accent) 100%
+  );
+  background-size: 200% 100%;
+}
+
+[data-reveal][data-visible] .newsletter-sweep {
+  animation: border-sweep 1.2s ease-out 0.3s both;
+}
+
+.newsletter-float {
+  animation: float 3s ease-in-out infinite;
+  animation-play-state: paused;
+}
+[data-reveal][data-visible] .newsletter-float {
+  animation-play-state: running;
+}
+
+.nl-stagger {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+[data-reveal][data-visible] .nl-stagger { opacity: 1; transform: translateY(0); }
+.nl-stagger-1 { transition-delay: 0.1s; }
+.nl-stagger-2 { transition-delay: 0.2s; }
+.nl-stagger-3 { transition-delay: 0.3s; }
+.nl-stagger-4 { transition-delay: 0.4s; }
+
 /* Scroll-reveal base */
 [data-reveal] {
   opacity: 0;
@@ -242,17 +288,32 @@ html.dark .glass {
   transform: translateY(0);
 }
 
+/* — Horizontal scroll fade — */
+.scroll-fade-x {
+  mask-image: linear-gradient(to right, transparent, black 1rem, black calc(100% - 2.5rem), transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 1rem, black calc(100% - 2.5rem), transparent);
+}
+
 /* — Mobile Menu — */
 .mobile-menu-closed {
-  max-height: 0;
   overflow: hidden;
+  display: grid;
+  grid-template-rows: 0fr;
   opacity: 0;
+  transition: grid-template-rows 0.25s ease-out, opacity 0.2s ease-out;
+}
+.mobile-menu-closed > * {
+  overflow: hidden;
 }
 .mobile-menu-open {
-  animation: slide-down 0.25s ease-out both;
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transition: grid-template-rows 0.25s ease-out, opacity 0.2s ease-out;
 }
 .mobile-menu-exit {
-  animation: slide-up 0.2s ease-out both;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.2s ease-out, opacity 0.15s ease-out;
 }
 
 /* — Reduced Motion — */
@@ -274,16 +335,31 @@ html.dark .glass {
     animation-iteration-count: 1 !important;
   }
 
+  .mobile-menu-closed,
   .mobile-menu-open,
   .mobile-menu-exit {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 
   .animate-shimmer,
   .animate-spin-slow {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+  }
+
+  .newsletter-sweep {
+    animation: none !important;
+    background: var(--color-accent-gradient) !important;
+  }
+
+  .newsletter-float {
+    animation: none !important;
+  }
+
+  .nl-stagger {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
 
@@ -336,7 +412,9 @@ html.theme-transition-disabled * {
   justify-content: center;
 }
 
-/* — Prompt code block — */
+/* — Prompt code block —
+   Intentionally uses a fixed dark palette for contrast in both themes.
+   Variables use the accent-muted teal for consistency. */
 .prompt-block {
   font-family: var(--font-mono);
   font-size: 0.9rem;
@@ -344,13 +422,18 @@ html.theme-transition-disabled * {
   background: #1e1e2e;
   color: #cdd6f4;
   border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
   padding: 1.5rem;
   overflow-x: auto;
   white-space: pre-wrap;
   word-break: break-word;
 }
 
+html.dark .prompt-block {
+  border-color: #333333;
+}
+
 .prompt-block .variable {
-  color: #5eead4;
+  color: var(--color-accent-muted);
   font-weight: 600;
 }

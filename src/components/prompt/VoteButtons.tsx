@@ -44,7 +44,7 @@ function VoteButtonsInner({ promptSlug }: VoteButtonsProps) {
         }`}
         aria-label="Upvote"
       >
-        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
           <path d="M5 15l7-7 7 7" />
         </svg>
       </button>
@@ -63,7 +63,7 @@ function VoteButtonsInner({ promptSlug }: VoteButtonsProps) {
         }`}
         aria-label="Downvote"
       >
-        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
           <path d="M19 9l-7 7-7-7" />
         </svg>
       </button>
@@ -89,13 +89,13 @@ export default function VoteButtons({ promptSlug }: VoteButtonsProps) {
     return (
       <div className="flex items-center gap-1 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-1)] px-1 opacity-50">
         <span className="inline-flex items-center justify-center p-2 text-[var(--color-text-muted)]">
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
             <path d="M5 15l7-7 7 7" />
           </svg>
         </span>
         <span className="min-w-[2ch] text-center text-sm font-[var(--font-display)] font-semibold text-[var(--color-text-muted)]">0</span>
         <span className="inline-flex items-center justify-center p-2 text-[var(--color-text-muted)]">
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
             <path d="M19 9l-7 7-7-7" />
           </svg>
         </span>

@@ -1,5 +1,6 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
+import LogoMark from './LogoMark.astro';
 import Button from '../ui/Button.astro';
 import AuthButtons from '../auth/AuthButtons.tsx';
 
@@ -19,14 +20,7 @@ const currentPath = Astro.url.pathname;
   <div class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-[var(--space-page)]">
     <!-- Logo -->
     <a href="/" aria-label="AI Prompt Index home" class="group flex shrink-0 items-center gap-2">
-      <div class="flex h-8 w-8 items-center justify-center rounded-[var(--radius-sm)] bg-gradient-to-br from-teal-500 to-teal-700 shadow-[0_0_16px_rgba(13,148,136,0.3)]">
-        <svg class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-          <path d="M8 6h13M8 12h9M8 18h11" />
-          <circle cx="4" cy="6" r="1.5" fill="currentColor" />
-          <circle cx="4" cy="12" r="1.5" fill="currentColor" />
-          <circle cx="4" cy="18" r="1.5" fill="currentColor" />
-        </svg>
-      </div>
+      <LogoMark size="md" />
       <span class="whitespace-nowrap font-[var(--font-display)] text-[17px] font-bold leading-none tracking-tight sm:text-lg">
         <span class="text-[var(--color-text-primary)]">AI</span><span class="text-gradient">PromptIndex</span>
       </span>
@@ -144,11 +138,10 @@ const currentPath = Astro.url.pathname;
 
     const closeMenu = (restoreFocus: boolean) => {
       if (!mobileMenu || !mobileMenuButton) return;
-      const wasOpen = !mobileMenu.classList.contains('mobile-menu-closed');
-      if (!wasOpen) return;
+      if (mobileMenu.classList.contains('mobile-menu-closed')) return;
       mobileMenu.classList.remove('mobile-menu-open');
       mobileMenu.classList.add('mobile-menu-exit');
-      mobileMenu.addEventListener('animationend', () => {
+      mobileMenu.addEventListener('transitionend', () => {
         mobileMenu.classList.remove('mobile-menu-exit');
         mobileMenu.classList.add('mobile-menu-closed');
       }, { once: true });
@@ -160,12 +153,14 @@ const currentPath = Astro.url.pathname;
 
     const toggleMenu = () => {
       if (!mobileMenu || !mobileMenuButton) return;
-      const isOpen = !mobileMenu.classList.contains('mobile-menu-closed');
-      if (isOpen) {
+      const isClosed = mobileMenu.classList.contains('mobile-menu-closed');
+      if (!isClosed) {
         closeMenu(false);
       } else {
-        mobileMenu.classList.remove('mobile-menu-closed');
-        mobileMenu.classList.add('mobile-menu-open');
+        mobileMenu.classList.remove('mobile-menu-closed', 'mobile-menu-exit');
+        requestAnimationFrame(() => {
+          mobileMenu.classList.add('mobile-menu-open');
+        });
         mobileMenuButton.setAttribute('aria-expanded', 'true');
         const firstFocusable = mobileMenu.querySelector('a, button') as HTMLElement | null;
         if (firstFocusable) firstFocusable.focus();

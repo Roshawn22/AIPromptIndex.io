@@ -1,15 +1,129 @@
 /**
  * SaveButton -- React island for saving/favoriting prompts.
- * Uses Convex for storage and Clerk for authentication.
+ * Uses Convex for storage and the page-level Clerk singleton for authentication.
  * Gracefully degrades if Convex or Clerk is not configured.
  */
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { ConvexReactClient, useQuery, useMutation, ConvexProvider } from 'convex/react';
-import { ClerkProvider, SignInButton, useUser } from '@clerk/clerk-react';
+import { ConvexReactClient, ConvexProviderWithAuth, useQuery, useMutation } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
 
 interface SaveButtonProps {
   promptSlug: string;
+}
+
+type ClerkSessionLike = {
+  getToken?: (options?: {
+    template?: 'convex';
+    skipCache?: boolean;
+  }) => Promise<string | null>;
+};
+
+type ClerkLike = {
+  loaded?: boolean;
+  user?: { id?: string } | null;
+  session?: ClerkSessionLike | null;
+  addListener?: (listener: () => void) => (() => void) | void;
+  openSignIn?: () => void;
+};
+
+declare global {
+  interface Window {
+    Clerk?: ClerkLike;
+  }
+}
+
+function getClerk(): ClerkLike | null {
+  if (typeof window === 'undefined') return null;
+  return window.Clerk ?? null;
+}
+
+function getClerkSnapshot() {
+  const clerk = getClerk();
+  return {
+    isLoaded: !!clerk?.loaded,
+    isSignedIn: !!clerk?.user,
+  };
+}
+
+function useClerkSingleton() {
+  const [snapshot, setSnapshot] = useState(getClerkSnapshot);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    let detach: (() => void) | undefined;
+    const syncSnapshot = () => setSnapshot(getClerkSnapshot());
+
+    const attachListener = () => {
+      if (detach) return;
+      const maybeDetach = getClerk()?.addListener?.(syncSnapshot);
+      if (typeof maybeDetach === 'function') {
+        detach = maybeDetach;
+      }
+    };
+
+    syncSnapshot();
+    attachListener();
+
+    const intervalId = window.setInterval(() => {
+      syncSnapshot();
+      attachListener();
+      if (getClerk()?.loaded && detach) {
+        window.clearInterval(intervalId);
+      }
+    }, 250);
+
+    return () => {
+      window.clearInterval(intervalId);
+      detach?.();
+    };
+  }, []);
+
+  const { isLoaded, isSignedIn } = snapshot;
+
+  const openSignIn = useCallback(() => {
+    getClerk()?.openSignIn?.();
+  }, []);
+
+  const fetchAccessToken = useCallback(
+    async ({ forceRefreshToken }: { forceRefreshToken: boolean }) => {
+      const getToken = getClerk()?.session?.getToken;
+      if (typeof getToken !== 'function') return null;
+
+      try {
+        return (
+          (await getToken({ template: 'convex', skipCache: forceRefreshToken })) ??
+          (await getToken({ skipCache: forceRefreshToken }))
+        );
+      } catch {
+        return null;
+      }
+    },
+    []
+  );
+
+  return useMemo(
+    () => ({
+      isLoaded,
+      isSignedIn,
+      openSignIn,
+      fetchAccessToken,
+    }),
+    [fetchAccessToken, isLoaded, isSignedIn, openSignIn]
+  );
+}
+
+function useConvexAuthFromClerkSingleton() {
+  const { isLoaded, isSignedIn, fetchAccessToken } = useClerkSingleton();
+
+  return useMemo(
+    () => ({
+      isLoading: !isLoaded,
+      isAuthenticated: isSignedIn,
+      fetchAccessToken,
+    }),
+    [fetchAccessToken, isLoaded, isSignedIn]
+  );
 }
 
 /* ------------------------------------------------------------------ */
@@ -17,12 +131,11 @@ interface SaveButtonProps {
 /* ------------------------------------------------------------------ */
 
 function SaveButtonInner({ promptSlug }: SaveButtonProps) {
-  const { user, isSignedIn } = useUser();
-  const clerkUserId = user?.id ?? '';
+  const { isLoaded, isSignedIn, openSignIn } = useClerkSingleton();
 
   const isSaved = useQuery(
     api.collections.isPromptSaved,
-    clerkUserId ? { clerkUserId, promptSlug } : 'skip'
+    isLoaded && isSignedIn ? { promptSlug } : 'skip'
   );
   const savePrompt = useMutation(api.collections.savePrompt);
   const removePrompt = useMutation(api.collections.removePrompt);
@@ -32,7 +145,7 @@ function SaveButtonInner({ promptSlug }: SaveButtonProps) {
   const [isPending, setIsPending] = useState(false);
 
   const handleToggle = useCallback(async () => {
-    if (!clerkUserId || isPending) return;
+    if (!isSignedIn || isPending) return;
     setIsPending(true);
     try {
       if (isSaved) {
@@ -47,21 +160,34 @@ function SaveButtonInner({ promptSlug }: SaveButtonProps) {
     } finally {
       setIsPending(false);
     }
-  }, [clerkUserId, isSaved, isPending, promptSlug, savePrompt, removePrompt]);
+  }, [isSignedIn, isSaved, isPending, promptSlug, savePrompt, removePrompt]);
+
+  if (!isLoaded) {
+    return (
+      <button
+        type="button"
+        disabled
+        className="inline-flex items-center justify-center gap-1.5 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-1)] px-3 py-2 text-sm font-medium text-[var(--color-text-muted)] opacity-50 cursor-not-allowed"
+        aria-label="Save prompt"
+      >
+        <HeartIcon filled={false} />
+        Save
+      </button>
+    );
+  }
 
   // Not signed in -- wrap in SignInButton
   if (!isSignedIn) {
     return (
-      <SignInButton mode="modal">
-        <button
-          type="button"
-          className="relative inline-flex items-center justify-center gap-1.5 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-1)] px-3 py-2 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-accent-muted)] hover:text-[var(--color-accent)] cursor-pointer"
-          aria-label="Save prompt"
-        >
-          <HeartIcon filled={false} />
-          Save
-        </button>
-      </SignInButton>
+      <button
+        type="button"
+        onClick={openSignIn}
+        className="relative inline-flex items-center justify-center gap-1.5 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-1)] px-3 py-2 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-accent-muted)] hover:text-[var(--color-accent)] cursor-pointer"
+        aria-label="Save prompt"
+      >
+        <HeartIcon filled={false} />
+        Save
+      </button>
     );
   }
 
@@ -97,24 +223,19 @@ function SaveButtonInner({ promptSlug }: SaveButtonProps) {
 
 export default function SaveButton({ promptSlug }: SaveButtonProps) {
   const [client, setClient] = useState<ConvexReactClient | null>(null);
-  const [clerkKey, setClerkKey] = useState<string | null>(null);
 
   useEffect(() => {
     const url = (import.meta as any).env?.PUBLIC_CONVEX_URL as string | undefined;
     if (!url || url === 'https://your-convex-url.convex.cloud') return;
 
-    const key = (import.meta as any).env?.PUBLIC_CLERK_PUBLISHABLE_KEY as string | undefined;
-    if (!key) return;
-
     try {
       setClient(new ConvexReactClient(url));
-      setClerkKey(key);
     } catch {
       // Not configured -- graceful degradation
     }
   }, []);
 
-  if (!client || !clerkKey) {
+  if (!client) {
     // Fallback: static disabled button
     return (
       <button
@@ -130,11 +251,9 @@ export default function SaveButton({ promptSlug }: SaveButtonProps) {
   }
 
   return (
-    <ClerkProvider publishableKey={clerkKey}>
-      <ConvexProvider client={client}>
-        <SaveButtonInner promptSlug={promptSlug} />
-      </ConvexProvider>
-    </ClerkProvider>
+    <ConvexProviderWithAuth client={client} useAuth={useConvexAuthFromClerkSingleton}>
+      <SaveButtonInner promptSlug={promptSlug} />
+    </ConvexProviderWithAuth>
   );
 }
 
@@ -150,6 +269,7 @@ function HeartIcon({ filled }: { filled: boolean }) {
       viewBox="0 0 24 24"
       stroke="currentColor"
       strokeWidth={2}
+      aria-hidden="true"
     >
       <path
         strokeLinecap="round"

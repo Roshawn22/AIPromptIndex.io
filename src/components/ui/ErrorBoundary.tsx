@@ -37,38 +37,13 @@ export default class ErrorBoundary extends Component<Props, State> {
       }
 
       return (
-        <div
-          style={{
-            padding: '2rem',
-            borderRadius: '16px',
-            border: '1px solid var(--color-border)',
-            backgroundColor: 'var(--color-surface-1)',
-            textAlign: 'center',
-          }}
-        >
-          <p
-            style={{
-              color: 'var(--color-text-secondary)',
-              fontFamily: 'var(--font-display)',
-              fontSize: '0.875rem',
-              marginBottom: '0.75rem',
-            }}
-          >
+        <div className="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-8 text-center">
+          <p className="mb-3 text-sm font-[var(--font-display)] text-[var(--color-text-secondary)]">
             Something went wrong loading this component.
           </p>
           <button
             onClick={() => this.setState({ hasError: false, error: null })}
-            style={{
-              padding: '0.5rem 1rem',
-              fontSize: '0.8125rem',
-              fontFamily: 'var(--font-display)',
-              fontWeight: 500,
-              borderRadius: '8px',
-              border: '1px solid var(--color-border)',
-              backgroundColor: 'var(--color-surface-2)',
-              color: 'var(--color-text-primary)',
-              cursor: 'pointer',
-            }}
+            className="cursor-pointer rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-2)] px-4 py-2 text-[13px] font-[var(--font-display)] font-medium text-[var(--color-text-primary)] transition-colors hover:border-[var(--color-accent-muted)]"
           >
             Try Again
           </button>

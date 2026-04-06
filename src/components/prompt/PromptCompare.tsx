@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { TOOL_DISPLAY_NAMES as toolDisplayNames, CATEGORY_DISPLAY_NAMES as categoryDisplayNames } from '../../lib/constants';
+import { BADGE_COLORS, DIFFICULTY_COLORS } from '../../lib/badge-colors';
+import { SELECT_CHEVRON_STYLE } from '../../lib/utils';
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -100,12 +102,7 @@ export default function PromptCompare({ prompts }: Props) {
             value={leftSlug}
             onChange={(e) => setLeftSlug(e.target.value)}
             className="w-full cursor-pointer appearance-none rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2 text-sm text-[var(--color-text-primary)] font-[var(--font-display)] transition-colors hover:border-[var(--color-accent-muted)] focus:border-[var(--color-accent)] focus:outline-none"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")`,
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'right 0.5rem center',
-              paddingRight: '2rem',
-            }}
+            style={{ ...SELECT_CHEVRON_STYLE, paddingRight: '2rem' }}
           >
             <option value="">-- Select a prompt --</option>
             {sorted.map((p) => (
@@ -126,12 +123,7 @@ export default function PromptCompare({ prompts }: Props) {
             value={rightSlug}
             onChange={(e) => setRightSlug(e.target.value)}
             className="w-full cursor-pointer appearance-none rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2 text-sm text-[var(--color-text-primary)] font-[var(--font-display)] transition-colors hover:border-[var(--color-accent-muted)] focus:border-[var(--color-accent)] focus:outline-none"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")`,
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'right 0.5rem center',
-              paddingRight: '2rem',
-            }}
+            style={{ ...SELECT_CHEVRON_STYLE, paddingRight: '2rem' }}
           >
             <option value="">-- Select a prompt --</option>
             {sorted.map((p) => (
@@ -144,7 +136,7 @@ export default function PromptCompare({ prompts }: Props) {
       {/* ---- Empty state ---- */}
       {(!leftPrompt && !rightPrompt) && (
         <div className="flex flex-col items-center justify-center rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] py-20 text-center">
-          <svg className="mb-4 h-12 w-12 text-[var(--color-text-muted)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <svg className="mb-4 h-12 w-12 text-[var(--color-text-muted)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
             <path d="M9 12h6M9 16h6M13 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V11l-8-8z" />
           </svg>
           <p className="text-lg font-semibold text-[var(--color-text-primary)]">
@@ -219,10 +211,10 @@ function PromptPanel({ prompt, side, copiedSide, onCopy, otherPrompt, isDifferen
 
       {/* Badges */}
       <div className="mb-4 flex flex-wrap items-center gap-2">
-        <span className={`inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-medium font-[var(--font-display)] bg-teal-500/15 text-teal-400 border-teal-500/20 ${isDifferent('tool') ? diffHighlight : ''}`}>
+        <span className={`inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-medium font-[var(--font-display)] ${BADGE_COLORS.teal} ${isDifferent('tool') ? diffHighlight : ''}`}>
           {toolDisplayNames[prompt.tool] || prompt.tool}
         </span>
-        <span className={`inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-medium font-[var(--font-display)] bg-violet-500/15 text-violet-400 border-violet-500/20 ${isDifferent('category') ? diffHighlight : ''}`}>
+        <span className={`inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-medium font-[var(--font-display)] ${BADGE_COLORS.purple} ${isDifferent('category') ? diffHighlight : ''}`}>
           {categoryDisplayNames[prompt.category] || prompt.category}
         </span>
         <DifficultyBadge difficulty={prompt.difficulty} highlight={isDifferent('difficulty')} />
@@ -242,7 +234,7 @@ function PromptPanel({ prompt, side, copiedSide, onCopy, otherPrompt, isDifferen
           onClick={() => onCopy(prompt.promptText, side)}
           className="inline-flex items-center gap-1.5 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-1.5 text-xs font-medium text-[var(--color-text-secondary)] transition-colors hover:border-[var(--color-accent-muted)] hover:text-[var(--color-accent)] cursor-pointer"
         >
-          <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
             <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
             <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
           </svg>
@@ -254,7 +246,7 @@ function PromptPanel({ prompt, side, copiedSide, onCopy, otherPrompt, isDifferen
           className="inline-flex items-center gap-1 text-xs font-medium text-[var(--color-accent)] transition-colors hover:text-[var(--color-accent-hover)]"
         >
           View full prompt
-          <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
         </a>
@@ -301,15 +293,11 @@ function PromptPanel({ prompt, side, copiedSide, onCopy, otherPrompt, isDifferen
 /* ------------------------------------------------------------------ */
 
 function DifficultyBadge({ difficulty, highlight }: { difficulty: string; highlight: boolean }) {
-  const colors: Record<string, string> = {
-    beginner: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/20',
-    intermediate: 'bg-amber-500/15 text-amber-400 border-amber-500/20',
-    advanced: 'bg-red-500/15 text-red-400 border-red-500/20',
-  };
+  const colorClass = DIFFICULTY_COLORS[difficulty as keyof typeof DIFFICULTY_COLORS] || '';
 
   return (
     <span
-      className={`inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-medium capitalize font-[var(--font-display)] ${colors[difficulty] || ''} ${highlight ? 'ring-2 ring-amber-400/40' : ''}`}
+      className={`inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-medium capitalize font-[var(--font-display)] ${colorClass} ${highlight ? 'ring-2 ring-amber-400/40' : ''}`}
     >
       {difficulty}
     </span>

@@ -1,4 +1,6 @@
 ---
+import LogoMark from './LogoMark.astro';
+
 const directoryLinks = [
   { href: '/prompts/', label: 'All Prompts' },
   { href: '/categories/writing/', label: 'Writing Prompts' },
@@ -162,14 +164,7 @@ const companyLinks = [
     <!-- Bottom bar -->
     <div class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-[var(--color-border)] pt-8 sm:flex-row">
       <div class="flex items-center gap-2">
-        <div class="flex h-6 w-6 items-center justify-center rounded-[var(--radius-sm)] bg-gradient-to-br from-teal-500 to-teal-700">
-          <svg class="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-            <path d="M8 6h13M8 12h9M8 18h11" />
-            <circle cx="4" cy="6" r="1.5" fill="currentColor" />
-            <circle cx="4" cy="12" r="1.5" fill="currentColor" />
-            <circle cx="4" cy="18" r="1.5" fill="currentColor" />
-          </svg>
-        </div>
+        <LogoMark size="sm" />
         <span class="font-[var(--font-display)] text-sm font-semibold text-[var(--color-text-primary)]">
           AIPromptIndex
         </span>
