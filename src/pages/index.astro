@@ -3,7 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/global/Header.astro';
 import Footer from '../components/global/Footer.astro';
 import Badge from '../components/ui/Badge.astro';
-import Button from '../components/ui/Button.astro';
 import NewsletterSignup from '../components/common/NewsletterSignup.astro';
 import PromptCard from '../components/prompt/PromptCard.astro';
 import HeroEntrance from '../components/motion/HeroEntrance';
@@ -61,24 +60,24 @@ const collections = [
   <Header slot="header" />
 
   <!-- Hero Section -->
-  <section class="relative overflow-hidden border-b border-[var(--color-border)]">
+  <section class="relative overflow-hidden border-b border-[var(--glass-border)]">
     <div class="absolute top-0 left-1/4 h-96 w-96 rounded-full bg-teal-500/5 blur-3xl" aria-hidden="true"></div>
     <div class="absolute bottom-0 right-1/4 h-96 w-96 rounded-full bg-amber-500/5 blur-3xl" aria-hidden="true"></div>
 
-    <HeroEntrance promptCount={allPrompts.length} client:only="react" />
+    <HeroEntrance promptCount={allPrompts.length} client:load />
   </section>
 
   <!-- Tool Quick-Filter Bar -->
-  <section class="border-b border-[var(--color-border)] bg-[var(--color-surface-1)]">
+  <section class="border-b border-[var(--glass-border)] bg-transparent">
     <div class="mx-auto max-w-7xl px-[var(--space-page)] py-4">
-      <div class="flex items-center gap-3 overflow-x-auto pb-1 scrollbar-none scroll-fade-x">
+      <div class="surface-glass-ui flex items-center gap-3 overflow-x-auto rounded-full px-4 py-3 scrollbar-none scroll-fade-x">
         <span class="shrink-0 text-xs font-[var(--font-display)] font-medium uppercase tracking-wider text-[var(--color-text-muted)]">
           By Tool:
         </span>
         {tools.map((tool) => (
           <a
             href={`/tools/${tool.slug}/`}
-            class="shrink-0 rounded-full border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-1.5 text-sm font-[var(--font-display)] font-medium text-[var(--color-text-secondary)] transition-colors hover:border-[var(--color-accent-muted)] hover:text-[var(--color-accent)]"
+            class="surface-glass-ui shrink-0 rounded-full px-3 py-1.5 text-sm font-[var(--font-display)] font-medium text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-accent)]"
           >
             {tool.name}
           </a>
@@ -144,11 +143,11 @@ const collections = [
       </a>
     </div>
 
-    <div class="divide-y divide-[var(--color-border)] rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)]">
+    <div class="surface-glass-prominent divide-y divide-[var(--glass-border)] rounded-[var(--radius-lg)]">
       {latestPrompts.map((prompt) => (
         <a
           href={`/prompts/${prompt.data.slug}/`}
-          class="flex items-center justify-between gap-4 px-5 py-4 transition-colors hover:bg-[var(--color-surface-2)]"
+          class="flex items-center justify-between gap-4 px-5 py-4 transition-colors hover:bg-[var(--glass-highlight-soft)]"
         >
           <div class="flex items-center gap-3 min-w-0">
             <span class="font-[var(--font-display)] font-semibold text-[var(--color-text-primary)] truncate">
@@ -179,16 +178,19 @@ const collections = [
 
   <!-- Cross-Promo -->
   <section class="mx-auto max-w-7xl px-[var(--space-page)] pb-16" data-reveal>
-    <div class="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-gradient-to-r from-teal-500/5 to-emerald-500/5 p-8 text-center">
+    <div class="surface-glass-prominent rounded-[var(--radius-lg)] p-8 text-center">
       <h2 class="text-xl font-[var(--font-display)] font-bold text-[var(--color-text-primary)]">
         Looking for AI tools?
       </h2>
       <p class="mt-2 text-[var(--color-text-secondary)]">
         Explore 200+ curated AI tools on our sister site
       </p>
-      <Button href="https://aitoolindex.io" size="md" variant="outline" class="mt-4">
+      <a
+        href="https://aitoolindex.io"
+        class="surface-glass-ui mt-4 inline-flex items-center justify-center rounded-[var(--radius-md)] px-5 py-2.5 text-sm font-[var(--font-display)] font-medium text-[var(--color-text-primary)] transition-all duration-200 hover:text-[var(--color-accent)]"
+      >
         Visit AIToolIndex.io &rarr;
-      </Button>
+      </a>
     </div>
   </section>
 

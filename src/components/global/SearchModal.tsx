@@ -42,6 +42,15 @@ const focusableSelector = [
   '[tabindex]:not([tabindex="-1"])',
 ].join(',');
 
+const fieldChrome = {
+  borderColor: 'var(--glass-border)',
+};
+
+const softGlass = {
+  backgroundColor: 'var(--glass-highlight-soft)',
+  borderColor: 'var(--glass-border)',
+};
+
 export default function SearchModal() {
   const [items, setItems] = useState<SearchItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -218,7 +227,16 @@ export default function SearchModal() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            className="absolute inset-0 bg-slate-950/70 backdrop-blur-md"
+          />
+
+          <div
+            className="pointer-events-none absolute inset-0"
+            aria-hidden="true"
+            style={{
+              background:
+                'radial-gradient(circle at 18% 20%, rgba(0,191,166,0.18), transparent 34%), radial-gradient(circle at 82% 16%, rgba(244,176,92,0.16), transparent 30%), radial-gradient(circle at 50% 100%, rgba(8,145,178,0.12), transparent 36%)',
+            }}
           />
 
           <motion.div
@@ -227,16 +245,12 @@ export default function SearchModal() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: -8 }}
             transition={{ duration: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
-            className="relative mx-4 w-full max-w-xl overflow-hidden rounded-2xl border shadow-2xl"
-            style={{
-              backgroundColor: 'var(--color-surface-1)',
-              borderColor: 'var(--color-border)',
-            }}
+            className="surface-glass-prominent relative mx-4 w-full max-w-xl overflow-hidden rounded-[calc(var(--radius-xl)+4px)]"
             onClick={(event) => event.stopPropagation()}
           >
             <div
               className="flex items-center gap-3 border-b px-5"
-              style={{ borderColor: 'var(--color-border)' }}
+              style={fieldChrome}
             >
               <svg
                 className="h-5 w-5 shrink-0"
@@ -265,13 +279,13 @@ export default function SearchModal() {
                 aria-label="Search AI prompts"
               />
               <kbd
-                className="hidden items-center rounded px-2 py-1 text-xs sm:inline-flex"
+                className="hidden items-center rounded-full border px-2 py-1 text-xs sm:inline-flex"
                 style={{
-                  backgroundColor: 'var(--color-surface-2)',
+                  backgroundColor: 'var(--glass-highlight-soft)',
                   color: 'var(--color-text-muted)',
-                  border: '1px solid var(--color-border)',
                   fontFamily: 'var(--font-mono)',
                   fontSize: '10px',
+                  borderColor: 'var(--glass-border)',
                 }}
               >
                 ESC
@@ -315,7 +329,8 @@ export default function SearchModal() {
                     href={result.item.url}
                     className="flex items-center gap-3 px-5 py-3 transition-colors"
                     style={{
-                      backgroundColor: index === selectedIndex ? 'var(--color-surface-2)' : 'transparent',
+                      backgroundColor:
+                        index === selectedIndex ? 'var(--glass-highlight-soft)' : 'transparent',
                     }}
                     onMouseEnter={() => setSelectedIndex(index)}
                   >
@@ -342,11 +357,12 @@ export default function SearchModal() {
                           {result.item.name}
                         </span>
                         <span
-                          className="shrink-0 rounded-full px-1.5 py-0.5 text-[10px]"
+                          className="shrink-0 rounded-full border px-1.5 py-0.5 text-[10px]"
                           style={{
-                            backgroundColor: 'var(--color-surface-3)',
+                            backgroundColor: 'var(--glass-highlight-soft)',
                             color: 'var(--color-text-muted)',
                             fontFamily: 'var(--font-display)',
+                            borderColor: 'var(--glass-border)',
                           }}
                         >
                           {typeLabels[result.item.type] || result.item.type}
@@ -374,7 +390,7 @@ export default function SearchModal() {
             <div
               className="flex items-center justify-between border-t px-5 py-3 text-xs"
               style={{
-                borderColor: 'var(--color-border)',
+                borderColor: 'var(--glass-border)',
                 color: 'var(--color-text-muted)',
                 fontFamily: 'var(--font-display)',
               }}
@@ -383,7 +399,7 @@ export default function SearchModal() {
                 <span className="flex items-center gap-1">
                   <kbd
                     className="rounded px-1.5 py-0.5"
-                    style={{ backgroundColor: 'var(--color-surface-2)', border: '1px solid var(--color-border)' }}
+                    style={{ ...softGlass, borderStyle: 'solid', borderWidth: '1px' }}
                   >
                     &uarr;&darr;
                   </kbd>
@@ -392,7 +408,7 @@ export default function SearchModal() {
                 <span className="flex items-center gap-1">
                   <kbd
                     className="rounded px-1.5 py-0.5"
-                    style={{ backgroundColor: 'var(--color-surface-2)', border: '1px solid var(--color-border)' }}
+                    style={{ ...softGlass, borderStyle: 'solid', borderWidth: '1px' }}
                   >
                     &crarr;
                   </kbd>
