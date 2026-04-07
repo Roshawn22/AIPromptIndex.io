@@ -26,12 +26,28 @@ export default function HeroEntrance({ promptCount }: Props) {
           aria-hidden="true"
           style={{
             background:
-              'radial-gradient(circle at 22% 18%, rgba(0,191,166,0.18), transparent 28%), radial-gradient(circle at 78% 16%, rgba(244,176,92,0.16), transparent 24%), linear-gradient(180deg, rgba(255,255,255,0.08), transparent 38%)',
+              'radial-gradient(circle at 20% 16%, rgba(0,191,166,0.26), transparent 24%), radial-gradient(circle at 78% 14%, rgba(244,176,92,0.22), transparent 22%), radial-gradient(circle at 52% 110%, rgba(56,189,248,0.16), transparent 34%), linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.04) 38%, transparent 100%)',
           }}
+        />
+        <div
+          className="pointer-events-none absolute inset-x-[-10%] top-10 h-28 blur-3xl"
+          aria-hidden="true"
+          style={{
+            background:
+              'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.55) 18%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0.55) 82%, transparent 100%)',
+          }}
+        />
+        <div
+          className="pointer-events-none absolute left-8 top-8 h-28 w-28 rounded-full border border-white/45 bg-white/30 blur-2xl"
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute bottom-10 right-10 h-32 w-32 rounded-full border border-white/30 bg-cyan-200/20 blur-3xl"
+          aria-hidden="true"
         />
 
         {/* Badge */}
-        <motion.div {...fadeUp(0)} className="surface-glass-ui relative mb-6 inline-flex items-center gap-2 rounded-full px-4 py-1.5">
+        <motion.div {...fadeUp(0)} className="surface-glass-ui relative mb-6 inline-flex items-center gap-2 rounded-full px-4 py-1.5 shadow-[0_14px_40px_rgba(13,148,136,0.12)]">
           <span className="relative flex h-5 w-5 items-center justify-center">
             <LottieAccent animationData={pulseData} size={20} loop />
           </span>
@@ -41,14 +57,14 @@ export default function HeroEntrance({ promptCount }: Props) {
         </motion.div>
 
         {/* Headline */}
-        <motion.h1 {...fadeUp(0.1)} className="relative mx-auto max-w-4xl">
+        <motion.h1 {...fadeUp(0.1)} className="relative mx-auto max-w-4xl text-balance">
           <span className="text-[var(--color-text-primary)]">The AI Prompt Library</span>
           <br />
           <span className="text-gradient">for Entrepreneurs</span>
         </motion.h1>
 
         {/* Subtitle */}
-        <motion.p {...fadeUp(0.2)} className="relative mx-auto mt-6 max-w-2xl text-lg text-[var(--color-text-secondary)]">
+        <motion.p {...fadeUp(0.2)} className="relative mx-auto mt-6 max-w-2xl text-lg text-[var(--color-text-secondary)] sm:text-[1.15rem]">
           Discover, copy, and use curated prompts for ChatGPT, Claude, Midjourney, and more. Free and community-driven.
         </motion.p>
 

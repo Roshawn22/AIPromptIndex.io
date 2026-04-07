@@ -60,17 +60,17 @@ const collections = [
   <Header slot="header" />
 
   <!-- Hero Section -->
-  <section class="relative overflow-hidden border-b border-[var(--glass-border)]">
-    <div class="absolute top-0 left-1/4 h-96 w-96 rounded-full bg-teal-500/5 blur-3xl" aria-hidden="true"></div>
-    <div class="absolute bottom-0 right-1/4 h-96 w-96 rounded-full bg-amber-500/5 blur-3xl" aria-hidden="true"></div>
+  <section class="glass-atmosphere glass-grid relative overflow-hidden border-b border-[var(--glass-border)]">
+    <div class="absolute inset-x-0 top-0 h-[32rem] bg-[radial-gradient(circle_at_16%_18%,rgba(13,148,136,0.18),transparent_18rem),radial-gradient(circle_at_84%_14%,rgba(251,191,36,0.18),transparent_16rem),radial-gradient(circle_at_50%_72%,rgba(56,189,248,0.14),transparent_24rem)]" aria-hidden="true"></div>
+    <div class="absolute inset-x-[-8%] top-16 h-40 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.34),transparent)] blur-3xl" aria-hidden="true"></div>
 
     <HeroEntrance promptCount={allPrompts.length} client:load />
   </section>
 
   <!-- Tool Quick-Filter Bar -->
-  <section class="border-b border-[var(--glass-border)] bg-transparent">
+  <section class="glass-atmosphere border-b border-[var(--glass-border)] bg-transparent">
     <div class="mx-auto max-w-7xl px-[var(--space-page)] py-4">
-      <div class="surface-glass-ui flex items-center gap-3 overflow-x-auto rounded-full px-4 py-3 scrollbar-none scroll-fade-x">
+      <div class="surface-glass-prominent flex items-center gap-3 overflow-x-auto rounded-full px-4 py-3 scrollbar-none scroll-fade-x">
         <span class="shrink-0 text-xs font-[var(--font-display)] font-medium uppercase tracking-wider text-[var(--color-text-muted)]">
           By Tool:
         </span>
@@ -87,7 +87,7 @@ const collections = [
   </section>
 
   <!-- Browse by Category -->
-  <section class="mx-auto max-w-7xl px-[var(--space-page)] py-16" data-reveal>
+  <section class="glass-atmosphere mx-auto max-w-7xl px-[var(--space-page)] py-16" data-reveal>
     <div class="mb-10 flex items-end justify-between">
       <div>
         <h2 class="text-[var(--color-text-primary)]">Browse by Use Case</h2>
@@ -132,7 +132,7 @@ const collections = [
   )}
 
   <!-- Latest Prompts -->
-  <section class="mx-auto max-w-7xl px-[var(--space-page)] py-16 border-t border-[var(--color-border)]" data-reveal>
+  <section class="glass-atmosphere mx-auto max-w-7xl px-[var(--space-page)] py-16 border-t border-[var(--color-border)]" data-reveal>
     <div class="mb-10 flex items-end justify-between">
       <div>
         <h2 class="text-[var(--color-text-primary)]">Latest Prompts</h2>
@@ -165,7 +165,7 @@ const collections = [
   </section>
 
   <!-- Popular Prompt Collections -->
-  <section class="mx-auto max-w-7xl px-[var(--space-page)] py-16 border-t border-[var(--color-border)]" data-reveal>
+  <section class="glass-atmosphere mx-auto max-w-7xl px-[var(--space-page)] py-16 border-t border-[var(--color-border)]" data-reveal>
     <div class="mb-10 flex items-end justify-between">
       <div>
         <h2 class="text-[var(--color-text-primary)]">Popular Prompt Collections</h2>
@@ -177,7 +177,7 @@ const collections = [
   </section>
 
   <!-- Cross-Promo -->
-  <section class="mx-auto max-w-7xl px-[var(--space-page)] pb-16" data-reveal>
+  <section class="glass-atmosphere mx-auto max-w-7xl px-[var(--space-page)] pb-16" data-reveal>
     <div class="surface-glass-prominent rounded-[var(--radius-lg)] p-8 text-center">
       <h2 class="text-xl font-[var(--font-display)] font-bold text-[var(--color-text-primary)]">
         Looking for AI tools?
