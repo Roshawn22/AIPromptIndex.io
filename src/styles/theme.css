@@ -190,6 +190,25 @@ h4 { font-size: clamp(1.1rem, 2vw, 1.35rem); }
   background-clip: text;
 }
 
+.editorial-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.editorial-kicker::before {
+  content: "";
+  width: 2.75rem;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-accent), rgba(255, 255, 255, 0.2));
+}
+
 /* Display text only ships 600/700, so normalize medium requests. */
 [class*="font-[var(--font-display)]"].font-medium,
 [style*="var(--font-display)"].font-medium {

@@ -19,7 +19,7 @@ export default function HeroEntrance({ promptCount }: Props) {
   });
 
   return (
-    <div className="relative mx-auto max-w-7xl px-[var(--space-page)] py-20 text-center sm:py-28">
+    <div className="relative mx-auto max-w-7xl px-[var(--space-page)] py-20 sm:py-28">
       <div className="surface-glass-prominent relative overflow-hidden rounded-[calc(var(--radius-2xl)+4px)] px-6 py-12 sm:px-10 sm:py-16 lg:px-16">
         <div
           className="pointer-events-none absolute inset-0"
@@ -46,43 +46,68 @@ export default function HeroEntrance({ promptCount }: Props) {
           aria-hidden="true"
         />
 
-        {/* Badge */}
-        <motion.div {...fadeUp(0)} className="surface-glass-ui relative mb-6 inline-flex items-center gap-2 rounded-full px-4 py-1.5 shadow-[0_14px_40px_rgba(13,148,136,0.12)]">
-          <span className="relative flex h-5 w-5 items-center justify-center">
-            <LottieAccent animationData={pulseData} size={20} loop />
-          </span>
-          <span className="text-xs font-[var(--font-display)] font-medium text-[var(--color-text-secondary)]">
-            {promptCount}+ Curated Prompts &middot; 8 Categories &middot; 8 AI Tools
-          </span>
-        </motion.div>
+        <div className="relative grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)] lg:items-end">
+          <div className="text-center lg:text-left">
+            <motion.div {...fadeUp(0)} className="surface-glass-ui relative mb-6 inline-flex items-center gap-2 rounded-full px-4 py-1.5 shadow-[0_14px_40px_rgba(13,148,136,0.12)]">
+              <span className="relative flex h-5 w-5 items-center justify-center">
+                <LottieAccent animationData={pulseData} size={20} loop />
+              </span>
+              <span className="text-xs font-[var(--font-display)] font-medium text-[var(--color-text-secondary)]">
+                {promptCount}+ Curated Prompts &middot; 8 Categories &middot; 8 AI Tools
+              </span>
+            </motion.div>
 
-        {/* Headline */}
-        <motion.h1 {...fadeUp(0.1)} className="relative mx-auto max-w-4xl text-balance">
-          <span className="text-[var(--color-text-primary)]">The AI Prompt Library</span>
-          <br />
-          <span className="text-gradient">for Entrepreneurs</span>
-        </motion.h1>
+            <motion.div {...fadeUp(0.05)} className="editorial-kicker relative justify-center lg:justify-start">
+              Founder's Prompt Library
+            </motion.div>
 
-        {/* Subtitle */}
-        <motion.p {...fadeUp(0.2)} className="relative mx-auto mt-6 max-w-2xl text-lg text-[var(--color-text-secondary)] sm:text-[1.15rem]">
-          Discover, copy, and use curated prompts for ChatGPT, Claude, Midjourney, and more. Free and community-driven.
-        </motion.p>
+            <motion.h1 {...fadeUp(0.1)} className="relative mt-5 max-w-4xl text-balance lg:max-w-3xl">
+              <span className="text-[var(--color-text-primary)]">The AI Prompt Library</span>
+              <br />
+              <span className="text-gradient">for Entrepreneurs</span>
+            </motion.h1>
 
-        {/* CTAs */}
-        <motion.div {...fadeUp(0.35)} className="relative mt-10 flex flex-wrap items-center justify-center gap-4">
-          <a
-            href="/prompts/"
-            className="inline-flex items-center justify-center gap-2 rounded-[var(--radius-md)] bg-[var(--color-accent)] px-7 py-3.5 text-base font-[var(--font-display)] font-medium text-white shadow-[0_0_24px_var(--color-accent-glow)] transition-all duration-200 hover:bg-[var(--color-accent-hover)]"
+            <motion.p {...fadeUp(0.2)} className="relative mx-auto mt-6 max-w-2xl text-lg text-[var(--color-text-secondary)] sm:text-[1.15rem] lg:mx-0 lg:max-w-xl">
+              Discover, copy, and use curated prompts for ChatGPT, Claude, Midjourney, and more. Free and community-driven.
+            </motion.p>
+
+            <motion.div {...fadeUp(0.35)} className="relative mt-10 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
+              <a
+                href="/prompts/"
+                className="inline-flex items-center justify-center gap-2 rounded-[var(--radius-md)] bg-[var(--color-accent)] px-7 py-3.5 text-base font-[var(--font-display)] font-medium text-white shadow-[0_0_24px_var(--color-accent-glow)] transition-all duration-200 hover:bg-[var(--color-accent-hover)]"
+              >
+                Browse Prompts
+              </a>
+              <a
+                href="/submit/"
+                className="surface-glass-ui inline-flex items-center justify-center gap-2 rounded-[var(--radius-md)] px-7 py-3.5 text-base font-[var(--font-display)] font-medium text-[var(--color-text-primary)] transition-all duration-200 hover:text-[var(--color-accent)]"
+              >
+                Submit a Prompt
+              </a>
+            </motion.div>
+          </div>
+
+          <motion.div
+            {...fadeUp(0.18)}
+            className="relative hidden min-h-[20rem] overflow-hidden rounded-[calc(var(--radius-xl)+2px)] border border-white/25 bg-[linear-gradient(180deg,rgba(255,255,255,0.2),rgba(255,255,255,0.06)),radial-gradient(circle_at_18%_18%,rgba(13,148,136,0.22),transparent_22%),radial-gradient(circle_at_82%_18%,rgba(251,191,36,0.18),transparent_22%),radial-gradient(circle_at_50%_90%,rgba(56,189,248,0.16),transparent_28%)] p-6 shadow-[0_28px_90px_rgba(15,23,42,0.14)] lg:block"
           >
-            Browse Prompts
-          </a>
-          <a
-            href="/submit/"
-            className="surface-glass-ui inline-flex items-center justify-center gap-2 rounded-[var(--radius-md)] px-7 py-3.5 text-base font-[var(--font-display)] font-medium text-[var(--color-text-primary)] transition-all duration-200 hover:text-[var(--color-accent)]"
-          >
-            Submit a Prompt
-          </a>
-        </motion.div>
+            <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.4),transparent_38%,transparent_62%,rgba(255,255,255,0.16))]" aria-hidden="true" />
+            <div className="relative flex h-full flex-col justify-between">
+              <div>
+                <div className="editorial-kicker">Built For</div>
+                <div className="mt-5 space-y-3 font-[var(--font-display)] text-right text-[clamp(1.15rem,2vw,1.65rem)] font-semibold tracking-[-0.03em] text-[var(--color-text-primary)]">
+                  <div>Launches</div>
+                  <div>Sales</div>
+                  <div>Content</div>
+                  <div>Shipping</div>
+                </div>
+              </div>
+              <div className="max-w-[15rem] text-sm leading-6 text-[var(--color-text-secondary)]">
+                Editorial-grade prompts for building products, campaigns, offers, and execution systems.
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </div>
   );
