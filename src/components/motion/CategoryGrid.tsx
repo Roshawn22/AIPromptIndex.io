@@ -37,7 +37,7 @@ export default function CategoryGrid({ categories }: Props) {
           <a
             key={cat.slug}
             href={`/categories/${cat.slug}/`}
-            className="surface-glass-ui group block rounded-[var(--radius-lg)] p-5 transition-all duration-300"
+            className="surface-glass-ui glass-card-grid glass-card-grid-roomy group h-full overflow-hidden rounded-[var(--radius-card)] transition-all duration-300"
           >
             <CategoryCardContent cat={cat} />
           </a>
@@ -55,10 +55,10 @@ export default function CategoryGrid({ categories }: Props) {
       className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
     >
       {categories.map((cat) => (
-        <motion.div key={cat.slug} variants={itemVariants}>
+        <motion.div key={cat.slug} variants={itemVariants} className="h-full">
           <AnimatedCard
             href={`/categories/${cat.slug}/`}
-            className="surface-glass-ui group block rounded-[var(--radius-lg)] p-5 transition-all duration-300"
+            className="surface-glass-ui glass-card-grid glass-card-grid-roomy group h-full overflow-hidden rounded-[var(--radius-card)] transition-all duration-300"
           >
             <CategoryCardContent cat={cat} />
           </AnimatedCard>
@@ -138,12 +138,17 @@ function CategoryCardContent({ cat }: { cat: Category }) {
           {categoryIcons[cat.slug] || fallbackIcon}
         </svg>
       </div>
-      <h3 className="font-[var(--font-display)] text-base font-semibold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
+      <h3 className="glass-card-title line-clamp-2 font-[var(--font-display)] text-base font-semibold text-[var(--color-text-primary)] transition-colors group-hover:text-[var(--color-accent)]">
         {cat.name}
       </h3>
-      <p className="mt-1 text-sm text-[var(--color-text-muted)]">
+      <p className="glass-card-body line-clamp-3 text-sm text-[var(--color-text-muted)]">
         {cat.description}
       </p>
+      <div className="glass-card-footer">
+        <span className="glass-pill-compact text-[var(--color-accent)]">
+          Explore use case &rarr;
+        </span>
+      </div>
     </>
   );
 }

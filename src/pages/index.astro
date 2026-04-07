@@ -60,15 +60,15 @@ const collections = [
   <Header slot="header" />
 
   <!-- Hero Section -->
-  <section class="glass-atmosphere glass-grid relative overflow-hidden border-b border-[var(--glass-border)]">
-    <div class="absolute inset-x-0 top-0 h-[32rem] bg-[radial-gradient(circle_at_16%_18%,rgba(13,148,136,0.18),transparent_18rem),radial-gradient(circle_at_84%_14%,rgba(251,191,36,0.18),transparent_16rem),radial-gradient(circle_at_50%_72%,rgba(56,189,248,0.14),transparent_24rem)]" aria-hidden="true"></div>
-    <div class="absolute inset-x-[-8%] top-16 h-40 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.34),transparent)] blur-3xl" aria-hidden="true"></div>
+  <section class="relative overflow-hidden border-b border-[var(--glass-border)]">
+    <div class="absolute top-0 left-1/4 h-96 w-96 rounded-full bg-teal-500/5 blur-3xl" aria-hidden="true"></div>
+    <div class="absolute bottom-0 right-1/4 h-96 w-96 rounded-full bg-amber-500/5 blur-3xl" aria-hidden="true"></div>
 
     <HeroEntrance promptCount={allPrompts.length} client:load />
   </section>
 
   <!-- Tool Quick-Filter Bar -->
-  <section class="glass-atmosphere border-b border-[var(--glass-border)] bg-transparent">
+  <section class="border-b border-[var(--glass-border)] bg-transparent">
     <div class="mx-auto max-w-7xl px-[var(--space-page)] py-4">
       <div class="surface-glass-prominent flex items-center gap-3 overflow-x-auto rounded-full px-4 py-3 scrollbar-none scroll-fade-x">
         <span class="shrink-0 text-xs font-[var(--font-display)] font-medium uppercase tracking-wider text-[var(--color-text-muted)]">
@@ -77,7 +77,7 @@ const collections = [
         {tools.map((tool) => (
           <a
             href={`/tools/${tool.slug}/`}
-            class="surface-glass-ui shrink-0 rounded-full px-3 py-1.5 text-sm font-[var(--font-display)] font-medium text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-accent)]"
+            class="glass-pill-compact shrink-0"
           >
             {tool.name}
           </a>
@@ -87,12 +87,11 @@ const collections = [
   </section>
 
   <!-- Browse by Category -->
-  <section class="glass-atmosphere mx-auto max-w-7xl px-[var(--space-page)] py-16" data-reveal>
+  <section class="mx-auto max-w-7xl px-[var(--space-page)] py-16" data-reveal>
     <div class="mb-10 flex items-end justify-between">
-      <div>
-        <div class="editorial-kicker">Discover</div>
+      <div class="section-head-copy">
         <h2 class="text-[var(--color-text-primary)]">Browse by Use Case</h2>
-        <p class="mt-2 text-[var(--color-text-secondary)]">Find the perfect prompt for your next project</p>
+        <p class="mt-2 max-w-xl text-[var(--color-text-secondary)]">Find the perfect prompt for your next project</p>
       </div>
       <a href="/categories/" class="hidden text-sm font-[var(--font-display)] font-medium text-[var(--color-accent)] hover:underline sm:block">
         View all categories &rarr;
@@ -106,10 +105,9 @@ const collections = [
   {featuredPrompts.length > 0 && (
     <section class="mx-auto max-w-7xl px-[var(--space-page)] py-16 border-t border-[var(--color-border)]" data-reveal>
       <div class="mb-10 flex items-end justify-between">
-        <div>
-          <div class="editorial-kicker">Curated</div>
+        <div class="section-head-copy">
           <h2 class="text-[var(--color-text-primary)]">Featured Prompts</h2>
-          <p class="mt-2 text-[var(--color-text-secondary)]">Editor's picks &mdash; our most popular and effective prompts</p>
+          <p class="mt-2 max-w-xl text-[var(--color-text-secondary)]">Editor's picks &mdash; our most popular and effective prompts</p>
         </div>
         <a href="/prompts/" class="hidden text-sm font-[var(--font-display)] font-medium text-[var(--color-accent)] hover:underline sm:block">
           View all prompts &rarr;
@@ -134,12 +132,11 @@ const collections = [
   )}
 
   <!-- Latest Prompts -->
-  <section class="glass-atmosphere mx-auto max-w-7xl px-[var(--space-page)] py-16 border-t border-[var(--color-border)]" data-reveal>
+  <section class="mx-auto max-w-7xl px-[var(--space-page)] py-16 border-t border-[var(--color-border)]" data-reveal>
     <div class="mb-10 flex items-end justify-between">
-      <div>
-        <div class="editorial-kicker">Latest</div>
+      <div class="section-head-copy">
         <h2 class="text-[var(--color-text-primary)]">Latest Prompts</h2>
-        <p class="mt-2 text-[var(--color-text-secondary)]">Recently added to the library</p>
+        <p class="mt-2 max-w-xl text-[var(--color-text-secondary)]">Recently added to the library</p>
       </div>
       <a href="/prompts/" class="hidden text-sm font-[var(--font-display)] font-medium text-[var(--color-accent)] hover:underline sm:block">
         View all prompts &rarr;
@@ -150,7 +147,7 @@ const collections = [
       {latestPrompts.map((prompt) => (
         <a
           href={`/prompts/${prompt.data.slug}/`}
-          class="flex items-center justify-between gap-4 px-5 py-4 transition-colors hover:bg-[var(--glass-highlight-soft)]"
+          class="flex min-h-[4.75rem] items-center justify-between gap-4 px-5 py-4 transition-colors hover:bg-[var(--glass-highlight-soft)]"
         >
           <div class="flex items-center gap-3 min-w-0">
             <span class="font-[var(--font-display)] font-semibold text-[var(--color-text-primary)] truncate">
@@ -168,12 +165,11 @@ const collections = [
   </section>
 
   <!-- Popular Prompt Collections -->
-  <section class="glass-atmosphere mx-auto max-w-7xl px-[var(--space-page)] py-16 border-t border-[var(--color-border)]" data-reveal>
+  <section class="mx-auto max-w-7xl px-[var(--space-page)] py-16 border-t border-[var(--color-border)]" data-reveal>
     <div class="mb-10 flex items-end justify-between">
-      <div>
-        <div class="editorial-kicker">Collections</div>
+      <div class="section-head-copy">
         <h2 class="text-[var(--color-text-primary)]">Popular Prompt Collections</h2>
-        <p class="mt-2 text-[var(--color-text-secondary)]">Curated collections for the most popular tools and audiences</p>
+        <p class="mt-2 max-w-xl text-[var(--color-text-secondary)]">Curated collections for the most popular tools and audiences</p>
       </div>
     </div>
 
@@ -181,9 +177,8 @@ const collections = [
   </section>
 
   <!-- Cross-Promo -->
-  <section class="glass-atmosphere mx-auto max-w-7xl px-[var(--space-page)] pb-16" data-reveal>
+  <section class="mx-auto max-w-7xl px-[var(--space-page)] pb-16" data-reveal>
     <div class="surface-glass-prominent rounded-[var(--radius-lg)] p-8 text-center">
-      <div class="editorial-kicker justify-center">Ecosystem</div>
       <h2 class="text-xl font-[var(--font-display)] font-bold text-[var(--color-text-primary)]">
         Looking for AI tools?
       </h2>

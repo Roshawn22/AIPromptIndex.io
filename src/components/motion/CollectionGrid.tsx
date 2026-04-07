@@ -37,7 +37,7 @@ export default function CollectionGrid({ collections }: Props) {
           <a
             key={c.href}
             href={c.href}
-            className="surface-glass-ui group block rounded-[var(--radius-lg)] p-5 transition-all duration-300"
+            className="surface-glass-ui glass-card-grid glass-card-grid-roomy group h-full overflow-hidden rounded-[var(--radius-card)] transition-all duration-300"
           >
             <CollectionCardContent collection={c} />
           </a>
@@ -55,10 +55,10 @@ export default function CollectionGrid({ collections }: Props) {
       className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
     >
       {collections.map((c) => (
-        <motion.div key={c.href} variants={itemVariants}>
+        <motion.div key={c.href} variants={itemVariants} className="h-full">
           <AnimatedCard
             href={c.href}
-            className="surface-glass-ui group block rounded-[var(--radius-lg)] p-5 transition-all duration-300"
+            className="surface-glass-ui glass-card-grid glass-card-grid-roomy group h-full overflow-hidden rounded-[var(--radius-card)] transition-all duration-300"
           >
             <CollectionCardContent collection={c} />
           </AnimatedCard>
@@ -71,15 +71,17 @@ export default function CollectionGrid({ collections }: Props) {
 function CollectionCardContent({ collection }: { collection: Collection }) {
   return (
     <>
-      <h3 className="font-[var(--font-display)] text-base font-semibold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
+      <h3 className="glass-card-title line-clamp-2 font-[var(--font-display)] text-base font-semibold text-[var(--color-text-primary)] transition-colors group-hover:text-[var(--color-accent)]">
         {collection.title}
       </h3>
-      <p className="mt-1 text-sm text-[var(--color-text-muted)]">
+      <p className="glass-card-body line-clamp-3 text-sm text-[var(--color-text-muted)]">
         {collection.description}
       </p>
-      <span className="mt-3 inline-flex items-center text-sm font-[var(--font-display)] font-medium text-[var(--color-accent)]">
-        Browse collection &rarr;
-      </span>
+      <div className="glass-card-footer">
+        <span className="glass-pill-compact text-[var(--color-accent)]">
+          Browse collection &rarr;
+        </span>
+      </div>
     </>
   );
 }

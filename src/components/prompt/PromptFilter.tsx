@@ -1,9 +1,6 @@
 import { useState, useMemo, useEffect, useCallback } from 'react';
-import { TOOL_DISPLAY_NAMES as toolDisplayNames, CATEGORY_DISPLAY_NAMES as categoryDisplayNames } from '../../lib/constants';
-
-/* ------------------------------------------------------------------ */
-/*  Types                                                              */
-/* ------------------------------------------------------------------ */
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
+import { TOOL_DISPLAY_NAMES as toolDisplayNames } from '../../lib/constants';
 
 interface PromptData {
   title: string;
@@ -31,6 +28,7 @@ interface CategoryData {
 
 type SortOption = 'featured' | 'newest' | 'az';
 type DifficultyFilter = 'all' | 'beginner' | 'intermediate' | 'advanced';
+type BadgeColor = 'green' | 'teal' | 'yellow' | 'red' | 'purple';
 
 interface Props {
   prompts: PromptData[];
@@ -38,21 +36,26 @@ interface Props {
   categories: CategoryData[];
 }
 
-/* ------------------------------------------------------------------ */
-/*  Display-name maps                                                  */
-/* ------------------------------------------------------------------ */
-
-/* toolDisplayNames, categoryDisplayNames imported from lib/constants */
-
-const difficultyColors: Record<string, string> = {
-  beginner: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/20',
-  intermediate: 'bg-amber-500/15 text-amber-400 border-amber-500/20',
-  advanced: 'bg-red-500/15 text-red-400 border-red-500/20',
+const BADGE_COLORS: Record<BadgeColor, string> = {
+  green: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/20',
+  teal: 'bg-teal-500/15 text-teal-400 border-teal-500/20',
+  yellow: 'bg-amber-500/15 text-amber-400 border-amber-500/20',
+  red: 'bg-red-500/15 text-red-400 border-red-500/20',
+  purple: 'bg-violet-500/15 text-violet-400 border-violet-500/20',
 };
 
-/* ------------------------------------------------------------------ */
-/*  URL search-param helpers                                           */
-/* ------------------------------------------------------------------ */
+const DIFFICULTY_TO_BADGE: Record<PromptData['difficulty'], BadgeColor> = {
+  beginner: 'green',
+  intermediate: 'yellow',
+  advanced: 'red',
+};
+
+const SELECT_CHEVRON_STYLE = {
+  backgroundImage:
+    `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")`,
+  backgroundRepeat: 'no-repeat',
+  backgroundPosition: 'right 0.5rem center',
+} as const;
 
 function getInitialParam(key: string, fallback: string): string {
   if (typeof window === 'undefined') return fallback;
@@ -72,10 +75,6 @@ function syncParams(params: Record<string, string>) {
   window.history.replaceState({}, '', url.toString());
 }
 
-/* ------------------------------------------------------------------ */
-/*  Component                                                          */
-/* ------------------------------------------------------------------ */
-
 export default function PromptFilter({ prompts, tools, categories }: Props) {
   const [tool, setTool] = useState(() => getInitialParam('tool', 'all'));
   const [category, setCategory] = useState(() => getInitialParam('category', 'all'));
@@ -85,8 +84,8 @@ export default function PromptFilter({ prompts, tools, categories }: Props) {
   const [sort, setSort] = useState<SortOption>(
     () => (getInitialParam('sort', 'featured') as SortOption),
   );
+  const prefersReducedMotion = useReducedMotion();
 
-  /* keep URL in sync */
   useEffect(() => {
     syncParams({ tool, category, difficulty, sort });
   }, [tool, category, difficulty, sort]);
@@ -99,7 +98,6 @@ export default function PromptFilter({ prompts, tools, categories }: Props) {
     setDifficulty('all');
   }, []);
 
-  /* ---- filtering + sorting ---- */
   const filtered = useMemo(() => {
     let result = prompts;
 
@@ -134,17 +132,14 @@ export default function PromptFilter({ prompts, tools, categories }: Props) {
     return result;
   }, [prompts, tool, category, difficulty, sort]);
 
-  /* ---------------------------------------------------------------- */
-  /*  Render                                                           */
-  /* ---------------------------------------------------------------- */
+  const motionDisabled = !!prefersReducedMotion;
 
   return (
     <div>
-      {/* ---- Filter bar ---- */}
+      {/* Filter bar */}
       <div
         className="mb-8 flex flex-wrap items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-4"
       >
-        {/* Tool dropdown */}
         <Select
           value={tool}
           onChange={setTool}
@@ -154,7 +149,6 @@ export default function PromptFilter({ prompts, tools, categories }: Props) {
           ]}
         />
 
-        {/* Category dropdown */}
         <Select
           value={category}
           onChange={setCategory}
@@ -164,7 +158,6 @@ export default function PromptFilter({ prompts, tools, categories }: Props) {
           ]}
         />
 
-        {/* Difficulty pills */}
         <div className="flex items-center gap-1.5">
           {(['all', 'beginner', 'intermediate', 'advanced'] as DifficultyFilter[]).map((d) => (
             <button
@@ -181,7 +174,6 @@ export default function PromptFilter({ prompts, tools, categories }: Props) {
           ))}
         </div>
 
-        {/* Sort */}
         <Select
           value={sort}
           onChange={(v) => setSort(v as SortOption)}
@@ -192,18 +184,23 @@ export default function PromptFilter({ prompts, tools, categories }: Props) {
           ]}
         />
 
-        {/* Clear filters */}
-        {hasActiveFilter && (
-          <button
-            onClick={clearFilters}
-            className="ml-auto cursor-pointer rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-1.5 text-xs font-medium text-[var(--color-text-secondary)] transition-colors hover:border-red-500/40 hover:text-red-400"
-          >
-            Clear filters
-          </button>
-        )}
+        <AnimatePresence>
+          {hasActiveFilter && (
+            <motion.button
+              initial={motionDisabled ? false : { opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.15 }}
+              onClick={clearFilters}
+              className="ml-auto cursor-pointer rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-1.5 text-xs font-medium text-[var(--color-text-secondary)] transition-colors hover:border-red-500/40 hover:text-red-400"
+            >
+              Clear filters
+            </motion.button>
+          )}
+        </AnimatePresence>
       </div>
 
-      {/* ---- Results count ---- */}
+      {/* Results count */}
       <p className="mb-6 text-sm text-[var(--color-text-secondary)]">
         Showing{' '}
         <span className="font-semibold text-[var(--color-text-primary)]">{filtered.length}</span>
@@ -212,35 +209,55 @@ export default function PromptFilter({ prompts, tools, categories }: Props) {
         {' '}prompts
       </p>
 
-      {/* ---- Grid ---- */}
-      {filtered.length === 0 ? (
-        <div className="flex flex-col items-center justify-center rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] py-20 text-center">
-          <p className="text-lg font-semibold text-[var(--color-text-primary)]">
-            No prompts match your filters
-          </p>
-          <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
-            Try broadening your search or{' '}
-            <button onClick={clearFilters} className="cursor-pointer text-[var(--color-accent)] underline">
-              clear all filters
-            </button>
-          </p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((prompt) => (
-            <PromptCard key={prompt.slug} prompt={prompt} />
-          ))}
-        </div>
-      )}
+      {/* Grid */}
+      <AnimatePresence mode="wait">
+        {filtered.length === 0 ? (
+          <motion.div
+            key="empty"
+            initial={motionDisabled ? false : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.25 }}
+            className="flex flex-col items-center justify-center rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] py-20 text-center"
+          >
+            <p className="mt-4 text-lg font-semibold text-[var(--color-text-primary)]">
+              No prompts match your filters
+            </p>
+            <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
+              Try broadening your search or{' '}
+              <button onClick={clearFilters} className="cursor-pointer text-[var(--color-accent)] underline">
+                clear all filters
+              </button>
+            </p>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="grid"
+            initial={motionDisabled ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            {filtered.map((prompt, index) => (
+              <motion.div
+                key={prompt.slug}
+                initial={motionDisabled ? false : { opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: motionDisabled ? 0 : Math.min(index * 0.03, 0.3) }}
+                className="h-full"
+              >
+                <PromptCard prompt={prompt} />
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  Sub-components                                                     */
-/* ------------------------------------------------------------------ */
-
-/* ---- Select ---- */
+/* Sub-components */
 
 interface SelectProps {
   value: string;
@@ -254,11 +271,7 @@ function Select({ value, onChange, options }: SelectProps) {
       value={value}
       onChange={(e) => onChange(e.target.value)}
       className="cursor-pointer appearance-none rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-1.5 pr-8 text-xs font-medium text-[var(--color-text-primary)] font-[var(--font-display)] transition-colors hover:border-[var(--color-accent-muted)] focus:border-[var(--color-accent)] focus:outline-none"
-      style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")`,
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'right 0.5rem center',
-      }}
+      style={SELECT_CHEVRON_STYLE}
     >
       {options.map((opt) => (
         <option key={opt.value} value={opt.value}>
@@ -269,8 +282,6 @@ function Select({ value, onChange, options }: SelectProps) {
   );
 }
 
-/* ---- PromptCard ---- */
-
 function PromptCard({ prompt }: { prompt: PromptData }) {
   const truncatedDescription =
     prompt.description.length > 150
@@ -280,68 +291,52 @@ function PromptCard({ prompt }: { prompt: PromptData }) {
   return (
     <a
       href={`/prompts/${prompt.slug}/`}
-      className={`group block rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-5 transition-all duration-200 hover:shadow-[var(--shadow-card-hover)] hover:border-[var(--color-accent-muted)] ${
+      className={`surface-glass-ui glass-card-grid group h-full overflow-hidden rounded-[var(--radius-card)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--glass-border-strong)] hover:shadow-[var(--shadow-card-hover)] ${
         prompt.isFeatured ? 'ring-1 ring-[var(--color-accent)]/20' : ''
       }`}
     >
-      {/* Top badges */}
-      <div className="mb-3 flex items-center gap-2">
+      <div className="glass-card-meta">
         <Badge variant="teal">{toolDisplayNames[prompt.tool] || prompt.tool}</Badge>
-        <Badge variant={prompt.difficulty === 'beginner' ? 'green' : prompt.difficulty === 'intermediate' ? 'yellow' : 'red'}>
+        <Badge variant={DIFFICULTY_TO_BADGE[prompt.difficulty]}>
           {prompt.difficulty}
         </Badge>
         {prompt.isFeatured && <Badge variant="purple">Featured</Badge>}
       </div>
 
-      {/* Title */}
-      <h3 className="mb-2 line-clamp-2 text-base font-semibold text-[var(--color-text-primary)] transition-colors group-hover:text-[var(--color-accent)] font-[var(--font-display)]">
+      <h3 className="glass-card-title line-clamp-2 text-base font-semibold text-[var(--color-text-primary)] transition-colors group-hover:text-[var(--color-accent)] font-[var(--font-display)]">
         {prompt.title}
       </h3>
 
-      {/* Description */}
-      <p className="mb-4 line-clamp-3 text-sm text-[var(--color-text-secondary)]">
+      <p className="glass-card-body line-clamp-3 text-sm text-[var(--color-text-secondary)]">
         {truncatedDescription}
       </p>
 
-      {/* Tags */}
-      {prompt.tags.length > 0 && (
-        <div className="flex flex-wrap gap-1.5">
-          {prompt.tags.slice(0, 3).map((tag) => (
-            <Tag key={tag}>{tag}</Tag>
-          ))}
-        </div>
-      )}
+      <div className="glass-card-footer">
+        {prompt.tags.length > 0 && (
+          <div className="flex flex-wrap gap-1.5">
+            {prompt.tags.slice(0, 3).map((tag) => (
+              <Tag key={tag}>{tag}</Tag>
+            ))}
+          </div>
+        )}
+      </div>
     </a>
   );
 }
 
-/* ---- Badge ---- */
-
-type BadgeVariant = 'green' | 'teal' | 'yellow' | 'red' | 'purple';
-
-const badgeColors: Record<BadgeVariant, string> = {
-  green: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/20',
-  teal: 'bg-teal-500/15 text-teal-400 border-teal-500/20',
-  yellow: 'bg-amber-500/15 text-amber-400 border-amber-500/20',
-  red: 'bg-red-500/15 text-red-400 border-red-500/20',
-  purple: 'bg-violet-500/15 text-violet-400 border-violet-500/20',
-};
-
-function Badge({ variant, children }: { variant: BadgeVariant; children: React.ReactNode }) {
+function Badge({ variant, children }: { variant: BadgeColor; children: React.ReactNode }) {
   return (
     <span
-      className={`inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-medium font-[var(--font-display)] transition-colors duration-200 ${badgeColors[variant]}`}
+      className={`inline-flex min-h-[var(--size-badge-height)] items-center whitespace-nowrap rounded-full border px-2.5 py-0 text-[11px] leading-none font-medium font-[var(--font-display)] transition-colors duration-200 ${BADGE_COLORS[variant]}`}
     >
       {children}
     </span>
   );
 }
 
-/* ---- Tag ---- */
-
 function Tag({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex items-center rounded-[var(--radius-sm)] border border-[var(--color-border-subtle)] bg-[var(--color-surface-2)] px-2.5 py-1 text-xs font-medium text-[var(--color-text-secondary)] font-[var(--font-display)]">
+    <span className="inline-flex min-h-[var(--size-pill-height)] items-center whitespace-nowrap rounded-[var(--radius-sm)] border border-[var(--color-border-subtle)] bg-[var(--color-surface-2)] px-2.5 py-0 text-xs leading-none font-medium text-[var(--color-text-secondary)] font-[var(--font-display)]">
       {children}
     </span>
   );
