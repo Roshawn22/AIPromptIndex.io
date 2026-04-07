@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/global/Header.astro';
 import Footer from '../components/global/Footer.astro';
-import PromptBuilder from '../components/prompt/PromptBuilder';
+import PromptBuilderIsland from '../components/prompt/PromptBuilder';
 
 import toolsJson from '../data/tools/tools.json';
 import categoriesJson from '../data/categories/categories.json';
@@ -43,7 +43,7 @@ const categories = categoriesJson.map((c: any) => ({ id: c.id, name: c.name }));
       </p>
     </div>
 
-    <PromptBuilder
+    <PromptBuilderIsland
       client:load
       prompts={prompts}
       tools={tools}

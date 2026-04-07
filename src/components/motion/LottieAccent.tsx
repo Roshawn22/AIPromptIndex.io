@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import lottie from 'lottie-web/build/player/lottie_light';
+import type { AnimationItem } from 'lottie-web';
 import { useReducedMotion } from 'motion/react';
 
 interface Props {
@@ -16,15 +16,29 @@ export default function LottieAccent({ animationData, size = 24, loop = false, c
   useEffect(() => {
     if (prefersReducedMotion || !containerRef.current) return;
 
-    const anim = lottie.loadAnimation({
-      container: containerRef.current,
-      renderer: 'svg',
-      loop,
-      autoplay: true,
-      animationData,
-    });
+    let anim: AnimationItem | null = null;
+    let cancelled = false;
 
-    return () => anim.destroy();
+    void import('lottie-web/build/player/lottie_light')
+      .then(({ default: lottie }) => {
+        if (cancelled || !containerRef.current) return;
+
+        anim = lottie.loadAnimation({
+          container: containerRef.current,
+          renderer: 'svg',
+          loop,
+          autoplay: true,
+          animationData,
+        });
+      })
+      .catch(() => {
+        // Decorative accent only; fail silently.
+      });
+
+    return () => {
+      cancelled = true;
+      anim?.destroy();
+    };
   }, [animationData, loop, prefersReducedMotion]);
 
   return (
