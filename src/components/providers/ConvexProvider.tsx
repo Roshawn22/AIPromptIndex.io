@@ -1,6 +1,7 @@
 /**
- * ConvexProvider wrapper for React islands.
- * Wraps children with ConvexReactClient context.
+ * Anonymous ConvexProvider wrapper for React islands.
+ * Wraps children with ConvexReactClient context for unauthenticated features only.
+ * Authenticated Clerk-backed Convex calls should use ConvexProviderWithClerk instead.
  * If PUBLIC_CONVEX_URL is not set, renders children without Convex (graceful degradation).
  */
 import { ConvexProvider as BaseConvexProvider } from 'convex/react';

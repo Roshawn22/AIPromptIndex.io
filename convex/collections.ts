@@ -1,5 +1,6 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
+import { requireIdentity } from "./lib/auth";
 
 /**
  * Save a prompt to the authenticated user's collection (default: "favorites").
@@ -11,10 +12,7 @@ export const savePrompt = mutation({
     collectionName: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
-    const identity = await ctx.auth.getUserIdentity();
-    if (!identity) {
-      throw new Error("Must be signed in to save prompts");
-    }
+    const identity = await requireIdentity(ctx, "Must be signed in to save prompts");
     const clerkUserId = identity.subject;
     const collectionName = args.collectionName ?? "favorites";
 
@@ -45,10 +43,10 @@ export const removePrompt = mutation({
     promptSlug: v.string(),
   },
   handler: async (ctx, args) => {
-    const identity = await ctx.auth.getUserIdentity();
-    if (!identity) {
-      throw new Error("Must be signed in to remove saved prompts");
-    }
+    const identity = await requireIdentity(
+      ctx,
+      "Must be signed in to remove saved prompts",
+    );
     const clerkUserId = identity.subject;
 
     const existing = await ctx.db
@@ -65,22 +63,20 @@ export const removePrompt = mutation({
 });
 
 /**
- * Check if a prompt is saved by a user.
- * This query accepts clerkUserId as an arg since queries can't use auth
- * in all contexts, but the client only passes the authenticated user's own ID.
+ * Check if a prompt is saved by the current authenticated user.
  */
 export const isPromptSaved = query({
   args: {
-    clerkUserId: v.string(),
     promptSlug: v.string(),
   },
   handler: async (ctx, args) => {
-    if (!args.clerkUserId) return false;
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) return false;
 
     const existing = await ctx.db
       .query("userCollections")
       .withIndex("by_user_prompt", (q) =>
-        q.eq("clerkUserId", args.clerkUserId).eq("promptSlug", args.promptSlug)
+        q.eq("clerkUserId", identity.subject).eq("promptSlug", args.promptSlug)
       )
       .first();
 
@@ -92,15 +88,14 @@ export const isPromptSaved = query({
  * Get all saved prompt slugs for a user.
  */
 export const getUserFavorites = query({
-  args: {
-    clerkUserId: v.string(),
-  },
-  handler: async (ctx, args) => {
-    if (!args.clerkUserId) return [];
+  args: {},
+  handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) return [];
 
     const records = await ctx.db
       .query("userCollections")
-      .withIndex("by_user", (q) => q.eq("clerkUserId", args.clerkUserId))
+      .withIndex("by_user", (q) => q.eq("clerkUserId", identity.subject))
       .collect();
 
     return records.map((r) => r.promptSlug);

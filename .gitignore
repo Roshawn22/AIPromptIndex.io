@@ -31,3 +31,4 @@ convex/.convex/
 
 # local artifacts
 output/
+.worktrees/

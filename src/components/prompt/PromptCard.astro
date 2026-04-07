@@ -19,7 +19,6 @@ const {
   slug,
   description,
   tool,
-  category,
   difficulty,
   tags = [],
   isFeatured = false,
@@ -42,35 +41,37 @@ const truncatedDescription = description.length > 150
 <a
   href={`/prompts/${slug}/`}
   class:list={[
-    'surface-glass-ui group block rounded-[var(--radius-lg)] p-5 transition-all duration-300 will-change-transform',
-    'hover:-translate-y-0.5 active:scale-[0.98]',
+    'surface-glass-ui glass-card-grid group h-full overflow-hidden rounded-[var(--radius-card)] transition-all duration-300 will-change-transform',
+    'hover:-translate-y-0.5 hover:shadow-[var(--shadow-card-hover)] active:scale-[0.98]',
     isFeatured && 'ring-1 ring-[var(--color-accent)]/20',
     className,
   ]}
 >
   <!-- Top badges -->
-  <div class="flex items-center gap-2 mb-3">
+  <div class="glass-card-meta">
     <Badge variant="teal" size="sm">{toolDisplayNames[tool] || tool}</Badge>
     <Badge variant={difficultyColor[difficulty]} size="sm">{difficulty}</Badge>
     {isFeatured && <Badge variant="purple" size="sm">Featured</Badge>}
   </div>
 
   <!-- Title -->
-  <h3 class="font-[var(--font-display)] text-base font-semibold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors mb-2 line-clamp-2">
+  <h3 class="glass-card-title line-clamp-2 font-[var(--font-display)] text-base font-semibold text-[var(--color-text-primary)] transition-colors group-hover:text-[var(--color-accent)]">
     {title}
   </h3>
 
   <!-- Description -->
-  <p class="text-sm text-[var(--color-text-secondary)] mb-4 line-clamp-3">
+  <p class="glass-card-body line-clamp-3 text-sm text-[var(--color-text-secondary)]">
     {truncatedDescription}
   </p>
 
   <!-- Tags -->
-  {tags.length > 0 && (
-    <div class="flex flex-wrap gap-1.5">
-      {tags.slice(0, 3).map((tag) => (
-        <Tag>{tag}</Tag>
-      ))}
-    </div>
-  )}
+  <div class="glass-card-footer">
+    {tags.length > 0 && (
+      <div class="flex flex-wrap gap-1.5">
+        {tags.slice(0, 3).map((tag) => (
+          <Tag>{tag}</Tag>
+        ))}
+      </div>
+    )}
+  </div>
 </a>

@@ -11,7 +11,7 @@ const ElementTag = href ? 'a' : 'span';
 <ElementTag
   href={href}
   class:list={[
-    'inline-flex items-center px-2.5 py-1 text-xs font-[var(--font-display)] font-medium',
+    'inline-flex min-h-[var(--size-pill-height)] items-center whitespace-nowrap px-2.5 py-0 text-xs leading-none font-[var(--font-display)] font-medium',
     'rounded-[var(--radius-sm)] bg-[var(--color-surface-2)] text-[var(--color-text-secondary)]',
     'border border-[var(--color-border-subtle)]',
     href && 'hover:bg-[var(--color-surface-3)] hover:text-[var(--color-text-primary)] cursor-pointer',

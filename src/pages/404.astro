@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/global/Header.astro';
 import Footer from '../components/global/Footer.astro';
 import Button from '../components/ui/Button.astro';
+import NotFoundAnimation from '../components/motion/NotFoundAnimation';
 ---
 
 <BaseLayout
@@ -13,14 +14,26 @@ import Button from '../components/ui/Button.astro';
   <Header slot="header" />
 
   <section class="mx-auto max-w-3xl px-[var(--space-page)] py-24 text-center">
-    <p class="text-6xl font-[var(--font-display)] font-bold text-[var(--color-accent)]">404</p>
+    <NotFoundAnimation client:only="react" />
+
     <h1 class="mt-4 text-2xl">Page Not Found</h1>
     <p class="mt-2 text-[var(--color-text-secondary)]">
       The page you're looking for doesn't exist or has been moved.
     </p>
-    <div class="mt-8 flex justify-center gap-4">
+    <div class="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
       <Button href="/">Go Home</Button>
       <Button href="/prompts/" variant="outline">Browse Prompts</Button>
+      <button
+        type="button"
+        data-open-search
+        class="inline-flex items-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-2)] px-5 py-2.5 text-sm font-[var(--font-display)] font-medium text-[var(--color-text-secondary)] transition-colors hover:border-[var(--color-accent-muted)] hover:text-[var(--color-accent)] cursor-pointer"
+      >
+        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.3-4.3" />
+        </svg>
+        Search prompts
+      </button>
     </div>
   </section>
 

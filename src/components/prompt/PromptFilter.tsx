@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
-import { TOOL_DISPLAY_NAMES as toolDisplayNames, CATEGORY_DISPLAY_NAMES as categoryDisplayNames } from '../../lib/constants';
-import { BADGE_COLORS, DIFFICULTY_COLORS, DIFFICULTY_TO_BADGE, type BadgeColor } from '../../lib/badge-colors';
+import { TOOL_DISPLAY_NAMES as toolDisplayNames } from '../../lib/constants';
+import { BADGE_COLORS, DIFFICULTY_TO_BADGE, type BadgeColor } from '../../lib/badge-colors';
 import { SELECT_CHEVRON_STYLE } from '../../lib/utils';
 import LottieAccent from '../motion/LottieAccent';
 import emptySearchData from '../../assets/lottie/empty-search.json';
@@ -38,8 +38,6 @@ interface Props {
   tools: ToolData[];
   categories: CategoryData[];
 }
-
-const difficultyColors = DIFFICULTY_COLORS;
 
 function getInitialParam(key: string, fallback: string): string {
   if (typeof window === 'undefined') return fallback;
@@ -230,6 +228,7 @@ export default function PromptFilter({ prompts, tools, categories }: Props) {
                 initial={motionDisabled ? false : { opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: motionDisabled ? 0 : Math.min(index * 0.03, 0.3) }}
+                className="h-full"
               >
                 <PromptCard prompt={prompt} />
               </motion.div>
@@ -275,11 +274,11 @@ function PromptCard({ prompt }: { prompt: PromptData }) {
   return (
     <a
       href={`/prompts/${prompt.slug}/`}
-      className={`group block rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-5 transition-all duration-200 hover:shadow-[var(--shadow-card-hover)] hover:border-[var(--color-accent-muted)] ${
+      className={`surface-glass-ui glass-card-grid group h-full overflow-hidden rounded-[var(--radius-card)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--glass-border-strong)] hover:shadow-[var(--shadow-card-hover)] ${
         prompt.isFeatured ? 'ring-1 ring-[var(--color-accent)]/20' : ''
       }`}
     >
-      <div className="mb-3 flex items-center gap-2">
+      <div className="glass-card-meta">
         <Badge variant="teal">{toolDisplayNames[prompt.tool] || prompt.tool}</Badge>
         <Badge variant={DIFFICULTY_TO_BADGE[prompt.difficulty]}>
           {prompt.difficulty}
@@ -287,21 +286,23 @@ function PromptCard({ prompt }: { prompt: PromptData }) {
         {prompt.isFeatured && <Badge variant="purple">Featured</Badge>}
       </div>
 
-      <h3 className="mb-2 line-clamp-2 text-base font-semibold text-[var(--color-text-primary)] transition-colors group-hover:text-[var(--color-accent)] font-[var(--font-display)]">
+      <h3 className="glass-card-title line-clamp-2 text-base font-semibold text-[var(--color-text-primary)] transition-colors group-hover:text-[var(--color-accent)] font-[var(--font-display)]">
         {prompt.title}
       </h3>
 
-      <p className="mb-4 line-clamp-3 text-sm text-[var(--color-text-secondary)]">
+      <p className="glass-card-body line-clamp-3 text-sm text-[var(--color-text-secondary)]">
         {truncatedDescription}
       </p>
 
-      {prompt.tags.length > 0 && (
-        <div className="flex flex-wrap gap-1.5">
-          {prompt.tags.slice(0, 3).map((tag) => (
-            <Tag key={tag}>{tag}</Tag>
-          ))}
-        </div>
-      )}
+      <div className="glass-card-footer">
+        {prompt.tags.length > 0 && (
+          <div className="flex flex-wrap gap-1.5">
+            {prompt.tags.slice(0, 3).map((tag) => (
+              <Tag key={tag}>{tag}</Tag>
+            ))}
+          </div>
+        )}
+      </div>
     </a>
   );
 }
@@ -309,7 +310,7 @@ function PromptCard({ prompt }: { prompt: PromptData }) {
 function Badge({ variant, children }: { variant: BadgeColor; children: React.ReactNode }) {
   return (
     <span
-      className={`inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-medium font-[var(--font-display)] transition-colors duration-200 ${BADGE_COLORS[variant]}`}
+      className={`inline-flex min-h-[var(--size-badge-height)] items-center whitespace-nowrap rounded-full border px-2.5 py-0 text-[11px] leading-none font-medium font-[var(--font-display)] transition-colors duration-200 ${BADGE_COLORS[variant]}`}
     >
       {children}
     </span>
@@ -318,7 +319,7 @@ function Badge({ variant, children }: { variant: BadgeColor; children: React.Rea
 
 function Tag({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex items-center rounded-[var(--radius-sm)] border border-[var(--color-border-subtle)] bg-[var(--color-surface-2)] px-2.5 py-1 text-xs font-medium text-[var(--color-text-secondary)] font-[var(--font-display)]">
+    <span className="inline-flex min-h-[var(--size-pill-height)] items-center whitespace-nowrap rounded-[var(--radius-sm)] border border-[var(--color-border-subtle)] bg-[var(--color-surface-2)] px-2.5 py-0 text-xs leading-none font-medium text-[var(--color-text-secondary)] font-[var(--font-display)]">
       {children}
     </span>
   );
