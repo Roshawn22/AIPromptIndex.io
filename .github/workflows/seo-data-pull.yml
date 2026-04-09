@@ -1,0 +1,222 @@
+name: SEO Data Pull
+
+on:
+  schedule:
+    - cron: "0 14 * * *"
+    - cron: "0 15 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: seo-data-pull-main
+  cancel-in-progress: false
+
+jobs:
+  data-pull:
+    name: Pull SEO Data (Ahrefs + Semrush + Cross-Validate + Brief)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Runtime schedule gate (7:00 AM America/Los_Angeles daily)
+        id: gate
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" != "schedule" ]]; then
+            echo "run_pull=true" >> "$GITHUB_OUTPUT"
+            echo "Manual dispatch detected. Proceeding."
+            exit 0
+          fi
+
+          local_hour="$(TZ=America/Los_Angeles date +%H)"
+          echo "Local Pacific gate check: hour=${local_hour}"
+
+          if [[ "$local_hour" == "07" ]]; then
+            echo "run_pull=true" >> "$GITHUB_OUTPUT"
+            echo "Gate passed."
+          else
+            echo "run_pull=false" >> "$GITHUB_OUTPUT"
+            echo "Gate blocked this run."
+          fi
+
+      - name: Pull Ahrefs data
+        if: steps.gate.outputs.run_pull == 'true'
+        env:
+          AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
+        run: npm run seo:pull:ahrefs
+
+      - name: Pull Semrush data (enriched)
+        if: steps.gate.outputs.run_pull == 'true'
+        env:
+          SEMRUSH_API_KEY: ${{ secrets.SEMRUSH_API_KEY }}
+        run: npm run seo:pull:semrush -- --enrich=true --budget=standard
+
+      - name: Cross-validate keywords
+        if: steps.gate.outputs.run_pull == 'true'
+        run: npm run seo:cross-validate
+
+      - name: Pull Brand Radar AI visibility data
+        if: steps.gate.outputs.run_pull == 'true'
+        env:
+          AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
+        run: npm run seo:pull:brand-radar
+
+      - name: Pull GSC data
+        if: steps.gate.outputs.run_pull == 'true'
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GOOGLE_SEARCH_CONSOLE_PROPERTY: ${{ secrets.GOOGLE_SEARCH_CONSOLE_PROPERTY }}
+        run: npm run seo:pull:gsc
+        continue-on-error: true
+
+      - name: Pull GA4 data
+        if: steps.gate.outputs.run_pull == 'true'
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GOOGLE_ANALYTICS_PROPERTY_ID: ${{ secrets.GOOGLE_ANALYTICS_PROPERTY_ID }}
+        run: npm run seo:pull:ga4
+        continue-on-error: true
+
+      - name: Generate content briefs
+        if: steps.gate.outputs.run_pull == 'true'
+        env:
+          AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
+        run: npm run seo:content-briefs
+        continue-on-error: true
+
+      - name: Analyze AI visibility
+        if: steps.gate.outputs.run_pull == 'true'
+        run: npm run seo:ai-visibility
+        continue-on-error: true
+
+      - name: Keyword gap analysis
+        if: steps.gate.outputs.run_pull == 'true'
+        env:
+          AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
+        run: npm run seo:keyword-gaps
+        continue-on-error: true
+
+      - name: Suggest rank tracker keywords
+        if: steps.gate.outputs.run_pull == 'true'
+        run: npm run seo:rank-suggestions
+        continue-on-error: true
+
+      - name: Generate SEO brief
+        if: steps.gate.outputs.run_pull == 'true'
+        run: npm run seo:brief
+
+      - name: Upload SEO output
+        if: always() && steps.gate.outputs.run_pull == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-data-pull-${{ github.run_id }}
+          path: output/seo/
+          if-no-files-found: error
+
+      - name: Open or update SEO data pull failure issue
+        if: failure() && steps.gate.outputs.run_pull == 'true'
+        uses: actions/github-script@v7
+        env:
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          RUN_AT: ${{ github.run_started_at }}
+          ARTIFACT_NAME: seo-data-pull-${{ github.run_id }}
+        with:
+          script: |
+            const title = 'SEO Data Pull Failure';
+            const body = [
+              'The scheduled SEO data pull failed.',
+              '',
+              `- Run: ${process.env.RUN_URL}`,
+              `- Triggered at: ${process.env.RUN_AT}`,
+              `- Workflow artifact: \`${process.env.ARTIFACT_NAME}\` in the linked run`,
+              '',
+              'This issue stays open until a later `SEO Data Pull` run passes.'
+            ].join('\n');
+
+            const { owner, repo } = context.repo;
+            const openIssues = await github.paginate(github.rest.issues.listForRepo, {
+              owner,
+              repo,
+              state: 'open',
+              per_page: 100
+            });
+
+            const existing = openIssues.find((issue) => issue.title === title);
+
+            if (existing) {
+              await github.rest.issues.update({
+                owner,
+                repo,
+                issue_number: existing.number,
+                body
+              });
+
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: existing.number,
+                body: `Another failure was detected: ${process.env.RUN_URL}`
+              });
+            } else {
+              await github.rest.issues.create({
+                owner,
+                repo,
+                title,
+                body
+              });
+            }
+
+      - name: Close SEO data pull failure issue on recovery
+        if: success() && steps.gate.outputs.run_pull == 'true'
+        uses: actions/github-script@v7
+        env:
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        with:
+          script: |
+            const title = 'SEO Data Pull Failure';
+            const { owner, repo } = context.repo;
+            const openIssues = await github.paginate(github.rest.issues.listForRepo, {
+              owner,
+              repo,
+              state: 'open',
+              per_page: 100
+            });
+
+            const existing = openIssues.find((issue) => issue.title === title);
+
+            if (!existing) {
+              return;
+            }
+
+            await github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number: existing.number,
+              body: `Recovered in ${process.env.RUN_URL}`
+            });
+
+            await github.rest.issues.update({
+              owner,
+              repo,
+              issue_number: existing.number,
+              state: 'closed'
+            });
+
+      - name: Gated run summary
+        if: steps.gate.outputs.run_pull == 'false'
+        run: echo "Skipped by Pacific-time gate."

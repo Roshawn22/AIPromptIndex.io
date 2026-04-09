@@ -45,6 +45,12 @@ const gaMeasurementId = rawGaMeasurementId && rawGaMeasurementId !== 'G-XXXXXXXX
 const googleSiteVerification = (
   import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION as string | undefined
 )?.trim();
+const ahrefsVerification = (
+  import.meta.env.PUBLIC_AHREFS_SITE_VERIFICATION as string | undefined
+)?.trim();
+const semrushVerification = (
+  import.meta.env.PUBLIC_SEMRUSH_SITE_VERIFICATION as string | undefined
+)?.trim();
 const ogImageType = fullOgImage.endsWith('.png') ? 'image/png' : fullOgImage.endsWith('.jpg') || fullOgImage.endsWith('.jpeg') ? 'image/jpeg' : fullOgImage.endsWith('.svg') ? 'image/svg+xml' : undefined;
 const organizationJsonLd = {
   '@context': 'https://schema.org',
@@ -98,6 +104,12 @@ const allJsonLd = [organizationJsonLd, pageJsonLd, ...pageJsonLdEntries];
     <link rel="alternate" hreflang="x-default" href={canonical} />
     {googleSiteVerification && (
       <meta name="google-site-verification" content={googleSiteVerification} />
+    )}
+    {ahrefsVerification && (
+      <meta name="ahrefs-site-verification" content={ahrefsVerification} />
+    )}
+    {semrushVerification && (
+      <meta name="semrush-site-verification" content={semrushVerification} />
     )}
 
     <!-- Favicons -->

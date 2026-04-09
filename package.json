@@ -9,7 +9,19 @@
     "astro": "astro",
     "check": "astro check",
     "lint": "astro check",
-    "ci": "npm run check && npm run build"
+    "ci": "npm run check && npm run build",
+    "seo:pull:ahrefs": "node scripts/seo/pull-ahrefs.mjs",
+    "seo:pull:semrush": "node scripts/seo/pull-semrush.mjs",
+    "seo:pull:gsc": "node scripts/seo/pull-gsc.mjs",
+    "seo:pull:ga4": "node scripts/seo/pull-ga4.mjs",
+    "seo:cross-validate": "node scripts/seo/cross-validate.mjs",
+    "seo:pull:brand-radar": "node scripts/seo/pull-brand-radar.mjs",
+    "seo:brief": "node scripts/seo/build-brief.mjs",
+    "seo:pull:all": "npm run seo:pull:ahrefs && npm run seo:pull:semrush -- --enrich=true --budget=standard && npm run seo:cross-validate && npm run seo:pull:brand-radar && npm run seo:pull:gsc && npm run seo:pull:ga4 && npm run seo:brief",
+    "seo:content-briefs": "node scripts/seo/generate-content-briefs.mjs",
+    "seo:ai-visibility": "node scripts/seo/analyze-ai-visibility.mjs",
+    "seo:keyword-gaps": "node scripts/seo/keyword-gap-analysis.mjs",
+    "seo:rank-suggestions": "node scripts/seo/suggest-rank-tracker-keywords.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",

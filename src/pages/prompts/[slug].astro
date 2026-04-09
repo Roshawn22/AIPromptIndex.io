@@ -70,12 +70,73 @@ for (const page of bestofPages) {
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://aipromptindex.io';
 const pageUrl = `${siteUrl}/prompts/${data.slug}/`;
+
+// --- Structured Data: HowTo + FAQPage schemas ---
+const howToJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: `How to Use: ${data.title}`,
+  description: data.description.slice(0, 300),
+  step: [
+    ...(data.variables?.length ? [{
+      '@type': 'HowToStep',
+      name: 'Customize Variables',
+      text: `Replace the placeholder variables with your own values: ${data.variables.map((v: any) => v.name).join(', ')}.`,
+    }] : []),
+    {
+      '@type': 'HowToStep',
+      name: 'Copy the Prompt',
+      text: 'Click the copy button to copy the full prompt text to your clipboard.',
+    },
+    {
+      '@type': 'HowToStep',
+      name: `Paste into ${toolName}`,
+      text: `Open ${toolName} and paste the customized prompt to get your result.`,
+    },
+  ],
+  tool: { '@type': 'HowToTool', name: toolName },
+};
+
+const faqEntries: { q: string; a: string }[] = [];
+if (data.tips?.length) {
+  faqEntries.push({
+    q: `How do I use the "${data.title}" prompt?`,
+    a: `${data.description.slice(0, 200)} Tip: ${data.tips[0]}`,
+  });
+}
+if (data.variables?.length) {
+  faqEntries.push({
+    q: 'What variables need to be customized?',
+    a: data.variables.map((v: any) => `${v.name}: ${v.description}`).join('. ') + '.',
+  });
+}
+if (data.exampleOutput) {
+  faqEntries.push({
+    q: 'What kind of output does this prompt produce?',
+    a: data.exampleOutput.slice(0, 300),
+  });
+}
+
+const faqJsonLd = faqEntries.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqEntries.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: { '@type': 'Answer', text: faq.a },
+  })),
+} : null;
+
+const promptJsonLd = [howToJsonLd, ...(faqJsonLd ? [faqJsonLd] : [])];
 ---
 
 <BaseLayout
   title={data.metaTitle || data.title}
   description={data.metaDescription || data.description.slice(0, 160)}
   loadMonoFont={true}
+  jsonLd={promptJsonLd}
+  publishedTime={data.dateAdded}
+  articleModifiedTime={data.lastUpdated || data.dateAdded}
 >
   <Header slot="header" />
 
