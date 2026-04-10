@@ -10,9 +10,10 @@ import {
 
 const args = parseCliArgs();
 const outputDir = getSeoOutputDir(args);
-const brand = optionalEnv('BRAND_RADAR_BRAND', 'aipromptindex');
-const market = optionalEnv('BRAND_RADAR_MARKET', 'ai prompts');
-const competitors = optionalEnv('BRAND_RADAR_COMPETITORS', 'prompthero,flowgpt,snackprompt,promptbase');
+const brand = optionalEnv('BRAND_RADAR_BRAND', 'AI Prompt Index');
+const market = optionalEnv('BRAND_RADAR_MARKET', 'AI prompts and prompt engineering');
+const competitors = optionalEnv('BRAND_RADAR_COMPETITORS', 'PromptBase,FlowGPT,AIPRM,PromptHero');
+const reportId = optionalEnv('BRAND_RADAR_REPORT_ID', '019d5474-1c0f-7ee5-a4d9-a39c3cd90e38');
 
 // AI platforms to query — Google models must be queried separately from non-Google
 const NON_GOOGLE_SOURCES = ['chatgpt', 'perplexity', 'gemini', 'copilot'];
@@ -30,7 +31,8 @@ async function pullImpressions(dataSource) {
     brand,
     competitors,
     market,
-    prompts: 'ahrefs',
+    prompts: 'custom',
+    report_id: reportId,
     data_source: dataSource,
     select: 'brand,total,only_target_brand,only_competitors_brands,target_and_competitors_brands,no_tracked_brands',
   });
@@ -41,7 +43,8 @@ async function pullMentions(dataSource) {
     brand,
     competitors,
     market,
-    prompts: 'ahrefs',
+    prompts: 'custom',
+    report_id: reportId,
     data_source: dataSource,
     select: 'brand,total,only_target_brand,only_competitors_brands,target_and_competitors_brands',
   });
@@ -52,7 +55,8 @@ async function pullShareOfVoice(dataSource) {
     brand,
     competitors,
     market,
-    prompts: 'ahrefs',
+    prompts: 'custom',
+    report_id: reportId,
     data_source: dataSource,
     select: 'brand,share_of_voice',
   });
@@ -62,7 +66,8 @@ async function pullAiResponses(dataSource) {
   return fetchBrandRadar('ai-responses', {
     brand,
     market,
-    prompts: 'ahrefs',
+    prompts: 'custom',
+    report_id: reportId,
     data_source: dataSource,
     select: 'question,volume,data_source,country',
     limit: 25,
@@ -74,7 +79,8 @@ async function pullCitedPages(dataSource) {
   return fetchBrandRadar('cited-pages', {
     brand,
     market,
-    prompts: 'ahrefs',
+    prompts: 'custom',
+    report_id: reportId,
     data_source: dataSource,
     select: 'cited_url,responses,volume',
     limit: 25,
