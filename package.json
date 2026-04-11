@@ -17,6 +17,9 @@
     "seo:cross-validate": "node scripts/seo/cross-validate.mjs",
     "seo:pull:brand-radar": "node scripts/seo/pull-brand-radar.mjs",
     "seo:brief": "node scripts/seo/build-brief.mjs",
+    "seo:verify:setup": "node scripts/seo/verify-setup.mjs --vercel=true",
+    "seo:verify:live": "node scripts/seo/verify-live.mjs",
+    "seo:verify:all": "npm run seo:verify:setup && npm run seo:verify:live",
     "seo:pull:all": "npm run seo:pull:ahrefs && npm run seo:pull:semrush -- --enrich=true --budget=standard && npm run seo:cross-validate && npm run seo:pull:brand-radar && npm run seo:pull:gsc && npm run seo:pull:ga4 && npm run seo:brief",
     "seo:content-briefs": "node scripts/seo/generate-content-briefs.mjs",
     "seo:ai-visibility": "node scripts/seo/analyze-ai-visibility.mjs",
@@ -24,6 +27,7 @@
     "seo:rank-suggestions": "node scripts/seo/suggest-rank-tracker-keywords.mjs"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.88.0",
     "@astrojs/check": "^0.9.6",
     "@astrojs/react": "^4.4.2",
     "@astrojs/rss": "^4.0.15",
@@ -47,6 +51,7 @@
     "convex": "^1.32.0",
     "fuse.js": "^7.1.0",
     "lottie-web": "^5.13.0",
+    "marked": "^18.0.0",
     "motion": "^12.38.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
