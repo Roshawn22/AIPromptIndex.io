@@ -20,11 +20,12 @@
     "seo:verify:setup": "node scripts/seo/verify-setup.mjs --vercel=true",
     "seo:verify:live": "node scripts/seo/verify-live.mjs",
     "seo:verify:all": "npm run seo:verify:setup && npm run seo:verify:live",
-    "seo:pull:all": "npm run seo:pull:ahrefs && npm run seo:pull:semrush -- --enrich=true --budget=standard && npm run seo:cross-validate && npm run seo:pull:brand-radar && npm run seo:pull:gsc && npm run seo:pull:ga4 && npm run seo:brief",
+    "seo:pull:all": "npm run seo:pull:ahrefs && npm run seo:pull:semrush -- --enrich=true --budget=standard && npm run seo:cross-validate && npm run seo:pull:brand-radar && npm run seo:pull:gsc && npm run seo:pull:ga4 && npm run seo:brief && npm run syndicate:medium",
     "seo:content-briefs": "node scripts/seo/generate-content-briefs.mjs",
     "seo:ai-visibility": "node scripts/seo/analyze-ai-visibility.mjs",
     "seo:keyword-gaps": "node scripts/seo/keyword-gap-analysis.mjs",
-    "seo:rank-suggestions": "node scripts/seo/suggest-rank-tracker-keywords.mjs"
+    "seo:rank-suggestions": "node scripts/seo/suggest-rank-tracker-keywords.mjs",
+    "syndicate:medium": "node scripts/seo/syndicate-medium.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.88.0",
