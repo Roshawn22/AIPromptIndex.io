@@ -6,6 +6,9 @@ pubDate: 2026-04-02
 category: "prompts"
 tags: ["chatgpt", "prompts", "productivity", "ai-tools"]
 draft: false
+syndicate:
+  - medium
+mediumUrl: ""
 ---
 
 If you have ever typed a question into ChatGPT and gotten back a mediocre wall of text, the problem was not the AI. It was the prompt. The gap between a forgettable output and a genuinely useful one almost always comes down to how you ask.

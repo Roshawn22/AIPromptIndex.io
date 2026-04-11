@@ -10,6 +10,9 @@ tags:
   - tutorial
   - fundamentals
 draft: false
+syndicate:
+  - medium
+mediumUrl: ""
 ---
 
 If you have ever typed something into ChatGPT and gotten a response that felt generic, unhelpful, or completely off the mark, you are not alone. The difference between people who get mediocre results from AI and those who get genuinely useful output almost always comes down to one thing: **how they write their prompts**.

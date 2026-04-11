@@ -6,6 +6,9 @@ pubDate: 2026-04-02
 category: "tutorials"
 tags: ["prompt-engineering", "beginners", "tutorial", "ai-tips"]
 draft: false
+syndicate:
+  - medium
+mediumUrl: ""
 ---
 
 You have probably had this experience: you type something into ChatGPT or Claude, hit enter, and get back a response that is technically correct but completely useless. Too generic. Too long. Missing the point. And you think, maybe this AI thing is overrated.
