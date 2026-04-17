@@ -9,6 +9,7 @@ import Tag from '../../components/ui/Tag.astro';
 import Breadcrumb from '../../components/common/Breadcrumb.astro';
 import ShareButtons from '../../components/common/ShareButtons.astro';
 import PromptCodeBlock from '../../components/prompt/PromptCodeBlock.tsx';
+import PromptViewTracker from '../../components/analytics/PromptViewTracker.tsx';
 import CopyButton from '../../components/ui/CopyButton.tsx';
 import VoteButtons from '../../components/prompt/VoteButtons.tsx';
 import SaveButton from '../../components/prompt/SaveButton.tsx';
@@ -139,6 +140,7 @@ const promptJsonLd = [howToJsonLd, ...(faqJsonLd ? [faqJsonLd] : [])];
   articleModifiedTime={data.lastUpdated || data.dateAdded}
 >
   <Header slot="header" />
+  <PromptViewTracker client:load promptSlug={data.slug} tool={data.tool} category={data.category} />
 
   <article class="mx-auto max-w-7xl px-[var(--space-page)] py-8">
     <Breadcrumb items={[
@@ -167,12 +169,12 @@ const promptJsonLd = [howToJsonLd, ...(faqJsonLd ? [faqJsonLd] : [])];
 
         <!-- Prompt Code Block -->
         <div class="mb-8">
-          <PromptCodeBlock client:load promptText={data.promptText} promptSlug={data.slug} />
+          <PromptCodeBlock client:load promptText={data.promptText} promptSlug={data.slug} tool={data.tool} category={data.category} />
         </div>
 
         <!-- Big Copy Button + Vote -->
         <div class="mb-8 flex flex-wrap items-center gap-3">
-          <CopyButton client:load text={data.promptText} label="Copy Prompt" size="lg" promptSlug={data.slug} />
+          <CopyButton client:load text={data.promptText} label="Copy Prompt" size="lg" promptSlug={data.slug} tool={data.tool} category={data.category} />
           <VoteButtons client:load promptSlug={data.slug} />
           <SaveButton client:load promptSlug={data.slug} />
           <ShareButtons url={pageUrl} title={data.title} />
@@ -210,7 +212,7 @@ const promptJsonLd = [howToJsonLd, ...(faqJsonLd ? [faqJsonLd] : [])];
                     </code>
                   </div>
                   <p class="text-sm text-[var(--color-text-secondary)]">{v.description}</p>
-                  <p class="mt-1 text-xs text-[var(--color-text-muted)]">Example: {v.example}</p>
+                  <p class="mt-1 text-xs text-[var(--color-text-muted)]">Example: <Fragment set:html="<!--email_off-->" />{v.example}<Fragment set:html="<!--/email_off-->" /></p>
                 </div>
               ))}
             </div>
@@ -239,7 +241,7 @@ const promptJsonLd = [howToJsonLd, ...(faqJsonLd ? [faqJsonLd] : [])];
           <div class="mb-8">
             <h2 class="text-xl mb-3">Example Output</h2>
             <div class="surface-solid-content rounded-[var(--radius-md)] p-4">
-              <pre class="whitespace-pre-wrap text-sm text-[var(--color-text-secondary)]">{data.exampleOutput}</pre>
+              <pre class="whitespace-pre-wrap text-sm text-[var(--color-text-secondary)]"><Fragment set:html="<!--email_off-->" />{data.exampleOutput}<Fragment set:html="<!--/email_off-->" /></pre>
             </div>
           </div>
         )}
@@ -288,7 +290,7 @@ const promptJsonLd = [howToJsonLd, ...(faqJsonLd ? [faqJsonLd] : [])];
             </dl>
 
             <div class="mt-5 space-y-2">
-              <CopyButton client:load text={data.promptText} label="Copy Prompt" size="md" promptSlug={data.slug} />
+              <CopyButton client:load text={data.promptText} label="Copy Prompt" size="md" promptSlug={data.slug} tool={data.tool} category={data.category} />
             </div>
           </div>
 

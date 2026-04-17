@@ -5,6 +5,10 @@ import Header from '../../components/global/Header.astro';
 import Footer from '../../components/global/Footer.astro';
 import PromptCard from '../../components/prompt/PromptCard.astro';
 import Breadcrumb from '../../components/common/Breadcrumb.astro';
+import { TOOL_DISPLAY_NAMES as toolDisplayNames } from '../../lib/constants';
+import toolCategoryPages from '../../data/seo/tool-category-pages.json';
+import bestofPages from '../../data/seo/bestof-pages.json';
+import audiencePages from '../../data/seo/audience-pages.json';
 
 export async function getStaticPaths() {
   const categories = await getCollection('categories');
@@ -23,11 +27,130 @@ const prompts = allPrompts
     if (!a.data.isFeatured && b.data.isFeatured) return 1;
     return new Date(b.data.dateAdded).getTime() - new Date(a.data.dateAdded).getTime();
   });
+const allGuides = await getCollection('guides');
+const allPosts = await getCollection('blog');
+
+const toolCounts = prompts.reduce((acc, prompt) => {
+  acc[prompt.data.tool] = (acc[prompt.data.tool] || 0) + 1;
+  return acc;
+}, {} as Record<string, number>);
+
+const existingToolCombos = new Set(
+  toolCategoryPages
+    .filter((page: any) => page.category === category.data.slug)
+    .map((page: any) => page.tool),
+);
+
+const topTools = Object.entries(toolCounts)
+  .sort(([, a], [, b]) => b - a)
+  .filter(([slug]) => existingToolCombos.has(slug))
+  .slice(0, 4)
+  .map(([slug, count]) => ({
+    slug,
+    count,
+    name: toolDisplayNames[slug] || slug,
+  }));
+
+const categoryCollections = toolCategoryPages
+  .filter((page: any) => page.category === category.data.slug)
+  .slice(0, 6);
+
+const categoryRoundups = bestofPages
+  .filter((page: any) => page.filter?.category === category.data.slug)
+  .slice(0, 4);
+
+const audienceMatches = audiencePages
+  .filter((page: any) => page.filterCategories?.includes(category.data.slug))
+  .slice(0, 4);
+
+const currentYear = new Date().getFullYear();
+const topToolSummary = topTools.map((tool) => tool.name).join(', ');
+const seoTitle = `AI Prompts for ${category.data.name}`;
+const seoDescription = `Discover ${prompts.length} AI prompts for ${category.data.name.toLowerCase()} across ${topToolSummary || 'leading AI tools'}. Copy, customize, and use them fast.`;
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://aipromptindex.io';
+
+const itemListJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: `Best AI Prompts for ${category.data.name}`,
+  description: seoDescription,
+  numberOfItems: prompts.length,
+  itemListElement: prompts.map((prompt, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: prompt.data.title,
+    url: `${siteUrl}/prompts/${prompt.data.slug}/`,
+  })),
+};
+
+const editorialEntryMap = {
+  blog: new Map(allPosts.map((entry) => [entry.id, entry])),
+  guide: new Map(allGuides.map((entry) => [entry.id, entry])),
+};
+
+const editorialResourceMap: Record<string, Array<{ type: 'blog' | 'guide'; slug: string }>> = {
+  writing: [
+    { type: 'guide', slug: 'prompt-engineering-101' },
+    { type: 'blog', slug: 'how-to-write-ai-prompts-beginners-guide' },
+    { type: 'blog', slug: 'best-chatgpt-prompts-2026' },
+  ],
+  coding: [
+    { type: 'guide', slug: 'prompt-engineering-101' },
+    { type: 'blog', slug: 'chatgpt-vs-claude-prompting-differences' },
+    { type: 'blog', slug: 'best-chatgpt-prompts-2026' },
+  ],
+  marketing: [
+    { type: 'guide', slug: 'chatgpt-for-business' },
+    { type: 'blog', slug: 'best-chatgpt-prompts-2026' },
+    { type: 'blog', slug: 'how-to-write-ai-prompts-beginners-guide' },
+  ],
+  'image-generation': [
+    { type: 'guide', slug: 'midjourney-prompt-guide' },
+    { type: 'guide', slug: 'prompt-engineering-101' },
+    { type: 'blog', slug: 'how-to-write-ai-prompts-beginners-guide' },
+  ],
+  business: [
+    { type: 'guide', slug: 'chatgpt-for-business' },
+    { type: 'guide', slug: 'prompt-engineering-101' },
+    { type: 'blog', slug: 'best-chatgpt-prompts-2026' },
+  ],
+  'data-analysis': [
+    { type: 'guide', slug: 'prompt-engineering-101' },
+    { type: 'blog', slug: 'chatgpt-vs-claude-prompting-differences' },
+    { type: 'blog', slug: 'how-to-write-ai-prompts-beginners-guide' },
+  ],
+  education: [
+    { type: 'guide', slug: 'prompt-engineering-101' },
+    { type: 'blog', slug: 'how-to-write-ai-prompts-beginners-guide' },
+    { type: 'blog', slug: 'best-chatgpt-prompts-2026' },
+  ],
+  creative: [
+    { type: 'guide', slug: 'midjourney-prompt-guide' },
+    { type: 'guide', slug: 'prompt-engineering-101' },
+    { type: 'blog', slug: 'best-chatgpt-prompts-2026' },
+  ],
+};
+
+const editorialResources = (editorialResourceMap[category.data.slug] || [])
+  .map((resource) => {
+    const entry = editorialEntryMap[resource.type].get(resource.slug);
+    if (!entry) return null;
+
+    return {
+      href: `/${resource.type === 'blog' ? 'blog' : 'guides'}/${resource.slug}/`,
+      label: resource.type === 'blog' ? 'Blog' : 'Guide',
+      title: entry.data.metaTitle || entry.data.title,
+      description: entry.data.metaDescription || entry.data.description,
+    };
+  })
+  .filter(Boolean);
 ---
 
 <BaseLayout
-  title={`Best AI Prompts for ${category.data.name}`}
-  description={`Discover the best AI prompts for ${category.data.name.toLowerCase()}. ${prompts.length} curated prompts organized by tool and difficulty.`}
+  title={seoTitle}
+  description={seoDescription}
+  jsonLd={[itemListJsonLd]}
 >
   <Header slot="header" />
 
@@ -44,6 +167,18 @@ const prompts = allPrompts
         {prompts.length} curated prompts for {category.data.name.toLowerCase()}
       </p>
       <p class="mt-4 text-[var(--color-text-secondary)]">{category.data.description}</p>
+      {topTools.length > 0 && (
+        <p class="mt-4 max-w-3xl text-[var(--color-text-secondary)]">
+          This category is strongest across {topTools.map((tool, index) => (
+            <span>
+              <a href={`/prompts/${tool.slug}/${category.data.slug}/`} class="text-[var(--color-accent)] hover:underline">
+                {tool.name}
+              </a>
+              {index < topTools.length - 1 ? ', ' : ''}
+            </span>
+          ))}. Use these pages to compare prompt patterns by tool, then drop into the individual prompt pages for copy-ready examples.
+        </p>
+      )}
     </div>
 
     {prompts.length > 0 ? (
@@ -65,6 +200,93 @@ const prompts = allPrompts
       <p class="text-center text-[var(--color-text-muted)] py-12">
         No {category.data.name.toLowerCase()} prompts yet. <a href="/submit/" class="text-[var(--color-accent)] hover:underline">Submit one!</a>
       </p>
+    )}
+
+    {categoryCollections.length > 0 && (
+      <div class="mt-16 border-t border-[var(--color-border)] pt-10">
+        <h2 class="mb-6 text-xl">Top {category.data.name} Collections by Tool</h2>
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {categoryCollections.map((collection: any) => (
+            <a
+              href={`/prompts/${collection.tool}/${collection.category}/`}
+              class="block rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-5 transition-all duration-200 hover:border-[var(--color-accent-muted)] hover:shadow-[var(--shadow-card-hover)]"
+            >
+              <h3 class="font-[var(--font-display)] text-base font-semibold text-[var(--color-text-primary)]">
+                {collection.title}
+              </h3>
+              <p class="mt-2 text-sm text-[var(--color-text-secondary)]">
+                {collection.metaDescription}
+              </p>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {audienceMatches.length > 0 && (
+      <div class="mt-16 border-t border-[var(--color-border)] pt-10">
+        <h2 class="mb-6 text-xl">Who These {category.data.name} Prompts Help</h2>
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {audienceMatches.map((page: any) => (
+            <a
+              href={`/prompts/for/${page.slug}/`}
+              class="block rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-5 transition-all duration-200 hover:border-[var(--color-accent-muted)] hover:shadow-[var(--shadow-card-hover)]"
+            >
+              <h3 class="font-[var(--font-display)] text-base font-semibold text-[var(--color-text-primary)]">
+                {page.title}
+              </h3>
+              <p class="mt-2 text-sm text-[var(--color-text-secondary)]">
+                {page.metaDescription}
+              </p>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {categoryRoundups.length > 0 && (
+      <div class="mt-16 border-t border-[var(--color-border)] pt-10">
+        <h2 class="mb-6 text-xl">Best-of {category.data.name} Pages</h2>
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {categoryRoundups.map((page: any) => (
+            <a
+              href={`/best/${page.slug}/`}
+              class="block rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-5 transition-all duration-200 hover:border-[var(--color-accent-muted)] hover:shadow-[var(--shadow-card-hover)]"
+            >
+              <h3 class="font-[var(--font-display)] text-base font-semibold text-[var(--color-text-primary)]">
+                {page.title}
+              </h3>
+              <p class="mt-2 text-sm text-[var(--color-text-secondary)]">
+                {page.metaDescription || page.description}
+              </p>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {editorialResources.length > 0 && (
+      <div class="mt-16 border-t border-[var(--color-border)] pt-10">
+        <h2 class="mb-6 text-xl">Guides and Articles for {category.data.name}</h2>
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {editorialResources.map((resource: any) => (
+            <a
+              href={resource.href}
+              class="block rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-5 transition-all duration-200 hover:border-[var(--color-accent-muted)] hover:shadow-[var(--shadow-card-hover)]"
+            >
+              <span class="inline-flex rounded-full bg-[var(--color-accent)]/10 px-3 py-1 text-xs font-[var(--font-display)] font-semibold uppercase tracking-wider text-[var(--color-accent)]">
+                {resource.label}
+              </span>
+              <h3 class="mt-4 font-[var(--font-display)] text-base font-semibold text-[var(--color-text-primary)]">
+                {resource.title}
+              </h3>
+              <p class="mt-2 text-sm text-[var(--color-text-secondary)]">
+                {resource.description}
+              </p>
+            </a>
+          ))}
+        </div>
+      </div>
     )}
   </section>
 
