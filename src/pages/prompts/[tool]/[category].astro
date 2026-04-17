@@ -51,8 +51,9 @@ const prompts = allPrompts
 const toolName = toolDisplayNames[tool!] || tool;
 const categoryName = categoryDisplayNames[category!] || category;
 
-const currentYear = new Date().getFullYear();
-const seoTitle = page.metaTitle || `${prompts.length} ${page.title} (${currentYear}) — Copy & Paste Ready`;
+const seoTitle = page.metaTitle && page.metaTitle.length <= 60
+  ? page.metaTitle
+  : `${toolName} ${categoryName} Prompts`;
 const seoDescription = page.metaDescription || page.intro?.slice(0, 160) || `Curated ${toolName} prompts for ${categoryName}.`;
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://aipromptindex.io';

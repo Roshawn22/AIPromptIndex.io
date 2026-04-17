@@ -79,8 +79,8 @@ const categoryColors: Record<string, 'teal' | 'blue' | 'purple' | 'orange' | 'gr
 ---
 
 <BaseLayout
-  title={data.title}
-  description={data.description}
+  title={data.metaTitle || data.title}
+  description={data.metaDescription || data.description}
   ogType="article"
   publishedTime={pubDateStr}
   articleModifiedTime={updatedDateStr || pubDateStr}

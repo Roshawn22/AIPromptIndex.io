@@ -76,11 +76,12 @@ const articleJsonLd = {
   },
   keywords: data.tags.join(', '),
 };
+const seoTitle = data.metaTitle && data.metaTitle.length <= 60 ? data.metaTitle : data.title;
 ---
 
 <BaseLayout
-  title={data.title}
-  description={data.description}
+  title={seoTitle}
+  description={data.metaDescription || data.description}
   ogType="article"
   publishedTime={pubDateStr}
   articleModifiedTime={updatedDateStr || pubDateStr}

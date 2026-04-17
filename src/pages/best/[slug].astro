@@ -42,16 +42,17 @@ const prompts = allPrompts
 
 const relatedRoundups = allRoundups.filter((r: any) => r.slug !== roundup.slug).slice(0, 4);
 
-const filterType = roundup.filter.tool ? 'tool' : 'category';
+const filterType = roundup.filter.tool ? 'tool' : roundup.filter.category ? 'category' : 'collection';
 const filterValue = roundup.filter.tool || roundup.filter.category;
 const linkTarget = filterType === 'tool' ? `/tools/${filterValue}/` : `/categories/${filterValue}/`;
 
 const displayName = filterType === 'tool'
   ? toolDisplayNames[filterValue!] || filterValue
-  : categoryDisplayNames[filterValue!] || filterValue;
+  : filterType === 'category'
+    ? categoryDisplayNames[filterValue!] || filterValue
+    : roundup.title;
 
-const currentYear = new Date().getFullYear();
-const seoTitle = roundup.metaTitle || `${prompts.length} ${roundup.title} (${currentYear}) — Copy & Paste Ready`;
+const seoTitle = roundup.metaTitle && roundup.metaTitle.length <= 60 ? roundup.metaTitle : roundup.title;
 const seoDescription = roundup.metaDescription || roundup.description;
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://aipromptindex.io';
