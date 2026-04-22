@@ -91,10 +91,12 @@ jobs:
           EOF
 
       - name: Pull Ahrefs data
+        id: pull_ahrefs_core
         if: steps.gate.outputs.run_pull == 'true' && steps.preflight.outputs.can_run_ahrefs == 'true'
         env:
           AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
         run: npm run seo:pull:ahrefs
+        continue-on-error: true
 
       - name: Pull Ahrefs Site Audit (overview)
         if: steps.gate.outputs.run_pull == 'true' && steps.preflight.outputs.can_run_site_audit == 'true'
@@ -136,7 +138,7 @@ jobs:
         continue-on-error: true
 
       - name: Generate content briefs
-        if: steps.gate.outputs.run_pull == 'true' && steps.preflight.outputs.can_run_ahrefs == 'true'
+        if: steps.gate.outputs.run_pull == 'true' && steps.pull_ahrefs_core.outcome == 'success'
         env:
           AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
         run: npm run seo:content-briefs
@@ -148,7 +150,7 @@ jobs:
         continue-on-error: true
 
       - name: Keyword gap analysis
-        if: steps.gate.outputs.run_pull == 'true' && steps.preflight.outputs.can_run_ahrefs == 'true'
+        if: steps.gate.outputs.run_pull == 'true' && steps.pull_ahrefs_core.outcome == 'success'
         env:
           AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
         run: npm run seo:keyword-gaps
@@ -160,11 +162,11 @@ jobs:
         continue-on-error: true
 
       - name: Generate SEO brief
-        if: steps.gate.outputs.run_pull == 'true' && steps.preflight.outputs.can_run_ahrefs == 'true'
+        if: steps.gate.outputs.run_pull == 'true' && steps.pull_ahrefs_core.outcome == 'success'
         run: npm run seo:brief
 
       - name: Syndicate new content to Medium
-        if: steps.gate.outputs.run_pull == 'true' && steps.preflight.outputs.can_run_ahrefs == 'true'
+        if: steps.gate.outputs.run_pull == 'true' && steps.pull_ahrefs_core.outcome == 'success'
         env:
           MEDIUM_API_TOKEN: ${{ secrets.MEDIUM_API_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -192,16 +194,22 @@ jobs:
           if-no-files-found: error
 
       - name: Open or update blocked SEO endpoint issue
-        if: steps.gate.outputs.run_pull == 'true' && steps.preflight.outputs.blocked_endpoints != ''
+        if: steps.gate.outputs.run_pull == 'true' && (steps.preflight.outputs.blocked_endpoints != '' || steps.pull_ahrefs_core.outcome != 'success')
         uses: actions/github-script@v7
         env:
           BLOCKED_ENDPOINTS: ${{ steps.preflight.outputs.blocked_endpoints }}
+          AHREFS_CORE_FAILED: ${{ steps.pull_ahrefs_core.outcome != 'success' }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           RUN_AT: ${{ github.run_started_at }}
         with:
           script: |
             const title = 'SEO API Endpoint Blocked';
-            const blocked = process.env.BLOCKED_ENDPOINTS.split(',').filter(Boolean);
+            const blocked = [
+              ...new Set([
+                ...process.env.BLOCKED_ENDPOINTS.split(',').filter(Boolean),
+                ...(process.env.AHREFS_CORE_FAILED === 'true' ? ['ahrefs.api'] : [])
+              ])
+            ];
             const body = [
               'One or more SEO API surfaces are blocked in the scheduled automation.',
               '',
