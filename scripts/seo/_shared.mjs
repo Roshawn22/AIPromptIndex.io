@@ -8,6 +8,43 @@ export const defaultSiteUrl = 'https://aipromptindex.io';
 export const defaultHost = 'aipromptindex.io';
 
 const tokenCache = new Map();
+const dotenvFiles = ['.env', '.env.local'];
+
+function loadDotenvFiles() {
+  if (typeof process.loadEnvFile === 'function') {
+    for (const fileName of dotenvFiles) {
+      const filePath = path.join(repoRoot, fileName);
+      if (!fs.existsSync(filePath)) continue;
+      process.loadEnvFile(filePath);
+    }
+    return;
+  }
+
+  for (const fileName of dotenvFiles) {
+    const filePath = path.join(repoRoot, fileName);
+    if (!fs.existsSync(filePath)) continue;
+
+    const lines = fs.readFileSync(filePath, 'utf8').split(/\r?\n/);
+    for (const line of lines) {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith('#')) continue;
+
+      const match = trimmed.match(/^([A-Za-z_][A-Za-z0-9_]*)=(.*)$/);
+      if (!match) continue;
+
+      const [, key, rawValue] = match;
+      if (process.env[key]) continue;
+
+      const value = rawValue
+        .trim()
+        .replace(/^["']/, '')
+        .replace(/["']$/, '');
+      process.env[key] = value;
+    }
+  }
+}
+
+loadDotenvFiles();
 
 export function parseCliArgs(argv = process.argv.slice(2)) {
   return argv.reduce((result, arg) => {
@@ -73,6 +110,20 @@ export function writeText(filePath, value) {
 
 export function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+}
+
+export function readOptionalJson(filePath, fallback = null) {
+  if (!fs.existsSync(filePath)) return fallback;
+  return readJson(filePath);
+}
+
+function appendSearchParam(url, key, value) {
+  if (value === undefined || value === null || value === '') return;
+  if (Array.isArray(value)) {
+    value.forEach((item) => appendSearchParam(url, key, item));
+    return;
+  }
+  url.searchParams.append(key, String(value));
 }
 
 export function normalizePathname(input) {
@@ -203,10 +254,7 @@ export async function fetchGoogleJson(url, { method = 'POST', body, scopes }) {
 export async function fetchAhrefsJson(endpointPath, params = {}) {
   const apiToken = requireEnv('AHREFS_API_TOKEN');
   const url = new URL(`https://api.ahrefs.com/v3/${endpointPath.replace(/^\/+/, '')}`);
-  Object.entries(params).forEach(([key, value]) => {
-    if (value === undefined || value === null || value === '') return;
-    url.searchParams.set(key, String(value));
-  });
+  Object.entries(params).forEach(([key, value]) => appendSearchParam(url, key, value));
 
   return fetchJson(url.toString(), {
     headers: {
@@ -216,15 +264,45 @@ export async function fetchAhrefsJson(endpointPath, params = {}) {
   });
 }
 
+export async function fetchAhrefsPost(endpointPath, body = {}) {
+  const apiToken = requireEnv('AHREFS_API_TOKEN');
+  const url = `https://api.ahrefs.com/v3/${endpointPath.replace(/^\/+/, '')}`;
+  return fetchJson(url, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiToken}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
+}
+
+// Iterates a cursor-paginated Ahrefs endpoint until empty or maxPages reached.
+// Returns flat array of rows across pages.
+export async function fetchAhrefsPaginated(endpointPath, params = {}, { maxPages = 10, rowsKey = 'rows' } = {}) {
+  const accumulated = [];
+  let cursor = undefined;
+  for (let page = 0; page < maxPages; page += 1) {
+    const pageParams = cursor ? { ...params, cursor } : params;
+    const response = await fetchAhrefsJson(endpointPath, pageParams);
+    const rows = Array.isArray(response?.[rowsKey]) ? response[rowsKey]
+      : Array.isArray(response?.rows) ? response.rows
+      : Array.isArray(response?.data) ? response.data
+      : [];
+    accumulated.push(...rows);
+    cursor = response?.next_cursor || response?.cursor || response?.meta?.next_cursor;
+    if (!cursor || rows.length === 0) break;
+  }
+  return accumulated;
+}
+
 export async function fetchSemrushRows(reportType, params = {}) {
   const apiKey = requireEnv('SEMRUSH_API_KEY');
   const url = new URL('https://api.semrush.com/');
   url.searchParams.set('type', reportType);
   url.searchParams.set('key', apiKey);
-  Object.entries(params).forEach(([key, value]) => {
-    if (value === undefined || value === null || value === '') return;
-    url.searchParams.set(key, String(value));
-  });
+  Object.entries(params).forEach(([key, value]) => appendSearchParam(url, key, value));
 
   const response = await fetch(url.toString());
   const text = await response.text();
@@ -243,6 +321,282 @@ export async function fetchSemrushRows(reportType, params = {}) {
       return row;
     }, {});
   });
+}
+
+// Semrush Analytics API v1 — separate base URL for Backlinks + Trends query types.
+// Report types: backlinks_overview, backlinks_refdomains, backlinks_anchors, backlinks_pages,
+// backlinks_competitors, traffic_summary, traffic_sources, audience_overlap, trending_websites.
+// "ERROR 50 :: NOTHING FOUND" means empty dataset (not auth failure) — treated as ok, returns [].
+export async function fetchSemrushAnalyticsRows(reportType, params = {}) {
+  const apiKey = requireEnv('SEMRUSH_API_KEY');
+  const url = new URL('https://api.semrush.com/analytics/v1/');
+  url.searchParams.set('type', reportType);
+  url.searchParams.set('key', apiKey);
+  Object.entries(params).forEach(([key, value]) => appendSearchParam(url, key, value));
+
+  const response = await fetch(url.toString());
+  const text = await response.text();
+
+  if (text.startsWith('ERROR 50')) return []; // NOTHING FOUND — empty, not error
+  if (!response.ok || text.startsWith('ERROR')) {
+    throw new Error(`Semrush analytics request failed (${response.status}) for ${reportType}: ${text.slice(0, 200)}`);
+  }
+
+  const lines = text.trim().split('\n');
+  if (lines.length < 2) return [];
+  const headers = lines[0].split(';');
+  return lines.slice(1).map((line) => {
+    const values = line.split(';');
+    return headers.reduce((row, header, index) => {
+      row[header] = values[index] || '';
+      return row;
+    }, {});
+  });
+}
+
+// Semrush Projects API (v3) — separate base URL, JSON payload, key via query.
+// Docs: https://developer.semrush.com/api/v3/projects/
+export async function fetchSemrushProjectJson(pathSuffix, params = {}) {
+  const apiKey = requireEnv('SEMRUSH_API_KEY');
+  const url = new URL(`https://api.semrush.com/reports/v1/projects/${pathSuffix.replace(/^\/+/, '')}`);
+  url.searchParams.set('key', apiKey);
+  Object.entries(params).forEach(([key, value]) => appendSearchParam(url, key, value));
+
+  return fetchJson(url.toString(), {
+    headers: { Accept: 'application/json' },
+  });
+}
+
+export async function fetchSemrushManagementJson(pathSuffix, {
+  method = 'GET',
+  params = {},
+  body = null,
+} = {}) {
+  const apiKey = requireEnv('SEMRUSH_API_KEY');
+  const url = new URL(`https://api.semrush.com/management/v1/projects/${pathSuffix.replace(/^\/+/, '')}`);
+  url.searchParams.set('key', apiKey);
+  Object.entries(params).forEach(([key, value]) => appendSearchParam(url, key, value));
+
+  return fetchJson(url.toString(), {
+    method,
+    headers: {
+      Accept: 'application/json',
+      ...(body ? { 'Content-Type': 'application/json' } : {}),
+    },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+}
+
+export function getArtifactEnvelope({
+  source,
+  generatedAt = new Date().toISOString(),
+  status = 'ok',
+  blockedReason = null,
+  warnings = [],
+  unitCostEstimate = null,
+  ...rest
+} = {}) {
+  return {
+    source,
+    generatedAt,
+    status,
+    blockedReason,
+    warnings,
+    unitCostEstimate,
+    ...rest,
+  };
+}
+
+export function withSectionStatus(section = {}, fallbackStatus = 'unknown') {
+  return {
+    status: section.status || fallbackStatus,
+    blockedReason: section.blockedReason || null,
+    warnings: Array.isArray(section.warnings) ? section.warnings : [],
+    ...section,
+  };
+}
+
+export function normalizeStatus(status, fallback = 'unknown') {
+  const allowed = new Set(['ok', 'skipped', 'blocked', 'misconfigured', 'unknown']);
+  return allowed.has(status) ? status : fallback;
+}
+
+export function statusSeverity(status) {
+  switch (normalizeStatus(status)) {
+    case 'misconfigured':
+      return 4;
+    case 'blocked':
+      return 3;
+    case 'unknown':
+      return 2;
+    case 'skipped':
+      return 1;
+    case 'ok':
+    default:
+      return 0;
+  }
+}
+
+export function rollupStatuses(...statuses) {
+  const normalized = statuses
+    .flat()
+    .map((status) => normalizeStatus(status))
+    .filter(Boolean);
+
+  if (normalized.length === 0) return 'unknown';
+  return normalized.reduce((current, candidate) => (
+    statusSeverity(candidate) > statusSeverity(current) ? candidate : current
+  ));
+}
+
+export function classifySemrushError(error) {
+  const message = error instanceof Error ? error.message : String(error);
+  if (/API UNITS BALANCE IS ZERO|not enough api units|Api units balance is zero/i.test(message)) {
+    return { status: 'blocked', blockedReason: 'semrush_api_units_zero', message };
+  }
+  if (/campaign not found|Access denied|project access/i.test(message)) {
+    return { status: 'misconfigured', blockedReason: null, message };
+  }
+  if (/Missing required environment variable|not set/i.test(message)) {
+    return { status: 'misconfigured', blockedReason: null, message };
+  }
+  return { status: 'unknown', blockedReason: null, message };
+}
+
+export function classifyAhrefsError(error) {
+  const message = error instanceof Error ? error.message : String(error);
+  if (/Missing required environment variable|not set/i.test(message)) {
+    return { status: 'misconfigured', blockedReason: null, message };
+  }
+  if (/API units limit reached|API units left:\s*0|Expected usage:/i.test(message)) {
+    return { status: 'blocked', blockedReason: 'ahrefs_api_units_exhausted', message };
+  }
+  if (/429|Too Many Requests|throttl/i.test(message)) {
+    return { status: 'blocked', blockedReason: 'ahrefs_rate_limited', message };
+  }
+  return { status: 'unknown', blockedReason: null, message };
+}
+
+export function summarizeSeoWorkflowGates(liveProbes = {}) {
+  const ahrefsBlocked = ['ahrefsApi', 'ahrefsSiteAudit', 'ahrefsRankTracker']
+    .some((probeName) => liveProbes[probeName]?.status === 'blocked');
+
+  return {
+    blockedEndpoints: [
+      ...(ahrefsBlocked ? ['ahrefs.api'] : []),
+      ...(liveProbes.semrushAnalytics?.status === 'blocked' ? ['semrush.analytics'] : []),
+      ...(liveProbes.semrushProjects?.status === 'blocked' ? ['semrush.projects'] : []),
+      ...(liveProbes.semrushPositionTracking?.status === 'blocked' ? ['semrush.positionTracking'] : []),
+    ],
+    sources: {
+      ahrefsApi: ahrefsBlocked ? 'blocked' : (normalizeStatus(liveProbes.ahrefsApi?.status) || 'unknown'),
+      semrushAnalytics: normalizeStatus(liveProbes.semrushAnalytics?.status) || 'unknown',
+      semrushProjects: normalizeStatus(liveProbes.semrushProjects?.status) || 'unknown',
+    },
+    workflowGates: {
+      canRunAhrefs: liveProbes.ahrefsApi?.status === 'ok' && !ahrefsBlocked,
+      canRunSemrushAnalytics: liveProbes.semrushAnalytics?.status === 'ok' && (liveProbes.semrushAnalytics?.unitsRemaining ?? 0) > 0,
+      canRunSemrushProjects: ['ok', 'unknown'].includes(liveProbes.semrushProjects?.status),
+      canRunSemrushPositionTracking: liveProbes.semrushPositionTracking?.status === 'ok',
+    },
+  };
+}
+
+export async function getSemrushApiUnitsBalance(apiKey = requireEnv('SEMRUSH_API_KEY')) {
+  try {
+    const response = await fetch(`https://www.semrush.com/users/countapiunits.html?key=${apiKey}`);
+    const text = (await response.text()).trim();
+    if (!response.ok || text.startsWith('ERROR')) {
+      throw new Error(text || `HTTP ${response.status}`);
+    }
+    const unitsRemaining = Number(text);
+    const normalizedUnits = Number.isFinite(unitsRemaining) ? unitsRemaining : null;
+    return {
+      status: normalizedUnits !== null && normalizedUnits <= 0 ? 'blocked' : 'ok',
+      blockedReason: normalizedUnits !== null && normalizedUnits <= 0 ? 'semrush_api_units_zero' : null,
+      unitsRemaining: normalizedUnits,
+      raw: text,
+    };
+  } catch (error) {
+    const classified = classifySemrushError(error);
+    return {
+      status: classified.status,
+      blockedReason: classified.blockedReason,
+      unitsRemaining: null,
+      error: classified.message,
+    };
+  }
+}
+
+export async function getAhrefsLimitsAndUsage(apiToken = requireEnv('AHREFS_API_TOKEN')) {
+  try {
+    const response = await fetch('https://api.ahrefs.com/v3/subscription-info/limits-and-usage', {
+      headers: { Authorization: `Bearer ${apiToken}` },
+    });
+    const payload = await response.json();
+    if (!response.ok) {
+      throw new Error(JSON.stringify(payload));
+    }
+    return {
+      status: 'ok',
+      subscription: payload.limits_and_usage?.subscription || null,
+      unitsLimit: payload.limits_and_usage?.units_limit_workspace ?? null,
+      unitsUsed: payload.limits_and_usage?.units_usage_workspace ?? null,
+      keyExpires: payload.limits_and_usage?.api_key_expiration_date ?? null,
+    };
+  } catch (error) {
+    const classified = classifyAhrefsError(error);
+    return {
+      status: classified.status,
+      blockedReason: classified.blockedReason,
+      error: classified.message,
+    };
+  }
+}
+
+export function listSeoOutputDates() {
+  if (!fs.existsSync(seoOutputRoot)) return [];
+  return fs.readdirSync(seoOutputRoot)
+    .filter((entry) => /^\d{4}-\d{2}-\d{2}$/.test(entry))
+    .sort();
+}
+
+export function getPreviousSeoDate(dateLabel) {
+  const dates = listSeoOutputDates();
+  const index = dates.indexOf(dateLabel);
+  if (index <= 0) return null;
+  return dates[index - 1] || null;
+}
+
+export function getPreviousSeoOutputDir(dateLabel) {
+  const previousDate = getPreviousSeoDate(dateLabel);
+  return previousDate ? path.join(seoOutputRoot, previousDate) : null;
+}
+
+// Load seed keywords from SEO_SEED_KEYWORDS_PATH (JSON array of strings or objects with .keyword).
+export function loadSeedKeywords(fallback = []) {
+  const configPath = optionalEnv('SEO_SEED_KEYWORDS_PATH', 'scripts/config/seed-keywords.json');
+  const absPath = path.isAbsolute(configPath) ? configPath : path.join(repoRoot, configPath);
+  if (!fs.existsSync(absPath)) return fallback;
+  const data = readJson(absPath);
+  const list = Array.isArray(data) ? data : data?.keywords || [];
+  return list
+    .map((entry) => (typeof entry === 'string' ? entry : entry?.keyword || ''))
+    .map((value) => String(value || '').trim())
+    .filter(Boolean);
+}
+
+// Load competitor domains from SEO_COMPETITOR_DOMAINS_PATH (JSON array of strings or objects with .domain).
+export function loadCompetitorDomains(fallback = []) {
+  const configPath = optionalEnv('SEO_COMPETITOR_DOMAINS_PATH', 'scripts/config/competitor-domains.json');
+  const absPath = path.isAbsolute(configPath) ? configPath : path.join(repoRoot, configPath);
+  if (!fs.existsSync(absPath)) return fallback;
+  const data = readJson(absPath);
+  const list = Array.isArray(data) ? data : data?.domains || [];
+  return list
+    .map((entry) => (typeof entry === 'string' ? entry : entry?.domain || ''))
+    .map((value) => String(value || '').trim().toLowerCase())
+    .filter(Boolean);
 }
 
 export function loadSiteInventory() {

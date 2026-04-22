@@ -72,6 +72,19 @@ function renderSection(title, intro, items, renderItem) {
   return lines.join('\n');
 }
 
+function summarizeSemrushSiteAuditIssue(issue) {
+  const affectedPages = numberValue(issue.total || issue.count || issue.num || 0);
+  const sample = Array.isArray(issue.data) ? issue.data.find(Boolean) : null;
+  const sampleLabel = sample?.source_url || sample?.title || sample?.page_id || '';
+  const label = issue.issue_id ? `Issue #${issue.issue_id}` : (issue.title || issue.name || 'Issue');
+  const details = [
+    label,
+    affectedPages > 0 ? `${integer(affectedPages)} pages` : null,
+    sampleLabel ? `sample: ${sampleLabel}` : null,
+  ].filter(Boolean);
+  return details.join(' | ');
+}
+
 function main() {
   const readOptional = (fileName) => {
     const filePath = path.join(outputDir, fileName);
@@ -97,6 +110,20 @@ function main() {
   const ahrefsCompetitors = readOptional('ahrefs-competitors.json');
   const semrushCompetitorProfiles = readOptional('semrush-competitor-profiles.json');
   const brandRadar = readOptional('brand-radar.json');
+
+  // Upgraded-plan artifacts (optional; skipped if not present)
+  const ahrefsSiteAudit = readOptional('ahrefs-site-audit.json');
+  const ahrefsRankTracker = readOptional('ahrefs-rank-tracker.json');
+  const ahrefsBatchAnalysis = readOptional('ahrefs-batch-analysis.json');
+  const ahrefsKeywordsExplorer = readOptional('ahrefs-keywords-explorer.json');
+  const ahrefsBacklinksDeep = readOptional('ahrefs-backlinks-deep.json');
+  const semrushKeywordAnalytics = readOptional('semrush-keyword-analytics.json');
+  const semrushBacklinksDeep = readOptional('semrush-backlinks-deep.json');
+  const semrushSupplemental = readOptional('semrush-supplemental.json');
+  const semrushTopicResearch = readOptional('semrush-topic-research.json');
+  const semrushTrafficAnalytics = readOptional('semrush-traffic-analytics.json');
+  const semrushProjects = readOptional('semrush-projects.json');
+  const contentBriefs = readOptional('content-briefs.json');
 
   const topPages = ahrefsTopPages.rows || [];
   const keywords = ahrefsKeywords.rows || [];
@@ -292,6 +319,54 @@ function main() {
     ].filter(Boolean).join('\n');
   }
 
+  let semrushSupplementalSection = '';
+  if (semrushSupplemental) {
+    const topOrganicPages = (semrushSupplemental.organicPages || []).slice(0, 5);
+    const topRefDomains = (semrushSupplemental.referringDomains || []).slice(0, 5);
+    const batchRows = (semrushSupplemental.batchComparison || []).slice(0, 5);
+    const lines = [
+      '## Semrush Supplemental',
+      '',
+      `- Status: ${semrushSupplemental.status}${semrushSupplemental.blockedReason ? ` (${semrushSupplemental.blockedReason})` : ''}`,
+      `- Units remaining: ${semrushSupplemental.unitsBalance?.unitsRemaining ?? 'n/a'}`,
+    ];
+
+    if (semrushSupplemental.status === 'blocked') {
+      lines.push(`- Current limitation: ${(semrushSupplemental.sections?.organicKeywords?.warnings || [])[0] || 'Semrush analytics units are exhausted.'}`);
+      lines.push('');
+      semrushSupplementalSection = lines.join('\n');
+    } else {
+      const overview = semrushSupplemental.backlinksOverview || {};
+      lines.push(`- Backlink Authority Score: ${integer(overview.ascore || 0)} | Referring domains: ${integer(overview.referringDomains || 0)} | Backlinks: ${integer(overview.totalBacklinks || 0)}`);
+      lines.push('');
+
+      if (topOrganicPages.length > 0) {
+        lines.push('**Top organic pages (Semrush):**');
+        topOrganicPages.forEach((page) => lines.push(`  - \`${normalizePathname(page.url)}\` | kw ${integer(page.keywords)} | traffic ${integer(page.traffic)} | share ${decimal(page.trafficShare)}%`));
+        lines.push('');
+      }
+
+      if (topRefDomains.length > 0) {
+        lines.push('**Top referring domains (Semrush):**');
+        topRefDomains.forEach((domain) => lines.push(`  - \`${domain.domain}\` | AS ${integer(domain.ascore)} | backlinks ${integer(domain.backlinks)} | ${domain.country || 'n/a'}`));
+        lines.push('');
+      }
+
+      if (batchRows.length > 0) {
+        lines.push('**Batch comparison (Semrush):**');
+        batchRows.forEach((row) => lines.push(`  - \`${row.target}\` | AS ${integer(row.ascore)} | refdomains ${integer(row.domains)} | backlinks ${integer(row.backlinks)}`));
+        lines.push('');
+      }
+
+      if (semrushTrafficAnalytics?.status === 'blocked') {
+        lines.push(`- Traffic Analytics: blocked (${semrushTrafficAnalytics.blockedReason || 'insufficient units'})`);
+        lines.push('');
+      }
+
+      semrushSupplementalSection = lines.join('\n');
+    }
+  }
+
   // --- Cross-Tool Keyword Validation section ---
 
   let crossToolSection = '';
@@ -414,6 +489,18 @@ function main() {
         }
         parts.push('');
 
+        const historySources = Object.entries(radar.impressionsHistory || {});
+        if (historySources.length > 0) {
+          parts.push('Recent Brand Radar history:');
+          historySources.slice(0, 4).forEach(([source, history]) => {
+            const metrics = history?.metrics || [];
+            const latest = metrics[metrics.length - 1];
+            if (!latest) return;
+            parts.push(`  - ${source}: latest impressions ${integer(latest.impressions || latest.total || 0)}`);
+          });
+          parts.push('');
+        }
+
         const allResponses = Object.values(radar.aiResponses || {}).flatMap((r) =>
           (r?.ai_responses || []).map((resp) => ({ ...resp }))
         );
@@ -467,13 +554,176 @@ function main() {
   if (semrushOverview) headerLines.push(`Semrush target: \`${semrushOverview.target}\``);
   headerLines.push('');
 
+  // --- Site Health (from Ahrefs Site Audit + Semrush Projects Site Audit) ---
+  let siteHealthSection = '';
+  if (ahrefsSiteAudit && !ahrefsSiteAudit.skipped) {
+    const ov = ahrefsSiteAudit.overview || {};
+    const topIssues = (ahrefsSiteAudit.issues || [])
+      .sort((a, b) => numberValue(b.crawled) - numberValue(a.crawled))
+      .slice(0, 5);
+    const issueLines = topIssues.length > 0
+      ? topIssues.map((iss) => `  - ${iss.name} [${iss.importance || iss.category || 'issue'}] x${integer(iss.crawled)}`).join('\n')
+      : '  - No issues surfaced.';
+    siteHealthSection = [
+      '## Site Health (Ahrefs Site Audit)',
+      '',
+      `- Score: ${ov.health_score ?? 'n/a'} | Crawled URLs: ${integer(ov.total)}`,
+      `- Errors: ${integer(ov.urls_with_errors)} | Warnings: ${integer(ov.urls_with_warnings)} | Notices: ${integer(ov.urls_with_notices)}`,
+      '',
+      '**Top issues:**',
+      issueLines,
+      '',
+    ].join('\n');
+  }
+  if (semrushProjects && !semrushProjects.skipped && semrushProjects.siteAudit) {
+    const sa = semrushProjects.siteAudit;
+    const topIssues = (sa.issues || []).slice(0, 5);
+    const issueLines = topIssues.length > 0
+      ? topIssues.map((iss) => `  - ${summarizeSemrushSiteAuditIssue(iss)}`).join('\n')
+      : (sa.status === 'ok' ? '  - No issues surfaced.' : '  - Issue details unavailable in the current run.');
+    const statusLine = sa.status === 'ok'
+      ? `- Status: ${sa.health?.status || 'ok'} | Crawled pages: ${integer(sa.health?.pagesCrawled)}`
+      : `- Status: ${sa.status}${sa.blockedReason ? ` (${sa.blockedReason})` : ''} | Crawled pages: ${integer(sa.health?.pagesCrawled)}`;
+    siteHealthSection += [
+      '## Site Health (Semrush Site Audit)',
+      '',
+      statusLine,
+      `- Errors: ${integer(sa.health?.errors)} | Warnings: ${integer(sa.health?.warnings)} | Notices: ${integer(sa.health?.notices)}`,
+      sa.warnings?.length ? `- Current limitation: ${sa.warnings[0]}` : '',
+      '',
+      issueLines,
+      '',
+    ].join('\n');
+  }
+
+  // --- Rank Movement (from Ahrefs Rank Tracker) ---
+  let rankMovementSection = '';
+  if (ahrefsRankTracker && !ahrefsRankTracker.skipped) {
+    const winners = (ahrefsRankTracker.movement?.winners || []).slice(0, 10);
+    const losers = (ahrefsRankTracker.movement?.losers || []).slice(0, 10);
+    const winnerLines = winners.length > 0
+      ? winners.map((w) => `  - \`${w.keyword}\` | ${decimal(w.position)} (↑${Math.abs(w.positionDiff).toFixed(0)}) | vol ${integer(w.volume)}`).join('\n')
+      : '  - No ranking improvements this period.';
+    const loserLines = losers.length > 0
+      ? losers.map((l) => `  - \`${l.keyword}\` | ${decimal(l.position)} (↓${l.positionDiff.toFixed(0)}) | vol ${integer(l.volume)}`).join('\n')
+      : '  - No ranking drops this period.';
+    rankMovementSection = [
+      '## Rank Movement (Ahrefs Rank Tracker)',
+      '',
+      `Tracking ${integer(ahrefsRankTracker.keywordPositions?.length)} keywords. Visibility: ${decimal(ahrefsRankTracker.overview?.visibility || 0)}`,
+      '',
+      '**Winners (moved up):**',
+      winnerLines,
+      '',
+      '**Losers (dropped):**',
+      loserLines,
+      '',
+      ahrefsRankTracker.competitorStats?.length > 0 ? '**Competitor stats:**' : '',
+      ahrefsRankTracker.competitorStats?.slice(0, 5).map((row) => `  - \`${row.competitor}\` | SoV ${percent(row.shareOfVoice || 0)} | traffic ${integer(row.traffic || 0)} | avg pos ${decimal(row.averagePosition || 0)}`).join('\n') || '',
+      ahrefsRankTracker.competitorStats?.length > 0 ? '' : '',
+    ].join('\n');
+  }
+
+  // --- Competitor Authority (from Ahrefs Batch Analysis) ---
+  let competitorAuthoritySection = '';
+  if (ahrefsBatchAnalysis && (ahrefsBatchAnalysis.ranked || []).length > 0) {
+    const lines = ahrefsBatchAnalysis.ranked.slice(0, 10).map((r) =>
+      `  - \`${r.url}\` | DR ${integer(r.domainRating)} | backlinks ${integer(r.backlinks)} | refdomains ${integer(r.refdomains)} | organic ${integer(r.organicTraffic)}`
+    ).join('\n');
+    competitorAuthoritySection = [
+      '## Competitor Authority (Ahrefs Batch Analysis)',
+      '',
+      `${ahrefsBatchAnalysis.domainCount} domains compared on a single pass.`,
+      '',
+      lines,
+      '',
+    ].join('\n');
+  }
+
+  // --- Keyword Research Opportunities (from Keywords Explorer + Keyword Analytics + Topic Research) ---
+  let keywordResearchSection = '';
+  if (ahrefsKeywordsExplorer || semrushKeywordAnalytics || semrushTopicResearch) {
+    const parts = ['## Keyword Research Opportunities', ''];
+    if (ahrefsKeywordsExplorer) {
+      const matching = (ahrefsKeywordsExplorer.matchingTerms || [])
+        .sort((a, b) => b.volume - a.volume).slice(0, 8);
+      if (matching.length > 0) {
+        parts.push('**Ahrefs matching terms (top volume):**');
+        matching.forEach((m) => parts.push(`  - \`${m.keyword}\` | vol ${integer(m.volume)} | KD ${integer(m.difficulty)} | TP ${integer(m.trafficPotential)}`));
+        parts.push('');
+      }
+    }
+    if (semrushTopicResearch && (semrushTopicResearch.ranked || []).length > 0) {
+      parts.push('**Semrush topics by total search volume:**');
+      semrushTopicResearch.ranked.slice(0, 8).forEach((t) =>
+        parts.push(`  - \`${t.topic}\` | total volume ${integer(t.totalVolume)} | ${t.questionsCount} questions, ${t.relatedCount} related`)
+      );
+      parts.push('');
+    }
+    if (semrushKeywordAnalytics) {
+      const questions = (semrushKeywordAnalytics.questions || [])
+        .sort((a, b) => b.volume - a.volume).slice(0, 6);
+      if (questions.length > 0) {
+        parts.push('**Top question keywords (Semrush):**');
+        questions.forEach((q) => parts.push(`  - \`${q.keyword}\` | vol ${integer(q.volume)}`));
+        parts.push('');
+      }
+    }
+    if (parts.length > 2) keywordResearchSection = parts.join('\n');
+  }
+
+  // --- Backlink Intelligence (from deep pulls) ---
+  let backlinkDeepSection = '';
+  if (ahrefsBacklinksDeep || semrushBacklinksDeep) {
+    const parts = ['## Backlink Intelligence', ''];
+    if (ahrefsBacklinksDeep) {
+      const broken = (ahrefsBacklinksDeep.brokenBacklinks || []).slice(0, 5);
+      if (broken.length > 0) {
+        parts.push(`**Broken backlinks (${ahrefsBacklinksDeep.brokenBacklinks.length} total) — reclaim opportunities:**`);
+        broken.forEach((b) => parts.push(`  - from \`${b.urlFrom}\` → \`${b.urlTo}\` | DR ${integer(b.sourceDomainRating)}`));
+        parts.push('');
+      }
+      const topAnchors = (ahrefsBacklinksDeep.anchors || []).slice(0, 8);
+      if (topAnchors.length > 0) {
+        parts.push('**Top anchor texts:**');
+        topAnchors.forEach((a) => parts.push(`  - \`${a.anchor}\` | refdomains ${integer(a.refdomains)} | dofollow ${integer(a.dofollowLinks)}`));
+        parts.push('');
+      }
+    }
+    if (semrushBacklinksDeep) {
+      const competitors = (semrushBacklinksDeep.competitors || []).slice(0, 5);
+      if (competitors.length > 0) {
+        parts.push('**Similar-backlink-profile competitors (Semrush):**');
+        competitors.forEach((c) => parts.push(`  - \`${c.domain}\` | similarity ${decimal(c.similarity)} | shared refdomains ${integer(c.commonRefdomains)}`));
+        parts.push('');
+      }
+    }
+    if (semrushSupplemental && (semrushSupplemental.anchors || []).length > 0) {
+      parts.push('**Top anchor texts (Semrush supplemental):**');
+      semrushSupplemental.anchors.slice(0, 5).forEach((anchor) => {
+        parts.push(`  - \`${anchor.anchor}\` | refdomains ${integer(anchor.refdomains)} | backlinks ${integer(anchor.backlinks)}`);
+      });
+      parts.push('');
+    }
+    if (parts.length > 2) backlinkDeepSection = parts.join('\n');
+  }
+
   const sections = [
     headerLines.join('\n'),
+    siteHealthSection,
+    rankMovementSection,
     semrushSnapshotSection,
     crossToolSection,
     competitiveLandscapeSection,
+    competitorAuthoritySection,
+    keywordResearchSection,
+    backlinkDeepSection,
     buildAiVisibilitySection(semrushKeywords, brandRadar),
-  ];
+  ].filter(Boolean);
+
+  if (semrushSupplementalSection) {
+    sections.splice(4, 0, semrushSupplementalSection);
+  }
 
   if (gscPages) {
     sections.push(renderSection(
@@ -508,7 +758,74 @@ function main() {
     (item) => `\`${item.pathname}\` [${item.surface}] | top keyword \`${item.topKeyword}\` | best position ${decimal(item.bestPosition)} | traffic potential ${integer(item.totalTraffic)} | refdomains ${item.refdomains === null ? 'n/a' : integer(item.refdomains)}`
   ));
 
-  writeText(path.join(outputDir, 'brief.md'), sections.join('\n'));
+  const technicalFixQueue = [];
+  (ahrefsSiteAudit?.issues || [])
+    .filter((issue) => numberValue(issue.crawled) > 0)
+    .slice(0, 8)
+    .forEach((issue) => {
+      technicalFixQueue.push(`${issue.name} | severity ${issue.importance || issue.category} | affected ${integer(issue.crawled)} URLs`);
+    });
+  (semrushProjects?.manualOnly?.actionQueue || []).slice(0, 3).forEach((item) => technicalFixQueue.push(item));
+
+  const refreshQueue = refreshCandidates.slice(0, 8).map((item) => (
+    `\`${item.pathname}\` | clicks ${integer(item.previousClicks)} -> ${integer(item.currentClicks)} | avg position ${decimal(item.previousPosition)} -> ${decimal(item.currentPosition)}`
+  ));
+
+  const newContentQueue = [
+    ...(contentBriefs?.briefs || []).slice(0, 8).map((brief) => (
+      `\`${brief.keyword}\` | ${brief.suggestedSurface} | vol ${integer(brief.volume)} | est potential ${integer(brief.trafficPotential)}`
+    )),
+    ...newContentOpportunities.slice(0, 4).map((item) => (
+      `\`${item.keyword}\` | ${item.suggestedSurface} | vol ${integer(item.volume)}`
+    )),
+  ];
+
+  const citationQueue = [];
+  Object.values(brandRadar?.citedPages || {})
+    .flatMap((entry) => entry?.cited_pages || [])
+    .sort((left, right) => numberValue(right.responses) - numberValue(left.responses))
+    .slice(0, 5)
+    .forEach((page) => {
+      citationQueue.push(`Maintain cited page \`${normalizePathname(page.cited_url)}\` | cited ${integer(page.responses)} times | volume ${integer(page.volume)}`);
+    });
+  rankedLinkTargets.slice(0, 5).forEach((item) => {
+    citationQueue.push(`Outreach target \`${item.pathname}\` | top keyword \`${item.topKeyword}\` | refdomains ${item.refdomains === null ? 'n/a' : integer(item.refdomains)}`);
+  });
+
+  sections.push(renderSection(
+    'Technical Fix Queue',
+    'Highest-signal technical SEO fixes and manual follow-ups from the current pull.',
+    technicalFixQueue,
+    (item) => item
+  ));
+  sections.push(renderSection(
+    'Content Refresh Queue',
+    'Existing pages to refresh first based on click loss, ranking softness, or citation maintenance.',
+    refreshQueue,
+    (item) => item
+  ));
+  sections.push(renderSection(
+    'New Content Queue',
+    'Next briefs or route gaps to turn into new pages.',
+    newContentQueue,
+    (item) => item
+  ));
+  sections.push(renderSection(
+    'Link/Citation Queue',
+    'Pages to support with link building, citation maintenance, or AI-answer reinforcement.',
+    citationQueue,
+    (item) => item
+  ));
+
+  let briefText = sections.join('\n');
+  if (semrushSupplementalSection && !briefText.includes('## Semrush Supplemental')) {
+    const anchorPattern = /(## Cross-Tool Keyword Validation|## Competitive Landscape|## Competitor Authority|## Keyword Research Opportunities|## Backlink Intelligence|## New Content Opportunities)/;
+    briefText = anchorPattern.test(briefText)
+      ? briefText.replace(anchorPattern, `${semrushSupplementalSection}\n\n$1`)
+      : `${briefText}\n\n${semrushSupplementalSection}`;
+  }
+
+  writeText(path.join(outputDir, 'brief.md'), briefText);
 
   console.log(JSON.stringify({
     ok: true,
