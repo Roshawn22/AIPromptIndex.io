@@ -478,26 +478,38 @@ export function classifyAhrefsError(error) {
 }
 
 export function summarizeSeoWorkflowGates(liveProbes = {}) {
-  const ahrefsBlocked = ['ahrefsApi', 'ahrefsSiteAudit', 'ahrefsRankTracker']
-    .some((probeName) => liveProbes[probeName]?.status === 'blocked');
+  const ahrefsApiStatus = normalizeStatus(liveProbes.ahrefsApi?.status);
+  const ahrefsSiteAuditStatus = normalizeStatus(liveProbes.ahrefsSiteAudit?.status);
+  const ahrefsRankTrackerStatus = normalizeStatus(liveProbes.ahrefsRankTracker?.status);
+  const semrushAnalyticsStatus = normalizeStatus(liveProbes.semrushAnalytics?.status);
+  const semrushProjectsStatus = normalizeStatus(liveProbes.semrushProjects?.status);
+  const semrushPositionTrackingStatus = normalizeStatus(liveProbes.semrushPositionTracking?.status);
+
+  const canRunAhrefsCore = ahrefsApiStatus === 'ok';
 
   return {
     blockedEndpoints: [
-      ...(ahrefsBlocked ? ['ahrefs.api'] : []),
-      ...(liveProbes.semrushAnalytics?.status === 'blocked' ? ['semrush.analytics'] : []),
-      ...(liveProbes.semrushProjects?.status === 'blocked' ? ['semrush.projects'] : []),
-      ...(liveProbes.semrushPositionTracking?.status === 'blocked' ? ['semrush.positionTracking'] : []),
+      ...(ahrefsApiStatus === 'blocked' ? ['ahrefs.api'] : []),
+      ...(ahrefsSiteAuditStatus === 'blocked' ? ['ahrefs.siteAudit'] : []),
+      ...(ahrefsRankTrackerStatus === 'blocked' ? ['ahrefs.rankTracker'] : []),
+      ...(semrushAnalyticsStatus === 'blocked' ? ['semrush.analytics'] : []),
+      ...(semrushProjectsStatus === 'blocked' ? ['semrush.projects'] : []),
+      ...(semrushPositionTrackingStatus === 'blocked' ? ['semrush.positionTracking'] : []),
     ],
     sources: {
-      ahrefsApi: ahrefsBlocked ? 'blocked' : (normalizeStatus(liveProbes.ahrefsApi?.status) || 'unknown'),
-      semrushAnalytics: normalizeStatus(liveProbes.semrushAnalytics?.status) || 'unknown',
-      semrushProjects: normalizeStatus(liveProbes.semrushProjects?.status) || 'unknown',
+      ahrefsApi: ahrefsApiStatus || 'unknown',
+      ahrefsSiteAudit: ahrefsSiteAuditStatus || 'unknown',
+      ahrefsRankTracker: ahrefsRankTrackerStatus || 'unknown',
+      semrushAnalytics: semrushAnalyticsStatus || 'unknown',
+      semrushProjects: semrushProjectsStatus || 'unknown',
     },
     workflowGates: {
-      canRunAhrefs: liveProbes.ahrefsApi?.status === 'ok' && !ahrefsBlocked,
-      canRunSemrushAnalytics: liveProbes.semrushAnalytics?.status === 'ok' && (liveProbes.semrushAnalytics?.unitsRemaining ?? 0) > 0,
-      canRunSemrushProjects: ['ok', 'unknown'].includes(liveProbes.semrushProjects?.status),
-      canRunSemrushPositionTracking: liveProbes.semrushPositionTracking?.status === 'ok',
+      canRunAhrefs: canRunAhrefsCore,
+      canRunAhrefsSiteAudit: canRunAhrefsCore && ahrefsSiteAuditStatus === 'ok',
+      canRunAhrefsRankTracker: canRunAhrefsCore && ahrefsRankTrackerStatus === 'ok',
+      canRunSemrushAnalytics: semrushAnalyticsStatus === 'ok' && (liveProbes.semrushAnalytics?.unitsRemaining ?? 0) > 0,
+      canRunSemrushProjects: ['ok', 'unknown'].includes(semrushProjectsStatus),
+      canRunSemrushPositionTracking: semrushPositionTrackingStatus === 'ok',
     },
   };
 }

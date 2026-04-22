@@ -95,71 +95,81 @@ async function main() {
   }
 
   let issues = [];
-  try {
-    const rows = await fetchAhrefsPaginated(
-      'site-audit/issues',
-      { project_id: projectId, limit: 200 },
-      { maxPages: mode === 'full' ? 10 : 3, rowsKey: 'issues' },
-    );
-    issues = rows.map((row) => ({
-      issueId: row.issue_id || '',
-      name: row.name || '',
-      category: row.category || '',
-      importance: row.importance || '',
-      isIndexable: row.is_indexable,
-      crawled: numberValue(row.crawled),
-      change: numberValue(row.change),
-      added: numberValue(row.added),
-      new: numberValue(row.new),
-      removed: numberValue(row.removed),
-      missing: numberValue(row.missing),
-    }));
-    issuesSection.status = 'ok';
-  } catch (error) {
-    const classified = classifyAhrefsError(error);
-    issuesSection.status = classified.status;
-    issuesSection.blockedReason = classified.blockedReason;
-    issuesSection.warnings.push(classified.message);
+  if (mode === 'overview') {
+    issuesSection.status = 'skipped';
+  } else {
+    try {
+      const rows = await fetchAhrefsPaginated(
+        'site-audit/issues',
+        { project_id: projectId, limit: 200 },
+        { maxPages: 10, rowsKey: 'issues' },
+      );
+      issues = rows.map((row) => ({
+        issueId: row.issue_id || '',
+        name: row.name || '',
+        category: row.category || '',
+        importance: row.importance || '',
+        isIndexable: row.is_indexable,
+        crawled: numberValue(row.crawled),
+        change: numberValue(row.change),
+        added: numberValue(row.added),
+        new: numberValue(row.new),
+        removed: numberValue(row.removed),
+        missing: numberValue(row.missing),
+      }));
+      issuesSection.status = 'ok';
+    } catch (error) {
+      const classified = classifyAhrefsError(error);
+      issuesSection.status = classified.status;
+      issuesSection.blockedReason = classified.blockedReason;
+      issuesSection.warnings.push(classified.message);
+    }
   }
 
   let pageExplorer = [];
-  try {
-    const response = await fetchAhrefsJson('site-audit/page-explorer', {
-      project_id: projectId,
-      limit: mode === 'full' ? 50 : 15,
-    });
-    const rows = response?.pages || response?.rows || [];
-    pageExplorer = rows.map((row) => ({
-      url: row.url || '',
-      title: Array.isArray(row.title) ? row.title[0] || '' : row.title || '',
-      h1: Array.isArray(row.h1) ? row.h1[0] || '' : row.h1 || '',
-      httpCode: numberValue(row.http_code, null),
-      canonical: row.canonical || '',
-      canonicalCode: row.canonical_code ?? null,
-      compliant: row.compliant ?? null,
-      isNoindex: Boolean(row.page_is_noindex),
-      isNofollow: Boolean(row.page_is_nofollow),
-      traffic: numberValue(row.traffic, null),
-      incomingAllLinks: numberValue(row.incoming_all_links, null),
-      internalLinks: numberValue(row.links_count_internal, null),
-      externalLinks: numberValue(row.links_count_external, null),
-      pageRating: numberValue(row.page_rating, null),
-      contentType: row.content_type || '',
-      crawlDatetime: row.crawl_datetime || null,
-    }));
-    pageExplorerSection.status = 'ok';
-  } catch (error) {
-    const classified = classifyAhrefsError(error);
-    pageExplorerSection.status = classified.status;
-    pageExplorerSection.blockedReason = classified.blockedReason;
-    pageExplorerSection.warnings.push(classified.message);
+  if (mode === 'overview') {
+    pageExplorerSection.status = 'skipped';
+  } else {
+    try {
+      const response = await fetchAhrefsJson('site-audit/page-explorer', {
+        project_id: projectId,
+        limit: 50,
+      });
+      const rows = response?.pages || response?.rows || [];
+      pageExplorer = rows.map((row) => ({
+        url: row.url || '',
+        title: Array.isArray(row.title) ? row.title[0] || '' : row.title || '',
+        h1: Array.isArray(row.h1) ? row.h1[0] || '' : row.h1 || '',
+        httpCode: numberValue(row.http_code, null),
+        canonical: row.canonical || '',
+        canonicalCode: row.canonical_code ?? null,
+        compliant: row.compliant ?? null,
+        isNoindex: Boolean(row.page_is_noindex),
+        isNofollow: Boolean(row.page_is_nofollow),
+        traffic: numberValue(row.traffic, null),
+        incomingAllLinks: numberValue(row.incoming_all_links, null),
+        internalLinks: numberValue(row.links_count_internal, null),
+        externalLinks: numberValue(row.links_count_external, null),
+        pageRating: numberValue(row.page_rating, null),
+        contentType: row.content_type || '',
+        crawlDatetime: row.crawl_datetime || null,
+      }));
+      pageExplorerSection.status = 'ok';
+    } catch (error) {
+      const classified = classifyAhrefsError(error);
+      pageExplorerSection.status = classified.status;
+      pageExplorerSection.blockedReason = classified.blockedReason;
+      pageExplorerSection.warnings.push(classified.message);
+    }
   }
 
   let pageContent = [];
-  if (pageExplorer.length > 0) {
+  if (mode === 'overview') {
+    pageContentSection.status = 'skipped';
+  } else if (pageExplorer.length > 0) {
     const contentTargets = pageExplorer
       .filter((row) => row.httpCode === 200 && /html/i.test(row.contentType))
-      .slice(0, mode === 'full' ? 5 : 3)
+      .slice(0, 5)
       .map((row) => row.url);
 
     try {
@@ -212,12 +222,14 @@ async function main() {
     source: 'ahrefs-api-v3',
     endpoint: 'site-audit',
     generatedAt,
-    status: rollupStatuses(projectSection.status, issuesSection.status, pageExplorerSection.status, pageContentSection.status),
+    status: mode === 'overview'
+      ? rollupStatuses(projectSection.status)
+      : rollupStatuses(projectSection.status, issuesSection.status, pageExplorerSection.status, pageContentSection.status),
     unitCostEstimate: {
       overview: 50,
-      issues: mode === 'full' ? 500 : 150,
-      pageExplorer: mode === 'full' ? 250 : 100,
-      pageContent: mode === 'full' ? 250 : 150,
+      issues: mode === 'full' ? 500 : 0,
+      pageExplorer: mode === 'full' ? 250 : 0,
+      pageContent: mode === 'full' ? 250 : 0,
     },
     projectId,
     mode,

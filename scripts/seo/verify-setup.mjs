@@ -124,12 +124,12 @@ async function probeAhrefsProject(token, projectId, kind) {
     return { status: 'skipped', checked: false, message: 'Project ID not configured.' };
   }
 
-  const today = new Date().toISOString().slice(0, 10);
-  const endpoint = kind === 'siteAudit'
-    ? `https://api.ahrefs.com/v3/site-audit/issues?project_id=${projectId}&limit=1`
-    : `https://api.ahrefs.com/v3/rank-tracker/overview?project_id=${projectId}&date=${today}&device=desktop&country=us&select=${encodeURIComponent('keyword,position')}&limit=1`;
-
   try {
+    const today = new Date().toISOString().slice(0, 10);
+    const endpoint = kind === 'siteAudit'
+      ? 'https://api.ahrefs.com/v3/site-audit/projects?limit=100'
+      : `https://api.ahrefs.com/v3/rank-tracker/overview?project_id=${projectId}&date=${today}&device=desktop&country=us&select=${encodeURIComponent('keyword,position')}&limit=1`;
+
     const response = await fetch(endpoint, {
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -143,6 +143,16 @@ async function probeAhrefsProject(token, projectId, kind) {
         message: text.slice(0, 200),
       };
     }
+
+    if (kind === 'siteAudit') {
+      const payload = JSON.parse(text);
+      const healthscores = Array.isArray(payload?.healthscores) ? payload.healthscores : [];
+      const projectExists = healthscores.some((row) => String(row.project_id) === String(projectId));
+      return projectExists
+        ? { status: 'ok', checked: true, message: null }
+        : { status: 'misconfigured', checked: true, message: `Project ${projectId} not found in site-audit/projects.` };
+    }
+
     return { status: 'ok', checked: true, message: null };
   } catch (error) {
     const classified = classifyAhrefsError(error);
@@ -190,6 +200,8 @@ function renderMarkdown(report) {
     '',
     `- Overall status: ${report.summary.overallStatus}`,
     `- Ahrefs API: ${report.summary.sources.ahrefsApi}`,
+    `- Ahrefs Site Audit: ${report.summary.sources.ahrefsSiteAudit}`,
+    `- Ahrefs Rank Tracker: ${report.summary.sources.ahrefsRankTracker}`,
     `- Semrush analytics (optional): ${report.summary.sources.semrushAnalytics}`,
     `- Semrush projects (optional): ${report.summary.sources.semrushProjects}`,
     `- Public site env: ${report.summary.sources.publicSiteEnv}`,
@@ -198,7 +210,9 @@ function renderMarkdown(report) {
     '',
     '## Workflow Gates',
     '',
-    `- Ahrefs pulls allowed: ${report.summary.workflowGates.canRunAhrefs ? 'yes' : 'no'}`,
+    `- Ahrefs core pulls allowed: ${report.summary.workflowGates.canRunAhrefs ? 'yes' : 'no'}`,
+    `- Ahrefs Site Audit pulls allowed: ${report.summary.workflowGates.canRunAhrefsSiteAudit ? 'yes' : 'no'}`,
+    `- Ahrefs Rank Tracker pulls allowed: ${report.summary.workflowGates.canRunAhrefsRankTracker ? 'yes' : 'no'}`,
     `- Semrush analytics pulls allowed (optional): ${report.summary.workflowGates.canRunSemrushAnalytics ? 'yes' : 'no'}`,
     `- Semrush projects pulls allowed (optional): ${report.summary.workflowGates.canRunSemrushProjects ? 'yes' : 'no'}`,
     `- Semrush position tracking pulls allowed (optional): ${report.summary.workflowGates.canRunSemrushPositionTracking ? 'yes' : 'no'}`,
@@ -333,6 +347,7 @@ async function main() {
 
   const liveProbeStatusesForOverall = Object.entries(liveProbes)
     .filter(([name, probe]) => {
+      if (name === 'ahrefsRankTracker') return false;
       if (!name.startsWith('semrush')) return true;
       return process.env.SEMRUSH_API_KEY && probe.status !== 'skipped';
     })
@@ -372,6 +387,8 @@ async function main() {
         localPipeline: rollupStatuses(requiredLocalPipelineStatuses),
         publicSiteEnv: rollupStatuses(publicSiteEnv.map((check) => check.status)),
         ahrefsApi: workflowSummary.sources.ahrefsApi,
+        ahrefsSiteAudit: workflowSummary.sources.ahrefsSiteAudit,
+        ahrefsRankTracker: workflowSummary.sources.ahrefsRankTracker,
         semrushAnalytics: workflowSummary.sources.semrushAnalytics,
         semrushProjects: workflowSummary.sources.semrushProjects,
       },

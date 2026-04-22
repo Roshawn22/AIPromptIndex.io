@@ -62,6 +62,10 @@ jobs:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           GOOGLE_ANALYTICS_PROPERTY_ID: ${{ secrets.GOOGLE_ANALYTICS_PROPERTY_ID }}
           GOOGLE_SEARCH_CONSOLE_PROPERTY: ${{ secrets.GOOGLE_SEARCH_CONSOLE_PROPERTY }}
+          PUBLIC_GOOGLE_SITE_VERIFICATION: ${{ secrets.PUBLIC_GOOGLE_SITE_VERIFICATION }}
+          PUBLIC_AHREFS_SITE_VERIFICATION: ${{ secrets.PUBLIC_AHREFS_SITE_VERIFICATION }}
+          PUBLIC_GA_MEASUREMENT_ID: ${{ secrets.PUBLIC_GA_MEASUREMENT_ID }}
+          PUBLIC_SITE_URL: ${{ secrets.PUBLIC_SITE_URL }}
         run: npm run seo:verify:setup
 
       - name: Resolve workflow gates from setup verification
@@ -80,6 +84,8 @@ jobs:
           const filePath = process.env.VERIFICATION_FILE;
           const report = JSON.parse(fs.readFileSync(filePath, 'utf8'));
           console.log(`can_run_ahrefs=${report.summary.workflowGates.canRunAhrefs}`);
+          console.log(`can_run_site_audit=${report.summary.workflowGates.canRunAhrefsSiteAudit}`);
+          console.log(`can_run_rank_tracker=${report.summary.workflowGates.canRunAhrefsRankTracker}`);
           console.log(`blocked_endpoints=${(report.summary.blockedEndpoints || []).join(',')}`);
           console.log(`overall_status=${report.summary.overallStatus}`);
           EOF
@@ -91,7 +97,7 @@ jobs:
         run: npm run seo:pull:ahrefs
 
       - name: Pull Ahrefs Site Audit (overview)
-        if: steps.gate.outputs.run_pull == 'true' && steps.preflight.outputs.can_run_ahrefs == 'true'
+        if: steps.gate.outputs.run_pull == 'true' && steps.preflight.outputs.can_run_site_audit == 'true'
         env:
           AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
           AHREFS_SITE_AUDIT_PROJECT_ID: ${{ secrets.AHREFS_SITE_AUDIT_PROJECT_ID }}
@@ -99,7 +105,7 @@ jobs:
         continue-on-error: true
 
       - name: Pull Ahrefs Rank Tracker
-        if: steps.gate.outputs.run_pull == 'true' && steps.preflight.outputs.can_run_ahrefs == 'true'
+        if: steps.gate.outputs.run_pull == 'true' && steps.preflight.outputs.can_run_rank_tracker == 'true'
         env:
           AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
           AHREFS_RANK_TRACKER_PROJECT_ID: ${{ secrets.AHREFS_RANK_TRACKER_PROJECT_ID }}
