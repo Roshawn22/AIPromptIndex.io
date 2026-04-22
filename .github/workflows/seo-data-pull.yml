@@ -138,7 +138,7 @@ jobs:
         continue-on-error: true
 
       - name: Generate content briefs
-        if: steps.gate.outputs.run_pull == 'true' && steps.pull_ahrefs_core.outcome == 'success'
+        if: steps.gate.outputs.run_pull == 'true' && steps.pull_ahrefs_core.conclusion == 'success'
         env:
           AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
         run: npm run seo:content-briefs
@@ -150,7 +150,7 @@ jobs:
         continue-on-error: true
 
       - name: Keyword gap analysis
-        if: steps.gate.outputs.run_pull == 'true' && steps.pull_ahrefs_core.outcome == 'success'
+        if: steps.gate.outputs.run_pull == 'true' && steps.pull_ahrefs_core.conclusion == 'success'
         env:
           AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
         run: npm run seo:keyword-gaps
@@ -162,11 +162,11 @@ jobs:
         continue-on-error: true
 
       - name: Generate SEO brief
-        if: steps.gate.outputs.run_pull == 'true' && steps.pull_ahrefs_core.outcome == 'success'
+        if: steps.gate.outputs.run_pull == 'true' && steps.pull_ahrefs_core.conclusion == 'success'
         run: npm run seo:brief
 
       - name: Syndicate new content to Medium
-        if: steps.gate.outputs.run_pull == 'true' && steps.pull_ahrefs_core.outcome == 'success'
+        if: steps.gate.outputs.run_pull == 'true' && steps.pull_ahrefs_core.conclusion == 'success'
         env:
           MEDIUM_API_TOKEN: ${{ secrets.MEDIUM_API_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
