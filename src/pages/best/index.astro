@@ -17,6 +17,19 @@ const roundups = [
   { slug: "image-generation-prompts", title: "Best AI Image Prompts", description: "Creative image generation prompts for Midjourney, DALL-E, and Stable Diffusion.", filter: { category: "image-generation" } },
 ];
 
+const featuredCollections = [
+  {
+    slug: "best-ai-prompts",
+    title: "Best AI Prompts",
+    description: "The highest-rated prompts across every tool and category.",
+  },
+  {
+    slug: "free-ai-prompts",
+    title: "Free AI Prompts",
+    description: "Copy-ready prompts that work well on free AI tool tiers.",
+  },
+];
+
 const allPrompts = await getCollection('prompts');
 
 const roundupsWithCounts = roundups.map((r) => {
@@ -49,6 +62,30 @@ const byCategory = roundupsWithCounts.filter((r) => r.filter.category);
       <p class="text-lg text-[var(--color-text-secondary)]">
         Curated collections of the best prompts, organized by tool and category.
       </p>
+    </div>
+
+    <!-- Featured Collections -->
+    <div class="mb-12">
+      <h2 class="mb-6 text-xl">Featured Collections</h2>
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {featuredCollections.map((r) => (
+          <a
+            href={`/best/${r.slug}/`}
+            class="group block rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-6 transition-all duration-200 hover:shadow-[var(--shadow-card-hover)] hover:border-[var(--color-accent-muted)]"
+          >
+            <h3 class="font-[var(--font-display)] text-lg font-semibold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
+              {r.title}
+            </h3>
+            <p class="mt-2 text-sm text-[var(--color-text-secondary)]">{r.description}</p>
+            <p class="mt-3 text-sm font-medium text-[var(--color-accent)]">
+              Open collection
+              <svg class="ml-1 inline h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </p>
+          </a>
+        ))}
+      </div>
     </div>
 
     <!-- By Tool -->
