@@ -41,6 +41,9 @@ const formattedUpdatedDate = data.updatedDate?.toLocaleDateString('en-US', {
   day: 'numeric',
 });
 
+const seoTitle = data.metaTitle && data.metaTitle.length <= 60 ? data.metaTitle : data.title;
+const seoDescription = data.metaDescription || data.description;
+
 const blogPostingJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
@@ -79,8 +82,8 @@ const categoryColors: Record<string, 'teal' | 'blue' | 'purple' | 'orange' | 'gr
 ---
 
 <BaseLayout
-  title={data.metaTitle || data.title}
-  description={data.metaDescription || data.description}
+  title={seoTitle}
+  description={seoDescription}
   ogType="article"
   publishedTime={pubDateStr}
   articleModifiedTime={updatedDateStr || pubDateStr}
