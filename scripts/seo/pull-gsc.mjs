@@ -8,7 +8,10 @@ import {
   writeJson,
 } from './_shared.mjs';
 
-const siteProperty = optionalEnv('GOOGLE_SEARCH_CONSOLE_PROPERTY', 'sc-domain:aipromptindex.io');
+const siteProperty = optionalEnv(
+  'GOOGLE_SEARCH_CONSOLE_PROPERTY',
+  optionalEnv('GOOGLE_SEARCH_CONSOLE_SITE', 'sc-domain:aipromptindex.io')
+);
 const outputDir = getSeoOutputDir();
 const windows = [
   buildDateWindow('last7', 7),

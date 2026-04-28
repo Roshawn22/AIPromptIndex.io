@@ -18,8 +18,40 @@ function main() {
   const ahrefsPath = path.join(outputDir, 'ahrefs-keywords.json');
 
   if (!fs.existsSync(semrushPath) || !fs.existsSync(ahrefsPath)) {
-    console.error('Both semrush-keywords.json and ahrefs-keywords.json are required. Run seo:pull:semrush and seo:pull:ahrefs first.');
-    process.exitCode = 1;
+    const missingInputs = [
+      !fs.existsSync(ahrefsPath) ? 'ahrefs-keywords.json' : null,
+      !fs.existsSync(semrushPath) ? 'semrush-keywords.json' : null,
+    ].filter(Boolean);
+
+    const output = {
+      source: 'cross-validation',
+      generatedAt,
+      status: 'skipped',
+      blockedReason: null,
+      warnings: [
+        `Cross-validation skipped because required keyword exports were missing: ${missingInputs.join(', ')}.`,
+      ],
+      summary: {
+        totalSemrush: 0,
+        totalAhrefs: 0,
+        matched: 0,
+        semrushOnly: 0,
+        ahrefsOnly: 0,
+        highDiscrepancy: 0,
+        averageConfidence: 0,
+      },
+      matched: [],
+      semrushOnly: [],
+      ahrefsOnly: [],
+    };
+
+    writeJson(path.join(outputDir, 'cross-validation.json'), output);
+    console.log(JSON.stringify({
+      ok: true,
+      outputDir,
+      status: output.status,
+      warning: output.warnings[0],
+    }, null, 2));
     return;
   }
 

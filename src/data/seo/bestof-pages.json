@@ -13,8 +13,10 @@
   },
   {
     "slug": "midjourney-prompts",
-    "title": "Best Midjourney Prompts",
-    "description": "Stunning Midjourney prompts for photorealistic images, fantasy art, and professional visual design.",
+    "title": "Best Midjourney AI Prompts",
+    "description": "Browse copy-ready Midjourney prompts for photorealistic images, fantasy art, product visuals, and professional visual design workflows.",
+    "metaTitle": "Best Midjourney AI Prompts",
+    "metaDescription": "Browse copy-ready Midjourney prompts for photorealistic images, fantasy art, product visuals, and professional visual design workflows.",
     "filter": { "tool": "midjourney" }
   },
   {
@@ -26,19 +28,22 @@
   {
     "slug": "writing-prompts",
     "title": "Best AI Writing Prompts",
-    "description": "Top writing prompts for blog posts, essays, copywriting, and long-form content creation with AI.",
+    "description": "Browse AI writing prompts for blog posts, essays, copywriting, editing, outlines, and long-form content creation across leading AI tools.",
+    "metaDescription": "Browse AI writing prompts for blog posts, essays, copywriting, editing, outlines, and long-form content creation across leading AI tools.",
     "filter": { "category": "writing" }
   },
   {
     "slug": "marketing-prompts",
     "title": "Best AI Marketing Prompts",
-    "description": "High-converting marketing prompts for social media, email campaigns, ad copy, and content strategy.",
+    "description": "Use AI marketing prompts for social posts, email campaigns, ad copy, audience research, landing pages, and practical content strategy workflows.",
+    "metaDescription": "Use AI marketing prompts for social posts, email campaigns, ad copy, audience research, landing pages, and practical content strategy workflows.",
     "filter": { "category": "marketing" }
   },
   {
     "slug": "business-prompts",
     "title": "Best AI Business Prompts",
-    "description": "Essential business prompts for strategy, proposals, operations, and professional communication.",
+    "description": "Explore AI business prompts for strategy, proposals, operations, planning, analysis, and professional communication across daily workflows.",
+    "metaDescription": "Explore AI business prompts for strategy, proposals, operations, planning, analysis, and professional communication across daily workflows.",
     "filter": { "category": "business" }
   },
   {

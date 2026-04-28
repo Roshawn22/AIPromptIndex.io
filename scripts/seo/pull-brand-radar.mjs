@@ -2,9 +2,11 @@ import path from 'node:path';
 
 import {
   fetchAhrefsJson,
+  getArtifactEnvelope,
   getSeoOutputDir,
   optionalEnv,
   parseCliArgs,
+  toIsoDate,
   writeJson,
 } from './_shared.mjs';
 
@@ -18,6 +20,8 @@ const reportId = optionalEnv('BRAND_RADAR_REPORT_ID', '019d5474-1c0f-7ee5-a4d9-a
 // AI platforms to query — Google models must be queried separately from non-Google
 const NON_GOOGLE_SOURCES = ['chatgpt', 'perplexity', 'gemini', 'copilot'];
 const GOOGLE_SOURCES = ['google_ai_overviews', 'google_ai_mode'];
+const historyDateTo = toIsoDate(new Date());
+const historyDateFrom = toIsoDate(new Date(Date.now() - 29 * 24 * 60 * 60 * 1000));
 
 async function fetchBrandRadar(endpoint, params = {}) {
   return fetchAhrefsJson(`brand-radar/${endpoint}`, {
@@ -87,6 +91,34 @@ async function pullCitedPages(dataSource) {
   });
 }
 
+async function pullImpressionsHistory(dataSource) {
+  return fetchBrandRadar('impressions-history', {
+    brand,
+    competitors,
+    market,
+    prompts: 'custom',
+    report_id: reportId,
+    data_source: dataSource,
+    date_from: historyDateFrom,
+    date_to: historyDateTo,
+    select: 'date,total,only_target_brand',
+  });
+}
+
+async function pullMentionsHistory(dataSource) {
+  return fetchBrandRadar('mentions-history', {
+    brand,
+    competitors,
+    market,
+    prompts: 'custom',
+    report_id: reportId,
+    data_source: dataSource,
+    date_from: historyDateFrom,
+    date_to: historyDateTo,
+    select: 'date,total,only_target_brand',
+  });
+}
+
 async function safePull(label, fn) {
   try {
     return { ok: true, data: await fn() };
@@ -109,6 +141,8 @@ async function main() {
   const sov = {};
   const aiResponses = {};
   const citedPages = {};
+  const impressionsHistory = {};
+  const mentionsHistory = {};
 
   for (const source of NON_GOOGLE_SOURCES) {
     const result = await safePull(`impressions-${source}`, () => pullImpressions(source));
@@ -127,6 +161,14 @@ async function main() {
       if (sovResult.ok) sov[source] = sovResult.data;
       if (responsesResult.ok) aiResponses[source] = responsesResult.data;
       if (citedResult.ok) citedPages[source] = citedResult.data;
+
+      const [impressionsHistoryResult, mentionsHistoryResult] = await Promise.all([
+        safePull(`impressions-history-${source}`, () => pullImpressionsHistory(source)),
+        safePull(`mentions-history-${source}`, () => pullMentionsHistory(source)),
+      ]);
+
+      if (impressionsHistoryResult.ok) impressionsHistory[source] = impressionsHistoryResult.data;
+      if (mentionsHistoryResult.ok) mentionsHistory[source] = mentionsHistoryResult.data;
     } else if (result.addonMissing) {
       addonStatus[source] = 'addon_not_enabled';
     } else {
@@ -152,6 +194,14 @@ async function main() {
       if (sovResult.ok) sov[source] = sovResult.data;
       if (responsesResult.ok) aiResponses[source] = responsesResult.data;
       if (citedResult.ok) citedPages[source] = citedResult.data;
+
+      const [impressionsHistoryResult, mentionsHistoryResult] = await Promise.all([
+        safePull(`impressions-history-${source}`, () => pullImpressionsHistory(source)),
+        safePull(`mentions-history-${source}`, () => pullMentionsHistory(source)),
+      ]);
+
+      if (impressionsHistoryResult.ok) impressionsHistory[source] = impressionsHistoryResult.data;
+      if (mentionsHistoryResult.ok) mentionsHistory[source] = mentionsHistoryResult.data;
     } else if (result.addonMissing) {
       addonStatus[source] = 'addon_not_enabled';
     } else {
@@ -172,21 +222,35 @@ async function main() {
     warnings.push(`Brand Radar addons not enabled: ${missingAddons.join(', ')}. Enable in Ahrefs to unlock AI visibility tracking.`);
   }
 
-  const output = {
+  const output = getArtifactEnvelope({
     source: 'ahrefs-brand-radar',
+    status: activeSources.length > 0 ? 'ok' : (missingAddons.length > 0 ? 'blocked' : 'unknown'),
+    blockedReason: activeSources.length > 0 ? null : (missingAddons.length > 0 ? 'brand_radar_addons_missing' : null),
     brand,
     market,
     competitors,
     generatedAt,
+    unitCostEstimate: {
+      overview: 250,
+      history: 100,
+      aiResponses: 100,
+      citedPages: 100,
+    },
     addonStatus,
     activeSources,
     warnings,
+    historyWindow: {
+      dateFrom: historyDateFrom,
+      dateTo: historyDateTo,
+    },
     impressions,
     mentions,
     sov,
+    impressionsHistory,
+    mentionsHistory,
     aiResponses,
     citedPages,
-  };
+  });
 
   writeJson(path.join(outputDir, 'brand-radar.json'), output);
 
@@ -203,6 +267,8 @@ async function main() {
       impressions: Object.keys(impressions).length,
       mentions: Object.keys(mentions).length,
       sov: Object.keys(sov).length,
+      impressionsHistory: Object.keys(impressionsHistory).length,
+      mentionsHistory: Object.keys(mentionsHistory).length,
       aiResponses: Object.keys(aiResponses).length,
       citedPages: Object.keys(citedPages).length,
     },

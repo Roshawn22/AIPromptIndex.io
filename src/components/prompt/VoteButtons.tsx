@@ -5,7 +5,7 @@
  */
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { ConvexReactClient, useQuery, useMutation, ConvexProvider } from 'convex/react';
-import { api } from '../../../convex/_generated/api';
+import { api } from '../../lib/convexApi';
 import { getVisitorId } from '../../lib/visitor';
 
 interface VoteButtonsProps {

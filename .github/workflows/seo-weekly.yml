@@ -1,0 +1,171 @@
+name: SEO Weekly Pull
+
+# Deep weekly pull: Ahrefs keywords explorer, backlinks-deep, site audit full crawl,
+# and Brand Radar. Runs Monday 7 AM Pacific.
+
+on:
+  schedule:
+    - cron: "0 14 * * 1"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: seo-weekly-main
+  cancel-in-progress: false
+
+jobs:
+  weekly:
+    name: Weekly SEO Deep Pull (Ahrefs)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+
+      - name: Runtime schedule gate (Mon 7 AM Pacific)
+        id: gate
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" != "schedule" ]]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          local_hour="$(TZ=America/Los_Angeles date +%H)"
+          local_dow="$(TZ=America/Los_Angeles date +%u)"
+          if [[ "$local_hour" == "07" && "$local_dow" == "1" ]]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "Gate blocked: hour=$local_hour dow=$local_dow"
+          fi
+
+      - name: Preflight verification
+        if: steps.gate.outputs.run == 'true'
+        env:
+          AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
+          AHREFS_SITE_AUDIT_PROJECT_ID: ${{ secrets.AHREFS_SITE_AUDIT_PROJECT_ID }}
+          AHREFS_RANK_TRACKER_PROJECT_ID: ${{ secrets.AHREFS_RANK_TRACKER_PROJECT_ID }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GOOGLE_ANALYTICS_PROPERTY_ID: ${{ secrets.GOOGLE_ANALYTICS_PROPERTY_ID }}
+          GOOGLE_SEARCH_CONSOLE_PROPERTY: ${{ secrets.GOOGLE_SEARCH_CONSOLE_PROPERTY }}
+          PUBLIC_GOOGLE_SITE_VERIFICATION: ${{ secrets.PUBLIC_GOOGLE_SITE_VERIFICATION }}
+          PUBLIC_AHREFS_SITE_VERIFICATION: ${{ secrets.PUBLIC_AHREFS_SITE_VERIFICATION }}
+          PUBLIC_GA_MEASUREMENT_ID: ${{ secrets.PUBLIC_GA_MEASUREMENT_ID }}
+          PUBLIC_SITE_URL: ${{ secrets.PUBLIC_SITE_URL }}
+        run: npm run seo:verify:setup
+
+      - name: Resolve workflow gates from setup verification
+        if: steps.gate.outputs.run == 'true'
+        id: preflight
+        shell: bash
+        run: |
+          verification_file="$(find output/seo -name setup-verification.json | sort | tail -n 1)"
+          if [[ -z "$verification_file" ]]; then
+            echo "setup-verification.json not found"
+            exit 1
+          fi
+          echo "verification_file=$verification_file" >> "$GITHUB_OUTPUT"
+          VERIFICATION_FILE="$verification_file" node --input-type=module - <<'EOF' >> "$GITHUB_OUTPUT"
+          import fs from 'node:fs';
+          const filePath = process.env.VERIFICATION_FILE;
+          const report = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+          console.log(`can_run_ahrefs=${report.summary.workflowGates.canRunAhrefs}`);
+          console.log(`blocked_endpoints=${(report.summary.blockedEndpoints || []).join(',')}`);
+          console.log(`overall_status=${report.summary.overallStatus}`);
+          EOF
+
+      - name: Pull Ahrefs (site-explorer baseline for join)
+        if: steps.gate.outputs.run == 'true' && steps.preflight.outputs.can_run_ahrefs == 'true'
+        env:
+          AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
+        run: npm run seo:pull:ahrefs
+
+      - name: Pull Ahrefs Keywords Explorer
+        if: steps.gate.outputs.run == 'true' && steps.preflight.outputs.can_run_ahrefs == 'true'
+        env:
+          AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
+        run: npm run seo:pull:ahrefs-keywords-explorer
+        continue-on-error: true
+
+      - name: Pull Ahrefs Backlinks (deep)
+        if: steps.gate.outputs.run == 'true' && steps.preflight.outputs.can_run_ahrefs == 'true'
+        env:
+          AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
+        run: npm run seo:pull:ahrefs-backlinks-deep
+        continue-on-error: true
+
+      - name: Pull Ahrefs Site Audit (full)
+        if: steps.gate.outputs.run == 'true' && steps.preflight.outputs.can_run_ahrefs == 'true'
+        env:
+          AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
+          AHREFS_SITE_AUDIT_PROJECT_ID: ${{ secrets.AHREFS_SITE_AUDIT_PROJECT_ID }}
+        run: npm run seo:pull:ahrefs-site-audit -- --mode=full
+        continue-on-error: true
+
+      - name: Pull Ahrefs Brand Radar
+        if: steps.gate.outputs.run == 'true' && steps.preflight.outputs.can_run_ahrefs == 'true'
+        env:
+          AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
+        run: npm run seo:pull:brand-radar
+        continue-on-error: true
+
+      - name: Upload SEO output
+        if: always() && steps.gate.outputs.run == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-weekly-${{ github.run_id }}
+          path: output/seo/
+          if-no-files-found: warn
+
+      - name: Open or update blocked SEO endpoint issue
+        if: steps.gate.outputs.run == 'true' && steps.preflight.outputs.blocked_endpoints != ''
+        uses: actions/github-script@v7
+        env:
+          BLOCKED_ENDPOINTS: ${{ steps.preflight.outputs.blocked_endpoints }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          RUN_AT: ${{ github.run_started_at }}
+        with:
+          script: |
+            const title = 'SEO API Endpoint Blocked';
+            const blocked = process.env.BLOCKED_ENDPOINTS.split(',').filter(Boolean);
+            const body = [
+              'One or more SEO API surfaces are blocked in the scheduled automation.',
+              '',
+              `- Blocked endpoints: ${blocked.join(', ')}`,
+              `- First observed in this run: ${process.env.RUN_AT}`,
+              `- Run: ${process.env.RUN_URL}`,
+              '',
+              'The workflow used `setup-verification.json` to skip blocked endpoints while continuing the Ahrefs-first weekly pull.'
+            ].join('\n');
+
+            const { owner, repo } = context.repo;
+            const openIssues = await github.paginate(github.rest.issues.listForRepo, {
+              owner,
+              repo,
+              state: 'open',
+              per_page: 100
+            });
+            const existing = openIssues.find((issue) => issue.title === title);
+            if (existing) {
+              await github.rest.issues.update({ owner, repo, issue_number: existing.number, body });
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: existing.number,
+                body: `Blocked endpoints observed again: ${blocked.join(', ')} (${process.env.RUN_URL})`
+              });
+            } else {
+              await github.rest.issues.create({ owner, repo, title, body });
+            }
+
+      - name: Gated run summary
+        if: steps.gate.outputs.run == 'false'
+        run: echo "Skipped by Pacific-time Monday gate."
