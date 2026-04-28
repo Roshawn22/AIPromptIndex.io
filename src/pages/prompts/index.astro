@@ -28,8 +28,8 @@ const categories = categoriesJson.map((c: any) => ({ id: c.id, name: c.name, slu
 ---
 
 <BaseLayout
-  title="Browse All AI Prompts"
-  description="Explore our curated collection of AI prompts for ChatGPT, Claude, Midjourney, and more. Filter by tool, category, and difficulty level."
+  title="AI Prompt Catalog | Browse Free Prompt Templates"
+  description="Explore a curated AI prompt catalog for ChatGPT, Claude, Midjourney, and more. Filter free prompt templates by tool, category, and difficulty level."
 >
   <Header slot="header" />
 
@@ -39,6 +39,26 @@ const categories = categoriesJson.map((c: any) => ({ id: c.id, name: c.name, slu
       <p class="mt-2 text-lg text-[var(--color-text-secondary)]">
         {prompts.length} curated prompts across {new Set(prompts.map(p => p.category)).size} categories
       </p>
+      <div class="mt-5 flex flex-wrap gap-3 text-sm">
+        <a
+          href="/best/free-ai-prompts/"
+          class="surface-solid-content rounded-full px-4 py-2 font-medium text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-accent)]"
+        >
+          Free AI prompt library
+        </a>
+        <a
+          href="/best/best-ai-prompts/"
+          class="surface-solid-content rounded-full px-4 py-2 font-medium text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-accent)]"
+        >
+          Best AI prompt catalog
+        </a>
+        <a
+          href="/guides/prompt-engineering-101/"
+          class="surface-solid-content rounded-full px-4 py-2 font-medium text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-accent)]"
+        >
+          Prompt engineering guide
+        </a>
+      </div>
     </div>
 
     <PromptFilter
