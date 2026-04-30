@@ -197,8 +197,8 @@
     "title": "Best Stable Diffusion Prompts",
     "description": "Curated Stable Diffusion prompts with negative prompts, sampler settings, and model recommendations for stunning AI art.",
     "filter": { "tool": "stable-diffusion" },
-    "metaTitle": "Best Stable Diffusion Prompts (2026) — Copy, Paste, Generate",
-    "metaDescription": "Discover the best Stable Diffusion prompts for portraits, anime, photorealism, and concept art. Includes negative prompts and suggested settings.",
+    "metaTitle": "Best Stable Diffusion Prompts & Negative Prompts (2026)",
+    "metaDescription": "Browse the best Stable Diffusion prompts and negative prompts for portraits, anime, photorealism, and concept art. Copy settings for 2026.",
     "keyword": "stable diffusion prompts",
     "intro": "Stable Diffusion's open-source architecture gives you more control over AI image generation than any other tool, but that control comes with a steeper learning curve. Knowing which keywords, weights, and negative prompts to use makes the difference between mediocre and stunning results. These curated Stable Diffusion prompts include positive prompts, negative prompts, and recommended sampler and model settings for each style. Whether you want photorealistic portraits, anime illustrations, or concept art, these prompts give you a proven starting point.",
     "tips": [

@@ -540,6 +540,49 @@ export async function getSemrushApiUnitsBalance(apiKey = requireEnv('SEMRUSH_API
   }
 }
 
+function roundPercent(value) {
+  if (!Number.isFinite(value)) return null;
+  return Math.round(value * 100) / 100;
+}
+
+function finiteNumberOrNull(value) {
+  if (value === null || value === undefined || value === '') return null;
+  const number = Number(value);
+  return Number.isFinite(number) ? number : null;
+}
+
+export function inferAhrefsRowLimitPerRequest(subscription) {
+  const value = String(subscription || '').toLowerCase();
+  if (value.includes('lite')) return 100;
+  if (value.includes('standard')) return 250;
+  if (value.includes('advanced')) return 500;
+  return null;
+}
+
+export function summarizeAhrefsUsage({
+  subscription = null,
+  unitsLimit = null,
+  unitsUsed = null,
+} = {}) {
+  const normalizedLimit = finiteNumberOrNull(unitsLimit);
+  const normalizedUsed = finiteNumberOrNull(unitsUsed);
+  const unitsRemaining = normalizedLimit !== null && normalizedUsed !== null
+    ? Math.max(normalizedLimit - normalizedUsed, 0)
+    : null;
+
+  return {
+    unitsRemaining,
+    unitsUsedPercent: normalizedLimit && normalizedUsed !== null
+      ? roundPercent((normalizedUsed / normalizedLimit) * 100)
+      : null,
+    unitsRemainingPercent: normalizedLimit && unitsRemaining !== null
+      ? roundPercent((unitsRemaining / normalizedLimit) * 100)
+      : null,
+    rowLimitPerRequest: inferAhrefsRowLimitPerRequest(subscription),
+    sharedPoolNote: 'Ahrefs API units are shared across API v3, Ahrefs MCP, and Ahrefs Connect.',
+  };
+}
+
 export async function getAhrefsLimitsAndUsage(apiToken = requireEnv('AHREFS_API_TOKEN')) {
   try {
     const response = await fetch('https://api.ahrefs.com/v3/subscription-info/limits-and-usage', {
@@ -549,11 +592,15 @@ export async function getAhrefsLimitsAndUsage(apiToken = requireEnv('AHREFS_API_
     if (!response.ok) {
       throw new Error(JSON.stringify(payload));
     }
+    const subscription = payload.limits_and_usage?.subscription || null;
+    const unitsLimit = payload.limits_and_usage?.units_limit_workspace ?? null;
+    const unitsUsed = payload.limits_and_usage?.units_usage_workspace ?? null;
     return {
       status: 'ok',
-      subscription: payload.limits_and_usage?.subscription || null,
-      unitsLimit: payload.limits_and_usage?.units_limit_workspace ?? null,
-      unitsUsed: payload.limits_and_usage?.units_usage_workspace ?? null,
+      subscription,
+      unitsLimit,
+      unitsUsed,
+      ...summarizeAhrefsUsage({ subscription, unitsLimit, unitsUsed }),
       keyExpires: payload.limits_and_usage?.api_key_expiration_date ?? null,
     };
   } catch (error) {
