@@ -25,6 +25,29 @@ const prompts = allPrompts.map((p) => ({
 
 const tools = toolsJson.map((t: any) => ({ id: t.id, name: t.name, slug: t.slug }));
 const categories = categoriesJson.map((c: any) => ({ id: c.id, name: c.name, slug: c.slug }));
+
+const discoveryLinks = [
+  {
+    title: 'Best AI Prompts',
+    description: 'Start with the highest-rated prompts across every tool and category.',
+    href: '/best/best-ai-prompts/',
+  },
+  {
+    title: 'Free AI Prompts',
+    description: 'Prompts built for useful results without a paid AI subscription.',
+    href: '/best/free-ai-prompts/',
+  },
+  {
+    title: 'Image Generation Prompts',
+    description: 'Browse AI art, logo, product photo, thumbnail, and visual prompt examples.',
+    href: '/prompts/?type=image',
+  },
+  {
+    title: 'Prompt Templates',
+    description: 'Use reusable fill-in-the-blank structures for repeatable AI workflows.',
+    href: '/best/prompt-templates/',
+  },
+];
 ---
 
 <BaseLayout
@@ -39,6 +62,25 @@ const categories = categoriesJson.map((c: any) => ({ id: c.id, name: c.name, slu
       <p class="mt-2 text-lg text-[var(--color-text-secondary)]">
         {prompts.length} curated prompts across {new Set(prompts.map(p => p.category)).size} categories
       </p>
+    </div>
+
+    <div class="mb-10 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+      {discoveryLinks.map((link) => (
+        <a
+          href={link.href}
+          class="surface-glass-ui group rounded-[var(--radius-lg)] p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--color-accent-muted)] hover:shadow-[var(--shadow-card-hover)]"
+        >
+          <h2 class="text-base font-[var(--font-display)] font-semibold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)]">
+            {link.title}
+          </h2>
+          <p class="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
+            {link.description}
+          </p>
+          <span class="mt-4 inline-flex text-sm font-medium text-[var(--color-accent)]">
+            Browse &rarr;
+          </span>
+        </a>
+      ))}
     </div>
 
     <PromptFilter

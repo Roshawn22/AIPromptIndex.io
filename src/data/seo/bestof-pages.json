@@ -14,8 +14,10 @@
   {
     "slug": "midjourney-prompts",
     "title": "Best Midjourney Prompts",
-    "description": "Stunning Midjourney prompts for photorealistic images, fantasy art, and professional visual design.",
-    "filter": { "tool": "midjourney" }
+    "description": "Stunning Midjourney prompts for photorealistic images, fantasy art, product concepts, editorial visuals, and professional design workflows.",
+    "filter": { "tool": "midjourney" },
+    "metaTitle": "Best Midjourney Prompts (2026) — AI Art Ideas",
+    "metaDescription": "Browse copy-ready Midjourney prompts for photorealistic images, fantasy scenes, product concepts, editorial visuals, and professional AI art workflows."
   },
   {
     "slug": "coding-prompts",
@@ -26,20 +28,26 @@
   {
     "slug": "writing-prompts",
     "title": "Best AI Writing Prompts",
-    "description": "Top writing prompts for blog posts, essays, copywriting, and long-form content creation with AI.",
-    "filter": { "category": "writing" }
+    "description": "Top AI writing prompts for blog posts, essays, emails, copywriting, storytelling, editing, and long-form content creation workflows.",
+    "filter": { "category": "writing" },
+    "metaTitle": "Best AI Writing Prompts (2026) — Copy-Ready Templates",
+    "metaDescription": "Find copy-ready AI writing prompts for blog posts, essays, emails, copywriting, editing, storytelling, and long-form content creation."
   },
   {
     "slug": "marketing-prompts",
     "title": "Best AI Marketing Prompts",
-    "description": "High-converting marketing prompts for social media, email campaigns, ad copy, and content strategy.",
-    "filter": { "category": "marketing" }
+    "description": "High-converting AI marketing prompts for social media, email campaigns, ad copy, SEO content, campaign briefs, and content strategy.",
+    "filter": { "category": "marketing" },
+    "metaTitle": "Best AI Marketing Prompts (2026) — Campaign Templates",
+    "metaDescription": "Use AI marketing prompts for social media, email campaigns, ad copy, SEO content, campaign briefs, and practical content strategy workflows."
   },
   {
     "slug": "business-prompts",
     "title": "Best AI Business Prompts",
-    "description": "Essential business prompts for strategy, proposals, operations, and professional communication.",
-    "filter": { "category": "business" }
+    "description": "Essential AI business prompts for strategy, proposals, market analysis, operations, business planning, and professional communication.",
+    "filter": { "category": "business" },
+    "metaTitle": "Best AI Business Prompts (2026) — Strategy Templates",
+    "metaDescription": "Browse AI business prompts for strategy, proposals, market analysis, operations, business planning, and polished professional communication."
   },
   {
     "slug": "image-generation-prompts",
@@ -167,7 +175,22 @@
     "slug": "free-ai-prompts",
     "title": "Free AI Prompts",
     "description": "High-quality AI prompts that work with free tiers of ChatGPT, Claude, Gemini, and other AI tools. No subscription required.",
-    "filter": { "tag": "free" },
+    "filter": {
+      "promptSlugs": [
+        "blog-post-outline-generator",
+        "email-response-templates",
+        "meta-description-generator",
+        "content-calendar-generator",
+        "customer-persona-builder",
+        "lesson-plan-creator",
+        "flashcard-generator",
+        "spreadsheet-formula-builder",
+        "git-commit-message-writer",
+        "regex-pattern-builder",
+        "meeting-notes-summarizer",
+        "product-photography-prompt"
+      ]
+    },
     "metaTitle": "Free AI Prompts (2026) — No Subscription Required",
     "metaDescription": "Free AI prompts that work with ChatGPT Free, Claude Free, and Gemini. Get professional results without paying for premium AI subscriptions.",
     "keyword": "free ai prompts",
@@ -189,6 +212,82 @@
       {
         "q": "Which free AI tool is the best?",
         "a": "It depends on your task. ChatGPT Free is great for general writing and coding. Claude Free excels at analysis and long-form content. Gemini Free integrates with Google tools. Try all three to find your preference."
+      }
+    ]
+  },
+  {
+    "slug": "ai-business-plan-prompts",
+    "title": "Best AI Business Plan Prompts",
+    "description": "Copy-ready AI prompts for business plans, executive summaries, fundraising materials, and startup planning workflows.",
+    "filter": {
+      "promptSlugs": [
+        "business-plan-executive-summary",
+        "startup-pitch-one-pager",
+        "startup-pitch-deck-script",
+        "market-opportunity-analyzer",
+        "financial-model-assumptions",
+        "swot-analysis-generator"
+      ]
+    },
+    "metaTitle": "Best AI Business Plan Prompts (2026) — Copy, Customize, Pitch",
+    "metaDescription": "Use these AI business plan prompts to write executive summaries, pitch decks, market analysis, SWOTs, and startup fundraising materials faster.",
+    "keyword": "business plan prompt",
+    "intro": "The Semrush and GSC signals on AIPromptIndex show that business-plan intent is one of the clearest early opportunities on the site. Instead of leaving that demand concentrated on a single executive-summary prompt, this page turns it into a tighter business-plan cluster with prompts for market sizing, funding narratives, assumptions, and investor-facing materials. Use these prompts to move from raw startup idea to a business plan that is sharper, faster to draft, and easier to tailor for lenders, accelerators, or investors.",
+    "tips": [
+      "Start with the executive summary prompt after you already have your market and assumptions inputs drafted so the final summary reflects real numbers.",
+      "Use multiple prompts in sequence rather than asking one model to create an entire business plan in a single shot.",
+      "Treat AI output as a first draft and verify every market-size, traction, and financial claim before sharing it externally."
+    ],
+    "faqs": [
+      {
+        "q": "Can AI write a full business plan?",
+        "a": "AI can accelerate the drafting process for executive summaries, market analysis, positioning, and financial-assumption narratives, but you still need to validate the facts, numbers, and strategic logic before using the plan for fundraising or lending."
+      },
+      {
+        "q": "What is the best AI prompt for a business plan?",
+        "a": "The best starting point is usually an executive-summary prompt paired with prompts for market opportunity, SWOT analysis, and financial assumptions. That sequence gives you a stronger business-plan package than a single generic prompt."
+      },
+      {
+        "q": "Are these prompts better for ChatGPT or Claude?",
+        "a": "Both tools can help, but Claude tends to work well for structured long-form business writing while ChatGPT is useful for ideation and planning workflows. The best choice depends on the depth and style you want."
+      }
+    ]
+  },
+  {
+    "slug": "ai-press-release-prompts",
+    "title": "Best AI Press Release Prompts",
+    "description": "AI prompts for press releases, launch announcements, supporting email copy, and announcement distribution workflows.",
+    "filter": {
+      "promptSlugs": [
+        "press-release-generator",
+        "product-launch-campaign",
+        "email-newsletter-writer",
+        "linkedin-post-generator",
+        "brand-messaging-framework",
+        "social-media-content-calendar"
+      ]
+    },
+    "metaTitle": "Best AI Press Release Prompts (2026) — PR and Launch Templates",
+    "metaDescription": "Use these AI press release prompts for company announcements, launch campaigns, media-ready copy, newsletter follow-ups, and LinkedIn distribution.",
+    "keyword": "press release prompt",
+    "intro": "A single press release rarely carries an announcement on its own. You usually need the release itself plus launch messaging, email distribution, and social amplification. This roundup turns the existing press-release winner on the site into a broader PR and announcement workflow, so one impression-bearing page can support a stronger internal cluster. Use it when you need to announce funding, product launches, partnerships, hiring news, or milestone updates with consistent messaging across every channel.",
+    "tips": [
+      "Draft the press release first, then reuse the approved language to generate your newsletter and LinkedIn follow-up content.",
+      "Include specific facts, dates, and quotable metrics so the release reads like news instead of promotional copy.",
+      "Keep one source-of-truth messaging document open while you use these prompts to avoid conflicting claims across channels."
+    ],
+    "faqs": [
+      {
+        "q": "Can AI write a professional press release?",
+        "a": "Yes, AI can draft a strong first version in standard press release format, especially when you provide the news angle, supporting facts, and an executive quote. You should still review for accuracy, tone, and legal or compliance concerns."
+      },
+      {
+        "q": "What should I include in a press release prompt?",
+        "a": "Include the company name, announcement type, the most important details, timing, target outlets, and the spokesperson name and title. The more concrete the facts, the more usable the draft will be."
+      },
+      {
+        "q": "Why pair a press release prompt with launch and distribution prompts?",
+        "a": "Because the release is only one asset in the announcement workflow. Most teams also need launch messaging for email, social, and executive channels to turn that announcement into actual reach."
       }
     ]
   },

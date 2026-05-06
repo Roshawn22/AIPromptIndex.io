@@ -44,6 +44,8 @@ const tools = [
 ];
 
 const collections = [
+  { title: 'Best AI Prompts', description: 'Top-rated prompts across writing, coding, marketing, business, image generation, and more.', href: '/best/best-ai-prompts/' },
+  { title: 'Free AI Prompts', description: 'Copy-ready prompts that work well on free tiers of ChatGPT, Claude, Gemini, and other AI tools.', href: '/best/free-ai-prompts/' },
   { title: 'Best ChatGPT Prompts for Marketing', description: 'High-converting marketing prompts for campaigns, ad copy, and content strategy.', href: '/prompts/chatgpt/marketing/' },
   { title: 'AI Prompts for Teachers', description: 'Lesson plans, quizzes, rubrics, and differentiated instruction materials.', href: '/prompts/for/teachers/' },
   { title: 'Best Cursor Coding Prompts', description: 'Code generation, refactoring, debugging, and multi-file editing prompts.', href: '/prompts/cursor/coding/' },
@@ -51,11 +53,101 @@ const collections = [
   { title: 'AI Prompts for Entrepreneurs', description: 'Validate ideas, build MVPs, create pitch decks, and grow startups.', href: '/prompts/for/entrepreneurs/' },
   { title: 'Best Claude Writing Prompts', description: 'Leverage Claude\'s nuanced writing for blog posts, essays, and long-form content.', href: '/prompts/claude/writing/' },
 ];
+
+const startHereResources = [
+  {
+    title: 'Prompt Engineering for Beginners',
+    description: 'Start with the core prompt-engineering patterns, examples, and copy-ready structures.',
+    href: '/guides/prompt-engineering-101/',
+    label: 'Guide',
+  },
+  {
+    title: 'Best ChatGPT Prompts for 2026',
+    description: 'A fast entry point for high-performing writing, marketing, business, and productivity prompts.',
+    href: '/blog/best-chatgpt-prompts-2026/',
+    label: 'Blog',
+  },
+  {
+    title: 'AI Business Plan Prompts',
+    description: 'Use Claude and ChatGPT prompts for executive summaries, market analysis, pitch decks, and funding narratives.',
+    href: '/best/ai-business-plan-prompts/',
+    label: 'Business',
+  },
+  {
+    title: 'Best Stable Diffusion Prompts',
+    description: 'Browse proven prompts for portraits, fantasy scenes, product shots, and photorealistic images.',
+    href: '/best/stable-diffusion-prompts/',
+    label: 'Roundup',
+  },
+  {
+    title: 'AI Prompt Templates',
+    description: 'Use fill-in-the-blank prompt templates you can adapt across ChatGPT, Claude, Gemini, and more.',
+    href: '/best/prompt-templates/',
+    label: 'Templates',
+  },
+  {
+    title: 'Free AI Prompt Library',
+    description: 'Browse the free prompt library and AI prompt catalog by task, tool, category, and reusable template format.',
+    href: '/best/free-ai-prompts/',
+    label: 'Free',
+  },
+  {
+    title: 'Best AI Prompts',
+    description: 'Start with the highest-rated prompts across every major tool, category, and repeatable workflow.',
+    href: '/best/best-ai-prompts/',
+    label: 'Best',
+  },
+  {
+    title: 'Image Prompt Browser',
+    description: 'Jump straight into AI art, product photo, logo, thumbnail, and visual prompt examples.',
+    href: '/prompts/?type=image',
+    label: 'Images',
+  },
+];
+
+const editorialResources = [
+  {
+    title: 'Best ChatGPT Prompts for 2026',
+    description: 'A curated list of tested prompts for writing, business, coding, and productivity workflows.',
+    href: '/blog/best-chatgpt-prompts-2026/',
+    label: 'Blog',
+  },
+  {
+    title: 'How to Write AI Prompts',
+    description: 'A practical beginner guide to prompt engineering with reusable structures and examples.',
+    href: '/blog/how-to-write-ai-prompts-beginners-guide/',
+    label: 'Guide',
+  },
+  {
+    title: 'ChatGPT vs Claude Prompting',
+    description: 'See how prompting style changes between the two most-used general AI assistants.',
+    href: '/blog/chatgpt-vs-claude-prompting-differences/',
+    label: 'Comparison',
+  },
+  {
+    title: 'Prompt Engineering 101',
+    description: 'Learn the five pillars of strong prompts and how to turn them into reusable templates.',
+    href: '/guides/prompt-engineering-101/',
+    label: 'Guide',
+  },
+  {
+    title: 'ChatGPT for Business',
+    description: 'Twenty real business prompts for marketing, sales, operations, HR, and finance tasks.',
+    href: '/guides/chatgpt-for-business/',
+    label: 'Guide',
+  },
+  {
+    title: 'Midjourney Prompt Guide',
+    description: 'A practical reference for structure, style keywords, and advanced image-prompt techniques.',
+    href: '/guides/midjourney-prompt-guide/',
+    label: 'Guide',
+  },
+];
 ---
 
 <BaseLayout
-  title="AI Prompt Library — Free Prompt Templates for ChatGPT, Claude & More"
-  description="Browse 500+ curated AI prompt templates for ChatGPT, Claude, Midjourney, and 10+ AI tools. Free prompt library for business, marketing, coding, and creative work."
+  title="Free AI Prompt Library for ChatGPT, Claude & More"
+  description="Browse a free AI prompt library with prompt templates for ChatGPT, Claude, Midjourney, Gemini, Cursor, and more. Copy, customize, and use them fast."
 >
   <Header slot="header" />
 
@@ -87,6 +179,75 @@ const collections = [
   </section>
 
   <!-- Browse by Category -->
+  <section class="mx-auto max-w-7xl px-[var(--space-page)] py-16 border-b border-[var(--color-border)]" data-reveal>
+    <div class="mb-10 flex items-end justify-between">
+      <div class="section-head-copy">
+        <h2 class="text-[var(--color-text-primary)]">Start With the Free Prompt Library</h2>
+        <p class="mt-2 max-w-2xl text-[var(--color-text-secondary)]">
+          These are the fastest paths into the AI prompt catalog if you want a searchable prompt database, prompt examples, prompt templates, or beginner-friendly guidance.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+      {startHereResources.map((resource) => (
+        <a
+          href={resource.href}
+          class="surface-glass-prominent group rounded-[var(--radius-lg)] p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--color-accent-muted)] hover:shadow-[var(--shadow-card-hover)]"
+        >
+          <span class="inline-flex rounded-full bg-[var(--color-accent)]/10 px-3 py-1 text-xs font-[var(--font-display)] font-semibold uppercase tracking-wider text-[var(--color-accent)]">
+            {resource.label}
+          </span>
+          <h3 class="mt-4 text-lg font-[var(--font-display)] font-semibold text-[var(--color-text-primary)]">
+            {resource.title}
+          </h3>
+          <p class="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
+            {resource.description}
+          </p>
+          <span class="mt-4 inline-flex items-center text-sm font-medium text-[var(--color-accent)]">
+            Open resource &rarr;
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-7xl border-t border-[var(--color-border)] px-[var(--space-page)] py-16" data-reveal>
+    <div class="mb-10 flex items-end justify-between">
+      <div class="section-head-copy">
+        <h2 class="text-[var(--color-text-primary)]">Learn Prompting Faster</h2>
+        <p class="mt-2 max-w-2xl text-[var(--color-text-secondary)]">
+          Use these guides and articles to understand how the library works, pick better tools, and improve your prompts before you customize them.
+        </p>
+      </div>
+      <a href="/guides/" class="hidden text-sm font-[var(--font-display)] font-medium text-[var(--color-accent)] hover:underline sm:block">
+        View all guides &rarr;
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+      {editorialResources.map((resource) => (
+        <a
+          href={resource.href}
+          class="surface-glass-prominent group rounded-[var(--radius-lg)] p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--color-accent-muted)] hover:shadow-[var(--shadow-card-hover)]"
+        >
+          <span class="inline-flex rounded-full bg-[var(--color-accent)]/10 px-3 py-1 text-xs font-[var(--font-display)] font-semibold uppercase tracking-wider text-[var(--color-accent)]">
+            {resource.label}
+          </span>
+          <h3 class="mt-4 text-lg font-[var(--font-display)] font-semibold text-[var(--color-text-primary)]">
+            {resource.title}
+          </h3>
+          <p class="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
+            {resource.description}
+          </p>
+          <span class="mt-4 inline-flex items-center text-sm font-medium text-[var(--color-accent)]">
+            Open resource &rarr;
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+
   <section class="mx-auto max-w-7xl px-[var(--space-page)] py-16" data-reveal>
     <div class="mb-10 flex items-end justify-between">
       <div class="section-head-copy">
