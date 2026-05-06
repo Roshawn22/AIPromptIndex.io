@@ -11,6 +11,8 @@ interface CopyButtonProps {
   size?: 'sm' | 'md' | 'lg';
   variant?: 'primary' | 'ghost';
   promptSlug?: string;
+  tool?: string;
+  category?: string;
   onCopy?: () => void;
 }
 

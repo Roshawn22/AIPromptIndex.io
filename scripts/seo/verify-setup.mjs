@@ -190,7 +190,27 @@ async function probeSemrushSiteAudit(projectId, apiKey) {
   }
 }
 
+function formatInteger(value) {
+  return Number.isFinite(Number(value)) ? Number(value).toLocaleString('en-US') : 'unknown';
+}
+
+function formatPercent(value) {
+  return Number.isFinite(Number(value)) ? `${Number(value).toFixed(2)}%` : 'unknown';
+}
+
+function renderAhrefsUsageSummary(probe) {
+  if (!probe || probe.status !== 'ok') return [];
+
+  return [
+    `- Ahrefs subscription: ${probe.subscription || 'unknown'}`,
+    `- Ahrefs units: ${formatInteger(probe.unitsUsed)} used / ${formatInteger(probe.unitsLimit)} limit (${formatInteger(probe.unitsRemaining)} remaining, ${formatPercent(probe.unitsRemainingPercent)} left)`,
+    `- Ahrefs row cap: ${formatInteger(probe.rowLimitPerRequest)} rows/request`,
+    `- Ahrefs shared pool: ${probe.sharedPoolNote || 'Ahrefs API units are shared across API v3, Ahrefs MCP, and Ahrefs Connect.'}`,
+  ];
+}
+
 function renderMarkdown(report) {
+  const ahrefsUsageLines = renderAhrefsUsageSummary(report.liveProbes.ahrefsApi);
   const lines = [
     '# SEO Setup Verification',
     '',
@@ -202,6 +222,7 @@ function renderMarkdown(report) {
     `- Ahrefs API: ${report.summary.sources.ahrefsApi}`,
     `- Ahrefs Site Audit: ${report.summary.sources.ahrefsSiteAudit}`,
     `- Ahrefs Rank Tracker: ${report.summary.sources.ahrefsRankTracker}`,
+    ...ahrefsUsageLines,
     `- Semrush analytics (optional): ${report.summary.sources.semrushAnalytics}`,
     `- Semrush projects (optional): ${report.summary.sources.semrushProjects}`,
     `- Public site env: ${report.summary.sources.publicSiteEnv}`,
@@ -245,7 +266,10 @@ function renderMarkdown(report) {
     const units = probe.unitsRemaining !== undefined && probe.unitsRemaining !== null
       ? ` (units remaining: ${probe.unitsRemaining})`
       : '';
-    lines.push(`- ${name}: ${probe.status}${units}${detail}`);
+    const usage = name === 'ahrefsApi' && probe.status === 'ok'
+      ? `; subscription: ${probe.subscription || 'unknown'}; used: ${formatInteger(probe.unitsUsed)} / ${formatInteger(probe.unitsLimit)}; left: ${formatPercent(probe.unitsRemainingPercent)}; rows/request: ${formatInteger(probe.rowLimitPerRequest)}`
+      : '';
+    lines.push(`- ${name}: ${probe.status}${units}${usage}${detail}`);
   }
 
   if (report.latestLiveVerification) {

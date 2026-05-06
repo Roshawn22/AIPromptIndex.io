@@ -90,7 +90,7 @@ async function main() {
   let topPages = [];
   try {
     const topPagesResponse = await requestAhrefs('site-explorer/top-pages', {
-      limit: 200,
+      limit: 250,
       select: 'url,sum_traffic,referring_domains,top_keyword,top_keyword_volume',
     });
     topPages = normalizeRows(topPagesResponse).map((row) => ({
@@ -126,7 +126,7 @@ async function main() {
   let organicCompetitors = [];
   try {
     const competitorsResponse = await requestAhrefs('site-explorer/organic-competitors', {
-      limit: 25,
+      limit: 100,
       country: 'us',
       select: 'competitor_domain,keywords_common,traffic,domain_rating',
     });

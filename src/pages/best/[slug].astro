@@ -8,6 +8,7 @@ import PromptCard from '../../components/prompt/PromptCard.astro';
 import Breadcrumb from '../../components/common/Breadcrumb.astro';
 import NewsletterSignup from '../../components/common/NewsletterSignup.astro';
 import bestofPages from '../../data/seo/bestof-pages.json';
+import { getPromptsForBestOf } from '../../lib/bestof';
 
 export async function getStaticPaths() {
   return bestofPages.map((r: any) => ({
@@ -20,27 +21,27 @@ const { roundup, allRoundups } = Astro.props;
 
 const allPrompts = await getCollection('prompts');
 
-const prompts = allPrompts
-  .filter((p) => {
-    if (roundup.filter.tool && roundup.filter.category) {
-      return p.data.tool === roundup.filter.tool && p.data.category === roundup.filter.category;
-    }
-    if (roundup.filter.tool && roundup.filter.tag) {
-      return p.data.tool === roundup.filter.tool && p.data.tags?.includes(roundup.filter.tag);
-    }
-    if (roundup.filter.tool) return p.data.tool === roundup.filter.tool;
-    if (roundup.filter.category) return p.data.category === roundup.filter.category;
-    if (roundup.filter.tag) return p.data.tags?.includes(roundup.filter.tag);
-    if (roundup.filter.sort === 'top-rated') return true;
-    return false;
-  })
+const prompts = getPromptsForBestOf(allPrompts, roundup.filter)
   .sort((a, b) => {
     if (a.data.isFeatured && !b.data.isFeatured) return -1;
     if (!a.data.isFeatured && b.data.isFeatured) return 1;
     return new Date(b.data.dateAdded).getTime() - new Date(a.data.dateAdded).getTime();
   });
 
-const relatedRoundups = allRoundups.filter((r: any) => r.slug !== roundup.slug).slice(0, 4);
+const growthRoundupSlugs = [
+  'best-ai-prompts',
+  'free-ai-prompts',
+  'image-generation-prompts',
+  'prompt-templates',
+];
+const relatedRoundups = [
+  ...growthRoundupSlugs
+    .map((slug) => allRoundups.find((r: any) => r.slug === slug))
+    .filter((r: any) => r && r.slug !== roundup.slug),
+  ...allRoundups.filter((r: any) => (
+    r.slug !== roundup.slug && !growthRoundupSlugs.includes(r.slug)
+  )),
+].slice(0, 4);
 
 const filterType = roundup.filter.tool ? 'tool' : roundup.filter.category ? 'category' : 'collection';
 const filterValue = roundup.filter.tool || roundup.filter.category;

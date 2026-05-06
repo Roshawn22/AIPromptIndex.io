@@ -39,9 +39,15 @@ interface Props {
   categories: CategoryData[];
 }
 
-function getInitialParam(key: string, fallback: string): string {
-  if (typeof window === 'undefined') return fallback;
-  return new URLSearchParams(window.location.search).get(key) || fallback;
+function readUrlFilters() {
+  const params = new URLSearchParams(window.location.search);
+  const categoryParam = params.get('category');
+  return {
+    tool: params.get('tool') || 'all',
+    category: categoryParam || (params.get('type') === 'image' ? 'image-generation' : 'all'),
+    difficulty: (params.get('difficulty') || 'all') as DifficultyFilter,
+    sort: (params.get('sort') || 'featured') as SortOption,
+  };
 }
 
 function syncParams(params: Record<string, string>) {
@@ -54,23 +60,31 @@ function syncParams(params: Record<string, string>) {
       url.searchParams.delete(k);
     }
   }
+  url.searchParams.delete('type');
   window.history.replaceState({}, '', url.toString());
 }
 
 export default function PromptFilter({ prompts, tools, categories }: Props) {
-  const [tool, setTool] = useState(() => getInitialParam('tool', 'all'));
-  const [category, setCategory] = useState(() => getInitialParam('category', 'all'));
-  const [difficulty, setDifficulty] = useState<DifficultyFilter>(
-    () => (getInitialParam('difficulty', 'all') as DifficultyFilter),
-  );
-  const [sort, setSort] = useState<SortOption>(
-    () => (getInitialParam('sort', 'featured') as SortOption),
-  );
+  const [tool, setTool] = useState('all');
+  const [category, setCategory] = useState('all');
+  const [difficulty, setDifficulty] = useState<DifficultyFilter>('all');
+  const [sort, setSort] = useState<SortOption>('featured');
+  const [hasLoadedUrlFilters, setHasLoadedUrlFilters] = useState(false);
   const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
+    const urlFilters = readUrlFilters();
+    setTool(urlFilters.tool);
+    setCategory(urlFilters.category);
+    setDifficulty(urlFilters.difficulty);
+    setSort(urlFilters.sort);
+    setHasLoadedUrlFilters(true);
+  }, []);
+
+  useEffect(() => {
+    if (!hasLoadedUrlFilters) return;
     syncParams({ tool, category, difficulty, sort });
-  }, [tool, category, difficulty, sort]);
+  }, [hasLoadedUrlFilters, tool, category, difficulty, sort]);
 
   const hasActiveFilter = tool !== 'all' || category !== 'all' || difficulty !== 'all';
 
