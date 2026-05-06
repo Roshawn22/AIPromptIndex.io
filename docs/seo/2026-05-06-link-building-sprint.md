@@ -92,9 +92,24 @@ I’m still expanding the catalog, so feedback on missing categories or workflow
 
 ## First-Pass Checklist
 
-- [ ] Submit AIPromptIndex to AI Workbench.
-- [ ] Submit AIPromptIndex to MustHave.ai.
-- [ ] Submit AIPromptIndex to AI Directory.
+- [ ] Submit AIPromptIndex to AI Workbench. Blocked for now: standard listing requires a one-time $20 payment plus matching payment reference/email.
+- [ ] Submit AIPromptIndex to MustHave.ai. Blocked for now: submit page was in maintenance mode.
+- [x] Submit AIPromptIndex to AI Directory. Submitted for manual review; reference `listing_49467`.
 - [ ] Contribute one SEO prompt and one resume prompt to a prompt-library community.
 - [ ] Publish one founder/community post using the draft above.
 - [ ] Recheck Ahrefs referring domains and new/lost backlinks one week after submission.
+
+## Execution Log
+
+### 2026-05-05 PT / 2026-05-06 UTC
+
+- Search Console URL Inspection requests were submitted for:
+  - `https://aipromptindex.io/best/seo-prompts/`
+  - `https://aipromptindex.io/best/resume-ai-prompts/`
+  - `https://aipromptindex.io/best/chatgpt-business-prompts/`
+  - `https://aipromptindex.io/best/chatgpt-marketing-prompts/`
+  - `https://aipromptindex.io/best/chatgpt-prompts-for-students/`
+  - `https://aipromptindex.io/best/chatgpt-seo-prompts/`
+- AI Directory accepted the public listing submission and moved it to manual review with reference `listing_49467`. No notification email was provided.
+- AI Workbench was not submitted because the standard listing flow requires payment before review.
+- MustHave.ai was not submitted because the submit page was in maintenance mode.
