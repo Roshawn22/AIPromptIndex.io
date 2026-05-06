@@ -435,5 +435,188 @@
         "a": "Copilot supports most popular languages including Python, JavaScript, TypeScript, Java, Go, Rust, and C++. It performs best with languages that have large representation in its training data."
       }
     ]
+  },
+  {
+    "slug": "seo-prompts",
+    "title": "Best SEO Prompts",
+    "description": "AI prompts for keyword research, content briefs, meta descriptions, content optimization, and technical SEO workflows.",
+    "filter": { "tag": "seo" },
+    "metaTitle": "Best SEO Prompts (2026) — AI Keyword & Content Workflows",
+    "metaDescription": "Copy-ready SEO prompts for keyword research, content briefs, meta descriptions, on-page optimization, and technical SEO workflows.",
+    "keyword": "seo prompts",
+    "intro": "SEO prompts help turn raw search data into repeatable workflows for keyword research, content planning, optimization, and reporting. This collection focuses on prompts that support practical search work: clustering keywords, writing meta descriptions, finding content gaps, building briefs, and improving on-page relevance. Use them alongside Ahrefs, Google Search Console, and your own analytics data to move from generic AI output to search-informed content decisions.",
+    "tips": [
+      "Paste real keyword, competitor, and Search Console data into each prompt so the output is grounded in evidence.",
+      "Ask for search intent, page type, and internal-link recommendations before writing new content.",
+      "Use the same prompt structure repeatedly so you can compare outputs across topics and pages."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best AI prompts for SEO?",
+        "a": "The best SEO prompts combine a target keyword, search intent, competitor context, and a specific output format such as a content brief, title tag set, meta description, or internal-link plan."
+      },
+      {
+        "q": "Can AI do SEO keyword research?",
+        "a": "AI can expand topics, cluster keywords, and infer intent, but it should be paired with keyword tools for real volume, difficulty, and ranking data."
+      },
+      {
+        "q": "How should I use SEO prompts safely?",
+        "a": "Use AI to structure and accelerate the workflow, then verify recommendations against live SERPs, Search Console, and trusted SEO tooling before publishing."
+      }
+    ]
+  },
+  {
+    "slug": "resume-ai-prompts",
+    "title": "Best AI Resume Prompts",
+    "description": "AI prompts for rewriting resumes, tailoring cover letters, improving ATS fit, and turning job history into measurable achievements.",
+    "filter": { "tag": "resume" },
+    "metaTitle": "Best AI Resume Prompts (2026) — ATS Resume & Cover Letter",
+    "metaDescription": "Copy-ready AI resume prompts for ATS optimization, achievement rewriting, job-specific cover letters, and career positioning.",
+    "keyword": "resume ai prompts",
+    "intro": "Resume AI prompts are most useful when they convert vague work history into specific, measurable achievements. This collection helps you rewrite bullets, tailor experience to a job description, improve ATS alignment, and draft cover letters without losing your real voice. Paste your resume, the job post, and any metrics you can share, then use these prompts to create stronger application materials faster.",
+    "tips": [
+      "Include the job description so AI can mirror relevant skills without inventing experience.",
+      "Ask for achievement bullets using action, scope, metric, and business impact.",
+      "Review every generated claim for accuracy before using it in an application."
+    ],
+    "faqs": [
+      {
+        "q": "Can AI write my resume?",
+        "a": "AI can help rewrite, structure, and tailor your resume, but you should verify every claim and keep the final version accurate to your experience."
+      },
+      {
+        "q": "What should I include in a resume prompt?",
+        "a": "Include your current resume, target job description, measurable achievements, industry, seniority level, and any keywords you want to emphasize."
+      },
+      {
+        "q": "Are AI resume prompts good for ATS?",
+        "a": "They can help align language with a job description, but ATS performance also depends on clean formatting, truthful keywords, and relevant experience."
+      }
+    ]
+  },
+  {
+    "slug": "chatgpt-business-prompts",
+    "title": "Best ChatGPT Business Prompts",
+    "description": "ChatGPT prompts for business planning, strategy, operations, customer communication, and professional decision support.",
+    "filter": { "tool": "chatgpt", "category": "business" },
+    "metaTitle": "Best ChatGPT Business Prompts (2026) — Strategy & Planning",
+    "metaDescription": "Copy-ready ChatGPT business prompts for strategy, planning, operations, customer communication, and professional workflows.",
+    "keyword": "chatgpt prompts for business",
+    "intro": "ChatGPT business prompts help turn scattered ideas, notes, and assumptions into structured plans and professional documents. Use this collection for business planning, customer communication, operations, startup decisions, and everyday strategy work. The best results come from giving ChatGPT real context about your audience, offer, constraints, and success metric before asking for a polished output.",
+    "tips": [
+      "Start with company context, target customer, offer, and business goal before asking for a plan.",
+      "Ask ChatGPT to state assumptions separately so you can correct weak or invented details.",
+      "Request decision matrices, action plans, and executive summaries when you need business-ready outputs."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best ChatGPT prompts for business?",
+        "a": "Strong business prompts specify the company, audience, objective, constraints, and output format. They work well for planning, customer emails, competitive analysis, and operational documents."
+      },
+      {
+        "q": "Can ChatGPT write a business plan?",
+        "a": "Yes, ChatGPT can draft business plan sections when you provide the business idea, market, customer, revenue model, and constraints."
+      },
+      {
+        "q": "Should I use ChatGPT for business decisions?",
+        "a": "Use it to organize thinking and generate options, but validate important decisions with real data, domain expertise, and financial review."
+      }
+    ]
+  },
+  {
+    "slug": "chatgpt-marketing-prompts",
+    "title": "Best ChatGPT Marketing Prompts",
+    "description": "ChatGPT prompts for campaign strategy, ad copy, email marketing, social posts, landing pages, and content planning.",
+    "filter": { "tool": "chatgpt", "category": "marketing" },
+    "metaTitle": "Best ChatGPT Marketing Prompts (2026) — Campaign & Copy",
+    "metaDescription": "Copy-ready ChatGPT marketing prompts for campaign strategy, ad copy, landing pages, email marketing, and content planning.",
+    "keyword": "chatgpt prompts for marketing",
+    "intro": "ChatGPT marketing prompts are strongest when they include a specific audience, offer, channel, and conversion goal. This collection covers campaign planning, ad copy, landing pages, content calendars, email sequences, and social media workflows. Use the prompts to generate first drafts and testable variations, then refine them with real customer language and performance data.",
+    "tips": [
+      "Include your offer, audience, channel, brand voice, and call to action in every marketing prompt.",
+      "Ask for multiple variants so you can test hooks, angles, and objections.",
+      "Feed back performance data from ads, email, or analytics to improve the next round of outputs."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best ChatGPT prompts for marketing?",
+        "a": "The best marketing prompts ask for a specific asset, audience, offer, channel, tone, and success metric. Examples include ad copy variants, email sequences, and landing-page sections."
+      },
+      {
+        "q": "Can ChatGPT create a marketing campaign?",
+        "a": "Yes, it can draft campaign strategy, messaging angles, channel plans, and creative assets when you provide the product, audience, budget, and goal."
+      },
+      {
+        "q": "How do I make AI marketing copy sound less generic?",
+        "a": "Give ChatGPT real customer quotes, objections, product details, and examples of your brand voice, then ask it to rewrite with those specifics."
+      }
+    ]
+  },
+  {
+    "slug": "chatgpt-prompts-for-students",
+    "title": "Best ChatGPT Prompts for Students",
+    "description": "ChatGPT prompts for studying, exam prep, flashcards, concept explanations, and Socratic tutoring.",
+    "filter": {
+      "promptSlugs": [
+        "concept-explainer-for-kids",
+        "flashcard-generator",
+        "math-problem-set-generator",
+        "socratic-tutor-assistant",
+        "study-guide-generator",
+        "vocabulary-builder-game"
+      ]
+    },
+    "metaTitle": "Best ChatGPT Prompts for Students (2026) — Study Smarter",
+    "metaDescription": "Copy-ready ChatGPT prompts for students covering study guides, flashcards, exam prep, concept explanations, and Socratic tutoring.",
+    "keyword": "chatgpt prompts for students",
+    "intro": "ChatGPT can be a useful study partner when you use it to understand material instead of bypassing the work. These student prompts focus on active recall, step-by-step explanations, flashcards, practice problems, and Socratic tutoring. Use them to identify weak spots, test yourself, and convert class material into study systems you can actually repeat.",
+    "tips": [
+      "Ask ChatGPT to quiz you before showing answers so you practice recall instead of rereading.",
+      "Request explanations at your grade level, then ask for a harder version once the idea makes sense.",
+      "Use AI-generated study materials as practice, not as final schoolwork to submit."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best ChatGPT prompts for students?",
+        "a": "The best student prompts ask ChatGPT to explain concepts, create practice questions, build flashcards, quiz you, and guide you through problems step by step."
+      },
+      {
+        "q": "Is using ChatGPT to study cheating?",
+        "a": "Using ChatGPT as a tutor or practice generator is generally different from submitting AI-written work. Follow your school rules and use it to improve understanding."
+      },
+      {
+        "q": "Can ChatGPT help with exam prep?",
+        "a": "Yes. Give it the topics, exam format, and time available, then ask for a study plan, practice test, and review questions."
+      }
+    ]
+  },
+  {
+    "slug": "chatgpt-seo-prompts",
+    "title": "Best ChatGPT SEO Prompts",
+    "description": "ChatGPT prompts for SEO blog outlines, meta descriptions, product copy, and on-page content optimization.",
+    "filter": { "tool": "chatgpt", "tag": "seo" },
+    "metaTitle": "Best ChatGPT SEO Prompts (2026) — Content & Meta Tags",
+    "metaDescription": "Copy-ready ChatGPT SEO prompts for blog outlines, meta descriptions, product copy, and on-page content optimization.",
+    "keyword": "chatgpt prompts for seo",
+    "intro": "ChatGPT SEO prompts are useful for turning keyword targets into outlines, title options, meta descriptions, and optimized copy blocks. This collection focuses on ChatGPT workflows where the input is clear and verifiable: target keyword, page type, audience, search intent, and competitor notes. Use these prompts to speed up content production while keeping final SEO decisions tied to live search data.",
+    "tips": [
+      "Provide the target keyword, secondary keywords, and search intent before asking for copy.",
+      "Ask ChatGPT to explain why each title or section matches the query intent.",
+      "Use Ahrefs or Search Console data to validate the keyword opportunity before publishing."
+    ],
+    "faqs": [
+      {
+        "q": "Can ChatGPT help with SEO?",
+        "a": "Yes. ChatGPT can draft outlines, metadata, briefs, and optimization ideas, but keyword data and SERP validation should come from SEO tools."
+      },
+      {
+        "q": "What should I include in a ChatGPT SEO prompt?",
+        "a": "Include the target keyword, page type, audience, search intent, competitor notes, internal links, and desired output format."
+      },
+      {
+        "q": "Are ChatGPT SEO prompts enough to rank?",
+        "a": "No prompt guarantees rankings. Use them to improve content quality and workflow speed, then support the page with technical SEO, links, and useful content."
+      }
+    ]
   }
 ]
