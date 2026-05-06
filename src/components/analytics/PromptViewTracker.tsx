@@ -14,7 +14,7 @@ export default function PromptViewTracker({ promptSlug, tool, category }: Prompt
     const storageKey = `prompt_viewed:${window.location.pathname}:${promptSlug}`;
     if (window.sessionStorage.getItem(storageKey) === '1') return;
 
-    trackPromptView(promptSlug, tool, category);
+    trackPromptView(promptSlug, tool || 'unknown', category || 'unknown');
     window.sessionStorage.setItem(storageKey, '1');
   }, [promptSlug, tool, category]);
 

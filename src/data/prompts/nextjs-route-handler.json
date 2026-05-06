@@ -19,5 +19,5 @@
   "isFeatured": false,
   "dateAdded": "2026-04-02",
   "metaTitle": "Next.js API Route Handler Prompt for Cursor",
-  "metaDescription": "Generate type-safe Next.js API route handlers with Zod validation and error handling using Cursor."
+  "metaDescription": "Generate type-safe Next.js App Router API route handlers with Zod validation, authentication checks, typed responses, and error handling using Cursor."
 }

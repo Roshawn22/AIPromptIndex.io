@@ -19,6 +19,105 @@ const args = parseCliArgs();
 const outputDir = getSeoOutputDir(args);
 const projectId = optionalEnv('AHREFS_SITE_AUDIT_PROJECT_ID');
 const mode = args.mode || 'overview';
+const issueDetailLimit = Number.parseInt(args.issueDetailsLimit || '25', 10);
+
+const issueDetailSelect = [
+  'url',
+  'http_code',
+  'content_type',
+  'title',
+  'titles_length',
+  'meta_description',
+  'meta_description_length',
+  'h1',
+  'canonical',
+  'redirect',
+  'redirect_code',
+  'redirect_chain_urls',
+  'compliant',
+  'page_is_noindex',
+  'links_count_internal4xx',
+  'links_count_external4xx',
+  'found_in_sitemaps',
+  'source',
+].join(',');
+
+function firstArrayValue(value) {
+  return Array.isArray(value) ? value[0] ?? '' : value ?? '';
+}
+
+function normalizeIssueDetailPage(row) {
+  return {
+    url: row.url || '',
+    httpCode: numberValue(row.http_code, null),
+    contentType: row.content_type || '',
+    title: firstArrayValue(row.title),
+    titleLength: numberValue(firstArrayValue(row.titles_length), null),
+    metaDescription: firstArrayValue(row.meta_description),
+    metaDescriptionLength: numberValue(firstArrayValue(row.meta_description_length), null),
+    h1: firstArrayValue(row.h1),
+    canonical: row.canonical || '',
+    redirect: row.redirect || '',
+    redirectCode: numberValue(row.redirect_code, null),
+    redirectChainUrls: Array.isArray(row.redirect_chain_urls) ? row.redirect_chain_urls : [],
+    compliant: row.compliant ?? null,
+    isNoindex: Boolean(row.page_is_noindex),
+    internal4xxLinks: numberValue(row.links_count_internal4xx, 0),
+    external4xxLinks: numberValue(row.links_count_external4xx, 0),
+    foundInSitemaps: Array.isArray(row.found_in_sitemaps) ? row.found_in_sitemaps : [],
+    source: Array.isArray(row.source) ? row.source : [],
+  };
+}
+
+async function loadIssueDetails(issues) {
+  const detailTargets = issues
+    .filter((issue) => issue.issueId && issue.crawled > 0)
+    .sort((left, right) => {
+      const importanceOrder = { Error: 0, Warning: 1, Notice: 2 };
+      const leftImportance = importanceOrder[left.importance] ?? 3;
+      const rightImportance = importanceOrder[right.importance] ?? 3;
+      if (leftImportance !== rightImportance) return leftImportance - rightImportance;
+      return right.crawled - left.crawled;
+    });
+
+  const details = [];
+  for (const issue of detailTargets) {
+    try {
+      const response = await fetchAhrefsJson('site-audit/page-explorer', {
+        project_id: projectId,
+        issue_id: issue.issueId,
+        limit: issueDetailLimit,
+        select: issueDetailSelect,
+      });
+      const rows = response?.pages || response?.rows || [];
+      details.push({
+        issueId: issue.issueId,
+        name: issue.name,
+        category: issue.category,
+        importance: issue.importance,
+        crawled: issue.crawled,
+        sampled: rows.length,
+        pages: rows.map(normalizeIssueDetailPage),
+      });
+    } catch (error) {
+      const classified = classifyAhrefsError(error);
+      details.push({
+        issueId: issue.issueId,
+        name: issue.name,
+        category: issue.category,
+        importance: issue.importance,
+        crawled: issue.crawled,
+        sampled: 0,
+        status: classified.status,
+        blockedReason: classified.blockedReason,
+        warning: classified.message,
+        pages: [],
+      });
+    }
+  }
+
+  return details;
+}
 
 async function loadPageContent(targetUrl) {
   const response = await fetchAhrefsJson('site-audit/page-content', {
@@ -73,6 +172,7 @@ async function main() {
       issues: [],
       pageExplorer: [],
       pageContent: [],
+      issueDetails: [],
       historicalComparisons: null,
       warnings: [reason],
     });
@@ -186,6 +286,11 @@ async function main() {
     pageContentSection.warnings.push('Page content skipped because Page Explorer returned no HTML pages.');
   }
 
+  let issueDetails = [];
+  if (mode === 'full' && issues.length > 0) {
+    issueDetails = await loadIssueDetails(issues);
+  }
+
   const severityCounts = issues.reduce((acc, issue) => {
     const key = (issue.importance || 'unknown').toLowerCase();
     acc[key] = (acc[key] || 0) + issue.crawled;
@@ -242,6 +347,7 @@ async function main() {
     overview,
     severityCounts,
     issues,
+    issueDetails,
     pageExplorer,
     pageContent,
     historicalComparisons,
@@ -257,6 +363,7 @@ async function main() {
     healthScore: overview?.health_score ?? null,
     rows: {
       issues: issues.length,
+      issueDetails: issueDetails.reduce((count, detail) => count + detail.sampled, 0),
       pageExplorer: pageExplorer.length,
       pageContent: pageContent.length,
     },

@@ -134,7 +134,7 @@ const guides = listFiles(guidesDirPath, '.md').map((fileName) => {
   };
 });
 
-const staticNoindexPaths = new Set(['/404', '/contact', '/privacy', '/submit']);
+const staticSitemapExcludedPaths = new Set(['/404', '/compare', '/prompt-of-the-day']);
 
 function buildRouteLastmodMap() {
   /** @type {Map<string, string>} */
@@ -182,7 +182,7 @@ export default defineConfig({
     sitemap({
       filter: (page) => {
         const pathname = normalizePathname(new URL(page).pathname);
-        return !staticNoindexPaths.has(pathname);
+        return !staticSitemapExcludedPaths.has(pathname);
       },
       serialize: (item) => {
         const pathname = normalizePathname(new URL(item.url, 'https://aipromptindex.io').pathname);

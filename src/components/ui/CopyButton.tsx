@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { ConvexReactClient, useMutation, ConvexProvider } from 'convex/react';
-import { api } from '../../../convex/_generated/api';
+import { api } from '../../lib/convexApi';
 import LottieAccent from '../motion/LottieAccent';
 import checkmarkData from '../../assets/lottie/checkmark.json';
 
@@ -11,6 +11,8 @@ interface CopyButtonProps {
   size?: 'sm' | 'md' | 'lg';
   variant?: 'primary' | 'ghost';
   promptSlug?: string;
+  tool?: string;
+  category?: string;
   onCopy?: () => void;
 }
 

@@ -13,11 +13,11 @@
   },
   {
     "slug": "midjourney-prompts",
-    "title": "Best Midjourney Prompts",
-    "description": "Stunning Midjourney prompts for photorealistic images, fantasy art, product concepts, editorial visuals, and professional design workflows.",
-    "filter": { "tool": "midjourney" },
-    "metaTitle": "Best Midjourney Prompts (2026) — AI Art Ideas",
-    "metaDescription": "Browse copy-ready Midjourney prompts for photorealistic images, fantasy scenes, product concepts, editorial visuals, and professional AI art workflows."
+    "title": "Best Midjourney AI Prompts",
+    "description": "Browse copy-ready Midjourney prompts for photorealistic images, fantasy art, product concepts, editorial visuals, and professional visual design workflows.",
+    "metaTitle": "Best Midjourney AI Prompts (2026) — AI Art Ideas",
+    "metaDescription": "Browse copy-ready Midjourney prompts for photorealistic images, fantasy scenes, product concepts, editorial visuals, and professional AI art workflows.",
+    "filter": { "tool": "midjourney" }
   },
   {
     "slug": "coding-prompts",

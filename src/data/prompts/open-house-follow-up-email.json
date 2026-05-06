@@ -15,7 +15,7 @@
     { "name": "FEATURES_LIKED", "description": "Specific features the visitor commented on positively", "example": "loved the updated kitchen and backyard size" },
     { "name": "CONCERNS", "description": "Any objections or concerns they expressed", "example": "worried about the roof age and proximity to the highway" },
     { "name": "AGENT_NAME", "description": "Your name as the listing agent", "example": "Marcus Thompson" },
-    { "name": "CONTACT_INFO", "description": "Your phone number and email", "example": "555-0123, marcus@realtypro.com" }
+    { "name": "CONTACT_INFO", "description": "Your phone number and email", "example": "555-0123, marcus [at] realtypro [dot] com" }
   ],
   "tips": ["Fill in the FEATURES_LIKED and CONCERNS fields immediately after the open house while details are fresh", "For hot leads, adjust the call to action toward scheduling a private showing or discussing offer strategy", "Send within 24 hours of the open house for maximum impact"],
   "exampleOutput": "Subject: Great meeting you at 742 Evergreen Terrace, Sarah and Mike!\n\nHi Sarah and Mike,\n\nIt was such a pleasure meeting you both at yesterday's open house — I could tell right away that the backyard had you envisioning summer cookouts! You two clearly have great taste, and I loved hearing about your plans for the space.\n\nI wanted to follow up on the roof question you raised. The roof was replaced in 2019 with 30-year architectural shingles, and I can provide the full inspection report and warranty documentation...",

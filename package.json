@@ -33,6 +33,7 @@
     "seo:verify:live": "node scripts/seo/verify-live.mjs",
     "seo:verify:ga4-live": "node scripts/seo/verify-ga4-live.mjs",
     "seo:verify:all": "npm run seo:verify:setup && npm run seo:verify:live",
+    "seo:submit:indexnow": "node scripts/seo/submit-indexnow.mjs",
     "seo:pull:daily": "npm run seo:pull:ahrefs && npm run seo:pull:ahrefs-site-audit -- --mode=overview && npm run seo:pull:ahrefs-rank-tracker && npm run seo:pull:gsc && npm run seo:pull:ga4 && npm run seo:brief && npm run syndicate:medium",
     "seo:pull:weekly": "npm run seo:pull:ahrefs && npm run seo:pull:ahrefs-keywords-explorer && npm run seo:pull:ahrefs-backlinks-deep && npm run seo:pull:ahrefs-site-audit -- --mode=full && npm run seo:pull:brand-radar",
     "seo:pull:monthly": "npm run seo:pull:ahrefs-batch-analysis",
