@@ -402,4 +402,4 @@ Ready to actually make stuff? The library has dozens of image prompts across eve
 
 Every prompt ships with the full text, variable explanations, and notes on what to tweak.
 
-[Browse All Image Generation Prompts](/prompts/?type=image) | [Browse the Full Prompt Library](/prompts/)
+[Browse All Image Generation Prompts](/categories/image-generation/) | [Browse the Full Prompt Library](/prompts/)
