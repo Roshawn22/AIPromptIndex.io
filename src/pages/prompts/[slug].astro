@@ -15,6 +15,7 @@ import VoteButtons from '../../components/prompt/VoteButtons.tsx';
 import SaveButton from '../../components/prompt/SaveButton.tsx';
 import NewsletterSignup from '../../components/common/NewsletterSignup.astro';
 import { formatDate } from '../../lib/utils';
+import { promptMatchesBestOfFilter } from '../../lib/bestof';
 import toolsData from '../../data/tools/tools.json';
 import toolCategoryPages from '../../data/seo/tool-category-pages.json';
 import audiencePages from '../../data/seo/audience-pages.json';
@@ -61,10 +62,9 @@ for (const page of audiencePages) {
   }
 }
 
-// Tier 3: best-of pages — match by tool or category in filter
+// Tier 3: best-of pages — match any supported best-of filter
 for (const page of bestofPages) {
-  const filter = (page as any).filter || {};
-  if (filter.tool === data.tool || filter.category === data.category) {
+  if (promptMatchesBestOfFilter({ data }, (page as any).filter || {})) {
     collections.push({ title: page.title, url: `/best/${page.slug}/` });
   }
 }
