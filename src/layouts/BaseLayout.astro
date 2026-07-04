@@ -20,7 +20,7 @@ interface Props {
 const {
   title,
   description,
-  ogImage = '/og-default.svg',
+  ogImage = '/og-default.png',
   ogType = 'website',
   canonicalUrl,
   noindex = false,
@@ -38,7 +38,8 @@ function clampMetaText(value: string, maxLength: number) {
   return `${clipped.replace(/[.,;:!?-]+$/, '')}...`;
 }
 
-const fullTitle = title;
+const siteName = 'AIPromptIndex';
+const fullTitle = title.includes(siteName) ? title : `${title} | ${siteName}`;
 const metaDescription = clampMetaText(description, 155);
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://aipromptindex.io';
 const siteOrigin = new URL(siteUrl).origin;

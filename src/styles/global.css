@@ -5,3 +5,5 @@
 @source "../components";
 
 @import "./theme.css";
+
+@plugin "@tailwindcss/typography";
