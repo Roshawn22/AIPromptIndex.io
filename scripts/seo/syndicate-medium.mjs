@@ -16,7 +16,7 @@ import {
 // ---------------------------------------------------------------------------
 
 const MEDIUM_API_BASE = 'https://api.medium.com/v1';
-const CLAUDE_MODEL = 'claude-opus-4-20250514';
+const CLAUDE_MODEL = process.env.ANTHROPIC_SEO_MODEL || 'claude-opus-4-8';
 const CONTENT_DIRS = [
   { dir: path.join(repoRoot, 'src/data/blog'), collection: 'blog' },
   { dir: path.join(repoRoot, 'src/data/guides'), collection: 'guides' },

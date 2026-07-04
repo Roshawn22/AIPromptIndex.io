@@ -2,7 +2,11 @@ name: SEO Data Pull
 
 on:
   schedule:
+    # Both crons target 07:00 America/Los_Angeles year-round; the runtime
+    # gate below lets exactly one of them proceed (14:00 UTC during PDT,
+    # 15:00 UTC during PST).
     - cron: "0 14 * * *"
+    - cron: "0 15 * * *"
   workflow_dispatch: {}
 
 permissions:
@@ -170,6 +174,7 @@ jobs:
         env:
           MEDIUM_API_TOKEN: ${{ secrets.MEDIUM_API_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_SEO_MODEL: ${{ vars.ANTHROPIC_SEO_MODEL || 'claude-opus-4-8' }}
         run: npm run syndicate:medium
         continue-on-error: true
 

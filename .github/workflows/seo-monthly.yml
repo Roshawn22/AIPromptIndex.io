@@ -4,7 +4,11 @@ name: SEO Monthly Pull
 
 on:
   schedule:
+    # Both crons target the 1st at 07:00 America/Los_Angeles year-round; the
+    # runtime gate lets exactly one proceed (14:00 UTC during PDT, 15:00 UTC
+    # during PST).
     - cron: "0 14 1 * *"
+    - cron: "0 15 1 * *"
   workflow_dispatch: {}
 
 permissions:
