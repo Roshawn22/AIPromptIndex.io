@@ -9,7 +9,7 @@
   "difficulty": "intermediate",
   "promptType": "code",
   "variables": [
-    { "name": "JSON_DATA", "description": "The JSON data to generate types from", "example": "{\"id\": \"usr_abc123\", \"name\": \"Jane Doe\", \"email\": \"jane@example.com\", \"role\": \"admin\", \"plan\": \"pro\", \"createdAt\": \"2026-01-15T10:30:00Z\"}" },
+    { "name": "JSON_DATA", "description": "The JSON data to generate types from", "example": "{\"id\": \"usr_abc123\", \"name\": \"Jane Doe\", \"email\": \"jane [at] example [dot] com\", \"role\": \"admin\", \"plan\": \"pro\", \"createdAt\": \"2026-01-15T10:30:00Z\"}" },
     { "name": "TYPE_CONTEXT", "description": "Where these types will be used", "example": "a multi-tenant SaaS user management system" },
     { "name": "NAMING_CONVENTION", "description": "How to name the generated types", "example": "PascalCase with entity prefix (e.g., UserProfile, UserRole, UserCreateInput)" }
   ],
@@ -18,5 +18,5 @@
   "isFeatured": false,
   "dateAdded": "2026-04-02",
   "metaTitle": "TypeScript Type Generator Prompt for GitHub Copilot",
-  "metaDescription": "Generate TypeScript types and Zod schemas from JSON data with GitHub Copilot. Branded IDs and type guards included."
+  "metaDescription": "Generate TypeScript interfaces, branded IDs, Zod schemas, creation inputs, update types, and type guards from JSON data with GitHub Copilot."
 }

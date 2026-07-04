@@ -3,9 +3,11 @@ import { useState, useCallback } from 'react';
 interface PromptCodeBlockProps {
   promptText: string;
   promptSlug?: string;
+  tool?: string;
+  category?: string;
 }
 
-export default function PromptCodeBlock({ promptText, promptSlug }: PromptCodeBlockProps) {
+export default function PromptCodeBlock({ promptText, promptSlug, tool, category }: PromptCodeBlockProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = useCallback(async () => {
@@ -27,9 +29,9 @@ export default function PromptCodeBlock({ promptText, promptSlug }: PromptCodeBl
 
     // Track copy event
     if (typeof window !== 'undefined' && 'gtag' in window) {
-      (window as any).gtag('event', 'prompt_copied', { prompt_slug: promptSlug });
+      (window as any).gtag('event', 'prompt_copied', { prompt_slug: promptSlug, tool, category });
     }
-  }, [promptText, promptSlug]);
+  }, [promptText, promptSlug, tool, category]);
 
   // Highlight [VARIABLE] placeholders
   const renderHighlightedText = () => {

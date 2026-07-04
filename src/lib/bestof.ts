@@ -24,7 +24,11 @@ export function promptMatchesBestOfFilter(prompt: PromptLike, filter: BestOfFilt
 
   if (filter.tool && prompt.data.tool !== filter.tool) return false;
   if (filter.category && prompt.data.category !== filter.category) return false;
-  if (filter.tag && !tags.includes(filter.tag)) return false;
+  if (filter.tag) {
+    const normalizedFilterTag = filter.tag.toLowerCase();
+    const hasMatchingTag = tags.some((tag) => tag.toLowerCase() === normalizedFilterTag);
+    if (!hasMatchingTag) return false;
+  }
 
   if (filter.sort === 'top-rated') return true;
 
