@@ -41,6 +41,7 @@
     "seo:pull:semrush-manual": "npm run seo:pull:semrush -- --enrich=true --budget=standard && npm run seo:pull:semrush-supplemental && npm run seo:pull:semrush-projects && npm run seo:cross-validate",
     "seo:content-briefs": "node scripts/seo/generate-content-briefs.mjs",
     "seo:ai-visibility": "node scripts/seo/analyze-ai-visibility.mjs",
+    "seo:ops:ai": "node scripts/seo/run-ai-ops.mjs",
     "seo:keyword-gaps": "node scripts/seo/keyword-gap-analysis.mjs",
     "seo:rank-suggestions": "node scripts/seo/suggest-rank-tracker-keywords.mjs",
     "syndicate:medium": "node scripts/seo/syndicate-medium.mjs"

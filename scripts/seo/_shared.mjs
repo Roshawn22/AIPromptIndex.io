@@ -620,11 +620,21 @@ export function listSeoOutputDates() {
     .sort();
 }
 
+export function getLatestSeoDate() {
+  const dates = listSeoOutputDates();
+  return dates.at(-1) || null;
+}
+
 export function getPreviousSeoDate(dateLabel) {
   const dates = listSeoOutputDates();
   const index = dates.indexOf(dateLabel);
   if (index <= 0) return null;
   return dates[index - 1] || null;
+}
+
+export function getLatestSeoOutputDir() {
+  const latestDate = getLatestSeoDate();
+  return latestDate ? path.join(seoOutputRoot, latestDate) : null;
 }
 
 export function getPreviousSeoOutputDir(dateLabel) {
