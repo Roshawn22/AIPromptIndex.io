@@ -10,6 +10,7 @@
     "check": "astro check",
     "lint": "astro check",
     "ci": "npm run check && npm run build",
+    "test": "node --test scripts/seo/__tests__/*.test.mjs",
     "seo:pull:ahrefs": "node scripts/seo/pull-ahrefs.mjs",
     "seo:pull:ahrefs-keywords-explorer": "node scripts/seo/pull-ahrefs-keywords-explorer.mjs",
     "seo:pull:ahrefs-site-audit": "node scripts/seo/pull-ahrefs-site-audit.mjs",
