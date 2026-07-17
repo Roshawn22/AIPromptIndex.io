@@ -5,7 +5,11 @@ name: SEO Weekly Pull
 
 on:
   schedule:
+    # Both crons target Monday 07:00 America/Los_Angeles year-round. The
+    # schedule-identity gate selects the PDT or PST cron without depending
+    # on the time GitHub actually starts the job.
     - cron: "0 14 * * 1"
+    - cron: "0 15 * * 1"
   workflow_dispatch: {}
 
 permissions:
@@ -30,22 +34,31 @@ jobs:
           cache: npm
       - run: npm ci
 
-      - name: Runtime schedule gate (Mon 7 AM Pacific)
+      - name: Select Pacific-time cron by schedule identity
         id: gate
         shell: bash
+        env:
+          TRIGGERING_SCHEDULE: ${{ github.event.schedule }}
         run: |
           if [[ "${{ github.event_name }}" != "schedule" ]]; then
             echo "run=true" >> "$GITHUB_OUTPUT"
+            echo "Manual dispatch detected. Proceeding."
             exit 0
           fi
-          local_hour="$(TZ=America/Los_Angeles date +%H)"
-          local_dow="$(TZ=America/Los_Angeles date +%u)"
-          if [[ "$local_hour" == "07" && "$local_dow" == "1" ]]; then
-            echo "run=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "run=false" >> "$GITHUB_OUTPUT"
-            echo "Gate blocked: hour=$local_hour dow=$local_dow"
-          fi
+
+          pacific_offset="$(TZ=America/Los_Angeles date +%z)"
+          echo "Schedule identity: cron=${TRIGGERING_SCHEDULE} pacific_offset=${pacific_offset}"
+
+          case "${pacific_offset}:${TRIGGERING_SCHEDULE}" in
+            "-0700:0 14 * * 1"|"-0800:0 15 * * 1")
+              echo "run=true" >> "$GITHUB_OUTPUT"
+              echo "Selected cron matched the current Pacific offset."
+              ;;
+            *)
+              echo "run=false" >> "$GITHUB_OUTPUT"
+              echo "Duplicate DST cron skipped."
+              ;;
+          esac
 
       - name: Preflight verification
         if: steps.gate.outputs.run == 'true'

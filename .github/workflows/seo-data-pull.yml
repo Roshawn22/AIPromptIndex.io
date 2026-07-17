@@ -2,7 +2,11 @@ name: SEO Data Pull
 
 on:
   schedule:
+    # Both crons target 07:00 America/Los_Angeles year-round. The schedule-
+    # identity gate below selects the PDT or PST cron without depending on
+    # the time GitHub actually starts the job.
     - cron: "0 14 * * *"
+    - cron: "0 15 * * *"
   workflow_dispatch: {}
 
 permissions:
@@ -32,9 +36,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Runtime schedule gate (7:00 AM America/Los_Angeles daily)
+      - name: Select Pacific-time cron by schedule identity
         id: gate
         shell: bash
+        env:
+          TRIGGERING_SCHEDULE: ${{ github.event.schedule }}
         run: |
           if [[ "${{ github.event_name }}" != "schedule" ]]; then
             echo "run_pull=true" >> "$GITHUB_OUTPUT"
@@ -42,16 +48,19 @@ jobs:
             exit 0
           fi
 
-          local_hour="$(TZ=America/Los_Angeles date +%H)"
-          echo "Local Pacific gate check: hour=${local_hour}"
+          pacific_offset="$(TZ=America/Los_Angeles date +%z)"
+          echo "Schedule identity: cron=${TRIGGERING_SCHEDULE} pacific_offset=${pacific_offset}"
 
-          if [[ "$local_hour" == "07" ]]; then
-            echo "run_pull=true" >> "$GITHUB_OUTPUT"
-            echo "Gate passed."
-          else
-            echo "run_pull=false" >> "$GITHUB_OUTPUT"
-            echo "Gate blocked this run."
-          fi
+          case "${pacific_offset}:${TRIGGERING_SCHEDULE}" in
+            "-0700:0 14 * * *"|"-0800:0 15 * * *")
+              echo "run_pull=true" >> "$GITHUB_OUTPUT"
+              echo "Selected cron matched the current Pacific offset."
+              ;;
+            *)
+              echo "run_pull=false" >> "$GITHUB_OUTPUT"
+              echo "Duplicate DST cron skipped."
+              ;;
+          esac
 
       - name: Preflight verification
         if: steps.gate.outputs.run_pull == 'true'
@@ -170,6 +179,7 @@ jobs:
         env:
           MEDIUM_API_TOKEN: ${{ secrets.MEDIUM_API_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_SEO_MODEL: ${{ vars.ANTHROPIC_SEO_MODEL || 'claude-opus-4-8' }}
         run: npm run syndicate:medium
         continue-on-error: true
 

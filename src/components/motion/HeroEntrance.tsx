@@ -20,7 +20,7 @@ export default function HeroEntrance({ promptCount }: Props) {
 
   return (
     <div className="relative mx-auto max-w-7xl px-[var(--space-page)] py-20 text-center sm:py-28">
-      <div className="surface-glass-prominent relative overflow-hidden rounded-[calc(var(--radius-2xl)+4px)] px-6 py-12 sm:px-10 sm:py-16 lg:px-16">
+      <div className="surface-glass-prominent relative overflow-hidden rounded-[calc(var(--radius-panel)+4px)] px-6 py-12 sm:px-10 sm:py-16 lg:px-16">
         <div
           className="pointer-events-none absolute inset-0"
           aria-hidden="true"

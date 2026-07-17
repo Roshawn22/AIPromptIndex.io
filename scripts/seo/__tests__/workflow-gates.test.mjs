@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 
 import {
   classifyAhrefsError,
@@ -48,3 +49,35 @@ test('summarizeSeoWorkflowGates keeps Ahrefs enabled when optional probes are sk
   assert.equal(summary.workflowGates.canRunAhrefsRankTracker, false);
   assert.equal(summary.workflowGates.canRunSemrushProjects, true);
 });
+
+const scheduledWorkflows = [
+  {
+    name: 'daily',
+    path: '../../../.github/workflows/seo-data-pull.yml',
+    daylightCron: '0 14 * * *',
+    standardCron: '0 15 * * *',
+  },
+  {
+    name: 'weekly',
+    path: '../../../.github/workflows/seo-weekly.yml',
+    daylightCron: '0 14 * * 1',
+    standardCron: '0 15 * * 1',
+  },
+  {
+    name: 'monthly',
+    path: '../../../.github/workflows/seo-monthly.yml',
+    daylightCron: '0 14 1 * *',
+    standardCron: '0 15 1 * *',
+  },
+];
+
+for (const workflow of scheduledWorkflows) {
+  test(`${workflow.name} workflow selects the Pacific cron by schedule identity`, () => {
+    const source = fs.readFileSync(new URL(workflow.path, import.meta.url), 'utf8');
+
+    assert.match(source, /TRIGGERING_SCHEDULE: \$\{\{ github\.event\.schedule \}\}/);
+    assert.ok(source.includes(`-0700:${workflow.daylightCron}`));
+    assert.ok(source.includes(`-0800:${workflow.standardCron}`));
+    assert.doesNotMatch(source, /local_hour|date \+%H/);
+  });
+}
