@@ -18,5 +18,5 @@
   "isFeatured": false,
   "dateAdded": "2026-04-02",
   "metaTitle": "TypeScript Type Generator Prompt for GitHub Copilot",
-  "metaDescription": "Generate TypeScript interfaces, branded IDs, Zod schemas, creation inputs, update types, and type guards from JSON data with GitHub Copilot."
+  "metaDescription": "Generate TypeScript interfaces, branded IDs, Zod schemas, utility types, and type guards from JSON data with this GitHub Copilot prompt."
 }

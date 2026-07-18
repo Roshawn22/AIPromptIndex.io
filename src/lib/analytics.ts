@@ -6,19 +6,26 @@ interface EventPayload {
 
 export function trackEvent(type: EventType, payload?: EventPayload) {
   try {
-    if (typeof window !== 'undefined' && 'gtag' in window) {
+    if (typeof window === 'undefined') return;
+
+    if ('gtag' in window && typeof (window as any).gtag === 'function') {
       (window as any).gtag('event', type, payload);
+      return;
+    }
+
+    if (Array.isArray((window as any).dataLayer)) {
+      (window as any).dataLayer.push(['event', type, payload]);
     }
   } catch {
     // Silently fail — analytics should never break the app
   }
 }
 
-export function trackPromptCopy(promptSlug: string, tool: string) {
-  trackEvent('prompt_copied', { prompt_slug: promptSlug, tool });
+export function trackPromptCopy(promptSlug: string, tool?: string, category?: string) {
+  trackEvent('prompt_copied', { prompt_slug: promptSlug, tool, category });
 }
 
-export function trackPromptView(promptSlug: string, tool: string, category: string) {
+export function trackPromptView(promptSlug: string, tool?: string, category?: string) {
   trackEvent('prompt_viewed', { prompt_slug: promptSlug, tool, category });
 }
 

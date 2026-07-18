@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useCallback } from 'react';
+import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { TOOL_DISPLAY_NAMES as toolDisplayNames } from '../../lib/constants';
 import { BADGE_COLORS, DIFFICULTY_TO_BADGE, type BadgeColor } from '../../lib/badge-colors';
@@ -70,6 +70,7 @@ export default function PromptFilter({ prompts, tools, categories }: Props) {
   const [difficulty, setDifficulty] = useState<DifficultyFilter>('all');
   const [sort, setSort] = useState<SortOption>('featured');
   const [hasLoadedUrlFilters, setHasLoadedUrlFilters] = useState(false);
+  const hasSkippedInitialUrlSync = useRef(false);
   const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
@@ -83,6 +84,10 @@ export default function PromptFilter({ prompts, tools, categories }: Props) {
 
   useEffect(() => {
     if (!hasLoadedUrlFilters) return;
+    if (!hasSkippedInitialUrlSync.current) {
+      hasSkippedInitialUrlSync.current = true;
+      return;
+    }
     syncParams({ tool, category, difficulty, sort });
   }, [hasLoadedUrlFilters, tool, category, difficulty, sort]);
 

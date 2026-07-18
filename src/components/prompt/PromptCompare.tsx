@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { TOOL_DISPLAY_NAMES as toolDisplayNames, CATEGORY_DISPLAY_NAMES as categoryDisplayNames } from '../../lib/constants';
 import { BADGE_COLORS, DIFFICULTY_COLORS } from '../../lib/badge-colors';
 import { SELECT_CHEVRON_STYLE } from '../../lib/utils';
+import { copyTextToClipboard } from '../../lib/clipboard';
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -75,13 +76,10 @@ export default function PromptCompare({ prompts }: Props) {
   }, [leftSlug, rightSlug]);
 
   const handleCopy = useCallback(async (text: string, side: 'left' | 'right') => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopiedSide(side);
-      setTimeout(() => setCopiedSide(null), 2000);
-    } catch {
-      // clipboard not available
-    }
+    const didCopy = await copyTextToClipboard(text);
+    if (!didCopy) return;
+    setCopiedSide(side);
+    setTimeout(() => setCopiedSide(null), 2000);
   }, []);
 
   /* Helper: check if a field differs between left and right */
@@ -157,7 +155,6 @@ export default function PromptCompare({ prompts }: Props) {
             side="left"
             copiedSide={copiedSide}
             onCopy={handleCopy}
-            otherPrompt={rightPrompt}
             isDifferent={isDifferent}
           />
 
@@ -167,7 +164,6 @@ export default function PromptCompare({ prompts }: Props) {
             side="right"
             copiedSide={copiedSide}
             onCopy={handleCopy}
-            otherPrompt={leftPrompt}
             isDifferent={isDifferent}
           />
         </div>
@@ -185,11 +181,10 @@ interface PromptPanelProps {
   side: 'left' | 'right';
   copiedSide: 'left' | 'right' | null;
   onCopy: (text: string, side: 'left' | 'right') => void;
-  otherPrompt: PromptData | null;
   isDifferent: (field: 'tool' | 'category' | 'difficulty') => boolean;
 }
 
-function PromptPanel({ prompt, side, copiedSide, onCopy, otherPrompt, isDifferent }: PromptPanelProps) {
+function PromptPanel({ prompt, side, copiedSide, onCopy, isDifferent }: PromptPanelProps) {
   if (!prompt) {
     return (
       <div className="flex items-center justify-center rounded-[var(--radius-lg)] border border-dashed border-[var(--color-border)] bg-[var(--color-surface-1)] p-12 text-center">

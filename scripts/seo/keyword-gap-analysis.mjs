@@ -96,7 +96,7 @@ async function main() {
     try {
       const response = await fetchAhrefsJson('site-explorer/organic-keywords', {
         target: domain,
-        mode: 'subdomains',
+        mode,
         limit: 100,
         select: 'keyword,best_position,volume,sum_traffic',
         country: 'us',

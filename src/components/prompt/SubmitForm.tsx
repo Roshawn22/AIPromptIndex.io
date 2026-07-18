@@ -3,7 +3,7 @@
  * Submits to Convex backend with rate limiting via visitor fingerprint.
  * Gracefully degrades to a static message if Convex is not configured.
  */
-import { useState, useEffect, useCallback, useMemo, type FormEvent } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { ConvexReactClient, useMutation, ConvexProvider } from 'convex/react';
 import { api } from '../../lib/convexApi';
 import { getVisitorId } from '../../lib/visitor';
@@ -43,7 +43,7 @@ function SubmitFormInner() {
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = useCallback(
-    async (e: FormEvent<HTMLFormElement>) => {
+    async (e: { preventDefault(): void; currentTarget: HTMLFormElement }) => {
       e.preventDefault();
       setStatus('submitting');
       setErrorMessage('');

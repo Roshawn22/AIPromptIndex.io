@@ -6,6 +6,7 @@ import Footer from '../../components/global/Footer.astro';
 import PromptCard from '../../components/prompt/PromptCard.astro';
 import Breadcrumb from '../../components/common/Breadcrumb.astro';
 import { TOOL_DISPLAY_NAMES as toolDisplayNames } from '../../lib/constants';
+import { promptMatchesBestOfFilter } from '../../lib/bestof';
 import toolCategoryPages from '../../data/seo/tool-category-pages.json';
 import bestofPages from '../../data/seo/bestof-pages.json';
 import audiencePages from '../../data/seo/audience-pages.json';
@@ -56,14 +57,16 @@ const categoryCollections = toolCategoryPages
   .slice(0, 6);
 
 const categoryRoundups = bestofPages
-  .filter((page: any) => page.filter?.category === category.data.slug)
+  .filter((page: any) => (
+    page.filter?.category === category.data.slug ||
+    (page.filter?.promptSlugs?.length && prompts.some((prompt) => promptMatchesBestOfFilter(prompt, page.filter)))
+  ))
   .slice(0, 4);
 
 const audienceMatches = audiencePages
   .filter((page: any) => page.filterCategories?.includes(category.data.slug))
   .slice(0, 4);
 
-const currentYear = new Date().getFullYear();
 const topToolSummary = topTools.map((tool) => tool.name).join(', ');
 const seoTitle = `AI Prompts for ${category.data.name}`;
 const seoDescription = `Discover ${prompts.length} free AI prompts for ${category.data.name.toLowerCase()} across ${topToolSummary || 'leading AI tools'}. Copy-ready templates help you write better outputs, customize examples, and save reusable prompt workflows.`;

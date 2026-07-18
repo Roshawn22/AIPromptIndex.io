@@ -1,4 +1,6 @@
 import { useState, useCallback } from 'react';
+import { trackPromptCopy } from '../../lib/analytics';
+import { copyTextToClipboard } from '../../lib/clipboard';
 
 interface PromptCodeBlockProps {
   promptText: string;
@@ -11,25 +13,14 @@ export default function PromptCodeBlock({ promptText, promptSlug, tool, category
   const [copied, setCopied] = useState(false);
 
   const handleCopy = useCallback(async () => {
-    try {
-      await navigator.clipboard.writeText(promptText);
-    } catch {
-      const textarea = document.createElement('textarea');
-      textarea.value = promptText;
-      textarea.style.position = 'fixed';
-      textarea.style.opacity = '0';
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textarea);
-    }
+    const didCopy = await copyTextToClipboard(promptText);
+    if (!didCopy) return;
 
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
 
-    // Track copy event
-    if (typeof window !== 'undefined' && 'gtag' in window) {
-      (window as any).gtag('event', 'prompt_copied', { prompt_slug: promptSlug, tool, category });
+    if (promptSlug) {
+      trackPromptCopy(promptSlug, tool, category);
     }
   }, [promptText, promptSlug, tool, category]);
 

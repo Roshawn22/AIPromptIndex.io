@@ -5,6 +5,11 @@ import Header from '../../components/global/Header.astro';
 import Footer from '../../components/global/Footer.astro';
 import PromptCard from '../../components/prompt/PromptCard.astro';
 import Breadcrumb from '../../components/common/Breadcrumb.astro';
+import { CATEGORY_DISPLAY_NAMES as categoryDisplayNames } from '../../lib/constants';
+import { promptMatchesBestOfFilter } from '../../lib/bestof';
+import toolCategoryPages from '../../data/seo/tool-category-pages.json';
+import bestofPages from '../../data/seo/bestof-pages.json';
+import audiencePages from '../../data/seo/audience-pages.json';
 
 export async function getStaticPaths() {
   const tools = await getCollection('tools');
@@ -16,6 +21,8 @@ export async function getStaticPaths() {
 
 const { tool } = Astro.props;
 const allPrompts = await getCollection('prompts');
+const allGuides = await getCollection('guides');
+const allPosts = await getCollection('blog');
 const prompts = allPrompts
   .filter((p) => p.data.tool === tool.data.slug)
   .sort((a, b) => {
@@ -23,11 +30,134 @@ const prompts = allPrompts
     if (!a.data.isFeatured && b.data.isFeatured) return 1;
     return new Date(b.data.dateAdded).getTime() - new Date(a.data.dateAdded).getTime();
   });
+
+const categoryCounts = prompts.reduce((acc, prompt) => {
+  acc[prompt.data.category] = (acc[prompt.data.category] || 0) + 1;
+  return acc;
+}, {} as Record<string, number>);
+
+const topCategories = Object.entries(categoryCounts)
+  .sort(([, a], [, b]) => b - a)
+  .slice(0, 4)
+  .map(([slug, count]) => ({
+    slug,
+    count,
+    name: categoryDisplayNames[slug] || slug,
+  }));
+
+const toolCollections = toolCategoryPages
+  .filter((page: any) => page.tool === tool.data.slug)
+  .slice(0, 6);
+
+const toolRoundups = bestofPages
+  .filter((page: any) => (
+    page.filter?.tool === tool.data.slug ||
+    (page.filter?.promptSlugs?.length && prompts.some((prompt) => promptMatchesBestOfFilter(prompt, page.filter)))
+  ))
+  .slice(0, 4);
+
+const audienceMatches = audiencePages
+  .map((page: any) => {
+    const count = prompts.filter((prompt) => {
+      const categoryMatch = page.filterCategories?.includes(prompt.data.category);
+      const tagMatch = page.filterTags?.some((tag: string) => prompt.data.tags?.includes(tag));
+      return categoryMatch || tagMatch;
+    }).length;
+
+    return { ...page, count };
+  })
+  .filter((page: any) => page.count > 0)
+  .sort((a: any, b: any) => b.count - a.count)
+  .slice(0, 4);
+
+const currentYear = new Date().getFullYear();
+const topCategorySummary = topCategories.map((category) => category.name).join(', ');
+const seoTitle = `Best ${tool.data.name} Prompts (${currentYear}) — ${prompts.length} Free Prompts`;
+const seoDescription = `Browse ${prompts.length} free ${tool.data.name} prompts for ${topCategorySummary || 'popular use cases'}. Copy-ready templates help you customize examples, improve AI outputs, and build a reusable prompt library.`;
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://aipromptindex.io';
+
+const itemListJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: `Best ${tool.data.name} Prompts`,
+  description: seoDescription,
+  numberOfItems: prompts.length,
+  itemListElement: prompts.map((prompt, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: prompt.data.title,
+    url: `${siteUrl}/prompts/${prompt.data.slug}/`,
+  })),
+};
+
+const editorialEntryMap = {
+  blog: new Map(allPosts.map((entry) => [entry.id, entry])),
+  guide: new Map(allGuides.map((entry) => [entry.id, entry])),
+};
+
+const editorialResourceMap: Record<string, Array<{ type: 'blog' | 'guide'; slug: string }>> = {
+  chatgpt: [
+    { type: 'blog', slug: 'best-chatgpt-prompts-2026' },
+    { type: 'guide', slug: 'chatgpt-for-business' },
+    { type: 'blog', slug: 'chatgpt-vs-claude-prompting-differences' },
+  ],
+  claude: [
+    { type: 'blog', slug: 'chatgpt-vs-claude-prompting-differences' },
+    { type: 'guide', slug: 'prompt-engineering-101' },
+    { type: 'blog', slug: 'how-to-write-ai-prompts-beginners-guide' },
+  ],
+  gemini: [
+    { type: 'guide', slug: 'prompt-engineering-101' },
+    { type: 'blog', slug: 'how-to-write-ai-prompts-beginners-guide' },
+    { type: 'guide', slug: 'chatgpt-for-business' },
+  ],
+  midjourney: [
+    { type: 'guide', slug: 'midjourney-prompt-guide' },
+    { type: 'guide', slug: 'prompt-engineering-101' },
+    { type: 'blog', slug: 'how-to-write-ai-prompts-beginners-guide' },
+  ],
+  'dall-e': [
+    { type: 'guide', slug: 'midjourney-prompt-guide' },
+    { type: 'guide', slug: 'prompt-engineering-101' },
+    { type: 'blog', slug: 'how-to-write-ai-prompts-beginners-guide' },
+  ],
+  'stable-diffusion': [
+    { type: 'guide', slug: 'midjourney-prompt-guide' },
+    { type: 'guide', slug: 'prompt-engineering-101' },
+    { type: 'blog', slug: 'how-to-write-ai-prompts-beginners-guide' },
+  ],
+  cursor: [
+    { type: 'guide', slug: 'prompt-engineering-101' },
+    { type: 'blog', slug: 'chatgpt-vs-claude-prompting-differences' },
+    { type: 'blog', slug: 'how-to-write-ai-prompts-beginners-guide' },
+  ],
+  'github-copilot': [
+    { type: 'guide', slug: 'prompt-engineering-101' },
+    { type: 'blog', slug: 'chatgpt-vs-claude-prompting-differences' },
+    { type: 'blog', slug: 'how-to-write-ai-prompts-beginners-guide' },
+  ],
+};
+
+const editorialResources = (editorialResourceMap[tool.data.slug] || [])
+  .map((resource) => {
+    const entry = editorialEntryMap[resource.type].get(resource.slug);
+    if (!entry) return null;
+
+    return {
+      href: `/${resource.type === 'blog' ? 'blog' : 'guides'}/${resource.slug}/`,
+      label: resource.type === 'blog' ? 'Blog' : 'Guide',
+      title: entry.data.metaTitle || entry.data.title,
+      description: entry.data.metaDescription || entry.data.description,
+    };
+  })
+  .filter(Boolean);
 ---
 
 <BaseLayout
-  title={`Best ${tool.data.name} Prompts`}
-  description={`Browse ${prompts.length} free ${tool.data.name} prompts for ${tool.data.name}. Copy-ready templates help you customize examples, improve AI outputs, and build a reusable prompt library.`}
+  title={seoTitle}
+  description={seoDescription}
+  jsonLd={[itemListJsonLd]}
 >
   <Header slot="header" />
 
@@ -44,6 +174,18 @@ const prompts = allPrompts
         {prompts.length} curated prompts for {tool.data.name}
       </p>
       <p class="mt-4 text-[var(--color-text-secondary)]">{tool.data.description}</p>
+      {topCategories.length > 0 && (
+        <p class="mt-4 max-w-3xl text-[var(--color-text-secondary)]">
+          Use these {tool.data.name} prompts for {topCategories.map((category, index) => (
+            <span>
+              <a href={`/prompts/${tool.data.slug}/${category.slug}/`} class="text-[var(--color-accent)] hover:underline">
+                {category.name.toLowerCase()}
+              </a>
+              {index < topCategories.length - 1 ? ', ' : ''}
+            </span>
+          ))}. Each collection is organized by use case and designed to be copied into {tool.data.name} with minimal editing.
+        </p>
+      )}
 
       <!-- Action buttons -->
       <div class="mt-6 flex flex-wrap items-center gap-3">
@@ -104,6 +246,93 @@ const prompts = allPrompts
       <p class="text-center text-[var(--color-text-muted)] py-12">
         No prompts for {tool.data.name} yet. <a href="/submit/" class="text-[var(--color-accent)] hover:underline">Submit one!</a>
       </p>
+    )}
+
+    {toolCollections.length > 0 && (
+      <div class="mt-16 border-t border-[var(--color-border)] pt-10">
+        <h2 class="mb-6 text-xl">Popular {tool.data.name} Collections</h2>
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {toolCollections.map((collection: any) => (
+            <a
+              href={`/prompts/${collection.tool}/${collection.category}/`}
+              class="block rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-5 transition-all duration-200 hover:border-[var(--color-accent-muted)] hover:shadow-[var(--shadow-card-hover)]"
+            >
+              <h3 class="font-[var(--font-display)] text-base font-semibold text-[var(--color-text-primary)]">
+                {collection.title}
+              </h3>
+              <p class="mt-2 text-sm text-[var(--color-text-secondary)]">
+                {collection.metaDescription}
+              </p>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {editorialResources.length > 0 && (
+      <div class="mt-16 border-t border-[var(--color-border)] pt-10">
+        <h2 class="mb-6 text-xl">Guides and Articles for {tool.data.name}</h2>
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {editorialResources.map((resource: any) => (
+            <a
+              href={resource.href}
+              class="block rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-5 transition-all duration-200 hover:border-[var(--color-accent-muted)] hover:shadow-[var(--shadow-card-hover)]"
+            >
+              <span class="inline-flex rounded-full bg-[var(--color-accent)]/10 px-3 py-1 text-xs font-[var(--font-display)] font-semibold uppercase tracking-wider text-[var(--color-accent)]">
+                {resource.label}
+              </span>
+              <h3 class="mt-4 font-[var(--font-display)] text-base font-semibold text-[var(--color-text-primary)]">
+                {resource.title}
+              </h3>
+              <p class="mt-2 text-sm text-[var(--color-text-secondary)]">
+                {resource.description}
+              </p>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {audienceMatches.length > 0 && (
+      <div class="mt-16 border-t border-[var(--color-border)] pt-10">
+        <h2 class="mb-6 text-xl">Who Uses {tool.data.name} Prompts</h2>
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {audienceMatches.map((page: any) => (
+            <a
+              href={`/prompts/for/${page.slug}/`}
+              class="block rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-5 transition-all duration-200 hover:border-[var(--color-accent-muted)] hover:shadow-[var(--shadow-card-hover)]"
+            >
+              <h3 class="font-[var(--font-display)] text-base font-semibold text-[var(--color-text-primary)]">
+                {page.title}
+              </h3>
+              <p class="mt-2 text-sm text-[var(--color-text-secondary)]">
+                {page.metaDescription}
+              </p>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {toolRoundups.length > 0 && (
+      <div class="mt-16 border-t border-[var(--color-border)] pt-10">
+        <h2 class="mb-6 text-xl">Best-of Pages for {tool.data.name}</h2>
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {toolRoundups.map((page: any) => (
+            <a
+              href={`/best/${page.slug}/`}
+              class="block rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-5 transition-all duration-200 hover:border-[var(--color-accent-muted)] hover:shadow-[var(--shadow-card-hover)]"
+            >
+              <h3 class="font-[var(--font-display)] text-base font-semibold text-[var(--color-text-primary)]">
+                {page.title}
+              </h3>
+              <p class="mt-2 text-sm text-[var(--color-text-secondary)]">
+                {page.metaDescription || page.description}
+              </p>
+            </a>
+          ))}
+        </div>
+      </div>
     )}
   </section>
 

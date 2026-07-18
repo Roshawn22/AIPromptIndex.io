@@ -1,9 +1,11 @@
-import { useState, useCallback, useEffect, useMemo } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { ConvexReactClient, useMutation, ConvexProvider } from 'convex/react';
 import { api } from '../../lib/convexApi';
 import LottieAccent from '../motion/LottieAccent';
 import checkmarkData from '../../assets/lottie/checkmark.json';
+import { trackPromptCopy } from '../../lib/analytics';
+import { copyTextToClipboard } from '../../lib/clipboard';
 
 interface CopyButtonProps {
   text: string;
@@ -22,6 +24,8 @@ function CopyButtonInner({
   size = 'md',
   variant = 'primary',
   promptSlug,
+  tool,
+  category,
   onCopy,
   trackEnabled,
 }: CopyButtonProps & { trackEnabled: boolean }) {
@@ -31,18 +35,8 @@ function CopyButtonInner({
   const motionDisabled = !!prefersReducedMotion;
 
   const handleCopy = useCallback(async () => {
-    try {
-      await navigator.clipboard.writeText(text);
-    } catch {
-      const textarea = document.createElement('textarea');
-      textarea.value = text;
-      textarea.style.position = 'fixed';
-      textarea.style.opacity = '0';
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textarea);
-    }
+    const didCopy = await copyTextToClipboard(text);
+    if (!didCopy) return;
 
     setCopied(true);
     onCopy?.();
@@ -55,8 +49,12 @@ function CopyButtonInner({
       }
     }
 
+    if (promptSlug) {
+      trackPromptCopy(promptSlug, tool, category);
+    }
+
     setTimeout(() => setCopied(false), 2000);
-  }, [text, onCopy, track, promptSlug]);
+  }, [text, onCopy, track, promptSlug, tool, category]);
 
   const sizeStyles = {
     sm: 'px-2.5 py-1 text-xs gap-1',
