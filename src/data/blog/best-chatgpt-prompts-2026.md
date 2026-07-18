@@ -8,9 +8,6 @@ pubDate: 2026-04-02
 category: "prompts"
 tags: ["chatgpt", "prompts", "productivity", "ai-tools"]
 draft: false
-syndicate:
-  - medium
-mediumUrl: ""
 ---
 
 If you've ever typed something into ChatGPT and gotten back a polite, confident, completely useless paragraph — same. That's not the AI being bad. That's a prompt that didn't ask for anything specific.

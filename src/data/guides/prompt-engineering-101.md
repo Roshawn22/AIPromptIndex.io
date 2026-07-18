@@ -12,9 +12,6 @@ tags:
   - tutorial
   - fundamentals
 draft: false
-syndicate:
-  - medium
-mediumUrl: ""
 ---
 
 If you're here for **prompt engineering for beginners**, welcome — you're in the right place. And if ChatGPT has ever handed you back something generic, weirdly off-topic, or just bad, you're in good company. I've been there too. The thing that separates people who consistently get great output from the ones who walk away frustrated almost always boils down to **how their prompts are written**.

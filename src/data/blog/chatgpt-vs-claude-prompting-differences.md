@@ -7,9 +7,6 @@ pubDate: 2026-04-02
 category: "comparisons"
 tags: ["chatgpt", "claude", "comparison", "ai-models"]
 draft: false
-syndicate:
-  - medium
-mediumUrl: ""
 ---
 
 Anyone who uses AI for real work ends up with tabs open in both ChatGPT and Claude. They're both great. They're not the same though — and that's the part I see people miss. Drop an identical prompt into both, and you'll get noticeably different output, sometimes in quality, often in flavor. Nudging your prompting style to match the model is a surprisingly quick way to level up your results.

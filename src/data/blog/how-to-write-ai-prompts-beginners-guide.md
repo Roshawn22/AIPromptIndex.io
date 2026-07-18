@@ -7,9 +7,6 @@ pubDate: 2026-04-02
 category: "tutorials"
 tags: ["prompt-engineering", "beginners", "tutorial", "ai-tips"]
 draft: false
-syndicate:
-  - medium
-mediumUrl: ""
 ---
 
 I watched a friend last month type "write me something for LinkedIn" into ChatGPT, stare at the wall of mush that came back, and mutter "this is garbage." And honestly? It was. But the AI wasn't the problem. The prompt was.
