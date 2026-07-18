@@ -69,8 +69,6 @@ const blog = defineCollection({
     category: z.string(),
     tags: z.array(z.string()),
     draft: z.boolean().default(false),
-    syndicate: z.array(z.string()).default([]),
-    mediumUrl: z.string().optional(),
   }),
 });
 
@@ -87,8 +85,6 @@ const guides = defineCollection({
     difficulty: z.enum(['beginner', 'intermediate', 'advanced']),
     tags: z.array(z.string()),
     draft: z.boolean().default(false),
-    syndicate: z.array(z.string()).default([]),
-    mediumUrl: z.string().optional(),
   }),
 });
 

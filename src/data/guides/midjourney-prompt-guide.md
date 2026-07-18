@@ -10,9 +10,6 @@ tags:
   - art
   - visual-content
 draft: false
-syndicate:
-  - medium
-mediumUrl: ""
 ---
 
 If you care even a little about visual quality, Midjourney is the image generator you keep coming back to. Marketing visuals, concept art, product shots, moodboards — it keeps turning out stuff that actually looks intentional, not "AI-generated."

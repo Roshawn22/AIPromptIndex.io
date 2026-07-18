@@ -10,9 +10,6 @@ tags:
   - productivity
   - automation
 draft: false
-syndicate:
-  - medium
-mediumUrl: ""
 ---
 
 Every business is basically a loop of communicating, analyzing, and deciding. In 2026, ChatGPT has quietly become the default tool for all three. But there's a huge gap between people who occasionally ask it a question and the folks who've rewired their week around it — and the second group is pulling away.
