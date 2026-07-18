@@ -121,13 +121,13 @@ async function pullMentionsHistory(dataSource) {
 
 async function safePull(label, fn) {
   try {
-    return { ok: true, data: await fn() };
+    return { label, ok: true, data: await fn() };
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     if (message.includes('Missing addon')) {
-      return { ok: false, addonMissing: true, message };
+      return { label, ok: false, addonMissing: true, message };
     }
-    return { ok: false, addonMissing: false, message };
+    return { label, ok: false, addonMissing: false, message };
   }
 }
 

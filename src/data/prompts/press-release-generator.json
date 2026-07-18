@@ -18,6 +18,6 @@
   "exampleOutput": "FOR IMMEDIATE RELEASE\n\nNovaTech Solutions Raises $15M Series A to Expand AI-Powered Supply Chain Platform\nFunding led by Sequoia Capital will accelerate international expansion and enterprise product launch\n\nSAN FRANCISCO, CA — April 2, 2026 — NovaTech Solutions, a supply chain intelligence platform, today announced it has raised $15 million in Series A funding led by Sequoia Capital with participation from existing investors.\n\nThe company plans to use the capital to triple its engineering team and expand operations into the United Kingdom, Germany and Japan by year-end...\n\n\"This funding validates what our customers have been telling us — the supply chain needs smarter tools, not more dashboards,\" said Maria Chen, CEO and Co-Founder of NovaTech Solutions...",
   "isFeatured": false,
   "dateAdded": "2026-04-02",
-  "metaTitle": "Press Release Generator Prompt for Claude",
-  "metaDescription": "Generate professional press releases in AP style with Claude. Publication-ready format for company announcements."
+  "metaTitle": "Press Release Prompt for Claude — AP Style Generator",
+  "metaDescription": "Generate a professional press release with Claude in AP style. Use this prompt for product launches, funding news, partnerships, and company announcements."
 }

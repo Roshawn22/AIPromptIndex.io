@@ -36,7 +36,7 @@ export default function HeroEntrance({ promptCount }: Props) {
             <LottieAccent animationData={pulseData} size={20} loop />
           </span>
           <span className="text-xs font-[var(--font-display)] font-medium text-[var(--color-text-secondary)]">
-            {promptCount}+ Curated Prompts &middot; 8 Categories &middot; 8 AI Tools
+            {promptCount}+ Curated Prompts &middot; Free Prompt Library &middot; 8 AI Tools
           </span>
         </motion.div>
 
@@ -44,12 +44,12 @@ export default function HeroEntrance({ promptCount }: Props) {
         <motion.h1 {...fadeUp(0.1)} className="relative mx-auto max-w-4xl">
           <span className="text-[var(--color-text-primary)]">The AI Prompt Library</span>
           <br />
-          <span className="text-gradient">for Entrepreneurs</span>
+          <span className="text-gradient">with Free Prompt Templates</span>
         </motion.h1>
 
         {/* Subtitle */}
         <motion.p {...fadeUp(0.2)} className="relative mx-auto mt-6 max-w-2xl text-lg text-[var(--color-text-secondary)]">
-          Discover, copy, and use curated prompts for ChatGPT, Claude, Midjourney, and more. Free and community-driven.
+          Browse a free AI prompt library and prompt catalog for ChatGPT, Claude, Midjourney, Gemini, Cursor, and more. Copy, customize, and use curated prompts fast.
         </motion.p>
 
         {/* CTAs */}
@@ -58,7 +58,7 @@ export default function HeroEntrance({ promptCount }: Props) {
             href="/prompts/"
             className="inline-flex items-center justify-center gap-2 rounded-[var(--radius-md)] bg-[var(--color-accent)] px-7 py-3.5 text-base font-[var(--font-display)] font-medium text-white shadow-[0_0_24px_var(--color-accent-glow)] transition-all duration-200 hover:bg-[var(--color-accent-hover)]"
           >
-            Browse Prompts
+            Browse Prompt Library
           </a>
           <a
             href="/submit/"

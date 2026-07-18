@@ -5,6 +5,7 @@ import Header from '../components/global/Header.astro';
 import Footer from '../components/global/Footer.astro';
 import { TOOL_DISPLAY_NAMES as toolDisplayNames, DIFFICULTY_COLORS as difficultyColor } from '../lib/constants';
 import Badge from '../components/ui/Badge.astro';
+import PromptViewTracker from '../components/analytics/PromptViewTracker.tsx';
 import PromptCodeBlock from '../components/prompt/PromptCodeBlock.tsx';
 import CopyButton from '../components/ui/CopyButton.tsx';
 import VoteButtons from '../components/prompt/VoteButtons.tsx';
@@ -37,8 +38,10 @@ const formattedDate = today.toLocaleDateString('en-US', {
   title="Prompt of the Day"
   description={`Today's featured AI prompt: ${data.title}. Discover a new curated prompt every day.`}
   loadMonoFont={true}
+  noindex={true}
 >
   <Header slot="header" />
+  <PromptViewTracker client:load promptSlug={data.slug} tool={data.tool} category={data.category} />
 
   <section class="mx-auto max-w-3xl px-[var(--space-page)] py-12">
     <div class="text-center mb-10">
@@ -55,12 +58,12 @@ const formattedDate = today.toLocaleDateString('en-US', {
 
     <!-- Prompt -->
     <div class="mb-6">
-      <PromptCodeBlock client:load promptText={data.promptText} promptSlug={data.slug} />
+      <PromptCodeBlock client:load promptText={data.promptText} promptSlug={data.slug} tool={data.tool} category={data.category} />
     </div>
 
     <div class="flex items-center justify-between mb-8">
       <div class="flex items-center gap-3">
-        <CopyButton client:load text={data.promptText} label="Copy Prompt" size="lg" promptSlug={data.slug} />
+        <CopyButton client:load text={data.promptText} label="Copy Prompt" size="lg" promptSlug={data.slug} tool={data.tool} category={data.category} />
         <VoteButtons client:load promptSlug={data.slug} />
       </div>
       <ShareButtons url={pageUrl} title={`Prompt of the Day: ${data.title}`} />

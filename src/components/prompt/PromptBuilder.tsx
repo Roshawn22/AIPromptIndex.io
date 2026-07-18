@@ -1,5 +1,7 @@
 import { useState, useMemo, useCallback } from 'react';
 import { SELECT_CHEVRON_STYLE } from '../../lib/utils';
+import { trackPromptCopy } from '../../lib/analytics';
+import { copyTextToClipboard } from '../../lib/clipboard';
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -123,19 +125,10 @@ export default function PromptBuilder({ prompts, tools, categories }: Props) {
   const handleCopy = useCallback(async () => {
     if (!selected) return;
     const text = replaceVariables(selected.promptText, selected.variables, variableValues);
-    try {
-      await navigator.clipboard.writeText(text);
-    } catch {
-      const textarea = document.createElement('textarea');
-      textarea.value = text;
-      textarea.style.position = 'fixed';
-      textarea.style.opacity = '0';
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textarea);
-    }
+    const didCopy = await copyTextToClipboard(text);
+    if (!didCopy) return;
     setCopied(true);
+    trackPromptCopy(selected.slug, selected.tool, selected.category);
     setTimeout(() => setCopied(false), 2000);
   }, [selected, variableValues]);
 

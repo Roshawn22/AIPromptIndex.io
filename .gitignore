@@ -32,3 +32,8 @@ convex/.convex/
 # local artifacts
 output/
 .worktrees/
+.playwright-cli/
+.playwright-mcp/
+
+# secrets — never commit
+scripts/config/google-service-account.json

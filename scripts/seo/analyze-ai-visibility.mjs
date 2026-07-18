@@ -26,14 +26,6 @@ function safeArray(value) {
   return Array.isArray(value) ? value : [];
 }
 
-function extractMetrics(dataBySource) {
-  const result = {};
-  for (const [source, data] of Object.entries(dataBySource || {})) {
-    result[source] = safeArray(data?.metrics || data?.rows || data);
-  }
-  return result;
-}
-
 function buildPlatformMentions(impressions, mentions) {
   const platforms = new Set([
     ...Object.keys(impressions || {}),
@@ -177,7 +169,6 @@ function generateRecommendations(platformMentions, citedPages, topQuestions, sov
   }
 
   // Identify high-volume questions where we are not cited
-  const uncitedPathnames = new Set(citedPages.map((p) => p.pathname));
   const highVolQuestions = topQuestions.filter((q) => q.volume >= 100);
   if (highVolQuestions.length > 0 && citedPages.length === 0) {
     recommendations.push({
