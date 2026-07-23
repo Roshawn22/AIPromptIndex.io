@@ -5,17 +5,51 @@
   "description": "This prompt transforms bland, responsibility-focused resume bullets into compelling, quantified achievement statements that catch the attention of both ATS systems and hiring managers. Most job seekers describe what they did rather than what they accomplished, and this prompt fixes that by applying the proven action-verb-plus-metrics formula that professional resume writers use. Each bullet gets a power score, ATS-friendly keywords, and an alternative version, giving job seekers multiple options to choose from. It is invaluable for career changers who need to reframe their experience for a new industry, or for anyone whose resume reads like a job description rather than a highlight reel of achievements.",
   "tool": "claude",
   "category": "writing",
-  "tags": ["resume", "career", "job-search", "ATS-optimization", "professional-writing"],
+  "tags": [
+    "resume",
+    "career",
+    "job-search",
+    "ATS-optimization",
+    "professional-writing"
+  ],
   "difficulty": "beginner",
   "promptType": "text",
   "variables": [
-    { "name": "JOB_TITLE", "description": "Your current or most recent job title", "example": "Marketing Coordinator" },
-    { "name": "COMPANY", "description": "Company where you held this role", "example": "TechStart Inc." },
-    { "name": "INDUSTRY", "description": "Your industry", "example": "B2B SaaS" },
-    { "name": "TARGET_ROLE", "description": "The role you are targeting next", "example": "Marketing Manager at a mid-size tech company" },
-    { "name": "CURRENT_BULLETS", "description": "Your existing resume bullets to rewrite", "example": "- Managed social media accounts\n- Helped with email marketing campaigns\n- Responsible for creating content\n- Worked on product launches\n- Assisted with event planning" }
+    {
+      "name": "JOB_TITLE",
+      "description": "Your current or most recent job title",
+      "example": "Marketing Coordinator"
+    },
+    {
+      "name": "COMPANY",
+      "description": "Company where you held this role",
+      "example": "TechStart Inc."
+    },
+    {
+      "name": "INDUSTRY",
+      "description": "Your industry",
+      "example": "B2B SaaS"
+    },
+    {
+      "name": "TARGET_ROLE",
+      "description": "The role you are targeting next",
+      "example": "Marketing Manager at a mid-size tech company"
+    },
+    {
+      "name": "CURRENT_BULLETS",
+      "description": "Your existing resume bullets to rewrite",
+      "example": "- Managed social media accounts\n- Helped with email marketing campaigns\n- Responsible for creating content\n- Worked on product launches\n- Assisted with event planning"
+    }
   ],
-  "tips": ["Include as many numbers and metrics as you can remember — even estimates make bullets dramatically stronger", "Specify your target role so the rewrite emphasizes the most relevant skills and keywords", "Use the alternative versions to tailor bullets for different job applications"],
+  "tips": [
+    "Include as many numbers and metrics as you can remember — even estimates make bullets dramatically stronger",
+    "Specify your target role so the rewrite emphasizes the most relevant skills and keywords",
+    "Use the alternative versions to tailor bullets for different job applications"
+  ],
+  "relatedGuide": {
+    "title": "AI Slop: The 19 Writing Patterns That Scream ChatGPT",
+    "url": "/guides/remove-ai-slop-from-writing/"
+  },
   "exampleOutput": "ORIGINAL: Managed social media accounts\nPOWER SCORE: 3/10 — Generic duty statement with no specifics or results.\n\nREWRITTEN: Grew organic social media following by 145% across LinkedIn and Twitter (2K to 4.9K) by implementing a data-driven content calendar and engagement strategy, generating 30+ qualified inbound leads monthly.\nPOWER SCORE: 9/10 — Specific platform names, quantified growth, clear methodology, and business outcome.\n\nKEYWORDS ADDED: organic social, content calendar, engagement strategy, inbound leads, data-driven\n\nALTERNATIVE: Spearheaded B2B social media strategy across 3 platforms, achieving 145% follower growth and reducing cost-per-lead by 22% through organic content optimization.",
   "isFeatured": false,
   "dateAdded": "2026-04-02",

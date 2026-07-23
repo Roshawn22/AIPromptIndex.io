@@ -20,6 +20,10 @@ const prompts = defineCollection({
       example: z.string(),
     })).default([]),
     tips: z.array(z.string()).default([]),
+    relatedGuide: z.object({
+      title: z.string(),
+      url: z.string(),
+    }).optional(),
     exampleOutput: z.string().optional(),
     isFeatured: z.boolean().default(false),
     dateAdded: z.string(),

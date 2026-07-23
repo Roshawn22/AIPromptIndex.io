@@ -1,0 +1,39 @@
+{
+  "title": "AI Slop Detector",
+  "slug": "ai-slop-detector",
+  "promptText": "You are an editor auditing a piece of writing for AI-sounding patterns. Do NOT rewrite anything. Your only job is to find and name each pattern, quote the exact line where it appears, and suggest a fix in a few words.\n\nImportant: do not guess whether AI wrote this text, and do not give it a score. AI detectors guess; named patterns are evidence the writer can check for themselves.\n\nThe text to audit:\n[TEXT]\n\nCheck for every one of these patterns:\n1. Banned words: delve, foster, leverage, utilize, facilitate, empower, streamline, robust, cutting-edge, game changer, tapestry, realm, beacon, multifaceted, meticulous, paramount, transformative, elevate, embark, harness, ever-evolving\n2. Empty filler phrases: \"it's worth noting,\" \"at the end of the day,\" \"in today's world,\" \"in the age of,\" \"the reality is,\" \"let's dive in\"\n3. Binary contrasts: \"It's not X. It's Y.\" / \"The question isn't X, it's Y.\"\n4. Throat-clearing openers: \"Here's the thing,\" \"Let me be clear,\" \"I'll be honest\"\n5. Faux-insight setups: \"What nobody tells you,\" \"The part everyone misses\"\n6. Dramatic colon reveals: \"The best part: it learns.\"\n7. Trailing -ing analysis: \"...highlighting,\" \"...underscoring,\" \"...showcasing\"\n8. Importance puffery: \"marks a pivotal moment,\" \"stands as a testament,\" \"plays a vital role\"\n9. Weasel attribution: \"experts agree,\" \"studies show,\" \"widely regarded as\"\n10. Fake-strong verbs: \"serves as,\" \"acts as,\" \"functions as\" where \"is\" would be clearer\n11. Synonym cycling: rotating through \"the agent... the assistant... the tool\" for the same thing\n12. Negative listing: \"Not a X. Not a Y. A Z.\"\n13. Dramatic fragments: \"That's it. That's the whole thing.\"\n14. Robotic rhythm: repeated sentence shapes or stacked punchy fragments\n15. Rhetorical setups: \"What if I told you...\", \"Plot twist:\", self-answered questions\n16. Fake-profound kicker: a final line that turns the point into a cute metaphor or mic-drop\n17. Summary-recap ending: \"In conclusion,\" \"Ultimately,\" or a final paragraph restating the piece\n18. Formatting slop: emoji in headings, bold sprinkled mid-sentence, bullets that should be prose\n19. Em dash overuse: more than 1-2 in a short piece, or clusters used as a rhythm crutch\n\nOutput format — for each pattern found:\nPATTERN: [name]\nQUOTE: \"[the exact line from the text]\"\nFIX: [suggested fix in ten words or fewer]\n\nEnd with a one-line count of total patterns found, and offer to edit the draft if I want the fixes applied.",
+  "description": "This prompt audits any piece of writing for the specific, checkable patterns that make text read as AI-generated — without rewriting a word and without pretending to be an AI detector. That distinction matters: AI detection tools guess and produce false positives, while this audit names each pattern it finds, quotes the exact offending line, and suggests a fix you can accept or ignore. It checks nineteen pattern categories, from the banned-word list (delve, leverage, robust) through structural tells like binary contrasts, synonym cycling, fake-profound endings, and em dash overuse. Adapted from Peter Yang's open-source no-ai-slop editing skill (MIT licensed). Useful for auditing your own AI-assisted drafts before publishing, reviewing freelancer submissions, or teaching your team what to watch for.",
+  "tool": "claude",
+  "category": "writing",
+  "tags": [
+    "editing",
+    "ai-detection",
+    "ai-slop",
+    "content-quality",
+    "proofreading"
+  ],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    {
+      "name": "TEXT",
+      "description": "The text you want audited for AI-sounding patterns",
+      "example": "In today's ever-evolving digital landscape, this tool isn't just another app. It's a game changer. Experts agree that..."
+    }
+  ],
+  "tips": [
+    "Use this before publishing anything drafted with AI help — it catches patterns you have gone blind to after three rounds of edits",
+    "The audit deliberately never says \"this was written by AI\" — quoted patterns are evidence you can verify, a verdict is just a guess",
+    "Zero findings does not mean the writing is good, only that it avoids the common tells; judge the substance separately",
+    "Pair it with the AI Slop Remover prompt when you want the fixes applied instead of just flagged"
+  ],
+  "relatedGuide": {
+    "title": "AI Slop: The 19 Writing Patterns That Scream ChatGPT",
+    "url": "/guides/remove-ai-slop-from-writing/"
+  },
+  "exampleOutput": "PATTERN: Filler phrase + banned word\nQUOTE: \"In today's ever-evolving digital landscape\"\nFIX: Delete the phrase, start with the subject.\n\nPATTERN: Negative listing / binary contrast\nQUOTE: \"this tool isn't just another app. It's a game changer.\"\nFIX: Say what the tool does instead.\n\nPATTERN: Weasel attribution\nQUOTE: \"Experts agree that...\"\nFIX: Name the expert or cut the claim.\n\nTOTAL: 4 patterns found in 2 sentences. Want me to apply these fixes to the full draft?",
+  "isFeatured": false,
+  "dateAdded": "2026-07-23",
+  "metaTitle": "AI Slop Detector Prompt for Claude — Audit AI Writing",
+  "metaDescription": "Free Claude prompt that flags AI writing patterns with quoted evidence — banned words, puffery, weasel claims. Audit drafts without rewriting."
+}

@@ -5,16 +5,46 @@
   "description": "This prompt produces speeches that are designed to be delivered, not just read. The emphasis on spoken cadence, rhetorical devices, and stage directions means you get a draft that sounds natural at the podium rather than stiff and academic. The three-point structure with personal anecdotes follows the format that audiences retain best, while the callback close creates a satisfying narrative arc. Whether you are delivering a keynote, a wedding toast, a company all-hands address, or a TEDx talk, this prompt adapts to the event context and audience. The included delivery notes help even nervous speakers know when to pause, emphasize, or slow down for impact.",
   "tool": "claude",
   "category": "writing",
-  "tags": ["speech", "public-speaking", "presentation", "keynote", "rhetoric"],
+  "tags": [
+    "speech",
+    "public-speaking",
+    "presentation",
+    "keynote",
+    "rhetoric"
+  ],
   "difficulty": "intermediate",
   "promptType": "text",
   "variables": [
-    { "name": "SPEECH_LENGTH", "description": "Duration of the speech in minutes", "example": "15" },
-    { "name": "EVENT_TYPE", "description": "The type of event where the speech will be given", "example": "annual company all-hands meeting" },
-    { "name": "TOPIC", "description": "The main subject of the speech", "example": "embracing uncertainty as a competitive advantage in 2026" },
-    { "name": "AUDIENCE_DESCRIPTION", "description": "Who will be listening", "example": "200 employees across engineering, sales, and operations teams" }
+    {
+      "name": "SPEECH_LENGTH",
+      "description": "Duration of the speech in minutes",
+      "example": "15"
+    },
+    {
+      "name": "EVENT_TYPE",
+      "description": "The type of event where the speech will be given",
+      "example": "annual company all-hands meeting"
+    },
+    {
+      "name": "TOPIC",
+      "description": "The main subject of the speech",
+      "example": "embracing uncertainty as a competitive advantage in 2026"
+    },
+    {
+      "name": "AUDIENCE_DESCRIPTION",
+      "description": "Who will be listening",
+      "example": "200 employees across engineering, sales, and operations teams"
+    }
   ],
-  "tips": ["Record yourself reading the draft aloud to catch awkward phrasing before you edit", "Provide examples of speakers you admire so Claude can match their style", "Ask for a one-page outline version first to nail the structure before generating the full speech"],
+  "tips": [
+    "Record yourself reading the draft aloud to catch awkward phrasing before you edit",
+    "Provide examples of speakers you admire so Claude can match their style",
+    "Ask for a one-page outline version first to nail the structure before generating the full speech"
+  ],
+  "relatedGuide": {
+    "title": "AI Slop: The 19 Writing Patterns That Scream ChatGPT",
+    "url": "/guides/remove-ai-slop-from-writing/"
+  },
   "exampleOutput": "[Walk to center stage. Pause. Make eye contact.]\n\nTwo years ago, I sat in a conference room and watched our entire product roadmap become irrelevant — overnight.\n\n[Pause for two beats.]\n\nA competitor we'd never heard of launched something we'd been planning for eighteen months. And in that moment, I had a choice. Panic... or pivot.\n\nI chose to pivot. And that decision — made in uncertainty, without a playbook — turned out to be the best strategic move this company has ever made.\n\n[Transition to first point.]\n\nToday I want to talk about why uncertainty isn't the enemy of good strategy. It IS good strategy...",
   "isFeatured": false,
   "dateAdded": "2026-04-02",

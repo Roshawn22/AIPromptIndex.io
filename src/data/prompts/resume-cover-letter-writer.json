@@ -5,16 +5,46 @@
   "description": "This prompt creates tailored cover letters that hiring managers actually want to read, moving beyond the generic templates that get immediately discarded. By analyzing the specific job description against your background, it identifies the strongest connection points and presents them with concrete evidence. The prompt explicitly avoids the overused phrases that signal a mass-produced application, and instead produces letters that feel personal and researched. The culture-matching tone adjustment means your letter for a startup sounds different from one for a Fortune 500 company. Particularly useful for career changers who need to frame transferable skills effectively, or anyone applying to competitive positions where the cover letter is a differentiator.",
   "tool": "gemini",
   "category": "writing",
-  "tags": ["cover-letter", "resume", "job-application", "career", "hiring"],
+  "tags": [
+    "cover-letter",
+    "resume",
+    "job-application",
+    "career",
+    "hiring"
+  ],
   "difficulty": "beginner",
   "promptType": "text",
   "variables": [
-    { "name": "JOB_TITLE", "description": "The position you are applying for", "example": "Senior Product Manager" },
-    { "name": "COMPANY_NAME", "description": "The company you are applying to", "example": "Stripe" },
-    { "name": "JOB_DESCRIPTION", "description": "Key requirements from the job posting", "example": "5+ years PM experience, API/platform products, data-driven decision making, cross-functional leadership" },
-    { "name": "MY_BACKGROUND", "description": "Your relevant experience and accomplishments", "example": "7 years as PM at fintech companies, launched a payments API serving 10K developers, grew platform revenue 40% YoY, MBA from Wharton" }
+    {
+      "name": "JOB_TITLE",
+      "description": "The position you are applying for",
+      "example": "Senior Product Manager"
+    },
+    {
+      "name": "COMPANY_NAME",
+      "description": "The company you are applying to",
+      "example": "Stripe"
+    },
+    {
+      "name": "JOB_DESCRIPTION",
+      "description": "Key requirements from the job posting",
+      "example": "5+ years PM experience, API/platform products, data-driven decision making, cross-functional leadership"
+    },
+    {
+      "name": "MY_BACKGROUND",
+      "description": "Your relevant experience and accomplishments",
+      "example": "7 years as PM at fintech companies, launched a payments API serving 10K developers, grew platform revenue 40% YoY, MBA from Wharton"
+    }
   ],
-  "tips": ["Paste the full job description rather than summarizing it for better keyword matching", "Include specific company news or product launches to make the letter feel researched", "Generate 2-3 versions with different opening hooks and pick the strongest one"],
+  "tips": [
+    "Paste the full job description rather than summarizing it for better keyword matching",
+    "Include specific company news or product launches to make the letter feel researched",
+    "Generate 2-3 versions with different opening hooks and pick the strongest one"
+  ],
+  "relatedGuide": {
+    "title": "AI Slop: The 19 Writing Patterns That Scream ChatGPT",
+    "url": "/guides/remove-ai-slop-from-writing/"
+  },
   "exampleOutput": "Dear Hiring Team,\n\nWhen Stripe launched Adaptive Pricing last quarter, I spent the weekend reading every piece of documentation — not because I had to, but because pricing infrastructure is exactly the kind of complex, high-leverage problem I love solving.\n\nOver the past seven years in fintech product management, I've built the type of products Stripe's merchants depend on. At PayFlow, I led the team that designed and launched a developer payments API from zero to 10,000 active integrations in 18 months. That experience taught me how to balance developer experience with business outcomes — our platform revenue grew 40% year-over-year while maintaining a Net Promoter Score of 72 among developers...",
   "isFeatured": false,
   "dateAdded": "2026-04-02",
