@@ -5,18 +5,56 @@
   "description": "Email newsletters are the most reliable content distribution channel with an average ROI of $36 for every $1 spent, but consistent quality writing is the biggest bottleneck for newsletter operators. This prompt produces complete, ready-to-send editions with curated stories, original analysis, and engagement hooks that drive replies. The 'why it matters' framing ensures every story connects to the reader's actual interests. The subject line options with open rate reasoning help you A/B test effectively. Use it weekly to maintain your publishing cadence without burning out on content creation.",
   "tool": "chatgpt",
   "category": "writing",
-  "tags": ["newsletter", "email", "content-creation", "curation", "writing"],
+  "tags": [
+    "newsletter",
+    "email",
+    "content-creation",
+    "curation",
+    "writing"
+  ],
   "difficulty": "beginner",
   "promptType": "text",
   "variables": [
-    { "name": "NICHE", "description": "Your newsletter's topic area", "example": "AI and productivity" },
-    { "name": "NEWSLETTER_NAME", "description": "Name of your newsletter", "example": "The AI Efficiency Report" },
-    { "name": "TOPICS_THIS_WEEK", "description": "This week's topics to cover", "example": "Claude's new computer use feature, Google's Gemini pricing changes, and a viral AI workflow automation thread on X" },
-    { "name": "DEEP_DIVE_TOPIC", "description": "Topic for the featured analysis section", "example": "how to build an AI-powered email triage system that saves 45 minutes per day" },
-    { "name": "WORD_LIMIT", "description": "Maximum total word count", "example": "800" },
-    { "name": "TONE", "description": "Writing style", "example": "knowledgeable but approachable, with occasional dry humor" }
+    {
+      "name": "NICHE",
+      "description": "Your newsletter's topic area",
+      "example": "AI and productivity"
+    },
+    {
+      "name": "NEWSLETTER_NAME",
+      "description": "Name of your newsletter",
+      "example": "The AI Efficiency Report"
+    },
+    {
+      "name": "TOPICS_THIS_WEEK",
+      "description": "This week's topics to cover",
+      "example": "Claude's new computer use feature, Google's Gemini pricing changes, and a viral AI workflow automation thread on X"
+    },
+    {
+      "name": "DEEP_DIVE_TOPIC",
+      "description": "Topic for the featured analysis section",
+      "example": "how to build an AI-powered email triage system that saves 45 minutes per day"
+    },
+    {
+      "name": "WORD_LIMIT",
+      "description": "Maximum total word count",
+      "example": "800"
+    },
+    {
+      "name": "TONE",
+      "description": "Writing style",
+      "example": "knowledgeable but approachable, with occasional dry humor"
+    }
   ],
-  "tips": ["Feed in your actual curated links and sources for more accurate summaries", "Maintain a consistent publishing schedule for best subscriber retention", "Track which sections get the most clicks to optimize future editions"],
+  "tips": [
+    "Feed in your actual curated links and sources for more accurate summaries",
+    "Maintain a consistent publishing schedule for best subscriber retention",
+    "Track which sections get the most clicks to optimize future editions"
+  ],
+  "relatedGuide": {
+    "title": "AI Slop: The 19 Writing Patterns That Scream ChatGPT",
+    "url": "/guides/remove-ai-slop-from-writing/"
+  },
   "exampleOutput": "**Subject Line Options:**\n1. 'The AI feature that just replaced my email assistant' (Curiosity gap + personal story)\n2. 'Claude can use your computer now. Here is what that means.' (News hook + value promise)\n3. 'Save 45 min/day with this AI email trick' (Specific benefit + number)\n\nHey there,\n\nLast Tuesday, I watched an AI control my web browser, fill out a spreadsheet, and file three expense reports. I did not touch the keyboard once. This week, that stopped being science fiction for everyone...",
   "isFeatured": false,
   "dateAdded": "2026-04-01",

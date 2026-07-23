@@ -1,0 +1,49 @@
+{
+  "title": "AI Slop Remover",
+  "slug": "ai-slop-remover",
+  "promptText": "You are a sharp human editor. Your job is to remove AI-sounding patterns from my draft while preserving my point and my personal voice. Do not turn distinctive writing into generic polished prose.\n\nThe draft is for: [AUDIENCE]\nIt will be published as: [FORMAT]\n\nMy draft:\n[DRAFT]\n\nEditing rules:\n1. Make the minimum effective edit. Fix AI patterns, repetition, and unclear passages. Leave strong human sentences alone. The edited draft should still sound like me.\n2. Cut these words entirely: delve, foster, leverage, utilize, facilitate, empower, streamline, robust, cutting-edge, game changer, tapestry, realm, beacon, multifaceted, meticulous, paramount, transformative, elevate, embark, harness, ever-evolving.\n3. Cut empty phrases like \"it's worth noting,\" \"at the end of the day,\" \"in today's world,\" \"let's dive in,\" and \"the reality is\" when they delay the point.\n4. Remove these AI patterns wherever they appear:\n- Binary contrasts (\"It's not X. It's Y.\") — state the point directly instead\n- Throat-clearing openers (\"Here's the thing...\") — cut them and lead with the point\n- Faux-insight setups (\"What nobody tells you...\") — let the claim stand on its own\n- Dramatic colon reveals (\"The best part: it learns.\") — rewrite as a plain sentence\n- Trailing -ing analysis (\"...highlighting the team's commitment\") — replace with the actual consequence or cut\n- Importance puffery (\"marks a pivotal moment,\" \"stands as a testament\") — state the fact and let the reader judge\n- Weasel attribution (\"experts agree,\" \"studies show\") — name the source or flag it for me, never invent one\n- Negative listing (\"Not a tool. Not a platform. A movement.\") — just say what it is\n- Dramatic fragments (\"That's it. That's the whole thing.\") — use complete sentences\n- Fake-profound final lines that end on a cute metaphor — delete them and end on the last concrete point\n- Summary-recap endings (\"In conclusion...\") — the reader was just there\n5. Use active voice with human subjects. Replace weak verb phrases with direct verbs (\"made a decision\" becomes \"decided\").\n6. Keep concrete details exactly as written. Never smooth a specific number, name, or date into a vague claim, and never invent claims, stats, or examples I did not provide.\n7. Keep my edge. Preserve strong opinions, blunt language, humor, fragments, and asides that sound like me. Use at most 1-2 em dashes in the whole piece.\n\nOutput format:\n1. The full edited draft\n2. A short \"What changed\" section listing the patterns you removed and why\n3. Any claims that need a source, flagged as questions for me",
+  "description": "This prompt turns ChatGPT, Claude, or Gemini into a disciplined line editor that strips out the tell-tale patterns of AI-generated writing — binary contrasts, dramatic colon reveals, importance puffery, weasel attribution, and the banned-word list everyone recognizes (delve, leverage, tapestry) — while keeping your voice intact. Most humanizer prompts rewrite everything and sand off whatever personality your draft had. This one is built around the minimum effective edit: it fixes what sounds robotic, leaves strong human sentences alone, and reports back on exactly what it changed so you stay in control. Adapted from Peter Yang's open-source no-ai-slop editing skill (MIT licensed). Use it on newsletters, LinkedIn posts, blog articles, or any draft that started life in an AI chat window.",
+  "tool": "chatgpt",
+  "category": "writing",
+  "tags": [
+    "editing",
+    "humanize-ai-writing",
+    "ai-slop",
+    "content-writing",
+    "voice"
+  ],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    {
+      "name": "AUDIENCE",
+      "description": "Who will read this piece",
+      "example": "Startup founders who subscribe to my newsletter"
+    },
+    {
+      "name": "FORMAT",
+      "description": "Where and how it will be published",
+      "example": "A 1,000-word email newsletter issue"
+    },
+    {
+      "name": "DRAFT",
+      "description": "The full draft you want edited",
+      "example": "Here's the thing: AI tools aren't just changing marketing. They're transforming it. Our new workflow leverages cutting-edge automation, highlighting our commitment to efficiency..."
+    }
+  ],
+  "tips": [
+    "Paste your whole draft, not a paragraph at a time — the editor needs the full piece to catch repeated sentence shapes and a weak ending",
+    "Fill in AUDIENCE and FORMAT honestly; a LinkedIn post and a technical doc need different levels of polish",
+    "If the output flags a claim as needing a source, add the real source rather than letting the model soften the claim",
+    "Run the edited draft through the companion AI Slop Detector prompt if you want a second-pass audit without another rewrite"
+  ],
+  "relatedGuide": {
+    "title": "AI Slop: The 19 Writing Patterns That Scream ChatGPT",
+    "url": "/guides/remove-ai-slop-from-writing/"
+  },
+  "exampleOutput": "EDITED DRAFT:\n\nAI tools are rewriting how our marketing team works. The new workflow automates first-draft social copy, which freed up about six hours a week for the two people who used to write it by hand...\n\nWHAT CHANGED:\n- Cut the throat-clearing opener (\"Here's the thing:\") and led with the point\n- Removed the binary contrast (\"aren't just changing... they're transforming\") and stated the claim once\n- Replaced \"leverages cutting-edge automation\" with what the workflow actually does\n- Deleted the trailing \"highlighting our commitment to efficiency\" and replaced it with the concrete result (six hours a week saved)\n\nNEEDS A SOURCE:\n- \"Six hours a week\" — I kept your number, but confirm it before publishing.",
+  "isFeatured": true,
+  "dateAdded": "2026-07-23",
+  "metaTitle": "AI Slop Remover Prompt for ChatGPT — Humanize AI Writing",
+  "metaDescription": "Free ChatGPT prompt that removes AI slop — banned words, binary contrasts, puffery — while keeping your voice. Edit any draft so it sounds human."
+}

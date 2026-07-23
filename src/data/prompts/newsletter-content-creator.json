@@ -5,16 +5,46 @@
   "description": "This prompt generates complete newsletter editions that feel personal and engaging rather than corporate and forgettable. Every section is optimized for a specific purpose: the subject line drives opens, the personal note builds connection, the main article delivers depth, and the curated links provide breadth. The conversational tone and formatting guidelines ensure the output is scannable on mobile, where most newsletters are read. Whether you publish weekly or biweekly, this prompt maintains consistent quality and saves hours of writing and research time. Ideal for solo creators, thought leaders, and small teams running email newsletters on platforms like Substack, ConvertKit, or Beehiiv.",
   "tool": "chatgpt",
   "category": "writing",
-  "tags": ["newsletter", "email-marketing", "content-creation", "substack", "writing"],
+  "tags": [
+    "newsletter",
+    "email-marketing",
+    "content-creation",
+    "substack",
+    "writing"
+  ],
   "difficulty": "beginner",
   "promptType": "text",
   "variables": [
-    { "name": "NEWSLETTER_TOPIC", "description": "The niche or subject area of the newsletter", "example": "AI tools and productivity for knowledge workers" },
-    { "name": "NEWSLETTER_NAME", "description": "The name of your newsletter", "example": "The Leverage Letter" },
-    { "name": "AUDIENCE", "description": "Who subscribes to your newsletter", "example": "remote professionals and freelancers who want to work smarter using AI" },
-    { "name": "MAIN_TOPIC", "description": "This week's primary theme or story", "example": "How to build a second brain using Claude Projects" }
+    {
+      "name": "NEWSLETTER_TOPIC",
+      "description": "The niche or subject area of the newsletter",
+      "example": "AI tools and productivity for knowledge workers"
+    },
+    {
+      "name": "NEWSLETTER_NAME",
+      "description": "The name of your newsletter",
+      "example": "The Leverage Letter"
+    },
+    {
+      "name": "AUDIENCE",
+      "description": "Who subscribes to your newsletter",
+      "example": "remote professionals and freelancers who want to work smarter using AI"
+    },
+    {
+      "name": "MAIN_TOPIC",
+      "description": "This week's primary theme or story",
+      "example": "How to build a second brain using Claude Projects"
+    }
   ],
-  "tips": ["Share your past 3-5 subject lines so ChatGPT can match your style and avoid repetition", "Include subscriber count and open rate data to calibrate the voice (10K list vs 500 feels different)", "Provide links you want curated so ChatGPT writes the descriptions rather than inventing sources"],
+  "tips": [
+    "Share your past 3-5 subject lines so ChatGPT can match your style and avoid repetition",
+    "Include subscriber count and open rate data to calibrate the voice (10K list vs 500 feels different)",
+    "Provide links you want curated so ChatGPT writes the descriptions rather than inventing sources"
+  ],
+  "relatedGuide": {
+    "title": "AI Slop: The 19 Writing Patterns That Scream ChatGPT",
+    "url": "/guides/remove-ai-slop-from-writing/"
+  },
   "exampleOutput": "**Subject:** Your notes are a graveyard. Fix that.\n**Preview:** How Claude Projects turns scattered thoughts into a working system\n\n---\n\nHey friend,\n\nI spent last Tuesday looking for a client brief I *know* I saved somewhere. Twenty minutes of searching. Found it in my Downloads folder, sandwiched between two memes.\n\nThat was my wake-up call. This week, I rebuilt my entire knowledge system in under an hour.\n\n---\n\n## The Second Brain You'll Actually Use\n\nMost \"second brain\" systems fail for one reason: they require you to be organized *before* you can get organized...\n\n---\n\n## 3 Links Worth Your Time\n1. **Claude Projects Documentation** — The official guide is actually well-written...\n2. **Tiago Forte's PARA Method (Updated for AI)** — The original framework, now adapted...\n3. **My Template** — I'm sharing the exact project structure I use...",
   "isFeatured": false,
   "dateAdded": "2026-04-02",

@@ -5,16 +5,46 @@
   "description": "This prompt creates conversion-optimized product descriptions that go beyond listing specifications. It combines persuasive copywriting techniques with SEO best practices to produce descriptions that both rank in search and convince shoppers to click 'Add to Cart.' The structured format ensures every description includes the essential elements that drive sales: benefit-focused bullet points, emotional hooks, and clear calls to action. Whether you are launching a new product or rewriting hundreds of existing listings, this prompt maintains consistent quality while adapting to different brand voices and customer segments. Ideal for Shopify, Amazon, Etsy, and other e-commerce platforms.",
   "tool": "chatgpt",
   "category": "writing",
-  "tags": ["e-commerce", "product-description", "copywriting", "seo", "conversion"],
+  "tags": [
+    "e-commerce",
+    "product-description",
+    "copywriting",
+    "seo",
+    "conversion"
+  ],
   "difficulty": "intermediate",
   "promptType": "text",
   "variables": [
-    { "name": "PRODUCT_NAME", "description": "The name of the product", "example": "CloudStep Pro Running Shoes" },
-    { "name": "PRODUCT_TYPE", "description": "Category and type of product", "example": "lightweight neutral running shoe for daily training" },
-    { "name": "PLATFORM", "description": "Where the product is sold", "example": "Shopify direct-to-consumer store" },
-    { "name": "TARGET_AUDIENCE", "description": "Who the product is for", "example": "recreational runners aged 25-45 who run 15-30 miles per week" }
+    {
+      "name": "PRODUCT_NAME",
+      "description": "The name of the product",
+      "example": "CloudStep Pro Running Shoes"
+    },
+    {
+      "name": "PRODUCT_TYPE",
+      "description": "Category and type of product",
+      "example": "lightweight neutral running shoe for daily training"
+    },
+    {
+      "name": "PLATFORM",
+      "description": "Where the product is sold",
+      "example": "Shopify direct-to-consumer store"
+    },
+    {
+      "name": "TARGET_AUDIENCE",
+      "description": "Who the product is for",
+      "example": "recreational runners aged 25-45 who run 15-30 miles per week"
+    }
   ],
-  "tips": ["Include specific numbers and measurements to build credibility", "Paste in competitor descriptions so ChatGPT can differentiate your copy", "Ask for A/B test variants of the headline to find the best performer"],
+  "tips": [
+    "Include specific numbers and measurements to build credibility",
+    "Paste in competitor descriptions so ChatGPT can differentiate your copy",
+    "Ask for A/B test variants of the headline to find the best performer"
+  ],
+  "relatedGuide": {
+    "title": "AI Slop: The 19 Writing Patterns That Scream ChatGPT",
+    "url": "/guides/remove-ai-slop-from-writing/"
+  },
   "exampleOutput": "# CloudStep Pro Running Shoes — Lightweight Comfort for Every Mile\n\nTired of choosing between cushioning and speed? The CloudStep Pro gives you both.\n\n- **Zero-Drop Responsive Foam** absorbs impact without slowing your stride, so your legs feel fresh at mile 20\n- **Engineered Mesh Upper** keeps your feet cool and dry, even on humid summer runs\n- **GripTech Outsole** delivers confident traction on wet pavement and light trails\n- **Only 7.8 oz** — lighter than most daily trainers without sacrificing durability\n\nOver 2,000 runners have made the CloudStep Pro their go-to training shoe. As one reviewer put it: \"I forget I'm wearing them — in the best way.\"\n\n**Ready to run lighter? Choose your size and hit the road.**",
   "isFeatured": false,
   "dateAdded": "2026-04-02",

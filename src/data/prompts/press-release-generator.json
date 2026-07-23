@@ -5,16 +5,46 @@
   "description": "This prompt generates press releases that follow the inverted pyramid structure journalists expect, making your announcement more likely to get picked up by media outlets. Rather than writing marketing copy disguised as news, this produces genuinely newsworthy content with proper AP style formatting, quotable executive statements, and the industry context editors look for. The structured approach ensures you never miss critical elements like the boilerplate or media contact section. Useful for product launches, funding announcements, partnerships, executive hires, awards, and company milestones. Saves hours compared to drafting from scratch and produces consistently publication-ready results.",
   "tool": "claude",
   "category": "writing",
-  "tags": ["press-release", "PR", "media", "communications", "AP-style"],
+  "tags": [
+    "press-release",
+    "PR",
+    "media",
+    "communications",
+    "AP-style"
+  ],
   "difficulty": "intermediate",
   "promptType": "text",
   "variables": [
-    { "name": "COMPANY_NAME", "description": "Name of the company issuing the release", "example": "NovaTech Solutions" },
-    { "name": "ANNOUNCEMENT_TYPE", "description": "What is being announced", "example": "a $15M Series A funding round led by Sequoia Capital" },
-    { "name": "KEY_DETAILS", "description": "Essential facts and figures for the announcement", "example": "Funding will be used to expand the engineering team from 20 to 50, launch in three new markets (UK, Germany, Japan), and release the enterprise product tier in Q3 2026" },
-    { "name": "SPOKESPERSON_NAME", "description": "Name and title of the person being quoted", "example": "Maria Chen, CEO and Co-Founder" }
+    {
+      "name": "COMPANY_NAME",
+      "description": "Name of the company issuing the release",
+      "example": "NovaTech Solutions"
+    },
+    {
+      "name": "ANNOUNCEMENT_TYPE",
+      "description": "What is being announced",
+      "example": "a $15M Series A funding round led by Sequoia Capital"
+    },
+    {
+      "name": "KEY_DETAILS",
+      "description": "Essential facts and figures for the announcement",
+      "example": "Funding will be used to expand the engineering team from 20 to 50, launch in three new markets (UK, Germany, Japan), and release the enterprise product tier in Q3 2026"
+    },
+    {
+      "name": "SPOKESPERSON_NAME",
+      "description": "Name and title of the person being quoted",
+      "example": "Maria Chen, CEO and Co-Founder"
+    }
   ],
-  "tips": ["Include specific numbers and metrics — they make the release more credible and quotable", "Provide context about your industry so Claude can position the news within broader trends", "Ask for a shorter 200-word version as well for wire services and social media"],
+  "tips": [
+    "Include specific numbers and metrics — they make the release more credible and quotable",
+    "Provide context about your industry so Claude can position the news within broader trends",
+    "Ask for a shorter 200-word version as well for wire services and social media"
+  ],
+  "relatedGuide": {
+    "title": "AI Slop: The 19 Writing Patterns That Scream ChatGPT",
+    "url": "/guides/remove-ai-slop-from-writing/"
+  },
   "exampleOutput": "FOR IMMEDIATE RELEASE\n\nNovaTech Solutions Raises $15M Series A to Expand AI-Powered Supply Chain Platform\nFunding led by Sequoia Capital will accelerate international expansion and enterprise product launch\n\nSAN FRANCISCO, CA — April 2, 2026 — NovaTech Solutions, a supply chain intelligence platform, today announced it has raised $15 million in Series A funding led by Sequoia Capital with participation from existing investors.\n\nThe company plans to use the capital to triple its engineering team and expand operations into the United Kingdom, Germany and Japan by year-end...\n\n\"This funding validates what our customers have been telling us — the supply chain needs smarter tools, not more dashboards,\" said Maria Chen, CEO and Co-Founder of NovaTech Solutions...",
   "isFeatured": false,
   "dateAdded": "2026-04-02",
