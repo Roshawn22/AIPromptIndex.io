@@ -5,15 +5,41 @@
   "description": "Customer personas transform abstract market segments into concrete individuals that product, marketing, and sales teams can build empathy for. This prompt goes beyond basic demographics to create psychographic profiles that reveal how and why customers make decisions. The inclusion of direct quotes gives copywriters authentic voice references, while the buying behavior section helps sales teams anticipate the purchase process. The customer journey map connects the persona to your actual funnel stages. Essential for product launches, marketing strategy development, or aligning cross-functional teams around a shared understanding of the customer.",
   "tool": "gemini",
   "category": "marketing",
-  "tags": ["persona", "user-research", "marketing-strategy", "customer-journey", "UX"],
+  "tags": [
+    "persona",
+    "user-research",
+    "marketing-strategy",
+    "customer-journey",
+    "UX"
+  ],
   "difficulty": "beginner",
   "promptType": "text",
   "variables": [
-    { "name": "PRODUCT_NAME", "description": "Your product name", "example": "BudgetBuddy" },
-    { "name": "PRODUCT_DESCRIPTION", "description": "What the product does", "example": "personal finance app that uses AI to categorize expenses and suggest savings opportunities" },
-    { "name": "MARKET_SEGMENT", "description": "The customer segment to profile", "example": "young professionals aged 25-35 who earn good salaries but struggle to save" }
+    {
+      "name": "PRODUCT_NAME",
+      "description": "Your product name",
+      "example": "BudgetBuddy"
+    },
+    {
+      "name": "PRODUCT_DESCRIPTION",
+      "description": "What the product does",
+      "example": "personal finance app that uses AI to categorize expenses and suggest savings opportunities"
+    },
+    {
+      "name": "MARKET_SEGMENT",
+      "description": "The customer segment to profile",
+      "example": "young professionals aged 25-35 who earn good salaries but struggle to save"
+    }
   ],
-  "tips": ["Create 3-4 personas to cover your key segments using this prompt multiple times", "Validate persona assumptions with real customer interview data", "Pin the persona to your team's shared workspace for ongoing reference"],
+  "tips": [
+    "Create 3-4 personas to cover your key segments using this prompt multiple times",
+    "Validate persona assumptions with real customer interview data",
+    "Pin the persona to your team's shared workspace for ongoing reference"
+  ],
+  "relatedGuide": {
+    "title": "AI Slop: The 19 Writing Patterns That Scream ChatGPT",
+    "url": "/guides/remove-ai-slop-from-writing/"
+  },
   "exampleOutput": "## Persona: Sarah Chen, 28\n**Photo Description:** Asian-American woman in business casual, holding a coffee, looking at her phone in a co-working space\n**Location:** Austin, TX | **Income:** $82,000/year | **Education:** BS in Marketing\n**Status:** Single, rents a 1-bedroom apartment, has a rescue dog named Pixel\n\n**Psychographic Profile:**\nValues experiences over material goods. Active on Instagram and TikTok. Listens to finance podcasts during her commute but feels overwhelmed by contradictory advice. Aspires to financial independence but associates budgeting with restriction and deprivation.\n\n**Quote 1:** 'I make decent money but somehow I am always surprised when I check my bank account at the end of the month.'\n**Quote 2:** 'I have downloaded three budgeting apps and abandoned all of them within a week because they made me feel guilty.'",
   "isFeatured": false,
   "dateAdded": "2026-04-01",

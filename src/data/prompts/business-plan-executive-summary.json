@@ -5,20 +5,69 @@
   "description": "Use this Claude business plan prompt to draft an investor-ready executive summary for a startup, small business, lender packet, pitch deck, or accelerator application. The prompt turns your company details, target market, traction, financial projections, and funding ask into a clear business plan executive summary that covers the sections investors and lenders expect to see. It is built for founders who need a stronger first draft before polishing numbers, claims, and market evidence.",
   "tool": "claude",
   "category": "business",
-  "tags": ["business-plan", "business-plan-prompt", "claude-prompt", "executive-summary", "startup", "funding", "pitch"],
+  "tags": [
+    "business-plan",
+    "business-plan-prompt",
+    "claude-prompt",
+    "executive-summary",
+    "startup",
+    "funding",
+    "pitch"
+  ],
   "difficulty": "intermediate",
   "promptType": "text",
   "variables": [
-    { "name": "COMPANY_NAME", "description": "Your company name", "example": "NutriPlan AI" },
-    { "name": "BUSINESS_MODEL", "description": "Type of business model", "example": "B2C SaaS subscription" },
-    { "name": "INDUSTRY", "description": "Industry vertical", "example": "health-tech and personalized nutrition" },
-    { "name": "PROBLEM", "description": "The problem being solved", "example": "generic nutrition advice that ignores individual health conditions, genetics, and lifestyle" },
-    { "name": "TARGET_MARKET", "description": "Who you serve", "example": "health-conscious adults aged 25-55 managing chronic conditions through diet" },
-    { "name": "SOLUTION", "description": "Your product or service", "example": "an AI-powered meal planning app that creates personalized nutrition plans based on bloodwork, genetic data, and health goals" },
-    { "name": "TRACTION_METRICS", "description": "Current business metrics", "example": "12,000 paid subscribers, $45K MRR, 94% month-over-month retention, partnerships with 3 major lab testing companies" },
-    { "name": "FUNDING_AMOUNT", "description": "How much funding you seek", "example": "$2.5M Series Seed" }
+    {
+      "name": "COMPANY_NAME",
+      "description": "Your company name",
+      "example": "NutriPlan AI"
+    },
+    {
+      "name": "BUSINESS_MODEL",
+      "description": "Type of business model",
+      "example": "B2C SaaS subscription"
+    },
+    {
+      "name": "INDUSTRY",
+      "description": "Industry vertical",
+      "example": "health-tech and personalized nutrition"
+    },
+    {
+      "name": "PROBLEM",
+      "description": "The problem being solved",
+      "example": "generic nutrition advice that ignores individual health conditions, genetics, and lifestyle"
+    },
+    {
+      "name": "TARGET_MARKET",
+      "description": "Who you serve",
+      "example": "health-conscious adults aged 25-55 managing chronic conditions through diet"
+    },
+    {
+      "name": "SOLUTION",
+      "description": "Your product or service",
+      "example": "an AI-powered meal planning app that creates personalized nutrition plans based on bloodwork, genetic data, and health goals"
+    },
+    {
+      "name": "TRACTION_METRICS",
+      "description": "Current business metrics",
+      "example": "12,000 paid subscribers, $45K MRR, 94% month-over-month retention, partnerships with 3 major lab testing companies"
+    },
+    {
+      "name": "FUNDING_AMOUNT",
+      "description": "How much funding you seek",
+      "example": "$2.5M Series Seed"
+    }
   ],
-  "tips": ["Lead with your strongest traction metric to hook the reader immediately", "Quantify your market size with a credible TAM/SAM/SOM breakdown", "Tailor the tone based on your audience: VCs want growth metrics, banks want stability", "Ask Claude for a lender version, investor version, and accelerator version so you can compare the framing before final edits"],
+  "tips": [
+    "Lead with your strongest traction metric to hook the reader immediately",
+    "Quantify your market size with a credible TAM/SAM/SOM breakdown",
+    "Tailor the tone based on your audience: VCs want growth metrics, banks want stability",
+    "Ask Claude for a lender version, investor version, and accelerator version so you can compare the framing before final edits"
+  ],
+  "relatedGuide": {
+    "title": "ChatGPT for Business: 20 Prompts That Save Hours Every Week",
+    "url": "/guides/chatgpt-for-business/"
+  },
   "exampleOutput": "NutriPlan AI is a B2C SaaS platform that uses artificial intelligence to create hyper-personalized nutrition plans based on individual bloodwork, genetic markers, and health goals. In a $271B global wellness market where 78% of consumers report frustration with generic dietary advice, we are the first platform to combine lab data integration with real-time meal planning.\n\nThe Problem: Over 60% of Americans managing chronic conditions like diabetes, heart disease, or autoimmune disorders receive nutrition guidance that ignores their unique biomarkers...",
   "isFeatured": true,
   "dateAdded": "2026-04-01",

@@ -5,19 +5,61 @@
   "description": "This prompt generates a professional startup pitch one-pager that distills your entire business case onto a single page. Investors see hundreds of pitches, so your one-pager needs to communicate the problem, solution, market opportunity, and ask within a 60-second read. This prompt structures your pitch using the same framework that top accelerators like Y Combinator and Techstars recommend, with each section optimized for maximum impact in minimum words. It is invaluable for founders preparing for investor meetings, pitch competitions, or cold outreach to potential backers.",
   "tool": "chatgpt",
   "category": "business",
-  "tags": ["startup", "pitch-deck", "fundraising", "investor-relations", "entrepreneurship"],
+  "tags": [
+    "startup",
+    "pitch-deck",
+    "fundraising",
+    "investor-relations",
+    "entrepreneurship"
+  ],
   "difficulty": "intermediate",
   "promptType": "text",
   "variables": [
-    { "name": "STARTUP_TYPE", "description": "The industry or type of startup", "example": "B2B SaaS" },
-    { "name": "COMPANY_NAME", "description": "Name of the startup", "example": "FlowBoard" },
-    { "name": "VALUE_PROPOSITION", "description": "What the startup does in one sentence", "example": "automates project handoffs between design and engineering teams" },
-    { "name": "TARGET_MARKET", "description": "Primary customer segment", "example": "mid-size tech companies with 50-500 employees" },
-    { "name": "MARKET_SIZE", "description": "Estimated total addressable market", "example": "$12 billion" },
-    { "name": "STAGE", "description": "Current startup stage", "example": "seed" },
-    { "name": "FUNDING_AMOUNT", "description": "Amount of funding being raised", "example": "$1.5M" }
+    {
+      "name": "STARTUP_TYPE",
+      "description": "The industry or type of startup",
+      "example": "B2B SaaS"
+    },
+    {
+      "name": "COMPANY_NAME",
+      "description": "Name of the startup",
+      "example": "FlowBoard"
+    },
+    {
+      "name": "VALUE_PROPOSITION",
+      "description": "What the startup does in one sentence",
+      "example": "automates project handoffs between design and engineering teams"
+    },
+    {
+      "name": "TARGET_MARKET",
+      "description": "Primary customer segment",
+      "example": "mid-size tech companies with 50-500 employees"
+    },
+    {
+      "name": "MARKET_SIZE",
+      "description": "Estimated total addressable market",
+      "example": "$12 billion"
+    },
+    {
+      "name": "STAGE",
+      "description": "Current startup stage",
+      "example": "seed"
+    },
+    {
+      "name": "FUNDING_AMOUNT",
+      "description": "Amount of funding being raised",
+      "example": "$1.5M"
+    }
   ],
-  "tips": ["Replace placeholder metrics with your real traction numbers before sending to investors", "Customize the competitive advantage section with specifics about your moat", "Print the one-pager and check if each section can be read in under 10 seconds"],
+  "tips": [
+    "Replace placeholder metrics with your real traction numbers before sending to investors",
+    "Customize the competitive advantage section with specifics about your moat",
+    "Print the one-pager and check if each section can be read in under 10 seconds"
+  ],
+  "relatedGuide": {
+    "title": "ChatGPT for Business: 20 Prompts That Save Hours Every Week",
+    "url": "/guides/chatgpt-for-business/"
+  },
   "exampleOutput": "FLOWBOARD - Automating the Design-to-Dev Handoff\n\nThe Problem:\n67% of product teams report that design handoffs cause an average 2-week delay per sprint cycle. Miscommunication between designers and engineers costs mid-size companies $340K annually in rework and missed deadlines.\n\nThe Solution:\nFlowBoard automatically translates design files into developer-ready specifications with pixel-perfect accuracy...",
   "isFeatured": false,
   "dateAdded": "2026-04-02",

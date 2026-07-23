@@ -5,20 +5,66 @@
   "description": "This prompt creates personalized freelance project proposals that stand out from the hundreds of generic copy-paste responses clients receive on platforms like Upwork, Fiverr, and Toptal. It follows a proven proposal structure that leads with client understanding rather than self-promotion, demonstrates expertise through specific examples, and closes with a low-risk next step that makes hiring you an easy decision. The output avoids every common proposal mistake — generic openings, feature-dumping, vague timelines, and missing proof points. It is ideal for freelancers who want to increase their win rate, consultants responding to RFPs, and agency owners who need to systematize their business development process.",
   "tool": "chatgpt",
   "category": "business",
-  "tags": ["freelancing", "proposal-writing", "business-development", "Upwork", "client-acquisition"],
+  "tags": [
+    "freelancing",
+    "proposal-writing",
+    "business-development",
+    "Upwork",
+    "client-acquisition"
+  ],
   "difficulty": "intermediate",
   "promptType": "text",
   "variables": [
-    { "name": "PROJECT_TITLE", "description": "Title of the project posting", "example": "Website Redesign for E-commerce Pet Supply Store" },
-    { "name": "CLIENT_INDUSTRY", "description": "Client's industry", "example": "Pet supplies e-commerce" },
-    { "name": "PROJECT_DESCRIPTION", "description": "Client's project description (paste from the posting)", "example": "We need to redesign our Shopify store. Current site is slow, conversion rate is 1.2%, and mobile experience is poor. Want a modern design that matches our premium brand positioning. Budget is $5-8K." },
-    { "name": "MY_SKILLS", "description": "Your relevant skills", "example": "Shopify development, UI/UX design, conversion rate optimization, page speed optimization" },
-    { "name": "MY_EXPERIENCE", "description": "Relevant past projects", "example": "Redesigned 12 Shopify stores in the past year, average conversion rate improvement of 45%, specialized in e-commerce for DTC brands" },
-    { "name": "TIMELINE", "description": "Your proposed project timeline", "example": "4-5 weeks from kickoff to launch" },
-    { "name": "BUDGET", "description": "Your proposed pricing", "example": "$6,500 for complete redesign including 2 rounds of revisions" },
-    { "name": "PLATFORM", "description": "Platform where the project is posted", "example": "Upwork" }
+    {
+      "name": "PROJECT_TITLE",
+      "description": "Title of the project posting",
+      "example": "Website Redesign for E-commerce Pet Supply Store"
+    },
+    {
+      "name": "CLIENT_INDUSTRY",
+      "description": "Client's industry",
+      "example": "Pet supplies e-commerce"
+    },
+    {
+      "name": "PROJECT_DESCRIPTION",
+      "description": "Client's project description (paste from the posting)",
+      "example": "We need to redesign our Shopify store. Current site is slow, conversion rate is 1.2%, and mobile experience is poor. Want a modern design that matches our premium brand positioning. Budget is $5-8K."
+    },
+    {
+      "name": "MY_SKILLS",
+      "description": "Your relevant skills",
+      "example": "Shopify development, UI/UX design, conversion rate optimization, page speed optimization"
+    },
+    {
+      "name": "MY_EXPERIENCE",
+      "description": "Relevant past projects",
+      "example": "Redesigned 12 Shopify stores in the past year, average conversion rate improvement of 45%, specialized in e-commerce for DTC brands"
+    },
+    {
+      "name": "TIMELINE",
+      "description": "Your proposed project timeline",
+      "example": "4-5 weeks from kickoff to launch"
+    },
+    {
+      "name": "BUDGET",
+      "description": "Your proposed pricing",
+      "example": "$6,500 for complete redesign including 2 rounds of revisions"
+    },
+    {
+      "name": "PLATFORM",
+      "description": "Platform where the project is posted",
+      "example": "Upwork"
+    }
   ],
-  "tips": ["Always paste the client's actual project description — the more context you provide, the more personalized the proposal", "Include specific metrics from past projects in MY_EXPERIENCE for maximum credibility", "Customize the risk-free next step based on the project size — larger projects warrant a free strategy call, smaller ones might offer a sample"],
+  "tips": [
+    "Always paste the client's actual project description — the more context you provide, the more personalized the proposal",
+    "Include specific metrics from past projects in MY_EXPERIENCE for maximum credibility",
+    "Customize the risk-free next step based on the project size — larger projects warrant a free strategy call, smaller ones might offer a sample"
+  ],
+  "relatedGuide": {
+    "title": "ChatGPT for Business: 20 Prompts That Save Hours Every Week",
+    "url": "/guides/chatgpt-for-business/"
+  },
   "exampleOutput": "A 1.2% conversion rate on Shopify with a premium brand positioning tells me your current design is likely creating friction between what customers expect from your brand and what the shopping experience delivers — that gap is where you are losing sales.\n\nI have redesigned 12 Shopify stores for DTC brands in the past year, and the pattern I see most often matches your situation: strong products and brand identity undermined by a template-based design that does not convert on mobile...\n\nProposed Approach:\nPhase 1 (Week 1): Conversion audit of your current store — heatmaps, funnel analysis, and mobile UX review\nPhase 2 (Weeks 2-3): Custom design with mobile-first approach, optimized product pages, and streamlined checkout...",
   "isFeatured": false,
   "dateAdded": "2026-04-02",

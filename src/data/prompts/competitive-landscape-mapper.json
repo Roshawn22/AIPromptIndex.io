@@ -5,16 +5,46 @@
   "description": "This prompt generates a structured competitive analysis covering market positioning, feature gaps, go-to-market strategies, and competitive moats. It goes far beyond a simple comparison chart by analyzing the strategic dynamics of the market, identifying unmet needs, and providing actionable positioning recommendations. The output includes both a detailed competitor matrix for reference and strategic insights for decision-making. It is particularly useful for startup founders preparing pitch decks, product managers prioritizing roadmaps based on competitive gaps, and marketing leaders crafting differentiated messaging. The monitoring plan ensures competitive intelligence stays current beyond this initial analysis.",
   "tool": "claude",
   "category": "business",
-  "tags": ["competitive-analysis", "strategy", "market-research", "positioning", "business-intelligence"],
+  "tags": [
+    "competitive-analysis",
+    "strategy",
+    "market-research",
+    "positioning",
+    "business-intelligence"
+  ],
   "difficulty": "advanced",
   "promptType": "text",
   "variables": [
-    { "name": "COMPANY_PRODUCT", "description": "Your company and what you offer", "example": "TaskPilot - an AI-powered project management tool that auto-generates tasks from meeting transcripts and Slack conversations" },
-    { "name": "TARGET_MARKET", "description": "Your ideal customer segment and market size", "example": "Mid-market tech companies (100-1000 employees) spending $50K-200K annually on productivity tools" },
-    { "name": "KNOWN_COMPETITORS", "description": "Competitors you are already aware of", "example": "Direct: Asana, Monday.com, Linear. Indirect: Notion, ClickUp. AI-native: Motion, Reclaim.ai" },
-    { "name": "DIFFERENTIATORS", "description": "What you believe sets you apart", "example": "Only tool that auto-creates tasks from meeting transcripts with 92% accuracy, plus AI priority scoring based on company OKRs" }
+    {
+      "name": "COMPANY_PRODUCT",
+      "description": "Your company and what you offer",
+      "example": "TaskPilot - an AI-powered project management tool that auto-generates tasks from meeting transcripts and Slack conversations"
+    },
+    {
+      "name": "TARGET_MARKET",
+      "description": "Your ideal customer segment and market size",
+      "example": "Mid-market tech companies (100-1000 employees) spending $50K-200K annually on productivity tools"
+    },
+    {
+      "name": "KNOWN_COMPETITORS",
+      "description": "Competitors you are already aware of",
+      "example": "Direct: Asana, Monday.com, Linear. Indirect: Notion, ClickUp. AI-native: Motion, Reclaim.ai"
+    },
+    {
+      "name": "DIFFERENTIATORS",
+      "description": "What you believe sets you apart",
+      "example": "Only tool that auto-creates tasks from meeting transcripts with 92% accuracy, plus AI priority scoring based on company OKRs"
+    }
   ],
-  "tips": ["Include competitors you think are indirect or emerging since those often represent the biggest future threats", "Mention your pricing so the analysis can position you accurately relative to competitors", "Share any customer feedback about why people chose you over competitors or vice versa for more grounded analysis"],
+  "tips": [
+    "Include competitors you think are indirect or emerging since those often represent the biggest future threats",
+    "Mention your pricing so the analysis can position you accurately relative to competitors",
+    "Share any customer feedback about why people chose you over competitors or vice versa for more grounded analysis"
+  ],
+  "relatedGuide": {
+    "title": "ChatGPT for Business: 20 Prompts That Save Hours Every Week",
+    "url": "/guides/chatgpt-for-business/"
+  },
   "exampleOutput": "**Competitive Landscape: AI Project Management**\n\n**Positioning Map (Axes: AI Automation Depth vs. Enterprise Readiness):**\n- Top-right (High AI, High Enterprise): Motion - strong AI scheduling but limited task creation\n- Top-left (High AI, Low Enterprise): TaskPilot (you) - deepest AI automation but needs SSO, audit logs\n- Bottom-right (Low AI, High Enterprise): Asana, Monday.com - mature but manual\n- Bottom-left (Low AI, Low Enterprise): Linear - developer-focused, minimal AI\n\n**Strategic Gap:** No competitor occupies the top-right quadrant with both deep AI and enterprise readiness. This is your path to market leadership.\n\n**Recommendation #1:** Prioritize enterprise security features (SSO, SCIM, SOC 2) to move right on the map before AI-native competitors build up from the bottom...",
   "isFeatured": false,
   "dateAdded": "2026-04-02",

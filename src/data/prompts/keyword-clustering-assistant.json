@@ -5,15 +5,41 @@
   "description": "This prompt organizes a raw list of keywords into strategic topic clusters complete with pillar page assignments, search intent tags, and content type recommendations. Keyword clustering is one of the most time-consuming parts of SEO planning, and this prompt automates the strategic thinking that typically requires an experienced SEO consultant. The output gives you a publication-ready content plan with clear internal linking architecture. It is ideal for SEO managers starting a new content strategy, bloggers trying to organize hundreds of keyword ideas, or agencies onboarding new clients who need a structured content roadmap built from keyword research data.",
   "tool": "gemini",
   "category": "marketing",
-  "tags": ["SEO", "keyword-clustering", "content-strategy", "topic-clusters", "pillar-page"],
+  "tags": [
+    "SEO",
+    "keyword-clustering",
+    "content-strategy",
+    "topic-clusters",
+    "pillar-page"
+  ],
   "difficulty": "intermediate",
   "promptType": "text",
   "variables": [
-    { "name": "NICHE", "description": "Your industry or content niche", "example": "personal finance for millennials" },
-    { "name": "KEYWORD_LIST", "description": "Raw list of keywords to cluster", "example": "budgeting apps, how to save money in your 20s, best savings accounts 2026, emergency fund tips, how to invest with little money, Roth IRA vs traditional IRA, side hustle ideas, debt payoff strategies, credit score improvement, first-time homebuyer tips" },
-    { "name": "BUSINESS_TYPE", "description": "Type of business these keywords serve", "example": "personal finance blog monetized through affiliate links" }
+    {
+      "name": "NICHE",
+      "description": "Your industry or content niche",
+      "example": "personal finance for millennials"
+    },
+    {
+      "name": "KEYWORD_LIST",
+      "description": "Raw list of keywords to cluster",
+      "example": "budgeting apps, how to save money in your 20s, best savings accounts 2026, emergency fund tips, how to invest with little money, Roth IRA vs traditional IRA, side hustle ideas, debt payoff strategies, credit score improvement, first-time homebuyer tips"
+    },
+    {
+      "name": "BUSINESS_TYPE",
+      "description": "Type of business these keywords serve",
+      "example": "personal finance blog monetized through affiliate links"
+    }
   ],
-  "tips": ["Include at least 15-20 keywords for more meaningful clusters", "Mix head terms and long-tail keywords for better cluster balance", "Export the clustered output to a spreadsheet and add search volume data from Ahrefs or SEMrush for prioritization"],
+  "tips": [
+    "Include at least 15-20 keywords for more meaningful clusters",
+    "Mix head terms and long-tail keywords for better cluster balance",
+    "Export the clustered output to a spreadsheet and add search volume data from Ahrefs or SEMrush for prioritization"
+  ],
+  "relatedGuide": {
+    "title": "AI Slop: The 19 Writing Patterns That Scream ChatGPT",
+    "url": "/guides/remove-ai-slop-from-writing/"
+  },
   "exampleOutput": "CLUSTER 1: Saving & Budgeting (Priority: HIGH)\nPillar Page: 'how to save money in your 20s' — Intent: Informational — Format: Ultimate Guide\nSupporting:\n  - 'budgeting apps' — Intent: Commercial Investigation — Format: Comparison/Listicle\n  - 'best savings accounts 2026' — Intent: Commercial Investigation — Format: Comparison Post\n  - 'emergency fund tips' — Intent: Informational — Format: How-To Guide\nInternal Linking: All supporting pages link to pillar with contextual anchor text. Budgeting apps page links to savings accounts page (natural cross-reference).\n\nCLUSTER 2: Investing Basics (Priority: HIGH)...",
   "isFeatured": false,
   "dateAdded": "2026-04-02",

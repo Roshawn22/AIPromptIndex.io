@@ -5,15 +5,41 @@
   "description": "This prompt turns Claude into a real estate market analyst capable of delivering structured, data-driven market assessments for any location. It covers all the essential metrics that investors and agents need: price trends, inventory levels, demand indicators, and economic drivers. The output is designed to mirror professional market reports from firms like Redfin or Zillow Research, giving users a comprehensive snapshot they can use for investment decisions, client presentations, or strategic planning. It is particularly valuable for real estate professionals who serve multiple markets and need quick, thorough analyses without hours of manual research.",
   "tool": "claude",
   "category": "business",
-  "tags": ["real-estate", "market-analysis", "investing", "housing-trends", "data-analysis"],
+  "tags": [
+    "real-estate",
+    "market-analysis",
+    "investing",
+    "housing-trends",
+    "data-analysis"
+  ],
   "difficulty": "intermediate",
   "promptType": "text",
   "variables": [
-    { "name": "LOCATION", "description": "City, neighborhood, or metro area to analyze", "example": "Austin, TX metro area" },
-    { "name": "TIME_PERIOD", "description": "Historical timeframe for trend analysis", "example": "12 months" },
-    { "name": "INVESTOR_TYPE", "description": "Type of buyer or investor seeking opportunities", "example": "first-time homebuyers" }
+    {
+      "name": "LOCATION",
+      "description": "City, neighborhood, or metro area to analyze",
+      "example": "Austin, TX metro area"
+    },
+    {
+      "name": "TIME_PERIOD",
+      "description": "Historical timeframe for trend analysis",
+      "example": "12 months"
+    },
+    {
+      "name": "INVESTOR_TYPE",
+      "description": "Type of buyer or investor seeking opportunities",
+      "example": "first-time homebuyers"
+    }
   ],
-  "tips": ["Be as specific as possible with location — neighborhood-level analysis yields more actionable insights than city-wide", "Pair this with current data from Redfin or Zillow for the most accurate analysis", "Run the prompt for multiple locations to compare markets side by side"],
+  "tips": [
+    "Be as specific as possible with location — neighborhood-level analysis yields more actionable insights than city-wide",
+    "Pair this with current data from Redfin or Zillow for the most accurate analysis",
+    "Run the prompt for multiple locations to compare markets side by side"
+  ],
+  "relatedGuide": {
+    "title": "ChatGPT for Business: 20 Prompts That Save Hours Every Week",
+    "url": "/guides/chatgpt-for-business/"
+  },
   "exampleOutput": "Market Overview: Austin, TX is currently transitioning from a strong seller's market to a more balanced environment. After two years of aggressive price appreciation, rising inventory and higher mortgage rates have shifted negotiating power slightly toward buyers.\n\nPrice Trends: Median home price over the past 12 months has stabilized at approximately $485,000, representing a 2.1% year-over-year increase — a significant deceleration from the 15%+ gains seen in 2022-2023...",
   "isFeatured": false,
   "dateAdded": "2026-04-02",

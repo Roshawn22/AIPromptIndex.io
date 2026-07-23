@@ -5,16 +5,46 @@
   "description": "This prompt converts raw meeting transcripts or rough notes into polished, actionable meeting summaries that ensure nothing falls through the cracks. The structured format separates decisions from discussions, extracts clear action items with owners and deadlines, and captures deferred topics in a parking lot for follow-up. It is designed for busy professionals who attend back-to-back meetings and need a reliable system for tracking commitments. The executive summary enables stakeholders who missed the meeting to stay informed without reading the full notes. Especially valuable for project managers, team leads, and executive assistants who summarize meetings for broader distribution.",
   "tool": "gemini",
   "category": "business",
-  "tags": ["meetings", "productivity", "action-items", "notes", "project-management"],
+  "tags": [
+    "meetings",
+    "productivity",
+    "action-items",
+    "notes",
+    "project-management"
+  ],
   "difficulty": "beginner",
   "promptType": "text",
   "variables": [
-    { "name": "MEETING_TYPE", "description": "The type of meeting and its purpose", "example": "Weekly product team standup to review sprint progress and unblock issues" },
-    { "name": "PARTICIPANTS", "description": "List of attendees and their roles", "example": "Sarah Chen (PM), Mike Johnson (Engineering Lead), Lisa Park (Designer), Tom Williams (QA), Priya Sharma (Data Analyst)" },
-    { "name": "MEETING_CONTENT", "description": "The raw transcript, recording notes, or detailed meeting notes", "example": "Sarah opened by reviewing sprint velocity... Mike mentioned the API migration is blocked by the auth team... Lisa presented two design options for the onboarding flow..." },
-    { "name": "AGENDA_ITEMS", "description": "The planned topics or decisions that needed to be made", "example": "1. Sprint progress review 2. API migration blocker 3. Onboarding redesign decision 4. Q2 planning timeline" }
+    {
+      "name": "MEETING_TYPE",
+      "description": "The type of meeting and its purpose",
+      "example": "Weekly product team standup to review sprint progress and unblock issues"
+    },
+    {
+      "name": "PARTICIPANTS",
+      "description": "List of attendees and their roles",
+      "example": "Sarah Chen (PM), Mike Johnson (Engineering Lead), Lisa Park (Designer), Tom Williams (QA), Priya Sharma (Data Analyst)"
+    },
+    {
+      "name": "MEETING_CONTENT",
+      "description": "The raw transcript, recording notes, or detailed meeting notes",
+      "example": "Sarah opened by reviewing sprint velocity... Mike mentioned the API migration is blocked by the auth team... Lisa presented two design options for the onboarding flow..."
+    },
+    {
+      "name": "AGENDA_ITEMS",
+      "description": "The planned topics or decisions that needed to be made",
+      "example": "1. Sprint progress review 2. API migration blocker 3. Onboarding redesign decision 4. Q2 planning timeline"
+    }
   ],
-  "tips": ["Paste the raw transcript rather than pre-edited notes to capture nuances and action items you might have missed", "Include participant roles so the summary can correctly attribute decisions and assign action items", "Specify your preferred format for action items if your team uses a specific project management tool like Jira or Asana"],
+  "tips": [
+    "Paste the raw transcript rather than pre-edited notes to capture nuances and action items you might have missed",
+    "Include participant roles so the summary can correctly attribute decisions and assign action items",
+    "Specify your preferred format for action items if your team uses a specific project management tool like Jira or Asana"
+  ],
+  "relatedGuide": {
+    "title": "ChatGPT for Business: 20 Prompts That Save Hours Every Week",
+    "url": "/guides/chatgpt-for-business/"
+  },
   "exampleOutput": "**Meeting Summary: Weekly Product Standup**\nDate: April 2, 2026 | Duration: 45 min | Attendees: S. Chen, M. Johnson, L. Park, T. Williams, P. Sharma\nObjective: Review sprint progress, resolve API migration blocker, decide on onboarding design\n\n**Executive Summary:**\nThe team is on track for 80% of sprint commitments. The API migration is blocked pending auth team capacity, which Sarah will escalate to the VP of Engineering today. The team selected Lisa's Design Option B for onboarding after reviewing conversion data.\n\n**Action Items:**\n| Task | Owner | Deadline | Priority |\n|------|-------|----------|----------|\n| Escalate auth team blocker to VP Eng | Sarah | Apr 2 | High |...",
   "isFeatured": false,
   "dateAdded": "2026-04-02",
