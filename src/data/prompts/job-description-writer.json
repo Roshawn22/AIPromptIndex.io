@@ -5,16 +5,46 @@
   "description": "This prompt generates job descriptions that are both compelling to top candidates and inclusive in their language and requirements. It follows modern talent acquisition best practices by distinguishing essential from preferred qualifications, using outcome-based role definitions, and including transparency about compensation and team structure. Research shows that overly long requirement lists disproportionately discourage women and underrepresented minorities from applying, so this prompt actively works to keep requirements realistic. The day-in-the-life section and 90-day goals help candidates assess genuine fit beyond keyword matching. Ideal for hiring managers, HR teams, and startup founders who want to attract diverse, qualified talent.",
   "tool": "chatgpt",
   "category": "business",
-  "tags": ["hiring", "job-description", "recruiting", "HR", "diversity"],
+  "tags": [
+    "hiring",
+    "job-description",
+    "recruiting",
+    "HR",
+    "diversity"
+  ],
   "difficulty": "beginner",
   "promptType": "text",
   "variables": [
-    { "name": "JOB_TITLE", "description": "The role title and department", "example": "Senior Product Manager, Growth Team" },
-    { "name": "COMPANY_OVERVIEW", "description": "Brief company description, mission, and culture", "example": "HealthBridge is a 120-person health tech company building tools that help rural clinics deliver specialist-level care remotely. Remote-first, profitable, growing 40% YoY." },
-    { "name": "RESPONSIBILITIES", "description": "Key duties and scope of the role", "example": "Own the growth experimentation roadmap, lead a cross-functional squad of 6, define and track activation and retention metrics, report to VP of Product" },
-    { "name": "COMPENSATION", "description": "Salary range, equity, and notable benefits", "example": "Base salary $165K-$195K, 0.1% equity, full health/dental/vision, $3K annual learning budget, 4 weeks PTO, parental leave 16 weeks" }
+    {
+      "name": "JOB_TITLE",
+      "description": "The role title and department",
+      "example": "Senior Product Manager, Growth Team"
+    },
+    {
+      "name": "COMPANY_OVERVIEW",
+      "description": "Brief company description, mission, and culture",
+      "example": "HealthBridge is a 120-person health tech company building tools that help rural clinics deliver specialist-level care remotely. Remote-first, profitable, growing 40% YoY."
+    },
+    {
+      "name": "RESPONSIBILITIES",
+      "description": "Key duties and scope of the role",
+      "example": "Own the growth experimentation roadmap, lead a cross-functional squad of 6, define and track activation and retention metrics, report to VP of Product"
+    },
+    {
+      "name": "COMPENSATION",
+      "description": "Salary range, equity, and notable benefits",
+      "example": "Base salary $165K-$195K, 0.1% equity, full health/dental/vision, $3K annual learning budget, 4 weeks PTO, parental leave 16 weeks"
+    }
   ],
-  "tips": ["Run the output through a gender decoder tool to catch any remaining biased language", "Keep the required qualifications list to 5-7 items maximum to avoid discouraging qualified candidates", "Include the salary range even if your company does not usually do so since it is the single biggest factor in application rates"],
+  "tips": [
+    "Run the output through a gender decoder tool to catch any remaining biased language",
+    "Keep the required qualifications list to 5-7 items maximum to avoid discouraging qualified candidates",
+    "Include the salary range even if your company does not usually do so since it is the single biggest factor in application rates"
+  ],
+  "relatedGuide": {
+    "title": "ChatGPT for Business: 20 Prompts That Save Hours Every Week",
+    "url": "/guides/chatgpt-for-business/"
+  },
   "exampleOutput": "**Senior Product Manager, Growth Team**\n\n**The Opportunity:**\nEvery day, patients in rural communities wait weeks for specialist consultations that could happen in minutes. At HealthBridge, you will lead the growth team that is eliminating that gap. Your work will directly determine how quickly we reach the 2,400 clinics still waiting for access to our platform.\n\n**What You Will Do:**\n- Own the experimentation roadmap for user activation and retention, running 8-12 experiments per quarter\n- Lead a cross-functional squad of 2 engineers, 1 designer, 1 data analyst, and 1 marketer...",
   "isFeatured": false,
   "dateAdded": "2026-04-02",

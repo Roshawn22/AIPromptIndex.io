@@ -5,17 +5,51 @@
   "description": "OKRs only work when they cascade properly from company strategy to team execution, and most OKR implementations fail because of poor alignment or unmeasurable key results. This prompt generates a complete OKR framework with proper cascading structure that shows every team how their work connects to company goals. The numeric targets in key results eliminate the ambiguity that makes OKRs useless. The anti-patterns section addresses the most common implementation mistakes like sandbagging targets or treating OKRs as a task list. Essential for quarterly planning, annual strategy sessions, or companies adopting OKRs for the first time.",
   "tool": "gemini",
   "category": "business",
-  "tags": ["OKR", "strategic-planning", "goal-setting", "management", "alignment"],
+  "tags": [
+    "OKR",
+    "strategic-planning",
+    "goal-setting",
+    "management",
+    "alignment"
+  ],
   "difficulty": "intermediate",
   "promptType": "text",
   "variables": [
-    { "name": "COMPANY_NAME", "description": "Your company name", "example": "TalentBridge" },
-    { "name": "BUSINESS_DESCRIPTION", "description": "What the company does", "example": "AI-powered recruiting platform for tech companies" },
-    { "name": "TIME_PERIOD", "description": "The OKR period", "example": "Q3 2026" },
-    { "name": "STRATEGIC_PRIORITIES", "description": "Top company priorities", "example": "expand into the enterprise segment, improve candidate matching accuracy, and reduce time-to-hire metric" },
-    { "name": "DEPARTMENTS", "description": "Teams to create OKRs for", "example": "Product, Engineering, Sales, and Customer Success" }
+    {
+      "name": "COMPANY_NAME",
+      "description": "Your company name",
+      "example": "TalentBridge"
+    },
+    {
+      "name": "BUSINESS_DESCRIPTION",
+      "description": "What the company does",
+      "example": "AI-powered recruiting platform for tech companies"
+    },
+    {
+      "name": "TIME_PERIOD",
+      "description": "The OKR period",
+      "example": "Q3 2026"
+    },
+    {
+      "name": "STRATEGIC_PRIORITIES",
+      "description": "Top company priorities",
+      "example": "expand into the enterprise segment, improve candidate matching accuracy, and reduce time-to-hire metric"
+    },
+    {
+      "name": "DEPARTMENTS",
+      "description": "Teams to create OKRs for",
+      "example": "Product, Engineering, Sales, and Customer Success"
+    }
   ],
-  "tips": ["Set OKRs that you expect to achieve at 70% for proper stretch goal calibration", "Limit to 3-4 objectives per level to maintain focus", "Review and adjust OKRs at the mid-quarter check-in, not just at the end"],
+  "tips": [
+    "Set OKRs that you expect to achieve at 70% for proper stretch goal calibration",
+    "Limit to 3-4 objectives per level to maintain focus",
+    "Review and adjust OKRs at the mid-quarter check-in, not just at the end"
+  ],
+  "relatedGuide": {
+    "title": "ChatGPT for Business: 20 Prompts That Save Hours Every Week",
+    "url": "/guides/chatgpt-for-business/"
+  },
   "exampleOutput": "## Company-Level OKRs - Q3 2026\n\n**Objective 1: Become the go-to recruiting platform for enterprise tech companies**\n- KR1: Close 5 new enterprise accounts (100+ employees) with ACV > $50K\n- KR2: Achieve 90-day enterprise retention rate of 95%\n- KR3: Reduce enterprise sales cycle from 62 days to 45 days\n- KR4: Launch enterprise-specific features (SSO, custom workflows, dedicated CSM dashboard)\n\n**Alignment Map:**\nObjective 1 -> Sales KR: Build enterprise pipeline of 25 qualified opportunities\nObjective 1 -> Product KR: Ship SSO and custom workflows by mid-Q3\nObjective 1 -> CS KR: Achieve enterprise NPS of 55+\n\n**Anti-Pattern 1:** Treating Key Results as tasks. 'Launch SSO' is a task. 'Enterprise customers rate security features 4.5/5 in satisfaction surveys' is a Key Result.",
   "isFeatured": false,
   "dateAdded": "2026-04-01",

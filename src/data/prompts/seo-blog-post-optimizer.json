@@ -5,16 +5,46 @@
   "description": "This prompt turns ChatGPT into a hands-on SEO editor that reviews and optimizes existing blog content for better search engine rankings. Rather than just giving generic SEO advice, it provides specific, actionable rewrites and recommendations across nine critical optimization areas — from title tags and meta descriptions to featured snippet formatting and content gap analysis. It is designed for content marketers and bloggers who have already written their posts and need a thorough SEO review before publishing. The structured output makes it easy to implement changes systematically without losing the original voice and quality of the writing.",
   "tool": "chatgpt",
   "category": "marketing",
-  "tags": ["SEO", "content-optimization", "blog", "keyword-optimization", "on-page-SEO"],
+  "tags": [
+    "SEO",
+    "content-optimization",
+    "blog",
+    "keyword-optimization",
+    "on-page-SEO"
+  ],
   "difficulty": "intermediate",
   "promptType": "text",
   "variables": [
-    { "name": "TARGET_KEYWORD", "description": "Primary keyword to optimize for", "example": "best project management tools for small teams" },
-    { "name": "TOPIC", "description": "Subject of the blog post", "example": "comparing project management software options" },
-    { "name": "AUDIENCE", "description": "Target reader for this content", "example": "small business owners and startup founders" },
-    { "name": "BLOG_POST_TEXT", "description": "Full text of the blog post to optimize", "example": "[Paste your full blog post here]" }
+    {
+      "name": "TARGET_KEYWORD",
+      "description": "Primary keyword to optimize for",
+      "example": "best project management tools for small teams"
+    },
+    {
+      "name": "TOPIC",
+      "description": "Subject of the blog post",
+      "example": "comparing project management software options"
+    },
+    {
+      "name": "AUDIENCE",
+      "description": "Target reader for this content",
+      "example": "small business owners and startup founders"
+    },
+    {
+      "name": "BLOG_POST_TEXT",
+      "description": "Full text of the blog post to optimize",
+      "example": "[Paste your full blog post here]"
+    }
   ],
-  "tips": ["Paste the complete blog post for the most accurate optimization suggestions", "Research your target keyword's search volume and competition before running this prompt", "Apply the featured snippet optimization section to your most informative paragraph for quick wins"],
+  "tips": [
+    "Paste the complete blog post for the most accurate optimization suggestions",
+    "Research your target keyword's search volume and competition before running this prompt",
+    "Apply the featured snippet optimization section to your most informative paragraph for quick wins"
+  ],
+  "relatedGuide": {
+    "title": "AI Slop: The 19 Writing Patterns That Scream ChatGPT",
+    "url": "/guides/remove-ai-slop-from-writing/"
+  },
   "exampleOutput": "1. OPTIMIZED TITLE TAG\nBest Project Management Tools for Small Teams in 2026 (Compared)\n\n2. META DESCRIPTION\nDiscover the 8 best project management tools for small teams. Compare features, pricing, and real user reviews to find your perfect fit.\n\n3. RECOMMENDED SUBHEADINGS\nH2: What Makes a Great Project Management Tool for Small Teams?\nH2: Top 8 Project Management Tools Compared\nH3: Asana — Best for Task-Heavy Workflows\nH3: Monday.com — Best for Visual Project Tracking...",
   "isFeatured": false,
   "dateAdded": "2026-04-02",

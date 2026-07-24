@@ -5,19 +5,61 @@
   "description": "This prompt helps real estate agents craft professional, emotionally compelling property listing descriptions that stand out on MLS platforms and social media. Rather than relying on generic templates or overused cliches, this prompt guides ChatGPT to produce listings that highlight a property's unique selling points, neighborhood appeal, and lifestyle benefits. It is ideal for agents who manage multiple listings simultaneously and need to maintain high-quality copywriting across all properties. The structured input fields ensure that key property details are never overlooked, while the output strikes the right balance between informative and persuasive.",
   "tool": "chatgpt",
   "category": "marketing",
-  "tags": ["real-estate", "copywriting", "property-listing", "MLS", "marketing"],
+  "tags": [
+    "real-estate",
+    "copywriting",
+    "property-listing",
+    "MLS",
+    "marketing"
+  ],
   "difficulty": "intermediate",
   "promptType": "text",
   "variables": [
-    { "name": "PROPERTY_TYPE", "description": "Type of property being listed", "example": "3-story townhouse" },
-    { "name": "LOCATION", "description": "Neighborhood and city of the property", "example": "Buckhead, Atlanta, GA" },
-    { "name": "BEDROOMS", "description": "Number of bedrooms", "example": "4" },
-    { "name": "BATHROOMS", "description": "Number of bathrooms", "example": "3.5" },
-    { "name": "SQUARE_FOOTAGE", "description": "Total square footage", "example": "2,800" },
-    { "name": "KEY_FEATURES", "description": "Notable features and upgrades", "example": "chef's kitchen with quartz countertops, rooftop deck, two-car garage, smart home system" },
-    { "name": "PRICE_RANGE", "description": "Listing price or price range", "example": "$625,000" }
+    {
+      "name": "PROPERTY_TYPE",
+      "description": "Type of property being listed",
+      "example": "3-story townhouse"
+    },
+    {
+      "name": "LOCATION",
+      "description": "Neighborhood and city of the property",
+      "example": "Buckhead, Atlanta, GA"
+    },
+    {
+      "name": "BEDROOMS",
+      "description": "Number of bedrooms",
+      "example": "4"
+    },
+    {
+      "name": "BATHROOMS",
+      "description": "Number of bathrooms",
+      "example": "3.5"
+    },
+    {
+      "name": "SQUARE_FOOTAGE",
+      "description": "Total square footage",
+      "example": "2,800"
+    },
+    {
+      "name": "KEY_FEATURES",
+      "description": "Notable features and upgrades",
+      "example": "chef's kitchen with quartz countertops, rooftop deck, two-car garage, smart home system"
+    },
+    {
+      "name": "PRICE_RANGE",
+      "description": "Listing price or price range",
+      "example": "$625,000"
+    }
   ],
-  "tips": ["Include specific upgrades and finishes rather than generic descriptions for more compelling output", "Mention nearby amenities and schools in the KEY_FEATURES field to strengthen neighborhood appeal", "Run the output through your brokerage compliance check before posting to MLS"],
+  "tips": [
+    "Include specific upgrades and finishes rather than generic descriptions for more compelling output",
+    "Mention nearby amenities and schools in the KEY_FEATURES field to strengthen neighborhood appeal",
+    "Run the output through your brokerage compliance check before posting to MLS"
+  ],
+  "relatedGuide": {
+    "title": "AI Slop: The 19 Writing Patterns That Scream ChatGPT",
+    "url": "/guides/remove-ai-slop-from-writing/"
+  },
   "exampleOutput": "Headline: Elevated Buckhead Living — Stunning 4BR Townhouse with Rooftop Retreat\n\nWake up to skyline views in this meticulously designed 2,800 sq ft townhouse in the heart of Buckhead. The chef's kitchen features quartz countertops, premium stainless appliances, and a waterfall island perfect for entertaining. Four spacious bedrooms across three thoughtfully designed floors offer privacy and flexibility for families or professionals working from home. Step outside to your private rooftop deck — ideal for morning coffee or evening gatherings under the Atlanta sky...",
   "isFeatured": false,
   "dateAdded": "2026-04-02",

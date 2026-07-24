@@ -5,16 +5,46 @@
   "description": "This prompt creates TikTok scripts engineered for the platform's unique attention dynamics, where the first second determines whether someone watches or scrolls. The three-hook approach gives you options to test the most effective opener, while the breath-length sentence structure ensures natural delivery on camera. Visual cues and text overlay strategies are included because TikTok is a visual-first platform where 40% of viewers watch without sound. The pacing notes help creators who tend to speak monotonously on camera vary their energy. Whether you are building a personal brand, promoting a product, or growing an educational account, this prompt adapts to any niche while following the patterns that drive viral reach.",
   "tool": "chatgpt",
   "category": "marketing",
-  "tags": ["tiktok", "video-script", "short-form-video", "social-media", "content-creation"],
+  "tags": [
+    "tiktok",
+    "video-script",
+    "short-form-video",
+    "social-media",
+    "content-creation"
+  ],
   "difficulty": "beginner",
   "promptType": "text",
   "variables": [
-    { "name": "VIDEO_TOPIC", "description": "What the video is about", "example": "3 AI tools that replace a $5,000/month marketing team" },
-    { "name": "NICHE", "description": "Your account's content niche", "example": "AI tools and automation for small business owners" },
-    { "name": "AUDIENCE", "description": "Who watches your content", "example": "entrepreneurs and solopreneurs aged 25-40 who want to save time and money" },
-    { "name": "VIDEO_FORMAT", "description": "The style of TikTok video", "example": "talking head with text overlays and screen recordings" }
+    {
+      "name": "VIDEO_TOPIC",
+      "description": "What the video is about",
+      "example": "3 AI tools that replace a $5,000/month marketing team"
+    },
+    {
+      "name": "NICHE",
+      "description": "Your account's content niche",
+      "example": "AI tools and automation for small business owners"
+    },
+    {
+      "name": "AUDIENCE",
+      "description": "Who watches your content",
+      "example": "entrepreneurs and solopreneurs aged 25-40 who want to save time and money"
+    },
+    {
+      "name": "VIDEO_FORMAT",
+      "description": "The style of TikTok video",
+      "example": "talking head with text overlays and screen recordings"
+    }
   ],
-  "tips": ["Film 3 versions with different hooks and post the one where your watch-through rate is highest", "Mention trending sounds or formats you have seen performing well so ChatGPT can adapt the script", "Ask for a 'stitch-bait' version that other creators will want to react to for organic reach"],
+  "tips": [
+    "Film 3 versions with different hooks and post the one where your watch-through rate is highest",
+    "Mention trending sounds or formats you have seen performing well so ChatGPT can adapt the script",
+    "Ask for a 'stitch-bait' version that other creators will want to react to for organic reach"
+  ],
+  "relatedGuide": {
+    "title": "AI Slop: The 19 Writing Patterns That Scream ChatGPT",
+    "url": "/guides/remove-ai-slop-from-writing/"
+  },
   "exampleOutput": "## HOOK OPTIONS (pick one)\n1. [Look directly at camera] \"Stop paying $5K a month for marketing.\" (Confrontational — highest predicted retention)\n2. [Point at text overlay] \"These 3 AI tools replaced my entire marketing team.\" (Proof-based)\n3. [Shake head] \"I can't believe this is free.\" (Curiosity gap)\n\n## BODY (30 seconds)\n[Cut to screen recording]\n\"Tool number one — [SLOW DOWN] and this one's a game changer for content.\"\n\n[Text overlay: \"1. CASTMAGIC\"]\n\"You paste in one podcast episode... [snap] ...it gives you a blog post, social captions, an email newsletter, AND a quote graphic.\"\n\n[Quick cut — new angle]\n\"That used to take my VA six hours. Now it takes forty-five seconds.\"\n\n[Text overlay: \"2. INSTANTLY\"]\n\"Cold email that doesn't feel cold...\"\n\n## CTA\n[Direct to camera, lean in]\n\"Follow for more tools that save you thousands. I post three every week.\"\n\n## CAPTION OPTIONS\n1. \"My marketing team is three AI tools and a laptop\" #aitools #marketing\n2. \"$5K/month → $0/month. Same results.\" #entrepreneur #automation",
   "isFeatured": false,
   "dateAdded": "2026-04-02",

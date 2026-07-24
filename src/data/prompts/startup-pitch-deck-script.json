@@ -5,16 +5,46 @@
   "description": "A pitch deck script is more than slides; it is a performance narrative that guides investors through your story. This prompt generates both the visual content framework and the verbal delivery script for each slide, ensuring your pitch flows naturally and builds momentum toward the ask. The speaker notes are especially valuable for founders who know their business deeply but struggle to distill it into a compelling 10-minute narrative. The structure follows the format that top-tier VCs like Sequoia and a16z publicly recommend.",
   "tool": "chatgpt",
   "category": "business",
-  "tags": ["pitch-deck", "startup", "fundraising", "investor-presentation", "venture-capital"],
+  "tags": [
+    "pitch-deck",
+    "startup",
+    "fundraising",
+    "investor-presentation",
+    "venture-capital"
+  ],
   "difficulty": "advanced",
   "promptType": "text",
   "variables": [
-    { "name": "COMPANY_NAME", "description": "Your startup name", "example": "ParkSense" },
-    { "name": "COMPANY_DESCRIPTION", "description": "One-sentence description of your company", "example": "an AI-powered platform that helps cities optimize parking infrastructure and reduce urban congestion by 40%" },
-    { "name": "FUNDING_AMOUNT", "description": "How much you are raising", "example": "$5M" },
-    { "name": "FUNDING_ROUND", "description": "What round of funding", "example": "Series A" }
+    {
+      "name": "COMPANY_NAME",
+      "description": "Your startup name",
+      "example": "ParkSense"
+    },
+    {
+      "name": "COMPANY_DESCRIPTION",
+      "description": "One-sentence description of your company",
+      "example": "an AI-powered platform that helps cities optimize parking infrastructure and reduce urban congestion by 40%"
+    },
+    {
+      "name": "FUNDING_AMOUNT",
+      "description": "How much you are raising",
+      "example": "$5M"
+    },
+    {
+      "name": "FUNDING_ROUND",
+      "description": "What round of funding",
+      "example": "Series A"
+    }
   ],
-  "tips": ["Customize the traction slide with your real metrics for maximum impact", "Practice the speaker notes out loud to find your natural delivery rhythm", "Ask for a version tailored to specific investor profiles for warm introductions"],
+  "tips": [
+    "Customize the traction slide with your real metrics for maximum impact",
+    "Practice the speaker notes out loud to find your natural delivery rhythm",
+    "Ask for a version tailored to specific investor profiles for warm introductions"
+  ],
+  "relatedGuide": {
+    "title": "ChatGPT for Business: 20 Prompts That Save Hours Every Week",
+    "url": "/guides/chatgpt-for-business/"
+  },
   "exampleOutput": "## Slide 1: The Problem\n**Title:** 'Every Driver Wastes 17 Minutes Per Trip Searching for Parking'\n**Bullets:**\n- 30% of urban traffic is drivers circling for parking (INRIX study)\n- Cities lose $20B annually in productivity from parking-related congestion\n- Current smart parking solutions require $50K+ per-lot hardware installation\n\n**Speaker Notes:** 'Picture your last trip downtown. You arrived at your destination in 12 minutes, then spent another 17 circling blocks looking for parking. That is not a personal problem; it is a $20 billion urban infrastructure crisis...'",
   "isFeatured": false,
   "dateAdded": "2026-04-01",

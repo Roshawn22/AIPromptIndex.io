@@ -5,16 +5,45 @@
   "description": "Planning a month of social media content is one of the most time-consuming marketing tasks. This prompt generates a complete 30-day calendar with platform-specific content ideas, posting schedules, and hashtag strategies. The 40/30/30 content mix follows proven engagement formulas that prevent your feed from becoming too salesy. It includes trending format suggestions to keep your content fresh and UGC prompts to boost community engagement. Use it as a starting framework that your team can customize and refine.",
   "tool": "gemini",
   "category": "marketing",
-  "tags": ["social-media", "content-calendar", "marketing-strategy", "hashtags"],
+  "tags": [
+    "social-media",
+    "content-calendar",
+    "marketing-strategy",
+    "hashtags"
+  ],
   "difficulty": "beginner",
   "promptType": "text",
   "variables": [
-    { "name": "BRAND_NAME", "description": "Your brand or business name", "example": "Bloom Botanicals" },
-    { "name": "BUSINESS_TYPE", "description": "What your business does", "example": "organic skincare brand" },
-    { "name": "PLATFORMS", "description": "Social media platforms to plan for", "example": "Instagram, TikTok, and LinkedIn" },
-    { "name": "AUDIENCE", "description": "Your target audience", "example": "women aged 25-40 interested in clean beauty and wellness" }
+    {
+      "name": "BRAND_NAME",
+      "description": "Your brand or business name",
+      "example": "Bloom Botanicals"
+    },
+    {
+      "name": "BUSINESS_TYPE",
+      "description": "What your business does",
+      "example": "organic skincare brand"
+    },
+    {
+      "name": "PLATFORMS",
+      "description": "Social media platforms to plan for",
+      "example": "Instagram, TikTok, and LinkedIn"
+    },
+    {
+      "name": "AUDIENCE",
+      "description": "Your target audience",
+      "example": "women aged 25-40 interested in clean beauty and wellness"
+    }
   ],
-  "tips": ["Add seasonal events or product launches to get more relevant content suggestions", "Request platform-specific adaptations of the same content theme to maximize efficiency", "Use the hashtag suggestions as starting points and verify their current popularity"],
+  "tips": [
+    "Add seasonal events or product launches to get more relevant content suggestions",
+    "Request platform-specific adaptations of the same content theme to maximize efficiency",
+    "Use the hashtag suggestions as starting points and verify their current popularity"
+  ],
+  "relatedGuide": {
+    "title": "AI Slop: The 19 Writing Patterns That Scream ChatGPT",
+    "url": "/guides/remove-ai-slop-from-writing/"
+  },
   "exampleOutput": "Day 1 | Instagram Carousel | '5 Ingredients You Should Never See on a Skincare Label' | Educational breakdown of harmful chemicals with clean alternatives. Use brand product photos as examples of clean formulations. | #CleanBeauty #OrganicSkincare #SkincareEducation #ToxinFree #GreenBeauty | 11:00 AM EST\n\nDay 2 | TikTok Reel | 'My Morning Skincare Routine in 60 Seconds' | Quick tutorial showing product application order with before/after results.",
   "isFeatured": true,
   "dateAdded": "2026-04-01",
