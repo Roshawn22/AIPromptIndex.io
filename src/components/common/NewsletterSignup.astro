@@ -11,9 +11,19 @@ const {
   compact = false,
 } = Astro.props;
 
+const newsletterUrl = (
+  import.meta.env.PUBLIC_NEWSLETTER_URL as string | undefined
+)?.trim();
+
 const beehiivPublicationId = (
   import.meta.env.PUBLIC_BEEHIIV_PUBLICATION_ID as string | undefined
 )?.trim();
+
+// Prefer an explicit newsletter URL. Beehiiv's classic slim embed 404s for this
+// white-labeled publication (no live subscribe forms), so only use the embed when
+// no PUBLIC_NEWSLETTER_URL is configured.
+const useEmbed = !newsletterUrl && !!beehiivPublicationId;
+const subscribeHref = newsletterUrl || null;
 ---
 
 <section data-reveal class:list={[
@@ -51,7 +61,22 @@ const beehiivPublicationId = (
         ]}>{subheading}</p>
       </div>
 
-      {beehiivPublicationId ? (
+      {subscribeHref ? (
+        <div class:list={['nl-stagger nl-stagger-4 mx-auto text-center', !compact && 'mt-6 max-w-sm', compact && 'mt-4']}>
+          <a
+            href={subscribeHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex min-h-11 w-full items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-accent)] px-5 py-2.5 text-sm font-[var(--font-display)] font-semibold text-white transition-colors hover:bg-[var(--color-accent-hover)]"
+            data-newsletter-cta="true"
+          >
+            Subscribe free
+          </a>
+          <p class="mt-3 text-center text-xs text-[var(--color-text-muted)]">
+            Opens the Indexed newsletter. No spam — unsubscribe anytime.
+          </p>
+        </div>
+      ) : useEmbed ? (
         <div class:list={['nl-stagger nl-stagger-4 mx-auto', !compact && 'mt-6 max-w-sm', compact && 'mt-4']}>
           <div class="surface-glass-ui overflow-hidden rounded-[var(--radius-md)] p-1">
           <iframe
@@ -75,7 +100,7 @@ const beehiivPublicationId = (
           </div>
 
           <p class="mt-3 text-center text-xs text-[var(--color-text-muted)]">
-            Add `PUBLIC_BEEHIIV_PUBLICATION_ID` to re-enable subscriptions.
+            Add `PUBLIC_NEWSLETTER_URL` to re-enable subscriptions.
           </p>
         </div>
       )}

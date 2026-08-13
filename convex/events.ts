@@ -7,6 +7,7 @@ export const track = mutation({
     promptSlug: v.optional(v.string()),
     metadata: v.optional(v.string()),
   },
+  returns: v.null(),
   handler: async (ctx, args) => {
     await ctx.db.insert("analyticsEvents", {
       type: args.type,
@@ -14,5 +15,6 @@ export const track = mutation({
       metadata: args.metadata,
       createdAt: Date.now(),
     });
+    return null;
   },
 });

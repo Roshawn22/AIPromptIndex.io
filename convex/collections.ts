@@ -11,6 +11,7 @@ export const savePrompt = mutation({
     promptSlug: v.string(),
     collectionName: v.optional(v.string()),
   },
+  returns: v.id("userCollections"),
   handler: async (ctx, args) => {
     const identity = await requireIdentity(ctx, "Must be signed in to save prompts");
     const clerkUserId = identity.subject;
@@ -42,6 +43,7 @@ export const removePrompt = mutation({
   args: {
     promptSlug: v.string(),
   },
+  returns: v.null(),
   handler: async (ctx, args) => {
     const identity = await requireIdentity(
       ctx,
@@ -59,6 +61,7 @@ export const removePrompt = mutation({
     if (existing) {
       await ctx.db.delete(existing._id);
     }
+    return null;
   },
 });
 
@@ -69,6 +72,7 @@ export const isPromptSaved = query({
   args: {
     promptSlug: v.string(),
   },
+  returns: v.boolean(),
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) return false;
@@ -89,6 +93,7 @@ export const isPromptSaved = query({
  */
 export const getUserFavorites = query({
   args: {},
+  returns: v.array(v.string()),
   handler: async (ctx) => {
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) return [];

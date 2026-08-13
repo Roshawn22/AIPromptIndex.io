@@ -3,10 +3,11 @@
  * Uses Convex for real-time vote counts and visitor fingerprint for dedup.
  * Gracefully degrades if Convex is not configured.
  */
-import { useState, useEffect, useCallback, useMemo } from 'react';
-import { ConvexReactClient, useQuery, useMutation, ConvexProvider } from 'convex/react';
+import { useState, useCallback, useMemo } from 'react';
+import { useQuery, useMutation, ConvexProvider } from 'convex/react';
 import { api } from '../../lib/convexApi';
 import { getVisitorId } from '../../lib/visitor';
+import { getConvexClient } from '../../lib/convex';
 
 interface VoteButtonsProps {
   promptSlug: string;
@@ -72,17 +73,7 @@ function VoteButtonsInner({ promptSlug }: VoteButtonsProps) {
 }
 
 export default function VoteButtons({ promptSlug }: VoteButtonsProps) {
-  const [client, setClient] = useState<ConvexReactClient | null>(null);
-
-  useEffect(() => {
-    const url = (import.meta as any).env?.PUBLIC_CONVEX_URL as string | undefined;
-    if (!url || url === 'https://your-convex-url.convex.cloud') return;
-    try {
-      setClient(new ConvexReactClient(url));
-    } catch {
-      // Convex not configured — graceful degradation
-    }
-  }, []);
+  const [client] = useState(() => getConvexClient());
 
   if (!client) {
     // Fallback: static vote display (no Convex)

@@ -2,6 +2,39 @@ import { v } from "convex/values";
 import { query, mutation } from "./_generated/server";
 import { requireAdminIdentity } from "./lib/auth";
 
+const difficulty = v.union(
+  v.literal("beginner"),
+  v.literal("intermediate"),
+  v.literal("advanced"),
+);
+
+const moderationStatus = v.union(
+  v.literal("pending"),
+  v.literal("approved"),
+  v.literal("rejected"),
+  v.literal("spam"),
+);
+
+const promptSubmissionDoc = v.object({
+  _id: v.id("promptSubmissions"),
+  _creationTime: v.number(),
+  title: v.string(),
+  promptText: v.string(),
+  tool: v.string(),
+  category: v.string(),
+  difficulty: v.string(),
+  description: v.optional(v.string()),
+  tags: v.optional(v.string()),
+  authorName: v.optional(v.string()),
+  authorEmail: v.optional(v.string()),
+  status: moderationStatus,
+  reviewNotes: v.optional(v.string()),
+  submittedAt: v.number(),
+  reviewedAt: v.optional(v.number()),
+  visitorFingerprint: v.optional(v.string()),
+  sourceIp: v.optional(v.string()),
+});
+
 function normalizeVisitorFingerprint(visitorFingerprint: string): string {
   const normalizedFingerprint = visitorFingerprint.trim();
   if (!normalizedFingerprint) {
@@ -16,13 +49,17 @@ export const submit = mutation({
     promptText: v.string(),
     tool: v.string(),
     category: v.string(),
-    difficulty: v.string(),
+    difficulty,
     description: v.optional(v.string()),
     tags: v.optional(v.string()),
     authorName: v.optional(v.string()),
     authorEmail: v.optional(v.string()),
     visitorFingerprint: v.string(),
   },
+  returns: v.object({
+    id: v.id("promptSubmissions"),
+    status: v.literal("pending"),
+  }),
   handler: async (ctx, args) => {
     const visitorFingerprint = normalizeVisitorFingerprint(args.visitorFingerprint);
 
@@ -79,12 +116,13 @@ export const submit = mutation({
       visitorFingerprint,
     });
 
-    return { id, status: "pending" };
+    return { id, status: "pending" as const };
   },
 });
 
 export const listPending = query({
   args: {},
+  returns: v.array(promptSubmissionDoc),
   handler: async (ctx) => {
     await requireAdminIdentity(ctx);
 

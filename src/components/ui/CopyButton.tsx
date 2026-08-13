@@ -1,11 +1,12 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
-import { ConvexReactClient, useMutation, ConvexProvider } from 'convex/react';
+import { useMutation, ConvexProvider } from 'convex/react';
 import { api } from '../../lib/convexApi';
 import LottieAccent from '../motion/LottieAccent';
 import checkmarkData from '../../assets/lottie/checkmark.json';
 import { trackPromptCopy } from '../../lib/analytics';
 import { copyTextToClipboard } from '../../lib/clipboard';
+import { getConvexClient } from '../../lib/convex';
 
 interface CopyButtonProps {
   text: string;
@@ -18,7 +19,9 @@ interface CopyButtonProps {
   onCopy?: () => void;
 }
 
-function CopyButtonInner({
+type TrackFn = ((args: { type: string; promptSlug?: string }) => Promise<unknown>) | null;
+
+function CopyButtonUI({
   text,
   label = 'Copy',
   size = 'md',
@@ -27,12 +30,14 @@ function CopyButtonInner({
   tool,
   category,
   onCopy,
-  trackEnabled,
-}: CopyButtonProps & { trackEnabled: boolean }) {
+  track,
+}: CopyButtonProps & { track: TrackFn }) {
   const [copied, setCopied] = useState(false);
-  const track = trackEnabled ? useMutation(api.events.track) : null;
   const prefersReducedMotion = useReducedMotion();
   const motionDisabled = !!prefersReducedMotion;
+  // Use the visible label as the accessible name — do not prefix with "Copy "
+  // (call sites already pass "Copy Prompt").
+  const resolvedAriaLabel = copied ? 'Copied!' : label;
 
   const handleCopy = useCallback(async () => {
     const didCopy = await copyTextToClipboard(text);
@@ -43,7 +48,7 @@ function CopyButtonInner({
 
     if (track && promptSlug) {
       try {
-        track({ type: 'copy', promptSlug });
+        await track({ type: 'copy', promptSlug });
       } catch {
         // Non-critical
       }
@@ -76,7 +81,7 @@ function CopyButtonInner({
       type="button"
       onClick={handleCopy}
       className={`inline-flex items-center justify-center font-[var(--font-display)] font-medium rounded-[var(--radius-md)] border transition-all duration-200 cursor-pointer overflow-hidden ${sizeStyles[size]} ${variantStyles[variant]}`}
-      aria-label={copied ? 'Copied!' : `Copy ${label}`}
+      aria-label={resolvedAriaLabel}
     >
       <AnimatePresence mode="wait" initial={false}>
         {copied ? (
@@ -112,26 +117,21 @@ function CopyButtonInner({
   );
 }
 
-export default function CopyButton(props: CopyButtonProps) {
-  const [client, setClient] = useState<ConvexReactClient | null>(null);
+function CopyButtonWithTracking(props: CopyButtonProps) {
+  const track = useMutation(api.events.track);
+  return <CopyButtonUI {...props} track={track} />;
+}
 
-  useEffect(() => {
-    const url = (import.meta as any).env?.PUBLIC_CONVEX_URL as string | undefined;
-    if (!url || url === 'https://your-convex-url.convex.cloud') return;
-    try {
-      setClient(new ConvexReactClient(url));
-    } catch {
-      // Convex not configured
-    }
-  }, []);
+export default function CopyButton(props: CopyButtonProps) {
+  const [client] = useState(() => getConvexClient());
 
   if (!client) {
-    return <CopyButtonInner {...props} trackEnabled={false} />;
+    return <CopyButtonUI {...props} track={null} />;
   }
 
   return (
     <ConvexProvider client={client}>
-      <CopyButtonInner {...props} trackEnabled={true} />
+      <CopyButtonWithTracking {...props} />
     </ConvexProvider>
   );
 }

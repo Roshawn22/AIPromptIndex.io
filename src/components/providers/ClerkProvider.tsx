@@ -1,21 +1,27 @@
 /**
- * Clerk auth provider for React islands in a static Astro site.
- * If PUBLISHABLE_KEY is not set, renders children without auth (graceful degradation).
+ * Clerk auth provider for Astro React islands.
+ * Skips mounting when the key is missing or unusable on this origin
+ * (e.g. pk_live_ on localhost).
  */
 import { ClerkProvider as BaseClerkProvider, SignedIn, SignedOut, UserButton, SignInButton } from '@clerk/clerk-react';
 import { type ReactNode, useMemo } from 'react';
+import {
+  getClerkPublishableKey,
+  isClerkSupportedOnThisOrigin,
+} from '../../lib/clerkEnv';
 
 interface Props {
   children: ReactNode;
 }
 
 export default function ClerkProvider({ children }: Props) {
-  const publishableKey = useMemo(() => {
-    if (typeof window === 'undefined') return null;
-    return (import.meta as any).env?.PUBLIC_CLERK_PUBLISHABLE_KEY as string | undefined;
-  }, []);
+  const publishableKey = useMemo(() => getClerkPublishableKey(), []);
+  const clerkSupported = useMemo(
+    () => isClerkSupportedOnThisOrigin(publishableKey),
+    [publishableKey],
+  );
 
-  if (!publishableKey) {
+  if (!publishableKey || !clerkSupported) {
     return <>{children}</>;
   }
 

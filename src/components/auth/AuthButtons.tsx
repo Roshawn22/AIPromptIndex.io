@@ -1,6 +1,7 @@
 /**
  * AuthButtons — React island that shows Sign In button or User avatar.
- * Uses Clerk for authentication. Gracefully degrades if Clerk is not configured.
+ * Uses Clerk for authentication. Gracefully degrades if Clerk is not configured
+ * or live keys are used on localhost (Clerk rejects pk_live outside production domain).
  */
 import { useMemo } from 'react';
 import {
@@ -10,6 +11,10 @@ import {
   UserButton,
   SignInButton,
 } from '@clerk/clerk-react';
+import {
+  getClerkPublishableKey,
+  isClerkSupportedOnThisOrigin,
+} from '../../lib/clerkEnv';
 
 function AuthButtonsInner() {
   return (
@@ -42,13 +47,14 @@ function AuthButtonsInner() {
 }
 
 export default function AuthButtons() {
-  const publishableKey = useMemo(() => {
-    if (typeof window === 'undefined') return null;
-    return (import.meta as any).env?.PUBLIC_CLERK_PUBLISHABLE_KEY as string | undefined;
-  }, []);
+  const publishableKey = useMemo(() => getClerkPublishableKey(), []);
+  const clerkSupported = useMemo(
+    () => isClerkSupportedOnThisOrigin(publishableKey),
+    [publishableKey],
+  );
 
-  if (!publishableKey) {
-    // No Clerk configured — don't render auth buttons
+  if (!publishableKey || !clerkSupported) {
+    // No Clerk configured, or live keys on localhost — skip to avoid console errors
     return null;
   }
 

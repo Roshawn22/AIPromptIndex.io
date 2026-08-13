@@ -1,15 +1,24 @@
 /**
- * Convex client singleton for use across React islands.
- * In a static Astro site, we initialize the client on the browser side only.
+ * Shared Convex client for Astro React islands.
+ * Builds eagerly from PUBLIC_CONVEX_URL so the first paint (SSR + hydrate)
+ * can render the real UI instead of a temporary empty state.
  */
 import { ConvexReactClient } from 'convex/react';
 
+const PLACEHOLDER_URL = 'https://your-convex-url.convex.cloud';
+
 let client: ConvexReactClient | null = null;
 
-export function getConvexClient(): ConvexReactClient | null {
-  if (typeof window === 'undefined') return null;
+export function getConvexUrl(): string | null {
+  const url = (
+    import.meta as ImportMeta & { env?: Record<string, string | undefined> }
+  ).env?.PUBLIC_CONVEX_URL;
+  if (!url || url === PLACEHOLDER_URL) return null;
+  return url;
+}
 
-  const url = (import.meta as any).env?.PUBLIC_CONVEX_URL as string | undefined;
+export function getConvexClient(): ConvexReactClient | null {
+  const url = getConvexUrl();
   if (!url) return null;
 
   if (!client) {

@@ -1,0 +1,339 @@
+#!/usr/bin/env bash
+# Launch, doctor, and tear down a disposable AIPromptIndex verification instance.
+# Never kill by process name. Only stop the pid recorded in this run's state file.
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SKILL_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+REPO_ROOT="$(cd "$SKILL_DIR/../../.." && pwd)"
+RUN_DIR="${VERIFY_RUN_DIR:-$SKILL_DIR/.run}"
+STATE_FILE="$RUN_DIR/state"
+LOG_FILE="$RUN_DIR/astro.log"
+DEFAULT_PORT="${VERIFY_PORT:-4327}"
+HOST="127.0.0.1"
+READY_TIMEOUT_SECONDS="${VERIFY_READY_TIMEOUT:-90}"
+
+usage() {
+  cat <<'EOF'
+Usage: control-aipromptindex <command>
+
+Commands:
+  launch [--port N]   Start Astro on 127.0.0.1 (default port 4327) and wait until ready
+  doctor              Read-only health check for the instance this helper started
+  url                 Print the instance origin (http://127.0.0.1:<port>)
+  status              Print pid, port, url, and log path
+  stop                Stop only the pid recorded in this run's state file
+
+Environment:
+  VERIFY_PORT              Override default port (4327)
+  VERIFY_RUN_DIR           Override state directory
+  VERIFY_READY_TIMEOUT     Seconds to wait for ready (default 90)
+
+Examples:
+  .cursor/skills/verify-aipromptindex/scripts/control-aipromptindex launch
+  .cursor/skills/verify-aipromptindex/scripts/control-aipromptindex doctor
+  .cursor/skills/verify-aipromptindex/scripts/control-aipromptindex stop
+EOF
+}
+
+die() {
+  echo "error: $*" >&2
+  exit 1
+}
+
+require_repo() {
+  [[ -f "$REPO_ROOT/package.json" ]] || die "package.json not found at $REPO_ROOT"
+  [[ -d "$REPO_ROOT/node_modules" ]] || die "node_modules missing. Run npm install in $REPO_ROOT"
+}
+
+read_state() {
+  [[ -f "$STATE_FILE" ]] || die "no verification instance. Run launch first ($STATE_FILE missing)"
+  # shellcheck disable=SC1090
+  source "$STATE_FILE"
+  [[ -n "${PID:-}" && -n "${PORT:-}" && -n "${URL:-}" ]] || die "state file is incomplete: $STATE_FILE"
+}
+
+pid_alive() {
+  local pid="$1"
+  [[ -n "$pid" ]] || return 1
+  kill -0 "$pid" 2>/dev/null
+}
+
+port_pid() {
+  local port="$1"
+  lsof -nP -iTCP:"$port" -sTCP:LISTEN -t 2>/dev/null | head -n 1 || true
+}
+
+stop_pid() {
+  local pid="$1"
+  [[ -n "$pid" ]] || return 0
+  if ! pid_alive "$pid"; then
+    return 0
+  fi
+  kill "$pid" 2>/dev/null || true
+  local waited=0
+  while pid_alive "$pid" && (( waited < 10 )); do
+    sleep 1
+    waited=$((waited + 1))
+  done
+  if pid_alive "$pid"; then
+    kill -9 "$pid" 2>/dev/null || true
+  fi
+}
+
+write_state() {
+  cat > "$STATE_FILE" <<EOF
+PID=$1
+WRAPPER_PID=$2
+PORT=$3
+HOST=$HOST
+URL=$4
+STARTED_AT=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+LOG_FILE=$LOG_FILE
+REPO_ROOT=$REPO_ROOT
+EOF
+}
+
+wait_ready() {
+  local url="$1"
+  local elapsed=0
+  while (( elapsed < READY_TIMEOUT_SECONDS )); do
+    if curl -fsS --max-time 2 "$url/" >/dev/null 2>&1; then
+      return 0
+    fi
+    sleep 1
+    elapsed=$((elapsed + 1))
+  done
+  return 1
+}
+
+cmd_launch() {
+  require_repo
+  mkdir -p "$RUN_DIR"
+  local port="$DEFAULT_PORT"
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --port)
+        [[ $# -ge 2 ]] || die "--port requires a value"
+        port="$2"
+        shift 2
+        ;;
+      *)
+        die "unknown launch argument: $1"
+        ;;
+    esac
+  done
+
+  if [[ -f "$STATE_FILE" ]]; then
+    # shellcheck disable=SC1090
+    source "$STATE_FILE"
+    if [[ -n "${PID:-}" ]] && pid_alive "$PID"; then
+      die "verification instance already running (pid $PID url ${URL:-unknown}). Run stop first."
+    fi
+    rm -f "$STATE_FILE"
+  fi
+
+  local existing
+  existing="$(port_pid "$port")"
+  if [[ -n "$existing" ]]; then
+    die "port $port is already in use by pid $existing. Pass --port with a free port, or stop that process if it is yours."
+  fi
+
+  local url="http://$HOST:$port"
+  : > "$LOG_FILE"
+
+  (
+    cd "$REPO_ROOT"
+    exec npx astro dev --host "$HOST" --port "$port"
+  ) >>"$LOG_FILE" 2>&1 &
+  local wrapper_pid=$!
+  write_state "$wrapper_pid" "$wrapper_pid" "$port" "$url"
+
+  if ! wait_ready "$url"; then
+    echo "error: Astro did not become ready at $url within ${READY_TIMEOUT_SECONDS}s" >&2
+    echo "last log lines:" >&2
+    tail -n 40 "$LOG_FILE" >&2 || true
+    local listener
+    listener="$(port_pid "$port")"
+    stop_pid "$wrapper_pid"
+    stop_pid "$listener"
+    rm -f "$STATE_FILE"
+    exit 1
+  fi
+
+  local listener_pid
+  listener_pid="$(port_pid "$port")"
+  if [[ -z "$listener_pid" ]]; then
+    stop_pid "$wrapper_pid"
+    rm -f "$STATE_FILE"
+    die "server responded but no process is listening on $port"
+  fi
+  write_state "$listener_pid" "$wrapper_pid" "$port" "$url"
+
+  echo "launched pid=$listener_pid wrapper=$wrapper_pid url=$url log=$LOG_FILE"
+}
+
+cmd_doctor() {
+  read_state
+  local ok=1
+
+  echo "url=$URL"
+  echo "pid=$PID"
+  echo "port=$PORT"
+  echo "log=$LOG_FILE"
+
+  if pid_alive "$PID"; then
+    echo "process=alive"
+  else
+    echo "process=dead"
+    ok=0
+  fi
+
+  local listener
+  listener="$(port_pid "$PORT")"
+  if [[ "$listener" == "$PID" ]]; then
+    echo "port_owner=ours"
+  elif [[ -n "$listener" ]]; then
+    echo "port_owner=other pid=$listener"
+    ok=0
+  else
+    echo "port_owner=none"
+    ok=0
+  fi
+
+  local home_code
+  home_code="$(curl -sS -o /tmp/aipromptindex-doctor-home.html -w '%{http_code}' --max-time 5 "$URL/" || echo 000)"
+  echo "home_status=$home_code"
+  if [[ "$home_code" != "200" ]]; then
+    ok=0
+  elif ! grep -q "The AI Prompt Library" /tmp/aipromptindex-doctor-home.html; then
+    echo "home_identity=missing (expected heading 'The AI Prompt Library')"
+    ok=0
+  else
+    echo "home_identity=ok"
+  fi
+
+  local prompts_code
+  prompts_code="$(curl -sS -o /tmp/aipromptindex-doctor-prompts.html -w '%{http_code}' --max-time 5 "$URL/prompts/" || echo 000)"
+  echo "prompts_status=$prompts_code"
+  if [[ "$prompts_code" != "200" ]] || ! grep -q "All Prompts" /tmp/aipromptindex-doctor-prompts.html; then
+    echo "prompts_identity=missing"
+    ok=0
+  else
+    echo "prompts_identity=ok"
+  fi
+
+  local detail_code
+  detail_code="$(curl -sS -o /tmp/aipromptindex-doctor-detail.html -w '%{http_code}' --max-time 5 "$URL/prompts/meeting-notes-summarizer/" || echo 000)"
+  echo "fixture_status=$detail_code"
+  if [[ "$detail_code" != "200" ]] || ! grep -q "Meeting Notes Summarizer" /tmp/aipromptindex-doctor-detail.html; then
+    echo "fixture=missing (expected /prompts/meeting-notes-summarizer/)"
+    ok=0
+  else
+    echo "fixture=ok slug=meeting-notes-summarizer"
+  fi
+
+  local index_code
+  index_code="$(curl -sS -o /tmp/aipromptindex-doctor-search.json -w '%{http_code}' --max-time 5 "$URL/search-index.json" || echo 000)"
+  echo "search_index_status=$index_code"
+  if [[ "$index_code" != "200" ]]; then
+    ok=0
+  elif ! grep -q "meeting-notes-summarizer" /tmp/aipromptindex-doctor-search.json; then
+    echo "search_index=missing fixture slug"
+    ok=0
+  else
+    echo "search_index=ok"
+  fi
+
+  # Convex URL may live in .env or .env.local (Astro loads both).
+  local convex_configured=0
+  local convex_source=none
+  if [[ -f "$REPO_ROOT/.env.local" ]] && grep -qE '^PUBLIC_CONVEX_URL=.+' "$REPO_ROOT/.env.local"; then
+    convex_configured=1
+    convex_source=env.local
+  elif [[ -f "$REPO_ROOT/.env" ]] && grep -qE '^PUBLIC_CONVEX_URL=.+' "$REPO_ROOT/.env"; then
+    convex_configured=1
+    convex_source=env
+  fi
+  if [[ "$convex_configured" -eq 1 ]]; then
+    echo "convex=configured source=$convex_source (do not vote, save, or submit during verification — that hits the shared backend)"
+  else
+    echo "convex=unconfigured (vote/save/submit UI may be hidden)"
+  fi
+
+  if [[ "$ok" -eq 1 ]]; then
+    echo "doctor=pass"
+    return 0
+  fi
+  echo "doctor=fail"
+  return 1
+}
+
+cmd_url() {
+  read_state
+  printf '%s\n' "$URL"
+}
+
+cmd_status() {
+  if [[ ! -f "$STATE_FILE" ]]; then
+    echo "instance=none"
+    return 0
+  fi
+  read_state
+  echo "pid=$PID"
+  echo "port=$PORT"
+  echo "url=$URL"
+  echo "log=$LOG_FILE"
+  if pid_alive "$PID"; then
+    echo "process=alive"
+  else
+    echo "process=dead"
+  fi
+}
+
+cmd_stop() {
+  if [[ ! -f "$STATE_FILE" ]]; then
+    echo "stopped=noop (no state file)"
+    return 0
+  fi
+  # shellcheck disable=SC1090
+  source "$STATE_FILE"
+  local listener="${PID:-}"
+  local wrapper="${WRAPPER_PID:-}"
+  local port_now="${PORT:-}"
+  stop_pid "$listener"
+  if [[ -n "$wrapper" && "$wrapper" != "$listener" ]]; then
+    stop_pid "$wrapper"
+  fi
+  if [[ -n "$port_now" ]]; then
+    local leftover
+    leftover="$(port_pid "$port_now")"
+    if [[ -n "$leftover" && ( "$leftover" == "$listener" || "$leftover" == "$wrapper" ) ]]; then
+      stop_pid "$leftover"
+    fi
+    leftover="$(port_pid "$port_now")"
+    if [[ -n "$leftover" && ( "$leftover" == "$listener" || "$leftover" == "$wrapper" ) ]]; then
+      echo "error: port $port_now still listening on pid $leftover after stop" >&2
+      rm -f "$STATE_FILE"
+      exit 1
+    fi
+  fi
+  rm -f "$STATE_FILE"
+  echo "stopped pid=${listener:-none} wrapper=${wrapper:-none}"
+}
+
+main() {
+  local cmd="${1:-}"
+  shift || true
+  case "$cmd" in
+    launch) cmd_launch "$@" ;;
+    doctor) cmd_doctor "$@" ;;
+    url) cmd_url "$@" ;;
+    status) cmd_status "$@" ;;
+    stop) cmd_stop "$@" ;;
+    -h|--help|help|"") usage ;;
+    *) die "unknown command: $cmd" ;;
+  esac
+}
+
+main "$@"

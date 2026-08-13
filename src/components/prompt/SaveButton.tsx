@@ -4,8 +4,10 @@
  * Gracefully degrades if Convex or Clerk is not configured.
  */
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { ConvexReactClient, ConvexProviderWithAuth, useQuery, useMutation } from 'convex/react';
+import { ConvexProviderWithAuth, useQuery, useMutation } from 'convex/react';
 import { api } from '../../lib/convexApi';
+import { isClerkSupportedOnThisOrigin } from '../../lib/clerkEnv';
+import { getConvexClient } from '../../lib/convex';
 
 interface SaveButtonProps {
   promptSlug: string;
@@ -46,10 +48,19 @@ function getClerkSnapshot() {
 }
 
 function useClerkSingleton() {
-  const [snapshot, setSnapshot] = useState(getClerkSnapshot);
+  const clerkSupported = useMemo(() => isClerkSupportedOnThisOrigin(), []);
+  const [snapshot, setSnapshot] = useState(() =>
+    clerkSupported ? getClerkSnapshot() : { isLoaded: true, isSignedIn: false },
+  );
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
+
+    // Live Clerk keys fail on localhost — stop polling and treat as signed-out.
+    if (!clerkSupported) {
+      setSnapshot({ isLoaded: true, isSignedIn: false });
+      return;
+    }
 
     let detach: (() => void) | undefined;
     const syncSnapshot = () => setSnapshot(getClerkSnapshot());
@@ -77,7 +88,7 @@ function useClerkSingleton() {
       window.clearInterval(intervalId);
       detach?.();
     };
-  }, []);
+  }, [clerkSupported]);
 
   const { isLoaded, isSignedIn } = snapshot;
 
@@ -106,10 +117,11 @@ function useClerkSingleton() {
     () => ({
       isLoaded,
       isSignedIn,
+      clerkSupported,
       openSignIn,
       fetchAccessToken,
     }),
-    [fetchAccessToken, isLoaded, isSignedIn, openSignIn]
+    [clerkSupported, fetchAccessToken, isLoaded, isSignedIn, openSignIn]
   );
 }
 
@@ -131,7 +143,7 @@ function useConvexAuthFromClerkSingleton() {
 /* ------------------------------------------------------------------ */
 
 function SaveButtonInner({ promptSlug }: SaveButtonProps) {
-  const { isLoaded, isSignedIn, openSignIn } = useClerkSingleton();
+  const { isLoaded, isSignedIn, clerkSupported, openSignIn } = useClerkSingleton();
 
   const isSaved = useQuery(
     api.collections.isPromptSaved,
@@ -176,7 +188,23 @@ function SaveButtonInner({ promptSlug }: SaveButtonProps) {
     );
   }
 
-  // Not signed in -- wrap in SignInButton
+  // Clerk live keys are unusable on localhost — keep Save visible but inert.
+  if (!clerkSupported) {
+    return (
+      <button
+        type="button"
+        disabled
+        title="Sign in requires a Clerk test key for local development"
+        className="inline-flex items-center justify-center gap-1.5 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-1)] px-3 py-2 text-sm font-medium text-[var(--color-text-muted)] opacity-50 cursor-not-allowed"
+        aria-label="Save prompt unavailable in local development"
+      >
+        <HeartIcon filled={false} />
+        Save
+      </button>
+    );
+  }
+
+  // Not signed in -- open Clerk sign-in
   if (!isSignedIn) {
     return (
       <button
@@ -222,18 +250,7 @@ function SaveButtonInner({ promptSlug }: SaveButtonProps) {
 /* ------------------------------------------------------------------ */
 
 export default function SaveButton({ promptSlug }: SaveButtonProps) {
-  const [client, setClient] = useState<ConvexReactClient | null>(null);
-
-  useEffect(() => {
-    const url = (import.meta as any).env?.PUBLIC_CONVEX_URL as string | undefined;
-    if (!url || url === 'https://your-convex-url.convex.cloud') return;
-
-    try {
-      setClient(new ConvexReactClient(url));
-    } catch {
-      // Not configured -- graceful degradation
-    }
-  }, []);
+  const [client] = useState(() => getConvexClient());
 
   if (!client) {
     // Fallback: static disabled button
