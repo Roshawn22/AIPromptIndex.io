@@ -8,6 +8,7 @@ import { useQuery, useMutation, ConvexProvider } from 'convex/react';
 import { api } from '../../lib/convexApi';
 import { getVisitorId } from '../../lib/visitor';
 import { getConvexClient } from '../../lib/convex';
+import { trackVoteCastSucceeded } from '../../lib/analytics';
 
 interface VoteButtonsProps {
   promptSlug: string;
@@ -23,7 +24,8 @@ function VoteButtonsInner({ promptSlug }: VoteButtonsProps) {
   const handleVote = useCallback(
     async (voteType: 'up' | 'down') => {
       try {
-        await castVote({ promptSlug, visitorId, voteType });
+        const result = await castVote({ promptSlug, visitorId, voteType });
+        trackVoteCastSucceeded(promptSlug, voteType, result.action);
       } catch (err) {
         console.error('Vote failed:', err);
       }

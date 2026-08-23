@@ -10,7 +10,16 @@ import {
 } from './_shared.mjs';
 
 const outputDir = getSeoOutputDir();
-const keyEventNames = ['prompt_copied', 'prompt_viewed'];
+const keyEventNames = [
+  'newsletter_cta_clicked',
+  'outbound_tool_clicked',
+  'prompt_copied',
+  'prompt_submission_succeeded',
+  'prompt_viewed',
+  'search_opened',
+  'search_query',
+  'vote_cast_succeeded',
+];
 const windows = [
   buildDateWindow('last7', 7),
   buildDateWindow('last28', 28),

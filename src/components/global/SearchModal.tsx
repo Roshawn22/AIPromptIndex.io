@@ -4,6 +4,7 @@ import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import Fuse from 'fuse.js';
 import type { IFuseOptions, FuseResult } from 'fuse.js';
 import type { SearchItem } from '../../lib/types';
+import { trackSearchOpened, trackSearchResults } from '../../lib/analytics';
 import {
   registerSearchOpenController,
   unregisterSearchOpenController,
@@ -70,6 +71,7 @@ export default function SearchModal() {
   const openModal = useCallback(() => {
     previouslyFocusedRef.current =
       document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    trackSearchOpened();
     setIsOpen(true);
   }, []);
 
@@ -115,16 +117,17 @@ export default function SearchModal() {
 
   useEffect(() => {
     const normalizedQuery = debouncedQuery.trim();
-    if (!fuseRef.current || normalizedQuery.length < 2) {
+    if (!hasLoadedRef.current || !fuseRef.current || normalizedQuery.length < 2) {
       setResults([]);
       setSelectedIndex(0);
       return;
     }
 
-    const searchResults = fuseRef.current.search(normalizedQuery).slice(0, 8);
-    setResults(searchResults);
+    const allSearchResults = fuseRef.current.search(normalizedQuery);
+    setResults(allSearchResults.slice(0, 8));
     setSelectedIndex(0);
-  }, [debouncedQuery]);
+    trackSearchResults(allSearchResults.length, normalizedQuery.length);
+  }, [debouncedQuery, items]);
 
   useEffect(() => {
     registerSearchOpenController(openModal);

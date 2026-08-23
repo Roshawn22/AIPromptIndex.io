@@ -257,5 +257,41 @@ const allJsonLd = [organizationJsonLd, pageJsonLd, ...pageJsonLdEntries];
     <slot name="footer" />
     <SearchWrapper />
     <ScrollReveal />
+    <script>
+      import {
+        trackNewsletterCtaClick,
+        trackOutboundToolClick,
+      } from '../lib/analytics';
+
+      const analyticsWindow = window as Window & typeof globalThis & {
+        __apiAnalyticsInteractions?: boolean;
+      };
+
+      if (!analyticsWindow.__apiAnalyticsInteractions) {
+        analyticsWindow.__apiAnalyticsInteractions = true;
+
+        document.addEventListener(
+          'click',
+          (event) => {
+            const target = event.target;
+            if (!(target instanceof Element)) return;
+
+            const newsletterCta = target.closest<HTMLElement>('[data-newsletter-cta]');
+            if (newsletterCta) {
+              trackNewsletterCtaClick(newsletterCta.dataset.newsletterPlacement || 'unknown');
+            }
+
+            const outboundToolCta = target.closest<HTMLElement>('[data-outbound-tool-slug]');
+            if (outboundToolCta) {
+              trackOutboundToolClick(
+                outboundToolCta.dataset.outboundToolSlug || 'unknown',
+                outboundToolCta.dataset.outboundToolDestination || 'unknown'
+              );
+            }
+          },
+          true
+        );
+      }
+    </script>
   </body>
 </html>
