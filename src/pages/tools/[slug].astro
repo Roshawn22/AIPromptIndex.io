@@ -194,6 +194,8 @@ const editorialResources = (editorialResourceMap[tool.data.slug] || [])
             href={tool.data.affiliateUrl}
             target="_blank"
             rel="noopener sponsored"
+            data-outbound-tool-slug={tool.data.slug}
+            data-outbound-tool-destination="official_site"
             class="inline-flex items-center gap-2 rounded-[var(--radius-md)] bg-[var(--color-accent)] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-teal-600"
           >
             Visit {tool.data.name}

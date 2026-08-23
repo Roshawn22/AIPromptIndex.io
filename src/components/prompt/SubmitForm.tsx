@@ -8,6 +8,7 @@ import { useMutation, ConvexProvider } from 'convex/react';
 import { api } from '../../lib/convexApi';
 import { getVisitorId } from '../../lib/visitor';
 import { getConvexClient } from '../../lib/convex';
+import { trackPromptSubmissionSucceeded } from '../../lib/analytics';
 
 const TOOLS = [
   { value: 'chatgpt', label: 'ChatGPT' },
@@ -51,20 +52,24 @@ function SubmitFormInner() {
 
       const form = e.currentTarget;
       const data = new FormData(form);
+      const tool = data.get('tool') as string;
+      const category = data.get('category') as string;
+      const difficulty = data.get('difficulty') as string;
 
       try {
         await submit({
           title: data.get('title') as string,
           promptText: data.get('promptText') as string,
-          tool: data.get('tool') as string,
-          category: data.get('category') as string,
-          difficulty: data.get('difficulty') as string,
+          tool,
+          category,
+          difficulty,
           description: (data.get('description') as string) || undefined,
           tags: (data.get('tags') as string) || undefined,
           authorName: (data.get('authorName') as string) || undefined,
           visitorFingerprint: visitorId,
         });
 
+        trackPromptSubmissionSucceeded(tool, category, difficulty);
         setStatus('success');
         form.reset();
       } catch (err: any) {
