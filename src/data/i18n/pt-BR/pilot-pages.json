@@ -1,0 +1,129 @@
+{
+  "locale": "pt-BR",
+  "sourceLocale": "en",
+  "translationProvider": "local-draft",
+  "reviewPolicy": "Every page must be changed to approved by a human reviewer before PUBLIC_LOCALIZATION_PILOT_INDEXABLE can take effect.",
+  "pages": {
+    "/": {
+      "type": "home",
+      "reviewStatus": "needs-human-review",
+      "sourceFingerprint": "7a3b6fdfcc4f",
+      "sourcePath": "/",
+      "title": "Biblioteca Gratuita de Prompts de IA para ChatGPT, Claude e Mais",
+      "metaTitle": "Biblioteca de Prompts de IA Grátis",
+      "description": "Explore uma biblioteca gratuita de prompts e modelos para ChatGPT, Claude, Midjourney, Gemini, Cursor e outras ferramentas. Copie, personalize e use rapidamente.",
+      "metaDescription": "Explore prompts e modelos gratuitos para ChatGPT, Claude, Gemini, Midjourney e Cursor. Copie, personalize e use rapidamente.",
+      "eyebrow": "Biblioteca gratuita de prompts de IA",
+      "heading": "Encontre um prompt melhor. Comece mais rápido.",
+      "intro": "Prompts prontos para copiar, organizados por ferramenta, categoria e objetivo. Escolha um ponto de partida, personalize as variáveis e mantenha o que funcionar.",
+      "primaryCta": "Explorar os melhores prompts",
+      "secondaryCta": "Ver prompts grátis",
+      "sectionHeading": "Comece pelas coleções prioritárias",
+      "sectionIntro": "Estas páginas concentram as oportunidades de busca e os fluxos mais úteis do catálogo para este piloto em português."
+    },
+    "/best/gemini-prompts/": {
+      "type": "roundup",
+      "reviewStatus": "needs-human-review",
+      "sourceFingerprint": "a5279e5d6424",
+      "sourcePath": "/best/gemini-prompts/",
+      "sourceSlug": "gemini-prompts",
+      "title": "Melhores Prompts para Gemini",
+      "metaTitle": "Prompts para Gemini: guia 2026",
+      "description": "Prompts selecionados para Google Gemini em pesquisa, análise, escrita e produtividade, aproveitando acesso à web e integração com o Google Workspace.",
+      "intro": "O Google Gemini reúne vantagens como acesso a informações atuais, integração com o Google Workspace e compreensão multimodal. Esta seleção ajuda você a usar esses recursos em tarefas de pesquisa, análise, programação, escrita e criação. Cada prompt foi escolhido como um ponto de partida prático para explorar o que o Gemini faz melhor."
+    },
+    "/best/best-ai-prompts/": {
+      "type": "roundup",
+      "reviewStatus": "needs-human-review",
+      "sourceFingerprint": "8d2c51b78af4",
+      "sourcePath": "/best/best-ai-prompts/",
+      "sourceSlug": "best-ai-prompts",
+      "title": "Melhores Prompts de IA",
+      "metaTitle": "Melhores prompts de IA em 2026",
+      "description": "Uma seleção dos prompts de IA mais bem avaliados para ChatGPT, Claude, Gemini, Midjourney e outras ferramentas, pronta para copiar e adaptar.",
+      "intro": "Encontrar bons prompts exige separar estruturas reutilizáveis de exemplos que só funcionam uma vez. Esta coleção reúne os prompts mais fortes do catálogo em escrita, programação, marketing, geração de imagens, negócios e análise de dados. Use cada item como base, adapte as variáveis ao seu contexto e compare os resultados."
+    },
+    "/best/free-ai-prompts/": {
+      "type": "roundup",
+      "reviewStatus": "needs-human-review",
+      "sourceFingerprint": "d06e2c96609d",
+      "sourcePath": "/best/free-ai-prompts/",
+      "sourceSlug": "free-ai-prompts",
+      "title": "Prompts de IA Grátis",
+      "metaTitle": "Prompts de IA grátis em 2026",
+      "description": "Prompts de qualidade que funcionam nos planos gratuitos do ChatGPT, Claude, Gemini e outras ferramentas de IA. Copie e use sem assinatura premium.",
+      "intro": "Você não precisa de uma assinatura paga para obter resultados úteis com IA. Estes prompts foram escolhidos para funcionar dentro dos limites dos planos gratuitos, sem depender de recursos premium ou contextos enormes. A qualidade vem da clareza do objetivo, do contexto e das restrições — não apenas do plano contratado."
+    },
+    "/best/prompt-templates/": {
+      "type": "roundup",
+      "reviewStatus": "needs-human-review",
+      "sourceFingerprint": "2d39337f1c1e",
+      "sourcePath": "/best/prompt-templates/",
+      "sourceSlug": "prompt-templates",
+      "title": "Melhores Modelos de Prompts de IA",
+      "metaTitle": "Modelos de prompts de IA em 2026",
+      "description": "Modelos reutilizáveis de prompts para ChatGPT, Claude e Gemini, com campos fáceis de preencher para escrita, programação, marketing e muito mais.",
+      "intro": "Modelos de prompts aceleram tarefas repetidas e ajudam a manter resultados consistentes. Em vez de começar do zero, você recebe uma estrutura testada com campos para objetivo, contexto, público e formato. Copie um modelo, substitua as variáveis e ajuste as instruções ao seu projeto."
+    },
+    "/best/cursor-ai-prompts/": {
+      "type": "roundup",
+      "reviewStatus": "needs-human-review",
+      "sourceFingerprint": "5da17d9009a6",
+      "sourcePath": "/best/cursor-ai-prompts/",
+      "sourceSlug": "cursor-ai-prompts",
+      "title": "Melhores Prompts para Cursor AI",
+      "metaTitle": "Prompts para Cursor AI (2026) — Guia Prático",
+      "description": "Prompts selecionados para geração de código, refatoração, depuração e edição de vários arquivos no Cursor AI.",
+      "intro": "O Cursor consegue considerar arquivos, padrões e dependências do repositório ao responder. Estes prompts foram organizados para aproveitar esse contexto em geração de código, refatoração de vários arquivos, depuração, criação de testes e exploração de arquitetura. Informe os arquivos relevantes e os critérios de aceite para obter respostas mais precisas."
+    },
+    "/prompts/ai-slop-remover/": {
+      "type": "prompt",
+      "reviewStatus": "needs-human-review",
+      "sourceFingerprint": "3402b06696dc",
+      "sourcePath": "/prompts/ai-slop-remover/",
+      "sourceSlug": "ai-slop-remover",
+      "title": "Removedor de Texto Genérico de IA",
+      "metaTitle": "Prompt para humanizar texto de IA",
+      "description": "Este prompt transforma ChatGPT, Claude ou Gemini em um editor criterioso que remove padrões típicos de texto gerado por IA sem apagar sua voz. Ele prioriza a menor edição eficaz, preserva frases fortes e explica o que mudou.",
+      "metaDescription": "Remova padrões de texto gerado por IA sem apagar sua voz. Um prompt gratuito para editar rascunhos com mudanças mínimas e explicadas.",
+      "promptText": "Você é um editor humano criterioso. Sua tarefa é remover do meu rascunho os padrões que soam como texto gerado por IA, preservando meu argumento e minha voz pessoal. Não transforme uma escrita marcante em uma prosa genérica e polida.\n\nO rascunho é para: [AUDIENCE]\nEle será publicado como: [FORMAT]\n\nMeu rascunho:\n[DRAFT]\n\nRegras de edição:\n1. Faça a menor edição eficaz. Corrija padrões de IA, repetições e trechos pouco claros. Mantenha intactas as frases humanas fortes. O texto editado ainda deve soar como eu.\n2. Elimine palavras vazias ou excessivamente promocionais quando não acrescentarem significado.\n3. Corte frases de enrolação que atrasem o ponto principal.\n4. Remova estes padrões onde aparecerem:\n- Contrastes binários artificiais (\"Não é X. É Y.\") — diga o ponto diretamente\n- Aberturas que apenas preparam o terreno — comece pelo ponto principal\n- Promessas de falsa revelação — deixe a afirmação se sustentar sozinha\n- Revelações dramáticas com dois-pontos — reescreva como frase simples\n- Análises vagas no gerúndio — informe a consequência real ou corte\n- Exageros de importância — apresente o fato e deixe o leitor julgar\n- Atribuições vagas (\"especialistas concordam\", \"estudos mostram\") — cite a fonte ou sinalize a necessidade de fonte; nunca invente uma\n- Listas negativas dramáticas — diga simplesmente o que a coisa é\n- Fragmentos dramáticos repetitivos — prefira frases completas\n- Metáforas finais que parecem profundas, mas não acrescentam informação — termine no último ponto concreto\n- Conclusões que apenas repetem tudo o que o leitor acabou de ler\n5. Use voz ativa e sujeitos humanos. Troque locuções verbais fracas por verbos diretos.\n6. Preserve exatamente os detalhes concretos. Nunca transforme número, nome ou data específicos em afirmações vagas e nunca invente dados, exemplos ou estatísticas.\n7. Preserve minha personalidade. Mantenha opiniões fortes, linguagem direta, humor, fragmentos e observações que soem como eu.\n\nFormato de saída:\n1. O rascunho editado completo\n2. Uma seção curta chamada \"O que mudou\", listando os padrões removidos e o motivo\n3. Quaisquer afirmações que precisem de fonte, marcadas como perguntas para mim",
+      "variables": [
+        { "name": "AUDIENCE", "description": "Quem vai ler o texto", "example": "Fundadores de startups que assinam minha newsletter" },
+        { "name": "FORMAT", "description": "Onde e em qual formato o texto será publicado", "example": "Uma edição de newsletter com cerca de 1.000 palavras" },
+        { "name": "DRAFT", "description": "O rascunho completo que você quer editar", "example": "Cole aqui o texto completo, incluindo título e conclusão." }
+      ],
+      "tips": [
+        "Cole o rascunho inteiro para que o editor identifique repetições e problemas de estrutura.",
+        "Preencha AUDIENCE e FORMAT com precisão; um post no LinkedIn exige um tratamento diferente de um documento técnico.",
+        "Se uma afirmação for marcada como carente de fonte, adicione a fonte real em vez de suavizar o texto."
+      ]
+    },
+    "/prompts/business-plan-executive-summary/": {
+      "type": "prompt",
+      "reviewStatus": "needs-human-review",
+      "sourceFingerprint": "98482a1d48fe",
+      "sourcePath": "/prompts/business-plan-executive-summary/",
+      "sourceSlug": "business-plan-executive-summary",
+      "title": "Resumo Executivo de Plano de Negócios para Claude",
+      "metaTitle": "Prompt de Resumo Executivo para Claude",
+      "description": "Use este prompt para criar no Claude um primeiro rascunho de resumo executivo voltado a investidores, bancos, apresentações e programas de aceleração. Ele organiza mercado, tração, projeções e pedido de investimento nas seções esperadas.",
+      "metaDescription": "Crie no Claude um resumo executivo para investidores, bancos e aceleradoras, com mercado, tração, projeções e pedido de investimento.",
+      "promptText": "Você é um consultor de negócios experiente que já ajudou mais de 200 startups a captar recursos. Escreva um resumo executivo pronto para investidores para a [COMPANY_NAME], uma startup com modelo [BUSINESS_MODEL] no setor de [INDUSTRY]. A empresa resolve [PROBLEM] para [TARGET_MARKET] oferecendo [SOLUTION]. Inclua estas seções: Visão geral da empresa (2 a 3 frases), Problema, Solução, tamanho e características do mercado-alvo, Modelo de receita, Vantagem competitiva, Tração atual (use [TRACTION_METRICS] como dados), resumo das projeções financeiras para 3 anos e Pedido de investimento de [FUNDING_AMOUNT] com a alocação planejada. Mantenha o resumo inteiro abaixo de 800 palavras, use um estilo profissional adequado a um plano de negócios e faça cada frase justificar sua presença.",
+      "variables": [
+        { "name": "COMPANY_NAME", "description": "Nome da empresa", "example": "NutriPlan AI" },
+        { "name": "BUSINESS_MODEL", "description": "Tipo de modelo de negócios", "example": "assinatura SaaS B2C" },
+        { "name": "INDUSTRY", "description": "Setor de atuação", "example": "healthtech e nutrição personalizada" },
+        { "name": "PROBLEM", "description": "Problema que a empresa resolve", "example": "orientações nutricionais genéricas que ignoram condições de saúde e estilo de vida" },
+        { "name": "TARGET_MARKET", "description": "Público atendido", "example": "adultos de 25 a 55 anos que gerenciam condições crônicas por meio da alimentação" },
+        { "name": "SOLUTION", "description": "Produto ou serviço", "example": "um aplicativo de planejamento alimentar com IA que cria planos personalizados" },
+        { "name": "TRACTION_METRICS", "description": "Métricas atuais do negócio", "example": "12 mil assinantes pagos, US$ 45 mil de MRR e retenção mensal de 94%" },
+        { "name": "FUNDING_AMOUNT", "description": "Valor de investimento buscado", "example": "US$ 2,5 milhões em rodada seed" }
+      ],
+      "tips": [
+        "Comece pela métrica de tração mais forte para prender a atenção do leitor.",
+        "Quantifique o mercado com fontes confiáveis e uma divisão clara entre TAM, SAM e SOM.",
+        "Ajuste o tom ao público: investidores buscam crescimento; bancos priorizam estabilidade e capacidade de pagamento."
+      ]
+    }
+  }
+}

@@ -11,6 +11,7 @@ import { getConvexClient } from '../../lib/convex';
 interface CopyButtonProps {
   text: string;
   label?: string;
+  copiedLabel?: string;
   size?: 'sm' | 'md' | 'lg';
   variant?: 'primary' | 'ghost';
   promptSlug?: string;
@@ -24,6 +25,7 @@ type TrackFn = ((args: { type: string; promptSlug?: string }) => Promise<unknown
 function CopyButtonUI({
   text,
   label = 'Copy',
+  copiedLabel = 'Copied!',
   size = 'md',
   variant = 'primary',
   promptSlug,
@@ -37,7 +39,7 @@ function CopyButtonUI({
   const motionDisabled = !!prefersReducedMotion;
   // Use the visible label as the accessible name — do not prefix with "Copy "
   // (call sites already pass "Copy Prompt").
-  const resolvedAriaLabel = copied ? 'Copied!' : label;
+  const resolvedAriaLabel = copied ? copiedLabel : label;
 
   const handleCopy = useCallback(async () => {
     const didCopy = await copyTextToClipboard(text);
@@ -94,7 +96,7 @@ function CopyButtonUI({
             className="inline-flex items-center gap-1"
           >
             <LottieAccent animationData={checkmarkData} size={14} />
-            Copied!
+            {copiedLabel}
           </motion.span>
         ) : (
           <motion.span

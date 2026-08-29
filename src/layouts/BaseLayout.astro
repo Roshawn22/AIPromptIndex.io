@@ -3,6 +3,12 @@ import '../styles/global.css';
 import ScrollReveal from '../components/global/ScrollReveal.astro';
 import SearchWrapper from '../components/global/SearchWrapper.astro';
 import monoFontStylesHref from '../styles/mono-font.css?url';
+import {
+  getLocaleAlternates,
+  getLocaleFromPath,
+  getPtBrCommon,
+  type SiteLocale,
+} from '../lib/localization';
 
 interface Props {
   title: string;
@@ -15,6 +21,7 @@ interface Props {
   articleModifiedTime?: string;
   publishedTime?: string;
   loadMonoFont?: boolean;
+  locale?: SiteLocale;
 }
 
 const {
@@ -28,6 +35,7 @@ const {
   articleModifiedTime,
   publishedTime,
   loadMonoFont = false,
+  locale: localeProp,
 } = Astro.props;
 
 function clampMetaText(value: string, maxLength: number) {
@@ -45,6 +53,10 @@ const siteUrl = Astro.site?.toString().replace(/\/$/, '') || 'https://aipromptin
 const siteOrigin = new URL(siteUrl).origin;
 const canonicalPath = canonicalUrl ? new URL(canonicalUrl, siteOrigin).pathname : Astro.url.pathname;
 const canonical = new URL(canonicalPath, siteOrigin).toString();
+const locale = localeProp || getLocaleFromPath(canonicalPath);
+const localeAlternates = getLocaleAlternates(canonicalPath);
+const common = locale === 'pt-BR' ? getPtBrCommon() : null;
+const skipToContent = common?.skipToContent || 'Skip to main content';
 const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
 const rawGaMeasurementId = (
   import.meta.env.PUBLIC_GA_MEASUREMENT_ID as string | undefined
@@ -80,6 +92,7 @@ const pageJsonLd = {
   name: title,
   description: metaDescription,
   url: canonical,
+  inLanguage: locale,
   publisher: { '@id': `${siteUrl}/#organization` },
   primaryImageOfPage: {
     '@type': 'ImageObject',
@@ -93,7 +106,7 @@ const allJsonLd = [organizationJsonLd, pageJsonLd, ...pageJsonLdEntries];
 ---
 
 <!doctype html>
-<html lang="en" class="dark">
+<html lang={locale} class="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -107,8 +120,18 @@ const allJsonLd = [organizationJsonLd, pageJsonLd, ...pageJsonLdEntries];
     <title>{fullTitle}</title>
     <meta name="description" content={metaDescription} />
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="en" href={canonical} />
-    <link rel="alternate" hreflang="x-default" href={canonical} />
+    {localeAlternates ? (
+      <>
+        <link rel="alternate" hreflang="en" href={new URL(localeAlternates.en, siteOrigin).toString()} />
+        <link rel="alternate" hreflang="pt-BR" href={new URL(localeAlternates.ptBr, siteOrigin).toString()} />
+        <link rel="alternate" hreflang="x-default" href={new URL(localeAlternates.default, siteOrigin).toString()} />
+      </>
+    ) : locale === 'en' ? (
+      <>
+        <link rel="alternate" hreflang="en" href={canonical} />
+        <link rel="alternate" hreflang="x-default" href={canonical} />
+      </>
+    ) : null}
     {googleSiteVerification && (
       <meta name="google-site-verification" content={googleSiteVerification} />
     )}
@@ -131,7 +154,7 @@ const allJsonLd = [organizationJsonLd, pageJsonLd, ...pageJsonLdEntries];
     <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content="AIPromptIndex" />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content={locale === 'pt-BR' ? 'pt_BR' : 'en_US'} />
 
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -173,6 +196,8 @@ const allJsonLd = [organizationJsonLd, pageJsonLd, ...pageJsonLdEntries];
   function trackPageView() {
     window.gtag('config', measurementId, {
       page_path: window.location.pathname,
+      site_locale: document.documentElement.lang || 'en',
+      content_group: window.location.pathname.indexOf('/pt-BR/') === 0 ? 'localization_pilot' : 'default',
       anonymize_ip: true,
     });
   }
@@ -248,7 +273,7 @@ const allJsonLd = [organizationJsonLd, pageJsonLd, ...pageJsonLdEntries];
   </head>
   <body class="min-h-screen bg-[var(--color-surface-0)] text-[var(--color-text-primary)] antialiased">
     <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:bg-[var(--color-accent)] focus:text-white focus:rounded-[var(--radius-md)]">
-      Skip to main content
+      {skipToContent}
     </a>
     <slot name="header" />
     <main id="main-content">

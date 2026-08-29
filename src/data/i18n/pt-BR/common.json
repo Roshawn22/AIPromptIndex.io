@@ -1,0 +1,68 @@
+{
+  "locale": "pt-BR",
+  "languageName": "Português (Brasil)",
+  "skipToContent": "Pular para o conteúdo principal",
+  "header": {
+    "homeLabel": "Página inicial do AI Prompt Index",
+    "mainNavigation": "Navegação principal",
+    "mobileNavigation": "Navegação para celular",
+    "search": "Buscar",
+    "searchPrompts": "Buscar prompts de IA",
+    "openSearch": "Abrir busca",
+    "openMenu": "Abrir menu",
+    "submit": "Enviar prompt (EN)",
+    "nav": [
+      { "href": "/prompts/", "label": "Prompts" },
+      { "href": "/categories/", "label": "Categorias" },
+      { "href": "/tools/", "label": "Ferramentas" },
+      { "href": "/prompt-builder/", "label": "Criador" },
+      { "href": "/guides/", "label": "Guias" },
+      { "href": "/blog/", "label": "Blog" }
+    ]
+  },
+  "languageSwitcher": {
+    "label": "Idioma",
+    "english": "English",
+    "portuguese": "Português"
+  },
+  "newsletter": {
+    "heading": "Receba os melhores prompts de IA toda semana",
+    "subheading": "Prompts, dicas e guias selecionados, entregues gratuitamente no seu e-mail.",
+    "subscribe": "Assinar grátis",
+    "opensIndexed": "Abre a newsletter Indexed em inglês. Sem spam — cancele quando quiser.",
+    "iframeTitle": "Assine a newsletter do AIPromptIndex",
+    "noSpam": "Sem spam. Cancele quando quiser.",
+    "unavailable": "A assinatura da newsletter está temporariamente indisponível.",
+    "configuration": "Adicione `PUBLIC_NEWSLETTER_URL` para reativar as assinaturas."
+  },
+  "footer": {
+    "crossPromoPrefix": "Procurando ferramentas de IA? Visite",
+    "crossPromoSuffix": "— o diretório de ferramentas de IA",
+    "directory": "Diretório",
+    "resources": "Recursos",
+    "bestPrompts": "Melhores prompts",
+    "byTool": "Por ferramenta",
+    "community": "Comunidade",
+    "company": "Empresa",
+    "rights": "Todos os direitos reservados.",
+    "followX": "Siga no X (Twitter)",
+    "watchYoutube": "Assista no YouTube"
+  },
+  "content": {
+    "home": "Início",
+    "bestPrompts": "Melhores prompts",
+    "copyReady": "prompts selecionados — prontos para copiar e colar",
+    "aboutPrompt": "Sobre este prompt",
+    "variables": "Variáveis para personalizar",
+    "example": "Exemplo",
+    "tips": "Dicas para obter os melhores resultados",
+    "copyPrompt": "Copiar prompt",
+    "copied": "Copiado!",
+    "originalLibraryNotice": "Os cartões abaixo mantêm o texto original em inglês nesta primeira fase. A interface, a orientação e as páginas prioritárias estão em português.",
+    "draftNotice": "Piloto em revisão: esta tradução ainda não foi aprovada para indexação.",
+    "viewPrompt": "Ver prompt",
+    "browseCollection": "Explorar coleção",
+    "added": "Adicionado",
+    "updated": "Atualizado"
+  }
+}

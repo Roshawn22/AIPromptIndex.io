@@ -28,7 +28,7 @@ const typeIcons: Record<string, string> = {
   guide: 'M12 6.253v13m0-13C10.832 5.484 9.246 5 7.5 5 4.462 5 2 6.462 2 9.5v8.25A.75.75 0 002.75 18.5h5.5c1.746 0 3.332.484 4.5 1.253m0-13C13.918 5.484 15.504 5 17.25 5 20.288 5 22.75 6.462 22.75 9.5v8.25a.75.75 0 01-.75.75h-5.5c-1.746 0-3.332.484-4.5 1.253',
 };
 
-const typeLabels: Record<string, string> = {
+const englishTypeLabels: Record<string, string> = {
   prompt: 'Prompt',
   blog: 'Article',
   guide: 'Guide',
@@ -53,6 +53,34 @@ const softGlass = {
 };
 
 export default function SearchModal() {
+  const isPtBr = typeof document !== 'undefined' && document.documentElement.lang === 'pt-BR';
+  const copy = isPtBr
+    ? {
+        aria: 'Buscar prompts de IA',
+        placeholder: 'Buscar prompts, guias e artigos...',
+        loadError: 'Não foi possível carregar o índice de busca.',
+        loading: 'Carregando o índice de busca...',
+        noResults: 'Nenhum resultado para',
+        tryAgain: 'Tente outro termo de busca',
+        minimum: 'Digite pelo menos 2 caracteres para buscar.',
+        catalogNotice: 'Os resultados abrem o catálogo original em inglês.',
+        navigate: 'navegar',
+        select: 'selecionar',
+        typeLabels: { prompt: 'Prompt', blog: 'Artigo', guide: 'Guia' } as Record<string, string>,
+      }
+    : {
+        aria: 'Search AI prompts',
+        placeholder: 'Search prompts, guides, articles...',
+        loadError: 'Search index failed to load.',
+        loading: 'Loading search index...',
+        noResults: 'No results for',
+        tryAgain: 'Try a different search term',
+        minimum: 'Type at least 2 characters to search.',
+        catalogNotice: '',
+        navigate: 'navigate',
+        select: 'select',
+        typeLabels: englishTypeLabels,
+      };
   const [items, setItems] = useState<SearchItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -98,7 +126,7 @@ export default function SearchModal() {
       setItems(nextItems);
       hasLoadedRef.current = true;
     } catch {
-      setLoadError('Search index failed to load.');
+      setLoadError(copy.loadError);
     } finally {
       setIsLoading(false);
     }
@@ -221,7 +249,7 @@ export default function SearchModal() {
           className="fixed inset-0 z-[100] flex items-start justify-center pt-[10vh] sm:pt-[15vh]"
           role="dialog"
           aria-modal="true"
-          aria-label="Search AI prompts"
+          aria-label={copy.aria}
           aria-busy={isLoading}
           onClick={closeModal}
         >
@@ -273,13 +301,13 @@ export default function SearchModal() {
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 onKeyDown={handleInputKeyDown}
-                placeholder="Search prompts, guides, articles..."
+                placeholder={copy.placeholder}
                 className="w-full bg-transparent py-4 text-base outline-none"
                 style={{
                   color: 'var(--color-text-primary)',
                   fontFamily: 'var(--font-display)',
                 }}
-                aria-label="Search AI prompts"
+                aria-label={copy.aria}
               />
               <kbd
                 className="hidden items-center rounded-full border px-2 py-1 text-xs sm:inline-flex"
@@ -298,7 +326,7 @@ export default function SearchModal() {
             <div className="max-h-80 overflow-y-auto">
               {isLoading && (
                 <div className="px-5 py-10 text-center" style={{ color: 'var(--color-text-muted)' }}>
-                  <p className="text-sm">Loading search index...</p>
+                  <p className="text-sm">{copy.loading}</p>
                 </div>
               )}
 
@@ -310,14 +338,14 @@ export default function SearchModal() {
 
               {!isLoading && !loadError && query.trim().length >= 2 && results.length === 0 && (
                 <div className="px-5 py-10 text-center" style={{ color: 'var(--color-text-muted)' }}>
-                  <p className="text-sm">No results for &quot;{query}&quot;</p>
-                  <p className="mt-1 text-xs">Try a different search term</p>
+                  <p className="text-sm">{copy.noResults} &quot;{query}&quot;</p>
+                  <p className="mt-1 text-xs">{copy.tryAgain}</p>
                 </div>
               )}
 
               {!isLoading && !loadError && query.trim().length < 2 && (
                 <div className="px-5 py-8 text-center" style={{ color: 'var(--color-text-muted)' }}>
-                  <p className="text-sm">Type at least 2 characters to search.</p>
+                  <p className="text-sm">{copy.minimum}</p>
                 </div>
               )}
 
@@ -368,7 +396,7 @@ export default function SearchModal() {
                             borderColor: 'var(--glass-border)',
                           }}
                         >
-                          {typeLabels[result.item.type] || result.item.type}
+                          {copy.typeLabels[result.item.type] || result.item.type}
                         </span>
                       </div>
                       <p className="mt-0.5 truncate text-xs" style={{ color: 'var(--color-text-muted)' }}>
@@ -406,7 +434,7 @@ export default function SearchModal() {
                   >
                     &uarr;&darr;
                   </kbd>
-                  navigate
+                  {copy.navigate}
                 </span>
                 <span className="flex items-center gap-1">
                   <kbd
@@ -415,11 +443,16 @@ export default function SearchModal() {
                   >
                     &crarr;
                   </kbd>
-                  select
+                  {copy.select}
                 </span>
               </div>
               <span>Powered by Fuse.js</span>
             </div>
+            {copy.catalogNotice && (
+              <p className="border-t px-5 py-2 text-center text-[11px]" style={{ borderColor: 'var(--glass-border)', color: 'var(--color-text-muted)' }}>
+                {copy.catalogNotice}
+              </p>
+            )}
           </motion.div>
         </motion.div>
       )}

@@ -16,7 +16,11 @@ import {
   isClerkSupportedOnThisOrigin,
 } from '../../lib/clerkEnv';
 
-function AuthButtonsInner() {
+interface AuthButtonsProps {
+  signInLabel?: string;
+}
+
+function AuthButtonsInner({ signInLabel = 'Sign In' }: AuthButtonsProps) {
   return (
     <>
       <SignedOut>
@@ -29,7 +33,7 @@ function AuthButtonsInner() {
               <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
               <circle cx="12" cy="7" r="4" />
             </svg>
-            Sign In
+            {signInLabel}
           </button>
         </SignInButton>
       </SignedOut>
@@ -46,7 +50,7 @@ function AuthButtonsInner() {
   );
 }
 
-export default function AuthButtons() {
+export default function AuthButtons({ signInLabel = 'Sign In' }: AuthButtonsProps) {
   const publishableKey = useMemo(() => getClerkPublishableKey(), []);
   const clerkSupported = useMemo(
     () => isClerkSupportedOnThisOrigin(publishableKey),
@@ -60,7 +64,7 @@ export default function AuthButtons() {
 
   return (
     <ClerkProvider publishableKey={publishableKey}>
-      <AuthButtonsInner />
+      <AuthButtonsInner signInLabel={signInLabel} />
     </ClerkProvider>
   );
 }

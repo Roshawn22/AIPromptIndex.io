@@ -2,8 +2,24 @@
 import ThemeToggle from './ThemeToggle.astro';
 import LogoMark from './LogoMark.astro';
 import AuthButtons from '../auth/AuthButtons.tsx';
+import {
+  getEnglishPath,
+  getLocaleFromPath,
+  getLocalizedPath,
+  getPtBrCommon,
+  hasPilotTranslation,
+  isLocalizationPilotEnabled,
+  type SiteLocale,
+} from '../../lib/localization';
 
-const navLinks = [
+interface Props {
+  locale?: SiteLocale;
+}
+
+const currentPath = Astro.url.pathname;
+const locale = Astro.props.locale || getLocaleFromPath(currentPath);
+const common = locale === 'pt-BR' ? getPtBrCommon() : null;
+const englishNavLinks = [
   { href: '/prompts/', label: 'Prompts' },
   { href: '/categories/', label: 'Categories' },
   { href: '/tools/', label: 'Tools' },
@@ -12,13 +28,27 @@ const navLinks = [
   { href: '/blog/', label: 'Blog' },
 ];
 
-const currentPath = Astro.url.pathname;
+const portugueseNavLinks = [
+  { href: '/pt-BR/best/best-ai-prompts/', label: 'Melhores' },
+  { href: '/pt-BR/best/free-ai-prompts/', label: 'Grátis' },
+  { href: '/pt-BR/best/prompt-templates/', label: 'Modelos' },
+  { href: '/pt-BR/best/gemini-prompts/', label: 'Gemini' },
+  { href: '/pt-BR/best/cursor-ai-prompts/', label: 'Cursor' },
+];
+const navLinks = locale === 'pt-BR' ? portugueseNavLinks : englishNavLinks;
+const homeHref = locale === 'pt-BR' ? '/pt-BR/' : '/';
+const headerCopy = common?.header;
+const showLanguageSwitcher = isLocalizationPilotEnabled() && hasPilotTranslation(currentPath);
+const languageHref = locale === 'pt-BR'
+  ? getEnglishPath(currentPath)
+  : getLocalizedPath(currentPath, 'pt-BR');
+const languageLabel = locale === 'pt-BR' ? 'English' : 'Português';
 ---
 
 <header class="sticky top-0 z-50 w-full border-b border-[var(--glass-border)] bg-[var(--glass-ui-bg)] shadow-[0_10px_40px_rgba(10,18,22,0.08)] backdrop-blur-xl">
   <div class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-[var(--space-page)]">
     <!-- Logo -->
-    <a href="/" aria-label="AI Prompt Index home" class="group flex shrink-0 items-center gap-2">
+    <a href={homeHref} aria-label={headerCopy?.homeLabel || 'AI Prompt Index home'} class="group flex shrink-0 items-center gap-2">
       <LogoMark size="md" />
       <span class="whitespace-nowrap font-[var(--font-display)] text-[17px] font-bold leading-none tracking-tight sm:text-lg">
         <span class="text-[var(--color-text-primary)]">AI</span><span class="text-gradient">PromptIndex</span>
@@ -26,7 +56,7 @@ const currentPath = Astro.url.pathname;
     </a>
 
     <!-- Desktop Nav -->
-    <nav class="surface-glass-ui hidden items-center gap-0.5 rounded-full px-2 py-1 md:flex lg:gap-1" aria-label="Main navigation">
+    <nav class="surface-glass-ui hidden items-center gap-0.5 rounded-full px-2 py-1 md:flex lg:gap-1" aria-label={headerCopy?.mainNavigation || 'Main navigation'}>
       {navLinks.map((link) => (
         <a
           href={link.href}
@@ -50,23 +80,33 @@ const currentPath = Astro.url.pathname;
         type="button"
         data-open-search
         class="surface-glass-ui flex h-11 w-11 items-center justify-center gap-2 rounded-[var(--radius-md)] text-[var(--color-text-muted)] sm:h-auto sm:w-auto sm:px-3 sm:py-2"
-        aria-label="Open search"
+        aria-label={headerCopy?.openSearch || 'Open search'}
       >
         <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <circle cx="11" cy="11" r="8" />
           <path d="m21 21-4.3-4.3" />
         </svg>
-        <span class="hidden font-[var(--font-display)] font-medium text-sm sm:inline">Search</span>
+        <span class="hidden font-[var(--font-display)] font-medium text-sm sm:inline">{headerCopy?.search || 'Search'}</span>
         <kbd aria-hidden="true" class="hidden rounded-full border border-[var(--glass-border)] bg-[var(--glass-highlight-soft)] px-1.5 py-0.5 font-[var(--font-mono)] text-[10px] text-[var(--color-text-muted)] sm:inline-flex">&#8984;K</kbd>
       </button>
 
-      <ThemeToggle />
-      <AuthButtons client:load />
+      {showLanguageSwitcher && (
+        <a
+          href={languageHref}
+          hreflang={locale === 'pt-BR' ? 'en' : 'pt-BR'}
+          class="surface-glass-ui hidden rounded-[var(--radius-md)] px-3 py-2 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-accent)] lg:inline-flex"
+          aria-label={`${common?.languageSwitcher.label || 'Language'}: ${languageLabel}`}
+        >
+          {languageLabel}
+        </a>
+      )}
+      <ThemeToggle label={locale === 'pt-BR' ? 'Alternar entre tema claro e escuro' : 'Toggle dark/light mode'} />
+      <AuthButtons client:load signInLabel={locale === 'pt-BR' ? 'Entrar' : 'Sign In'} />
       <a
         href="/submit/"
         class="surface-glass-ui hidden items-center justify-center rounded-full px-4 py-2 text-sm font-[var(--font-display)] font-medium text-[var(--color-text-primary)] transition-all duration-200 hover:text-[var(--color-accent)] sm:inline-flex"
       >
-        Submit Prompt
+        {headerCopy?.submit || 'Submit Prompt'}
       </a>
 
       <!-- Mobile menu toggle -->
@@ -74,7 +114,7 @@ const currentPath = Astro.url.pathname;
         id="mobile-menu-btn"
         type="button"
         class="surface-glass-ui flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] text-[var(--color-text-secondary)] md:hidden"
-        aria-label="Open menu"
+        aria-label={headerCopy?.openMenu || 'Open menu'}
         aria-controls="mobile-menu"
         aria-expanded="false"
       >
@@ -87,18 +127,18 @@ const currentPath = Astro.url.pathname;
 
   <!-- Mobile Nav -->
   <div id="mobile-menu" class="mobile-menu-closed border-t border-[var(--glass-border)] bg-transparent md:hidden">
-    <nav class="surface-glass-prominent flex flex-col gap-2 rounded-[var(--radius-xl)] p-3" aria-label="Mobile navigation">
+    <nav class="surface-glass-prominent flex flex-col gap-2 rounded-[var(--radius-xl)] p-3" aria-label={headerCopy?.mobileNavigation || 'Mobile navigation'}>
       <button
         type="button"
         data-open-search
         class="surface-glass-ui flex items-center justify-center gap-2 rounded-[var(--radius-md)] px-4 py-3 text-sm font-[var(--font-display)] font-medium text-[var(--color-text-secondary)]"
-        aria-label="Open search"
+        aria-label={headerCopy?.openSearch || 'Open search'}
       >
         <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <circle cx="11" cy="11" r="8" />
           <path d="m21 21-4.3-4.3" />
         </svg>
-        Search AI prompts
+        {headerCopy?.searchPrompts || 'Search AI prompts'}
       </button>
 
       {navLinks.map((link) => (
@@ -115,11 +155,20 @@ const currentPath = Astro.url.pathname;
           {link.label}
         </a>
       ))}
+      {showLanguageSwitcher && (
+        <a
+          href={languageHref}
+          hreflang={locale === 'pt-BR' ? 'en' : 'pt-BR'}
+          class="surface-glass-ui rounded-[var(--radius-md)] px-4 py-3 text-center text-sm font-[var(--font-display)] font-medium text-[var(--color-text-secondary)]"
+        >
+          {languageLabel}
+        </a>
+      )}
       <a
         href="/submit/"
         class="surface-glass-ui mt-1 rounded-[var(--radius-md)] px-4 py-3 text-center text-sm font-[var(--font-display)] font-medium text-[var(--color-text-primary)]"
       >
-        Submit a Prompt
+        {headerCopy?.submit || 'Submit a Prompt'}
       </a>
     </nav>
   </div>

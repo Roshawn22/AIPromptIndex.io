@@ -1,7 +1,16 @@
 ---
 import LogoMark from './LogoMark.astro';
+import { getLocaleFromPath, getPtBrCommon, type SiteLocale } from '../../lib/localization';
 
-const directoryLinks = [
+interface Props {
+  locale?: SiteLocale;
+}
+
+const locale = Astro.props.locale || getLocaleFromPath(Astro.url.pathname);
+const common = locale === 'pt-BR' ? getPtBrCommon() : null;
+const footerCopy = common?.footer;
+
+const englishDirectoryLinks = [
   { href: '/prompts/', label: 'All Prompts' },
   { href: '/categories/writing/', label: 'Writing Prompts' },
   { href: '/categories/coding/', label: 'Coding Prompts' },
@@ -9,14 +18,29 @@ const directoryLinks = [
   { href: '/categories/image-generation/', label: 'Image Prompts' },
   { href: '/categories/business/', label: 'Business Prompts' },
 ];
+const portugueseDirectoryLinks = [
+  { href: '/pt-BR/', label: 'Início' },
+  { href: '/pt-BR/best/best-ai-prompts/', label: 'Melhores prompts de IA' },
+  { href: '/pt-BR/best/free-ai-prompts/', label: 'Prompts grátis' },
+  { href: '/pt-BR/best/prompt-templates/', label: 'Modelos de prompts' },
+  { href: '/pt-BR/best/gemini-prompts/', label: 'Prompts para Gemini' },
+  { href: '/pt-BR/best/cursor-ai-prompts/', label: 'Prompts para Cursor' }
+];
+const directoryLinks = locale === 'pt-BR' ? portugueseDirectoryLinks : englishDirectoryLinks;
 
-const resourceLinks = [
+const englishResourceLinks = [
   { href: '/guides/', label: 'Guides' },
   { href: '/blog/', label: 'Blog' },
   { href: '/submit/', label: 'Submit a Prompt' },
 ];
+const portugueseResourceLinks = [
+  { href: '/pt-BR/prompts/ai-slop-remover/', label: 'Editor de texto de IA' },
+  { href: '/pt-BR/prompts/business-plan-executive-summary/', label: 'Resumo de plano de negócios' },
+  { href: '/submit/', label: 'Enviar um prompt (em inglês)' }
+];
+const resourceLinks = locale === 'pt-BR' ? portugueseResourceLinks : englishResourceLinks;
 
-const bestPromptsLinks = [
+const englishBestPromptsLinks = [
   { href: '/best/', label: 'All Best-Of Lists' },
   { href: '/best/chatgpt-prompts/', label: 'Best ChatGPT Prompts' },
   { href: '/best/coding-prompts/', label: 'Best Coding Prompts' },
@@ -28,14 +52,23 @@ const bestPromptsLinks = [
   { href: '/best/prompt-templates/', label: 'Prompt Templates' },
   { href: '/prompts/cursor/coding/', label: 'Cursor Coding Prompts' },
 ];
+const bestPromptsLinks = locale === 'pt-BR'
+  ? portugueseDirectoryLinks.slice(1)
+  : englishBestPromptsLinks;
 
-const toolLinks = [
+const englishToolLinks = [
   { href: '/tools/chatgpt/', label: 'ChatGPT Prompts' },
   { href: '/tools/claude/', label: 'Claude Prompts' },
   { href: '/tools/midjourney/', label: 'Midjourney Prompts' },
   { href: '/tools/gemini/', label: 'Gemini Prompts' },
   { href: '/tools/cursor/', label: 'Cursor Prompts' },
 ];
+const toolLinks = locale === 'pt-BR'
+  ? [
+      { href: '/pt-BR/best/gemini-prompts/', label: 'Prompts para Gemini' },
+      { href: '/pt-BR/best/cursor-ai-prompts/', label: 'Prompts para Cursor' },
+    ]
+  : englishToolLinks;
 
 const communityLinks = [
   { href: 'https://www.skool.com/ai-freedom-lab', label: 'AI Freedom Lab', external: true },
@@ -43,11 +76,18 @@ const communityLinks = [
   { href: 'https://aitoolindex.io', label: 'AIToolIndex.io', external: true },
 ];
 
-const companyLinks = [
+const englishCompanyLinks = [
   { href: '/about/', label: 'About' },
   { href: '/contact/', label: 'Contact' },
   { href: '/privacy/', label: 'Privacy Policy' },
 ];
+const companyLinks = locale === 'pt-BR'
+  ? [
+      { href: '/about/', label: 'Sobre (em inglês)' },
+      { href: '/contact/', label: 'Contato (em inglês)' },
+      { href: '/privacy/', label: 'Política de privacidade (em inglês)' },
+    ]
+  : englishCompanyLinks;
 ---
 
 <footer class="border-t border-[var(--color-border)] bg-[var(--color-surface-1)]">
@@ -55,11 +95,11 @@ const companyLinks = [
     <!-- Cross-promo -->
     <div class="mb-12 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-2)] p-6 text-center">
       <p class="text-sm text-[var(--color-text-secondary)]">
-        Looking for AI tools? Visit
+        {footerCopy?.crossPromoPrefix || 'Looking for AI tools? Visit'}
         <a href="https://aitoolindex.io" target="_blank" rel="noopener noreferrer" class="font-[var(--font-display)] font-semibold text-[var(--color-accent)] hover:underline">
           AIToolIndex.io
         </a>
-        — The AI Tools Directory
+        {footerCopy?.crossPromoSuffix || '— The AI Tools Directory'}
       </p>
     </div>
 
@@ -67,7 +107,7 @@ const companyLinks = [
       <!-- Directory -->
       <div>
         <h3 class="mb-4 font-[var(--font-display)] text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
-          Directory
+          {footerCopy?.directory || 'Directory'}
         </h3>
         <ul class="space-y-2.5">
           {directoryLinks.map((link) => (
@@ -83,7 +123,7 @@ const companyLinks = [
       <!-- Resources -->
       <div>
         <h3 class="mb-4 font-[var(--font-display)] text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
-          Resources
+          {footerCopy?.resources || 'Resources'}
         </h3>
         <ul class="space-y-2.5">
           {resourceLinks.map((link) => (
@@ -99,7 +139,7 @@ const companyLinks = [
       <!-- Best Prompts -->
       <div>
         <h3 class="mb-4 font-[var(--font-display)] text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
-          Best Prompts
+          {footerCopy?.bestPrompts || 'Best Prompts'}
         </h3>
         <ul class="space-y-2.5">
           {bestPromptsLinks.map((link) => (
@@ -115,7 +155,7 @@ const companyLinks = [
       <!-- Tools -->
       <div>
         <h3 class="mb-4 font-[var(--font-display)] text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
-          By Tool
+          {footerCopy?.byTool || 'By Tool'}
         </h3>
         <ul class="space-y-2.5">
           {toolLinks.map((link) => (
@@ -131,7 +171,7 @@ const companyLinks = [
       <!-- Community -->
       <div>
         <h3 class="mb-4 font-[var(--font-display)] text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
-          Community
+          {footerCopy?.community || 'Community'}
         </h3>
         <ul class="space-y-2.5">
           {communityLinks.map((link) => (
@@ -147,7 +187,7 @@ const companyLinks = [
       <!-- Company -->
       <div>
         <h3 class="mb-4 font-[var(--font-display)] text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
-          Company
+          {footerCopy?.company || 'Company'}
         </h3>
         <ul class="space-y-2.5">
           {companyLinks.map((link) => (
@@ -171,18 +211,18 @@ const companyLinks = [
       </div>
 
       <p class="text-xs text-[var(--color-text-muted)]">
-        &copy; {new Date().getFullYear()} AIPromptIndex. All rights reserved.
+        &copy; {new Date().getFullYear()} AIPromptIndex. {footerCopy?.rights || 'All rights reserved.'}
       </p>
 
       <div class="flex items-center gap-3">
         <!-- Twitter / X -->
-        <a href="https://twitter.com/aipromptindex" target="_blank" rel="noopener noreferrer" aria-label="Follow on X (Twitter)" class="flex h-8 w-8 items-center justify-center rounded-[var(--radius-sm)] text-[var(--color-text-muted)] transition-colors hover:bg-[var(--color-surface-2)] hover:text-[var(--color-text-primary)]">
+        <a href="https://twitter.com/aipromptindex" target="_blank" rel="noopener noreferrer" aria-label={footerCopy?.followX || 'Follow on X (Twitter)'} class="flex h-8 w-8 items-center justify-center rounded-[var(--radius-sm)] text-[var(--color-text-muted)] transition-colors hover:bg-[var(--color-surface-2)] hover:text-[var(--color-text-primary)]">
           <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
           </svg>
         </a>
         <!-- YouTube -->
-        <a href="https://youtube.com/@AIHeavyOfficial" target="_blank" rel="noopener noreferrer" aria-label="Watch on YouTube" class="flex h-8 w-8 items-center justify-center rounded-[var(--radius-sm)] text-[var(--color-text-muted)] transition-colors hover:bg-[var(--color-surface-2)] hover:text-[var(--color-text-primary)]">
+        <a href="https://youtube.com/@AIHeavyOfficial" target="_blank" rel="noopener noreferrer" aria-label={footerCopy?.watchYoutube || 'Watch on YouTube'} class="flex h-8 w-8 items-center justify-center rounded-[var(--radius-sm)] text-[var(--color-text-muted)] transition-colors hover:bg-[var(--color-surface-2)] hover:text-[var(--color-text-primary)]">
           <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
           </svg>
