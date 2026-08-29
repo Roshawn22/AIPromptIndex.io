@@ -7,7 +7,16 @@ on:
     # the time GitHub actually starts the job.
     - cron: "0 14 * * *"
     - cron: "0 15 * * *"
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Data sources to pull"
+        required: true
+        type: choice
+        default: google_only
+        options:
+          - google_only
+          - full
 
 permissions:
   contents: read
@@ -62,8 +71,23 @@ jobs:
               ;;
           esac
 
-      - name: Preflight verification
+      - name: Resolve manual data-source mode
+        id: mode
         if: steps.gate.outputs.run_pull == 'true'
+        shell: bash
+        env:
+          REQUESTED_MODE: ${{ inputs.mode }}
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" && "$REQUESTED_MODE" != "full" ]]; then
+            echo "run_paid_sources=false" >> "$GITHUB_OUTPUT"
+            echo "Google-only manual run selected. Paid SEO sources will be skipped."
+          else
+            echo "run_paid_sources=true" >> "$GITHUB_OUTPUT"
+            echo "Full data pull selected."
+          fi
+
+      - name: Preflight verification
+        if: steps.gate.outputs.run_pull == 'true' && steps.mode.outputs.run_paid_sources == 'true'
         env:
           AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
           AHREFS_SITE_AUDIT_PROJECT_ID: ${{ secrets.AHREFS_SITE_AUDIT_PROJECT_ID }}
@@ -78,7 +102,7 @@ jobs:
         run: npm run seo:verify:setup
 
       - name: Resolve workflow gates from setup verification
-        if: steps.gate.outputs.run_pull == 'true'
+        if: steps.gate.outputs.run_pull == 'true' && steps.mode.outputs.run_paid_sources == 'true'
         id: preflight
         shell: bash
         run: |
@@ -101,14 +125,14 @@ jobs:
 
       - name: Pull Ahrefs data
         id: pull_ahrefs_core
-        if: steps.gate.outputs.run_pull == 'true' && steps.preflight.outputs.can_run_ahrefs == 'true'
+        if: steps.gate.outputs.run_pull == 'true' && steps.mode.outputs.run_paid_sources == 'true' && steps.preflight.outputs.can_run_ahrefs == 'true'
         env:
           AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
         run: npm run seo:pull:ahrefs
         continue-on-error: true
 
       - name: Pull Ahrefs Site Audit (overview)
-        if: steps.gate.outputs.run_pull == 'true' && steps.preflight.outputs.can_run_site_audit == 'true'
+        if: steps.gate.outputs.run_pull == 'true' && steps.mode.outputs.run_paid_sources == 'true' && steps.preflight.outputs.can_run_site_audit == 'true'
         env:
           AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
           AHREFS_SITE_AUDIT_PROJECT_ID: ${{ secrets.AHREFS_SITE_AUDIT_PROJECT_ID }}
@@ -116,7 +140,7 @@ jobs:
         continue-on-error: true
 
       - name: Pull Ahrefs Rank Tracker
-        if: steps.gate.outputs.run_pull == 'true' && steps.preflight.outputs.can_run_rank_tracker == 'true'
+        if: steps.gate.outputs.run_pull == 'true' && steps.mode.outputs.run_paid_sources == 'true' && steps.preflight.outputs.can_run_rank_tracker == 'true'
         env:
           AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
           AHREFS_RANK_TRACKER_PROJECT_ID: ${{ secrets.AHREFS_RANK_TRACKER_PROJECT_ID }}
@@ -124,7 +148,7 @@ jobs:
         continue-on-error: true
 
       - name: Pull Brand Radar AI visibility data
-        if: steps.gate.outputs.run_pull == 'true' && steps.preflight.outputs.can_run_ahrefs == 'true'
+        if: steps.gate.outputs.run_pull == 'true' && steps.mode.outputs.run_paid_sources == 'true' && steps.preflight.outputs.can_run_ahrefs == 'true'
         env:
           AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
         run: npm run seo:pull:brand-radar
@@ -136,7 +160,7 @@ jobs:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           GOOGLE_SEARCH_CONSOLE_PROPERTY: ${{ secrets.GOOGLE_SEARCH_CONSOLE_PROPERTY }}
         run: npm run seo:pull:gsc
-        continue-on-error: true
+        continue-on-error: ${{ steps.mode.outputs.run_paid_sources == 'true' }}
 
       - name: Pull GA4 data
         if: steps.gate.outputs.run_pull == 'true'
@@ -144,34 +168,34 @@ jobs:
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           GOOGLE_ANALYTICS_PROPERTY_ID: ${{ secrets.GOOGLE_ANALYTICS_PROPERTY_ID }}
         run: npm run seo:pull:ga4
-        continue-on-error: true
+        continue-on-error: ${{ steps.mode.outputs.run_paid_sources == 'true' }}
 
       - name: Generate content briefs
-        if: steps.gate.outputs.run_pull == 'true' && steps.pull_ahrefs_core.outcome == 'success'
+        if: steps.gate.outputs.run_pull == 'true' && steps.mode.outputs.run_paid_sources == 'true' && steps.pull_ahrefs_core.outcome == 'success'
         env:
           AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
         run: npm run seo:content-briefs
         continue-on-error: true
 
       - name: Analyze AI visibility
-        if: steps.gate.outputs.run_pull == 'true'
+        if: steps.gate.outputs.run_pull == 'true' && steps.mode.outputs.run_paid_sources == 'true'
         run: npm run seo:ai-visibility
         continue-on-error: true
 
       - name: Keyword gap analysis
-        if: steps.gate.outputs.run_pull == 'true' && steps.pull_ahrefs_core.outcome == 'success'
+        if: steps.gate.outputs.run_pull == 'true' && steps.mode.outputs.run_paid_sources == 'true' && steps.pull_ahrefs_core.outcome == 'success'
         env:
           AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
         run: npm run seo:keyword-gaps
         continue-on-error: true
 
       - name: Suggest rank tracker keywords
-        if: steps.gate.outputs.run_pull == 'true'
+        if: steps.gate.outputs.run_pull == 'true' && steps.mode.outputs.run_paid_sources == 'true'
         run: npm run seo:rank-suggestions
         continue-on-error: true
 
       - name: Generate SEO brief
-        if: steps.gate.outputs.run_pull == 'true' && steps.pull_ahrefs_core.outcome == 'success'
+        if: steps.gate.outputs.run_pull == 'true' && steps.mode.outputs.run_paid_sources == 'true' && steps.pull_ahrefs_core.outcome == 'success'
         run: npm run seo:brief
 
       - name: Upload SEO output
@@ -183,7 +207,7 @@ jobs:
           if-no-files-found: error
 
       - name: Open or update blocked SEO endpoint issue
-        if: steps.gate.outputs.run_pull == 'true' && (steps.preflight.outputs.blocked_endpoints != '' || steps.pull_ahrefs_core.outcome != 'success')
+        if: steps.gate.outputs.run_pull == 'true' && steps.mode.outputs.run_paid_sources == 'true' && (steps.preflight.outputs.blocked_endpoints != '' || steps.pull_ahrefs_core.outcome != 'success')
         uses: actions/github-script@v7
         env:
           BLOCKED_ENDPOINTS: ${{ steps.preflight.outputs.blocked_endpoints }}
@@ -230,7 +254,7 @@ jobs:
             }
 
       - name: Open or update SEO data pull failure issue
-        if: failure() && steps.gate.outputs.run_pull == 'true'
+        if: failure() && steps.gate.outputs.run_pull == 'true' && steps.mode.outputs.run_paid_sources == 'true'
         uses: actions/github-script@v7
         env:
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
@@ -283,7 +307,7 @@ jobs:
             }
 
       - name: Close SEO data pull failure issue on recovery
-        if: success() && steps.gate.outputs.run_pull == 'true'
+        if: success() && steps.gate.outputs.run_pull == 'true' && steps.mode.outputs.run_paid_sources == 'true'
         uses: actions/github-script@v7
         env:
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}

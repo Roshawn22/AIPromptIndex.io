@@ -81,3 +81,14 @@ for (const workflow of scheduledWorkflows) {
     assert.doesNotMatch(source, /local_hour|date \+%H/);
   });
 }
+
+test('daily manual workflow defaults to Google-only and gates paid sources', () => {
+  const source = fs.readFileSync(new URL('../../../.github/workflows/seo-data-pull.yml', import.meta.url), 'utf8');
+
+  assert.match(source, /default: google_only/);
+  assert.match(source, /echo "run_paid_sources=false"/);
+  assert.match(source, /Pull Ahrefs data[\s\S]*?if: .*steps\.mode\.outputs\.run_paid_sources == 'true'/);
+  assert.match(source, /Pull Brand Radar AI visibility data[\s\S]*?if: .*steps\.mode\.outputs\.run_paid_sources == 'true'/);
+  assert.match(source, /Pull GSC data[\s\S]*?continue-on-error: \$\{\{ steps\.mode\.outputs\.run_paid_sources == 'true' \}\}/);
+  assert.match(source, /Pull GA4 data[\s\S]*?continue-on-error: \$\{\{ steps\.mode\.outputs\.run_paid_sources == 'true' \}\}/);
+});
