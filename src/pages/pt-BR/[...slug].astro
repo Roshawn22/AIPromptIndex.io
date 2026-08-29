@@ -1,0 +1,260 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/global/Header.astro';
+import Footer from '../../components/global/Footer.astro';
+import NewsletterSignup from '../../components/common/NewsletterSignup.astro';
+import PromptCodeBlock from '../../components/prompt/PromptCodeBlock.tsx';
+import PromptViewTracker from '../../components/analytics/PromptViewTracker.tsx';
+import CopyButton from '../../components/ui/CopyButton.tsx';
+import SaveButton from '../../components/prompt/SaveButton.tsx';
+import Badge from '../../components/ui/Badge.astro';
+import bestofPages from '../../data/seo/bestof-pages.json';
+import pilotData from '../../data/i18n/pt-BR/pilot-pages.json';
+import { getPromptsForBestOf } from '../../lib/bestof';
+import { TOOL_DISPLAY_NAMES as toolDisplayNames, CATEGORY_DISPLAY_NAMES as categoryDisplayNames } from '../../lib/constants';
+import {
+  getPtBrCommon,
+  isLocalizationPilotEnabled,
+  isLocalizationPilotIndexable,
+  normalizeLocalizedPath,
+} from '../../lib/localization';
+
+export function getStaticPaths() {
+  if (!isLocalizationPilotEnabled()) return [];
+
+  return Object.entries(pilotData.pages).map(([sourcePath, page]) => ({
+    params: {
+      slug: sourcePath === '/' ? undefined : sourcePath.replace(/^\//, '').replace(/\/$/, ''),
+    },
+    props: { sourcePath, page },
+  }));
+}
+
+const { sourcePath, page } = Astro.props as {
+  sourcePath: string;
+  page: any;
+};
+const common = getPtBrCommon();
+const indexable = isLocalizationPilotIndexable();
+const allPrompts = await getCollection('prompts');
+const sourcePrompt = page.type === 'prompt'
+  ? allPrompts.find((prompt) => prompt.data.slug === page.sourceSlug)
+  : undefined;
+const sourceRoundup = page.type === 'roundup'
+  ? bestofPages.find((roundup) => roundup.slug === page.sourceSlug)
+  : undefined;
+const roundupPrompts = sourceRoundup
+  ? getPromptsForBestOf(allPrompts, sourceRoundup.filter)
+      .sort((left, right) => {
+        if (left.data.isFeatured && !right.data.isFeatured) return -1;
+        if (!left.data.isFeatured && right.data.isFeatured) return 1;
+        return new Date(right.data.dateAdded).getTime() - new Date(left.data.dateAdded).getTime();
+      })
+      .slice(0, 18)
+  : [];
+const localizedCollections = Object.values(pilotData.pages)
+  .filter((candidate: any) => candidate.type === 'roundup');
+const canonicalUrl = normalizeLocalizedPath(`/pt-BR${sourcePath}`);
+const title = page.metaTitle || page.title;
+const description = page.metaDescription || page.description;
+const categoryLabels: Record<string, string> = {
+  writing: 'Escrita',
+  coding: 'Programação',
+  marketing: 'Marketing',
+  'image-generation': 'Geração de imagens',
+  business: 'Negócios',
+  'data-analysis': 'Análise de dados',
+  education: 'Educação',
+  creative: 'Criatividade',
+};
+const difficultyLabels: Record<string, string> = {
+  beginner: 'iniciante',
+  intermediate: 'intermediário',
+  advanced: 'avançado',
+};
+const formatDate = (value?: string) => value
+  ? new Intl.DateTimeFormat('pt-BR', { dateStyle: 'medium', timeZone: 'UTC' }).format(new Date(value))
+  : '';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalUrl={canonicalUrl}
+  noindex={!indexable}
+  loadMonoFont={page.type === 'prompt'}
+  locale="pt-BR"
+  publishedTime={sourcePrompt?.data.dateAdded}
+  articleModifiedTime={sourcePrompt?.data.lastUpdated || sourcePrompt?.data.dateAdded}
+>
+  <Header slot="header" locale="pt-BR" />
+  {sourcePrompt && (
+    <PromptViewTracker
+      client:load
+      promptSlug={sourcePrompt.data.slug}
+      tool={sourcePrompt.data.tool}
+      category={sourcePrompt.data.category}
+    />
+  )}
+
+  {!indexable && (
+    <div class="border-b border-amber-500/20 bg-amber-500/10 px-[var(--space-page)] py-2 text-center text-xs text-amber-700 dark:text-amber-300">
+      {common.content.draftNotice}
+    </div>
+  )}
+
+  {page.type === 'home' && (
+    <>
+      <section class="relative overflow-hidden border-b border-[var(--glass-border)]">
+        <div class="absolute left-1/4 top-0 h-96 w-96 rounded-full bg-teal-500/5 blur-3xl" aria-hidden="true"></div>
+        <div class="mx-auto max-w-7xl px-[var(--space-page)] py-20 text-center sm:py-28">
+          <p class="mb-4 text-sm font-semibold uppercase tracking-[0.16em] text-[var(--color-accent)]">{page.eyebrow}</p>
+          <h1 class="mx-auto max-w-4xl text-balance text-4xl sm:text-6xl">{page.heading}</h1>
+          <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[var(--color-text-secondary)]">{page.intro}</p>
+          <div class="mt-8 flex flex-wrap justify-center gap-3">
+            <a href="/pt-BR/best/best-ai-prompts/" class="rounded-[var(--radius-md)] bg-[var(--color-accent)] px-5 py-3 font-semibold text-white hover:bg-[var(--color-accent-hover)]">
+              {page.primaryCta}
+            </a>
+            <a href="/pt-BR/best/free-ai-prompts/" class="surface-glass-ui rounded-[var(--radius-md)] px-5 py-3 font-semibold text-[var(--color-text-primary)]">
+              {page.secondaryCta}
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="mx-auto max-w-7xl px-[var(--space-page)] py-16">
+        <h2>{page.sectionHeading}</h2>
+        <p class="mt-2 max-w-3xl text-[var(--color-text-secondary)]">{page.sectionIntro}</p>
+        <div class="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {localizedCollections.map((collection: any) => (
+            <a href={`/pt-BR${collection.sourcePath}`} class="surface-glass-prominent rounded-[var(--radius-lg)] p-6 transition hover:-translate-y-0.5 hover:border-[var(--color-accent-muted)]">
+              <h3 class="text-lg">{collection.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">{collection.description}</p>
+              <span class="mt-4 inline-flex text-sm font-semibold text-[var(--color-accent)]">{common.content.browseCollection} &rarr;</span>
+            </a>
+          ))}
+        </div>
+      </section>
+      <NewsletterSignup locale="pt-BR" />
+    </>
+  )}
+
+  {page.type === 'roundup' && sourceRoundup && (
+    <section class="mx-auto max-w-7xl px-[var(--space-page)] py-10">
+      <nav aria-label="Breadcrumb" class="mb-8 text-sm text-[var(--color-text-muted)]">
+        <a href="/pt-BR/" class="hover:text-[var(--color-accent)]">{common.content.home}</a>
+        <span aria-hidden="true"> / </span>
+        <span>{common.content.bestPrompts}</span>
+      </nav>
+      <div class="max-w-4xl">
+        <h1>{page.title}</h1>
+        <p class="mt-3 text-lg text-[var(--color-text-secondary)]">{roundupPrompts.length} {common.content.copyReady}</p>
+        <p class="mt-5 leading-relaxed text-[var(--color-text-secondary)]">{page.intro}</p>
+      </div>
+      <aside class="mt-6 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-4 text-sm text-[var(--color-text-secondary)]">
+        {common.content.originalLibraryNotice}
+      </aside>
+
+      <ol class="mt-10 grid list-none gap-4 p-0 sm:grid-cols-2 lg:grid-cols-3">
+        {roundupPrompts.map((prompt, index) => (
+          <li class="relative">
+            <span class="absolute -left-2 -top-2 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-[var(--color-accent)] text-xs font-bold text-white">{index + 1}</span>
+            <a lang="en" href={`/prompts/${prompt.data.slug}/`} class="surface-glass-ui block h-full rounded-[var(--radius-card)] p-5 transition hover:-translate-y-0.5 hover:border-[var(--color-accent-muted)]">
+              <div class="mb-3 flex flex-wrap gap-2">
+                <Badge variant="teal" size="sm">{toolDisplayNames[prompt.data.tool] || prompt.data.tool}</Badge>
+                <Badge variant="neutral" size="sm">{difficultyLabels[prompt.data.difficulty] || prompt.data.difficulty}</Badge>
+              </div>
+              <h2 class="text-base">{prompt.data.title}</h2>
+              <p class="mt-2 line-clamp-3 text-sm text-[var(--color-text-secondary)]">{prompt.data.description}</p>
+              <span class="mt-4 inline-flex text-sm font-semibold text-[var(--color-accent)]">{common.content.viewPrompt} &rarr;</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+      <div class="mt-12">
+        <NewsletterSignup locale="pt-BR" compact />
+      </div>
+    </section>
+  )}
+
+  {page.type === 'prompt' && sourcePrompt && (
+    <article class="mx-auto max-w-7xl px-[var(--space-page)] py-10">
+      <nav aria-label="Breadcrumb" class="mb-8 text-sm text-[var(--color-text-muted)]">
+        <a href="/pt-BR/" class="hover:text-[var(--color-accent)]">{common.content.home}</a>
+        <span aria-hidden="true"> / </span>
+        <span>{categoryLabels[sourcePrompt.data.category] || categoryDisplayNames[sourcePrompt.data.category] || sourcePrompt.data.category}</span>
+      </nav>
+
+      <div class="lg:grid lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-10">
+        <div>
+          <div class="mb-4 flex flex-wrap gap-2">
+            <Badge variant="teal" size="md">{toolDisplayNames[sourcePrompt.data.tool] || sourcePrompt.data.tool}</Badge>
+            <Badge variant="neutral" size="md">{difficultyLabels[sourcePrompt.data.difficulty] || sourcePrompt.data.difficulty}</Badge>
+          </div>
+          <h1>{page.title}</h1>
+          <p class="mb-6 mt-3 text-sm text-[var(--color-text-muted)]">
+            {common.content.added} {formatDate(sourcePrompt.data.dateAdded)}
+            {sourcePrompt.data.lastUpdated && ` · ${common.content.updated} ${formatDate(sourcePrompt.data.lastUpdated)}`}
+          </p>
+
+          <PromptCodeBlock
+            client:load
+            promptText={page.promptText}
+            promptSlug={sourcePrompt.data.slug}
+            tool={sourcePrompt.data.tool}
+            category={sourcePrompt.data.category}
+            copyLabel={common.content.copyPrompt}
+            copiedLabel={common.content.copied}
+          />
+          <div class="my-6 flex flex-wrap gap-3">
+            <CopyButton
+              client:load
+              text={page.promptText}
+              label={common.content.copyPrompt}
+              copiedLabel={common.content.copied}
+              size="lg"
+              promptSlug={sourcePrompt.data.slug}
+              tool={sourcePrompt.data.tool}
+              category={sourcePrompt.data.category}
+            />
+            <SaveButton client:load promptSlug={sourcePrompt.data.slug} locale="pt-BR" />
+          </div>
+
+          <section class="mt-8">
+            <h2 class="text-xl">{common.content.aboutPrompt}</h2>
+            <p class="mt-3 leading-relaxed text-[var(--color-text-secondary)]">{page.description}</p>
+          </section>
+
+          <section class="mt-8">
+            <h2 class="text-xl">{common.content.variables}</h2>
+            <div class="mt-4 space-y-3">
+              {page.variables.map((variable: any) => (
+                <div class="surface-solid-content rounded-[var(--radius-md)] p-4">
+                  <code class="rounded bg-teal-500/10 px-2 py-0.5 text-sm text-[var(--color-accent)]">[{variable.name}]</code>
+                  <p class="mt-2 text-sm text-[var(--color-text-secondary)]">{variable.description}</p>
+                  <p class="mt-1 text-xs text-[var(--color-text-muted)]">{common.content.example}: {variable.example}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section class="mt-8">
+            <h2 class="text-xl">{common.content.tips}</h2>
+            <ul class="mt-4 space-y-3 text-[var(--color-text-secondary)]">
+              {page.tips.map((tip: string) => <li class="flex gap-2"><span class="text-[var(--color-accent)]">✓</span><span>{tip}</span></li>)}
+            </ul>
+          </section>
+        </div>
+
+        <aside class="mt-10 lg:mt-0">
+          <div class="surface-glass-prominent sticky top-24 rounded-[var(--radius-lg)] p-5">
+            <NewsletterSignup locale="pt-BR" compact />
+          </div>
+        </aside>
+      </div>
+    </article>
+  )}
+
+  <Footer slot="footer" locale="pt-BR" />
+</BaseLayout>
