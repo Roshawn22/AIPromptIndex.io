@@ -1,0 +1,11 @@
+{
+  "name": "AIPromptIndex",
+  "install": "npm ci",
+  "terminals": [
+    {
+      "name": "astro-dev",
+      "command": "npm run dev -- --host 127.0.0.1 --port 4321"
+    }
+  ],
+  "ports": [4321]
+}
