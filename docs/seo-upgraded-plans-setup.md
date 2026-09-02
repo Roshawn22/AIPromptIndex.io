@@ -1,40 +1,39 @@
-# Ahrefs-First SEO Stack Setup
+# OpenSEO + first-party SEO stack
 
-This repo now treats **Ahrefs as the system of record** for third-party SEO automation on `aipromptindex.io`.
+AIPromptIndex scheduled SEO jobs treat **Google Search Console and GA4 as first-party truth** and **OpenSEO (DataForSEO Labs)** as the third-party research source.
 
-Semrush remains supported only as an **optional manual or temporary workflow**. It is no longer part of the default scheduled automation path because the Semrush API and MCP model require separate unit spend that does not fit the current single-site budget.
+Ahrefs is **opt-in only**. The free Ahrefs plan cannot power these jobs. Leave `SEO_ENABLE_AHREFS=false` unless you are back on a paid Ahrefs API plan.
 
-## Current Decision
+Semrush remains a **manual** helper. It is not part of the default daily path.
 
-- Primary stack: **Ahrefs + Google Search Console + GA4**
-- Default scheduled automation: **Ahrefs-first only**
-- Semrush role: **manual-only or temporary until renewal**
-- Renewal rule:
-  Keep Semrush only if there is one Semrush-only workflow you use every week and would genuinely miss. Otherwise, let it expire and stay consolidated on Ahrefs.
+## Current decision
 
-## Status Snapshot
+- Primary stack: **GSC + GA4 + OpenSEO/DataForSEO**
+- Default scheduled automation: first-party pulls every day; OpenSEO when `DATAFORSEO_API_KEY` is set
+- Ahrefs: off unless `SEO_ENABLE_AHREFS=true`
+- Semrush: optional `seo:pull:hybrid` / `seo:pull:semrush-manual`
+
+## Status snapshot
 
 | System | Status | Notes |
 |---|---|---|
-| Ahrefs Site Audit | ✅ Active | Main crawl health source |
-| Ahrefs Rank Tracker | ✅ Active | Main rank monitoring source |
-| Ahrefs Site Explorer / Keywords Explorer / Backlinks | ✅ Active | Main research source |
-| GSC | ✅ Active | First-party index and query truth |
-| GA4 | ✅ Active | First-party traffic and event truth |
-| Semrush Projects | Optional | Keep only if a manual UI workflow still earns its keep |
-| Semrush API / MCP | De-prioritized | Not part of the default automation path |
+| GSC | Required | Query and page truth; briefs are gated on a successful GSC pull |
+| GA4 | Required locally, continue-on-error in CI | Traffic and events |
+| OpenSEO / DataForSEO | Default third-party | Domain rank, ranked keywords, relevant pages, competitors, weekly keyword ideas |
+| Ahrefs Site Explorer / Keywords Explorer / Site Audit / Rank Tracker | Opt-in | Ignored by scheduled jobs unless `SEO_ENABLE_AHREFS=true` |
+| Semrush | Optional | Manual comparison only |
 
-## Ahrefs Budget Snapshot
+## Required GitHub secret
 
-- Current Standard plan budget: `400,000` shared monthly API units.
-- Current Standard row cap: `250` rows/request.
-- Shared pool rule: Ahrefs API v3, Ahrefs MCP, and Ahrefs Connect all spend from the same API unit pool.
-- April 28 reference benchmark: a full `aitoolindex.io` Ahrefs pass generated `96` files and `1,888` rows for about `9,506` units based on before/after usage.
-- Practical default: use fuller Ahrefs pulls when they answer a concrete SEO question, but keep backlink and keyword exports budgeted because Ahrefs charges by row and field cost.
+Add **`DATAFORSEO_API_KEY`** to the repo secrets. Use the DataForSEO API Access value (Base64 `login:password`) or the raw `login:password` string. Scripts also accept `OPENSEO_DATAFORSEO_API_KEY` or `DATAFORSEO_LOGIN` + `DATAFORSEO_PASSWORD`.
 
-## Default Automation
+Without this secret:
 
-These are now the repo’s default commands:
+- Daily GSC / GA4 / brief still run
+- OpenSEO steps skip with `ok: true`
+- Keyword research falls back to GSC rows
+
+## Default automation
 
 ```bash
 npm run seo:pull:daily
@@ -43,78 +42,20 @@ npm run seo:pull:monthly
 npm run seo:pull:all
 ```
 
-What they do now:
-
-- `seo:pull:daily`
-  Ahrefs baseline + Ahrefs Site Audit overview + Ahrefs Rank Tracker + GSC + GA4 + brief + Medium syndication
-- `seo:pull:weekly`
-  Ahrefs deep pull: Keywords Explorer, Backlinks Deep, full Site Audit, Brand Radar. Keep larger keyword/backlink exports explicit with CLI limits rather than raising heavy defaults automatically.
-- `seo:pull:monthly`
-  Ahrefs Batch Analysis only
-- `seo:pull:all`
-  Ahrefs + Brand Radar + GSC + GA4 + brief + Medium syndication
-
-## Optional Semrush Commands
-
-Semrush helpers still exist for manual use:
-
-```bash
-npm run seo:pull:semrush
-npm run seo:pull:semrush-supplemental
-npm run seo:pull:semrush-projects
-npm run seo:cross-validate
-```
-
-Convenience wrappers:
-
-```bash
-npm run seo:pull:semrush-manual
-npm run seo:pull:hybrid
-```
-
-Use them only if you intentionally keep Semrush for a narrow workflow.
-
-- `seo:pull:semrush-manual`
-  Runs the Semrush domain/project pulls and keyword cross-validation on demand
-- `seo:pull:hybrid`
-  Runs the old mixed Ahrefs + Semrush path when you explicitly want a temporary side-by-side comparison
-
-## Required Environment
-
-Required for the default stack:
-
-```bash
-AHREFS_API_TOKEN=
-AHREFS_SITE_AUDIT_PROJECT_ID=
-AHREFS_RANK_TRACKER_PROJECT_ID=
-GOOGLE_SERVICE_ACCOUNT_JSON=
-GOOGLE_SEARCH_CONSOLE_PROPERTY=
-GOOGLE_ANALYTICS_PROPERTY_ID=
-PUBLIC_GOOGLE_SITE_VERIFICATION=
-PUBLIC_AHREFS_SITE_VERIFICATION=
-PUBLIC_GA_MEASUREMENT_ID=
-PUBLIC_SITE_URL=https://aipromptindex.io
-```
-
-Optional only if you keep Semrush:
-
-```bash
-SEMRUSH_API_KEY=
-SEMRUSH_PROJECT_ID=
-SEMRUSH_POSITION_TRACKING_CAMPAIGN_ID=
-SEMRUSH_SITE_AUDIT_CAMPAIGN_ID=
-SEMRUSH_ONPAGE_CAMPAIGN_ID=
-```
+- `seo:pull:daily` — GSC + GA4 + OpenSEO (no-op without a key) + brief
+- `seo:pull:weekly` — OpenSEO baseline + weekly keyword ideas, backlinks summary, competitor keywords
+- `seo:pull:monthly` — OpenSEO snapshot (Ahrefs batch analysis only if opt-in)
+- `seo:pull:all` — same as daily
 
 ## GitHub Actions
 
-Three workflows remain scheduled, but they now follow the Ahrefs-first decision:
-
 | Workflow | Schedule | Purpose |
 |---|---|---|
-| `.github/workflows/seo-data-pull.yml` | Daily 7 AM PT | Ahrefs + first-party data + brief + Medium |
-| `.github/workflows/seo-weekly.yml` | Mondays 7 AM PT | Ahrefs deep research |
-| `.github/workflows/seo-monthly.yml` | 1st of month 7 AM PT | Ahrefs batch analysis + archive |
+| `.github/workflows/seo-data-pull.yml` | Daily 7 AM PT | GSC + GA4 + OpenSEO + briefs |
+| `.github/workflows/seo-weekly.yml` | Mondays 7 AM PT | OpenSEO keyword ideas and competitor keywords |
+| `.github/workflows/seo-monthly.yml` | 1st of month 7 AM PT | OpenSEO snapshot + archive |
+
+Issue **#5** (`ahrefs.api` blocked) is leftover from the Ahrefs-first path. Daily jobs ignore Ahrefs-only blocks and close that issue when the body is Ahrefs-only. A new blocked-endpoint issue is opened only for OpenSEO/DataForSEO or other remaining APIs.
 
 Manual trigger:
 
@@ -124,19 +65,30 @@ gh workflow run seo-weekly.yml
 gh workflow run seo-monthly.yml
 ```
 
-## What To Keep Using Semrush For, If Anything
+## Optional Semrush
 
-Only keep it for one specific manual job, such as:
+```bash
+npm run seo:pull:semrush-manual
+npm run seo:pull:hybrid
+```
 
-- a manual **On-Page SEO Checker** review in the UI
-- a manual **Site Audit** view you prefer over Ahrefs for specific diagnostics
-- a manual reporting screen you actually open every week
+Use these only for a temporary side-by-side comparison.
 
-If you cannot name a recurring weekly workflow like that, Semrush should not be renewed for this project.
+## Local env
+
+See `.env.example`. Required for first-party pulls:
+
+```bash
+GOOGLE_SERVICE_ACCOUNT_JSON=
+GOOGLE_SEARCH_CONSOLE_PROPERTY=sc-domain:aipromptindex.io
+GOOGLE_ANALYTICS_PROPERTY_ID=
+PUBLIC_GOOGLE_SITE_VERIFICATION=
+PUBLIC_GA_MEASUREMENT_ID=
+PUBLIC_SITE_URL=https://aipromptindex.io
+DATAFORSEO_API_KEY=
+```
 
 ## Verification
-
-Run this after env changes or before relying on automation:
 
 ```bash
 npm run seo:verify:setup
@@ -145,7 +97,8 @@ npm run seo:verify:live
 
 Interpretation:
 
-- Ahrefs missing or blocked: fix immediately
-- GSC / GA4 missing: fix immediately
-- Semrush missing: acceptable, because it is now optional
-- Semrush blocked by units: acceptable for the default stack, because Semrush is no longer in the critical path
+- GSC missing: fix immediately
+- GA4 missing: fix immediately for local setup; CI continues if GA4 fails
+- OpenSEO / DataForSEO missing: jobs still run; research rows fall back to GSC until the secret is set
+- Ahrefs missing: expected
+- Semrush missing: expected

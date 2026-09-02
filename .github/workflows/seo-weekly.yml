@@ -1,7 +1,7 @@
 name: SEO Weekly Pull
 
-# Deep weekly pull: Ahrefs keywords explorer, backlinks-deep, site audit full crawl,
-# and Brand Radar. Runs Monday 7 AM Pacific.
+# Deep weekly pull: OpenSEO keyword ideas, backlinks summary, and competitor keywords.
+# Runs Monday 7 AM Pacific.
 
 on:
   schedule:
@@ -22,7 +22,7 @@ concurrency:
 
 jobs:
   weekly:
-    name: Weekly SEO Deep Pull (Ahrefs)
+    name: Weekly SEO Deep Pull (OpenSEO)
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
@@ -63,9 +63,8 @@ jobs:
       - name: Preflight verification
         if: steps.gate.outputs.run == 'true'
         env:
-          AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
-          AHREFS_SITE_AUDIT_PROJECT_ID: ${{ secrets.AHREFS_SITE_AUDIT_PROJECT_ID }}
-          AHREFS_RANK_TRACKER_PROJECT_ID: ${{ secrets.AHREFS_RANK_TRACKER_PROJECT_ID }}
+          DATAFORSEO_API_KEY: ${{ secrets.DATAFORSEO_API_KEY }}
+          SEO_ENABLE_AHREFS: "false"
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           GOOGLE_ANALYTICS_PROPERTY_ID: ${{ secrets.GOOGLE_ANALYTICS_PROPERTY_ID }}
           GOOGLE_SEARCH_CONSOLE_PROPERTY: ${{ secrets.GOOGLE_SEARCH_CONSOLE_PROPERTY }}
@@ -90,44 +89,28 @@ jobs:
           import fs from 'node:fs';
           const filePath = process.env.VERIFICATION_FILE;
           const report = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-          console.log(`can_run_ahrefs=${report.summary.workflowGates.canRunAhrefs}`);
+          const gates = report.summary.workflowGates || {};
+          console.log(`can_run_openseo=${gates.canRunOpenSeo === true}`);
           console.log(`blocked_endpoints=${(report.summary.blockedEndpoints || []).join(',')}`);
           console.log(`overall_status=${report.summary.overallStatus}`);
           EOF
 
-      - name: Pull Ahrefs (site-explorer baseline for join)
-        if: steps.gate.outputs.run == 'true' && steps.preflight.outputs.can_run_ahrefs == 'true'
+      - name: Pull OpenSEO baseline
+        if: steps.gate.outputs.run == 'true' && steps.preflight.outputs.can_run_openseo == 'true'
         env:
-          AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
-        run: npm run seo:pull:ahrefs
+          DATAFORSEO_API_KEY: ${{ secrets.DATAFORSEO_API_KEY }}
+        run: npm run seo:pull:openseo
 
-      - name: Pull Ahrefs Keywords Explorer
-        if: steps.gate.outputs.run == 'true' && steps.preflight.outputs.can_run_ahrefs == 'true'
+      - name: Pull OpenSEO weekly research
+        if: steps.gate.outputs.run == 'true' && steps.preflight.outputs.can_run_openseo == 'true'
         env:
-          AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
-        run: npm run seo:pull:ahrefs-keywords-explorer
+          DATAFORSEO_API_KEY: ${{ secrets.DATAFORSEO_API_KEY }}
+        run: npm run seo:pull:openseo:weekly
         continue-on-error: true
 
-      - name: Pull Ahrefs Backlinks (deep)
-        if: steps.gate.outputs.run == 'true' && steps.preflight.outputs.can_run_ahrefs == 'true'
-        env:
-          AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
-        run: npm run seo:pull:ahrefs-backlinks-deep
-        continue-on-error: true
-
-      - name: Pull Ahrefs Site Audit (full)
-        if: steps.gate.outputs.run == 'true' && steps.preflight.outputs.can_run_ahrefs == 'true'
-        env:
-          AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
-          AHREFS_SITE_AUDIT_PROJECT_ID: ${{ secrets.AHREFS_SITE_AUDIT_PROJECT_ID }}
-        run: npm run seo:pull:ahrefs-site-audit -- --mode=full
-        continue-on-error: true
-
-      - name: Pull Ahrefs Brand Radar
-        if: steps.gate.outputs.run == 'true' && steps.preflight.outputs.can_run_ahrefs == 'true'
-        env:
-          AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
-        run: npm run seo:pull:brand-radar
+      - name: Keyword gap analysis
+        if: steps.gate.outputs.run == 'true'
+        run: npm run seo:keyword-gaps
         continue-on-error: true
 
       - name: Upload SEO output
@@ -148,7 +131,9 @@ jobs:
         with:
           script: |
             const title = 'SEO API Endpoint Blocked';
-            const blocked = process.env.BLOCKED_ENDPOINTS.split(',').filter(Boolean);
+            const blocked = process.env.BLOCKED_ENDPOINTS.split(',').filter(Boolean)
+              .filter((name) => !name.startsWith('ahrefs.'));
+            if (blocked.length === 0) return;
             const body = [
               'One or more SEO API surfaces are blocked in the scheduled automation.',
               '',
@@ -156,7 +141,7 @@ jobs:
               `- First observed in this run: ${process.env.RUN_AT}`,
               `- Run: ${process.env.RUN_URL}`,
               '',
-              'The workflow used `setup-verification.json` to skip blocked endpoints while continuing the Ahrefs-first weekly pull.'
+              'The weekly workflow now uses OpenSEO/DataForSEO. Ahrefs blocks are ignored.'
             ].join('\n');
 
             const { owner, repo } = context.repo;
