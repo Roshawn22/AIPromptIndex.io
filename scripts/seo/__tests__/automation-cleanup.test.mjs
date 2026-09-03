@@ -25,7 +25,19 @@ test('deterministic SEO pulls do not depend on removed AI or Medium automation',
 
   assert.doesNotMatch(dailyWorkflow, /anthropic|medium|syndicat/i);
   assert.match(dailyWorkflow, /permissions:\n  contents: read\n  issues: write/);
+  assert.match(dailyWorkflow, /Pull SEO Data \(GSC \+ GA4 \+ OpenSEO\)/);
+  assert.match(dailyWorkflow, /DATAFORSEO_API_KEY/);
+  assert.match(dailyWorkflow, /npm run seo:pull:openseo/);
+  assert.doesNotMatch(dailyWorkflow, /npm run seo:pull:ahrefs[^\-]/);
   assert.doesNotMatch(envExample, /ANTHROPIC_API_KEY|ANTHROPIC_SEO_MODEL|MEDIUM_API_TOKEN/);
+  assert.match(envExample, /DATAFORSEO_API_KEY=/);
+
+  const weeklyWorkflow = readRepoFile('.github/workflows/seo-weekly.yml');
+  const monthlyWorkflow = readRepoFile('.github/workflows/seo-monthly.yml');
+  assert.match(weeklyWorkflow, /Weekly SEO Deep Pull \(OpenSEO\)/);
+  assert.match(monthlyWorkflow, /Monthly SEO Research Pull \(OpenSEO\)/);
+  assert.match(packageJson.scripts['seo:pull:daily'], /seo:pull:openseo/);
+  assert.doesNotMatch(packageJson.scripts['seo:pull:daily'], /seo:pull:ahrefs/);
 
   assert.equal(fs.existsSync(new URL('.github/workflows/seo-ai-ops.yml', repoUrl)), false);
   assert.equal(fs.existsSync(new URL('scripts/seo/run-ai-ops.mjs', repoUrl)), false);

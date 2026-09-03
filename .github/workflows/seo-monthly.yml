@@ -1,6 +1,7 @@
 name: SEO Monthly Pull
 
-# High-credit pulls run once a month: Ahrefs batch analysis. Runs 1st of month at 7 AM Pacific.
+# Monthly OpenSEO snapshot plus archive. Runs 1st of month at 7 AM Pacific.
+# Ahrefs batch analysis is opt-in only (SEO_ENABLE_AHREFS=true on a paid API plan).
 
 on:
   schedule:
@@ -21,7 +22,7 @@ concurrency:
 
 jobs:
   monthly:
-    name: Monthly SEO Research Pull (Ahrefs)
+    name: Monthly SEO Research Pull (OpenSEO)
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
@@ -62,9 +63,8 @@ jobs:
       - name: Preflight verification
         if: steps.gate.outputs.run == 'true'
         env:
-          AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
-          AHREFS_SITE_AUDIT_PROJECT_ID: ${{ secrets.AHREFS_SITE_AUDIT_PROJECT_ID }}
-          AHREFS_RANK_TRACKER_PROJECT_ID: ${{ secrets.AHREFS_RANK_TRACKER_PROJECT_ID }}
+          DATAFORSEO_API_KEY: ${{ secrets.DATAFORSEO_API_KEY }}
+          SEO_ENABLE_AHREFS: "false"
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           GOOGLE_ANALYTICS_PROPERTY_ID: ${{ secrets.GOOGLE_ANALYTICS_PROPERTY_ID }}
           GOOGLE_SEARCH_CONSOLE_PROPERTY: ${{ secrets.GOOGLE_SEARCH_CONSOLE_PROPERTY }}
@@ -89,15 +89,24 @@ jobs:
           import fs from 'node:fs';
           const filePath = process.env.VERIFICATION_FILE;
           const report = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-          console.log(`can_run_ahrefs=${report.summary.workflowGates.canRunAhrefs}`);
+          const gates = report.summary.workflowGates || {};
+          console.log(`can_run_openseo=${gates.canRunOpenSeo === true}`);
+          console.log(`can_run_ahrefs=${gates.canRunAhrefs === true}`);
           console.log(`blocked_endpoints=${(report.summary.blockedEndpoints || []).join(',')}`);
           console.log(`overall_status=${report.summary.overallStatus}`);
           EOF
 
-      - name: Pull Ahrefs Batch Analysis
+      - name: Pull OpenSEO monthly snapshot
+        if: steps.gate.outputs.run == 'true' && steps.preflight.outputs.can_run_openseo == 'true'
+        env:
+          DATAFORSEO_API_KEY: ${{ secrets.DATAFORSEO_API_KEY }}
+        run: npm run seo:pull:openseo
+
+      - name: Pull Ahrefs Batch Analysis (opt-in)
         if: steps.gate.outputs.run == 'true' && steps.preflight.outputs.can_run_ahrefs == 'true'
         env:
           AHREFS_API_TOKEN: ${{ secrets.AHREFS_API_TOKEN }}
+          SEO_ENABLE_AHREFS: "true"
         run: npm run seo:pull:ahrefs-batch-analysis
         continue-on-error: true
 
@@ -132,7 +141,9 @@ jobs:
         with:
           script: |
             const title = 'SEO API Endpoint Blocked';
-            const blocked = process.env.BLOCKED_ENDPOINTS.split(',').filter(Boolean);
+            const blocked = process.env.BLOCKED_ENDPOINTS.split(',').filter(Boolean)
+              .filter((name) => !name.startsWith('ahrefs.'));
+            if (blocked.length === 0) return;
             const body = [
               'One or more SEO API surfaces are blocked in the scheduled automation.',
               '',
@@ -140,7 +151,7 @@ jobs:
               `- First observed in this run: ${process.env.RUN_AT}`,
               `- Run: ${process.env.RUN_URL}`,
               '',
-              'The workflow used `setup-verification.json` to skip blocked endpoints while continuing the Ahrefs-first monthly pull.'
+              'The monthly workflow now uses OpenSEO/DataForSEO. Ahrefs blocks are ignored unless SEO_ENABLE_AHREFS is set.'
             ].join('\n');
 
             const { owner, repo } = context.repo;

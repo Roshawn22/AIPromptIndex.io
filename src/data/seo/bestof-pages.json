@@ -299,24 +299,65 @@
     "metaTitle": "Best Stable Diffusion Prompts & Negative Prompts (2026)",
     "metaDescription": "Browse the best Stable Diffusion prompts and negative prompts for portraits, anime, photorealism, and concept art. Copy settings for 2026.",
     "keyword": "stable diffusion prompts",
-    "intro": "Stable Diffusion's open-source architecture gives you more control over AI image generation than any other tool, but that control comes with a steeper learning curve. Knowing which keywords, weights, and negative prompts to use makes the difference between mediocre and stunning results. These curated Stable Diffusion prompts include positive prompts, negative prompts, and recommended sampler and model settings for each style. Whether you want photorealistic portraits, anime illustrations, or concept art, these prompts give you a proven starting point.",
+    "intro": "Stable Diffusion still rewards prompt engineering more than Midjourney or DALL-E. These prompts are written for SDXL and Flux-class checkpoints, not leftover SD 1.5 token soup. Each listing is a starting recipe: subject, style, lighting, and the negative prompt that keeps extra fingers, watermarks, and mushy text out of the render.",
+    "lastReviewed": "2026-09-02",
+    "exampleSlugs": [
+      "sd-character-design-sheet",
+      "sci-fi-concept-art-prompt",
+      "sd-food-photography-style"
+    ],
+    "sections": [
+      {
+        "heading": "SD 1.5 vs SDXL vs Flux: prompt the model you actually run",
+        "body": "SD 1.5 still likes short, comma-separated tags and heavy quality tokens. SDXL wants fuller natural-language scenes plus a style/composition clause. Flux-class models often ignore classic quality-tag spam and respond better to photographic or illustration language. If a prompt on this page looks 'wordy,' it is usually an SDXL/Flux prompt; if it is a tight tag list, treat it as 1.5 and drop the extras when you switch checkpoints."
+      },
+      {
+        "heading": "Negative prompts that actually change the image",
+        "body": "A generic negative like 'low quality, blurry' barely moves SDXL. Pair the subject with the failure mode: portraits need extra fingers, extra limbs, fused eyes; product shots need watermark, logo, text, jpeg artifacts; anime needs western anatomy, photoreal skin, 3d render. Keep the negative shorter than the positive prompt. If the model starts deleting the subject, you over-weighted the negative."
+      },
+      {
+        "heading": "Sampler, CFG, and when to stop rolling seeds",
+        "body": "For SDXL, Euler a or DPM++ 2M Karras at CFG 4–7 is a sane default. Push CFG above 10 only when the prompt is being ignored; that is also when you'll get crunchy artifacts. Lock a seed once composition works, then change one clause at a time. Do not chase 40-step 'more detail' when the checkpoint or LoRA is the real style lever."
+      }
+    ],
+    "relatedLinks": [
+      {
+        "href": "/best/midjourney-prompts/",
+        "label": "Best Midjourney prompts",
+        "note": "Use this when you want stylized art without sampler and negative-prompt control."
+      },
+      {
+        "href": "/best/dall-e-art-prompts/",
+        "label": "Best DALL-E art prompts",
+        "note": "Natural-language image prompts that do not use Stable Diffusion weighting."
+      },
+      {
+        "href": "/best/image-generation-prompts/",
+        "label": "Image generation prompt roundup",
+        "note": "Cross-tool image prompts if you are still choosing a generator."
+      }
+    ],
     "tips": [
-      "Pair every positive prompt with a tailored negative prompt — generic negatives work, but style-specific negatives produce dramatically better results.",
-      "Use token weighting (word:1.3) to emphasize important elements and (word:0.7) to de-emphasize secondary details.",
-      "Experiment with different checkpoint models from Civitai — the model matters as much as the prompt for achieving specific styles."
+      "Name the checkpoint family in your notes (SD 1.5, SDXL, Flux) before you copy a prompt; the same text does not travel cleanly across all three.",
+      "Write the negative prompt for the failure you actually see: hands, text, watermark, or wrong medium — not a 40-token junk list.",
+      "Change one weighted token or LoRA at a time after you lock composition. Sampler hopping hides whether the prompt worked."
     ],
     "faqs": [
       {
-        "q": "What are the best Stable Diffusion prompts?",
-        "a": "The best Stable Diffusion prompts use quality tags, specific art style references, weighted tokens, and detailed negative prompts. They also specify the model, sampler, and CFG scale for reproducible results."
+        "q": "What are the best Stable Diffusion prompts in 2026?",
+        "a": "The best prompts match the checkpoint: natural-language scenes for SDXL and Flux, tighter tag lists for SD 1.5, plus a short negative prompt aimed at the subject's failure modes. Quality-tag spam is no longer a substitute for a specific subject, lighting, and camera or medium clause."
       },
       {
         "q": "How do negative prompts work in Stable Diffusion?",
-        "a": "Negative prompts tell the model what to avoid generating. Common entries include 'low quality, blurry, deformed hands, extra fingers, watermark.' Customize negatives based on your subject for the cleanest outputs."
+        "a": "The negative prompt is a second conditioning stream that tells the sampler what to suppress. Use it for anatomy errors, watermarks, and the wrong medium. If you paste a huge shared negative, SDXL often ignores it or starts deleting the subject; keep it shorter than the positive prompt."
       },
       {
-        "q": "Is Stable Diffusion free to use?",
-        "a": "Yes. Stable Diffusion is open source and can run locally on a GPU with at least 6GB VRAM. Cloud options like RunDiffusion and services on Civitai offer pay-per-use access if you do not have local hardware."
+        "q": "Should I use Stable Diffusion or Midjourney?",
+        "a": "Use Stable Diffusion when you need local control, LoRAs, inpainting, or repeatable seeds. Use Midjourney when you want a strong default aesthetic and do not want to manage checkpoints. The two prompt languages are not interchangeable."
+      },
+      {
+        "q": "Is Stable Diffusion still free?",
+        "a": "The model weights remain open. You can run locally on a GPU with enough VRAM, or pay for a hosted ComfyUI / Automatic1111 / Forge box. Civitai checkpoints and LoRAs are a separate license question — check each file before commercial use."
       }
     ]
   },
@@ -357,24 +398,65 @@
     "metaTitle": "Best Gemini Prompts (2026) — Google AI at Its Best",
     "metaDescription": "Curated Google Gemini prompts for research, analysis, writing, and productivity. Leverage web access and Google Workspace integration.",
     "keyword": "gemini prompts",
-    "intro": "Google Gemini brings unique advantages that other AI tools cannot match — real-time web access, native Google Workspace integration, and strong multimodal understanding. These capabilities make it the ideal choice for research, data analysis, and tasks that benefit from current information. These curated Gemini prompts help you leverage its full potential across writing, analysis, coding, and creative tasks. Each prompt is designed to take advantage of what Gemini does best, from searching the web for recent data to analyzing images and documents within your Google Drive.",
+    "intro": "Google Gemini in 2026 is the prompt surface that already sits in Gmail, Docs, Sheets, Drive, and Gemini 2.5 in AI Studio. The prompts here are written for that stack: live web research, Workspace file context, and long-context reasoning. If you paste a ChatGPT prompt into Gemini unchanged, you are leaving Drive context and live search unused.",
+    "lastReviewed": "2026-09-02",
+    "exampleSlugs": [
+      "competitor-analysis-framework",
+      "keyword-clustering-assistant",
+      "meeting-notes-summarizer"
+    ],
+    "sections": [
+      {
+        "heading": "Prompt Gemini 2.5 like Workspace, not like a chatbot",
+        "body": "Gemini 2.5 is strongest when the prompt names the Google artifact it should use: a Sheet tab, a Doc outline, a Drive folder, or a Gmail thread. Ask it to cite the file and the live web result separately so you can tell model memory from retrieved facts. For research, force a 'as of [date]' clause and a source list. For writing, paste the brand voice from a Doc instead of restating tone adjectives."
+      },
+      {
+        "heading": "When to use Gemini instead of ChatGPT or Claude",
+        "body": "Pick Gemini when the work already lives in Google: keyword clustering from a Sheet, meeting notes from a Doc, competitor tables you will keep in Drive. Pick ChatGPT when you want a plugin or custom-GPT workflow. Pick Claude when you are dumping a long PDF or code repo and need careful extraction. The prompts on this page assume you will attach or @-mention a Workspace file when one exists."
+      },
+      {
+        "heading": "Multimodal prompts that do more than 'describe this image'",
+        "body": "Upload a screenshot, a chart, or a camera photo and ask for a structured output: table, checklist, or rewritten prompt. Gemini is useful for turning a messy whiteboard or SERP screenshot into a brief. Tell it what to ignore (ads, UI chrome, watermarks) and what to preserve (numbers, names, axis labels). Then ask it to draft the next action in the same reply."
+      }
+    ],
+    "relatedLinks": [
+      {
+        "href": "/best/chatgpt-prompts/",
+        "label": "Best ChatGPT prompts",
+        "note": "Use these when the work is not already in Google Workspace."
+      },
+      {
+        "href": "/best/claude-prompts/",
+        "label": "Best Claude prompts",
+        "note": "Better default for long documents and careful extraction."
+      },
+      {
+        "href": "/prompts/for/small-business/",
+        "label": "AI prompts for small business",
+        "note": "Owner workflows that run in Gemini, ChatGPT, or Claude."
+      }
+    ],
     "tips": [
-      "Leverage Gemini's real-time web access for tasks that require current information like market research, news analysis, and trend tracking.",
-      "Connect Gemini to your Google Workspace to analyze Sheets, Docs, and Slides content directly in your prompts.",
-      "Use Gemini's multimodal capabilities by uploading images, screenshots, and documents alongside your text prompts for richer analysis."
+      "Name the Workspace file in the prompt (Sheet, Doc, Drive folder) instead of pasting a wall of cells when Gemini can see the file.",
+      "Separate 'from the attached file' and 'from live web search' so you can catch stale or invented sources.",
+      "For Gemini 2.5, give the output shape first (table, brief, email) and the research question second."
     ],
     "faqs": [
       {
-        "q": "What are the best Gemini prompts?",
-        "a": "The best Gemini prompts leverage its unique strengths: real-time web search, Google Workspace integration, and multimodal input. Use it for research requiring current data, analysis of Google Sheets, and tasks that combine text and images."
+        "q": "What are the best Gemini prompts in 2026?",
+        "a": "The best Gemini prompts attach a Workspace file or screenshot, require live sources with dates, and specify the output shape. Use Gemini for Sheet analysis, Drive-backed research, and multimodal briefs — not as a generic ChatGPT clone."
       },
       {
         "q": "How is Gemini different from ChatGPT?",
-        "a": "Gemini has built-in web access for current information, native Google Workspace integration, and strong multimodal capabilities. ChatGPT has a larger plugin ecosystem and is generally better for creative writing. Choose based on your primary needs."
+        "a": "Gemini's advantage is Google Workspace plus live web. ChatGPT still wins for custom GPTs and many plugin workflows. If your source of truth is a Sheet or Doc, prompt Gemini against that file. If it is a custom GPT or a non-Google stack, start with ChatGPT."
       },
       {
-        "q": "Is Gemini free to use?",
-        "a": "Yes, Gemini offers a generous free tier that includes the base model with web access and Google integration. Gemini Advanced (paid) provides access to the most capable model and longer context windows."
+        "q": "Does Gemini 2.5 change how I should prompt?",
+        "a": "Yes. Gemini 2.5 handles longer context, so dump the source material and spend the prompt on constraints, citations, and the deliverable. Short clever one-liners waste the model. Ask it to show which lines came from the file versus the web."
+      },
+      {
+        "q": "Is Gemini still free?",
+        "a": "Gemini's consumer tier still includes web access and Workspace connections. The most capable 2.5 models and the longest context sit on paid Google AI / Gemini Advanced plans. Use the free tier for drafts; move the same prompt to 2.5 when the file is large or the research has to be current."
       }
     ]
   },
@@ -386,24 +468,65 @@
     "metaTitle": "Best Cursor AI Prompts (2026) — Code Smarter with AI",
     "metaDescription": "Curated Cursor AI prompts for code generation, refactoring, debugging, and multi-file editing. Boost your development speed.",
     "keyword": "cursor ai prompts",
-    "intro": "Cursor has redefined AI-assisted coding by indexing your entire codebase and offering context-aware completions that understand your project's architecture, conventions, and dependencies. Unlike general-purpose AI tools, Cursor's prompts can reference specific files, functions, and patterns across your repository. These curated Cursor AI prompts cover code generation, multi-file refactoring, debugging, test creation, and architecture exploration. Each prompt uses Cursor-specific features like @ mentions and composer mode to help you get the most out of this powerful coding tool.",
+    "intro": "Cursor prompts are not ChatGPT prompts pasted into an IDE. Composer, Chat, inline edit, and @-mentions change what the model can see. This roundup is for repo-aware work: refactors, tests, migrations, and debug sessions that should cite files instead of dumping the whole codebase into a generic chat.",
+    "lastReviewed": "2026-09-02",
+    "exampleSlugs": [
+      "cursor-refactor-assistant",
+      "debug-error-detective",
+      "cursor-test-writer"
+    ],
+    "sections": [
+      {
+        "heading": "Composer vs Chat vs inline edit",
+        "body": "Use Chat when you want an explanation, a plan, or a single-file patch you will apply yourself. Use Composer when the change has to land in more than one file and you want Cursor to propose the diff set. Use inline edit (Cmd/Ctrl-K) when the selection is the spec: rename, extract, or fix this function. If you put a Composer task in Chat, you will copy-paste hunks and miss call sites."
+      },
+      {
+        "heading": "@ mentions that keep the model inside the repo",
+        "body": "Prefer @file and @symbol over @codebase for surgical work. @codebase is for 'where is this pattern?' questions, not for a 12-file refactor. Mention the test file next to the implementation so Cursor does not invent a second test runner. If the repo has a convention doc, @ that too — 'match existing style' is weaker than pointing at the file that defines the style."
+      },
+      {
+        "heading": "A prompt that works in Cursor and fails in Copilot Chat",
+        "body": "The useful Cursor prompt names the files, the failing test or stack trace, and the constraint ('do not add a new dependency'). Copilot Chat can do some of this, but Composer is the reason to keep a Cursor-specific prompt library. Pair this roundup with the coding collection when you want implementation recipes instead of a ranked list."
+      }
+    ],
+    "relatedLinks": [
+      {
+        "href": "/prompts/cursor/coding/",
+        "label": "Cursor prompts for coding",
+        "note": "Implementation recipes: refactors, tests, routes, and debug sessions."
+      },
+      {
+        "href": "/best/copilot-prompts/",
+        "label": "Best GitHub Copilot prompts",
+        "note": "Comment and inline-completion patterns, not Composer diffs."
+      },
+      {
+        "href": "/best/chatgpt-prompts/",
+        "label": "Best ChatGPT prompts",
+        "note": "Use these outside the repo, then paste the spec back into Cursor."
+      }
+    ],
     "tips": [
-      "Use @ mentions to reference specific files, functions, or documentation so Cursor includes the right context in its response.",
-      "Switch between chat mode (explanations, single-file edits) and composer mode (multi-file coordinated changes) based on the task.",
-      "Start complex tasks by asking Cursor to explain the existing code before making changes — this reduces errors in generated code."
+      "@ the implementation file and the test file in the same Composer prompt so Cursor does not invent a second test stack.",
+      "Paste the failing stack trace above the instruction. 'Fix this' without the error is a ChatGPT prompt, not a Cursor prompt.",
+      "Ask for a plan in Chat, then switch to Composer to apply it. Mixing both in one turn is how drive-by files get created."
     ],
     "faqs": [
       {
         "q": "What are the best Cursor AI prompts?",
-        "a": "The best Cursor prompts use @ file references, specify the desired behavior clearly, and leverage composer mode for multi-file changes. Effective prompts include code generation, refactoring, debugging with error context, and codebase exploration."
+        "a": "The best Cursor prompts name files with @, include the failing test or stack trace, and pick Chat vs Composer on purpose. Vague 'write a feature' prompts waste the codebase index."
       },
       {
-        "q": "How do I get better code from Cursor?",
-        "a": "Reference relevant files with @, provide clear acceptance criteria, and specify your coding style and framework version. For complex changes, break the task into smaller steps and verify each before proceeding."
+        "q": "Should I use Composer or Chat?",
+        "a": "Chat for questions and plans. Composer when you want a multi-file diff. Inline edit when the selection is the whole spec. If the change touches more than one file, start in Composer."
       },
       {
         "q": "Is Cursor better than GitHub Copilot?",
-        "a": "Cursor and Copilot serve different needs. Cursor excels at multi-file edits, codebase understanding, and chat-driven development. Copilot is better for inline completions and quick suggestions. Many developers use both."
+        "a": "Cursor is stronger for repo-aware, multi-file edits. Copilot is still useful for inline completions. Keep both if you like Tab completions and Composer; do not reuse Copilot comment prompts as Composer instructions."
+      },
+      {
+        "q": "Why did Cursor ignore my prompt?",
+        "a": "Usually because @codebase pulled the wrong files, or Chat was used for a multi-file change. Narrow the @ mentions, paste the error, and move the apply step to Composer."
       }
     ]
   },

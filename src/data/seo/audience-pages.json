@@ -98,24 +98,65 @@
     "keyword": "ai prompts for small business",
     "filterTags": ["business", "marketing", "operations", "strategy", "small-business"],
     "filterCategories": ["business", "marketing"],
-    "intro": "Small business owners wear many hats, and AI can be the most versatile team member you never had to hire. From drafting marketing emails and creating social media content to writing SOPs and analyzing financial data, AI tools help you punch above your weight. These curated AI prompts for small businesses cover the tasks that consume the most time — marketing, customer communication, operations, and planning. Each prompt is designed for lean teams that need professional-quality outputs without the overhead of specialized staff.",
+    "intro": "These prompts are for owners who do marketing, books, hiring, and customer replies in the same afternoon. They are reusable workflows, not 'write a business plan' filler: a 90-day marketing plan, a budget, testimonials, and customer copy you can run in ChatGPT, Gemini, or Claude without a dedicated ops hire.",
+    "lastReviewed": "2026-09-02",
+    "exampleSlugs": [
+      "small-business-marketing-plan",
+      "small-business-budget-planner",
+      "customer-testimonial-writer"
+    ],
+    "sections": [
+      {
+        "heading": "A weekly operator stack, not a prompt dump",
+        "body": "Run three prompts on a cadence: marketing plan on Monday, customer replies and testimonials as they come in, budget review before you pay ads. Paste the same business one-liner (offer, customer, price, city) at the top of every prompt so the model does not invent a different company each time. Save the good outputs as SOPs instead of re-prompting from scratch."
+      },
+      {
+        "heading": "Which model for which owner task",
+        "body": "Use Gemini when the numbers already live in a Sheet or the research has to be current. Use Claude when you are pasting a long contract, lease, or bank export. Use ChatGPT when you want a reusable custom GPT for brand voice. The prompts on this page are model-agnostic on purpose; swap the tool, keep the business facts."
+      },
+      {
+        "heading": "What this page is not",
+        "body": "It is not the generic business-prompt roundup and it is not the ChatGPT-for-business guide. Stay here for owner workflows. Jump to Best Business Prompts for a broader library, or the ChatGPT for business guide if you want the how-to around the prompts."
+      }
+    ],
+    "relatedLinks": [
+      {
+        "href": "/best/business-prompts/",
+        "label": "Best business prompts",
+        "note": "Wider library: plans, strategy, and operations beyond owner-only workflows."
+      },
+      {
+        "href": "/guides/chatgpt-for-business/",
+        "label": "ChatGPT for business guide",
+        "note": "How to brief ChatGPT for business work, then come back here for the prompts."
+      },
+      {
+        "href": "/best/chatgpt-business-prompts/",
+        "label": "ChatGPT business prompts",
+        "note": "ChatGPT-specific business prompts if you are standardized on that tool."
+      }
+    ],
     "tips": [
-      "Create a master prompt with your business description, target audience, and brand voice that you can paste into any AI tool as context.",
-      "Use AI to generate standard operating procedures for recurring tasks so you can delegate or automate them more easily.",
-      "Ask AI to role-play as your ideal customer and critique your website copy, pricing, or product descriptions for honest feedback."
+      "Keep a 5-line business brief (who you serve, offer, price, city, voice) and paste it above every prompt.",
+      "Do not ask for a full business plan when you need a 90-day marketing calendar or a weekly budget. Match the prompt to the decision.",
+      "Role-play the customer only after you paste real reviews or support tickets. Invented personas produce invented objections."
     ],
     "faqs": [
       {
         "q": "What are the best AI prompts for small business owners?",
-        "a": "The best AI prompts for small businesses address marketing content, customer emails, social media posts, financial analysis, and operational SOPs. Provide your industry, business size, and specific challenge for the most relevant output."
+        "a": "Prompts that turn into a weekly workflow: marketing calendar, budget, customer replies, and testimonials. Give the model your industry, city, price, and a real constraint (hours, budget, staff) or you will get generic agency copy."
       },
       {
-        "q": "Can AI help me write a business plan?",
-        "a": "Yes. Share your business idea, market, revenue model, and goals. AI can generate executive summaries, market analysis sections, financial projections, and competitive positioning that you can refine with your specific knowledge."
+        "q": "Can AI write a business plan I can actually use?",
+        "a": "It can draft the narrative. It cannot invent your numbers. Use a plan prompt only after you have offer, price, and channel facts. For most owners, a 90-day marketing plan and a budget prompt are more useful than a 20-page plan."
       },
       {
-        "q": "How can small businesses use AI without a big budget?",
-        "a": "Free tiers of ChatGPT, Claude, and Gemini offer powerful capabilities. Focus AI on high-impact tasks like content creation, customer email templates, and data analysis to maximize ROI without paid subscriptions."
+        "q": "How can a small business use AI without a big budget?",
+        "a": "Free ChatGPT, Gemini, and Claude tiers are enough if you reuse one business brief and a handful of prompts. Spend time on marketing, customer replies, and bookkeeping first. Paid seats matter when you need Workspace files, longer context, or a custom GPT."
+      },
+      {
+        "q": "Should I use ChatGPT, Gemini, or Claude?",
+        "a": "Gemini if the work is in Sheets or needs live local research. Claude if you are pasting long documents. ChatGPT if you want a saved custom GPT for brand voice. The prompts here work in all three."
       }
     ]
   },

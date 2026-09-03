@@ -1,10 +1,14 @@
 {
-  "note": "Seed keywords for Ahrefs Keywords Explorer + Semrush Keyword Analytics weekly pulls. Re-seed quarterly from top-performing Ahrefs/GSC keywords in output/seo/<date>/.",
+  "note": "Seed keywords for OpenSEO weekly keyword suggestions. Re-seed quarterly from top-performing OpenSEO/GSC keywords in output/seo/<date>/.",
   "keywords": [
     "ai prompts",
     "chatgpt prompts",
     "midjourney prompts",
     "claude prompts",
+    "gemini prompts",
+    "cursor ai prompts",
+    "cursor prompts",
+    "ai prompts for small business",
     "stable diffusion prompts",
     "best ai prompts",
     "ai prompt library",

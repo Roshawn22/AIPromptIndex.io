@@ -7,6 +7,7 @@ import { TOOL_DISPLAY_NAMES as toolDisplayNames, CATEGORY_DISPLAY_NAMES as categ
 import PromptCard from '../../components/prompt/PromptCard.astro';
 import Breadcrumb from '../../components/common/Breadcrumb.astro';
 import NewsletterSignup from '../../components/common/NewsletterSignup.astro';
+import EditorialBody from '../../components/seo/EditorialBody.astro';
 import bestofPages from '../../data/seo/bestof-pages.json';
 import { getPromptsForBestOf } from '../../lib/bestof';
 
@@ -89,8 +90,33 @@ if (roundup.faqs && roundup.faqs.length > 0) {
   });
 }
 
+if (roundup.lastReviewed) {
+  allJsonLd.push({
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: roundup.title,
+    dateModified: roundup.lastReviewed,
+    url: `${siteUrl}/best/${roundup.slug}/`,
+  });
+}
+
 const firstBatch = prompts.slice(0, 5);
 const secondBatch = prompts.slice(5);
+
+const examplePrompts = [];
+for (const slug of (Array.isArray(roundup.exampleSlugs) ? roundup.exampleSlugs : [])) {
+  const prompt = allPrompts.find((entry) => entry.data.slug === slug);
+  if (!prompt) continue;
+  examplePrompts.push({
+    title: prompt.data.title,
+    slug: prompt.data.slug,
+    promptText: prompt.data.promptText,
+    description: prompt.data.description,
+  });
+  if (examplePrompts.length >= 4) break;
+}
+
+const editorialRelatedLinks = Array.isArray(roundup.relatedLinks) ? roundup.relatedLinks : [];
 ---
 
 <BaseLayout
@@ -198,6 +224,13 @@ const secondBatch = prompts.slice(5);
       </p>
     )}
 
+    <EditorialBody
+      lastReviewed={roundup.lastReviewed}
+      sections={roundup.sections}
+      examples={examplePrompts}
+      relatedLinks={editorialRelatedLinks}
+    />
+
     <!-- Tips section -->
     {roundup.tips && roundup.tips.length > 0 && (
       <div class="mt-16 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-8">
@@ -231,6 +264,7 @@ const secondBatch = prompts.slice(5);
     )}
 
     <!-- Related roundups -->
+    {editorialRelatedLinks.length === 0 && (
     <div class="mt-16 border-t border-[var(--color-border)] pt-10">
       <h2 class="mb-6 text-xl">You Might Also Like</h2>
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -247,6 +281,7 @@ const secondBatch = prompts.slice(5);
         ))}
       </div>
     </div>
+    )}
   </section>
 
   <!-- Bottom Newsletter CTA -->

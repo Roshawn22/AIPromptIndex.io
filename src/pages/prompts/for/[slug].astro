@@ -6,6 +6,7 @@ import Footer from '../../../components/global/Footer.astro';
 import PromptCard from '../../../components/prompt/PromptCard.astro';
 import Breadcrumb from '../../../components/common/Breadcrumb.astro';
 import NewsletterSignup from '../../../components/common/NewsletterSignup.astro';
+import EditorialBody from '../../../components/seo/EditorialBody.astro';
 import audiencePages from '../../../data/seo/audience-pages.json';
 
 export async function getStaticPaths() {
@@ -78,6 +79,16 @@ if (page.faqs && page.faqs.length > 0) {
   });
 }
 
+if (page.lastReviewed) {
+  allJsonLd.push({
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: page.title,
+    dateModified: page.lastReviewed,
+    url: `${siteUrl}/prompts/for/${page.slug}/`,
+  });
+}
+
 // Related audience pages, excluding current
 const relatedPages = allPages
   .filter((p: any) => p.slug !== page.slug)
@@ -85,6 +96,21 @@ const relatedPages = allPages
 
 const firstBatch = prompts.slice(0, 5);
 const secondBatch = prompts.slice(5);
+
+const examplePrompts = [];
+for (const slug of (Array.isArray(page.exampleSlugs) ? page.exampleSlugs : [])) {
+  const prompt = allPrompts.find((entry) => entry.data.slug === slug);
+  if (!prompt) continue;
+  examplePrompts.push({
+    title: prompt.data.title,
+    slug: prompt.data.slug,
+    promptText: prompt.data.promptText,
+    description: prompt.data.description,
+  });
+  if (examplePrompts.length >= 4) break;
+}
+
+const editorialRelatedLinks = Array.isArray(page.relatedLinks) ? page.relatedLinks : [];
 ---
 
 <BaseLayout
@@ -178,6 +204,13 @@ const secondBatch = prompts.slice(5);
       </p>
     )}
 
+    <EditorialBody
+      lastReviewed={page.lastReviewed}
+      sections={page.sections}
+      examples={examplePrompts}
+      relatedLinks={editorialRelatedLinks}
+    />
+
     <!-- Tips section -->
     {page.tips && page.tips.length > 0 && (
       <div class="mt-16 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-8">
@@ -211,7 +244,7 @@ const secondBatch = prompts.slice(5);
     )}
 
     <!-- Related collections -->
-    {relatedPages.length > 0 && (
+    {editorialRelatedLinks.length === 0 && relatedPages.length > 0 && (
       <div class="mt-16 border-t border-[var(--color-border)] pt-10">
         <h2 class="mb-6 text-xl">Related Collections</h2>
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
