@@ -27,6 +27,8 @@ Semrush remains a **manual** helper. It is not part of the default daily path.
 
 Add **`OPENSEO_API_KEY`** as a GitHub **Actions** repository secret. Use the hosted OpenSEO MCP key from Settings → API keys (`oseo_…`, sent as `Authorization: Bearer`). Scripts also accept `OPEN_SEO_API_KEY`.
 
+This secret is on Actions as of 2026-09-04. SEO Data Pull on `main` ([run 33903322489](https://github.com/Roshawn22/AIPromptIndex.io/actions/runs/33903322489)) wrote `openseo-keywords.json` with `source: "openseo-mcp"` and 50 ranked rows. The 2026-09-03 skip ([run 33701555083](https://github.com/Roshawn22/AIPromptIndex.io/actions/runs/33701555083)) was before the MCP path shipped in #29.
+
 `DATAFORSEO_API_KEY` remains an optional fallback for direct DataForSEO Labs calls (weekly backlinks / keyword suggestions). Hosted OpenSEO does not show a DataForSEO login. An `oseo_` key is not valid DataForSEO Basic auth.
 
 Without either secret:
@@ -87,6 +89,7 @@ GOOGLE_ANALYTICS_PROPERTY_ID=
 PUBLIC_GOOGLE_SITE_VERIFICATION=
 PUBLIC_GA_MEASUREMENT_ID=
 PUBLIC_SITE_URL=https://aipromptindex.io
+OPENSEO_API_KEY=
 DATAFORSEO_API_KEY=
 ```
 
