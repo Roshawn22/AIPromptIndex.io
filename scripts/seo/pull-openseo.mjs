@@ -1,8 +1,10 @@
 import path from 'node:path';
 
 import {
+  callOpenSeoMcp,
   fetchDataForSeoLive,
   getDataForSeoAuthHeader,
+  getOpenSeoMcpKey,
   getSeoOutputDir,
   numberValue,
   optionalEnv,
@@ -78,23 +80,146 @@ function mapCompetitors(result) {
   }).filter((row) => row.domain && row.domain !== target);
 }
 
+async function resolveOpenSeoProjectId() {
+  const explicit = optionalEnv('OPENSEO_PROJECT_ID');
+  if (explicit) return explicit;
+
+  const listed = await callOpenSeoMcp('list_projects', {});
+  const projects = Array.isArray(listed.projects) ? listed.projects : [];
+  const match = projects.find((project) => {
+    const domain = String(project.domain || '').replace(/^www\./, '');
+    return domain === target || project.name === 'AIPromptIndex';
+  });
+  if (!match?._id && !match?.id) {
+    throw new Error(`No OpenSEO project found for ${target}. Create one in app.openseo.so.`);
+  }
+  return match.id || match._id;
+}
+
+async function pullViaOpenSeoMcp(generatedAt, warnings) {
+  const projectId = await resolveOpenSeoProjectId();
+  const costs = [];
+
+  let rankedPayload = { keywords: [] };
+  try {
+    rankedPayload = await callOpenSeoMcp('get_ranked_keywords', {
+      projectId,
+      target,
+      scope: 'domain',
+      locationCode,
+      languageCode,
+      resultTypes: ['organic'],
+    });
+    costs.push({ name: 'ranked-keywords', cost: 0 });
+  } catch (error) {
+    warnings.push(`ranked-keywords unavailable: ${error instanceof Error ? error.message : error}`);
+  }
+
+  let overviewPayload = {};
+  try {
+    overviewPayload = await callOpenSeoMcp('get_domain_overview', {
+      projectId,
+      domain: target,
+      scope: 'domain',
+      locationCode,
+      languageCode,
+    });
+    costs.push({ name: 'domain-overview', cost: 0 });
+  } catch (error) {
+    warnings.push(`domain-rank unavailable: ${error instanceof Error ? error.message : error}`);
+  }
+
+  const rankedKeywords = mapRankedKeywords({ items: rankedPayload.keywords || [] });
+  const topPages = uniqueBy(
+    rankedKeywords
+      .filter((row) => row.best_position_url)
+      .map((row) => ({
+        url: row.best_position_url,
+        title: '',
+        traffic: numberValue(row.sum_traffic),
+        refdomains: null,
+        topKeyword: row.keyword,
+        topKeywordVolume: numberValue(row.volume),
+      })),
+    (row) => row.url,
+  ).slice(0, pageLimit);
+
+  const overview = {
+    source: 'openseo-mcp',
+    provider: 'OpenSEO MCP',
+    target,
+    projectId,
+    locationCode,
+    languageCode,
+    generatedAt,
+    warnings,
+    costs,
+    totalCost: 0,
+    metrics: overviewPayload.metrics || overviewPayload.overview || overviewPayload,
+    rankedKeywordCount: rankedKeywords.length,
+    topPageCount: topPages.length,
+    competitorCount: 0,
+  };
+
+  writeJson(path.join(outputDir, 'openseo-overview.json'), overview);
+  writeJson(path.join(outputDir, 'openseo-keywords.json'), {
+    source: 'openseo-mcp',
+    target,
+    generatedAt,
+    warnings,
+    rows: rankedKeywords,
+  });
+  writeJson(path.join(outputDir, 'openseo-top-pages.json'), {
+    source: 'openseo-mcp',
+    target,
+    generatedAt,
+    warnings,
+    rows: topPages,
+  });
+  writeJson(path.join(outputDir, 'openseo-competitors.json'), {
+    source: 'openseo-mcp',
+    target,
+    generatedAt,
+    warnings,
+    rows: [],
+  });
+
+  console.log(JSON.stringify({
+    ok: true,
+    provider: 'openseo-mcp',
+    outputDir,
+    target,
+    projectId,
+    keywordCount: rankedKeywords.length,
+    pageCount: topPages.length,
+    competitorCount: 0,
+    totalCost: 0,
+    warnings,
+  }, null, 2));
+}
+
 async function main() {
   const generatedAt = new Date().toISOString();
   const warnings = [];
   const costs = [];
+
+  if (getOpenSeoMcpKey()) {
+    await pullViaOpenSeoMcp(generatedAt, warnings);
+    return;
+  }
 
   if (!getDataForSeoAuthHeader()) {
     writeJson(path.join(outputDir, 'openseo-overview.json'), {
       source: 'openseo-dataforseo',
       skipped: true,
       generatedAt,
-      warnings: ['DATAFORSEO_API_KEY is not set. First-party GSC/GA4 pulls still run.'],
+      warnings: ['OPENSEO_API_KEY or DATAFORSEO_API_KEY is not set. First-party GSC/GA4 pulls still run.'],
     });
     console.log(JSON.stringify({
       ok: true,
       skipped: true,
       outputDir,
-      warning: 'DATAFORSEO_API_KEY is not set',
+      warning: 'OPENSEO_API_KEY or DATAFORSEO_API_KEY is not set',
     }, null, 2));
     return;
   }

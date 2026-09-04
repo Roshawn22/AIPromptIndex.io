@@ -64,6 +64,7 @@ jobs:
         if: steps.gate.outputs.run == 'true'
         env:
           DATAFORSEO_API_KEY: ${{ secrets.DATAFORSEO_API_KEY }}
+          OPENSEO_API_KEY: ${{ secrets.OPENSEO_API_KEY }}
           SEO_ENABLE_AHREFS: "false"
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           GOOGLE_ANALYTICS_PROPERTY_ID: ${{ secrets.GOOGLE_ANALYTICS_PROPERTY_ID }}
@@ -100,6 +101,7 @@ jobs:
         if: steps.gate.outputs.run == 'true' && steps.preflight.outputs.can_run_openseo == 'true'
         env:
           DATAFORSEO_API_KEY: ${{ secrets.DATAFORSEO_API_KEY }}
+          OPENSEO_API_KEY: ${{ secrets.OPENSEO_API_KEY }}
         run: npm run seo:pull:openseo
 
       - name: Pull Ahrefs Batch Analysis (opt-in)

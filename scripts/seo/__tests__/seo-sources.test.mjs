@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 
-import { getDataForSeoAuthHeader } from '../_shared.mjs';
+import { getDataForSeoAuthHeader, getOpenSeoMcpKey } from '../_shared.mjs';
 import {
   loadResearchCompetitors,
   loadResearchKeywords,
@@ -64,12 +64,14 @@ test('loadResearchTopPages and competitors prefer OpenSEO artifacts', () => {
 test('getDataForSeoAuthHeader encodes login:password and accepts pre-encoded keys', () => {
   const previous = {
     DATAFORSEO_API_KEY: process.env.DATAFORSEO_API_KEY,
+    OPENSEO_API_KEY: process.env.OPENSEO_API_KEY,
     OPENSEO_DATAFORSEO_API_KEY: process.env.OPENSEO_DATAFORSEO_API_KEY,
     DATAFORSEO_LOGIN: process.env.DATAFORSEO_LOGIN,
     DATAFORSEO_PASSWORD: process.env.DATAFORSEO_PASSWORD,
   };
 
   delete process.env.DATAFORSEO_API_KEY;
+  delete process.env.OPENSEO_API_KEY;
   delete process.env.OPENSEO_DATAFORSEO_API_KEY;
   process.env.DATAFORSEO_LOGIN = 'user@example.com';
   process.env.DATAFORSEO_PASSWORD = 'secret';
@@ -80,6 +82,13 @@ test('getDataForSeoAuthHeader encodes login:password and accepts pre-encoded key
 
     process.env.DATAFORSEO_API_KEY = 'alreadyBase64';
     assert.equal(getDataForSeoAuthHeader(), 'Basic alreadyBase64');
+
+    delete process.env.DATAFORSEO_LOGIN;
+    delete process.env.DATAFORSEO_PASSWORD;
+    process.env.DATAFORSEO_API_KEY = 'oseo_notADataForSeoKey';
+    process.env.OPENSEO_API_KEY = 'oseo_hostedMcpKey';
+    assert.equal(getDataForSeoAuthHeader(), '');
+    assert.equal(getOpenSeoMcpKey(), 'oseo_hostedMcpKey');
   } finally {
     for (const [name, value] of Object.entries(previous)) {
       if (value === undefined) delete process.env[name];
