@@ -27,10 +27,12 @@ test('deterministic SEO pulls do not depend on removed AI or Medium automation',
   assert.match(dailyWorkflow, /permissions:\n  contents: read\n  issues: write/);
   assert.match(dailyWorkflow, /Pull SEO Data \(GSC \+ GA4 \+ OpenSEO\)/);
   assert.match(dailyWorkflow, /DATAFORSEO_API_KEY/);
+  assert.match(dailyWorkflow, /OPENSEO_API_KEY/);
   assert.match(dailyWorkflow, /npm run seo:pull:openseo/);
   assert.doesNotMatch(dailyWorkflow, /npm run seo:pull:ahrefs[^\-]/);
   assert.doesNotMatch(envExample, /ANTHROPIC_API_KEY|ANTHROPIC_SEO_MODEL|MEDIUM_API_TOKEN/);
   assert.match(envExample, /DATAFORSEO_API_KEY=/);
+  assert.match(envExample, /OPENSEO_API_KEY=/);
 
   const weeklyWorkflow = readRepoFile('.github/workflows/seo-weekly.yml');
   const monthlyWorkflow = readRepoFile('.github/workflows/seo-monthly.yml');

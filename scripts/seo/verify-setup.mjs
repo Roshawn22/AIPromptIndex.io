@@ -6,12 +6,13 @@ import {
   getAhrefsLimitsAndUsage,
   getArtifactEnvelope,
   getDataForSeoAuthHeader,
+  getOpenSeoMcpKey,
   getPreviousSeoOutputDir,
   getSemrushApiUnitsBalance,
   getSeoOutputDir,
   isAhrefsEnabled,
   parseCliArgs,
-  probeDataForSeoAccount,
+  probeOpenSeoAccount,
   readOptionalJson,
   rollupStatuses,
   summarizeSeoWorkflowGates,
@@ -33,7 +34,7 @@ const localPipelineChecks = [
     aliases: ['GOOGLE_SEARCH_CONSOLE_SITE'],
     required: true,
   },
-  { name: 'DATAFORSEO_API_KEY', label: 'OpenSEO / DataForSEO API key', required: false, aliases: ['OPENSEO_DATAFORSEO_API_KEY', 'DATAFORSEO_LOGIN'] },
+  { name: 'DATAFORSEO_API_KEY', label: 'OpenSEO / DataForSEO API key', required: false, aliases: ['OPENSEO_API_KEY', 'OPEN_SEO_API_KEY', 'OPENSEO_DATAFORSEO_API_KEY', 'DATAFORSEO_LOGIN'] },
   { name: 'AHREFS_API_TOKEN', label: 'Ahrefs API token (opt-in only)', required: false },
   { name: 'SEMRUSH_API_KEY', label: 'Semrush API key (optional)', required: false },
 ];
@@ -313,6 +314,12 @@ async function main() {
   ));
 
   const dataforseoCheck = localPipeline.find((check) => check.name === 'DATAFORSEO_API_KEY');
+  if (dataforseoCheck && !dataforseoCheck.configured && getOpenSeoMcpKey()) {
+    dataforseoCheck.configured = true;
+    dataforseoCheck.status = 'ok';
+    dataforseoCheck.source = 'OPENSEO_API_KEY';
+    dataforseoCheck.reason = null;
+  }
   if (dataforseoCheck && !dataforseoCheck.configured && getDataForSeoAuthHeader()) {
     dataforseoCheck.configured = true;
     dataforseoCheck.status = 'ok';
@@ -352,7 +359,7 @@ async function main() {
     ? { status: 'ok', checked: false, message: 'GSC and GA4 credentials are configured.' }
     : { status: 'misconfigured', checked: false, message: 'Google service account, GSC property, or GA4 property ID is missing.' };
 
-  liveProbes.openSeoApi = await probeDataForSeoAccount();
+  liveProbes.openSeoApi = await probeOpenSeoAccount();
 
   if (isAhrefsEnabled() && process.env.AHREFS_API_TOKEN) {
     liveProbes.ahrefsApi = await getAhrefsLimitsAndUsage(process.env.AHREFS_API_TOKEN);

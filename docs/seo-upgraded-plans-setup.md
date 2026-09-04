@@ -9,7 +9,7 @@ Semrush remains a **manual** helper. It is not part of the default daily path.
 ## Current decision
 
 - Primary stack: **GSC + GA4 + OpenSEO/DataForSEO**
-- Default scheduled automation: first-party pulls every day; OpenSEO when `DATAFORSEO_API_KEY` is set
+- Default scheduled automation: first-party pulls every day; OpenSEO when `OPENSEO_API_KEY` or `DATAFORSEO_API_KEY` is set
 - Ahrefs: off unless `SEO_ENABLE_AHREFS=true`
 - Semrush: optional `seo:pull:hybrid` / `seo:pull:semrush-manual`
 
@@ -25,9 +25,11 @@ Semrush remains a **manual** helper. It is not part of the default daily path.
 
 ## Required GitHub secret
 
-Add **`DATAFORSEO_API_KEY`** to the repo secrets. Use the DataForSEO API Access value (Base64 `login:password`) or the raw `login:password` string. Scripts also accept `OPENSEO_DATAFORSEO_API_KEY` or `DATAFORSEO_LOGIN` + `DATAFORSEO_PASSWORD`.
+Add **`OPENSEO_API_KEY`** as a GitHub **Actions** repository secret. Use the hosted OpenSEO MCP key from Settings → API keys (`oseo_…`, sent as `Authorization: Bearer`). Scripts also accept `OPEN_SEO_API_KEY`.
 
-Without this secret:
+`DATAFORSEO_API_KEY` remains an optional fallback for direct DataForSEO Labs calls (weekly backlinks / keyword suggestions). Hosted OpenSEO does not show a DataForSEO login. An `oseo_` key is not valid DataForSEO Basic auth.
+
+Without either secret:
 
 - Daily GSC / GA4 / brief still run
 - OpenSEO steps skip with `ok: true`

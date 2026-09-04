@@ -282,9 +282,19 @@ export function isAhrefsEnabled() {
   return optionalEnv('SEO_ENABLE_AHREFS', 'false').toLowerCase() === 'true';
 }
 
+export function getOpenSeoMcpKey() {
+  const candidates = [
+    optionalEnv('OPENSEO_API_KEY'),
+    optionalEnv('OPEN_SEO_API_KEY'),
+    optionalEnv('DATAFORSEO_API_KEY'),
+    optionalEnv('OPENSEO_DATAFORSEO_API_KEY'),
+  ];
+  return candidates.find((value) => value.startsWith('oseo_')) || '';
+}
+
 export function getDataForSeoAuthHeader() {
   const explicit = optionalEnv('DATAFORSEO_API_KEY') || optionalEnv('OPENSEO_DATAFORSEO_API_KEY');
-  if (explicit) {
+  if (explicit && !explicit.startsWith('oseo_')) {
     const encoded = explicit.includes(':')
       ? Buffer.from(explicit, 'utf8').toString('base64')
       : explicit;
@@ -382,6 +392,66 @@ export async function probeDataForSeoAccount() {
       balance: null,
     };
   }
+}
+
+export async function callOpenSeoMcp(toolName, args = {}) {
+  const key = getOpenSeoMcpKey();
+  if (!key) {
+    throw new Error('Missing OPENSEO_API_KEY (OpenSEO MCP bearer key).');
+  }
+
+  const payload = await fetchJson('https://app.openseo.so/mcp', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${key}`,
+      Accept: 'application/json, text/event-stream',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      id: Date.now(),
+      method: 'tools/call',
+      params: {
+        name: toolName,
+        arguments: args,
+      },
+    }),
+  });
+
+  if (payload?.error) {
+    const message = payload.error.message || JSON.stringify(payload.error);
+    throw new Error(`OpenSEO MCP ${toolName} failed: ${message}`);
+  }
+
+  return payload?.result?.structuredContent || payload?.result || {};
+}
+
+export async function probeOpenSeoAccount() {
+  if (getOpenSeoMcpKey()) {
+    try {
+      const account = await callOpenSeoMcp('whoami', {});
+      const creditsRemaining = Number(
+        account.creditsRemaining ?? account.meta?.creditsRemaining ?? Number.NaN,
+      );
+      return {
+        status: 'ok',
+        checked: true,
+        provider: 'openseo-mcp',
+        creditsRemaining: Number.isFinite(creditsRemaining) ? creditsRemaining : null,
+        message: `OpenSEO MCP connected${account.userEmail ? ` (${account.userEmail})` : ''}.`,
+      };
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      return {
+        status: 'misconfigured',
+        checked: true,
+        provider: 'openseo-mcp',
+        message,
+      };
+    }
+  }
+
+  return probeDataForSeoAccount();
 }
 
 // Iterates a cursor-paginated Ahrefs endpoint until empty or maxPages reached.

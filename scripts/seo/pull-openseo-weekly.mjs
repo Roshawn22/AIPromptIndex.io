@@ -4,6 +4,7 @@ import path from 'node:path';
 import {
   fetchDataForSeoLive,
   getDataForSeoAuthHeader,
+  getOpenSeoMcpKey,
   getSeoOutputDir,
   numberValue,
   optionalEnv,
@@ -49,7 +50,9 @@ async function main() {
       ok: true,
       skipped: true,
       outputDir,
-      warning: 'DATAFORSEO_API_KEY is not set',
+      warning: getOpenSeoMcpKey()
+        ? 'Weekly DataForSEO Labs endpoints need DATAFORSEO_API_KEY. Daily OpenSEO MCP pull still runs.'
+        : 'DATAFORSEO_API_KEY is not set',
     }, null, 2));
     return;
   }
