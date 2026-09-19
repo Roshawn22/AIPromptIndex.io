@@ -1,6 +1,8 @@
 // Minimal TypeSafe System One client for Convex actions (HTTP API: https://docs.typesafe.ai/api.md).
 // The key is read from the Convex deployment environment and never reaches the browser.
 
+import { reportSwallowedError } from "./sentry";
+
 type Entry = string | null | { [key: string]: unknown } | unknown[];
 
 export type NoulQuestion = { type: "noul"; instructions: Entry; criteria?: { true?: Entry; false?: Entry } };
@@ -52,7 +54,7 @@ export function isTypeSafeConfigured(): boolean {
 
 export async function systemOne(
   request: { state: unknown; questions: Record<string, Question> },
-  { maxAttempts = 3 }: { maxAttempts?: number } = {},
+  { maxAttempts = 3, label }: { maxAttempts?: number; label?: string } = {},
 ): Promise<SystemOneResponse> {
   const apiKey = process.env.TYPESAFE_API_KEY?.trim();
   if (!apiKey) throw new Error("TYPESAFE_API_KEY is not set for this Convex deployment.");
@@ -77,6 +79,14 @@ export async function systemOne(
     if (!retryable) break;
     if (attempt < maxAttempts) await new Promise((resolve) => setTimeout(resolve, 400 * 2 ** (attempt - 1)));
   }
+  // Every caller catches this to stay fail-soft, which also made TypeSafe
+  // outages invisible. Report here — once, after retries are exhausted — so the
+  // callers keep degrading silently for the user but not for us.
+  await reportSwallowedError(
+    label ? `TypeSafe ${label} failed` : "TypeSafe request failed",
+    lastError,
+    label ? { typesafe_operation: label } : {},
+  );
   throw lastError;
 }
 
