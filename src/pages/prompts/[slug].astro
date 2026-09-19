@@ -20,6 +20,7 @@ import toolsData from '../../data/tools/tools.json';
 import toolCategoryPages from '../../data/seo/tool-category-pages.json';
 import audiencePages from '../../data/seo/audience-pages.json';
 import bestofPages from '../../data/seo/bestof-pages.json';
+import relatedPromptMap from '../../data/seo/related-prompts.json';
 
 export async function getStaticPaths() {
   const prompts = await getCollection('prompts');
@@ -37,9 +38,18 @@ const toolAffiliateUrl = currentTool?.affiliateUrl;
 const toolName = currentTool?.name || data.tool;
 
 const allPrompts = await getCollection('prompts');
-const relatedPrompts = allPrompts
-  .filter((p) => p.data.slug !== data.slug && (p.data.category === data.category || p.data.tool === data.tool))
-  .slice(0, 4);
+// Judged relatedness (scripts/typesafe/build-related.mjs) comes first; the category/tool
+// match fills any remaining slots and covers prompts that have not been judged yet.
+const judgedRelatedSlugs: string[] = (relatedPromptMap as Record<string, string[]>)[data.slug] ?? [];
+const judgedRelated = judgedRelatedSlugs
+  .map((slug) => allPrompts.find((p) => p.data.slug === slug))
+  .filter((p): p is (typeof allPrompts)[number] => Boolean(p) && p!.data.slug !== data.slug);
+const fallbackRelated = allPrompts.filter(
+  (p) => p.data.slug !== data.slug
+    && !judgedRelatedSlugs.includes(p.data.slug)
+    && (p.data.category === data.category || p.data.tool === data.tool),
+);
+const relatedPrompts = [...judgedRelated, ...fallbackRelated].slice(0, 4);
 
 /* toolDisplayNames, categoryDisplayNames, difficultyColor imported from lib/constants */
 

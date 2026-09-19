@@ -5,6 +5,7 @@ import Fuse from 'fuse.js';
 import type { IFuseOptions, FuseResult } from 'fuse.js';
 import type { SearchItem } from '../../lib/types';
 import { trackSearchOpened, trackSearchResults } from '../../lib/analytics';
+import { applyRelevance, rerankSearch, shouldRerank } from '../../lib/assist';
 import {
   registerSearchOpenController,
   unregisterSearchOpenController,
@@ -21,6 +22,40 @@ const fuseOptions: IFuseOptions<SearchItem> = {
   includeScore: true,
   minMatchCharLength: 2,
 };
+
+const SEARCH_STOP_WORDS = new Set(['a', 'an', 'and', 'for', 'in', 'my', 'of', 'on', 'the', 'to', 'with', 'ai', 'prompt', 'prompts']);
+const MIN_PHRASE_RESULTS = 3;
+
+/**
+ * Fuse matches the query as one fuzzy phrase, so a natural-language search such as
+ * "email to angry customer" finds nothing even though relevant prompts exist. When the
+ * phrase search comes up short, fall back to matching the meaningful words individually,
+ * ranked by how many of them each item matches.
+ */
+function searchWithTokenFallback(fuse: Fuse<SearchItem>, query: string): FuseResult<SearchItem>[] {
+  const phraseResults = fuse.search(query);
+  const tokens = query.toLowerCase().split(/\s+/).filter((token) => token.length > 2 && !SEARCH_STOP_WORDS.has(token));
+  if (phraseResults.length >= MIN_PHRASE_RESULTS || tokens.length < 2) return phraseResults;
+
+  const merged = new Map<string, { result: FuseResult<SearchItem>; hits: number }>();
+  for (const token of new Set(tokens)) {
+    for (const result of fuse.search(token)) {
+      const existing = merged.get(result.item.url);
+      if (!existing) {
+        merged.set(result.item.url, { result, hits: 1 });
+      } else {
+        existing.hits += 1;
+        if ((result.score ?? 1) < (existing.result.score ?? 1)) existing.result = result;
+      }
+    }
+  }
+  const phraseUrls = new Set(phraseResults.map((result) => result.item.url));
+  const tokenResults = [...merged.values()]
+    .filter((entry) => !phraseUrls.has(entry.result.item.url))
+    .sort((a, b) => b.hits - a.hits || (a.result.score ?? 1) - (b.result.score ?? 1))
+    .map((entry) => entry.result);
+  return [...phraseResults, ...tokenResults];
+}
 
 const typeIcons: Record<string, string> = {
   prompt: 'M8 6h13M8 12h9M8 18h11',
@@ -89,6 +124,8 @@ export default function SearchModal() {
   const [debouncedQuery, setDebouncedQuery] = useState('');
   const [results, setResults] = useState<FuseResult<SearchItem>[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const selectedIndexRef = useRef(0);
+  selectedIndexRef.current = selectedIndex;
   const inputRef = useRef<HTMLInputElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
   const fuseRef = useRef<Fuse<SearchItem> | null>(null);
@@ -151,11 +188,41 @@ export default function SearchModal() {
       return;
     }
 
-    const allSearchResults = fuseRef.current.search(normalizedQuery);
+    const allSearchResults = searchWithTokenFallback(fuseRef.current, normalizedQuery);
     setResults(allSearchResults.slice(0, 8));
     setSelectedIndex(0);
     trackSearchResults(allSearchResults.length, normalizedQuery.length);
   }, [debouncedQuery, items]);
+
+  // Optional TypeSafe rerank (PUBLIC_TYPESAFE_SEARCH_RERANK). It waits for a typing pause so
+  // results do not shuffle mid-keystroke, and stands down once the user starts navigating.
+  useEffect(() => {
+    const normalizedQuery = debouncedQuery.trim();
+    if (!shouldRerank(normalizedQuery, results.length)) return;
+
+    let cancelled = false;
+    const timeoutId = window.setTimeout(async () => {
+      const relevance = await rerankSearch(
+        normalizedQuery,
+        results.map(({ item }) => ({
+          url: item.url,
+          name: item.name,
+          description: item.description,
+          type: item.type,
+        })),
+      );
+      if (cancelled || !relevance) return;
+      if (selectedIndexRef.current !== 0) return;
+      setResults((shown) => applyRelevance(shown, (result) => result.item.url, relevance));
+    }, 600);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timeoutId);
+    };
+    // `results` is intentionally read from the render that produced this query's matches.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedQuery, results.length]);
 
   useEffect(() => {
     registerSearchOpenController(openModal);

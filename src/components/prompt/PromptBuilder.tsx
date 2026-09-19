@@ -2,6 +2,7 @@ import { useState, useMemo, useCallback } from 'react';
 import { SELECT_CHEVRON_STYLE } from '../../lib/utils';
 import { trackPromptCopy } from '../../lib/analytics';
 import { copyTextToClipboard } from '../../lib/clipboard';
+import { checkVariableFit } from '../../lib/assist';
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -68,6 +69,8 @@ export default function PromptBuilder({ prompts, tools, categories }: Props) {
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
   const [variableValues, setVariableValues] = useState<Record<string, string>>({});
   const [copied, setCopied] = useState(false);
+  // Variables whose typed value does not look like what the slot asks for (optional TypeSafe hint).
+  const [variableHints, setVariableHints] = useState<Record<string, boolean>>({});
 
   /* ---- Tool lookup ---- */
   const toolMap = useMemo(() => {
@@ -109,8 +112,29 @@ export default function PromptBuilder({ prompts, tools, categories }: Props) {
         defaults[v.name] = v.example;
       }
       setVariableValues(defaults);
+      setVariableHints({});
     },
     [prompts],
+  );
+
+  const checkVariable = useCallback(
+    async (variable: Variable, value: string) => {
+      const trimmed = value.trim();
+      if (!selected || !trimmed || trimmed === variable.example) {
+        setVariableHints((prev) => ({ ...prev, [variable.name]: false }));
+        return;
+      }
+      const fits = await checkVariableFit({
+        promptTitle: selected.title,
+        variableName: variable.name,
+        variableDescription: variable.description,
+        example: variable.example,
+        value: trimmed,
+      });
+      // Only speak up when the model is fairly sure; an unsure or unavailable judgment stays silent.
+      setVariableHints((prev) => ({ ...prev, [variable.name]: fits !== null && fits < 0.25 }));
+    },
+    [selected],
   );
 
   const resetDefaults = useCallback(() => {
@@ -120,6 +144,7 @@ export default function PromptBuilder({ prompts, tools, categories }: Props) {
       defaults[v.name] = v.example;
     }
     setVariableValues(defaults);
+    setVariableHints({});
   }, [selected]);
 
   const handleCopy = useCallback(async () => {
@@ -307,10 +332,17 @@ export default function PromptBuilder({ prompts, tools, categories }: Props) {
                       onChange={(e) =>
                         setVariableValues((prev) => ({ ...prev, [v.name]: e.target.value }))
                       }
+                      onBlur={(e) => void checkVariable(v, e.target.value)}
+                      aria-describedby={variableHints[v.name] ? `var-hint-${v.name}` : undefined}
                       placeholder={v.example}
                       className="w-full rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2 text-sm text-[var(--color-text-primary)] placeholder-[var(--color-text-muted)] transition-colors focus:border-[var(--color-accent)] focus:outline-none"
                     />
                     <p className="mt-1 text-xs text-[var(--color-text-muted)]">{v.description}</p>
+                    {variableHints[v.name] && (
+                      <p id={`var-hint-${v.name}`} role="status" className="mt-1 text-xs text-[var(--color-text-secondary)]">
+                        This doesn't look like what this field expects — for example: "{v.example}". You can keep it if it's what you meant.
+                      </p>
+                    )}
                   </div>
                 ))}
               </div>

@@ -1,6 +1,8 @@
 import { v } from "convex/values";
+import { internal } from "./_generated/api";
 import { query, mutation } from "./_generated/server";
 import { requireAdminIdentity } from "./lib/auth";
+import { moderationResult } from "./schema";
 
 const difficulty = v.union(
   v.literal("beginner"),
@@ -33,6 +35,7 @@ const promptSubmissionDoc = v.object({
   reviewedAt: v.optional(v.number()),
   visitorFingerprint: v.optional(v.string()),
   sourceIp: v.optional(v.string()),
+  moderation: v.optional(moderationResult),
 });
 
 function normalizeVisitorFingerprint(visitorFingerprint: string): string {
@@ -116,6 +119,10 @@ export const submit = mutation({
       visitorFingerprint,
     });
 
+    // Judged off the request path; the submitter never waits on it and a failure
+    // simply leaves the submission pending for a human, as before.
+    await ctx.scheduler.runAfter(0, internal.moderation.evaluate, { id });
+
     return { id, status: "pending" as const };
   },
 });
@@ -126,10 +133,15 @@ export const listPending = query({
   handler: async (ctx) => {
     await requireAdminIdentity(ctx);
 
-    return await ctx.db
+    const pending = await ctx.db
       .query("promptSubmissions")
       .withIndex("by_status", (q) => q.eq("status", "pending"))
       .order("desc")
       .collect();
+
+    // Highest review priority first; submissions not judged yet keep newest-first order after them.
+    return pending.sort(
+      (a, b) => (b.moderation?.priority ?? -1) - (a.moderation?.priority ?? -1),
+    );
   },
 });

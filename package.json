@@ -10,7 +10,7 @@
     "check": "astro check",
     "lint": "astro check",
     "ci": "npm run check && npm run build && npm run seo:guard:indexing && npm run localization:check",
-    "test": "node --test scripts/seo/__tests__/*.test.mjs",
+    "test": "node --experimental-strip-types --test scripts/seo/__tests__/*.test.mjs scripts/typesafe/__tests__/*.test.mjs",
     "seo:pull:ahrefs": "node scripts/seo/pull-ahrefs.mjs",
     "seo:pull:ahrefs-keywords-explorer": "node scripts/seo/pull-ahrefs-keywords-explorer.mjs",
     "seo:pull:ahrefs-site-audit": "node scripts/seo/pull-ahrefs-site-audit.mjs",
@@ -48,7 +48,11 @@
     "seo:content-briefs": "node scripts/seo/generate-content-briefs.mjs",
     "seo:ai-visibility": "node scripts/seo/analyze-ai-visibility.mjs",
     "seo:keyword-gaps": "node scripts/seo/keyword-gap-analysis.mjs",
-    "seo:rank-suggestions": "node scripts/seo/suggest-rank-tracker-keywords.mjs"
+    "seo:rank-suggestions": "node scripts/seo/suggest-rank-tracker-keywords.mjs",
+    "typesafe:audit": "node scripts/typesafe/audit-catalog.mjs",
+    "typesafe:related": "node scripts/typesafe/build-related.mjs",
+    "typesafe:keywords": "node scripts/typesafe/classify-keywords.mjs",
+    "typesafe:localization": "node scripts/typesafe/verify-localization.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",
