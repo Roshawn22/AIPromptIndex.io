@@ -5,6 +5,7 @@ import path from 'node:path';
 import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
+import sentry from '@sentry/astro';
 
 const repoRoot = process.cwd();
 const promptsDirPath = path.join(repoRoot, 'src/data/prompts');
@@ -173,12 +174,36 @@ function buildRouteLastmodMap() {
 
 const routeLastmodMap = buildRouteLastmodMap();
 
+// Sentry's build plugin emits source maps so it can upload them. Uploading needs
+// SENTRY_AUTH_TOKEN (plus SENTRY_ORG/SENTRY_PROJECT); without it the maps would
+// just be served publicly from dist/, so keep them off until a token exists.
+const sentryUploadsSourceMaps = Boolean(process.env.SENTRY_AUTH_TOKEN);
+
 export default defineConfig({
   site: 'https://aipromptindex.io',
   output: 'static',
   trailingSlash: 'always',
   integrations: [
     react(),
+    sentry({
+      // Errors only. Tracing and session replay stay out of the bundle: they are
+      // the bulk of the SDK's weight and would add per-page-view requests.
+      bundleSizeOptimizations: {
+        excludeDebugStatements: true,
+        excludeTracing: true,
+        excludeReplayShadowDom: true,
+        excludeReplayIframe: true,
+        excludeReplayWorker: true,
+      },
+      telemetry: false,
+      // A failed upload should cost readable stack traces, not the deploy.
+      errorHandler: (error) => {
+        console.warn('[sentry] source map upload failed:', error.message);
+      },
+      sourcemaps: sentryUploadsSourceMaps
+        ? { filesToDeleteAfterUpload: ['dist/**/*.map'] }
+        : { disable: true },
+    }),
     sitemap({
       filter: (page) => {
         const pathname = normalizePathname(new URL(page).pathname);
