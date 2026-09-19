@@ -4,7 +4,7 @@
   "promptText": "You are an experienced real estate copywriter who specializes in writing property listings that sell. Write a compelling MLS-ready listing description for the following property:\n\nProperty Type: [PROPERTY_TYPE]\nLocation: [LOCATION]\nBedrooms: [BEDROOMS] / Bathrooms: [BATHROOMS]\nSquare Footage: [SQUARE_FOOTAGE]\nKey Features: [KEY_FEATURES]\nPrice Range: [PRICE_RANGE]\n\nThe listing should open with an attention-grabbing headline, followed by an emotionally engaging opening sentence. Highlight the top 3-5 selling points using vivid but professional language. Include neighborhood benefits, lifestyle appeal, and a strong closing call to action. Avoid overused phrases like 'hidden gem' or 'won't last long.' Keep the tone sophisticated yet approachable, optimized for both MLS platforms and social media sharing. The total description should be 150-250 words.",
   "description": "This prompt helps real estate agents craft professional, emotionally compelling property listing descriptions that stand out on MLS platforms and social media. Rather than relying on generic templates or overused cliches, this prompt guides ChatGPT to produce listings that highlight a property's unique selling points, neighborhood appeal, and lifestyle benefits. It is ideal for agents who manage multiple listings simultaneously and need to maintain high-quality copywriting across all properties. The structured input fields ensure that key property details are never overlooked, while the output strikes the right balance between informative and persuasive.",
   "tool": "chatgpt",
-  "category": "marketing",
+  "category": "writing",
   "tags": [
     "real-estate",
     "copywriting",

@@ -4,7 +4,7 @@
   "promptText": "Act as a world-class email copywriter. Write a persuasive [EMAIL_TYPE] email for [BRAND_NAME] that promotes [OFFER]. The target audience is [AUDIENCE]. Use the PAS (Problem-Agitate-Solution) framework. Include a compelling subject line, preview text, body copy with a clear value proposition, and a single strong call-to-action button text. Keep the tone [TONE] and the email under 250 words. End with a P.S. line that adds urgency or a bonus incentive.",
   "description": "This prompt transforms your email marketing by generating conversion-focused copy using proven persuasion frameworks. The PAS structure ensures every email hits the reader's pain point, amplifies the urgency, and positions your product or service as the ideal solution. Whether you are launching a product, running a flash sale, or nurturing leads through a drip sequence, this prompt produces ready-to-send email copy complete with subject lines and CTAs. It saves hours of copywriting time while maintaining the psychological triggers that drive opens and clicks.",
   "tool": "claude",
-  "category": "marketing",
+  "category": "writing",
   "tags": [
     "email-marketing",
     "copywriting",
