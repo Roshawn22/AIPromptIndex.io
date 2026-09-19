@@ -7,6 +7,12 @@ import { addQualityOutliers, buildAuditRequest, interpretAudit, labelSkew } from
 import { buildRelatedRequest, pickRelated } from '../build-related.mjs';
 import { buildKeywordRequest, interpretKeyword } from '../classify-keywords.mjs';
 import { buildLocalizationRequest, interpretLocalization } from '../verify-localization.mjs';
+import {
+  currentMembership,
+  overBroadMemberships,
+  proposeTags,
+  rewriteTagsArray,
+} from '../audience-fit.mjs';
 
 const prompt = {
   slug: 'cold-email-writer',
@@ -226,4 +232,59 @@ test('inventing a claim the source does not make is a defect', () => {
   assert.equal(result.verdict, 'needs-attention');
   assert.equal(result.issues[0].type, 'contradiction');
   assert.equal(result.issues[0].severity, 'defect');
+});
+
+/* ---- audience fit ---- */
+
+const audiencePages = [
+  { slug: 'marketers', audience: 'Marketers', filterCategories: ['marketing'], filterTags: ['marketing', 'social-media'] },
+  { slug: 'developers', audience: 'Developers', filterCategories: ['coding'], filterTags: ['architecture', 'api'] },
+  { slug: 'teachers', audience: 'Teachers', filterCategories: ['education'], filterTags: ['curriculum'] },
+];
+const writingPrompt = {
+  slug: 'testimonial-writer', title: 'Testimonial Writer', description: 'Writes customer testimonials.',
+  promptText: 'Write a testimonial for [CUSTOMER].', category: 'writing', tags: ['testimonials'],
+};
+
+test('membership is by category OR tag, and the source is reported', () => {
+  assert.deepEqual(currentMembership({ ...writingPrompt, category: 'marketing' }, audiencePages[0]),
+    { member: true, byCategory: true, byTag: false });
+  assert.deepEqual(currentMembership({ ...writingPrompt, tags: ['social-media'] }, audiencePages[0]),
+    { member: true, byCategory: false, byTag: true });
+  assert.deepEqual(currentMembership(writingPrompt, audiencePages[0]),
+    { member: false, byCategory: false, byTag: false });
+});
+
+test('an inaccurate tag is refused even when it would restore a deserved page', () => {
+  // The whole point: the prompt genuinely serves developers, but calling a testimonial
+  // writer "architecture" would be a lie, so the page is left unreachable instead.
+  const fits = [0.95, 0.9, 0.0];
+  const accurate = { marketing: 0.96, architecture: 0.04, api: 0.03 };
+  const result = proposeTags(writingPrompt, audiencePages, fits, accurate);
+  assert.deepEqual(result.tags, ['marketing']);
+  assert.deepEqual(result.restores, ['marketers']);
+  assert.deepEqual(result.unreachable, ['developers']);
+});
+
+test('a marginal audience fit proposes nothing at all', () => {
+  const result = proposeTags(writingPrompt, audiencePages, [0.5, 0.1, 0.1], { marketing: 0.99 });
+  assert.deepEqual(result, { tags: [], restores: [], unreachable: [] });
+});
+
+test('over-broad memberships are only those held by category, not by tag', () => {
+  const byCategory = { ...writingPrompt, category: 'marketing' };
+  assert.deepEqual(overBroadMemberships(byCategory, audiencePages, [0.05, 0, 0]).map((e) => e.slug), ['marketers']);
+  // Held by an explicit tag instead: that is a deliberate choice, not filter spillover.
+  const byTag = { ...writingPrompt, tags: ['social-media'] };
+  assert.deepEqual(overBroadMemberships(byTag, audiencePages, [0.05, 0, 0]), []);
+});
+
+test('tag rewriting preserves each file\'s own array formatting', () => {
+  const multi = '{\n  "tags": [\n    "a",\n    "b"\n  ],\n  "x": 1\n}\n';
+  assert.equal(rewriteTagsArray(multi, ['c']), '{\n  "tags": [\n    "a",\n    "b",\n    "c"\n  ],\n  "x": 1\n}\n');
+  const spaced = '{"tags": ["a", "b"], "x": 1}';
+  assert.equal(rewriteTagsArray(spaced, ['c']), '{"tags": ["a", "b", "c"], "x": 1}');
+  const tight = '{"tags": ["a","b"], "x": 1}';
+  assert.equal(rewriteTagsArray(tight, ['c']), '{"tags": ["a","b","c"], "x": 1}');
+  assert.equal(rewriteTagsArray(multi, []), null);
 });

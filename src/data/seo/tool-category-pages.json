@@ -586,5 +586,61 @@
         "a": "Specify the recipient, context, desired tone (formal, friendly, urgent), and the key message. ChatGPT can draft emails for any business scenario including follow-ups, proposals, apologies, and introductions."
       }
     ]
+  },
+  {
+    "tool": "claude",
+    "category": "coding",
+    "title": "Best Claude Prompts for Coding",
+    "metaTitle": "Best Claude Coding Prompts (2026) — Copy & Paste Ready",
+    "metaDescription": "Curated Claude prompts for query optimization, data scripts, and technical documentation. Ready to copy and paste.",
+    "keyword": "claude prompts for coding",
+    "intro": "Claude's long context window changes which coding problems are worth handing to an AI. You can paste an entire module, a schema, and a slow query together and ask why the query is slow — the kind of question that needs all three at once to answer well. It is correspondingly strong at the writing side of engineering: documentation, migration notes, and explanations of code that someone else has to maintain. These Claude coding prompts lean on that, favouring tasks where reading a lot carefully matters more than generating a lot quickly.",
+    "tips": [
+      "Paste the whole file rather than the fragment you suspect. Claude's context window is large enough that trimming usually costs you more in accuracy than it saves.",
+      "Include the schema, sample rows, or type definitions alongside the code. Most wrong answers about data come from the model guessing the shape of the data.",
+      "Ask for the reasoning and the change together, then read the reasoning first — it is where a wrong assumption becomes visible."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best Claude prompts for coding?",
+        "a": "The ones that give Claude a lot to read. Its advantage is holding a whole file, a schema, and an error in mind at once, so prompts that supply full context outperform prompts that supply a minimal snippet."
+      },
+      {
+        "q": "Is Claude good at writing technical documentation?",
+        "a": "It is one of its strongest coding-adjacent uses. Give it the source file and say who the documentation is for — a new team member, an external API consumer, a future maintainer — and it will pitch the explanation at that reader rather than restating the code."
+      },
+      {
+        "q": "How is Claude different from Cursor for coding?",
+        "a": "Cursor is an editor that acts on your repository; Claude is an assistant you paste into. Use Cursor to make a change across files, and Claude to understand a system, optimize a query, or produce the written artifact that explains it."
+      }
+    ]
+  },
+  {
+    "tool": "gemini",
+    "category": "writing",
+    "title": "Best Gemini Prompts for Writing",
+    "metaTitle": "Best Gemini Writing Prompts (2026) — Copy & Paste Ready",
+    "metaDescription": "Curated Gemini prompts for testimonials, cover letters, and social captions. Ready to copy and paste.",
+    "keyword": "gemini prompts for writing",
+    "intro": "Gemini's advantage in writing is what it can reach while it writes. Live web access means it can ground a draft in something current rather than in whatever it last memorised, and its Google Workspace integration puts that draft where the rest of your work already lives. That suits writing that has to be accurate about the outside world — a cover letter that reflects what a company actually announced this quarter, a caption tied to something happening now. These Gemini writing prompts are chosen to use that, not to ignore it.",
+    "tips": [
+      "Ask Gemini to check current details before drafting when the piece depends on them, such as a company's recent product news in a cover letter.",
+      "Give it a sample of the voice you want — an earlier post, a paragraph you liked. Describing a tone in the abstract produces a generic result.",
+      "Draft in Gemini and refine in Docs. Moving the draft into Workspace early is usually faster than polishing inside the chat."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best Gemini prompts for writing?",
+        "a": "Prompts that give Gemini something to work from: a voice sample, an audience, and a reason the piece exists. Its web access adds most value when the writing depends on facts that change, so say explicitly when you want current information used."
+      },
+      {
+        "q": "Is Gemini good for writing social media captions?",
+        "a": "Yes, particularly when the caption needs to reference something current. Supply the image description or the post's purpose, the platform, and a sample of your existing voice, since caption conventions differ sharply between platforms."
+      },
+      {
+        "q": "Can Gemini write in my voice?",
+        "a": "It approximates a voice well when you show it one. Paste two or three samples of your own writing and ask it to match the sentence rhythm and vocabulary rather than describing the tone in adjectives, which tends to produce a flattened, generic result."
+      }
+    ]
   }
 ]

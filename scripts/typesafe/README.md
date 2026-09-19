@@ -11,6 +11,7 @@ Docs: https://docs.typesafe.ai/llms.txt
 | Related prompts | `build-related.mjs` | `npm run typesafe:related` | `src/data/seo/related-prompts.json` (commit it) |
 | Keyword intent & gaps | `classify-keywords.mjs` | `npm run typesafe:keywords` | `output/typesafe/<date>/keyword-intent.{json,md}` |
 | pt-BR pre-review | `verify-localization.mjs` | `npm run typesafe:localization` | `output/typesafe/<date>/localization-review.{json,md}` |
+| Audience fit | `audience-fit.mjs` | `npm run typesafe:audience` | proposes tags; `--apply` writes them |
 | Search rerank, builder hints | `convex/assist.ts`, `src/lib/assist.ts` | In the browser, behind `PUBLIC_TYPESAFE_*` flags | nothing |
 
 Every script accepts `--dry-run` (print the exact request, no API call), `--limit=N`,
@@ -59,3 +60,27 @@ Contradiction and omission are now separate judgments: inventing or contradictin
 **defect** to fix, leaving material out is an editorial **choice** to confirm. That resolves to
 6 defects, 1 to confirm and 1 clean, and the 6 are real — the pt-BR roundup descriptions name
 specific tools ("ChatGPT, Claude e Gemini") where the English says "any use case".
+
+## Why audience fit needs two requests
+
+A prompt lands on an audience page when its category or one of its tags matches that page's
+filters, so recategorising a prompt silently adds and drops it from several audience pages at
+once. `audience-fit.mjs` asks whether each membership is deserved, then proposes tags to
+restore the ones that are.
+
+It asks in two rounds, which is the one place in this codebase a second request is justified:
+the candidate tags depend on the first round's answers, so they cannot be batched.
+
+1. **Does this prompt serve this audience?** One Noul per audience page.
+2. **Is this tag accurate for this prompt?** One Noul per candidate tag.
+
+The second round exists because the first is not enough. A greedy tag picker optimising only
+for coverage proposed tagging a freelance proposal writer `architecture`, purely because that
+tag drives the developers page. The prompt genuinely serves developers; the tag was still a
+lie. Tags below `tagAccurate` are refused and the page is reported as **deserved but
+unreachable** instead — widening that page's own filters is a human call. Writing a false tag
+to win a collection slot is exactly the trade this system exists to avoid.
+
+Note `src/pages/prompts/[tool]/[category].astro` only builds a tool-category page when at
+least 3 prompts match, so adding an entry to `tool-category-pages.json` below that bar creates
+config that silently does nothing.

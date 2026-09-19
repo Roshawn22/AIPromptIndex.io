@@ -5,7 +5,7 @@
   "description": "This prompt combines creative generation with educational craft analysis, making it a dual-purpose tool for both writing poetry and learning poetic technique. The inclusion of specific literary device requirements ensures the output demonstrates real craft rather than generic verse. The workshop-style analysis breaks down why certain choices work, which is invaluable for poets developing their skills. Use it to generate first drafts, study how form shapes content, or prepare teaching examples for creative writing classes.",
   "tool": "claude",
   "category": "writing",
-  "tags": ["poetry", "creative-writing", "literary-devices", "workshop", "craft"],
+  "tags": ["poetry", "creative-writing", "literary-devices", "workshop", "craft", "education"],
   "difficulty": "intermediate",
   "promptType": "text",
   "variables": [

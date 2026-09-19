@@ -52,7 +52,8 @@
     "typesafe:audit": "node scripts/typesafe/audit-catalog.mjs",
     "typesafe:related": "node scripts/typesafe/build-related.mjs",
     "typesafe:keywords": "node scripts/typesafe/classify-keywords.mjs",
-    "typesafe:localization": "node scripts/typesafe/verify-localization.mjs"
+    "typesafe:localization": "node scripts/typesafe/verify-localization.mjs",
+    "typesafe:audience": "node scripts/typesafe/audience-fit.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",

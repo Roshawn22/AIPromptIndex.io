@@ -10,7 +10,8 @@
     "marketing-plan",
     "growth-strategy",
     "local-marketing",
-    "budget-marketing"
+    "budget-marketing",
+    "business"
   ],
   "difficulty": "intermediate",
   "promptType": "text",
