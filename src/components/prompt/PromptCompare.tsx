@@ -64,16 +64,26 @@ function syncParams(params: Record<string, string>) {
 export default function PromptCompare({ prompts }: Props) {
   const sorted = [...prompts].sort((a, b) => a.title.localeCompare(b.title));
 
-  const [leftSlug, setLeftSlug] = useState(() => getInitialParam('left', ''));
-  const [rightSlug, setRightSlug] = useState(() => getInitialParam('right', ''));
+  // The island is pre-rendered without a URL, so the first client render must match that
+  // empty state; the shared ?left=&right= selection is read after mount.
+  const [leftSlug, setLeftSlug] = useState('');
+  const [rightSlug, setRightSlug] = useState('');
+  const [hasReadUrl, setHasReadUrl] = useState(false);
   const [copiedSide, setCopiedSide] = useState<'left' | 'right' | null>(null);
 
   const leftPrompt = sorted.find((p) => p.slug === leftSlug) ?? null;
   const rightPrompt = sorted.find((p) => p.slug === rightSlug) ?? null;
 
   useEffect(() => {
+    setLeftSlug(getInitialParam('left', ''));
+    setRightSlug(getInitialParam('right', ''));
+    setHasReadUrl(true);
+  }, []);
+
+  useEffect(() => {
+    if (!hasReadUrl) return;
     syncParams({ left: leftSlug, right: rightSlug });
-  }, [leftSlug, rightSlug]);
+  }, [hasReadUrl, leftSlug, rightSlug]);
 
   const handleCopy = useCallback(async (text: string, side: 'left' | 'right') => {
     const didCopy = await copyTextToClipboard(text);
@@ -93,16 +103,17 @@ export default function PromptCompare({ prompts }: Props) {
       {/* ---- Selector bar ---- */}
       <div className="mb-8 flex flex-col gap-4 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-4 sm:flex-row sm:items-center">
         <div className="flex-1">
-          <label className="mb-1 block text-xs font-medium uppercase tracking-wider text-[var(--color-text-muted)] font-[var(--font-display)]">
+          <label htmlFor="compare-left" className="mb-1 block text-xs font-medium uppercase tracking-wider text-[var(--color-text-muted)] font-[var(--font-display)]">
             Left Prompt
           </label>
           <select
+            id="compare-left"
             value={leftSlug}
             onChange={(e) => setLeftSlug(e.target.value)}
-            className="w-full cursor-pointer appearance-none rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2 text-sm text-[var(--color-text-primary)] font-[var(--font-display)] transition-colors hover:border-[var(--color-accent-muted)] focus:border-[var(--color-accent)] focus:outline-none"
+            className="w-full cursor-pointer appearance-none rounded-[var(--radius-md)] border border-[var(--color-border-control)] bg-[var(--color-surface-2)] px-3 py-2 text-sm text-[var(--color-text-primary)] font-[var(--font-display)] transition-colors hover:border-[var(--color-accent-muted)] focus:border-[var(--color-accent)] focus:outline-none"
             style={{ ...SELECT_CHEVRON_STYLE, paddingRight: '2rem' }}
           >
-            <option value="">-- Select a prompt --</option>
+            <option value="">Select a prompt</option>
             {sorted.map((p) => (
               <option key={p.slug} value={p.slug}>{p.title}</option>
             ))}
@@ -114,16 +125,17 @@ export default function PromptCompare({ prompts }: Props) {
         </div>
 
         <div className="flex-1">
-          <label className="mb-1 block text-xs font-medium uppercase tracking-wider text-[var(--color-text-muted)] font-[var(--font-display)]">
+          <label htmlFor="compare-right" className="mb-1 block text-xs font-medium uppercase tracking-wider text-[var(--color-text-muted)] font-[var(--font-display)]">
             Right Prompt
           </label>
           <select
+            id="compare-right"
             value={rightSlug}
             onChange={(e) => setRightSlug(e.target.value)}
-            className="w-full cursor-pointer appearance-none rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2 text-sm text-[var(--color-text-primary)] font-[var(--font-display)] transition-colors hover:border-[var(--color-accent-muted)] focus:border-[var(--color-accent)] focus:outline-none"
+            className="w-full cursor-pointer appearance-none rounded-[var(--radius-md)] border border-[var(--color-border-control)] bg-[var(--color-surface-2)] px-3 py-2 text-sm text-[var(--color-text-primary)] font-[var(--font-display)] transition-colors hover:border-[var(--color-accent-muted)] focus:border-[var(--color-accent)] focus:outline-none"
             style={{ ...SELECT_CHEVRON_STYLE, paddingRight: '2rem' }}
           >
-            <option value="">-- Select a prompt --</option>
+            <option value="">Select a prompt</option>
             {sorted.map((p) => (
               <option key={p.slug} value={p.slug}>{p.title}</option>
             ))}
