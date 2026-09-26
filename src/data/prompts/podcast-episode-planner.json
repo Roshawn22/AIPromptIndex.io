@@ -12,12 +12,14 @@
     { "name": "PODCAST_NAME", "description": "The name of your podcast", "example": "The Build in Public Show" },
     { "name": "EPISODE_TOPIC", "description": "What this episode covers", "example": "How to validate a SaaS idea in 72 hours without writing code" },
     { "name": "PODCAST_FORMAT", "description": "The style of the podcast", "example": "solo deep-dive with occasional guest interviews" },
-    { "name": "TARGET_LISTENER", "description": "Who listens to your show", "example": "aspiring SaaS founders and indie hackers who are pre-revenue or in the idea stage" }
+    { "name": "TARGET_LISTENER", "description": "Who listens to your show", "example": "aspiring SaaS founders and indie hackers who are pre-revenue or in the idea stage" },
+    { "name": "EPISODE_LENGTH", "description": "Typical episode length in minutes", "example": "45" }
   ],
   "tips": ["Share your top 5 performing episode titles so Claude can match the style your audience responds to", "Include the guest's bio and recent work if it is an interview episode so questions feel researched", "Ask Claude to generate a pre-recording checklist specific to this episode's technical needs"],
   "exampleOutput": "# Episode Plan: SaaS Validation in 72 Hours\n\n## Title Options\n1. \"Validate Your SaaS Idea in 72 Hours — No Code Required\"\n2. \"The 72-Hour Test: Know If Your Idea Is Worth Building\"\n3. \"Stop Building. Start Validating. Here's How.\"\n\n## Cold Open (45 seconds)\n\"Last month, I watched someone spend six months building a SaaS product that three people wanted. Six months. I'm going to show you how to figure that out in three days — for free — and I'm going to walk you through the exact process I used to validate my last two ideas before writing a single line of code.\"\n\n[INTRO MUSIC]\n\n## Segment 1: Why Most Founders Skip Validation (5:00-12:00)\n**Talking Points:**\n- The \"builder's bias\" — we default to building because it feels productive\n- The stat: 42% of startups fail because there's no market need (CB Insights)\n- My own story: the project I built for 4 months that nobody wanted\n\n**Transition:** \"So if building isn't the answer, what do you do in those 72 hours instead? Let me break down the framework...\"\n\n## Segment 2: The 72-Hour Validation Framework (12:00-28:00)...\n\n## Social Media Clips\n1. [14:30-15:15] \"If you can't get 10 people to give you their email for a product that doesn't exist, you definitely can't get them to pay for one that does.\"\n2. [22:00-22:45] The fake door test explanation — visual, tactical, shareable",
   "isFeatured": true,
   "dateAdded": "2026-04-02",
+  "lastUpdated": "2026-09-26",
   "metaTitle": "Podcast Episode Planner Prompt for Claude",
   "metaDescription": "Plan complete podcast episodes with segments, talking points, and social clips using Claude. Record-ready blueprints."
 }

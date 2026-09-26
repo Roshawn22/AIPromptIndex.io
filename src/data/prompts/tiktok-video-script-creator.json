@@ -35,6 +35,11 @@
       "name": "VIDEO_FORMAT",
       "description": "The style of TikTok video",
       "example": "talking head with text overlays and screen recordings"
+    },
+    {
+      "name": "VIDEO_LENGTH",
+      "description": "Total video length in seconds",
+      "example": "45"
     }
   ],
   "tips": [
@@ -49,6 +54,7 @@
   "exampleOutput": "## HOOK OPTIONS (pick one)\n1. [Look directly at camera] \"Stop paying $5K a month for marketing.\" (Confrontational — highest predicted retention)\n2. [Point at text overlay] \"These 3 AI tools replaced my entire marketing team.\" (Proof-based)\n3. [Shake head] \"I can't believe this is free.\" (Curiosity gap)\n\n## BODY (30 seconds)\n[Cut to screen recording]\n\"Tool number one — [SLOW DOWN] and this one's a game changer for content.\"\n\n[Text overlay: \"1. CASTMAGIC\"]\n\"You paste in one podcast episode... [snap] ...it gives you a blog post, social captions, an email newsletter, AND a quote graphic.\"\n\n[Quick cut — new angle]\n\"That used to take my VA six hours. Now it takes forty-five seconds.\"\n\n[Text overlay: \"2. INSTANTLY\"]\n\"Cold email that doesn't feel cold...\"\n\n## CTA\n[Direct to camera, lean in]\n\"Follow for more tools that save you thousands. I post three every week.\"\n\n## CAPTION OPTIONS\n1. \"My marketing team is three AI tools and a laptop\" #aitools #marketing\n2. \"$5K/month → $0/month. Same results.\" #entrepreneur #automation",
   "isFeatured": false,
   "dateAdded": "2026-04-02",
+  "lastUpdated": "2026-09-26",
   "metaTitle": "TikTok Video Script Creator Prompt for ChatGPT",
   "metaDescription": "Create viral TikTok scripts with hooks, pacing notes, and text overlays using ChatGPT. Optimized for short-form video."
 }
