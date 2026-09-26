@@ -85,7 +85,7 @@ const subscribeHref = (() => {
             href={subscribeHref}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex min-h-11 w-full items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-accent)] px-5 py-2.5 text-sm font-[var(--font-display)] font-semibold text-white transition-colors hover:bg-[var(--color-accent-hover)]"
+            class="inline-flex min-h-11 w-full items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-accent-fill)] px-5 py-2.5 text-sm font-[var(--font-display)] font-semibold text-[var(--color-on-accent)] transition-colors hover:bg-[var(--color-accent-fill-hover)]"
             data-newsletter-cta="true"
             data-newsletter-placement={`${locale === 'pt-BR' ? 'pt-br-' : ''}${compact ? 'compact' : 'standard'}`}
           >
@@ -117,10 +117,6 @@ const subscribeHref = (() => {
           <div class="surface-glass-ui rounded-[var(--radius-md)] px-4 py-3 text-center text-sm text-[var(--color-text-secondary)]">
             {newsletterCopy?.unavailable || 'Newsletter signup is temporarily unavailable.'}
           </div>
-
-          <p class="mt-3 text-center text-xs text-[var(--color-text-muted)]">
-            {newsletterCopy?.configuration || 'Add `PUBLIC_NEWSLETTER_URL` to re-enable subscriptions.'}
-          </p>
         </div>
       )}
     </div>

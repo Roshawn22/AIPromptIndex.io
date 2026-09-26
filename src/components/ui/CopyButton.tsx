@@ -71,8 +71,8 @@ function CopyButtonUI({
 
   const variantStyles = {
     primary: copied
-      ? 'bg-emerald-500 text-white border-emerald-500'
-      : 'bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)] border-transparent',
+      ? 'bg-emerald-700 text-white border-emerald-500'
+      : 'bg-[var(--color-accent-fill)] text-[var(--color-on-accent)] hover:bg-[var(--color-accent-fill-hover)] border-transparent',
     ghost: copied
       ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20'
       : 'bg-[var(--color-surface-2)] text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-3)] border-[var(--color-border)]',
@@ -85,6 +85,7 @@ function CopyButtonUI({
       className={`inline-flex items-center justify-center font-[var(--font-display)] font-medium rounded-[var(--radius-md)] border transition-all duration-200 cursor-pointer overflow-hidden ${sizeStyles[size]} ${variantStyles[variant]}`}
       aria-label={resolvedAriaLabel}
     >
+      <span className="sr-only" aria-live="polite">{copied ? copiedLabel : ''}</span>
       <AnimatePresence mode="wait" initial={false}>
         {copied ? (
           <motion.span

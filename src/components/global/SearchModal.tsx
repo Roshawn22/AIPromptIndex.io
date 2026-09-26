@@ -65,7 +65,7 @@ const typeIcons: Record<string, string> = {
 
 const englishTypeLabels: Record<string, string> = {
   prompt: 'Prompt',
-  blog: 'Article',
+  blog: 'Blog',
   guide: 'Guide',
 };
 
@@ -101,6 +101,7 @@ export default function SearchModal() {
         catalogNotice: 'Os resultados abrem o catálogo original em inglês.',
         navigate: 'navegar',
         select: 'selecionar',
+        resultsStatus: (count: number) => (count === 1 ? '1 resultado' : `${count} resultados`),
         typeLabels: { prompt: 'Prompt', blog: 'Artigo', guide: 'Guia' } as Record<string, string>,
       }
     : {
@@ -114,6 +115,7 @@ export default function SearchModal() {
         catalogNotice: '',
         navigate: 'navigate',
         select: 'select',
+        resultsStatus: (count: number) => (count === 1 ? '1 result' : `${count} results`),
         typeLabels: englishTypeLabels,
       };
   const [items, setItems] = useState<SearchItem[]>([]);
@@ -375,8 +377,13 @@ export default function SearchModal() {
                   fontFamily: 'var(--font-display)',
                 }}
                 aria-label={copy.aria}
+                role="combobox"
+                aria-expanded={results.length > 0}
+                aria-controls="search-results"
+                aria-autocomplete="list"
+                aria-activedescendant={results.length > 0 ? `search-result-${selectedIndex}` : undefined}
               />
-              <kbd
+              <kbd aria-hidden="true"
                 className="hidden items-center rounded-full border px-2 py-1 text-xs sm:inline-flex"
                 style={{
                   backgroundColor: 'var(--glass-highlight-soft)',
@@ -390,7 +397,12 @@ export default function SearchModal() {
               </kbd>
             </div>
 
-            <div className="max-h-80 overflow-y-auto">
+            <div
+              id="search-results"
+              role={results.length > 0 ? 'listbox' : undefined}
+              aria-label={results.length > 0 ? copy.aria : undefined}
+              className="max-h-80 overflow-y-auto"
+            >
               {isLoading && (
                 <div className="px-5 py-10 text-center" style={{ color: 'var(--color-text-muted)' }}>
                   <p className="text-sm">{copy.loading}</p>
@@ -425,6 +437,9 @@ export default function SearchModal() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.2, delay: motionDisabled ? 0 : index * 0.03 }}
                     href={result.item.url}
+                    id={`search-result-${index}`}
+                    role="option"
+                    aria-selected={index === selectedIndex}
                     className="flex items-center gap-3 px-5 py-3 transition-colors"
                     style={{
                       backgroundColor:
@@ -484,6 +499,9 @@ export default function SearchModal() {
                   </motion.a>
                 ))}
             </div>
+            <p role="status" className="sr-only">
+              {!isLoading && !loadError && query.trim().length >= 2 ? copy.resultsStatus(results.length) : ''}
+            </p>
 
             <div
               className="flex items-center justify-between border-t px-5 py-3 text-xs"
@@ -493,9 +511,9 @@ export default function SearchModal() {
                 fontFamily: 'var(--font-display)',
               }}
             >
-              <div className="flex items-center gap-3">
+              <div className="hidden items-center gap-3 [@media(hover:hover)]:flex">
                 <span className="flex items-center gap-1">
-                  <kbd
+                  <kbd aria-hidden="true"
                     className="rounded px-1.5 py-0.5"
                     style={{ ...softGlass, borderStyle: 'solid', borderWidth: '1px' }}
                   >
@@ -504,7 +522,7 @@ export default function SearchModal() {
                   {copy.navigate}
                 </span>
                 <span className="flex items-center gap-1">
-                  <kbd
+                  <kbd aria-hidden="true"
                     className="rounded px-1.5 py-0.5"
                     style={{ ...softGlass, borderStyle: 'solid', borderWidth: '1px' }}
                   >
@@ -513,7 +531,6 @@ export default function SearchModal() {
                   {copy.select}
                 </span>
               </div>
-              <span>Powered by Fuse.js</span>
             </div>
             {copy.catalogNotice && (
               <p className="border-t px-5 py-2 text-center text-[11px]" style={{ borderColor: 'var(--glass-border)', color: 'var(--color-text-muted)' }}>

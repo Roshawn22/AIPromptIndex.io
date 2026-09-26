@@ -58,7 +58,7 @@ export default function PromptCodeBlock({
         onClick={handleCopy}
         className={`absolute top-3 right-3 inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-[var(--font-display)] font-medium rounded-[var(--radius-md)] border transition-all duration-200 cursor-pointer ${
           copied
-            ? 'bg-emerald-500 text-white border-emerald-500'
+            ? 'bg-emerald-700 text-white border-emerald-500'
             : 'bg-white/10 text-white/70 border-white/20 hover:bg-white/20 hover:text-white opacity-0 group-hover:opacity-100 focus:opacity-100'
         }`}
         aria-label={copied ? copiedLabel : copyLabel}

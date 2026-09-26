@@ -113,7 +113,7 @@ const formatDate = (value?: string) => value
           <h1 class="mx-auto max-w-4xl text-balance text-4xl sm:text-6xl">{page.heading}</h1>
           <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[var(--color-text-secondary)]">{page.intro}</p>
           <div class="mt-8 flex flex-wrap justify-center gap-3">
-            <a href="/pt-BR/best/best-ai-prompts/" class="rounded-[var(--radius-md)] bg-[var(--color-accent)] px-5 py-3 font-semibold text-white hover:bg-[var(--color-accent-hover)]">
+            <a href="/pt-BR/best/best-ai-prompts/" class="rounded-[var(--radius-md)] bg-[var(--color-accent-fill)] px-5 py-3 font-semibold text-[var(--color-on-accent)] hover:bg-[var(--color-accent-fill-hover)]">
               {page.primaryCta}
             </a>
             <a href="/pt-BR/best/free-ai-prompts/" class="surface-glass-ui rounded-[var(--radius-md)] px-5 py-3 font-semibold text-[var(--color-text-primary)]">
@@ -156,10 +156,10 @@ const formatDate = (value?: string) => value
         {common.content.originalLibraryNotice}
       </aside>
 
-      <ol class="mt-10 grid list-none gap-4 p-0 sm:grid-cols-2 lg:grid-cols-3">
+      <ol role="list" class="mt-10 grid list-none gap-4 p-0 sm:grid-cols-2 lg:grid-cols-3">
         {roundupPrompts.map((prompt, index) => (
           <li class="relative">
-            <span class="absolute -left-2 -top-2 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-[var(--color-accent)] text-xs font-bold text-white">{index + 1}</span>
+            <span class="absolute -left-2 -top-2 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-[var(--color-accent-fill)] text-xs font-bold text-[var(--color-on-accent)]">{index + 1}</span>
             <a lang="en" href={`/prompts/${prompt.data.slug}/`} class="surface-glass-ui block h-full rounded-[var(--radius-card)] p-5 transition hover:-translate-y-0.5 hover:border-[var(--color-accent-muted)]">
               <div class="mb-3 flex flex-wrap gap-2">
                 <Badge variant="teal" size="sm">{toolDisplayNames[prompt.data.tool] || prompt.data.tool}</Badge>

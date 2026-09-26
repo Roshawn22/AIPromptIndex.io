@@ -56,13 +56,14 @@ const languageLabel = locale === 'pt-BR' ? 'English' : 'Português';
     </a>
 
     <!-- Desktop Nav -->
-    <nav class="surface-glass-ui hidden items-center gap-0.5 rounded-full px-2 py-1 md:flex lg:gap-1" aria-label={headerCopy?.mainNavigation || 'Main navigation'}>
+    <!-- Shown from lg: below that the logo, nav pill, search, theme, sign-in and submit do not fit on one row. -->
+    <nav class="surface-glass-ui hidden items-center gap-0.5 rounded-full px-2 py-1 lg:flex xl:gap-1" aria-label={headerCopy?.mainNavigation || 'Main navigation'}>
       {navLinks.map((link) => (
         <a
           href={link.href}
           aria-current={currentPath.startsWith(link.href) ? 'page' : undefined}
           class:list={[
-            'rounded-full px-2 py-2 text-sm font-[var(--font-display)] font-medium transition-colors lg:px-3',
+            'rounded-full px-2 py-2 text-sm font-[var(--font-display)] font-medium transition-colors xl:px-3',
             currentPath.startsWith(link.href)
               ? 'bg-[var(--glass-highlight)] text-[var(--color-accent)]'
               : 'text-[var(--color-text-secondary)] hover:bg-[var(--glass-highlight-soft)] hover:text-[var(--color-text-primary)]',
@@ -87,7 +88,7 @@ const languageLabel = locale === 'pt-BR' ? 'English' : 'Português';
           <path d="m21 21-4.3-4.3" />
         </svg>
         <span class="hidden font-[var(--font-display)] font-medium text-sm sm:inline">{headerCopy?.search || 'Search'}</span>
-        <kbd aria-hidden="true" class="hidden rounded-full border border-[var(--glass-border)] bg-[var(--glass-highlight-soft)] px-1.5 py-0.5 font-[var(--font-mono)] text-[10px] text-[var(--color-text-muted)] sm:inline-flex">&#8984;K</kbd>
+        <kbd aria-hidden="true" class="hidden rounded-full border border-[var(--glass-border)] bg-[var(--glass-highlight-soft)] px-1.5 py-0.5 font-[var(--font-mono)] text-[10px] text-[var(--color-text-muted)] xl:inline-flex">&#8984;K</kbd>
       </button>
 
       {showLanguageSwitcher && (
@@ -104,17 +105,19 @@ const languageLabel = locale === 'pt-BR' ? 'English' : 'Português';
       <AuthButtons client:load signInLabel={locale === 'pt-BR' ? 'Entrar' : 'Sign In'} />
       <a
         href="/submit/"
-        class="surface-glass-ui hidden items-center justify-center rounded-full px-4 py-2 text-sm font-[var(--font-display)] font-medium text-[var(--color-text-primary)] transition-all duration-200 hover:text-[var(--color-accent)] sm:inline-flex"
+        class="surface-glass-ui hidden items-center justify-center rounded-full px-4 py-2 text-sm font-[var(--font-display)] font-medium text-[var(--color-text-primary)] transition-all duration-200 hover:text-[var(--color-accent)] xl:inline-flex"
       >
-        {headerCopy?.submit || 'Submit Prompt'}
+        {headerCopy?.submit || 'Submit a Prompt'}
       </a>
 
       <!-- Mobile menu toggle -->
       <button
         id="mobile-menu-btn"
         type="button"
-        class="surface-glass-ui flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] text-[var(--color-text-secondary)] md:hidden"
+        class="surface-glass-ui flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] text-[var(--color-text-secondary)] lg:hidden"
         aria-label={headerCopy?.openMenu || 'Open menu'}
+        data-label-open={headerCopy?.openMenu || 'Open menu'}
+        data-label-close={headerCopy?.closeMenu || 'Close menu'}
         aria-controls="mobile-menu"
         aria-expanded="false"
       >
@@ -126,7 +129,10 @@ const languageLabel = locale === 'pt-BR' ? 'English' : 'Português';
   </div>
 
   <!-- Mobile Nav -->
-  <div id="mobile-menu" class="mobile-menu-closed border-t border-[var(--glass-border)] bg-transparent md:hidden">
+  <!-- The collapsing 0fr row only reaches zero height when its direct child has no padding
+       or border of its own, so the padded nav sits inside a plain wrapper. -->
+  <div id="mobile-menu" class="mobile-menu-closed bg-transparent lg:hidden">
+    <div class="min-h-0 overflow-hidden">
     <nav class="surface-glass-prominent flex flex-col gap-2 rounded-[var(--radius-xl)] p-3" aria-label={headerCopy?.mobileNavigation || 'Mobile navigation'}>
       <button
         type="button"
@@ -171,6 +177,7 @@ const languageLabel = locale === 'pt-BR' ? 'English' : 'Português';
         {headerCopy?.submit || 'Submit a Prompt'}
       </a>
     </nav>
+    </div>
   </div>
 </header>
 
@@ -197,6 +204,7 @@ const languageLabel = locale === 'pt-BR' ? 'English' : 'Português';
         mobileMenu.classList.add('mobile-menu-closed');
       }, { once: true });
       mobileMenuButton.setAttribute('aria-expanded', 'false');
+      mobileMenuButton.setAttribute('aria-label', mobileMenuButton.dataset.labelOpen || 'Open menu');
       if (restoreFocus) {
         mobileMenuButton.focus();
       }
@@ -213,6 +221,7 @@ const languageLabel = locale === 'pt-BR' ? 'English' : 'Português';
           mobileMenu.classList.add('mobile-menu-open');
         });
         mobileMenuButton.setAttribute('aria-expanded', 'true');
+        mobileMenuButton.setAttribute('aria-label', mobileMenuButton.dataset.labelClose || 'Close menu');
         const firstFocusable = mobileMenu.querySelector('a, button') as HTMLElement | null;
         if (firstFocusable) firstFocusable.focus();
       }
