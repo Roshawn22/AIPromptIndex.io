@@ -101,4 +101,12 @@ export default defineSchema({
     windowStart: v.number(),
   })
     .index("by_key", ["key"]),
+
+  // Request budget for anonymous voting in convex/votes.ts (per visitor and site-wide)
+  voteRateLimits: defineTable({
+    key: v.string(),
+    count: v.number(),
+    windowStart: v.number(),
+  })
+    .index("by_key", ["key"]),
 });
