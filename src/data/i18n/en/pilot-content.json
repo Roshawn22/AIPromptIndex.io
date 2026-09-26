@@ -1,0 +1,126 @@
+{
+  "pages": {
+    "/": {
+      "title": "Free AI Prompt Library for ChatGPT, Claude and More",
+      "metaTitle": "Free AI Prompt Library",
+      "description": "Browse a free library of prompts and templates for ChatGPT, Claude, Midjourney, Gemini, Cursor, and other tools. Copy, customize, and use them fast.",
+      "metaDescription": "Browse free prompts and templates for ChatGPT, Claude, Gemini, Midjourney, and Cursor. Copy, customize, and use them fast.",
+      "eyebrow": "Free AI prompt library",
+      "heading": "Find a better prompt. Start faster.",
+      "intro": "Copy-ready prompts organized by tool, category, and goal. Pick a starting point, fill in the variables, and keep what works.",
+      "primaryCta": "Browse the best prompts",
+      "secondaryCta": "See free prompts",
+      "sectionHeading": "Start with these collections",
+      "sectionIntro": "Start with these collections: they are the most useful pages of the catalog in this language."
+    },
+    "/best/gemini-prompts/": {
+      "title": "Best Gemini Prompts",
+      "metaTitle": "Best Gemini Prompts",
+      "description": "Top Google Gemini prompts that leverage its multimodal capabilities, real-time web access, and Google Workspace integration.",
+      "metaDescription": "Curated Google Gemini prompts for research, analysis, writing, and productivity. Leverage web access and Google Workspace integration.",
+      "intro": "Google Gemini in 2026 is the prompt surface that already sits in Gmail, Docs, Sheets, Drive, and Gemini 2.5 in AI Studio. The prompts here are written for that stack: live web research, Workspace file context, and long-context reasoning. If you paste a ChatGPT prompt into Gemini unchanged, you are leaving Drive context and live search unused."
+    },
+    "/best/best-ai-prompts/": {
+      "title": "Best AI Prompts",
+      "metaTitle": "Best AI Prompts",
+      "description": "Every prompt in the library on one page, with our editors' picks first. Start here if you don't yet know what you need.",
+      "metaDescription": "The best AI prompts for ChatGPT, Claude, Gemini, Midjourney, and more. Community-curated and copy-paste ready for any task.",
+      "intro": "This is the full library on one page: every prompt for writing, coding, marketing, image generation, business, data analysis, education, and creative work, with our editors' picks first. Each entry states what it produces, lists the variables you fill in, and links to the full prompt with tips. Skim by tool or category, open anything that fits your task, and adapt the variables to your own context."
+    },
+    "/best/free-ai-prompts/": {
+      "title": "Free AI Prompts",
+      "metaTitle": "Free AI Prompts",
+      "description": "High-quality AI prompts that work with free tiers of ChatGPT, Claude, Gemini, and other AI tools. No subscription required.",
+      "metaDescription": "Free AI prompts that work with ChatGPT Free, Claude Free, and Gemini. Get professional results without paying for premium AI subscriptions.",
+      "intro": "You do not need a paid AI subscription to get professional-quality results. These free AI prompts are specifically optimized to work within the limitations of free-tier AI tools like ChatGPT Free, Claude Free, and Gemini. Every prompt in this collection has been tested on free plans to ensure it produces useful outputs without hitting context limits or requiring premium features. Whether you are a student, hobbyist, or budget-conscious professional, these prompts prove that effective AI usage is about prompt quality, not subscription tier."
+    },
+    "/best/prompt-templates/": {
+      "title": "Best AI Prompt Templates",
+      "metaTitle": "Best AI Prompt Templates",
+      "description": "Reusable AI prompt templates with fill-in-the-blank structures for any use case. Copy, customize, and get results fast.",
+      "metaDescription": "Reusable AI prompt templates for ChatGPT, Claude, and Gemini. Fill-in-the-blank structures for writing, coding, marketing, and more.",
+      "intro": "Prompt templates are the fastest way to get consistent, high-quality results from any AI tool. Instead of crafting prompts from scratch every time, these templates give you proven structures with blank fields you can customize for your specific needs. Whether you need a marketing email, code review, or data analysis, these AI prompt templates have been tested across ChatGPT, Claude, and Gemini to deliver reliable outputs. Save them to your prompt library and use them as starting points for any project."
+    },
+    "/best/cursor-ai-prompts/": {
+      "title": "Best Cursor AI Prompts",
+      "metaTitle": "Best Cursor AI Prompts",
+      "description": "Curated prompts for Cursor AI that leverage its codebase indexing, multi-file editing, and intelligent code generation capabilities.",
+      "metaDescription": "Curated Cursor AI prompts for code generation, refactoring, debugging, and multi-file editing. Boost your development speed.",
+      "intro": "Cursor prompts are not ChatGPT prompts pasted into an IDE. Composer, Chat, inline edit, and @-mentions change what the model can see. This roundup is for repo-aware work: refactors, tests, migrations, and debug sessions that should cite files instead of dumping the whole codebase into a generic chat."
+    },
+    "/prompts/ai-slop-remover/": {
+      "title": "AI Slop Remover",
+      "metaTitle": "AI Slop Remover Prompt for ChatGPT — Humanize AI Writing",
+      "description": "This prompt turns ChatGPT, Claude, or Gemini into a disciplined line editor that strips out the tell-tale patterns of AI-generated writing — binary contrasts, dramatic colon reveals, importance puffery, weasel attribution, and the banned-word list everyone recognizes (delve, leverage, tapestry) — while keeping your voice intact. Most humanizer prompts rewrite everything and sand off whatever personality your draft had. This one is built around the minimum effective edit: it fixes what sounds robotic, leaves strong human sentences alone, and reports back on exactly what it changed so you stay in control. Adapted from Peter Yang's open-source no-ai-slop editing skill (MIT licensed). Use it on newsletters, LinkedIn posts, blog articles, or any draft that started life in an AI chat window.",
+      "metaDescription": "Free ChatGPT prompt that removes AI slop — banned words, binary contrasts, puffery — while keeping your voice. Edit any draft so it sounds human.",
+      "promptText": "You are a sharp human editor. Your job is to remove AI-sounding patterns from my draft while preserving my point and my personal voice. Do not turn distinctive writing into generic polished prose.\n\nThe draft is for: [AUDIENCE]\nIt will be published as: [FORMAT]\n\nMy draft:\n[DRAFT]\n\nEditing rules:\n1. Make the minimum effective edit. Fix AI patterns, repetition, and unclear passages. Leave strong human sentences alone. The edited draft should still sound like me.\n2. Cut these words entirely: delve, foster, leverage, utilize, facilitate, empower, streamline, robust, cutting-edge, game changer, tapestry, realm, beacon, multifaceted, meticulous, paramount, transformative, elevate, embark, harness, ever-evolving.\n3. Cut empty phrases like \"it's worth noting,\" \"at the end of the day,\" \"in today's world,\" \"let's dive in,\" and \"the reality is\" when they delay the point.\n4. Remove these AI patterns wherever they appear:\n- Binary contrasts (\"It's not X. It's Y.\") — state the point directly instead\n- Throat-clearing openers (\"Here's the thing...\") — cut them and lead with the point\n- Faux-insight setups (\"What nobody tells you...\") — let the claim stand on its own\n- Dramatic colon reveals (\"The best part: it learns.\") — rewrite as a plain sentence\n- Trailing -ing analysis (\"...highlighting the team's commitment\") — replace with the actual consequence or cut\n- Importance puffery (\"marks a pivotal moment,\" \"stands as a testament\") — state the fact and let the reader judge\n- Weasel attribution (\"experts agree,\" \"studies show\") — name the source or flag it for me, never invent one\n- Negative listing (\"Not a tool. Not a platform. A movement.\") — just say what it is\n- Dramatic fragments (\"That's it. That's the whole thing.\") — use complete sentences\n- Fake-profound final lines that end on a cute metaphor — delete them and end on the last concrete point\n- Summary-recap endings (\"In conclusion...\") — the reader was just there\n5. Use active voice with human subjects. Replace weak verb phrases with direct verbs (\"made a decision\" becomes \"decided\").\n6. Keep concrete details exactly as written. Never smooth a specific number, name, or date into a vague claim, and never invent claims, stats, or examples I did not provide.\n7. Keep my edge. Preserve strong opinions, blunt language, humor, fragments, and asides that sound like me. Use at most 1-2 em dashes in the whole piece.\n\nOutput format:\n1. The full edited draft\n2. A short \"What changed\" section listing the patterns you removed and why\n3. Any claims that need a source, flagged as questions for me",
+      "variables": [
+        {
+          "description": "Who will read this piece",
+          "example": "Startup founders who subscribe to my newsletter"
+        },
+        {
+          "description": "Where and how it will be published",
+          "example": "A 1,000-word email newsletter issue"
+        },
+        {
+          "description": "The full draft you want edited",
+          "example": "Here's the thing: AI tools aren't just changing marketing. They're transforming it. Our new workflow leverages cutting-edge automation, highlighting our commitment to efficiency..."
+        }
+      ],
+      "tips": [
+        "Paste your whole draft, not a paragraph at a time — the editor needs the full piece to catch repeated sentence shapes and a weak ending",
+        "Fill in AUDIENCE and FORMAT honestly; a LinkedIn post and a technical doc need different levels of polish",
+        "If the output flags a claim as needing a source, add the real source rather than letting the model soften the claim",
+        "Run the edited draft through the companion AI Slop Detector prompt if you want a second-pass audit without another rewrite"
+      ]
+    },
+    "/prompts/business-plan-executive-summary/": {
+      "title": "Claude Business Plan Executive Summary Prompt",
+      "metaTitle": "Claude Business Plan Prompt for Executive Summaries",
+      "description": "Use this Claude business plan prompt to draft an investor-ready executive summary for a startup, small business, lender packet, pitch deck, or accelerator application. The prompt turns your company details, target market, traction, financial projections, and funding ask into a clear business plan executive summary that covers the sections investors and lenders expect to see. It is built for founders who need a stronger first draft before polishing numbers, claims, and market evidence.",
+      "metaDescription": "Use this Claude business plan prompt to write an investor-ready executive summary for funding, lender packets, pitch decks, and startup planning.",
+      "promptText": "You are a seasoned business consultant who has helped 200+ startups secure funding. Write an investor-ready executive summary for [COMPANY_NAME], a [BUSINESS_MODEL] startup in the [INDUSTRY] industry. The company solves [PROBLEM] for [TARGET_MARKET] by offering [SOLUTION]. Include these sections: Company Overview (2-3 sentences), Problem Statement, Solution, Target Market size and characteristics, Revenue Model, Competitive Advantage, Current Traction (use [TRACTION_METRICS] as data points), Financial Projections summary for 3 years, and Funding Ask of [FUNDING_AMOUNT] with planned allocation. Keep the entire summary under 800 words, write in a polished Claude-friendly business-plan style, and make every sentence earn its place.",
+      "variables": [
+        {
+          "description": "Your company name",
+          "example": "NutriPlan AI"
+        },
+        {
+          "description": "Type of business model",
+          "example": "B2C SaaS subscription"
+        },
+        {
+          "description": "Industry vertical",
+          "example": "health-tech and personalized nutrition"
+        },
+        {
+          "description": "The problem being solved",
+          "example": "generic nutrition advice that ignores individual health conditions, genetics, and lifestyle"
+        },
+        {
+          "description": "Who you serve",
+          "example": "health-conscious adults aged 25-55 managing chronic conditions through diet"
+        },
+        {
+          "description": "Your product or service",
+          "example": "an AI-powered meal planning app that creates personalized nutrition plans based on bloodwork, genetic data, and health goals"
+        },
+        {
+          "description": "Current business metrics",
+          "example": "12,000 paid subscribers, $45K MRR, 94% month-over-month retention, partnerships with 3 major lab testing companies"
+        },
+        {
+          "description": "How much funding you seek",
+          "example": "$2.5M Series Seed"
+        }
+      ],
+      "tips": [
+        "Lead with your strongest traction metric to hook the reader immediately",
+        "Quantify your market size with a credible TAM/SAM/SOM breakdown",
+        "Tailor the tone based on your audience: VCs want growth metrics, banks want stability",
+        "Ask Claude for a lender version, investor version, and accelerator version so you can compare the framing before final edits"
+      ]
+    }
+  }
+}

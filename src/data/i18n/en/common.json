@@ -1,0 +1,60 @@
+{
+  "locale": "en",
+  "languageName": "English",
+  "skipToContent": "Skip to main content",
+  "header": {
+    "homeLabel": "AIPromptIndex home",
+    "mainNavigation": "Main navigation",
+    "mobileNavigation": "Mobile navigation",
+    "search": "Search",
+    "searchPrompts": "Search AI prompts",
+    "openSearch": "Open search",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "submit": "Submit a prompt (in English)"
+  },
+  "languageSwitcher": {
+    "label": "Language",
+    "english": "English",
+    "portuguese": "Português"
+  },
+  "newsletter": {
+    "heading": "Get the best AI prompts every week",
+    "subheading": "Curated prompts, tips, and guides, delivered free to your inbox.",
+    "subscribe": "Subscribe free",
+    "opensIndexed": "Opens the Indexed newsletter, in English. No spam. Unsubscribe anytime.",
+    "iframeTitle": "Subscribe to the AIPromptIndex newsletter",
+    "noSpam": "No spam. Unsubscribe anytime.",
+    "unavailable": "Newsletter signup is temporarily unavailable."
+  },
+  "footer": {
+    "crossPromoPrefix": "Looking for AI tools? Visit",
+    "crossPromoSuffix": ", the AI tools directory",
+    "directory": "Directory",
+    "resources": "Resources",
+    "bestPrompts": "Best prompts",
+    "byTool": "By tool",
+    "community": "Community",
+    "company": "Company",
+    "rights": "All rights reserved.",
+    "followX": "Follow on X (Twitter)",
+    "watchYoutube": "Watch on YouTube"
+  },
+  "content": {
+    "home": "Home",
+    "bestPrompts": "Best prompts",
+    "copyReady": "curated prompts, ready to copy and paste",
+    "aboutPrompt": "About this prompt",
+    "variables": "Variables to customize",
+    "example": "Example",
+    "tips": "Tips for the best results",
+    "copyPrompt": "Copy prompt",
+    "copied": "Copied!",
+    "originalLibraryNotice": "The prompts below are in English. Navigation and the main pages are in this language.",
+    "draftNotice": "Translation under review.",
+    "viewPrompt": "View prompt (in English)",
+    "browseCollection": "Browse collection",
+    "added": "Added",
+    "updated": "Updated"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://assets.gtx.dev/config-schema.json",
+  "defaultLocale": "en",
+  "locales": ["es-419", "fr"],
+  "files": {
+    "json": {
+      "include": [
+        "src/data/i18n/[locale]/pilot-content.json",
+        "src/data/i18n/[locale]/common.json"
+      ]
+    }
+  }
+}
