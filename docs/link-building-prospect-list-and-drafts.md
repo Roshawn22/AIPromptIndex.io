@@ -7,6 +7,31 @@ Use this with:
 
 ## Outreach Log
 
+### 2026-09-03 — Page-matched citation pitches (near page one)
+
+Authority is still the constraint. This round pitched four live ranking pages to publishers that already link out, not another catalog/directory batch. `.shop` counts were ignored.
+
+**Live destination URLs (after #27):**
+
+- Gemini: `https://aipromptindex.io/best/gemini-prompts/`
+- Stable Diffusion: `https://aipromptindex.io/best/stable-diffusion-prompts/`
+- Cursor: `https://aipromptindex.io/prompts/cursor/coding/`
+- Small business: `https://aipromptindex.io/prompts/for/small-business/`
+
+| # | Prospect | Contact path | Page pitched | Delivery | Follow-up |
+| --- | --- | --- | --- | --- | --- |
+| 1 | DAIR.AI / Prompting Guide | `hello@dair.ai` (listed on https://www.promptingguide.ai/about) | `/best/gemini-prompts/` | Gmail sent 2026-09-03 01:02 UTC (`Roshawn@slightedge.ai` → `hello@dair.ai`). Thread `1a064ca0fee888b8`. Subject: `Gemini prompt resource that may fit the Prompting Guide`. | 2026-09-10 |
+| 2 | Learn Prompting | `support@learnprompting.org` (listed on https://learnprompting.org/docs/credits) | `/best/gemini-prompts/` | Gmail sent 2026-09-03 01:02 UTC. Thread `1a064ca10755ed0d`. Subject: `Practical Gemini prompt resource for Learn Prompting readers`. | 2026-09-10 |
+| 3 | Small Business Trends | `sbtips@smallbiztrends.com` (listed on https://smallbiztrends.com/contact) | `/prompts/for/small-business/` | Gmail sent 2026-09-03 01:02 UTC. Thread `1a064ca1268533c3`. Subject: `Small-business prompt resource for your AI coverage`. | 2026-09-10 |
+| 4 | Latent Space | `tips@latent.space` (news tips, not a PR inbox) | `/prompts/cursor/coding/` | Gmail sent 2026-09-03 01:02 UTC. Thread `1a064ca15ecea857`. Subject: `Cursor coding-prompt resource for AI engineering readers`. Framed as a resource tip, not a cold PR blast. | 2026-09-10 |
+| 5 | Stable Diffusion Art | Contact form `https://stable-diffusion-art.com/contact/` | `/best/stable-diffusion-prompts/` | Form filled (Roshawn Franklin / `Roshawn@slightedge.ai`) and submitted. CleanTalk rejected it: datacenter IP flagged as high spam risk / VPN. Not delivered. X MCP was down, so no DM to `@stable_diff_art` / `@andrewwongai`. Retry from a residential network or X once that connection works. | Retry from a non-datacenter IP |
+
+Do not re-contact Applied AI Tools, AI Valley, AI Tools Up, StructPrompt, AI Directory, or AITopTools. First-batch follow-ups are closed.
+
+Do not re-pitch DAIR.AI, Learn Prompting, Small Business Trends, or Latent Space before **2026-09-10**.
+
+**One URL per pitch.** Gemini went to two different education sites (DAIR + Learn Prompting) because both already cite third-party prompt resources.
+
 ### 2026-07-17 — Audit reconciliation and reprioritization
 
 **Verified backlink state**
@@ -27,7 +52,7 @@ Use this with:
 | AIToolSync | No substantive Gmail reply or listing URL | Follow up once in the original email thread | 2026-07-18 |
 | FindAIDir | No notification, live listing, or Ahrefs referring domain was verified | Recheck the listing, then follow up through the public contact path | 2026-07-18 |
 | SmartBizTools | Dedicated profile is live; link attributes differ between the profile and directory hub | Do not request a `nofollow` correction; monitor discovery and ask only if the profile link is later changed | 2026-07-31 |
-| Learn Prompting | Never started | Keep deferred until the overdue follow-ups and P1 page-matched outreach are complete | Deferred |
+| Learn Prompting | First Gemini-page pitch sent 2026-09-03 to `support@learnprompting.org` | Wait for reply; follow up 2026-09-10 | 2026-09-10 |
 
 **Decision:** clear the existing follow-up backlog once, then stop expanding the generic free-directory queue. New outreach should target editorial sites whose audience matches a page that is already earning impressions.
 
@@ -238,7 +263,7 @@ Observed from public prospect pages on April 14, 2026. This is the first real se
 | AITopTools | Michael Kleinman | Founder / Editor | AITopTools newsletter + directory | https://aitoptools.beehiiv.com/ | AI newsletter + directory | professionals, consumers, entrepreneurs | Homepage | Best ChatGPT Prompts For 2026 | prompt library | Email | Their newsletter targets AI tools, news, updates, and insights, and the main site promotes AI blog, AI news, and free AI tools reports. | Newsletter posts visible Mar-Apr 2026 | Direct email publicly exposed; broad directory audience | `michael@aitoptools.com` | Pass recommended 2026-05-29 | Optional decline reply | Day 2 Send #3. Paid placement offer received: $69 standard listing or $299 directory package. Ahrefs probe returned DR 54 and a sample live tool page had a dofollow-style outbound Visit Site link, but public partner copy says 50,000 monthly active users while the email claims 5M+ annual visitors. Michael confirmed $69 links to provided URL, anchor is "visit site", link is dofollow, and newsletter is not included. Recommendation: pass for SEO because this is explicitly paid + dofollow with generic anchor and no newsletter distribution; only reconsider for referral traffic/brand exposure. |
 | Applied AI Tools | Unknown | Editor / Content Team | Applied AI Tools | https://appliedai.tools/resources/learn-prompt-engineering-free-resources-courses-books/ | prompt engineering education post | practical AI adopters, marketers, operators | Prompt Engineering 101 | Gemini Prompts | prompt engineering for beginners | Email | They already maintain a “learn prompt engineering” resource roundup and publish practical AI tutorials tied to real-world workflows. | Prompt engineering resource page active; latest site tutorials dated March 2026 (resource roundup itself last updated April 2023) | High topical fit and clear external-resource behavior | `content@merrative.com` | Final follow-up sent 2026-07-17 | Close if no reply by 2026-07-31 | Day 1 Send #1. Email sent 2026-04-16. No substantive Gmail reply was found through the 2026-07-17 audit. |
 | StructPrompt | Unknown | Team / Curator | StructPrompt resources hub | https://www.structprompt.com/en/resources | prompt engineering resource page | ChatGPT, Cursor, and prompt optimization users | Cursor Coding Prompts | Prompt Engineering 101 | Cursor prompt templates | Contact form | Their resources hub explicitly links out to third-party blogs, communities, and tools including Prompting Guide, Learn Prompting, and FlowGPT. | Resources page crawled within last 3 months | High evidence of linking out to third-party prompt resources | Contact page paused/disabled; fallback email: `daoyi2022@gmail.com` | Final follow-up sent 2026-07-17 (Cursor page) | Close if no reply by 2026-07-31 | Day 2 Send #5. Email sent 2026-05-28. No substantive Gmail reply was found through the 2026-07-17 audit; use the Cursor page if following up. |
-| Learn Prompting | Learn Prompting team | Newsletter / Education team | Learn Prompting newsletter | https://newsletter.learnprompting.org/ | prompt engineering education newsletter | AI learners, prompt engineers, education-focused readers | Prompt Engineering 101 | Gemini Prompts | prompt engineering 101 | Contact form | Their newsletter headline is “AI news, prompts, and tools,” and the broader site runs structured prompt engineering courses and docs. | Newsletter issues visible through March 2026 | Large brand, lower win probability, but very clean thematic fit | Contact form: `https://learnprompting.org/contact-sales` | Deprioritized — not started | After P1 page-matched outreach | Keep deferred until the overdue follow-ups and Gemini, Stable Diffusion, and Cursor prospecting are complete. |
+| Learn Prompting | Learn Prompting team | Newsletter / Education team | Learn Prompting newsletter | https://newsletter.learnprompting.org/ | prompt engineering education newsletter | AI learners, prompt engineers, education-focused readers | Gemini Prompts | Prompt Engineering 101 | practical Gemini prompts | Email | Docs invite suggestions and already teach prompt engineering; Gemini page is the near-page-one match. | Live credits page still lists `support@learnprompting.org` (2026-09-03) | Large brand, lower win probability, but very clean thematic fit | Email: `support@learnprompting.org` (credits page). Sales form is the wrong inbox. | Sent 2026-09-03 (Gemini page) | 2026-09-10 | P1 page-matched send. Thread `1a064ca10755ed0d`. |
 
 ### Watchlist, Not First Batch
 

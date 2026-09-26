@@ -62,24 +62,65 @@
     "metaTitle": "Best Cursor AI Coding Prompts (2026) — Copy & Paste Ready",
     "metaDescription": "Curated Cursor AI coding prompts for code generation, refactoring, debugging, and architecture. Ready to copy and paste.",
     "keyword": "cursor prompts for coding",
-    "intro": "Cursor has quickly become the go-to AI-powered code editor for developers who want deep codebase understanding paired with intelligent code generation. Unlike generic AI assistants, Cursor indexes your entire project, making its suggestions contextually aware and highly relevant. These curated Cursor coding prompts help you leverage its unique capabilities — from multi-file refactors to architecture decisions. Whether you are prototyping a new feature or navigating an unfamiliar codebase, these prompts will accelerate your workflow.",
+    "intro": "This collection is the implementation side of Cursor: generate a route, write tests, refactor a module, chase a stack trace. The prompts assume you will @ the right files and use Composer for multi-file diffs. For a ranked overview of Cursor prompting, use the Cursor AI roundup; use this page when you already know you are coding.",
+    "lastReviewed": "2026-09-02",
+    "exampleSlugs": [
+      "cursor-refactor-assistant",
+      "nextjs-route-handler",
+      "debug-error-detective"
+    ],
+    "sections": [
+      {
+        "heading": "A coding prompt that belongs in Composer",
+        "body": "If the deliverable is a diff across a route, a schema, and a test, write the prompt for Composer: list the files, the behavior, and the constraints (framework version, no new dependencies). Chat is the wrong surface for that prompt. Inline edit is the wrong surface if the call sites live in other files."
+      },
+      {
+        "heading": "@file vs @codebase while you are in the repo",
+        "body": "For a known bug, @ the failing test and the implementation. For 'how does auth work in this repo?', @codebase is fine as a first question, then switch to named files before you let Cursor edit. Coding prompts that start with @codebase and 'implement' are how you get a second auth helper."
+      },
+      {
+        "heading": "How this page differs from Best Cursor AI Prompts",
+        "body": "The /best/cursor-ai-prompts/ roundup explains Composer vs Chat and ranks the library. This page is the filtered coding set: refactors, tests, handlers, debug. If you landed here from the query 'cursor prompts for coding', stay here. If you wanted a general Cursor primer, jump to the roundup."
+      }
+    ],
+    "relatedLinks": [
+      {
+        "href": "/best/cursor-ai-prompts/",
+        "label": "Best Cursor AI prompts",
+        "note": "Composer vs Chat, @ mentions, and the ranked Cursor library."
+      },
+      {
+        "href": "/best/copilot-prompts/",
+        "label": "Best GitHub Copilot prompts",
+        "note": "Inline completion and comment patterns, not Composer."
+      },
+      {
+        "href": "/prompts/github-copilot/coding/",
+        "label": "GitHub Copilot coding prompts",
+        "note": "Inline completion recipes to use alongside Cursor Composer."
+      }
+    ],
     "tips": [
-      "Reference specific files or functions in your prompt using @ mentions so Cursor pulls the right context into its response.",
-      "Use Cursor's composer mode for multi-file changes and chat mode for explanations or single-file edits.",
-      "Ask Cursor to explain existing code before modifying it — this ensures the AI understands the logic before making changes."
+      "Put the failing test path in the prompt before the feature description.",
+      "Name the framework version. 'Next.js app router' and 'Pages router' are different Composer jobs.",
+      "Reject drive-by files. If Composer creates a util that already exists, @ the existing helper and rerun."
     ],
     "faqs": [
       {
-        "q": "What are the best Cursor AI prompts for coding?",
-        "a": "The best Cursor coding prompts reference specific files with @ mentions, describe the desired behavior clearly, and specify constraints like framework versions or coding conventions. Cursor excels when you give it project-level context."
+        "q": "What are the best Cursor prompts for coding?",
+        "a": "Ones that @ the implementation and test files, state the behavior, and run in Composer when more than one file must change. Generic 'write code' prompts belong in ChatGPT, not here."
       },
       {
-        "q": "How is Cursor different from GitHub Copilot for coding prompts?",
-        "a": "Cursor indexes your entire codebase and supports multi-file edits through its composer mode. This means prompts can reference multiple files and request coordinated changes across your project, which Copilot cannot do natively."
+        "q": "How is Cursor different from GitHub Copilot for coding?",
+        "a": "Cursor can apply a coordinated multi-file diff from one Composer prompt. Copilot is stronger as you type. Use this collection when the unit of work is a change set, not a Tab completion."
       },
       {
-        "q": "Can Cursor refactor code across multiple files?",
-        "a": "Yes. Use composer mode and describe the refactor — for example, 'extract the authentication logic from these three files into a shared middleware.' Cursor will propose changes across all referenced files."
+        "q": "Can Cursor refactor across multiple files?",
+        "a": "Yes. In Composer, @ every file that must change and describe the extraction. If you only @ one file, Cursor will leave the other call sites stale."
+      },
+      {
+        "q": "Should I use this page or /best/cursor-ai-prompts/?",
+        "a": "Use this page for coding recipes. Use the best-of roundup if you are learning Composer vs Chat or comparing Cursor prompts to Copilot."
       }
     ]
   },

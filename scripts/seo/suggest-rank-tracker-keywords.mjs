@@ -9,6 +9,7 @@ import {
   uniqueBy,
   writeJson,
 } from './_shared.mjs';
+import { loadResearchKeywords } from './seo-sources.mjs';
 
 const outputDir = getSeoOutputDir();
 
@@ -74,14 +75,13 @@ async function main() {
 
   const keywordGapsData = readOptional('keyword-gaps.json');
   const contentBriefsData = readOptional('content-briefs.json');
-  const ahrefsKeywordsData = readOptional('ahrefs-keywords.json');
+  const ownKeywords = loadResearchKeywords(outputDir).rows;
 
   const gapKeywords = keywordGapsData?.gaps || [];
   const briefs = contentBriefsData?.briefs || [];
-  const ownKeywords = ahrefsKeywordsData?.rows || [];
 
   if (gapKeywords.length === 0 && briefs.length === 0 && ownKeywords.length === 0) {
-    warnings.push('No input data found. Run keyword-gap-analysis, generate-content-briefs, or pull-ahrefs first.');
+    warnings.push('No input data found. Run keyword-gap-analysis, generate-content-briefs, seo:pull:gsc, or seo:pull:openseo first.');
   }
 
   // Build candidate list from all sources

@@ -2,7 +2,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import {
-  fetchAhrefsJson,
   getSeoOutputDir,
   inferOpportunitySurface,
   loadSiteInventory,
@@ -13,6 +12,7 @@ import {
   writeJson,
   writeText,
 } from './_shared.mjs';
+import { loadResearchKeywords } from './seo-sources.mjs';
 
 const outputDir = getSeoOutputDir();
 
@@ -51,11 +51,11 @@ async function main() {
   const generatedAt = new Date().toISOString();
   const warnings = [];
 
-  const ahrefsKeywordsData = readOptional('ahrefs-keywords.json');
+  const researchKeywords = loadResearchKeywords(outputDir);
   const crossValidationData = readOptional('cross-validation.json');
   const inventory = loadSiteInventory();
 
-  const ownKeywords = ahrefsKeywordsData?.rows || [];
+  const ownKeywords = researchKeywords.rows || [];
   const crossMatched = crossValidationData?.matched || [];
 
   // Build a set of keywords where we rank well (position <= 20)
@@ -78,12 +78,13 @@ async function main() {
     }
   }
 
-  // Find gap keywords: volume >= 50, position > 20 or not ranked
+  // Find gap keywords: volume/impressions high enough, position > 20 or not ranked
+  const volumeFloor = researchKeywords.source === 'google-search-console' ? 20 : 50;
   const gapKeywords = ownKeywords
     .filter((row) => {
-      const volume = numberValue(row.volume);
+      const volume = numberValue(row.volume) || numberValue(row.impressions);
       const position = numberValue(row.best_position);
-      if (volume < 50) return false;
+      if (volume < volumeFloor) return false;
       if (position > 0 && position <= 20) return false;
       // Exclude branded keywords
       if (/\baipromptindex\b/i.test(row.keyword)) return false;
@@ -92,33 +93,12 @@ async function main() {
     .sort((a, b) => numberValue(b.volume) - numberValue(a.volume))
     .slice(0, 20);
 
-  // Enrich top-20 gap keywords with Keywords Explorer data
-  const enrichedKeywords = [];
-  for (const row of gapKeywords) {
-    let enrichment = null;
-    try {
-      const response = await fetchAhrefsJson('keywords-explorer/overview', {
-        select: 'keyword,volume,keyword_difficulty,cpc',
-        keywords: row.keyword,
-        country: 'us',
-      });
-      const metrics = response?.keywords?.[0] || response?.rows?.[0] || response || {};
-      enrichment = {
-        volume: numberValue(metrics.volume, numberValue(row.volume)),
-        difficulty: numberValue(metrics.keyword_difficulty),
-        cpc: numberValue(metrics.cpc),
-      };
-    } catch (error) {
-      const message = error instanceof Error ? error.message : String(error);
-      warnings.push(`Keywords Explorer enrichment failed for "${row.keyword}": ${message}`);
-      enrichment = {
-        volume: numberValue(row.volume),
-        difficulty: null,
-        cpc: null,
-      };
-    }
-    enrichedKeywords.push({ keyword: row.keyword, ...enrichment });
-  }
+  const enrichedKeywords = gapKeywords.map((row) => ({
+    keyword: row.keyword,
+    volume: numberValue(row.volume) || numberValue(row.impressions),
+    difficulty: numberValue(row.difficulty),
+    cpc: numberValue(row.cpc),
+  }));
 
   // Generate briefs
   const briefs = enrichedKeywords.map((kw) => {

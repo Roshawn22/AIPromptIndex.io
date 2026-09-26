@@ -278,6 +278,182 @@ export async function fetchAhrefsPost(endpointPath, body = {}) {
   });
 }
 
+export function isAhrefsEnabled() {
+  return optionalEnv('SEO_ENABLE_AHREFS', 'false').toLowerCase() === 'true';
+}
+
+export function getOpenSeoMcpKey() {
+  const candidates = [
+    optionalEnv('OPENSEO_API_KEY'),
+    optionalEnv('OPEN_SEO_API_KEY'),
+    optionalEnv('DATAFORSEO_API_KEY'),
+    optionalEnv('OPENSEO_DATAFORSEO_API_KEY'),
+  ];
+  return candidates.find((value) => value.startsWith('oseo_')) || '';
+}
+
+export function getDataForSeoAuthHeader() {
+  const explicit = optionalEnv('DATAFORSEO_API_KEY') || optionalEnv('OPENSEO_DATAFORSEO_API_KEY');
+  if (explicit && !explicit.startsWith('oseo_')) {
+    const encoded = explicit.includes(':')
+      ? Buffer.from(explicit, 'utf8').toString('base64')
+      : explicit;
+    return `Basic ${encoded}`;
+  }
+
+  const login = optionalEnv('DATAFORSEO_LOGIN');
+  const password = optionalEnv('DATAFORSEO_PASSWORD');
+  if (login && password) {
+    return `Basic ${Buffer.from(`${login}:${password}`, 'utf8').toString('base64')}`;
+  }
+
+  return '';
+}
+
+export function classifyDataForSeoError(error) {
+  const message = error instanceof Error ? error.message : String(error);
+  if (/Payment Required|402|not enough money|insufficient funds|You do not have enough money/i.test(message)) {
+    return { status: 'blocked', blockedReason: 'dataforseo_balance_exhausted', message };
+  }
+  if (/401|Unauthorized|Forbidden|403|Authentication failed/i.test(message)) {
+    return { status: 'misconfigured', blockedReason: null, message };
+  }
+  return { status: 'unknown', blockedReason: null, message };
+}
+
+export async function fetchDataForSeoLive(endpointPath, task) {
+  const auth = getDataForSeoAuthHeader();
+  if (!auth) {
+    throw new Error('Missing DATAFORSEO_API_KEY (OpenSEO / DataForSEO credentials).');
+  }
+
+  const url = `https://api.dataforseo.com/v3/${endpointPath.replace(/^\/+/, '')}`;
+  const payload = await fetchJson(url, {
+    method: 'POST',
+    headers: {
+      Authorization: auth,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify([task]),
+  });
+
+  const taskResult = Array.isArray(payload?.tasks) ? payload.tasks[0] : null;
+  const statusCode = Number(taskResult?.status_code || payload?.status_code || 0);
+  if (statusCode !== 20000) {
+    const message = taskResult?.status_message
+      || payload?.status_message
+      || `DataForSEO status ${statusCode}`;
+    throw new Error(message);
+  }
+
+  return {
+    cost: Number(taskResult?.cost || payload?.cost || 0),
+    result: Array.isArray(taskResult?.result) ? taskResult.result : [],
+  };
+}
+
+export async function probeDataForSeoAccount() {
+  const auth = getDataForSeoAuthHeader();
+  if (!auth) {
+    return {
+      status: 'skipped',
+      checked: false,
+      message: 'DATAFORSEO_API_KEY not configured. OpenSEO pulls stay skipped until the GitHub secret is set.',
+    };
+  }
+
+  try {
+    const payload = await fetchJson('https://api.dataforseo.com/v3/appendix/user_data', {
+      method: 'GET',
+      headers: {
+        Authorization: auth,
+        Accept: 'application/json',
+      },
+    });
+    const task = Array.isArray(payload?.tasks) ? payload.tasks[0] : null;
+    const statusCode = Number(task?.status_code || payload?.status_code || 0);
+    if (statusCode !== 20000) {
+      throw new Error(task?.status_message || payload?.status_message || `status ${statusCode}`);
+    }
+    const account = Array.isArray(task?.result) ? task.result[0] : {};
+    const money = account?.money || {};
+    return {
+      status: 'ok',
+      checked: true,
+      balance: finiteNumberOrNull(money.balance),
+      message: null,
+    };
+  } catch (error) {
+    const classified = classifyDataForSeoError(error);
+    return {
+      ...classified,
+      checked: true,
+      balance: null,
+    };
+  }
+}
+
+export async function callOpenSeoMcp(toolName, args = {}) {
+  const key = getOpenSeoMcpKey();
+  if (!key) {
+    throw new Error('Missing OPENSEO_API_KEY (OpenSEO MCP bearer key).');
+  }
+
+  const payload = await fetchJson('https://app.openseo.so/mcp', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${key}`,
+      Accept: 'application/json, text/event-stream',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      jsonrpc: '2.0',
+      id: Date.now(),
+      method: 'tools/call',
+      params: {
+        name: toolName,
+        arguments: args,
+      },
+    }),
+  });
+
+  if (payload?.error) {
+    const message = payload.error.message || JSON.stringify(payload.error);
+    throw new Error(`OpenSEO MCP ${toolName} failed: ${message}`);
+  }
+
+  return payload?.result?.structuredContent || payload?.result || {};
+}
+
+export async function probeOpenSeoAccount() {
+  if (getOpenSeoMcpKey()) {
+    try {
+      const account = await callOpenSeoMcp('whoami', {});
+      const creditsRemaining = Number(
+        account.creditsRemaining ?? account.meta?.creditsRemaining ?? Number.NaN,
+      );
+      return {
+        status: 'ok',
+        checked: true,
+        provider: 'openseo-mcp',
+        creditsRemaining: Number.isFinite(creditsRemaining) ? creditsRemaining : null,
+        message: `OpenSEO MCP connected${account.userEmail ? ` (${account.userEmail})` : ''}.`,
+      };
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      return {
+        status: 'misconfigured',
+        checked: true,
+        provider: 'openseo-mcp',
+        message,
+      };
+    }
+  }
+
+  return probeDataForSeoAccount();
+}
+
 // Iterates a cursor-paginated Ahrefs endpoint until empty or maxPages reached.
 // Returns flat array of rows across pages.
 export async function fetchAhrefsPaginated(endpointPath, params = {}, { maxPages = 10, rowsKey = 'rows' } = {}) {
@@ -481,17 +657,21 @@ export function summarizeSeoWorkflowGates(liveProbes = {}) {
   const ahrefsApiStatus = normalizeStatus(liveProbes.ahrefsApi?.status);
   const ahrefsSiteAuditStatus = normalizeStatus(liveProbes.ahrefsSiteAudit?.status);
   const ahrefsRankTrackerStatus = normalizeStatus(liveProbes.ahrefsRankTracker?.status);
+  const openSeoApiStatus = normalizeStatus(liveProbes.openSeoApi?.status);
+  const firstPartyStatus = normalizeStatus(liveProbes.firstParty?.status);
   const semrushAnalyticsStatus = normalizeStatus(liveProbes.semrushAnalytics?.status);
   const semrushProjectsStatus = normalizeStatus(liveProbes.semrushProjects?.status);
   const semrushPositionTrackingStatus = normalizeStatus(liveProbes.semrushPositionTracking?.status);
 
-  const canRunAhrefsCore = ahrefsApiStatus === 'ok';
+  const canRunAhrefsCore = isAhrefsEnabled() && ahrefsApiStatus === 'ok';
+  const reportAhrefsBlocks = isAhrefsEnabled();
 
   return {
     blockedEndpoints: [
-      ...(ahrefsApiStatus === 'blocked' ? ['ahrefs.api'] : []),
-      ...(ahrefsSiteAuditStatus === 'blocked' ? ['ahrefs.siteAudit'] : []),
-      ...(ahrefsRankTrackerStatus === 'blocked' ? ['ahrefs.rankTracker'] : []),
+      ...(reportAhrefsBlocks && ahrefsApiStatus === 'blocked' ? ['ahrefs.api'] : []),
+      ...(reportAhrefsBlocks && ahrefsSiteAuditStatus === 'blocked' ? ['ahrefs.siteAudit'] : []),
+      ...(reportAhrefsBlocks && ahrefsRankTrackerStatus === 'blocked' ? ['ahrefs.rankTracker'] : []),
+      ...(openSeoApiStatus === 'blocked' ? ['openseo.api'] : []),
       ...(semrushAnalyticsStatus === 'blocked' ? ['semrush.analytics'] : []),
       ...(semrushProjectsStatus === 'blocked' ? ['semrush.projects'] : []),
       ...(semrushPositionTrackingStatus === 'blocked' ? ['semrush.positionTracking'] : []),
@@ -500,6 +680,8 @@ export function summarizeSeoWorkflowGates(liveProbes = {}) {
       ahrefsApi: ahrefsApiStatus || 'unknown',
       ahrefsSiteAudit: ahrefsSiteAuditStatus || 'unknown',
       ahrefsRankTracker: ahrefsRankTrackerStatus || 'unknown',
+      openSeoApi: openSeoApiStatus || 'unknown',
+      firstParty: firstPartyStatus || 'unknown',
       semrushAnalytics: semrushAnalyticsStatus || 'unknown',
       semrushProjects: semrushProjectsStatus || 'unknown',
     },
@@ -507,6 +689,8 @@ export function summarizeSeoWorkflowGates(liveProbes = {}) {
       canRunAhrefs: canRunAhrefsCore,
       canRunAhrefsSiteAudit: canRunAhrefsCore && ahrefsSiteAuditStatus === 'ok',
       canRunAhrefsRankTracker: canRunAhrefsCore && ahrefsRankTrackerStatus === 'ok',
+      canRunOpenSeo: openSeoApiStatus === 'ok',
+      canRunFirstParty: firstPartyStatus !== 'misconfigured',
       canRunSemrushAnalytics: semrushAnalyticsStatus === 'ok' && (liveProbes.semrushAnalytics?.unitsRemaining ?? 0) > 0,
       canRunSemrushProjects: ['ok', 'unknown'].includes(semrushProjectsStatus),
       canRunSemrushPositionTracking: semrushPositionTrackingStatus === 'ok',

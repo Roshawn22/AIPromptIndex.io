@@ -2,21 +2,18 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import {
-  fetchAhrefsJson,
   getSeoOutputDir,
   normalizeText,
   numberValue,
   optionalEnv,
   readJson,
-  toIsoDate,
   uniqueBy,
   writeJson,
 } from './_shared.mjs';
+import { loadResearchCompetitors, loadResearchKeywords } from './seo-sources.mjs';
 
 const outputDir = getSeoOutputDir();
-const target = optionalEnv('AHREFS_TARGET', 'aipromptindex.io');
-const mode = optionalEnv('AHREFS_TARGET_MODE', 'subdomains');
-const today = toIsoDate(new Date());
+const target = optionalEnv('OPENSEO_TARGET', optionalEnv('AHREFS_TARGET', 'aipromptindex.io'));
 
 const PROMPT_RELATED_TERMS = [
   'prompt', 'prompts', 'ai', 'chatgpt', 'claude', 'midjourney',
@@ -53,15 +50,16 @@ async function main() {
   const generatedAt = new Date().toISOString();
   const warnings = [];
 
-  const competitorsData = readOptional('ahrefs-competitors.json');
-  const ahrefsKeywordsData = readOptional('ahrefs-keywords.json');
+  const competitorsData = loadResearchCompetitors(outputDir);
+  const ownKeywordData = loadResearchKeywords(outputDir);
+  const cachedCompetitorKeywords = readOptional('openseo-competitor-keywords.json');
 
-  if (!competitorsData || (competitorsData.rows || []).length === 0) {
+  if (!competitorsData.rows.length) {
     console.log(JSON.stringify({
       ok: true,
       outputDir,
-      message: 'No competitor data found. Run seo:pull:ahrefs first to generate competitor data.',
-      warnings: ['ahrefs-competitors.json not found or empty'],
+      message: 'No competitor data found. Run seo:pull:openseo first.',
+      warnings: ['competitor artifact not found or empty'],
     }, null, 2));
     writeJson(path.join(outputDir, 'keyword-gaps.json'), {
       source: 'keyword-gap-analysis',
@@ -73,10 +71,9 @@ async function main() {
     return;
   }
 
-  // Build a set of our own keywords
   const ownKeywords = new Set();
   const ownKeywordPositions = new Map();
-  for (const row of (ahrefsKeywordsData?.rows || [])) {
+  for (const row of ownKeywordData.rows) {
     const key = normalizeText(row.keyword);
     if (key) {
       ownKeywords.add(key);
@@ -84,66 +81,45 @@ async function main() {
     }
   }
 
-  // Take top 5 competitors by traffic
-  const competitors = (competitorsData.rows || [])
+  const competitors = competitorsData.rows
     .sort((a, b) => numberValue(b.traffic) - numberValue(a.traffic))
     .slice(0, 5);
 
-  // Fetch keywords for each competitor
   const competitorKeywords = new Map();
-  for (const competitor of competitors) {
-    const domain = competitor.domain;
-    try {
-      const response = await fetchAhrefsJson('site-explorer/organic-keywords', {
-        target: domain,
-        mode,
-        limit: 100,
-        select: 'keyword,best_position,volume,sum_traffic',
-        country: 'us',
-        date: today,
-        output: 'json',
+  const cachedRows = cachedCompetitorKeywords?.rows || [];
+  if (cachedRows.length === 0) {
+    warnings.push('openseo-competitor-keywords.json missing. Run seo:pull:openseo:weekly to fill competitor keyword gaps.');
+  }
+
+  for (const row of cachedRows) {
+    const key = normalizeText(row.keyword);
+    if (!key) continue;
+    const domain = row.domain || '';
+    const position = numberValue(row.best_position);
+    const volume = numberValue(row.volume);
+    const traffic = numberValue(row.sum_traffic);
+    const existing = competitorKeywords.get(key);
+    if (!existing) {
+      competitorKeywords.set(key, {
+        keyword: row.keyword,
+        volume,
+        competitorDomains: domain ? [domain] : [],
+        bestCompetitorPosition: position,
+        bestCompetitorDomain: domain,
+        totalCompetitorTraffic: traffic,
       });
-
-      const rows = Array.isArray(response?.rows) ? response.rows
-        : Array.isArray(response?.data) ? response.data
-        : [];
-
-      for (const row of rows) {
-        const key = normalizeText(row.keyword);
-        if (!key) continue;
-
-        const existing = competitorKeywords.get(key);
-        const position = numberValue(row.best_position);
-        const volume = numberValue(row.volume);
-        const traffic = numberValue(row.sum_traffic);
-
-        if (!existing) {
-          competitorKeywords.set(key, {
-            keyword: row.keyword,
-            volume,
-            competitorDomains: [domain],
-            bestCompetitorPosition: position,
-            bestCompetitorDomain: domain,
-            totalCompetitorTraffic: traffic,
-          });
-        } else {
-          if (!existing.competitorDomains.includes(domain)) {
-            existing.competitorDomains.push(domain);
-          }
-          existing.totalCompetitorTraffic += traffic;
-          if (position < existing.bestCompetitorPosition) {
-            existing.bestCompetitorPosition = position;
-            existing.bestCompetitorDomain = domain;
-          }
-          // Use the higher volume if available
-          if (volume > existing.volume) {
-            existing.volume = volume;
-          }
-        }
-      }
-    } catch (error) {
-      const message = error instanceof Error ? error.message : String(error);
-      warnings.push(`Failed to fetch keywords for ${domain}: ${message}`);
+      continue;
+    }
+    if (domain && !existing.competitorDomains.includes(domain)) {
+      existing.competitorDomains.push(domain);
+    }
+    existing.totalCompetitorTraffic += traffic;
+    if (position < existing.bestCompetitorPosition) {
+      existing.bestCompetitorPosition = position;
+      existing.bestCompetitorDomain = domain;
+    }
+    if (volume > existing.volume) {
+      existing.volume = volume;
     }
   }
 

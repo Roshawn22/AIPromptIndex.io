@@ -24,7 +24,7 @@
     "/best/gemini-prompts/": {
       "type": "roundup",
       "reviewStatus": "needs-human-review",
-      "sourceFingerprint": "a5279e5d6424",
+      "sourceFingerprint": "706f9db641cd",
       "sourcePath": "/best/gemini-prompts/",
       "sourceSlug": "gemini-prompts",
       "title": "Melhores prompts para Gemini",
@@ -68,7 +68,7 @@
     "/best/cursor-ai-prompts/": {
       "type": "roundup",
       "reviewStatus": "needs-human-review",
-      "sourceFingerprint": "5da17d9009a6",
+      "sourceFingerprint": "e9e8a52c2167",
       "sourcePath": "/best/cursor-ai-prompts/",
       "sourceSlug": "cursor-ai-prompts",
       "title": "Melhores prompts para Cursor",

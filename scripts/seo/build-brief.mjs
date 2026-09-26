@@ -12,6 +12,13 @@ import {
   scoreKeywordMatch,
   writeText,
 } from './_shared.mjs';
+import {
+  hasFirstPartySeoArtifacts,
+  loadResearchCompetitors,
+  loadResearchKeywords,
+  loadResearchOverview,
+  loadResearchTopPages,
+} from './seo-sources.mjs';
 
 const outputDir = getSeoOutputDir();
 const inventory = loadSiteInventory();
@@ -92,13 +99,14 @@ function main() {
     return readJson(filePath);
   };
 
-  // Core artifacts — Ahrefs is required, GSC/GA4 are optional
-  const ahrefsOverview = readOptional('ahrefs-overview.json');
-  const ahrefsKeywords = readOptional('ahrefs-keywords.json');
-  const ahrefsTopPages = readOptional('ahrefs-top-pages.json');
+  // Core artifacts — GSC/GA4 first-party, OpenSEO third-party, Ahrefs only if opted in
+  const researchKeywords = loadResearchKeywords(outputDir);
+  const researchTopPages = loadResearchTopPages(outputDir);
+  const researchOverview = loadResearchOverview(outputDir);
+  const researchCompetitors = loadResearchCompetitors(outputDir);
 
-  if (!ahrefsOverview || !ahrefsKeywords || !ahrefsTopPages) {
-    throw new Error('Missing required Ahrefs artifacts. Run seo:pull:ahrefs first.');
+  if (researchKeywords.rows.length === 0 && researchTopPages.rows.length === 0 && !hasFirstPartySeoArtifacts(outputDir)) {
+    throw new Error('Missing SEO artifacts. Run seo:pull:gsc (and seo:pull:openseo when DATAFORSEO_API_KEY is set) first.');
   }
 
   const gscPages = readOptional('gsc-pages.json');
@@ -107,7 +115,13 @@ function main() {
   const semrushKeywords = readOptional('semrush-keywords.json');
   const semrushRankHistory = readOptional('semrush-rank-history.json');
   const crossValidation = readOptional('cross-validation.json');
-  const ahrefsCompetitors = readOptional('ahrefs-competitors.json');
+  const ahrefsOverview = researchOverview?.source === 'ahrefs-api-v3' ? researchOverview : readOptional('ahrefs-overview.json');
+  const ahrefsCompetitors = researchCompetitors.source?.includes('ahrefs')
+    ? { rows: researchCompetitors.rows }
+    : readOptional('ahrefs-competitors.json');
+  const openseoCompetitors = researchCompetitors.source?.includes('openseo')
+    ? { rows: researchCompetitors.rows }
+    : readOptional('openseo-competitors.json');
   const semrushCompetitorProfiles = readOptional('semrush-competitor-profiles.json');
   const brandRadar = readOptional('brand-radar.json');
 
@@ -125,8 +139,8 @@ function main() {
   const semrushProjects = readOptional('semrush-projects.json');
   const contentBriefs = readOptional('content-briefs.json');
 
-  const topPages = ahrefsTopPages.rows || [];
-  const keywords = ahrefsKeywords.rows || [];
+  const topPages = researchTopPages.rows || [];
+  const keywords = researchKeywords.rows || [];
 
   const topPagesByPath = mapByPath(topPages, (row) => ({
     traffic: numberValue(row.traffic),
@@ -412,8 +426,11 @@ function main() {
   // --- Competitive Landscape section ---
 
   let competitiveLandscapeSection = '';
-  if (ahrefsCompetitors && (ahrefsCompetitors.rows || []).length > 0) {
-    const ahrefsList = (ahrefsCompetitors.rows || []).slice(0, 10);
+  const competitorRows = (openseoCompetitors?.rows?.length
+    ? openseoCompetitors.rows
+    : ahrefsCompetitors?.rows) || [];
+  if (competitorRows.length > 0) {
+    const ahrefsList = competitorRows.slice(0, 10);
     const semrushProfiles = new Map(
       (semrushCompetitorProfiles?.rows || []).map((p) => [p.domain, p])
     );
@@ -423,13 +440,13 @@ function main() {
       const semrushInfo = semrush
         ? ` | Semrush rank ${integer(semrush.rank)} | Semrush kw ${integer(semrush.organicKeywords)}`
         : '';
-      return `  - \`${c.domain}\` | shared kw ${integer(c.keywords_matched || c.commonKeywords || 0)} | Ahrefs traffic ${integer(c.traffic || 0)}${semrushInfo}`;
+      return `  - \`${c.domain}\` | shared kw ${integer(c.keywords_matched || c.commonKeywords || 0)} | estimated traffic ${integer(c.traffic || 0)}${semrushInfo}`;
     }).join('\n');
 
     competitiveLandscapeSection = [
       '## Competitive Landscape',
       '',
-      'Competitors auto-discovered by Ahrefs, enriched with Semrush domain data.',
+      `Competitors auto-discovered by ${researchCompetitors.source || 'the latest research pull'}.`,
       '',
       competitorLines,
       '',
@@ -550,7 +567,10 @@ function main() {
   ];
   if (gscPages) headerLines.push(`Search Console property: \`${gscPages.siteProperty}\``);
   if (ga4) headerLines.push(`GA4 property: \`${ga4.propertyId}\``);
-  headerLines.push(`Ahrefs target: \`${ahrefsOverview.target}\``);
+  if (researchOverview?.target) headerLines.push(`Research target: \`${researchOverview.target}\` (${researchOverview.source || 'unknown'})`);
+  else if (ahrefsOverview?.target) headerLines.push(`Ahrefs target: \`${ahrefsOverview.target}\``);
+  headerLines.push(`Keyword source: \`${researchKeywords.source || 'none'}\``);
+  headerLines.push(`Top-page source: \`${researchTopPages.source || 'none'}\``);
   if (semrushOverview) headerLines.push(`Semrush target: \`${semrushOverview.target}\``);
   headerLines.push('');
 

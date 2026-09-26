@@ -1,0 +1,100 @@
+---
+interface Section {
+  heading: string;
+  body: string;
+}
+
+interface RelatedLink {
+  href: string;
+  label: string;
+  note?: string;
+}
+
+interface ExamplePrompt {
+  title: string;
+  slug: string;
+  promptText: string;
+  description: string;
+}
+
+interface Props {
+  lastReviewed?: string;
+  sections?: Section[];
+  relatedLinks?: RelatedLink[];
+  examples?: ExamplePrompt[];
+  relatedHeading?: string;
+}
+
+const {
+  lastReviewed,
+  sections = [],
+  relatedLinks = [],
+  examples = [],
+  relatedHeading = 'Related reading',
+} = Astro.props;
+
+function excerpt(text: string, max = 420) {
+  const collapsed = text.replace(/\s+/g, ' ').trim();
+  if (collapsed.length <= max) return collapsed;
+  return `${collapsed.slice(0, max).trimEnd()}…`;
+}
+
+const hasBody = sections.length > 0 || examples.length > 0 || relatedLinks.length > 0 || Boolean(lastReviewed);
+---
+
+{hasBody && (
+  <div class="mt-12 space-y-12">
+    {lastReviewed && (
+      <p class="text-sm text-[var(--color-text-muted)]">
+        Last reviewed {lastReviewed}
+      </p>
+    )}
+
+    {sections.map((section) => (
+      <section>
+        <h2 class="mb-3 text-xl">{section.heading}</h2>
+        <p class="max-w-3xl text-[var(--color-text-secondary)] whitespace-pre-line">{section.body}</p>
+      </section>
+    ))}
+
+    {examples.length > 0 && (
+      <section>
+        <h2 class="mb-4 text-xl">Prompt excerpts you can paste today</h2>
+        <div class="space-y-4">
+          {examples.map((prompt) => (
+            <article class="rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-6">
+              <h3 class="font-[var(--font-display)] text-base font-semibold">
+                <a href={`/prompts/${prompt.slug}/`} class="text-[var(--color-accent)] hover:underline">
+                  {prompt.title}
+                </a>
+              </h3>
+              <p class="mt-2 text-sm text-[var(--color-text-secondary)]">{prompt.description}</p>
+              <pre class="mt-4 overflow-x-auto whitespace-pre-wrap rounded-[var(--radius-md)] bg-[var(--color-surface-0)] p-4 text-sm text-[var(--color-text-primary)]">{excerpt(prompt.promptText)}</pre>
+            </article>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {relatedLinks.length > 0 && (
+      <section class="border-t border-[var(--color-border)] pt-10">
+        <h2 class="mb-6 text-xl">{relatedHeading}</h2>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {relatedLinks.map((link) => (
+            <a
+              href={link.href}
+              class="block rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-5 transition-all duration-200 hover:border-[var(--color-accent-muted)] hover:shadow-[var(--shadow-card-hover)]"
+            >
+              <h3 class="font-[var(--font-display)] text-base font-semibold text-[var(--color-text-primary)]">
+                {link.label}
+              </h3>
+              {link.note && (
+                <p class="mt-2 text-sm text-[var(--color-text-secondary)]">{link.note}</p>
+              )}
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+  </div>
+)}

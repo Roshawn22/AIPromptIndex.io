@@ -5,10 +5,14 @@ import {
   classifyAhrefsError,
   getAhrefsLimitsAndUsage,
   getArtifactEnvelope,
+  getDataForSeoAuthHeader,
+  getOpenSeoMcpKey,
   getPreviousSeoOutputDir,
   getSemrushApiUnitsBalance,
   getSeoOutputDir,
+  isAhrefsEnabled,
   parseCliArgs,
+  probeOpenSeoAccount,
   readOptionalJson,
   rollupStatuses,
   summarizeSeoWorkflowGates,
@@ -22,8 +26,6 @@ const repoRoot = process.cwd();
 const dotenvFiles = ['.env.local', '.env'];
 
 const localPipelineChecks = [
-  { name: 'AHREFS_API_TOKEN', label: 'Ahrefs API token', required: true },
-  { name: 'SEMRUSH_API_KEY', label: 'Semrush API key (optional)', required: false },
   { name: 'GOOGLE_ANALYTICS_PROPERTY_ID', label: 'GA4 property ID', required: true },
   { name: 'GOOGLE_SERVICE_ACCOUNT_JSON', label: 'Google service account JSON', required: true },
   {
@@ -32,6 +34,9 @@ const localPipelineChecks = [
     aliases: ['GOOGLE_SEARCH_CONSOLE_SITE'],
     required: true,
   },
+  { name: 'DATAFORSEO_API_KEY', label: 'OpenSEO / DataForSEO API key', required: false, aliases: ['OPENSEO_API_KEY', 'OPEN_SEO_API_KEY', 'OPENSEO_DATAFORSEO_API_KEY', 'DATAFORSEO_LOGIN'] },
+  { name: 'AHREFS_API_TOKEN', label: 'Ahrefs API token (opt-in only)', required: false },
+  { name: 'SEMRUSH_API_KEY', label: 'Semrush API key (optional)', required: false },
 ];
 
 const optionalProjectChecks = [
@@ -219,7 +224,9 @@ function renderMarkdown(report) {
     '## Summary',
     '',
     `- Overall status: ${report.summary.overallStatus}`,
-    `- Ahrefs API: ${report.summary.sources.ahrefsApi}`,
+    `- First-party GSC/GA4: ${report.summary.sources.firstParty}`,
+    `- OpenSEO / DataForSEO: ${report.summary.sources.openSeoApi}`,
+    `- Ahrefs API (opt-in): ${report.summary.sources.ahrefsApi}`,
     `- Ahrefs Site Audit: ${report.summary.sources.ahrefsSiteAudit}`,
     `- Ahrefs Rank Tracker: ${report.summary.sources.ahrefsRankTracker}`,
     ...ahrefsUsageLines,
@@ -231,6 +238,8 @@ function renderMarkdown(report) {
     '',
     '## Workflow Gates',
     '',
+    `- First-party GSC/GA4 pulls allowed: ${report.summary.workflowGates.canRunFirstParty ? 'yes' : 'no'}`,
+    `- OpenSEO pulls allowed: ${report.summary.workflowGates.canRunOpenSeo ? 'yes' : 'no'}`,
     `- Ahrefs core pulls allowed: ${report.summary.workflowGates.canRunAhrefs ? 'yes' : 'no'}`,
     `- Ahrefs Site Audit pulls allowed: ${report.summary.workflowGates.canRunAhrefsSiteAudit ? 'yes' : 'no'}`,
     `- Ahrefs Rank Tracker pulls allowed: ${report.summary.workflowGates.canRunAhrefsRankTracker ? 'yes' : 'no'}`,
@@ -304,6 +313,20 @@ async function main() {
     toStatusCheck(check, findConfigSource(check.name, check.aliases || [], dotenvSources))
   ));
 
+  const dataforseoCheck = localPipeline.find((check) => check.name === 'DATAFORSEO_API_KEY');
+  if (dataforseoCheck && !dataforseoCheck.configured && getOpenSeoMcpKey()) {
+    dataforseoCheck.configured = true;
+    dataforseoCheck.status = 'ok';
+    dataforseoCheck.source = 'OPENSEO_API_KEY';
+    dataforseoCheck.reason = null;
+  }
+  if (dataforseoCheck && !dataforseoCheck.configured && getDataForSeoAuthHeader()) {
+    dataforseoCheck.configured = true;
+    dataforseoCheck.status = 'ok';
+    dataforseoCheck.source = 'DATAFORSEO_LOGIN+DATAFORSEO_PASSWORD';
+    dataforseoCheck.reason = null;
+  }
+
   const optionalProjects = optionalProjectChecks.map((check) => (
     toStatusCheck({ ...check, required: false }, findConfigSource(check.name, check.aliases || [], dotenvSources))
   ));
@@ -327,7 +350,18 @@ async function main() {
 
   const liveProbes = {};
 
-  if (process.env.AHREFS_API_TOKEN) {
+  const googleConfigured = Boolean(
+    process.env.GOOGLE_SERVICE_ACCOUNT_JSON
+    && (process.env.GOOGLE_SEARCH_CONSOLE_PROPERTY || process.env.GOOGLE_SEARCH_CONSOLE_SITE)
+    && process.env.GOOGLE_ANALYTICS_PROPERTY_ID,
+  );
+  liveProbes.firstParty = googleConfigured
+    ? { status: 'ok', checked: false, message: 'GSC and GA4 credentials are configured.' }
+    : { status: 'misconfigured', checked: false, message: 'Google service account, GSC property, or GA4 property ID is missing.' };
+
+  liveProbes.openSeoApi = await probeOpenSeoAccount();
+
+  if (isAhrefsEnabled() && process.env.AHREFS_API_TOKEN) {
     liveProbes.ahrefsApi = await getAhrefsLimitsAndUsage(process.env.AHREFS_API_TOKEN);
     liveProbes.ahrefsSiteAudit = await probeAhrefsProject(
       process.env.AHREFS_API_TOKEN,
@@ -340,9 +374,14 @@ async function main() {
       'rankTracker',
     );
   } else {
-    liveProbes.ahrefsApi = { status: 'misconfigured', message: 'AHREFS_API_TOKEN missing.' };
-    liveProbes.ahrefsSiteAudit = { status: 'skipped', message: 'Ahrefs API token missing.' };
-    liveProbes.ahrefsRankTracker = { status: 'skipped', message: 'Ahrefs API token missing.' };
+    liveProbes.ahrefsApi = {
+      status: 'skipped',
+      message: isAhrefsEnabled()
+        ? 'AHREFS_API_TOKEN missing.'
+        : 'Ahrefs is opt-in. Set SEO_ENABLE_AHREFS=true only if you are back on a paid Ahrefs API plan.',
+    };
+    liveProbes.ahrefsSiteAudit = { status: 'skipped', message: 'Ahrefs site audit skipped.' };
+    liveProbes.ahrefsRankTracker = { status: 'skipped', message: 'Ahrefs rank tracker skipped.' };
   }
 
   if (process.env.SEMRUSH_API_KEY) {
@@ -371,7 +410,8 @@ async function main() {
 
   const liveProbeStatusesForOverall = Object.entries(liveProbes)
     .filter(([name, probe]) => {
-      if (name === 'ahrefsRankTracker') return false;
+      if (name === 'ahrefsRankTracker' || name.startsWith('ahrefs')) return false;
+      if (name === 'openSeoApi' && probe.status === 'skipped') return false;
       if (!name.startsWith('semrush')) return true;
       return process.env.SEMRUSH_API_KEY && probe.status !== 'skipped';
     })
@@ -410,6 +450,8 @@ async function main() {
       sources: {
         localPipeline: rollupStatuses(requiredLocalPipelineStatuses),
         publicSiteEnv: rollupStatuses(publicSiteEnv.map((check) => check.status)),
+        firstParty: workflowSummary.sources.firstParty,
+        openSeoApi: workflowSummary.sources.openSeoApi,
         ahrefsApi: workflowSummary.sources.ahrefsApi,
         ahrefsSiteAudit: workflowSummary.sources.ahrefsSiteAudit,
         ahrefsRankTracker: workflowSummary.sources.ahrefsRankTracker,
