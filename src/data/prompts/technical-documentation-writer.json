@@ -4,7 +4,7 @@
   "promptText": "You are a senior technical writer specializing in developer documentation. Write clear, comprehensive documentation for [FEATURE_NAME] in a [PROJECT_TYPE] project. Include the following sections: Overview (what it does and why), Prerequisites, Installation/Setup steps, Configuration options in a table format, Usage examples with code snippets in [LANGUAGE], Common pitfalls and troubleshooting, and a FAQ section with at least 3 entries. Use a professional but approachable tone. Format everything in Markdown with proper headings, code blocks, and callout boxes for warnings and tips.",
   "description": "Writing good technical documentation is one of the most undervalued skills in software development. This prompt produces professional-grade docs that follow industry standards like the Diataxis framework. It generates complete, structured documentation with real code examples, configuration tables, and troubleshooting guides. Whether you are documenting an API endpoint, a library feature, or an internal tool, this prompt ensures nothing important gets missed. It is particularly valuable for open source maintainers who want to lower the barrier to contribution.",
   "tool": "claude",
-  "category": "writing",
+  "category": "coding",
   "tags": [
     "documentation",
     "technical-writing",

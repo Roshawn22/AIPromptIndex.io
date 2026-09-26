@@ -8,9 +8,11 @@ import { ConvexProviderWithAuth, useQuery, useMutation } from 'convex/react';
 import { api } from '../../lib/convexApi';
 import { isClerkSupportedOnThisOrigin } from '../../lib/clerkEnv';
 import { getConvexClient } from '../../lib/convex';
+import { trackPromptSave } from '../../lib/analytics';
 
 interface SaveButtonProps {
   promptSlug: string;
+  locale?: 'en' | 'pt-BR';
 }
 
 type ClerkSessionLike = {
@@ -142,8 +144,11 @@ function useConvexAuthFromClerkSingleton() {
 /*  Inner component (has Convex + Clerk context)                       */
 /* ------------------------------------------------------------------ */
 
-function SaveButtonInner({ promptSlug }: SaveButtonProps) {
+function SaveButtonInner({ promptSlug, locale = 'en' }: SaveButtonProps) {
   const { isLoaded, isSignedIn, clerkSupported, openSignIn } = useClerkSingleton();
+  const labels = locale === 'pt-BR'
+    ? { save: 'Salvar', saved: 'Salvo', unsaveAria: 'Remover prompt dos salvos', unavailable: 'Salvar prompt indisponível no ambiente local' }
+    : { save: 'Save', saved: 'Saved', unsaveAria: 'Unsave prompt', unavailable: 'Save prompt unavailable in local development' };
 
   const isSaved = useQuery(
     api.collections.isPromptSaved,
@@ -162,8 +167,10 @@ function SaveButtonInner({ promptSlug }: SaveButtonProps) {
     try {
       if (isSaved) {
         await removePrompt({ promptSlug });
+        trackPromptSave(promptSlug, false);
       } else {
         await savePrompt({ promptSlug });
+        trackPromptSave(promptSlug, true);
         setShowTooltip(true);
         setTimeout(() => setShowTooltip(false), 2000);
       }
@@ -180,10 +187,10 @@ function SaveButtonInner({ promptSlug }: SaveButtonProps) {
         type="button"
         disabled
         className="inline-flex items-center justify-center gap-1.5 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-1)] px-3 py-2 text-sm font-medium text-[var(--color-text-muted)] opacity-50 cursor-not-allowed"
-        aria-label="Save prompt"
+        aria-label={labels.save}
       >
         <HeartIcon filled={false} />
-        Save
+        {labels.save}
       </button>
     );
   }
@@ -196,10 +203,10 @@ function SaveButtonInner({ promptSlug }: SaveButtonProps) {
         disabled
         title="Sign in requires a Clerk test key for local development"
         className="inline-flex items-center justify-center gap-1.5 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-1)] px-3 py-2 text-sm font-medium text-[var(--color-text-muted)] opacity-50 cursor-not-allowed"
-        aria-label="Save prompt unavailable in local development"
+        aria-label={labels.unavailable}
       >
         <HeartIcon filled={false} />
-        Save
+        {labels.save}
       </button>
     );
   }
@@ -211,10 +218,10 @@ function SaveButtonInner({ promptSlug }: SaveButtonProps) {
         type="button"
         onClick={openSignIn}
         className="relative inline-flex items-center justify-center gap-1.5 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-1)] px-3 py-2 text-sm font-medium text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-accent-muted)] hover:text-[var(--color-accent)] cursor-pointer"
-        aria-label="Save prompt"
+        aria-label={labels.save}
       >
         <HeartIcon filled={false} />
-        Save
+        {labels.save}
       </button>
     );
   }
@@ -229,16 +236,16 @@ function SaveButtonInner({ promptSlug }: SaveButtonProps) {
             ? 'border-rose-500/30 bg-rose-500/10 text-rose-400 hover:bg-rose-500/20'
             : 'border-[var(--color-border)] bg-[var(--color-surface-1)] text-[var(--color-text-muted)] hover:border-[var(--color-accent-muted)] hover:text-[var(--color-accent)]'
         }`}
-        aria-label={isSaved ? 'Unsave prompt' : 'Save prompt'}
+        aria-label={isSaved ? labels.unsaveAria : labels.save}
       >
         <HeartIcon filled={!!isSaved} />
-        {isSaved ? 'Saved' : 'Save'}
+        {isSaved ? labels.saved : labels.save}
       </button>
 
       {/* Tooltip */}
       {showTooltip && (
         <span className="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-[var(--radius-sm)] bg-[var(--color-surface-2)] border border-[var(--color-border)] px-2 py-1 text-xs font-medium text-[var(--color-accent)] shadow-lg">
-          Saved!
+          {labels.saved}!
         </span>
       )}
     </div>
@@ -249,8 +256,9 @@ function SaveButtonInner({ promptSlug }: SaveButtonProps) {
 /*  Outer wrapper (initializes Convex + Clerk)                         */
 /* ------------------------------------------------------------------ */
 
-export default function SaveButton({ promptSlug }: SaveButtonProps) {
+export default function SaveButton({ promptSlug, locale = 'en' }: SaveButtonProps) {
   const [client] = useState(() => getConvexClient());
+  const saveLabel = locale === 'pt-BR' ? 'Salvar' : 'Save';
 
   if (!client) {
     // Fallback: static disabled button
@@ -259,17 +267,17 @@ export default function SaveButton({ promptSlug }: SaveButtonProps) {
         type="button"
         disabled
         className="inline-flex items-center justify-center gap-1.5 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-1)] px-3 py-2 text-sm font-medium text-[var(--color-text-muted)] opacity-50 cursor-not-allowed"
-        aria-label="Save prompt"
+        aria-label={saveLabel}
       >
         <HeartIcon filled={false} />
-        Save
+        {saveLabel}
       </button>
     );
   }
 
   return (
     <ConvexProviderWithAuth client={client} useAuth={useConvexAuthFromClerkSingleton}>
-      <SaveButtonInner promptSlug={promptSlug} />
+      <SaveButtonInner promptSlug={promptSlug} locale={locale} />
     </ConvexProviderWithAuth>
   );
 }

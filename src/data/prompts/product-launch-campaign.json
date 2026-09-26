@@ -34,6 +34,11 @@
       "name": "TARGET_AUDIENCE",
       "description": "Primary audience for the launch",
       "example": "remote knowledge workers and students aged 22-38 who struggle with digital distractions"
+    },
+    {
+      "name": "BUDGET",
+      "description": "Total marketing budget for the launch",
+      "example": "$15,000"
     }
   ],
   "tips": [
@@ -48,6 +53,7 @@
   "exampleOutput": "# FocusFlow 2.0 Launch Plan\n\n## Phase 1: Pre-Launch (April 17 — May 14)\n\n### Week 1-2: Build Anticipation\n- **Email:** Send \"Something's Coming\" teaser to existing list (Subject: \"We've been quiet. Here's why.\")\n- **Social:** Start a \"Deep Work Diaries\" content series — 3 posts/week showing productivity stats and user stories\n- **Waitlist:** Launch early access page with referral mechanic (refer 3 friends = skip the line)\n- **Target:** 2,000 waitlist signups by Week 2\n\n### Week 3-4: Warm the Audience\n- **Influencer outreach:** Send advance access to 15 productivity YouTubers and newsletter authors\n- **Blog:** Publish \"The State of Digital Distraction in 2026\" data piece for SEO and press pickup\n- **Email:** Drip sequence — Day 1: problem awareness, Day 4: behind-the-scenes, Day 7: feature preview\n\n## Phase 2: Launch Week (May 15-21)\n\n### Day 1 — Launch Day\n- 6:00 AM: Email blast to full list + waitlist (Subject: \"FocusFlow 2.0 is live\")\n- 8:00 AM: Press embargo lifts — coordinate with 5 publications...",
   "isFeatured": false,
   "dateAdded": "2026-04-02",
+  "lastUpdated": "2026-09-26",
   "metaTitle": "Product Launch Campaign Planner Prompt for ChatGPT",
   "metaDescription": "Plan a complete product launch campaign with ChatGPT. Pre-launch through post-launch with daily timelines and budgets."
 }

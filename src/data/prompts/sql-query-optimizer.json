@@ -4,7 +4,7 @@
   "promptText": "You are a senior database engineer specializing in [DATABASE_SYSTEM] performance optimization. I have a SQL query that is running slowly on a table with approximately [TABLE_SIZE] rows. Here is the query: [SQL_QUERY]. Please: 1) Explain what this query does in plain English, 2) Identify performance bottlenecks and explain why they cause slowness, 3) Rewrite the query with optimizations (use CTEs, proper JOINs, avoid subqueries where possible), 4) Suggest indexes that would improve performance and explain why each helps, 5) Provide the EXPLAIN ANALYZE interpretation you would expect before and after optimization, 6) Note any potential data integrity issues or edge cases the original query might miss. Format each optimization with a clear before/after comparison.",
   "description": "Slow SQL queries are one of the most common performance problems in production applications, and optimizing them requires understanding both the query logic and the database engine's execution strategy. This prompt acts as a virtual DBA who can explain your query in plain English, identify exactly why it is slow, and provide an optimized version with proper indexing recommendations. The EXPLAIN ANALYZE interpretation helps you understand what the database is actually doing under the hood. This is invaluable for developers who are proficient in SQL but lack deep performance tuning experience.",
   "tool": "claude",
-  "category": "data-analysis",
+  "category": "coding",
   "tags": ["SQL", "database", "performance", "optimization", "indexing"],
   "difficulty": "advanced",
   "promptType": "text",

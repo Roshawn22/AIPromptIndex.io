@@ -14,6 +14,8 @@ const keyEventNames = [
   'newsletter_cta_clicked',
   'outbound_tool_clicked',
   'prompt_copied',
+  'prompt_saved',
+  'prompt_unsaved',
   'prompt_submission_succeeded',
   'prompt_viewed',
   'search_opened',
@@ -83,6 +85,36 @@ function mapKeyEventRows(rows = []) {
   }));
 }
 
+function mapLocaleDemandRows(rows = []) {
+  return rows.map((row) => ({
+    language: row.dimensionValues?.[0]?.value || '(not set)',
+    countryId: row.dimensionValues?.[1]?.value || '(not set)',
+    sessions: numberValue(row.metricValues?.[0]?.value),
+    engagedSessions: numberValue(row.metricValues?.[1]?.value),
+    activeUsers: numberValue(row.metricValues?.[2]?.value),
+  }));
+}
+
+function aggregateLocaleDemand(rows, key) {
+  const totals = new Map();
+
+  for (const row of rows) {
+    const value = row[key];
+    const current = totals.get(value) || {
+      [key]: value,
+      sessions: 0,
+      engagedSessions: 0,
+      activeUsers: 0,
+    };
+    current.sessions += row.sessions;
+    current.engagedSessions += row.engagedSessions;
+    current.activeUsers += row.activeUsers;
+    totals.set(value, current);
+  }
+
+  return [...totals.values()].sort((left, right) => right.sessions - left.sessions);
+}
+
 function mergeWindowData(landingPages, keyEvents) {
   const byLandingPage = new Map();
 
@@ -142,13 +174,43 @@ async function fetchWindow(propertyId, window) {
   };
 }
 
+async function fetchLocaleDemandWindow(propertyId, window, dimensionFilter) {
+  const response = await runReport(propertyId, {
+    dateRanges: [{ startDate: window.startDate, endDate: window.endDate }],
+    dimensions: [{ name: 'language' }, { name: 'countryId' }],
+    metrics: [
+      { name: 'sessions' },
+      { name: 'engagedSessions' },
+      { name: 'activeUsers' },
+    ],
+    dimensionFilter,
+    orderBys: [{ metric: { metricName: 'sessions' }, desc: true }],
+    keepEmptyRows: false,
+    limit: '10000',
+  });
+  const rows = mapLocaleDemandRows(response.rows);
+
+  return {
+    ...window,
+    rows,
+    languages: aggregateLocaleDemand(rows, 'language'),
+    countries: aggregateLocaleDemand(rows, 'countryId'),
+  };
+}
+
 async function main() {
   const propertyId = requireEnv('GOOGLE_ANALYTICS_PROPERTY_ID');
   const generatedAt = new Date().toISOString();
   const ranges = {};
+  const localeDemandRanges = {};
 
   for (const window of windows) {
     ranges[window.label] = await fetchWindow(propertyId, window);
+    localeDemandRanges[window.label] = {
+      ...window,
+      allTraffic: await fetchLocaleDemandWindow(propertyId, window),
+      organicSearch: await fetchLocaleDemandWindow(propertyId, window, organicSearchFilter()),
+    };
   }
 
   writeJson(path.join(outputDir, 'ga4-landing-pages.json'), {
@@ -157,6 +219,18 @@ async function main() {
     generatedAt,
     keyEventNames,
     ranges,
+  });
+  writeJson(path.join(outputDir, 'ga4-locale-demand.json'), {
+    source: 'ga4-data-api',
+    propertyId,
+    generatedAt,
+    metricDefinitions: {
+      language: 'GA4 browser or app language dimension.',
+      countryId: 'ISO 3166-1 alpha-2 country code inferred by GA4.',
+      allTraffic: 'All measured sessions.',
+      organicSearch: 'Sessions where sessionDefaultChannelGroup is Organic Search.',
+    },
+    ranges: localeDemandRanges,
   });
 
   console.log(JSON.stringify({
@@ -168,6 +242,13 @@ async function main() {
       {
         landingPages: value.landingPages.length,
         keyEvents: value.keyEvents.length,
+      },
+    ])),
+    localeDemandRows: Object.fromEntries(Object.entries(localeDemandRanges).map(([label, value]) => [
+      label,
+      {
+        allTraffic: value.allTraffic.rows.length,
+        organicSearch: value.organicSearch.rows.length,
       },
     ])),
   }, null, 2));

@@ -4,13 +4,15 @@
   "promptText": "You are a LinkedIn content strategist who helps professionals build authority. Write a LinkedIn post about [TOPIC] from the perspective of a [ROLE] with [EXPERIENCE_LEVEL] experience. Use the [POST_FORMAT] format. Open with a bold hook in the first line that stops the scroll (no hashtags in the first line). Structure the post with short paragraphs (1-2 sentences each), strategic line breaks for mobile readability, and a mix of insights, personal anecdotes, and data points. End with a thought-provoking question that encourages comments. Include 3-5 relevant hashtags at the very end. Keep it under 1,300 characters for optimal algorithm performance. The tone should be [TONE] and avoid corporate jargon.",
   "description": "LinkedIn has become the most important platform for professional thought leadership, but most posts fail because they read like corporate press releases. This prompt generates posts optimized for LinkedIn's algorithm and mobile reading experience: short paragraphs, scroll-stopping hooks, and engagement-driving questions. The character limit constraint ensures your post displays fully without the 'see more' truncation that kills engagement. The personal anecdote requirement adds authenticity that resonates with LinkedIn audiences who are tired of generic business wisdom. Use it to build a consistent posting cadence that establishes you as a thought leader in your industry.",
   "tool": "chatgpt",
-  "category": "marketing",
+  "category": "writing",
   "tags": [
     "linkedin",
     "thought-leadership",
     "personal-branding",
     "social-media",
-    "networking"
+    "networking",
+    "marketing",
+    "business"
   ],
   "difficulty": "beginner",
   "promptType": "text",

@@ -4,8 +4,8 @@
   "promptText": "You are a poetry professor and published poet who runs writing workshops. Write a [POETRY_FORM] poem about [THEME] that evokes the feeling of [EMOTION]. Use [IMAGERY_FOCUS] as your central imagery. The poem should employ at least three of these literary devices: metaphor, alliteration, enjambment, assonance, personification, or synecdoche. Keep the tone [TONE] and aim for [LINE_COUNT] lines. After the poem, provide a brief craft analysis explaining your choices in form, imagery, and sound, as if you were workshopping the piece with a student. Suggest two revision directions the writer could explore.",
   "description": "This prompt combines creative generation with educational craft analysis, making it a dual-purpose tool for both writing poetry and learning poetic technique. The inclusion of specific literary device requirements ensures the output demonstrates real craft rather than generic verse. The workshop-style analysis breaks down why certain choices work, which is invaluable for poets developing their skills. Use it to generate first drafts, study how form shapes content, or prepare teaching examples for creative writing classes.",
   "tool": "claude",
-  "category": "creative",
-  "tags": ["poetry", "creative-writing", "literary-devices", "workshop", "craft"],
+  "category": "writing",
+  "tags": ["poetry", "creative-writing", "literary-devices", "workshop", "craft", "education"],
   "difficulty": "intermediate",
   "promptType": "text",
   "variables": [

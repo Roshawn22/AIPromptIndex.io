@@ -22,18 +22,26 @@
 
   --color-border: #e5e5e5;
   --color-border-subtle: #f0f0f0;
+  /* Boundary for inputs, selects and textareas: 3:1 against the surfaces they sit on. */
+  --color-border-control: #8f8f8f;
 
   --color-text-primary: #1a1a1a;
   --color-text-secondary: #525252;
-  --color-text-muted: #737373;
+  --color-text-muted: #6f6f6f;
   --color-text-inverse: #fafafa;
 
-  /* Accent: Editorial Teal */
-  --color-accent: #0d9488;
-  --color-accent-hover: #0f766e;
+  /* Accent: Editorial Teal. Deep enough (5.5:1 on white) to carry body-size text and
+     links; the brighter #0d9488 stays in the gradient and glow only. */
+  --color-accent: #0f766e;
+  --color-accent-hover: #115e59;
   --color-accent-muted: #5eead4;
+  /* Solid button fill and the text that sits on it. The accent itself is too light for
+     white text (3.7:1 in light mode, 1.9:1 in dark), so filled controls use this pair. */
+  --color-accent-fill: #0f766e;
+  --color-accent-fill-hover: #115e59;
+  --color-on-accent: #ffffff;
   --color-accent-glow: rgba(13, 148, 136, 0.1);
-  --color-accent-gradient: linear-gradient(135deg, #2dd4bf 0%, #0d9488 100%);
+  --color-accent-gradient: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
   --glass-ui-bg: rgba(255, 255, 255, 0.64);
   --glass-ui-bg-strong: rgba(255, 255, 255, 0.82);
   --glass-border: rgba(255, 255, 255, 0.62);
@@ -116,16 +124,21 @@ html.dark {
 
   --color-border: #2a2a2a;
   --color-border-subtle: #222222;
+  --color-border-control: #6b6b6b;
 
   --color-text-primary: #f5f5f5;
   --color-text-secondary: #a3a3a3;
-  --color-text-muted: #8a8a8a;
+  --color-text-muted: #9a9a9a;
   --color-text-inverse: #1a1a1a;
 
   --color-accent: #2dd4bf;
   --color-accent-hover: #5eead4;
   --color-accent-muted: #0f766e;
+  --color-accent-fill: #2dd4bf;
+  --color-accent-fill-hover: #5eead4;
+  --color-on-accent: #0b1f1c;
   --color-accent-glow: rgba(45, 212, 191, 0.15);
+  --color-accent-gradient: linear-gradient(135deg, #2dd4bf 0%, #0d9488 100%);
   --glass-ui-bg: rgba(23, 29, 31, 0.68);
   --glass-ui-bg-strong: rgba(20, 25, 27, 0.84);
   --glass-border: rgba(255, 255, 255, 0.08);
@@ -434,25 +447,26 @@ html.dark .glass {
 }
 
 .nl-stagger {
-  opacity: 0;
-  transform: translateY(10px);
   transition: opacity 0.4s ease-out, transform 0.4s ease-out;
 }
-[data-reveal][data-visible] .nl-stagger { opacity: 1; transform: translateY(0); }
 .nl-stagger-1 { transition-delay: 0.1s; }
 .nl-stagger-2 { transition-delay: 0.2s; }
 .nl-stagger-3 { transition-delay: 0.3s; }
 .nl-stagger-4 { transition-delay: 0.4s; }
 
-/* Scroll-reveal base */
+/* Scroll-reveal. Content is visible by default; ScrollReveal.astro adds `reveal-ready`
+   to <html> only once its observer is running, so a fast scroll, a blocked script, or a
+   crawler never meets a blank section. */
 [data-reveal] {
-  opacity: 0;
-  transform: translateY(16px);
   transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
-[data-reveal][data-visible] {
-  opacity: 1;
-  transform: translateY(0);
+html.reveal-ready [data-reveal]:not([data-visible]) {
+  opacity: 0;
+  transform: translateY(16px);
+}
+html.reveal-ready [data-reveal]:not([data-visible]) .nl-stagger {
+  opacity: 0;
+  transform: translateY(10px);
 }
 
 /* — Horizontal scroll fade — */
@@ -472,6 +486,8 @@ html.dark .glass {
   overflow: hidden;
   grid-template-rows: 0fr;
   opacity: 0;
+  /* Also removes the collapsed links from the tab order and the accessibility tree. */
+  visibility: hidden;
   transition: grid-template-rows 0.25s ease-out, opacity 0.2s ease-out;
 }
 .mobile-menu-closed > * {
@@ -481,6 +497,7 @@ html.dark .glass {
 .mobile-menu-open {
   grid-template-rows: 1fr;
   opacity: 1;
+  visibility: visible;
   transition: grid-template-rows 0.25s ease-out, opacity 0.2s ease-out;
 }
 .mobile-menu-exit {
@@ -489,7 +506,7 @@ html.dark .glass {
   transition: grid-template-rows 0.2s ease-out, opacity 0.15s ease-out;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .mobile-menu-closed,
   .mobile-menu-open,
   .mobile-menu-exit {
@@ -499,7 +516,13 @@ html.dark .glass {
 
 /* — Reduced Motion — */
 @media (prefers-reduced-motion: reduce) {
-  [data-reveal] {
+  html {
+    scroll-behavior: auto;
+  }
+
+  [data-reveal],
+  html.reveal-ready [data-reveal]:not([data-visible]),
+  html.reveal-ready [data-reveal]:not([data-visible]) .nl-stagger {
     opacity: 1;
     transform: none;
     transition: none;
@@ -537,11 +560,6 @@ html.dark .glass {
     animation: none !important;
   }
 
-  .nl-stagger {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
 }
 
 .noise {

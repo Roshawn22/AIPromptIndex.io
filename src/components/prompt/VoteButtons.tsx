@@ -46,6 +46,7 @@ function VoteButtonsInner({ promptSlug }: VoteButtonsProps) {
             : 'text-[var(--color-text-muted)] hover:text-[var(--color-accent)] hover:bg-[var(--color-surface-2)]'
         }`}
         aria-label="Upvote"
+        aria-pressed={userVote === 'up'}
       >
         <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
           <path d="M5 15l7-7 7 7" />
@@ -65,6 +66,7 @@ function VoteButtonsInner({ promptSlug }: VoteButtonsProps) {
             : 'text-[var(--color-text-muted)] hover:text-red-500 hover:bg-[var(--color-surface-2)]'
         }`}
         aria-label="Downvote"
+        aria-pressed={userVote === 'down'}
       >
         <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
           <path d="M19 9l-7 7-7-7" />

@@ -34,6 +34,16 @@
       "name": "TARGET_READER",
       "description": "Who the book is written for",
       "example": "aspiring content creators with 0-10K followers who want to turn their expertise into income"
+    },
+    {
+      "name": "CHAPTER_SCOPE",
+      "description": "What the chapter must cover from start to finish",
+      "example": "why most side projects stall after week three and the three habits that prevent it"
+    },
+    {
+      "name": "WORD_COUNT",
+      "description": "Target length of the finished chapter in words",
+      "example": "4,500"
     }
   ],
   "tips": [
@@ -48,6 +58,7 @@
   "exampleOutput": "# Chapter 3: Finding Your Niche Without Limiting Your Growth\n\n**Chapter Summary:** This chapter dismantles the myth that niching down means boxing yourself in. Readers will learn the \"Niche Ladder\" framework for starting specific and expanding strategically...\n\n## Opening Hook\nIn 2022, Ali Abdaal had 3 million subscribers watching his videos about being a junior doctor. Then he stopped making medical content entirely. His channel didn't shrink — it doubled...\n\n## Section 1: The Niche Paradox (Essential — 1,200 words)\n- Why \"niche down\" is simultaneously the best and worst advice for new creators\n- The difference between a topic niche and an audience niche\n- Data: creators who start broad grow 3x slower in Year 1 but...\n\n**Suggested examples:** Ali Abdaal's pivot, Mr. Beast's early gaming videos, Sahil Bloom's finance-to-general-wisdom arc\n\n[Bridge: Now that we understand why specificity works, let's build your personal niche strategy...]",
   "isFeatured": false,
   "dateAdded": "2026-04-02",
+  "lastUpdated": "2026-09-26",
   "metaTitle": "Non-Fiction Book Chapter Outliner Prompt for Claude",
   "metaDescription": "Create detailed non-fiction chapter outlines with Claude. Structured writing roadmaps with examples and transitions."
 }

@@ -1,11 +1,16 @@
 ---
 // ThemeToggle — light-first, dark class toggle
+interface Props {
+  label?: string;
+}
+
+const { label = 'Toggle dark/light mode' } = Astro.props;
 ---
 
 <button
   id="theme-toggle"
   type="button"
-  aria-label="Toggle dark/light mode"
+  aria-label={label}
   class="surface-glass-ui relative flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] transition-colors"
 >
   <!-- Moon icon (shown in light mode — click to go dark) -->

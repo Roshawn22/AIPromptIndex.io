@@ -1,15 +1,19 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
+import { loadEnv } from 'vite';
 
 const repoRoot = process.cwd();
 const promptsDirPath = path.join(repoRoot, 'src/data/prompts');
 const blogDirPath = path.join(repoRoot, 'src/data/blog');
 const guidesDirPath = path.join(repoRoot, 'src/data/guides');
+const ptBrPilotPath = path.join(repoRoot, 'src/data/i18n/pt-BR/pilot-pages.json');
+const bestofPagesPath = path.join(repoRoot, 'src/data/seo/bestof-pages.json');
 
 /**
  * @template T
@@ -173,40 +177,81 @@ function buildRouteLastmodMap() {
 
 const routeLastmodMap = buildRouteLastmodMap();
 
+const astroMode = process.env.NODE_ENV === 'production' ? 'production' : 'development';
+const publicEnv = loadEnv(astroMode, repoRoot, 'PUBLIC_');
+const ptBrPilot = loadJsonFile(ptBrPilotPath, { pages: {} });
+const bestofPages = /** @type {any[]} */ (loadJsonFile(bestofPagesPath, []));
+const pilotPages = Object.values(ptBrPilot.pages || {});
+
+/** @param {any} page */
+function getPilotSourceFingerprint(page) {
+  let sourceValue = '';
+  if (page?.type === 'home') {
+    sourceValue = fs.readFileSync(path.join(repoRoot, 'src/pages/index.astro'), 'utf8');
+  } else if (page?.type === 'roundup') {
+    sourceValue = JSON.stringify(bestofPages.find((roundup) => roundup.slug === page.sourceSlug));
+  } else if (page?.type === 'prompt') {
+    const sourcePath = path.join(promptsDirPath, `${page.sourceSlug}.json`);
+    if (fs.existsSync(sourcePath)) sourceValue = fs.readFileSync(sourcePath, 'utf8');
+  }
+  return crypto.createHash('sha256').update(sourceValue).digest('hex').slice(0, 12);
+}
+
+const localizationPilotApproved = pilotPages.length > 0 && pilotPages.every(
+  (page) => page
+    && page.reviewStatus === 'approved'
+    && page.sourceFingerprint === getPilotSourceFingerprint(page)
+);
+const localizationPilotIndexable =
+  publicEnv.PUBLIC_LOCALIZATION_PILOT_INDEXABLE === 'true' && localizationPilotApproved;
+
 export default defineConfig({
-  site: 'https://aipromptindex.io',
-  output: 'static',
-  trailingSlash: 'always',
-  integrations: [
-    react(),
-    sitemap({
-      filter: (page) => {
-        const pathname = normalizePathname(new URL(page).pathname);
-        return !staticSitemapExcludedPaths.has(pathname);
+    site: 'https://aipromptindex.io',
+    output: 'static',
+    trailingSlash: 'always',
+    i18n: {
+      defaultLocale: 'en',
+      locales: ['en', 'pt-BR'],
+      routing: {
+        prefixDefaultLocale: false,
+        redirectToDefaultLocale: false,
       },
-      serialize: (item) => {
-        const pathname = normalizePathname(new URL(item.url, 'https://aipromptindex.io').pathname);
-        const lastmod = routeLastmodMap.get(pathname);
-        return lastmod ? { ...item, lastmod } : item;
+    },
+    integrations: [
+      react(),
+      sitemap({
+        filter: (page) => {
+          const pathname = normalizePathname(new URL(page).pathname);
+          if (pathname.startsWith('/pt-BR') && !localizationPilotIndexable) return false;
+          return !staticSitemapExcludedPaths.has(pathname);
+        },
+        serialize: (item) => {
+          const pathname = normalizePathname(new URL(item.url, 'https://aipromptindex.io').pathname);
+          const englishPathname = pathname.replace(/^\/pt-BR(?=\/|$)/, '') || '/';
+          const lastmod = routeLastmodMap.get(englishPathname);
+          return lastmod ? { ...item, lastmod } : item;
+        },
+      }),
+    ],
+    vite: {
+      plugins: [tailwindcss()],
+      define: {
+        'import.meta.env.PUBLIC_LOCALIZATION_PILOT_REVIEW_VALID': JSON.stringify(localizationPilotApproved),
       },
-    }),
-  ],
-  vite: {
-    plugins: [tailwindcss()],
-    build: {
-      target: 'es2019',
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            fuse: ['fuse.js'],
-            convex: ['convex/browser'],
-            radix: ['@radix-ui/react-dialog', '@radix-ui/react-select', '@radix-ui/react-tabs'],
+      build: {
+        target: 'es2019',
+        rollupOptions: {
+          output: {
+            manualChunks: {
+              fuse: ['fuse.js'],
+              convex: ['convex/browser'],
+              radix: ['@radix-ui/react-dialog', '@radix-ui/react-select', '@radix-ui/react-tabs'],
+            },
           },
         },
       },
     },
-  },
-  build: {
-    inlineStylesheets: 'auto',
-  },
+    build: {
+      inlineStylesheets: 'auto',
+    },
 });

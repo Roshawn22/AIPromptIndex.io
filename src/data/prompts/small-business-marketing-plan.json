@@ -4,13 +4,14 @@
   "promptText": "You are an experienced marketing strategist who specializes in small business growth. Create a comprehensive 90-day marketing plan for a [BUSINESS_TYPE] located in [LOCATION] with a monthly marketing budget of [BUDGET]. The business currently has [CURRENT_CUSTOMERS] customers and wants to grow to [TARGET_CUSTOMERS] within the next quarter. Include specific channel recommendations (social media, local SEO, email, partnerships), weekly action items broken down by priority, estimated cost allocation per channel, key performance indicators to track progress, and realistic milestones for each 30-day period. Factor in seasonal trends relevant to the business type and local market conditions. Provide at least three low-cost guerrilla marketing tactics that can generate quick wins in the first two weeks.",
   "description": "This prompt generates a detailed, actionable 90-day marketing plan tailored specifically for small businesses with limited budgets. Rather than generic advice, it produces week-by-week action items with cost estimates and KPIs so you can track real progress. The plan covers digital and local marketing channels, includes guerrilla tactics for quick wins, and accounts for your specific budget constraints. Whether you are launching a new business or trying to accelerate growth of an existing one, this prompt gives you a structured roadmap that a marketing consultant would typically charge hundreds of dollars to create.",
   "tool": "chatgpt",
-  "category": "business",
+  "category": "marketing",
   "tags": [
     "small-business",
     "marketing-plan",
     "growth-strategy",
     "local-marketing",
-    "budget-marketing"
+    "budget-marketing",
+    "business"
   ],
   "difficulty": "intermediate",
   "promptType": "text",

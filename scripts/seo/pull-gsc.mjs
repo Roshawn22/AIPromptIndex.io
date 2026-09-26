@@ -38,9 +38,14 @@ async function runSearchAnalyticsQuery(window, dimensions) {
   );
 
   return (response.rows || []).map((row) => {
-    const [primaryKey] = row.keys || [];
+    const keys = row.keys || [];
+    const [primaryKey] = keys;
     return {
       key: primaryKey || '',
+      dimensions: Object.fromEntries(dimensions.map((dimension, index) => [
+        dimension,
+        keys[index] || '',
+      ])),
       clicks: Number(row.clicks || 0),
       impressions: Number(row.impressions || 0),
       ctr: Number(row.ctr || 0),
@@ -53,6 +58,8 @@ async function main() {
   const generatedAt = new Date().toISOString();
   const pageRanges = {};
   const queryRanges = {};
+  const countryRanges = {};
+  const queryCountryRanges = {};
 
   for (const window of windows) {
     pageRanges[window.label] = {
@@ -62,6 +69,14 @@ async function main() {
     queryRanges[window.label] = {
       ...window,
       rows: await runSearchAnalyticsQuery(window, ['query']),
+    };
+    countryRanges[window.label] = {
+      ...window,
+      rows: await runSearchAnalyticsQuery(window, ['country']),
+    };
+    queryCountryRanges[window.label] = {
+      ...window,
+      rows: await runSearchAnalyticsQuery(window, ['query', 'country']),
     };
   }
 
@@ -77,6 +92,18 @@ async function main() {
     generatedAt,
     ranges: queryRanges,
   });
+  writeJson(path.join(outputDir, 'gsc-countries.json'), {
+    source: 'google-search-console',
+    siteProperty,
+    generatedAt,
+    ranges: countryRanges,
+  });
+  writeJson(path.join(outputDir, 'gsc-query-countries.json'), {
+    source: 'google-search-console',
+    siteProperty,
+    generatedAt,
+    ranges: queryCountryRanges,
+  });
 
   console.log(JSON.stringify({
     ok: true,
@@ -84,6 +111,8 @@ async function main() {
     siteProperty,
     pageRows: Object.fromEntries(Object.entries(pageRanges).map(([label, value]) => [label, value.rows.length])),
     queryRows: Object.fromEntries(Object.entries(queryRanges).map(([label, value]) => [label, value.rows.length])),
+    countryRows: Object.fromEntries(Object.entries(countryRanges).map(([label, value]) => [label, value.rows.length])),
+    queryCountryRows: Object.fromEntries(Object.entries(queryCountryRanges).map(([label, value]) => [label, value.rows.length])),
   }, null, 2));
 }
 

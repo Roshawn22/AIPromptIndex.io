@@ -2,6 +2,8 @@ type EventType =
   | 'newsletter_cta_clicked'
   | 'outbound_tool_clicked'
   | 'prompt_copied'
+  | 'prompt_saved'
+  | 'prompt_unsaved'
   | 'prompt_submission_succeeded'
   | 'prompt_viewed'
   | 'prompt_shared'
@@ -17,13 +19,19 @@ export function trackEvent(type: EventType, payload?: EventPayload) {
   try {
     if (typeof window === 'undefined') return;
 
+    const localizedPayload = {
+      site_locale: document.documentElement.lang || 'en',
+      localization_pilot: window.location.pathname.startsWith('/pt-BR/'),
+      ...payload,
+    };
+
     if ('gtag' in window && typeof (window as any).gtag === 'function') {
-      (window as any).gtag('event', type, payload);
+      (window as any).gtag('event', type, localizedPayload);
       return;
     }
 
     if (Array.isArray((window as any).dataLayer)) {
-      (window as any).dataLayer.push(['event', type, payload]);
+      (window as any).dataLayer.push(['event', type, localizedPayload]);
     }
   } catch {
     // Silently fail — analytics should never break the app
@@ -36,6 +44,10 @@ export function trackPromptCopy(promptSlug: string, tool?: string, category?: st
 
 export function trackPromptView(promptSlug: string, tool?: string, category?: string) {
   trackEvent('prompt_viewed', { prompt_slug: promptSlug, tool, category });
+}
+
+export function trackPromptSave(promptSlug: string, saved: boolean) {
+  trackEvent(saved ? 'prompt_saved' : 'prompt_unsaved', { prompt_slug: promptSlug });
 }
 
 export function trackShare(promptSlug: string, platform: string) {

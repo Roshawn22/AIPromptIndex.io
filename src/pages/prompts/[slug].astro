@@ -20,6 +20,7 @@ import toolsData from '../../data/tools/tools.json';
 import toolCategoryPages from '../../data/seo/tool-category-pages.json';
 import audiencePages from '../../data/seo/audience-pages.json';
 import bestofPages from '../../data/seo/bestof-pages.json';
+import relatedPromptMap from '../../data/seo/related-prompts.json';
 
 export async function getStaticPaths() {
   const prompts = await getCollection('prompts');
@@ -37,9 +38,18 @@ const toolAffiliateUrl = currentTool?.affiliateUrl;
 const toolName = currentTool?.name || data.tool;
 
 const allPrompts = await getCollection('prompts');
-const relatedPrompts = allPrompts
-  .filter((p) => p.data.slug !== data.slug && (p.data.category === data.category || p.data.tool === data.tool))
-  .slice(0, 4);
+// Judged relatedness (scripts/typesafe/build-related.mjs) comes first; the category/tool
+// match fills any remaining slots and covers prompts that have not been judged yet.
+const judgedRelatedSlugs: string[] = (relatedPromptMap as Record<string, string[]>)[data.slug] ?? [];
+const judgedRelated = judgedRelatedSlugs
+  .map((slug) => allPrompts.find((p) => p.data.slug === slug))
+  .filter((p): p is (typeof allPrompts)[number] => Boolean(p) && p!.data.slug !== data.slug);
+const fallbackRelated = allPrompts.filter(
+  (p) => p.data.slug !== data.slug
+    && !judgedRelatedSlugs.includes(p.data.slug)
+    && (p.data.category === data.category || p.data.tool === data.tool),
+);
+const relatedPrompts = [...judgedRelated, ...fallbackRelated].slice(0, 4);
 
 /* toolDisplayNames, categoryDisplayNames, difficultyColor imported from lib/constants */
 
@@ -183,10 +193,10 @@ const promptJsonLd = [howToJsonLd, ...(faqJsonLd ? [faqJsonLd] : [])];
               href={toolAffiliateUrl}
               target="_blank"
               rel="noopener sponsored"
-              class="inline-flex items-center gap-2 rounded-[var(--radius-md)] border-2 border-[var(--color-accent)] px-5 py-2.5 text-sm font-semibold text-[var(--color-accent)] transition-colors hover:bg-[var(--color-accent)] hover:text-white"
+              class="inline-flex items-center gap-2 rounded-[var(--radius-md)] border-2 border-[var(--color-accent)] px-5 py-2.5 text-sm font-semibold text-[var(--color-accent)] transition-colors hover:bg-[var(--color-accent-fill)] hover:text-[var(--color-on-accent)]"
             >
               Try in {toolName}
-              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                 <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" />
               </svg>
             </a>
@@ -212,7 +222,7 @@ const promptJsonLd = [howToJsonLd, ...(faqJsonLd ? [faqJsonLd] : [])];
                     </code>
                   </div>
                   <p class="text-sm text-[var(--color-text-secondary)]">{v.description}</p>
-                  <p class="mt-1 text-xs text-[var(--color-text-muted)]">Example: <Fragment set:html="<!--email_off-->" />{v.example}<Fragment set:html="<!--/email_off-->" /></p>
+                  <p class="mt-1 text-xs text-[var(--color-text-muted)]">Example: {v.example}</p>
                 </div>
               ))}
             </div>
@@ -226,7 +236,7 @@ const promptJsonLd = [howToJsonLd, ...(faqJsonLd ? [faqJsonLd] : [])];
             <ul class="space-y-2">
               {data.tips.map((tip) => (
                 <li class="flex items-start gap-2 text-[var(--color-text-secondary)]">
-                  <svg class="mt-1 h-4 w-4 shrink-0 text-[var(--color-accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <svg class="mt-1 h-4 w-4 shrink-0 text-[var(--color-accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                     <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   {tip}
@@ -243,7 +253,7 @@ const promptJsonLd = [howToJsonLd, ...(faqJsonLd ? [faqJsonLd] : [])];
               href={data.relatedGuide.url}
               class="surface-solid-content flex items-start gap-3 rounded-[var(--radius-md)] p-4 transition-colors hover:border-[var(--color-accent-muted)]"
             >
-              <svg class="mt-0.5 h-5 w-5 shrink-0 text-[var(--color-accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <svg class="mt-0.5 h-5 w-5 shrink-0 text-[var(--color-accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
                 <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
               </svg>
               <div>
@@ -259,7 +269,7 @@ const promptJsonLd = [howToJsonLd, ...(faqJsonLd ? [faqJsonLd] : [])];
           <div class="mb-8">
             <h2 class="text-xl mb-3">Example Output</h2>
             <div class="surface-solid-content rounded-[var(--radius-md)] p-4">
-              <pre class="whitespace-pre-wrap text-sm text-[var(--color-text-secondary)]"><Fragment set:html="<!--email_off-->" />{data.exampleOutput}<Fragment set:html="<!--/email_off-->" /></pre>
+              <pre class="whitespace-pre-wrap text-sm text-[var(--color-text-secondary)]">{data.exampleOutput}</pre>
             </div>
           </div>
         )}
@@ -277,7 +287,7 @@ const promptJsonLd = [howToJsonLd, ...(faqJsonLd ? [faqJsonLd] : [])];
       </div>
 
       <!-- Sidebar -->
-      <aside class="hidden lg:block">
+      <div class="hidden lg:block">
         <div class="sticky top-24 space-y-6">
           <!-- Quick Info -->
           <div class="surface-solid-content rounded-[var(--radius-lg)] p-5">
@@ -335,7 +345,7 @@ const promptJsonLd = [howToJsonLd, ...(faqJsonLd ? [faqJsonLd] : [])];
             </div>
           )}
         </div>
-      </aside>
+      </div>
     </div>
 
     {collections.length > 0 && (
