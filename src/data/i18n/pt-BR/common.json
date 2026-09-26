@@ -10,15 +10,8 @@
     "searchPrompts": "Buscar prompts de IA",
     "openSearch": "Abrir busca",
     "openMenu": "Abrir menu",
-    "submit": "Enviar prompt (EN)",
-    "nav": [
-      { "href": "/prompts/", "label": "Prompts" },
-      { "href": "/categories/", "label": "Categorias" },
-      { "href": "/tools/", "label": "Ferramentas" },
-      { "href": "/prompt-builder/", "label": "Criador" },
-      { "href": "/guides/", "label": "Guias" },
-      { "href": "/blog/", "label": "Blog" }
-    ]
+    "closeMenu": "Fechar menu",
+    "submit": "Enviar um prompt (em inglês)"
   },
   "languageSwitcher": {
     "label": "Idioma",
@@ -32,8 +25,7 @@
     "opensIndexed": "Abre a newsletter Indexed em inglês. Sem spam — cancele quando quiser.",
     "iframeTitle": "Assine a newsletter do AIPromptIndex",
     "noSpam": "Sem spam. Cancele quando quiser.",
-    "unavailable": "A assinatura da newsletter está temporariamente indisponível.",
-    "configuration": "Adicione `PUBLIC_NEWSLETTER_URL` para reativar as assinaturas."
+    "unavailable": "A assinatura da newsletter está temporariamente indisponível."
   },
   "footer": {
     "crossPromoPrefix": "Procurando ferramentas de IA? Visite",
@@ -58,9 +50,9 @@
     "tips": "Dicas para obter os melhores resultados",
     "copyPrompt": "Copiar prompt",
     "copied": "Copiado!",
-    "originalLibraryNotice": "Os cartões abaixo mantêm o texto original em inglês nesta primeira fase. A interface, a orientação e as páginas prioritárias estão em português.",
-    "draftNotice": "Piloto em revisão: esta tradução ainda não foi aprovada para indexação.",
-    "viewPrompt": "Ver prompt",
+    "originalLibraryNotice": "Os prompts abaixo estão em inglês. A navegação e as páginas principais estão em português.",
+    "draftNotice": "Tradução em revisão.",
+    "viewPrompt": "Ver prompt (em inglês)",
     "browseCollection": "Explorar coleção",
     "added": "Adicionado",
     "updated": "Atualizado"

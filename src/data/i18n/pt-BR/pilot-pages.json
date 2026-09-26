@@ -7,9 +7,9 @@
     "/": {
       "type": "home",
       "reviewStatus": "needs-human-review",
-      "sourceFingerprint": "7a3b6fdfcc4f",
+      "sourceFingerprint": "b6313df36298",
       "sourcePath": "/",
-      "title": "Biblioteca Gratuita de Prompts de IA para ChatGPT, Claude e Mais",
+      "title": "Biblioteca gratuita de prompts de IA para ChatGPT, Claude e mais",
       "metaTitle": "Biblioteca de Prompts de IA Grátis",
       "description": "Explore uma biblioteca gratuita de prompts e modelos para ChatGPT, Claude, Midjourney, Gemini, Cursor e outras ferramentas. Copie, personalize e use rapidamente.",
       "metaDescription": "Explore prompts e modelos gratuitos para ChatGPT, Claude, Gemini, Midjourney e Cursor. Copie, personalize e use rapidamente.",
@@ -19,7 +19,7 @@
       "primaryCta": "Explorar os melhores prompts",
       "secondaryCta": "Ver prompts grátis",
       "sectionHeading": "Comece pelas coleções prioritárias",
-      "sectionIntro": "Estas páginas concentram as oportunidades de busca e os fluxos mais úteis do catálogo para este piloto em português."
+      "sectionIntro": "Comece por estas coleções: são as páginas mais úteis do catálogo em português."
     },
     "/best/gemini-prompts/": {
       "type": "roundup",
@@ -27,7 +27,7 @@
       "sourceFingerprint": "a5279e5d6424",
       "sourcePath": "/best/gemini-prompts/",
       "sourceSlug": "gemini-prompts",
-      "title": "Melhores Prompts para Gemini",
+      "title": "Melhores prompts para Gemini",
       "metaTitle": "Prompts para Gemini: guia 2026",
       "description": "Prompts selecionados para Google Gemini em pesquisa, análise, escrita e produtividade, aproveitando acesso à web e integração com o Google Workspace.",
       "intro": "O Google Gemini reúne vantagens como acesso a informações atuais, integração com o Google Workspace e compreensão multimodal. Esta seleção ajuda você a usar esses recursos em tarefas de pesquisa, análise, programação, escrita e criação. Cada prompt foi escolhido como um ponto de partida prático para explorar o que o Gemini faz melhor."
@@ -35,12 +35,12 @@
     "/best/best-ai-prompts/": {
       "type": "roundup",
       "reviewStatus": "needs-human-review",
-      "sourceFingerprint": "8d2c51b78af4",
+      "sourceFingerprint": "3f735965050a",
       "sourcePath": "/best/best-ai-prompts/",
       "sourceSlug": "best-ai-prompts",
-      "title": "Melhores Prompts de IA",
+      "title": "Melhores prompts de IA",
       "metaTitle": "Melhores prompts de IA em 2026",
-      "description": "Uma seleção dos prompts de IA mais bem avaliados para ChatGPT, Claude, Gemini, Midjourney e outras ferramentas, pronta para copiar e adaptar.",
+      "description": "Todos os prompts da biblioteca para ChatGPT, Claude, Gemini, Midjourney e outras ferramentas em uma só página, com as escolhas dos editores primeiro.",
       "intro": "Encontrar bons prompts exige separar estruturas reutilizáveis de exemplos que só funcionam uma vez. Esta coleção reúne os prompts mais fortes do catálogo em escrita, programação, marketing, geração de imagens, negócios e análise de dados. Use cada item como base, adapte as variáveis ao seu contexto e compare os resultados."
     },
     "/best/free-ai-prompts/": {
@@ -49,7 +49,7 @@
       "sourceFingerprint": "d06e2c96609d",
       "sourcePath": "/best/free-ai-prompts/",
       "sourceSlug": "free-ai-prompts",
-      "title": "Prompts de IA Grátis",
+      "title": "Prompts de IA grátis",
       "metaTitle": "Prompts de IA grátis em 2026",
       "description": "Prompts de qualidade que funcionam nos planos gratuitos do ChatGPT, Claude, Gemini e outras ferramentas de IA. Copie e use sem assinatura premium.",
       "intro": "Você não precisa de uma assinatura paga para obter resultados úteis com IA. Estes prompts foram escolhidos para funcionar dentro dos limites dos planos gratuitos, sem depender de recursos premium ou contextos enormes. A qualidade vem da clareza do objetivo, do contexto e das restrições — não apenas do plano contratado."
@@ -57,10 +57,10 @@
     "/best/prompt-templates/": {
       "type": "roundup",
       "reviewStatus": "needs-human-review",
-      "sourceFingerprint": "2d39337f1c1e",
+      "sourceFingerprint": "71ceec21fd91",
       "sourcePath": "/best/prompt-templates/",
       "sourceSlug": "prompt-templates",
-      "title": "Melhores Modelos de Prompts de IA",
+      "title": "Melhores modelos de prompts de IA",
       "metaTitle": "Modelos de prompts de IA em 2026",
       "description": "Modelos reutilizáveis de prompts para ChatGPT, Claude e Gemini, com campos fáceis de preencher para escrita, programação, marketing e muito mais.",
       "intro": "Modelos de prompts aceleram tarefas repetidas e ajudam a manter resultados consistentes. Em vez de começar do zero, você recebe uma estrutura testada com campos para objetivo, contexto, público e formato. Copie um modelo, substitua as variáveis e ajuste as instruções ao seu projeto."
@@ -71,8 +71,8 @@
       "sourceFingerprint": "5da17d9009a6",
       "sourcePath": "/best/cursor-ai-prompts/",
       "sourceSlug": "cursor-ai-prompts",
-      "title": "Melhores Prompts para Cursor AI",
-      "metaTitle": "Prompts para Cursor AI (2026) — Guia Prático",
+      "title": "Melhores prompts para Cursor",
+      "metaTitle": "Prompts para Cursor (2026) — guia prático",
       "description": "Prompts selecionados para geração de código, refatoração, depuração e edição de vários arquivos no Cursor AI.",
       "intro": "O Cursor consegue considerar arquivos, padrões e dependências do repositório ao responder. Estes prompts foram organizados para aproveitar esse contexto em geração de código, refatoração de vários arquivos, depuração, criação de testes e exploração de arquitetura. Informe os arquivos relevantes e os critérios de aceite para obter respostas mais precisas."
     },
@@ -82,7 +82,7 @@
       "sourceFingerprint": "3402b06696dc",
       "sourcePath": "/prompts/ai-slop-remover/",
       "sourceSlug": "ai-slop-remover",
-      "title": "Removedor de Texto Genérico de IA",
+      "title": "Removedor de texto genérico de IA",
       "metaTitle": "Prompt para humanizar texto de IA",
       "description": "Este prompt transforma ChatGPT, Claude ou Gemini em um editor criterioso que remove padrões típicos de texto gerado por IA sem apagar sua voz. Ele prioriza a menor edição eficaz, preserva frases fortes e explica o que mudou.",
       "metaDescription": "Remova padrões de texto gerado por IA sem apagar sua voz. Um prompt gratuito para editar rascunhos com mudanças mínimas e explicadas.",
@@ -104,7 +104,7 @@
       "sourceFingerprint": "98482a1d48fe",
       "sourcePath": "/prompts/business-plan-executive-summary/",
       "sourceSlug": "business-plan-executive-summary",
-      "title": "Resumo Executivo de Plano de Negócios para Claude",
+      "title": "Resumo executivo de plano de negócios para Claude",
       "metaTitle": "Prompt de Resumo Executivo para Claude",
       "description": "Use este prompt para criar no Claude um primeiro rascunho de resumo executivo voltado a investidores, bancos, apresentações e programas de aceleração. Ele organiza mercado, tração, projeções e pedido de investimento nas seções esperadas.",
       "metaDescription": "Crie no Claude um resumo executivo para investidores, bancos e aceleradoras, com mercado, tração, projeções e pedido de investimento.",
