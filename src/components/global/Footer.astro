@@ -34,14 +34,14 @@ const englishResourceLinks = [
   { href: '/submit/', label: 'Submit a Prompt' },
 ];
 const portugueseResourceLinks = [
-  { href: '/pt-BR/prompts/ai-slop-remover/', label: 'Editor de texto de IA' },
+  { href: '/pt-BR/prompts/ai-slop-remover/', label: 'Removedor de texto genérico de IA' },
   { href: '/pt-BR/prompts/business-plan-executive-summary/', label: 'Resumo de plano de negócios' },
   { href: '/submit/', label: 'Enviar um prompt (em inglês)' }
 ];
 const resourceLinks = locale === 'pt-BR' ? portugueseResourceLinks : englishResourceLinks;
 
 const englishBestPromptsLinks = [
-  { href: '/best/', label: 'All Best-Of Lists' },
+  { href: '/best/', label: 'All Collections' },
   { href: '/best/chatgpt-prompts/', label: 'Best ChatGPT Prompts' },
   { href: '/best/coding-prompts/', label: 'Best Coding Prompts' },
   { href: '/best/writing-prompts/', label: 'Best Writing Prompts' },
@@ -71,8 +71,8 @@ const toolLinks = locale === 'pt-BR'
   : englishToolLinks;
 
 const communityLinks = [
-  { href: 'https://www.skool.com/ai-freedom-lab', label: 'AI Freedom Lab', external: true },
-  { href: 'https://www.youtube.com/@AIHeavy', label: 'AI Heavy YouTube', external: true },
+  { href: 'https://www.skool.com/aifreedomlab', label: 'AI Freedom Lab', external: true },
+  { href: 'https://www.youtube.com/@AIHeavyOfficial', label: 'AI Heavy YouTube', external: true },
   { href: 'https://aitoolindex.io', label: 'AIToolIndex.io', external: true },
 ];
 
@@ -106,9 +106,9 @@ const companyLinks = locale === 'pt-BR'
     <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-6">
       <!-- Directory -->
       <div>
-        <h3 class="mb-4 font-[var(--font-display)] text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
+        <h2 class="mb-4 font-[var(--font-display)] text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
           {footerCopy?.directory || 'Directory'}
-        </h3>
+        </h2>
         <ul class="space-y-2.5">
           {directoryLinks.map((link) => (
             <li>
@@ -122,9 +122,9 @@ const companyLinks = locale === 'pt-BR'
 
       <!-- Resources -->
       <div>
-        <h3 class="mb-4 font-[var(--font-display)] text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
+        <h2 class="mb-4 font-[var(--font-display)] text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
           {footerCopy?.resources || 'Resources'}
-        </h3>
+        </h2>
         <ul class="space-y-2.5">
           {resourceLinks.map((link) => (
             <li>
@@ -138,9 +138,9 @@ const companyLinks = locale === 'pt-BR'
 
       <!-- Best Prompts -->
       <div>
-        <h3 class="mb-4 font-[var(--font-display)] text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
+        <h2 class="mb-4 font-[var(--font-display)] text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
           {footerCopy?.bestPrompts || 'Best Prompts'}
-        </h3>
+        </h2>
         <ul class="space-y-2.5">
           {bestPromptsLinks.map((link) => (
             <li>
@@ -154,9 +154,9 @@ const companyLinks = locale === 'pt-BR'
 
       <!-- Tools -->
       <div>
-        <h3 class="mb-4 font-[var(--font-display)] text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
+        <h2 class="mb-4 font-[var(--font-display)] text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
           {footerCopy?.byTool || 'By Tool'}
-        </h3>
+        </h2>
         <ul class="space-y-2.5">
           {toolLinks.map((link) => (
             <li>
@@ -170,9 +170,9 @@ const companyLinks = locale === 'pt-BR'
 
       <!-- Community -->
       <div>
-        <h3 class="mb-4 font-[var(--font-display)] text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
+        <h2 class="mb-4 font-[var(--font-display)] text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
           {footerCopy?.community || 'Community'}
-        </h3>
+        </h2>
         <ul class="space-y-2.5">
           {communityLinks.map((link) => (
             <li>
@@ -186,9 +186,9 @@ const companyLinks = locale === 'pt-BR'
 
       <!-- Company -->
       <div>
-        <h3 class="mb-4 font-[var(--font-display)] text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
+        <h2 class="mb-4 font-[var(--font-display)] text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
           {footerCopy?.company || 'Company'}
-        </h3>
+        </h2>
         <ul class="space-y-2.5">
           {companyLinks.map((link) => (
             <li>
@@ -215,12 +215,6 @@ const companyLinks = locale === 'pt-BR'
       </p>
 
       <div class="flex items-center gap-3">
-        <!-- Twitter / X -->
-        <a href="https://twitter.com/aipromptindex" target="_blank" rel="noopener noreferrer" aria-label={footerCopy?.followX || 'Follow on X (Twitter)'} class="flex h-8 w-8 items-center justify-center rounded-[var(--radius-sm)] text-[var(--color-text-muted)] transition-colors hover:bg-[var(--color-surface-2)] hover:text-[var(--color-text-primary)]">
-          <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-          </svg>
-        </a>
         <!-- YouTube -->
         <a href="https://youtube.com/@AIHeavyOfficial" target="_blank" rel="noopener noreferrer" aria-label={footerCopy?.watchYoutube || 'Watch on YouTube'} class="flex h-8 w-8 items-center justify-center rounded-[var(--radius-sm)] text-[var(--color-text-muted)] transition-colors hover:bg-[var(--color-surface-2)] hover:text-[var(--color-text-primary)]">
           <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">

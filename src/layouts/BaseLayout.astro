@@ -83,7 +83,6 @@ const organizationJsonLd = {
     width: 32,
     height: 32,
   },
-  sameAs: ['https://twitter.com/aipromptindex'],
 };
 const pageJsonLd = {
   '@context': 'https://schema.org',
@@ -162,7 +161,6 @@ const allJsonLd = [organizationJsonLd, pageJsonLd, ...pageJsonLdEntries];
     <meta name="twitter:description" content={metaDescription} />
     <meta name="twitter:image" content={fullOgImage} />
     <meta name="twitter:image:alt" content={title} />
-    <meta name="twitter:site" content="@AIPromptIndex" />
 
     <!-- Robots -->
     {noindex ? (
@@ -272,7 +270,7 @@ const allJsonLd = [organizationJsonLd, pageJsonLd, ...pageJsonLdEntries];
     </script>
   </head>
   <body class="min-h-screen bg-[var(--color-surface-0)] text-[var(--color-text-primary)] antialiased">
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:bg-[var(--color-accent)] focus:text-white focus:rounded-[var(--radius-md)]">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:bg-[var(--color-accent-fill)] focus:text-[var(--color-on-accent)] focus:rounded-[var(--radius-md)]">
       {skipToContent}
     </a>
     <slot name="header" />
