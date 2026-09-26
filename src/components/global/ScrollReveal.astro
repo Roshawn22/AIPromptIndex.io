@@ -17,6 +17,9 @@
       return;
     }
 
+    // Opt the page into hidden-until-revealed styling only now that an observer exists.
+    document.documentElement.classList.add('reveal-ready');
+
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -31,7 +34,8 @@
           observer.unobserve(el);
         }
       },
-      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+      // Start the entrance just before the section scrolls into view so it is never caught blank.
+      { threshold: 0, rootMargin: '0px 0px 12% 0px' }
     );
 
     document.querySelectorAll('[data-reveal]').forEach((el) => {
