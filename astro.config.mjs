@@ -236,7 +236,9 @@ export default defineConfig({
     vite: {
       plugins: [tailwindcss()],
       define: {
-        'import.meta.env.PUBLIC_LOCALIZATION_PILOT_REVIEW_VALID': JSON.stringify(localizationPilotApproved),
+        // Injected as the string 'true'/'false': src/lib/localization.ts compares it to 'true',
+        // and a bare boolean would never match, leaving approved pages noindex.
+        'import.meta.env.PUBLIC_LOCALIZATION_PILOT_REVIEW_VALID': JSON.stringify(localizationPilotApproved ? 'true' : 'false'),
       },
       build: {
         target: 'es2019',
