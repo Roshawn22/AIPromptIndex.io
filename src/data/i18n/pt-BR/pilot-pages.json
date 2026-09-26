@@ -6,7 +6,7 @@
   "pages": {
     "/": {
       "type": "home",
-      "reviewStatus": "needs-human-review",
+      "reviewStatus": "approved",
       "sourceFingerprint": "b6313df36298",
       "sourcePath": "/",
       "title": "Biblioteca gratuita de prompts de IA para ChatGPT, Claude e mais",
@@ -23,84 +23,97 @@
     },
     "/best/gemini-prompts/": {
       "type": "roundup",
-      "reviewStatus": "needs-human-review",
+      "reviewStatus": "approved",
       "sourceFingerprint": "706f9db641cd",
       "sourcePath": "/best/gemini-prompts/",
       "sourceSlug": "gemini-prompts",
       "title": "Melhores prompts para Gemini",
       "metaTitle": "Prompts para Gemini: guia 2026",
-      "description": "Prompts selecionados para Google Gemini em pesquisa, análise, escrita e produtividade, aproveitando acesso à web e integração com o Google Workspace.",
-      "intro": "O Google Gemini reúne vantagens como acesso a informações atuais, integração com o Google Workspace e compreensão multimodal. Esta seleção ajuda você a usar esses recursos em tarefas de pesquisa, análise, programação, escrita e criação. Cada prompt foi escolhido como um ponto de partida prático para explorar o que o Gemini faz melhor."
+      "description": "Os melhores prompts para o Google Gemini, aproveitando seus recursos multimodais, o acesso à web em tempo real e a integração com o Google Workspace.",
+      "intro": "Em 2026, o Google Gemini é a interface de prompts que já está no Gmail, no Docs, no Sheets, no Drive e no Gemini 2.5 do AI Studio. Os prompts desta página foram escritos para esse conjunto: pesquisa na web ao vivo, contexto de arquivos do Workspace e raciocínio com contexto longo. Se você colar um prompt de ChatGPT no Gemini sem adaptar, está deixando de usar o contexto do Drive e a busca ao vivo."
     },
     "/best/best-ai-prompts/": {
       "type": "roundup",
-      "reviewStatus": "needs-human-review",
+      "reviewStatus": "approved",
       "sourceFingerprint": "3f735965050a",
       "sourcePath": "/best/best-ai-prompts/",
       "sourceSlug": "best-ai-prompts",
       "title": "Melhores prompts de IA",
       "metaTitle": "Melhores prompts de IA em 2026",
-      "description": "Todos os prompts da biblioteca para ChatGPT, Claude, Gemini, Midjourney e outras ferramentas em uma só página, com as escolhas dos editores primeiro.",
-      "intro": "Encontrar bons prompts exige separar estruturas reutilizáveis de exemplos que só funcionam uma vez. Esta coleção reúne os prompts mais fortes do catálogo em escrita, programação, marketing, geração de imagens, negócios e análise de dados. Use cada item como base, adapte as variáveis ao seu contexto e compare os resultados."
+      "description": "Todos os prompts da biblioteca em uma só página, com as escolhas dos editores primeiro. Comece por aqui se ainda não sabe o que precisa.",
+      "intro": "Esta é a biblioteca completa em uma só página: todos os prompts de escrita, programação, marketing, geração de imagens, negócios, análise de dados, educação e criatividade, com as escolhas dos editores primeiro. Cada item diz o que produz, lista as variáveis que você preenche e leva ao prompt completo com dicas. Percorra por ferramenta ou categoria, abra o que servir para a sua tarefa e adapte as variáveis ao seu contexto."
     },
     "/best/free-ai-prompts/": {
       "type": "roundup",
-      "reviewStatus": "needs-human-review",
+      "reviewStatus": "approved",
       "sourceFingerprint": "d06e2c96609d",
       "sourcePath": "/best/free-ai-prompts/",
       "sourceSlug": "free-ai-prompts",
       "title": "Prompts de IA grátis",
       "metaTitle": "Prompts de IA grátis em 2026",
-      "description": "Prompts de qualidade que funcionam nos planos gratuitos do ChatGPT, Claude, Gemini e outras ferramentas de IA. Copie e use sem assinatura premium.",
+      "description": "Prompts de IA de alta qualidade que funcionam nos planos gratuitos do ChatGPT, Claude, Gemini e outras ferramentas de IA. Nenhuma assinatura é necessária.",
       "intro": "Você não precisa de uma assinatura paga para obter resultados úteis com IA. Estes prompts foram escolhidos para funcionar dentro dos limites dos planos gratuitos, sem depender de recursos premium ou contextos enormes. A qualidade vem da clareza do objetivo, do contexto e das restrições — não apenas do plano contratado."
     },
     "/best/prompt-templates/": {
       "type": "roundup",
-      "reviewStatus": "needs-human-review",
+      "reviewStatus": "approved",
       "sourceFingerprint": "71ceec21fd91",
       "sourcePath": "/best/prompt-templates/",
       "sourceSlug": "prompt-templates",
       "title": "Melhores modelos de prompts de IA",
       "metaTitle": "Modelos de prompts de IA em 2026",
-      "description": "Modelos reutilizáveis de prompts para ChatGPT, Claude e Gemini, com campos fáceis de preencher para escrita, programação, marketing e muito mais.",
+      "description": "Modelos reutilizáveis de prompts de IA com estruturas para preencher, para qualquer caso de uso. Copie, personalize e obtenha resultados rápido.",
       "intro": "Modelos de prompts aceleram tarefas repetidas e ajudam a manter resultados consistentes. Em vez de começar do zero, você recebe uma estrutura testada com campos para objetivo, contexto, público e formato. Copie um modelo, substitua as variáveis e ajuste as instruções ao seu projeto."
     },
     "/best/cursor-ai-prompts/": {
       "type": "roundup",
-      "reviewStatus": "needs-human-review",
+      "reviewStatus": "approved",
       "sourceFingerprint": "e9e8a52c2167",
       "sourcePath": "/best/cursor-ai-prompts/",
       "sourceSlug": "cursor-ai-prompts",
       "title": "Melhores prompts para Cursor",
       "metaTitle": "Prompts para Cursor (2026) — guia prático",
-      "description": "Prompts selecionados para geração de código, refatoração, depuração e edição de vários arquivos no Cursor AI.",
-      "intro": "O Cursor consegue considerar arquivos, padrões e dependências do repositório ao responder. Estes prompts foram organizados para aproveitar esse contexto em geração de código, refatoração de vários arquivos, depuração, criação de testes e exploração de arquitetura. Informe os arquivos relevantes e os critérios de aceite para obter respostas mais precisas."
+      "description": "Prompts selecionados para o Cursor que aproveitam a indexação do repositório, a edição de vários arquivos e a geração inteligente de código.",
+      "intro": "Prompts para o Cursor não são prompts de ChatGPT colados em uma IDE. O Composer, o Chat, a edição inline e as menções com @ mudam o que o modelo consegue ver. Esta coleção é para trabalho que conhece o repositório: refatorações, testes, migrações e sessões de depuração que devem citar arquivos em vez de despejar a base de código inteira em um chat genérico."
     },
     "/prompts/ai-slop-remover/": {
       "type": "prompt",
-      "reviewStatus": "needs-human-review",
+      "reviewStatus": "approved",
       "sourceFingerprint": "3402b06696dc",
       "sourcePath": "/prompts/ai-slop-remover/",
       "sourceSlug": "ai-slop-remover",
       "title": "Removedor de texto genérico de IA",
       "metaTitle": "Prompt para humanizar texto de IA",
-      "description": "Este prompt transforma ChatGPT, Claude ou Gemini em um editor criterioso que remove padrões típicos de texto gerado por IA sem apagar sua voz. Ele prioriza a menor edição eficaz, preserva frases fortes e explica o que mudou.",
+      "description": "Este prompt transforma o ChatGPT, o Claude ou o Gemini em um editor de texto disciplinado que remove os padrões típicos de escrita gerada por IA — contrastes binários, revelações dramáticas com dois-pontos, exageros de importância, atribuições vagas e a lista de palavras batidas que todo mundo reconhece — sem apagar a sua voz. A maioria dos prompts \"humanizadores\" reescreve tudo e lixa qualquer personalidade que o rascunho tinha. Este parte da menor edição eficaz: corrige o que soa robótico, deixa em paz as frases humanas fortes e relata exatamente o que mudou, para você manter o controle. Adaptado da skill de edição no-ai-slop de Peter Yang, de código aberto (licença MIT). Use em newsletters, posts no LinkedIn, artigos de blog ou qualquer rascunho que nasceu em uma janela de chat de IA.",
       "metaDescription": "Remova padrões de texto gerado por IA sem apagar sua voz. Um prompt gratuito para editar rascunhos com mudanças mínimas e explicadas.",
-      "promptText": "Você é um editor humano criterioso. Sua tarefa é remover do meu rascunho os padrões que soam como texto gerado por IA, preservando meu argumento e minha voz pessoal. Não transforme uma escrita marcante em uma prosa genérica e polida.\n\nO rascunho é para: [AUDIENCE]\nEle será publicado como: [FORMAT]\n\nMeu rascunho:\n[DRAFT]\n\nRegras de edição:\n1. Faça a menor edição eficaz. Corrija padrões de IA, repetições e trechos pouco claros. Mantenha intactas as frases humanas fortes. O texto editado ainda deve soar como eu.\n2. Elimine palavras vazias ou excessivamente promocionais quando não acrescentarem significado.\n3. Corte frases de enrolação que atrasem o ponto principal.\n4. Remova estes padrões onde aparecerem:\n- Contrastes binários artificiais (\"Não é X. É Y.\") — diga o ponto diretamente\n- Aberturas que apenas preparam o terreno — comece pelo ponto principal\n- Promessas de falsa revelação — deixe a afirmação se sustentar sozinha\n- Revelações dramáticas com dois-pontos — reescreva como frase simples\n- Análises vagas no gerúndio — informe a consequência real ou corte\n- Exageros de importância — apresente o fato e deixe o leitor julgar\n- Atribuições vagas (\"especialistas concordam\", \"estudos mostram\") — cite a fonte ou sinalize a necessidade de fonte; nunca invente uma\n- Listas negativas dramáticas — diga simplesmente o que a coisa é\n- Fragmentos dramáticos repetitivos — prefira frases completas\n- Metáforas finais que parecem profundas, mas não acrescentam informação — termine no último ponto concreto\n- Conclusões que apenas repetem tudo o que o leitor acabou de ler\n5. Use voz ativa e sujeitos humanos. Troque locuções verbais fracas por verbos diretos.\n6. Preserve exatamente os detalhes concretos. Nunca transforme número, nome ou data específicos em afirmações vagas e nunca invente dados, exemplos ou estatísticas.\n7. Preserve minha personalidade. Mantenha opiniões fortes, linguagem direta, humor, fragmentos e observações que soem como eu.\n\nFormato de saída:\n1. O rascunho editado completo\n2. Uma seção curta chamada \"O que mudou\", listando os padrões removidos e o motivo\n3. Quaisquer afirmações que precisem de fonte, marcadas como perguntas para mim",
+      "promptText": "Você é um editor humano criterioso. Sua tarefa é remover do meu rascunho os padrões que soam como texto gerado por IA, preservando meu argumento e minha voz pessoal. Não transforme uma escrita marcante em uma prosa genérica e polida.\n\nO rascunho é para: [AUDIENCE]\nEle será publicado como: [FORMAT]\n\nMeu rascunho:\n[DRAFT]\n\nRegras de edição:\n1. Faça a menor edição eficaz. Corrija padrões de IA, repetições e trechos pouco claros. Mantenha intactas as frases humanas fortes. O texto editado ainda deve soar como eu.\n2. Corte estas palavras por completo: mergulhar, fomentar, alavancar, utilizar, facilitar, empoderar, otimizar, robusto, de ponta, divisor de águas, tapeçaria, reino, farol, multifacetado, meticuloso, primordial, transformador, elevar, embarcar, aproveitar ao máximo, em constante evolução.\n3. Corte frases vazias como \"vale ressaltar\", \"no fim das contas\", \"no mundo de hoje\", \"vamos mergulhar\" e \"a realidade é que\" quando elas atrasam o ponto.\n4. Remova estes padrões onde aparecerem:\n- Contrastes binários artificiais (\"Não é X. É Y.\") — diga o ponto diretamente\n- Aberturas que só preparam o terreno (\"A questão é a seguinte...\") — corte e comece pelo ponto\n- Promessas de falsa revelação (\"O que ninguém te conta...\") — deixe a afirmação se sustentar sozinha\n- Revelações dramáticas com dois-pontos (\"A melhor parte: ele aprende.\") — reescreva como frase simples\n- Análises soltas no gerúndio (\"...destacando o compromisso da equipe\") — substitua pela consequência real ou corte\n- Exageros de importância (\"marca um momento decisivo\", \"é um testemunho de\") — apresente o fato e deixe o leitor julgar\n- Atribuições vagas (\"especialistas concordam\", \"estudos mostram\") — cite a fonte ou sinalize a necessidade de fonte; nunca invente uma\n- Listas negativas dramáticas (\"Não é uma ferramenta. Não é uma plataforma. É um movimento.\") — diga simplesmente o que a coisa é\n- Fragmentos dramáticos (\"É isso. É só isso.\") — use frases completas\n- Metáforas finais que parecem profundas, mas não acrescentam informação — termine no último ponto concreto\n- Conclusões que só recapitulam (\"Em conclusão...\") — o leitor acabou de ler aquilo\n5. Use voz ativa com sujeitos humanos. Troque locuções verbais fracas por verbos diretos (\"tomou uma decisão\" vira \"decidiu\").\n6. Preserve exatamente os detalhes concretos. Nunca transforme número, nome ou data específicos em afirmações vagas e nunca invente dados, exemplos ou estatísticas.\n7. Preserve o meu jeito. Mantenha opiniões fortes, linguagem direta, humor, fragmentos e comentários que soem como eu. Use no máximo 1 ou 2 travessões no texto inteiro.\n\nFormato de saída:\n1. O rascunho editado completo\n2. Uma seção curta chamada \"O que mudou\", listando os padrões removidos e o motivo\n3. Quaisquer afirmações que precisem de fonte, marcadas como perguntas para mim",
       "variables": [
-        { "name": "AUDIENCE", "description": "Quem vai ler o texto", "example": "Fundadores de startups que assinam minha newsletter" },
-        { "name": "FORMAT", "description": "Onde e em qual formato o texto será publicado", "example": "Uma edição de newsletter com cerca de 1.000 palavras" },
-        { "name": "DRAFT", "description": "O rascunho completo que você quer editar", "example": "Cole aqui o texto completo, incluindo título e conclusão." }
+        {
+          "name": "AUDIENCE",
+          "description": "Quem vai ler o texto",
+          "example": "Fundadores de startups que assinam minha newsletter"
+        },
+        {
+          "name": "FORMAT",
+          "description": "Onde e em qual formato o texto será publicado",
+          "example": "Uma edição de newsletter com cerca de 1.000 palavras"
+        },
+        {
+          "name": "DRAFT",
+          "description": "O rascunho completo que você quer editar",
+          "example": "Cole aqui o texto completo, incluindo título e conclusão."
+        }
       ],
       "tips": [
-        "Cole o rascunho inteiro para que o editor identifique repetições e problemas de estrutura.",
-        "Preencha AUDIENCE e FORMAT com precisão; um post no LinkedIn exige um tratamento diferente de um documento técnico.",
-        "Se uma afirmação for marcada como carente de fonte, adicione a fonte real em vez de suavizar o texto."
+        "Cole o rascunho inteiro, não um parágrafo por vez: o editor precisa do texto completo para pegar frases com a mesma estrutura repetida e um final fraco.",
+        "Preencha AUDIENCE e FORMAT com honestidade; um post no LinkedIn e um documento técnico pedem níveis de polimento diferentes.",
+        "Se a saída marcar uma afirmação como carente de fonte, adicione a fonte real em vez de deixar o modelo suavizar a afirmação.",
+        "Passe o rascunho editado pelo prompt companheiro AI Slop Detector se quiser uma segunda auditoria sem outra reescrita."
       ]
     },
     "/prompts/business-plan-executive-summary/": {
       "type": "prompt",
-      "reviewStatus": "needs-human-review",
+      "reviewStatus": "approved",
       "sourceFingerprint": "98482a1d48fe",
       "sourcePath": "/prompts/business-plan-executive-summary/",
       "sourceSlug": "business-plan-executive-summary",
@@ -110,19 +123,52 @@
       "metaDescription": "Crie no Claude um resumo executivo para investidores, bancos e aceleradoras, com mercado, tração, projeções e pedido de investimento.",
       "promptText": "Você é um consultor de negócios experiente que já ajudou mais de 200 startups a captar recursos. Escreva um resumo executivo pronto para investidores para a [COMPANY_NAME], uma startup com modelo [BUSINESS_MODEL] no setor de [INDUSTRY]. A empresa resolve [PROBLEM] para [TARGET_MARKET] oferecendo [SOLUTION]. Inclua estas seções: Visão geral da empresa (2 a 3 frases), Problema, Solução, tamanho e características do mercado-alvo, Modelo de receita, Vantagem competitiva, Tração atual (use [TRACTION_METRICS] como dados), resumo das projeções financeiras para 3 anos e Pedido de investimento de [FUNDING_AMOUNT] com a alocação planejada. Mantenha o resumo inteiro abaixo de 800 palavras, use um estilo profissional adequado a um plano de negócios e faça cada frase justificar sua presença.",
       "variables": [
-        { "name": "COMPANY_NAME", "description": "Nome da empresa", "example": "NutriPlan AI" },
-        { "name": "BUSINESS_MODEL", "description": "Tipo de modelo de negócios", "example": "assinatura SaaS B2C" },
-        { "name": "INDUSTRY", "description": "Setor de atuação", "example": "healthtech e nutrição personalizada" },
-        { "name": "PROBLEM", "description": "Problema que a empresa resolve", "example": "orientações nutricionais genéricas que ignoram condições de saúde e estilo de vida" },
-        { "name": "TARGET_MARKET", "description": "Público atendido", "example": "adultos de 25 a 55 anos que gerenciam condições crônicas por meio da alimentação" },
-        { "name": "SOLUTION", "description": "Produto ou serviço", "example": "um aplicativo de planejamento alimentar com IA que cria planos personalizados" },
-        { "name": "TRACTION_METRICS", "description": "Métricas atuais do negócio", "example": "12 mil assinantes pagos, US$ 45 mil de MRR e retenção mensal de 94%" },
-        { "name": "FUNDING_AMOUNT", "description": "Valor de investimento buscado", "example": "US$ 2,5 milhões em rodada seed" }
+        {
+          "name": "COMPANY_NAME",
+          "description": "Nome da empresa",
+          "example": "NutriPlan AI"
+        },
+        {
+          "name": "BUSINESS_MODEL",
+          "description": "Tipo de modelo de negócios",
+          "example": "assinatura SaaS B2C"
+        },
+        {
+          "name": "INDUSTRY",
+          "description": "Setor de atuação",
+          "example": "healthtech e nutrição personalizada"
+        },
+        {
+          "name": "PROBLEM",
+          "description": "Problema que a empresa resolve",
+          "example": "orientações nutricionais genéricas que ignoram condições de saúde e estilo de vida"
+        },
+        {
+          "name": "TARGET_MARKET",
+          "description": "Público atendido",
+          "example": "adultos de 25 a 55 anos que gerenciam condições crônicas por meio da alimentação"
+        },
+        {
+          "name": "SOLUTION",
+          "description": "Produto ou serviço",
+          "example": "um aplicativo de planejamento alimentar com IA que cria planos personalizados"
+        },
+        {
+          "name": "TRACTION_METRICS",
+          "description": "Métricas atuais do negócio",
+          "example": "12 mil assinantes pagos, US$ 45 mil de MRR e retenção mensal de 94%"
+        },
+        {
+          "name": "FUNDING_AMOUNT",
+          "description": "Valor de investimento buscado",
+          "example": "US$ 2,5 milhões em rodada seed"
+        }
       ],
       "tips": [
-        "Comece pela métrica de tração mais forte para prender a atenção do leitor.",
-        "Quantifique o mercado com fontes confiáveis e uma divisão clara entre TAM, SAM e SOM.",
-        "Ajuste o tom ao público: investidores buscam crescimento; bancos priorizam estabilidade e capacidade de pagamento."
+        "Comece pela sua métrica de tração mais forte para prender o leitor de imediato.",
+        "Quantifique o tamanho do mercado com uma divisão confiável entre TAM, SAM e SOM.",
+        "Ajuste o tom ao público: investidores de risco querem métricas de crescimento; bancos querem estabilidade.",
+        "Peça ao Claude uma versão para bancos, uma para investidores e uma para aceleradoras, para comparar o enquadramento antes das edições finais."
       ]
     }
   }
