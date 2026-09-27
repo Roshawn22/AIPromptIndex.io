@@ -7,6 +7,7 @@ import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import { loadEnv } from 'vite';
+import sentry from '@sentry/astro';
 
 const repoRoot = process.cwd();
 const promptsDirPath = path.join(repoRoot, 'src/data/prompts');
@@ -218,6 +219,11 @@ const localePrefixPattern = localizedLocales.length > 0
   ? new RegExp(`^/(${localizedLocales.map(escapeRegExp).join('|')})(?=/|$)`)
   : null;
 
+// Sentry's build plugin emits source maps so it can upload them. Uploading needs
+// SENTRY_AUTH_TOKEN (plus SENTRY_ORG/SENTRY_PROJECT); without it the maps would
+// just be served publicly from dist/, so keep them off until a token exists.
+const sentryUploadsSourceMaps = Boolean(process.env.SENTRY_AUTH_TOKEN);
+
 export default defineConfig({
     site: 'https://aipromptindex.io',
     output: 'static',
@@ -232,6 +238,16 @@ export default defineConfig({
     },
     integrations: [
       react(),
+      sentry({
+        telemetry: false,
+        // A failed upload should cost readable stack traces, not the deploy.
+        errorHandler: (error) => {
+          console.warn('[sentry] source map upload failed:', error.message);
+        },
+        sourcemaps: sentryUploadsSourceMaps
+          ? { filesToDeleteAfterUpload: ['dist/**/*.map'] }
+          : { disable: true },
+      }),
       sitemap({
         filter: (page) => {
           const pathname = normalizePathname(new URL(page).pathname);
@@ -253,6 +269,12 @@ export default defineConfig({
         // Comma-separated locales whose approval is valid against the current English sources.
         // src/lib/localization.ts splits this string; a locale missing here stays noindex.
         'import.meta.env.PUBLIC_LOCALIZATION_REVIEW_VALID_LOCALES': JSON.stringify(approvedLocales.join(',')),
+        // Errors only: drop tracing and debug code from the Sentry bundle, which
+        // is otherwise the bulk of its weight on every page. The integration's
+        // own `bundleSizeOptimizations` option is documented for this but has no
+        // measurable effect here; these are the flags the SDK actually reads.
+        __SENTRY_DEBUG__: 'false',
+        __SENTRY_TRACING__: 'false',
       },
       build: {
         target: 'es2019',

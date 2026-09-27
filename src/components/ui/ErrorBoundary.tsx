@@ -1,4 +1,5 @@
 import { Component, type ReactNode } from 'react';
+import { reportError } from '../../lib/error-reporting';
 
 interface Props {
   children: ReactNode;
@@ -23,11 +24,7 @@ export default class ErrorBoundary extends Component<Props, State> {
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     console.error('[AIPromptIndex] Component error:', error, errorInfo);
 
-    if (typeof window !== 'undefined' && (window as any).Sentry) {
-      (window as any).Sentry.captureException(error, {
-        extra: { componentStack: errorInfo.componentStack },
-      });
-    }
+    reportError(error, { componentStack: errorInfo.componentStack });
   }
 
   render() {
