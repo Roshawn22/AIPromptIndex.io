@@ -33,13 +33,13 @@
   "content": {
     "difficulty": {
       "beginner": {
-        "context": "Difficulty level shown as a small badge on a prompt card, lower case."
+        "context": "Difficulty level shown as a small badge on a prompt card. Follow the capitalization rules of the target language (for example lower case in Spanish or French, capitalized nouns in German)."
       },
       "intermediate": {
-        "context": "Difficulty level shown as a small badge on a prompt card, lower case."
+        "context": "Difficulty level shown as a small badge on a prompt card. Follow the capitalization rules of the target language (for example lower case in Spanish or French, capitalized nouns in German)."
       },
       "advanced": {
-        "context": "Difficulty level shown as a small badge on a prompt card, lower case."
+        "context": "Difficulty level shown as a small badge on a prompt card. Follow the capitalization rules of the target language (for example lower case in Spanish or French, capitalized nouns in German)."
       }
     }
   }

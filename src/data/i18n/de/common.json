@@ -18,9 +18,9 @@
     "copyPrompt": "Prompt kopieren",
     "copyReady": "ausgewählte Prompts, direkt zum Kopieren und Einfügen",
     "difficulty": {
-      "advanced": "fortgeschritten",
-      "beginner": "einsteiger",
-      "intermediate": "mittelstufe"
+      "beginner": "Einsteiger",
+      "intermediate": "Mittelstufe",
+      "advanced": "Fortgeschritten"
     },
     "draftNotice": "Übersetzung wird geprüft.",
     "example": "Beispiel",

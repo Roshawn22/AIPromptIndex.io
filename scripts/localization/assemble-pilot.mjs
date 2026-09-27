@@ -18,6 +18,9 @@ if (!locale) {
   process.exit(1);
 }
 const sourceName = rest.includes('--source') ? rest[rest.indexOf('--source') + 1] : 'pilot-content';
+// Approved pages are a reviewer's work and are kept as they are; pass --force to replace
+// them after a re-translation (the guard will then ask for a fresh review anyway).
+const force = rest.includes('--force');
 
 const translated = read(`src/data/i18n/${locale}/${sourceName}.json`).pages;
 const bestof = read('src/data/seo/bestof-pages.json');
@@ -71,6 +74,13 @@ for (const [sourcePath, content] of Object.entries(translated)) {
 
 const outputPath = `src/data/i18n/${locale}/pilot-pages.json`;
 const existing = fs.existsSync(path.join(repoRoot, outputPath)) ? read(outputPath) : { pages: {} };
+const kept = [];
+for (const [sourcePath, page] of Object.entries(existing.pages || {})) {
+  if (page.reviewStatus === 'approved' && pages[sourcePath] && !force) {
+    pages[sourcePath] = page;
+    kept.push(sourcePath);
+  }
+}
 const output = {
   locale,
   sourceLocale: 'en',
@@ -79,7 +89,8 @@ const output = {
   pages: { ...existing.pages, ...pages },
 };
 fs.writeFileSync(path.join(repoRoot, outputPath), JSON.stringify(output, null, 2) + '\n');
-console.log(`assembled ${outputPath}: ${Object.keys(pages).length} page(s) from ${sourceName}, all needs-human-review`);
+const assembledCount = Object.keys(pages).length - kept.length;
+console.log(`assembled ${outputPath}: ${assembledCount} page(s) from ${sourceName} as needs-human-review${kept.length ? `; kept ${kept.length} approved page(s) (${kept.join(', ')}); use --force to replace them` : ''}`);
 
 // common.json is raw General Translation output, and the CLI translates every string in it,
 // including the two that name the locale itself. Pin those so the UI cannot call es-419 "Inglés".

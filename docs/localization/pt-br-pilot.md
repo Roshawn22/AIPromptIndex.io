@@ -71,3 +71,11 @@ The pipeline keeps machine translation away from page structure:
 The review and publishing gate above applies unchanged. A fluent reviewer must change each page to `approved` before it can be indexed, and the 42-day expansion rule still governs when any of these locales may go live.
 
 All locales share one route, `src/pages/[locale]/[...slug].astro`. The locale list is not configured anywhere: every folder under `src/data/i18n/` that holds a `pilot-pages.json` is a locale (`src/lib/localization.ts`, `astro.config.mjs` and the guard all discover it the same way), and each locale's `common.json` carries every UI string, including the short header labels (`nav`), category and difficulty names, and the search and save copy. To add a locale: build the English sources, translate, assemble, then register its Open Graph code in `src/lib/localization.ts` if the default `xx_YY` form is wrong. The report and TypeSafe pre-review accept `--locale=<code>` and default to pt-BR.
+
+Reviewing a translated locale:
+
+1. Edit the General Translation output file, `src/data/i18n/<locale>/pilot-content.json` (or `data-analysis.json`), not `pilot-pages.json`. Titles and descriptions must fit the 60 and 155 character limits before a page can be approved; the guard lists the ones that do not as warnings.
+2. Run `npm run localization:assemble -- <locale>` (add `--source data-analysis` for de) to carry the edits into `pilot-pages.json`, then change `reviewStatus` to `approved` there. Re-assembling keeps approved pages as they are unless `--force` is passed.
+3. On the next `npx gt translate --save-local`, the CLI uploads the local edits so the translator does not undo them.
+
+UI strings live in `common.json` and are edited in place; the assemble step only pins `locale` and `languageName`.
