@@ -21,7 +21,7 @@ The automated GA4/GSC collectors now include country and browser-language output
 
 ## Review and publishing gate
 
-Translations live in `src/data/i18n/pt-BR/`. Every page currently has `reviewStatus: needs-human-review`.
+Translations live in `src/data/i18n/pt-BR/`. All eight pages were changed to `reviewStatus: approved` and launched on 2026-09-26 (PR #33), with both environment flags set on Vercel production and preview. Use `--launch-date=2026-09-26` for the pilot report.
 
 Use `docs/localization/pt-br-review-checklist.md` for the required Brazilian Portuguese review. Each translation also stores a fingerprint of its English source; source changes invalidate the review gate until the translation and fingerprint are refreshed.
 
@@ -55,3 +55,15 @@ npm run localization:report -- --date=YYYY-MM-DD --launch-date=YYYY-MM-DD
 GA4 events now include `site_locale` and `localization_pilot`. The report tracks localized sessions, engaged sessions, prompt copies, prompt saves, and newsletter CTA clicks. The pt-BR newsletter URL also carries `utm_campaign=pt-br-pilot`; completed subscriptions must be confirmed in Beehiiv.
 
 Do not expand before 42 days. After six to eight weeks, expansion is eligible for review only if the pilot has at least 100 localized organic impressions, 5 localized organic clicks, and 10 combined prompt copies, saves, and newsletter CTA clicks. A human must also confirm at least one attributed newsletter subscription and no technical SEO regression.
+
+## Additional locales through General Translation
+
+Spanish (Latin American, `es-419`), French (`fr`) and German (`de`) are prepared with the General Translation CLI, which is a build-time tool only: the site never calls General Translation at runtime. The ranking came from the 90-day demand check on 2026-09-25: French and Spanish each had about 1.3K to 1.4K Search Console impressions, with Mexico the largest Spanish market, and German had the best click-through rate and a native query ("datenanalyse prompts") that already ranks. German is therefore a single-collection test on `/best/data-analysis-prompts/` rather than the full pilot set.
+
+The pipeline keeps machine translation away from page structure:
+
+1. `node scripts/localization/build-pilot-source.mjs` writes the English source files in `src/data/i18n/en/`: `pilot-content.json` (the eight pilot pages), `data-analysis.json` (the German test collection) and `common.json` (UI strings). Only translatable text goes in; `pilot-content.metadata.json` carries translator context such as keeping `[PLACEHOLDERS]` intact.
+2. `npx gt translate` (es-419 and fr, from `gt.config.json`) and `npx gt translate --config gt.de.config.json` (de) send those files and download `src/data/i18n/<locale>/` copies. The CLI reads `GT_API_KEY` and `GT_PROJECT_ID` from the gitignored `.env.local`; the project is `AIPromptIndex` in the General Translation organization.
+3. `node scripts/localization/assemble-pilot.mjs <locale>` (add `--source data-analysis` for de) rebuilds `pilot-pages.json` for that locale: page type, source slug, source fingerprint and variable names come from the English side, every placeholder is verified, and every page starts as `needs-human-review`.
+
+The review and publishing gate above applies unchanged. A fluent reviewer must change each page to `approved` before it can be indexed, and the 42-day expansion rule still governs when any of these locales may go live. Rendering them also needs the pt-BR-only route, guard and locale helper generalized to a `[locale]` route, which has not been done yet.
