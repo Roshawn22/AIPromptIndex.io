@@ -10,33 +10,39 @@ import CopyButton from '../../components/ui/CopyButton.tsx';
 import SaveButton from '../../components/prompt/SaveButton.tsx';
 import Badge from '../../components/ui/Badge.astro';
 import bestofPages from '../../data/seo/bestof-pages.json';
-import pilotData from '../../data/i18n/pt-BR/pilot-pages.json';
 import { getPromptsForBestOf } from '../../lib/bestof';
 import { TOOL_DISPLAY_NAMES as toolDisplayNames, CATEGORY_DISPLAY_NAMES as categoryDisplayNames } from '../../lib/constants';
 import {
-  getPtBrCommon,
-  isLocalizationPilotEnabled,
-  isLocalizationPilotIndexable,
-  normalizeLocalizedPath,
+  getCommon,
+  getEnabledLocales,
+  getLocalizedPath,
+  getLocalizedRoundups,
+  getPilotPages,
+  isLocaleIndexable,
+  type PilotPage,
 } from '../../lib/localization';
 
+// One route renders every localized page. Which locales build is decided by the data and
+// the environment (see src/lib/localization.ts); an unapproved locale only builds in a
+// review build and stays noindex.
 export function getStaticPaths() {
-  if (!isLocalizationPilotEnabled()) return [];
-
-  return Object.entries(pilotData.pages).map(([sourcePath, page]) => ({
-    params: {
-      slug: sourcePath === '/' ? undefined : sourcePath.replace(/^\//, '').replace(/\/$/, ''),
-    },
-    props: { sourcePath, page },
-  }));
+  return getEnabledLocales().flatMap((locale) =>
+    Object.entries(getPilotPages(locale)).map(([sourcePath, page]) => ({
+      params: {
+        locale,
+        slug: sourcePath === '/' ? undefined : sourcePath.replace(/^\//, '').replace(/\/$/, ''),
+      },
+      props: { locale, sourcePath, page },
+    })),
+  );
 }
 
-const { sourcePath, page } = Astro.props as {
-  sourcePath: string;
-  page: any;
-};
-const common = getPtBrCommon();
-const indexable = isLocalizationPilotIndexable();
+const { locale, sourcePath, page } = Astro.props as { locale: string; sourcePath: string; page: PilotPage };
+const common = getCommon(locale);
+if (!common) throw new Error(`src/data/i18n/${locale}/common.json is missing`);
+const indexable = isLocaleIndexable(locale);
+const localized = (path: string) => getLocalizedPath(path, locale);
+const localizedPages = getPilotPages(locale);
 const allPrompts = await getCollection('prompts');
 const sourcePrompt = page.type === 'prompt'
   ? allPrompts.find((prompt) => prompt.data.slug === page.sourceSlug)
@@ -53,28 +59,21 @@ const roundupPrompts = sourceRoundup
       })
       .slice(0, 18)
   : [];
-const localizedCollections = Object.values(pilotData.pages)
-  .filter((candidate: any) => candidate.type === 'roundup');
-const canonicalUrl = normalizeLocalizedPath(`/pt-BR${sourcePath}`);
+const localizedCollections = getLocalizedRoundups(locale);
+// Home calls to action point at the two headline collections when the locale has them,
+// otherwise at whatever collections it does have.
+const collectionHref = (preferredSlug: string, fallbackIndex: number) => {
+  const preferred = localizedCollections.find((collection) => collection.sourceSlug === preferredSlug);
+  const target = preferred || localizedCollections[fallbackIndex] || localizedCollections[0];
+  return target ? localized(target.sourcePath) : localized('/');
+};
+const canonicalUrl = localized(sourcePath);
 const title = page.metaTitle || page.title;
 const description = page.metaDescription || page.description;
-const categoryLabels: Record<string, string> = {
-  writing: 'Escrita',
-  coding: 'Programação',
-  marketing: 'Marketing',
-  'image-generation': 'Geração de imagens',
-  business: 'Negócios',
-  'data-analysis': 'Análise de dados',
-  education: 'Educação',
-  creative: 'Criatividade',
-};
-const difficultyLabels: Record<string, string> = {
-  beginner: 'iniciante',
-  intermediate: 'intermediário',
-  advanced: 'avançado',
-};
+const categoryLabel = (category: string) => common.content.categories?.[category] || categoryDisplayNames[category] || category;
+const difficultyLabel = (difficulty: string) => common.content.difficulty?.[difficulty] || difficulty;
 const formatDate = (value?: string) => value
-  ? new Intl.DateTimeFormat('pt-BR', { dateStyle: 'medium', timeZone: 'UTC' }).format(new Date(value))
+  ? new Intl.DateTimeFormat(locale, { dateStyle: 'medium', timeZone: 'UTC' }).format(new Date(value))
   : '';
 ---
 
@@ -84,11 +83,11 @@ const formatDate = (value?: string) => value
   canonicalUrl={canonicalUrl}
   noindex={!indexable}
   loadMonoFont={page.type === 'prompt'}
-  locale="pt-BR"
+  locale={locale}
   publishedTime={sourcePrompt?.data.dateAdded}
   articleModifiedTime={sourcePrompt?.data.lastUpdated || sourcePrompt?.data.dateAdded}
 >
-  <Header slot="header" locale="pt-BR" />
+  <Header slot="header" locale={locale} />
   {sourcePrompt && (
     <PromptViewTracker
       client:load
@@ -113,10 +112,10 @@ const formatDate = (value?: string) => value
           <h1 class="mx-auto max-w-4xl text-balance text-4xl sm:text-6xl">{page.heading}</h1>
           <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[var(--color-text-secondary)]">{page.intro}</p>
           <div class="mt-8 flex flex-wrap justify-center gap-3">
-            <a href="/pt-BR/best/best-ai-prompts/" class="rounded-[var(--radius-md)] bg-[var(--color-accent-fill)] px-5 py-3 font-semibold text-[var(--color-on-accent)] hover:bg-[var(--color-accent-fill-hover)]">
+            <a href={collectionHref('best-ai-prompts', 0)} class="rounded-[var(--radius-md)] bg-[var(--color-accent-fill)] px-5 py-3 font-semibold text-[var(--color-on-accent)] hover:bg-[var(--color-accent-fill-hover)]">
               {page.primaryCta}
             </a>
-            <a href="/pt-BR/best/free-ai-prompts/" class="surface-glass-ui rounded-[var(--radius-md)] px-5 py-3 font-semibold text-[var(--color-text-primary)]">
+            <a href={collectionHref('free-ai-prompts', 1)} class="surface-glass-ui rounded-[var(--radius-md)] px-5 py-3 font-semibold text-[var(--color-text-primary)]">
               {page.secondaryCta}
             </a>
           </div>
@@ -127,8 +126,8 @@ const formatDate = (value?: string) => value
         <h2>{page.sectionHeading}</h2>
         <p class="mt-2 max-w-3xl text-[var(--color-text-secondary)]">{page.sectionIntro}</p>
         <div class="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {localizedCollections.map((collection: any) => (
-            <a href={`/pt-BR${collection.sourcePath}`} class="surface-glass-prominent rounded-[var(--radius-lg)] p-6 transition hover:-translate-y-0.5 hover:border-[var(--color-accent-muted)]">
+          {localizedCollections.map((collection) => (
+            <a href={localized(collection.sourcePath)} class="surface-glass-prominent rounded-[var(--radius-lg)] p-6 transition hover:-translate-y-0.5 hover:border-[var(--color-accent-muted)]">
               <h3 class="text-lg">{collection.title}</h3>
               <p class="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">{collection.description}</p>
               <span class="mt-4 inline-flex text-sm font-semibold text-[var(--color-accent)]">{common.content.browseCollection} &rarr;</span>
@@ -136,14 +135,18 @@ const formatDate = (value?: string) => value
           ))}
         </div>
       </section>
-      <NewsletterSignup locale="pt-BR" />
+      <NewsletterSignup locale={locale} />
     </>
   )}
 
   {page.type === 'roundup' && sourceRoundup && (
     <section class="mx-auto max-w-7xl px-[var(--space-page)] py-10">
       <nav aria-label="Breadcrumb" class="mb-8 text-sm text-[var(--color-text-muted)]">
-        <a href="/pt-BR/" class="hover:text-[var(--color-accent)]">{common.content.home}</a>
+        {localizedPages['/'] ? (
+          <a href={localized('/')} class="hover:text-[var(--color-accent)]">{common.content.home}</a>
+        ) : (
+          <a href="/" hreflang="en" class="hover:text-[var(--color-accent)]">{common.content.home}</a>
+        )}
         <span aria-hidden="true"> / </span>
         <span>{common.content.bestPrompts}</span>
       </nav>
@@ -163,7 +166,7 @@ const formatDate = (value?: string) => value
             <a lang="en" href={`/prompts/${prompt.data.slug}/`} class="surface-glass-ui block h-full rounded-[var(--radius-card)] p-5 transition hover:-translate-y-0.5 hover:border-[var(--color-accent-muted)]">
               <div class="mb-3 flex flex-wrap gap-2">
                 <Badge variant="teal" size="sm">{toolDisplayNames[prompt.data.tool] || prompt.data.tool}</Badge>
-                <Badge variant="neutral" size="sm">{difficultyLabels[prompt.data.difficulty] || prompt.data.difficulty}</Badge>
+                <Badge variant="neutral" size="sm">{difficultyLabel(prompt.data.difficulty)}</Badge>
               </div>
               <h2 class="text-base">{prompt.data.title}</h2>
               <p class="mt-2 line-clamp-3 text-sm text-[var(--color-text-secondary)]">{prompt.data.description}</p>
@@ -173,7 +176,7 @@ const formatDate = (value?: string) => value
         ))}
       </ol>
       <div class="mt-12">
-        <NewsletterSignup locale="pt-BR" compact />
+        <NewsletterSignup locale={locale} compact />
       </div>
     </section>
   )}
@@ -181,16 +184,20 @@ const formatDate = (value?: string) => value
   {page.type === 'prompt' && sourcePrompt && (
     <article class="mx-auto max-w-7xl px-[var(--space-page)] py-10">
       <nav aria-label="Breadcrumb" class="mb-8 text-sm text-[var(--color-text-muted)]">
-        <a href="/pt-BR/" class="hover:text-[var(--color-accent)]">{common.content.home}</a>
+        {localizedPages['/'] ? (
+          <a href={localized('/')} class="hover:text-[var(--color-accent)]">{common.content.home}</a>
+        ) : (
+          <a href="/" hreflang="en" class="hover:text-[var(--color-accent)]">{common.content.home}</a>
+        )}
         <span aria-hidden="true"> / </span>
-        <span>{categoryLabels[sourcePrompt.data.category] || categoryDisplayNames[sourcePrompt.data.category] || sourcePrompt.data.category}</span>
+        <span>{categoryLabel(sourcePrompt.data.category)}</span>
       </nav>
 
       <div class="lg:grid lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-10">
         <div>
           <div class="mb-4 flex flex-wrap gap-2">
             <Badge variant="teal" size="md">{toolDisplayNames[sourcePrompt.data.tool] || sourcePrompt.data.tool}</Badge>
-            <Badge variant="neutral" size="md">{difficultyLabels[sourcePrompt.data.difficulty] || sourcePrompt.data.difficulty}</Badge>
+            <Badge variant="neutral" size="md">{difficultyLabel(sourcePrompt.data.difficulty)}</Badge>
           </div>
           <h1>{page.title}</h1>
           <p class="mb-6 mt-3 text-sm text-[var(--color-text-muted)]">
@@ -218,7 +225,7 @@ const formatDate = (value?: string) => value
               tool={sourcePrompt.data.tool}
               category={sourcePrompt.data.category}
             />
-            <SaveButton client:load promptSlug={sourcePrompt.data.slug} locale="pt-BR" />
+            <SaveButton client:load promptSlug={sourcePrompt.data.slug} labels={common.save} />
           </div>
 
           <section class="mt-8">
@@ -229,7 +236,7 @@ const formatDate = (value?: string) => value
           <section class="mt-8">
             <h2 class="text-xl">{common.content.variables}</h2>
             <div class="mt-4 space-y-3">
-              {page.variables.map((variable: any) => (
+              {page.variables.map((variable) => (
                 <div class="surface-solid-content rounded-[var(--radius-md)] p-4">
                   <code class="rounded bg-teal-500/10 px-2 py-0.5 text-sm text-[var(--color-accent)]">[{variable.name}]</code>
                   <p class="mt-2 text-sm text-[var(--color-text-secondary)]">{variable.description}</p>
@@ -242,19 +249,19 @@ const formatDate = (value?: string) => value
           <section class="mt-8">
             <h2 class="text-xl">{common.content.tips}</h2>
             <ul class="mt-4 space-y-3 text-[var(--color-text-secondary)]">
-              {page.tips.map((tip: string) => <li class="flex gap-2"><span class="text-[var(--color-accent)]">✓</span><span>{tip}</span></li>)}
+              {page.tips.map((tip) => <li class="flex gap-2"><span class="text-[var(--color-accent)]">✓</span><span>{tip}</span></li>)}
             </ul>
           </section>
         </div>
 
         <aside class="mt-10 lg:mt-0">
           <div class="surface-glass-prominent sticky top-24 rounded-[var(--radius-lg)] p-5">
-            <NewsletterSignup locale="pt-BR" compact />
+            <NewsletterSignup locale={locale} compact />
           </div>
         </aside>
       </div>
     </article>
   )}
 
-  <Footer slot="footer" locale="pt-BR" />
+  <Footer slot="footer" locale={locale} />
 </BaseLayout>

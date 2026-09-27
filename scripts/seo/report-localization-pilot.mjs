@@ -11,8 +11,10 @@ import {
 
 const args = parseCliArgs();
 const outputDir = getSeoOutputDir(args);
+// The locale under report; defaults to the first pilot. Pass --locale=fr for another one.
+const locale = args.locale || 'pt-BR';
 const pilot = readOptionalJson(
-  path.join(repoRoot, 'src/data/i18n/pt-BR/pilot-pages.json'),
+  path.join(repoRoot, `src/data/i18n/${locale}/pilot-pages.json`),
   { pages: {} }
 );
 const ga4 = readOptionalJson(path.join(outputDir, 'ga4-landing-pages.json'), { ranges: {} });
@@ -38,7 +40,7 @@ function normalizePathname(value) {
 }
 
 function isLocalized(value) {
-  return normalizePathname(value).startsWith('/pt-BR/');
+  return normalizePathname(value).startsWith(`/${locale}/`);
 }
 
 function isEnglishControl(value) {
@@ -124,7 +126,7 @@ const report = {
   },
   windows,
   caveats: [
-    'GA4 newsletter_cta_clicked measures the handoff to the newsletter; confirm completed subscriptions in Beehiiv using utm_campaign=pt-br-pilot.',
+    `GA4 newsletter_cta_clicked measures the handoff to the newsletter; confirm completed subscriptions in Beehiiv using utm_campaign=${locale.toLowerCase()}-pilot.`,
     'Compare localized pages with the matched English control set; raw all-site traffic is not an incremental baseline.',
     'Do not decide before six weeks unless there is a technical or quality failure.',
   ],
@@ -135,7 +137,7 @@ const primary = primaryWindow || {
   label: 'unavailable',
   localized: { ga4: { sessions: 0, engagedSessions: 0, events: {} }, gsc: { clicks: 0, impressions: 0, ctr: 0 } },
 };
-const markdown = `# pt-BR localization pilot report
+const markdown = `# ${locale} localization pilot report
 
 - Generated: ${generatedAt}
 - Launch date: ${launchDate || 'not set'}

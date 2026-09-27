@@ -12,7 +12,7 @@ const repoRoot = process.cwd();
 const promptsDirPath = path.join(repoRoot, 'src/data/prompts');
 const blogDirPath = path.join(repoRoot, 'src/data/blog');
 const guidesDirPath = path.join(repoRoot, 'src/data/guides');
-const ptBrPilotPath = path.join(repoRoot, 'src/data/i18n/pt-BR/pilot-pages.json');
+const i18nDirPath = path.join(repoRoot, 'src/data/i18n');
 const bestofPagesPath = path.join(repoRoot, 'src/data/seo/bestof-pages.json');
 
 /**
@@ -179,9 +179,13 @@ const routeLastmodMap = buildRouteLastmodMap();
 
 const astroMode = process.env.NODE_ENV === 'production' ? 'production' : 'development';
 const publicEnv = loadEnv(astroMode, repoRoot, 'PUBLIC_');
-const ptBrPilot = loadJsonFile(ptBrPilotPath, { pages: {} });
 const bestofPages = /** @type {any[]} */ (loadJsonFile(bestofPagesPath, []));
-const pilotPages = Object.values(ptBrPilot.pages || {});
+// Every folder under src/data/i18n with a pilot-pages.json is a localized locale (en holds sources).
+const localizedLocales = fs.existsSync(i18nDirPath)
+  ? fs.readdirSync(i18nDirPath)
+      .filter((name) => name !== 'en' && fs.existsSync(path.join(i18nDirPath, name, 'pilot-pages.json')))
+      .sort()
+  : [];
 
 /** @param {any} page */
 function getPilotSourceFingerprint(page) {
@@ -197,13 +201,22 @@ function getPilotSourceFingerprint(page) {
   return crypto.createHash('sha256').update(sourceValue).digest('hex').slice(0, 12);
 }
 
-const localizationPilotApproved = pilotPages.length > 0 && pilotPages.every(
-  (page) => page
-    && page.reviewStatus === 'approved'
-    && page.sourceFingerprint === getPilotSourceFingerprint(page)
-);
-const localizationPilotIndexable =
-  publicEnv.PUBLIC_LOCALIZATION_PILOT_INDEXABLE === 'true' && localizationPilotApproved;
+// A locale is approved when every page is approved against the current English source.
+const approvedLocales = localizedLocales.filter((locale) => {
+  const pilot = loadJsonFile(path.join(i18nDirPath, locale, 'pilot-pages.json'), { pages: {} });
+  const pages = Object.values(pilot.pages || {});
+  return pages.length > 0 && pages.every(
+    (page) => page
+      && page.reviewStatus === 'approved'
+      && page.sourceFingerprint === getPilotSourceFingerprint(page)
+  );
+});
+const indexableLocales = publicEnv.PUBLIC_LOCALIZATION_PILOT_INDEXABLE === 'true' ? approvedLocales : [];
+/** @param {string} value */
+const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const localePrefixPattern = localizedLocales.length > 0
+  ? new RegExp(`^/(${localizedLocales.map(escapeRegExp).join('|')})(?=/|$)`)
+  : null;
 
 export default defineConfig({
     site: 'https://aipromptindex.io',
@@ -211,7 +224,7 @@ export default defineConfig({
     trailingSlash: 'always',
     i18n: {
       defaultLocale: 'en',
-      locales: ['en', 'pt-BR'],
+      locales: ['en', ...localizedLocales],
       routing: {
         prefixDefaultLocale: false,
         redirectToDefaultLocale: false,
@@ -222,12 +235,13 @@ export default defineConfig({
       sitemap({
         filter: (page) => {
           const pathname = normalizePathname(new URL(page).pathname);
-          if (pathname.startsWith('/pt-BR') && !localizationPilotIndexable) return false;
+          const localeMatch = localePrefixPattern ? pathname.match(localePrefixPattern) : null;
+          if (localeMatch && !indexableLocales.includes(localeMatch[1])) return false;
           return !staticSitemapExcludedPaths.has(pathname);
         },
         serialize: (item) => {
           const pathname = normalizePathname(new URL(item.url, 'https://aipromptindex.io').pathname);
-          const englishPathname = pathname.replace(/^\/pt-BR(?=\/|$)/, '') || '/';
+          const englishPathname = (localePrefixPattern ? pathname.replace(localePrefixPattern, '') : pathname) || '/';
           const lastmod = routeLastmodMap.get(englishPathname);
           return lastmod ? { ...item, lastmod } : item;
         },
@@ -236,9 +250,9 @@ export default defineConfig({
     vite: {
       plugins: [tailwindcss()],
       define: {
-        // Injected as the string 'true'/'false': src/lib/localization.ts compares it to 'true',
-        // and a bare boolean would never match, leaving approved pages noindex.
-        'import.meta.env.PUBLIC_LOCALIZATION_PILOT_REVIEW_VALID': JSON.stringify(localizationPilotApproved ? 'true' : 'false'),
+        // Comma-separated locales whose approval is valid against the current English sources.
+        // src/lib/localization.ts splits this string; a locale missing here stays noindex.
+        'import.meta.env.PUBLIC_LOCALIZATION_REVIEW_VALID_LOCALES': JSON.stringify(approvedLocales.join(',')),
       },
       build: {
         target: 'es2019',

@@ -1,0 +1,11 @@
+{
+  "pages": {
+    "/best/data-analysis-prompts/": {
+      "description": "Prompts, mit denen du in ChatGPT, Claude und Gemini CSV-Dateien, Umfrageergebnisse, A/B-Tests und Kohorten analysierst sowie Dashboards und Diagramme planst.",
+      "intro": "Diese Prompts decken Analyseaufgaben ab, die dich eine ganze Arbeitswoche beschäftigen können: aus einer CSV-Datei einen Bericht erstellen, Umfrageergebnisse und A/B-Tests auswerten, Kohorten analysieren, das passende Diagramm auswählen, ein KPI-Dashboard planen und die Formel für deine Tabellenkalkulation schreiben, die dir einfach nicht einfällt. Jeder Prompt fragt nach den Angaben, die das Modell tatsächlich braucht – etwa den Spalten, der Definition der Kennzahl und den Personen, die das Ergebnis lesen werden. So bekommst du eine Antwort, die du überprüfen kannst, statt einer selbstsicher vorgetragenen Vermutung.",
+      "metaDescription": "Elf Prompts für die Datenanalyse: CSV-Berichte, Umfragen und A/B-Tests auswerten, Kohorten analysieren, Dashboards planen, Tabellenformeln schreiben.",
+      "metaTitle": "Die besten KI-Prompts für die Datenanalyse",
+      "title": "Die besten KI-Prompts für die Datenanalyse"
+    }
+  }
+}

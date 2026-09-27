@@ -1,0 +1,11 @@
+{
+  "pages": {
+    "/best/data-analysis-prompts/": {
+      "title": "Best AI Data Analysis Prompts",
+      "metaTitle": "Best AI Data Analysis Prompts",
+      "description": "Prompts for analyzing CSVs, survey results, A/B tests and cohorts, and for planning dashboards and charts in ChatGPT, Claude, and Gemini.",
+      "metaDescription": "Eleven prompts for data analysis: CSV reports, survey and A/B test analysis, cohort interpretation, dashboard design, and spreadsheet formulas.",
+      "intro": "These prompts cover the analysis work that fills a working week: turning a CSV into a report, reading survey and A/B test results, interpreting cohorts, picking the right chart, planning a KPI dashboard, and writing the spreadsheet formula you keep forgetting. Each one asks for the inputs the model actually needs, such as the columns, the metric definition, and who will read the result, so the output is something you can check rather than a confident guess."
+    }
+  }
+}
