@@ -1,0 +1,46 @@
+{
+  "nav": {
+    "best-ai-prompts": {
+      "context": "Very short header navigation label (one or two words) for a collection of prompts. Product names such as Gemini and Cursor stay as they are."
+    },
+    "free-ai-prompts": {
+      "context": "Very short header navigation label (one or two words) for a collection of prompts. Product names such as Gemini and Cursor stay as they are."
+    },
+    "prompt-templates": {
+      "context": "Very short header navigation label (one or two words) for a collection of prompts. Product names such as Gemini and Cursor stay as they are."
+    },
+    "gemini-prompts": {
+      "context": "Very short header navigation label (one or two words) for a collection of prompts. Product names such as Gemini and Cursor stay as they are."
+    },
+    "cursor-ai-prompts": {
+      "context": "Very short header navigation label (one or two words) for a collection of prompts. Product names such as Gemini and Cursor stay as they are."
+    },
+    "data-analysis-prompts": {
+      "context": "Very short header navigation label (one or two words) for a collection of prompts. Product names such as Gemini and Cursor stay as they are."
+    }
+  },
+  "languageName": {
+    "context": "The name of the target language written in that language itself, for example Español or Deutsch."
+  },
+  "search": {
+    "manyResults": {
+      "context": "Keep the {count} placeholder exactly as written; it is replaced with a number at runtime."
+    },
+    "catalogNotice": {
+      "context": "Shown under search results to say that the results open the English catalog."
+    }
+  },
+  "content": {
+    "difficulty": {
+      "beginner": {
+        "context": "Difficulty level shown as a small badge on a prompt card, lower case."
+      },
+      "intermediate": {
+        "context": "Difficulty level shown as a small badge on a prompt card, lower case."
+      },
+      "advanced": {
+        "context": "Difficulty level shown as a small badge on a prompt card, lower case."
+      }
+    }
+  }
+}

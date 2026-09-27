@@ -84,14 +84,21 @@ test('every tool-category page matches enough prompts to be worth a page', () =>
   }
 });
 
-test('pt-BR pilot pages translate sources that exist', () => {
-  const pilot = readJson('src/data/i18n/pt-BR/pilot-pages.json');
+test('every localized pilot page translates a source that exists', () => {
   const roundups = new Set(readJson('src/data/seo/bestof-pages.json').map((page) => page.slug));
-  for (const [sourcePath, page] of Object.entries(pilot.pages)) {
-    if (page.type === 'prompt') {
-      assert.ok(prompts.some((prompt) => prompt.data.slug === page.sourceSlug), `${sourcePath}: source prompt missing`);
-    } else if (page.type === 'roundup') {
-      assert.ok(roundups.has(page.sourceSlug), `${sourcePath}: source collection missing`);
+  const locales = fs.readdirSync(path.join(repoRoot, 'src/data/i18n'))
+    .filter((name) => name !== 'en' && fs.existsSync(path.join(repoRoot, 'src/data/i18n', name, 'pilot-pages.json')));
+  assert.ok(locales.length > 0, 'expected at least one localized locale');
+  for (const locale of locales) {
+    const pilot = readJson(`src/data/i18n/${locale}/pilot-pages.json`);
+    assert.equal(pilot.locale, locale, `${locale}: pilot-pages.json declares a different locale`);
+    assert.ok(fs.existsSync(path.join(repoRoot, 'src/data/i18n', locale, 'common.json')), `${locale}: common.json missing`);
+    for (const [sourcePath, page] of Object.entries(pilot.pages)) {
+      if (page.type === 'prompt') {
+        assert.ok(prompts.some((prompt) => prompt.data.slug === page.sourceSlug), `${locale} ${sourcePath}: source prompt missing`);
+      } else if (page.type === 'roundup') {
+        assert.ok(roundups.has(page.sourceSlug), `${locale} ${sourcePath}: source collection missing`);
+      }
     }
   }
 });

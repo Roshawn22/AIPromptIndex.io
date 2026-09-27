@@ -21,22 +21,22 @@
     },
     {
       "fileId": "3798a28092850c1b12e2bfca9d477caa5bfd4f0994c7d1848ebc1d0feb21bf97",
-      "versionId": "a80774f0394e01b233d3e479fc6267c3fe41158f73e184c62b176003b3aefdf2",
+      "versionId": "9b12049af8a19591c7099775ffd032a1b6767ea3ecdaddd4f8215f5c7b05e614",
       "translations": {
-        "es-419": {
-          "updatedAt": "2026-09-27T00:45:22.907Z",
-          "fileName": "src/data/i18n/es-419/common.json",
-          "postProcessHash": "35f9e5d7c31e1e6ba1c3f36d1dee4c45c139163061c68a6178c619fde2e4746b"
-        },
         "fr": {
-          "updatedAt": "2026-09-27T00:45:22.909Z",
+          "updatedAt": "2026-09-27T01:14:30.257Z",
           "fileName": "src/data/i18n/fr/common.json",
-          "postProcessHash": "3ef4610ac5b22c305e9f1c18a7477242349a3e96b0c36856e5f86dcbfc5f6c5d"
+          "postProcessHash": "221b15e78e70c74b956b65f787eac80cc65ee3e395513b6c50bc6f8a9000c6d7"
+        },
+        "es-419": {
+          "updatedAt": "2026-09-27T01:14:30.258Z",
+          "fileName": "src/data/i18n/es-419/common.json",
+          "postProcessHash": "defee458dbdcc05b22eb9b1a23fc94d0dc8bb925cc940a5a41e0e4ce26d66423"
         },
         "de": {
-          "updatedAt": "2026-09-27T00:45:58.373Z",
+          "updatedAt": "2026-09-27T01:14:50.346Z",
           "fileName": "src/data/i18n/de/common.json",
-          "postProcessHash": "600f87f98547bab62eaa9e0f8cb8df8da5a441a5c685159ad4ca24c13033e007"
+          "postProcessHash": "e10ca495240e5b886c386e0553e54840f01f63f53ec9053518a0b0d3f1a98d0b"
         }
       },
       "fileName": "src/data/i18n/en/common.json"

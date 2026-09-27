@@ -4,9 +4,24 @@
     "added": "Ajouté",
     "bestPrompts": "Meilleurs prompts",
     "browseCollection": "Parcourir la collection",
+    "categories": {
+      "business": "Entreprise",
+      "coding": "Programmation",
+      "creative": "Créativité",
+      "data-analysis": "Analyse de données",
+      "education": "Éducation",
+      "image-generation": "Génération d’images",
+      "marketing": "Marketing",
+      "writing": "Rédaction"
+    },
     "copied": "Copié !",
     "copyPrompt": "Copier le prompt",
     "copyReady": "prompts sélectionnés, prêts à copier-coller",
+    "difficulty": {
+      "advanced": "avancé",
+      "beginner": "débutant",
+      "intermediate": "intermédiaire"
+    },
     "draftNotice": "Traduction en cours de révision.",
     "example": "Exemple",
     "home": "Accueil",
@@ -17,14 +32,16 @@
     "viewPrompt": "Voir le prompt (en anglais)"
   },
   "footer": {
+    "about": "À propos (en anglais)",
     "bestPrompts": "Meilleurs prompts",
     "byTool": "Par outil",
     "community": "Communauté",
     "company": "Entreprise",
+    "contact": "Contact (en anglais)",
     "crossPromoPrefix": "Vous cherchez des outils d’IA ? Consultez",
     "crossPromoSuffix": ", l’annuaire des outils d’IA",
     "directory": "Annuaire",
-    "followX": "Suivre sur X (Twitter)",
+    "privacy": "Politique de confidentialité (en anglais)",
     "resources": "Ressources",
     "rights": "Tous droits réservés.",
     "watchYoutube": "Regarder sur YouTube"
@@ -38,15 +55,23 @@
     "openSearch": "Ouvrir la recherche",
     "search": "Rechercher",
     "searchPrompts": "Rechercher des prompts d’IA",
-    "submit": "Proposer un prompt (en anglais)"
+    "signIn": "Se connecter",
+    "submit": "Proposer un prompt (en anglais)",
+    "themeToggle": "Passer du mode sombre au mode clair et inversement"
   },
   "languageName": "Français",
   "languageSwitcher": {
-    "english": "Anglais",
-    "label": "Langue",
-    "portuguese": "Portugais"
+    "label": "Langue"
   },
   "locale": "fr",
+  "nav": {
+    "best-ai-prompts": "Les meilleurs",
+    "cursor-ai-prompts": "Cursor",
+    "data-analysis-prompts": "Analyse de données",
+    "free-ai-prompts": "Gratuits",
+    "gemini-prompts": "Gemini",
+    "prompt-templates": "Modèles"
+  },
   "newsletter": {
     "heading": "Recevez les meilleurs prompts d’IA chaque semaine",
     "iframeTitle": "Abonnez-vous à la newsletter d’AIPromptIndex",
@@ -55,6 +80,31 @@
     "subheading": "Des prompts sélectionnés, des conseils et des guides, directement dans votre boîte mail et sans frais.",
     "subscribe": "Abonnez-vous gratuitement",
     "unavailable": "L’inscription à la newsletter est temporairement indisponible."
+  },
+  "save": {
+    "save": "Enregistrer",
+    "saved": "Enregistré",
+    "unavailable": "Impossible d’enregistrer un prompt en développement local",
+    "unsaveAria": "Retirer ce prompt des éléments enregistrés"
+  },
+  "search": {
+    "aria": "Rechercher des prompts IA",
+    "catalogNotice": "Les résultats renvoient au catalogue d’origine, en anglais.",
+    "loadError": "Impossible de charger l’index de recherche.",
+    "loading": "Chargement de l’index de recherche...",
+    "manyResults": "{count} résultats",
+    "minimum": "Saisissez au moins 2 caractères pour lancer la recherche.",
+    "navigate": "naviguer",
+    "noResults": "Aucun résultat pour",
+    "oneResult": "1 résultat",
+    "placeholder": "Rechercher des prompts, des guides, des articles...",
+    "select": "sélectionner",
+    "tryAgain": "Essayez un autre terme de recherche",
+    "typeLabels": {
+      "blog": "Article",
+      "guide": "Guide",
+      "prompt": "Prompt"
+    }
   },
   "skipToContent": "Aller au contenu principal"
 }

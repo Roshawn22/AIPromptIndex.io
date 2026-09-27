@@ -40,7 +40,9 @@ PUBLIC_LOCALIZATION_PILOT_ENABLED=true
 PUBLIC_LOCALIZATION_PILOT_INDEXABLE=true
 ```
 
-The code requires both conditions. If either is missing, the localized pages cannot be indexed. Once approved, English and pt-BR pages emit reciprocal `hreflang` values plus `x-default`.
+The code requires both conditions. If either is missing, the localized pages cannot be indexed. Once approved, English and localized pages emit reciprocal `hreflang` values plus `x-default`.
+
+Both flags are site-wide, but every locale is gated on its own data. With the flags set, a locale builds and is indexed only once every one of its pages is `approved` against the current English source; a locale with any page still under review is left out of the build entirely, so unreviewed machine translation never reaches production, not even as `noindex`. To build unapproved locales for review, list them in `PUBLIC_LOCALIZATION_REVIEW_LOCALES` (comma-separated, or `*` for all); `npm run localization:review-build` does that for every locale. Such pages render `noindex`, are left out of the sitemap and advertise no `hreflang`.
 
 ## Measurement
 
@@ -66,4 +68,6 @@ The pipeline keeps machine translation away from page structure:
 2. `npx gt translate` (es-419 and fr, from `gt.config.json`) and `npx gt translate --config gt.de.config.json` (de) send those files and download `src/data/i18n/<locale>/` copies. The CLI reads `GT_API_KEY` and `GT_PROJECT_ID` from the gitignored `.env.local`; the project is `AIPromptIndex` in the General Translation organization.
 3. `node scripts/localization/assemble-pilot.mjs <locale>` (add `--source data-analysis` for de) rebuilds `pilot-pages.json` for that locale: page type, source slug, source fingerprint and variable names come from the English side, every placeholder is verified, and every page starts as `needs-human-review`.
 
-The review and publishing gate above applies unchanged. A fluent reviewer must change each page to `approved` before it can be indexed, and the 42-day expansion rule still governs when any of these locales may go live. Rendering them also needs the pt-BR-only route, guard and locale helper generalized to a `[locale]` route, which has not been done yet.
+The review and publishing gate above applies unchanged. A fluent reviewer must change each page to `approved` before it can be indexed, and the 42-day expansion rule still governs when any of these locales may go live.
+
+All locales share one route, `src/pages/[locale]/[...slug].astro`. The locale list is not configured anywhere: every folder under `src/data/i18n/` that holds a `pilot-pages.json` is a locale (`src/lib/localization.ts`, `astro.config.mjs` and the guard all discover it the same way), and each locale's `common.json` carries every UI string, including the short header labels (`nav`), category and difficulty names, and the search and save copy. To add a locale: build the English sources, translate, assemble, then register its Open Graph code in `src/lib/localization.ts` if the default `xx_YY` form is wrong. The report and TypeSafe pre-review accept `--locale=<code>` and default to pt-BR.
