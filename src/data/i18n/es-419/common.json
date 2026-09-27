@@ -1,0 +1,60 @@
+{
+  "content": {
+    "aboutPrompt": "Sobre este prompt",
+    "added": "Agregado",
+    "bestPrompts": "Los mejores prompts",
+    "browseCollection": "Explorar la colección",
+    "copied": "¡Copiado!",
+    "copyPrompt": "Copiar prompt",
+    "copyReady": "prompts seleccionados, listos para copiar y pegar",
+    "draftNotice": "Traducción en revisión.",
+    "example": "Ejemplo",
+    "home": "Inicio",
+    "originalLibraryNotice": "Los prompts que aparecen a continuación están en inglés. La navegación y las páginas principales están en español.",
+    "tips": "Consejos para obtener los mejores resultados",
+    "updated": "Actualizado",
+    "variables": "Variables que puedes personalizar",
+    "viewPrompt": "Ver prompt (en inglés)"
+  },
+  "footer": {
+    "bestPrompts": "Los mejores prompts",
+    "byTool": "Por herramienta",
+    "community": "Comunidad",
+    "company": "Empresa",
+    "crossPromoPrefix": "¿Buscas herramientas de IA? Visita",
+    "crossPromoSuffix": ", el directorio de herramientas de IA",
+    "directory": "Directorio",
+    "followX": "Síguenos en X (Twitter)",
+    "resources": "Recursos",
+    "rights": "Todos los derechos reservados.",
+    "watchYoutube": "Mira nuestros videos en YouTube"
+  },
+  "header": {
+    "closeMenu": "Cerrar menú",
+    "homeLabel": "Inicio de AIPromptIndex",
+    "mainNavigation": "Navegación principal",
+    "mobileNavigation": "Navegación para dispositivos móviles",
+    "openMenu": "Abrir menú",
+    "openSearch": "Abrir buscador",
+    "search": "Buscar",
+    "searchPrompts": "Buscar prompts de IA",
+    "submit": "Enviar un prompt (en inglés)"
+  },
+  "languageName": "Español",
+  "languageSwitcher": {
+    "english": "Inglés",
+    "label": "Idioma",
+    "portuguese": "Português"
+  },
+  "locale": "es-419",
+  "newsletter": {
+    "heading": "Recibe los mejores prompts de IA cada semana",
+    "iframeTitle": "Suscríbete al boletín de AIPromptIndex",
+    "noSpam": "Sin spam. Cancela tu suscripción cuando quieras.",
+    "opensIndexed": "Abre el boletín Indexed, en inglés. Sin spam. Cancela tu suscripción cuando quieras.",
+    "subheading": "Recibe gratis en tu correo prompts seleccionados, consejos y guías.",
+    "subscribe": "Suscríbete gratis",
+    "unavailable": "La suscripción al boletín no está disponible por el momento."
+  },
+  "skipToContent": "Ir al contenido principal"
+}

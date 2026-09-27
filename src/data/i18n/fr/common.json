@@ -1,0 +1,60 @@
+{
+  "content": {
+    "aboutPrompt": "À propos de ce prompt",
+    "added": "Ajouté",
+    "bestPrompts": "Meilleurs prompts",
+    "browseCollection": "Parcourir la collection",
+    "copied": "Copié !",
+    "copyPrompt": "Copier le prompt",
+    "copyReady": "prompts sélectionnés, prêts à copier-coller",
+    "draftNotice": "Traduction en cours de révision.",
+    "example": "Exemple",
+    "home": "Accueil",
+    "originalLibraryNotice": "Les prompts ci-dessous sont en anglais. La navigation et les pages principales sont en français.",
+    "tips": "Conseils pour obtenir les meilleurs résultats",
+    "updated": "Mis à jour",
+    "variables": "Variables à personnaliser",
+    "viewPrompt": "Voir le prompt (en anglais)"
+  },
+  "footer": {
+    "bestPrompts": "Meilleurs prompts",
+    "byTool": "Par outil",
+    "community": "Communauté",
+    "company": "Entreprise",
+    "crossPromoPrefix": "Vous cherchez des outils d’IA ? Consultez",
+    "crossPromoSuffix": ", l’annuaire des outils d’IA",
+    "directory": "Annuaire",
+    "followX": "Suivre sur X (Twitter)",
+    "resources": "Ressources",
+    "rights": "Tous droits réservés.",
+    "watchYoutube": "Regarder sur YouTube"
+  },
+  "header": {
+    "closeMenu": "Fermer le menu",
+    "homeLabel": "Accueil d’AIPromptIndex",
+    "mainNavigation": "Navigation principale",
+    "mobileNavigation": "Navigation mobile",
+    "openMenu": "Ouvrir le menu",
+    "openSearch": "Ouvrir la recherche",
+    "search": "Rechercher",
+    "searchPrompts": "Rechercher des prompts d’IA",
+    "submit": "Proposer un prompt (en anglais)"
+  },
+  "languageName": "Français",
+  "languageSwitcher": {
+    "english": "Anglais",
+    "label": "Langue",
+    "portuguese": "Portugais"
+  },
+  "locale": "fr",
+  "newsletter": {
+    "heading": "Recevez les meilleurs prompts d’IA chaque semaine",
+    "iframeTitle": "Abonnez-vous à la newsletter d’AIPromptIndex",
+    "noSpam": "Pas de spam. Désabonnement possible à tout moment.",
+    "opensIndexed": "Ouvre la newsletter Indexed, en anglais. Pas de spam. Désabonnement possible à tout moment.",
+    "subheading": "Des prompts sélectionnés, des conseils et des guides, directement dans votre boîte mail et sans frais.",
+    "subscribe": "Abonnez-vous gratuitement",
+    "unavailable": "L’inscription à la newsletter est temporairement indisponible."
+  },
+  "skipToContent": "Aller au contenu principal"
+}

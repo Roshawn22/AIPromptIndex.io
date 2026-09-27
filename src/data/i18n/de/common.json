@@ -1,0 +1,60 @@
+{
+  "content": {
+    "aboutPrompt": "Über diesen Prompt",
+    "added": "Hinzugefügt",
+    "bestPrompts": "Die besten Prompts",
+    "browseCollection": "Sammlung durchstöbern",
+    "copied": "Kopiert!",
+    "copyPrompt": "Prompt kopieren",
+    "copyReady": "ausgewählte Prompts, direkt zum Kopieren und Einfügen",
+    "draftNotice": "Übersetzung wird geprüft.",
+    "example": "Beispiel",
+    "home": "Startseite",
+    "originalLibraryNotice": "Die folgenden Prompts sind auf Englisch. Die Navigation und die wichtigsten Seiten sind in dieser Sprache verfügbar.",
+    "tips": "Tipps für optimale Ergebnisse",
+    "updated": "Aktualisiert",
+    "variables": "Variablen zum Anpassen",
+    "viewPrompt": "Prompt ansehen (auf Englisch)"
+  },
+  "footer": {
+    "bestPrompts": "Die besten Prompts",
+    "byTool": "Nach Tool",
+    "community": "Community",
+    "company": "Unternehmen",
+    "crossPromoPrefix": "Du suchst KI-Tools? Besuche",
+    "crossPromoSuffix": ", das Verzeichnis für KI-Tools",
+    "directory": "Verzeichnis",
+    "followX": "Auf X (Twitter) folgen",
+    "resources": "Ressourcen",
+    "rights": "Alle Rechte vorbehalten.",
+    "watchYoutube": "Auf YouTube ansehen"
+  },
+  "header": {
+    "closeMenu": "Menü schließen",
+    "homeLabel": "AIPromptIndex-Startseite",
+    "mainNavigation": "Hauptnavigation",
+    "mobileNavigation": "Mobile Navigation",
+    "openMenu": "Menü öffnen",
+    "openSearch": "Suche öffnen",
+    "search": "Suche",
+    "searchPrompts": "KI-Prompts suchen",
+    "submit": "Prompt einreichen (auf Englisch)"
+  },
+  "languageName": "Deutsch",
+  "languageSwitcher": {
+    "english": "Englisch",
+    "label": "Sprache",
+    "portuguese": "Português"
+  },
+  "locale": "de",
+  "newsletter": {
+    "heading": "Die besten KI-Prompts – jede Woche",
+    "iframeTitle": "AIPromptIndex-Newsletter abonnieren",
+    "noSpam": "Kein Spam. Jederzeit abbestellbar.",
+    "opensIndexed": "Öffnet den englischsprachigen Newsletter Indexed. Kein Spam. Jederzeit abbestellbar.",
+    "subheading": "Ausgewählte Prompts, Tipps und Anleitungen – kostenlos direkt in dein Postfach.",
+    "subscribe": "Kostenlos abonnieren",
+    "unavailable": "Die Newsletter-Anmeldung ist vorübergehend nicht verfügbar."
+  },
+  "skipToContent": "Zum Hauptinhalt springen"
+}
