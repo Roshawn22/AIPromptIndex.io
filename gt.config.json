@@ -1,7 +1,11 @@
 {
   "$schema": "https://assets.gtx.dev/config-schema.json",
+  "projectId": "prj_rumrooobilghovrsc2buncuh",
   "defaultLocale": "en",
-  "locales": ["es-419", "fr"],
+  "locales": [
+    "es-419",
+    "fr"
+  ],
   "files": {
     "json": {
       "include": [
