@@ -1,0 +1,12 @@
+{
+  "pages": {
+    "/best/data-analysis-prompts/": {
+      "metaTitle": {
+        "context": "Page title shown in search results. It must be at most 44 characters in the target language, because the site name is appended after it. Write a short, natural title rather than a literal translation; drop filler words before meaning. Keep product names such as ChatGPT, Claude, Gemini and Cursor unchanged."
+      },
+      "metaDescription": {
+        "context": "Meta description shown under the title in search results. It must be at most 155 characters in the target language. Condense rather than translate word for word: keep the main benefit and the product names, and drop secondary phrases before exceeding the limit."
+      }
+    }
+  }
+}

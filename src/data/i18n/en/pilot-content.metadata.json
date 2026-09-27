@@ -1,14 +1,76 @@
 {
   "pages": {
+    "/": {
+      "metaTitle": {
+        "context": "Page title shown in search results. It must be at most 44 characters in the target language, because the site name is appended after it. Write a short, natural title rather than a literal translation; drop filler words before meaning. Keep product names such as ChatGPT, Claude, Gemini and Cursor unchanged."
+      },
+      "metaDescription": {
+        "context": "Meta description shown under the title in search results. It must be at most 155 characters in the target language. Condense rather than translate word for word: keep the main benefit and the product names, and drop secondary phrases before exceeding the limit."
+      }
+    },
+    "/best/gemini-prompts/": {
+      "metaTitle": {
+        "context": "Page title shown in search results. It must be at most 44 characters in the target language, because the site name is appended after it. Write a short, natural title rather than a literal translation; drop filler words before meaning. Keep product names such as ChatGPT, Claude, Gemini and Cursor unchanged."
+      },
+      "metaDescription": {
+        "context": "Meta description shown under the title in search results. It must be at most 155 characters in the target language. Condense rather than translate word for word: keep the main benefit and the product names, and drop secondary phrases before exceeding the limit."
+      }
+    },
+    "/best/best-ai-prompts/": {
+      "metaTitle": {
+        "context": "Page title shown in search results. It must be at most 44 characters in the target language, because the site name is appended after it. Write a short, natural title rather than a literal translation; drop filler words before meaning. Keep product names such as ChatGPT, Claude, Gemini and Cursor unchanged."
+      },
+      "metaDescription": {
+        "context": "Meta description shown under the title in search results. It must be at most 155 characters in the target language. Condense rather than translate word for word: keep the main benefit and the product names, and drop secondary phrases before exceeding the limit."
+      }
+    },
+    "/best/free-ai-prompts/": {
+      "metaTitle": {
+        "context": "Page title shown in search results. It must be at most 44 characters in the target language, because the site name is appended after it. Write a short, natural title rather than a literal translation; drop filler words before meaning. Keep product names such as ChatGPT, Claude, Gemini and Cursor unchanged."
+      },
+      "metaDescription": {
+        "context": "Meta description shown under the title in search results. It must be at most 155 characters in the target language. Condense rather than translate word for word: keep the main benefit and the product names, and drop secondary phrases before exceeding the limit."
+      }
+    },
+    "/best/prompt-templates/": {
+      "metaTitle": {
+        "context": "Page title shown in search results. It must be at most 44 characters in the target language, because the site name is appended after it. Write a short, natural title rather than a literal translation; drop filler words before meaning. Keep product names such as ChatGPT, Claude, Gemini and Cursor unchanged."
+      },
+      "metaDescription": {
+        "context": "Meta description shown under the title in search results. It must be at most 155 characters in the target language. Condense rather than translate word for word: keep the main benefit and the product names, and drop secondary phrases before exceeding the limit."
+      }
+    },
+    "/best/cursor-ai-prompts/": {
+      "metaTitle": {
+        "context": "Page title shown in search results. It must be at most 44 characters in the target language, because the site name is appended after it. Write a short, natural title rather than a literal translation; drop filler words before meaning. Keep product names such as ChatGPT, Claude, Gemini and Cursor unchanged."
+      },
+      "metaDescription": {
+        "context": "Meta description shown under the title in search results. It must be at most 155 characters in the target language. Condense rather than translate word for word: keep the main benefit and the product names, and drop secondary phrases before exceeding the limit."
+      }
+    },
     "/prompts/ai-slop-remover/": {
       "promptText": {
         "context": "Instructions given to an AI assistant. Keep every placeholder in [SQUARE_BRACKETS] exactly as written, including [AUDIENCE], [FORMAT] and [DRAFT]. The banned-word list in rule 2 and the empty phrases in rule 3 are examples of AI-sounding writing in English; replace them with the equivalent overused words and phrases that mark machine-written text in the target language rather than translating them literally. Keep the numbered structure and the output format section."
       },
-      "title": { "context": "Name of a prompt that removes AI-sounding patterns from writing. 'AI slop' means low-effort, generic AI-generated text." }
+      "title": {
+        "context": "Name of a prompt that removes AI-sounding patterns from writing. 'AI slop' means low-effort, generic AI-generated text."
+      },
+      "metaTitle": {
+        "context": "Page title shown in search results. It must be at most 44 characters in the target language, because the site name is appended after it. Write a short, natural title rather than a literal translation; drop filler words before meaning. Keep product names such as ChatGPT, Claude, Gemini and Cursor unchanged."
+      },
+      "metaDescription": {
+        "context": "Meta description shown under the title in search results. It must be at most 155 characters in the target language. Condense rather than translate word for word: keep the main benefit and the product names, and drop secondary phrases before exceeding the limit."
+      }
     },
     "/prompts/business-plan-executive-summary/": {
       "promptText": {
         "context": "Instructions given to an AI assistant. Keep every placeholder in [SQUARE_BRACKETS] exactly as written. Keep the section list and the 800-word limit."
+      },
+      "metaTitle": {
+        "context": "Page title shown in search results. It must be at most 44 characters in the target language, because the site name is appended after it. Write a short, natural title rather than a literal translation; drop filler words before meaning. Keep product names such as ChatGPT, Claude, Gemini and Cursor unchanged."
+      },
+      "metaDescription": {
+        "context": "Meta description shown under the title in search results. It must be at most 155 characters in the target language. Condense rather than translate word for word: keep the main benefit and the product names, and drop secondary phrases before exceeding the limit."
       }
     }
   }

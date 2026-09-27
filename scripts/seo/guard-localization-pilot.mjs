@@ -3,6 +3,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 
 import { repoRoot } from './_shared.mjs';
+import { SEO_DESCRIPTION_MAX, SEO_TITLE_MAX, renderedSeoTitle } from '../localization/seo-limits.mjs';
 
 // Checks every localized locale under src/data/i18n (a folder with pilot-pages.json).
 // Structural problems always fail the run. Quality limits (title and description length,
@@ -71,12 +72,12 @@ for (const locale of locales) {
 
     const seoTitle = page.metaTitle || page.title || '';
     const seoDescription = page.metaDescription || page.description || '';
-    const fullSeoTitle = seoTitle.includes('AIPromptIndex') ? seoTitle : `${seoTitle} | AIPromptIndex`;
-    if (fullSeoTitle.length > 60) {
-      quality(`localized rendered SEO title is ${fullSeoTitle.length} characters; maximum is 60.`);
+    const fullSeoTitle = renderedSeoTitle(seoTitle);
+    if (fullSeoTitle.length > SEO_TITLE_MAX) {
+      quality(`localized rendered SEO title is ${fullSeoTitle.length} characters; maximum is ${SEO_TITLE_MAX}.`);
     }
-    if (seoDescription.length > 155) {
-      quality(`localized meta description is ${seoDescription.length} characters; maximum is 155.`);
+    if (seoDescription.length > SEO_DESCRIPTION_MAX) {
+      quality(`localized meta description is ${seoDescription.length} characters; maximum is ${SEO_DESCRIPTION_MAX}.`);
     }
     if (page.sourceFingerprint !== expectedFingerprint(page)) {
       quality('sourceFingerprint is stale; reset reviewStatus and refresh the translation.');

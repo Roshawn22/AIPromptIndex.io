@@ -1,11 +1,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+import { SEO_DESCRIPTION_MAX, SEO_TITLE_BUDGET } from './seo-limits.mjs';
+
 // Writes the English source files that General Translation translates:
 //   src/data/i18n/en/pilot-content.json      the eight pilot pages (es-419, fr)
 //   src/data/i18n/en/data-analysis.json      the German test collection (de)
 //   src/data/i18n/en/common.json             UI strings shared by every locale
-// Only translatable text goes in. Structure (page type, source slugs, fingerprints,
+// plus a <file>.metadata.json sidecar for each of the first two, carrying translator
+// context. Only translatable text goes in. Structure (page type, source slugs, fingerprints,
 // variable names) is re-attached by assemble-pilot.mjs, so machine translation can
 // never alter it. Keys mirror src/data/i18n/pt-BR/pilot-pages.json.
 
@@ -69,8 +72,50 @@ for (const [sourcePath, page] of Object.entries(pilot.pages)) {
   else if (page.type === 'roundup') pages[sourcePath] = roundupContent(page.sourceSlug);
   else if (page.type === 'prompt') pages[sourcePath] = promptContent(page.sourceSlug);
 }
+const dataAnalysisPages = { '/best/data-analysis-prompts/': roundupContent('data-analysis-prompts') };
 write('src/data/i18n/en/pilot-content.json', { pages });
-write('src/data/i18n/en/data-analysis.json', { pages: { '/best/data-analysis-prompts/': roundupContent('data-analysis-prompts') } });
+write('src/data/i18n/en/data-analysis.json', { pages: dataAnalysisPages });
+
+// Translator context, keyed like the content files. Hand-written notes for particular pages
+// live in PAGE_CONTEXT; every page also gets a character budget on its two SEO fields.
+//
+// The budget is the point: General Translation translates faithfully, and faithful
+// translation of compressed SEO English overruns by 1.5-1.8x ("Humanize AI Writing"
+// becomes 49 characters of French). Without a budget every new locale arrives with its
+// titles and descriptions over the limits the guard enforces, and has to be cut by hand.
+const PAGE_CONTEXT = {
+  '/prompts/ai-slop-remover/': {
+    promptText: {
+      context: 'Instructions given to an AI assistant. Keep every placeholder in [SQUARE_BRACKETS] exactly as written, including [AUDIENCE], [FORMAT] and [DRAFT]. The banned-word list in rule 2 and the empty phrases in rule 3 are examples of AI-sounding writing in English; replace them with the equivalent overused words and phrases that mark machine-written text in the target language rather than translating them literally. Keep the numbered structure and the output format section.',
+    },
+    title: { context: "Name of a prompt that removes AI-sounding patterns from writing. 'AI slop' means low-effort, generic AI-generated text." },
+  },
+  '/prompts/business-plan-executive-summary/': {
+    promptText: {
+      context: 'Instructions given to an AI assistant. Keep every placeholder in [SQUARE_BRACKETS] exactly as written. Keep the section list and the 800-word limit.',
+    },
+  },
+};
+
+const SEO_CONTEXT = {
+  metaTitle: {
+    context: `Page title shown in search results. It must be at most ${SEO_TITLE_BUDGET} characters in the target language, because the site name is appended after it. Write a short, natural title rather than a literal translation; drop filler words before meaning. Keep product names such as ChatGPT, Claude, Gemini and Cursor unchanged.`,
+  },
+  metaDescription: {
+    context: `Meta description shown under the title in search results. It must be at most ${SEO_DESCRIPTION_MAX} characters in the target language. Condense rather than translate word for word: keep the main benefit and the product names, and drop secondary phrases before exceeding the limit.`,
+  },
+};
+
+function contextFor(contentPages) {
+  return {
+    pages: Object.fromEntries(Object.keys(contentPages).map((sourcePath) => [
+      sourcePath,
+      { ...PAGE_CONTEXT[sourcePath], ...SEO_CONTEXT },
+    ])),
+  };
+}
+write('src/data/i18n/en/pilot-content.metadata.json', contextFor(pages));
+write('src/data/i18n/en/data-analysis.metadata.json', contextFor(dataAnalysisPages));
 
 // UI strings: same keys as the pt-BR file so the assemble step can copy them across.
 write('src/data/i18n/en/common.json', {
