@@ -1,0 +1,110 @@
+{
+  "content": {
+    "aboutPrompt": "Über diesen Prompt",
+    "added": "Hinzugefügt",
+    "bestPrompts": "Die besten Prompts",
+    "browseCollection": "Sammlung durchstöbern",
+    "categories": {
+      "business": "Business",
+      "coding": "Programmieren",
+      "creative": "Kreatives",
+      "data-analysis": "Datenanalyse",
+      "education": "Bildung",
+      "image-generation": "Bildgenerierung",
+      "marketing": "Marketing",
+      "writing": "Schreiben"
+    },
+    "copied": "Kopiert!",
+    "copyPrompt": "Prompt kopieren",
+    "copyReady": "ausgewählte Prompts, direkt zum Kopieren und Einfügen",
+    "difficulty": {
+      "beginner": "Einsteiger",
+      "intermediate": "Mittelstufe",
+      "advanced": "Fortgeschritten"
+    },
+    "draftNotice": "Übersetzung wird geprüft.",
+    "example": "Beispiel",
+    "home": "Startseite",
+    "originalLibraryNotice": "Die folgenden Prompts sind auf Englisch. Die Navigation und die wichtigsten Seiten sind in dieser Sprache verfügbar.",
+    "tips": "Tipps für optimale Ergebnisse",
+    "updated": "Aktualisiert",
+    "variables": "Variablen zum Anpassen",
+    "viewPrompt": "Prompt ansehen (auf Englisch)"
+  },
+  "footer": {
+    "about": "Über uns (auf Englisch)",
+    "bestPrompts": "Die besten Prompts",
+    "byTool": "Nach Tool",
+    "community": "Community",
+    "company": "Unternehmen",
+    "contact": "Kontakt (auf Englisch)",
+    "crossPromoPrefix": "Du suchst KI-Tools? Besuche",
+    "crossPromoSuffix": ", das Verzeichnis für KI-Tools",
+    "directory": "Verzeichnis",
+    "privacy": "Datenschutzerklärung (auf Englisch)",
+    "resources": "Ressourcen",
+    "rights": "Alle Rechte vorbehalten.",
+    "watchYoutube": "Auf YouTube ansehen"
+  },
+  "header": {
+    "closeMenu": "Menü schließen",
+    "homeLabel": "AIPromptIndex-Startseite",
+    "mainNavigation": "Hauptnavigation",
+    "mobileNavigation": "Mobile Navigation",
+    "openMenu": "Menü öffnen",
+    "openSearch": "Suche öffnen",
+    "search": "Suche",
+    "searchPrompts": "KI-Prompts suchen",
+    "signIn": "Anmelden",
+    "submit": "Prompt einreichen (auf Englisch)",
+    "themeToggle": "Zwischen dunklem und hellem Modus wechseln"
+  },
+  "languageName": "Deutsch",
+  "languageSwitcher": {
+    "label": "Sprache"
+  },
+  "locale": "de",
+  "nav": {
+    "best-ai-prompts": "Die besten",
+    "cursor-ai-prompts": "Cursor",
+    "data-analysis-prompts": "Datenanalyse",
+    "free-ai-prompts": "Kostenlos",
+    "gemini-prompts": "Gemini",
+    "prompt-templates": "Vorlagen"
+  },
+  "newsletter": {
+    "heading": "Die besten KI-Prompts – jede Woche",
+    "iframeTitle": "AIPromptIndex-Newsletter abonnieren",
+    "noSpam": "Kein Spam. Jederzeit abbestellbar.",
+    "opensIndexed": "Öffnet den englischsprachigen Newsletter Indexed. Kein Spam. Jederzeit abbestellbar.",
+    "subheading": "Ausgewählte Prompts, Tipps und Anleitungen – kostenlos direkt in dein Postfach.",
+    "subscribe": "Kostenlos abonnieren",
+    "unavailable": "Die Newsletter-Anmeldung ist vorübergehend nicht verfügbar."
+  },
+  "save": {
+    "save": "Speichern",
+    "saved": "Gespeichert",
+    "unavailable": "Prompt kann in der lokalen Entwicklungsumgebung nicht gespeichert werden",
+    "unsaveAria": "Prompt aus gespeicherten entfernen"
+  },
+  "search": {
+    "aria": "KI-Prompts suchen",
+    "catalogNotice": "Die Suchergebnisse führen zum englischsprachigen Originalkatalog.",
+    "loadError": "Der Suchindex konnte nicht geladen werden.",
+    "loading": "Suchindex wird geladen...",
+    "manyResults": "{count} Ergebnisse",
+    "minimum": "Gib mindestens 2 Zeichen ein, um zu suchen.",
+    "navigate": "navigieren",
+    "noResults": "Keine Ergebnisse für",
+    "oneResult": "1 Ergebnis",
+    "placeholder": "Prompts, Anleitungen und Artikel suchen...",
+    "select": "auswählen",
+    "tryAgain": "Versuche es mit einem anderen Suchbegriff",
+    "typeLabels": {
+      "blog": "Artikel",
+      "guide": "Anleitung",
+      "prompt": "Prompt"
+    }
+  },
+  "skipToContent": "Zum Hauptinhalt springen"
+}

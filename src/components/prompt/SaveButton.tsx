@@ -10,9 +10,24 @@ import { isClerkSupportedOnThisOrigin } from '../../lib/clerkEnv';
 import { getConvexClient } from '../../lib/convex';
 import { trackPromptSave } from '../../lib/analytics';
 
+export interface SaveButtonLabels {
+  save: string;
+  saved: string;
+  unsaveAria: string;
+  unavailable: string;
+}
+
+const ENGLISH_LABELS: SaveButtonLabels = {
+  save: 'Save',
+  saved: 'Saved',
+  unsaveAria: 'Unsave prompt',
+  unavailable: 'Save prompt unavailable in local development',
+};
+
 interface SaveButtonProps {
   promptSlug: string;
-  locale?: 'en' | 'pt-BR';
+  // Localized pages pass their own labels (common.json "save"); English is the default.
+  labels?: Partial<SaveButtonLabels>;
 }
 
 type ClerkSessionLike = {
@@ -144,11 +159,9 @@ function useConvexAuthFromClerkSingleton() {
 /*  Inner component (has Convex + Clerk context)                       */
 /* ------------------------------------------------------------------ */
 
-function SaveButtonInner({ promptSlug, locale = 'en' }: SaveButtonProps) {
+function SaveButtonInner({ promptSlug, labels: labelsProp }: SaveButtonProps) {
   const { isLoaded, isSignedIn, clerkSupported, openSignIn } = useClerkSingleton();
-  const labels = locale === 'pt-BR'
-    ? { save: 'Salvar', saved: 'Salvo', unsaveAria: 'Remover prompt dos salvos', unavailable: 'Salvar prompt indisponível no ambiente local' }
-    : { save: 'Save', saved: 'Saved', unsaveAria: 'Unsave prompt', unavailable: 'Save prompt unavailable in local development' };
+  const labels: SaveButtonLabels = { ...ENGLISH_LABELS, ...labelsProp };
 
   const isSaved = useQuery(
     api.collections.isPromptSaved,
@@ -256,9 +269,9 @@ function SaveButtonInner({ promptSlug, locale = 'en' }: SaveButtonProps) {
 /*  Outer wrapper (initializes Convex + Clerk)                         */
 /* ------------------------------------------------------------------ */
 
-export default function SaveButton({ promptSlug, locale = 'en' }: SaveButtonProps) {
+export default function SaveButton({ promptSlug, labels }: SaveButtonProps) {
   const [client] = useState(() => getConvexClient());
-  const saveLabel = locale === 'pt-BR' ? 'Salvar' : 'Save';
+  const saveLabel = labels?.save || ENGLISH_LABELS.save;
 
   if (!client) {
     // Fallback: static disabled button
@@ -277,7 +290,7 @@ export default function SaveButton({ promptSlug, locale = 'en' }: SaveButtonProp
 
   return (
     <ConvexProviderWithAuth client={client} useAuth={useConvexAuthFromClerkSingleton}>
-      <SaveButtonInner promptSlug={promptSlug} locale={locale} />
+      <SaveButtonInner promptSlug={promptSlug} labels={labels} />
     </ConvexProviderWithAuth>
   );
 }

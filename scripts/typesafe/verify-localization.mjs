@@ -41,11 +41,25 @@ const OMISSION_LEVELS = [
   'Most of the source\'s substance is gone; the translation is a brief summary of a much fuller text.',
 ];
 
+// The locale under review; pass --locale=fr for another pilot. Each profile names the
+// language the way a reviewer would and the variant that must not leak in.
+const LANGUAGE_PROFILES = {
+  'pt-BR': { name: 'Brazilian Portuguese', reader: 'a Brazilian reader', wrongVariant: 'European Portuguese usage' },
+  'es-419': { name: 'Latin American Spanish', reader: 'a Latin American reader', wrongVariant: 'Peninsular Spanish usage such as vosotros' },
+  fr: { name: 'French', reader: 'a French reader', wrongVariant: 'untranslated English phrasing or anglicisms' },
+  de: { name: 'German', reader: 'a German reader', wrongVariant: 'untranslated English phrasing or anglicisms' },
+};
+const TARGET_LOCALE = parseCliArgs().locale || 'pt-BR';
+const LANGUAGE = LANGUAGE_PROFILES[TARGET_LOCALE];
+if (!LANGUAGE) {
+  throw new Error(`No language profile for ${TARGET_LOCALE}; add it to LANGUAGE_PROFILES in verify-localization.mjs`);
+}
+
 const NATURALNESS_LEVELS = [
-  'Reads like word-for-word machine translation: awkward phrasing a Brazilian reader would stumble over, or European Portuguese usage.',
-  'Understandable but stiff; several phrases sound translated rather than written in Brazilian Portuguese.',
-  'Reads naturally to a Brazilian reader, with at most one slightly unusual phrase.',
-  'Reads as if originally written by a fluent Brazilian Portuguese writer for a Brazilian audience.',
+  `Reads like word-for-word machine translation: awkward phrasing ${LANGUAGE.reader} would stumble over, or ${LANGUAGE.wrongVariant}.`,
+  `Understandable but stiff; several phrases sound translated rather than written in ${LANGUAGE.name}.`,
+  `Reads naturally to ${LANGUAGE.reader}, with at most one slightly unusual phrase.`,
+  `Reads as if originally written by a fluent ${LANGUAGE.name} writer for the same audience.`,
 ];
 
 const asText = (value) => (Array.isArray(value) ? value.join('\n') : value);
@@ -86,24 +100,24 @@ export function buildLocalizationRequest(page, sourceFields) {
       // Asked separately because a condensed translation omits a great deal while
       // contradicting nothing, and only the second of those is a defect.
       questions[`contradicts_${index}`] = noul(
-        `Does \`fields[${index}].translation\` (Brazilian Portuguese) state anything that contradicts \`fields[${index}].source\` (English), or add a claim the source does not make?`,
+        `Does \`fields[${index}].translation\` (${LANGUAGE.name}) state anything that contradicts \`fields[${index}].source\` (English), or add a claim the source does not make?`,
         {
           true: 'It asserts something the source does not support, names a different capability or benefit, or reverses an instruction.',
           false: 'Everything it asserts is supported by the source, even if it says less than the source does. Placeholders inside [SQUARE_BRACKETS] are meant to stay unchanged.',
         },
       );
       questions[`omits_${index}`] = score(
-        `How much of the substance of \`fields[${index}].source\` (English) is missing from \`fields[${index}].translation\` (Brazilian Portuguese)?`,
+        `How much of the substance of \`fields[${index}].source\` (English) is missing from \`fields[${index}].translation\` (${LANGUAGE.name})?`,
         OMISSION_LEVELS,
       );
     }
     questions[`naturalness_${index}`] = score(
-      `How natural is \`fields[${index}].translation\` as Brazilian Portuguese? Ignore placeholders inside [SQUARE_BRACKETS] and names of AI products.`,
+      `How natural is \`fields[${index}].translation\` as ${LANGUAGE.name}? Ignore placeholders inside [SQUARE_BRACKETS] and names of AI products.`,
       NATURALNESS_LEVELS,
     );
   });
   return {
-    state: { sourceLocale: 'en', targetLocale: 'pt-BR', pageType: page.type, fields },
+    state: { sourceLocale: 'en', targetLocale: TARGET_LOCALE, pageType: page.type, fields },
     questions,
     fields,
   };
@@ -150,7 +164,7 @@ export function interpretLocalization(sourcePath, page, fields, answers, thresho
 function buildReport(results) {
   const percent = (value) => (typeof value === 'number' ? `${Math.round(value * 100)}` : 'n/a');
   const lines = [
-    `# pt-BR localization pre-review — ${toIsoDate()}`,
+    `# ${TARGET_LOCALE} localization pre-review — ${toIsoDate()}`,
     '',
     'Advisory TypeSafe judgments to focus the human reviewer. A clean result is not an approval:',
     'non-English accuracy is lower than English, and `reviewStatus` is only ever changed by a person.',
@@ -182,7 +196,7 @@ function buildReport(results) {
 
 async function main() {
   const args = parseCliArgs();
-  const pilot = loadJson('src/data/i18n/pt-BR/pilot-pages.json', { pages: {} });
+  const pilot = loadJson(`src/data/i18n/${TARGET_LOCALE}/pilot-pages.json`, { pages: {} });
   const context = {
     prompts: Object.values(pilot.pages)
       .filter((page) => page.type === 'prompt')

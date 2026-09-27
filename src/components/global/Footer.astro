@@ -1,14 +1,38 @@
 ---
 import LogoMark from './LogoMark.astro';
-import { getLocaleFromPath, getPtBrCommon, type SiteLocale } from '../../lib/localization';
+import bestofPages from '../../data/seo/bestof-pages.json';
+import {
+  DEFAULT_LOCALE,
+  getCommon,
+  getLocaleFromPath,
+  getLocalizedPath,
+  getLocalizedRoundups,
+  getPilotPages,
+  type SiteLocale,
+} from '../../lib/localization';
 
 interface Props {
   locale?: SiteLocale;
 }
 
 const locale = Astro.props.locale || getLocaleFromPath(Astro.url.pathname);
-const common = locale === 'pt-BR' ? getPtBrCommon() : null;
+const common = getCommon(locale);
 const footerCopy = common?.footer;
+
+// A localized footer only links to pages that exist in that locale, plus the English-only
+// pages it labels as such. The lists come from the locale's pilot pages, so a locale with a
+// single collection gets a short footer rather than English links dressed up as local ones.
+const localizedPages = locale === DEFAULT_LOCALE ? [] : Object.values(getPilotPages(locale));
+const localizedHome = localizedPages.find((page) => page.type === 'home');
+const localizedRoundups = locale === DEFAULT_LOCALE ? [] : getLocalizedRoundups(locale);
+const localizedPrompts = localizedPages.filter((page) => page.type === 'prompt');
+const localizedLink = (page: { sourcePath: string; title: string }) => ({
+  href: getLocalizedPath(page.sourcePath, locale),
+  label: page.title,
+});
+const toolCollectionSlugs = new Set(
+  bestofPages.filter((page) => page.filter && 'tool' in page.filter).map((page) => page.slug),
+);
 
 const englishDirectoryLinks = [
   { href: '/prompts/', label: 'All Prompts' },
@@ -18,27 +42,24 @@ const englishDirectoryLinks = [
   { href: '/categories/image-generation/', label: 'Image Prompts' },
   { href: '/categories/business/', label: 'Business Prompts' },
 ];
-const portugueseDirectoryLinks = [
-  { href: '/pt-BR/', label: 'Início' },
-  { href: '/pt-BR/best/best-ai-prompts/', label: 'Melhores prompts de IA' },
-  { href: '/pt-BR/best/free-ai-prompts/', label: 'Prompts grátis' },
-  { href: '/pt-BR/best/prompt-templates/', label: 'Modelos de prompts' },
-  { href: '/pt-BR/best/gemini-prompts/', label: 'Prompts para Gemini' },
-  { href: '/pt-BR/best/cursor-ai-prompts/', label: 'Prompts para Cursor' }
-];
-const directoryLinks = locale === 'pt-BR' ? portugueseDirectoryLinks : englishDirectoryLinks;
+const directoryLinks = locale === DEFAULT_LOCALE
+  ? englishDirectoryLinks
+  : [
+      ...(localizedHome && common ? [{ href: getLocalizedPath('/', locale), label: common.content.home }] : []),
+      ...localizedRoundups.map(localizedLink),
+    ];
 
 const englishResourceLinks = [
   { href: '/guides/', label: 'Guides' },
   { href: '/blog/', label: 'Blog' },
   { href: '/submit/', label: 'Submit a Prompt' },
 ];
-const portugueseResourceLinks = [
-  { href: '/pt-BR/prompts/ai-slop-remover/', label: 'Removedor de texto genérico de IA' },
-  { href: '/pt-BR/prompts/business-plan-executive-summary/', label: 'Resumo de plano de negócios' },
-  { href: '/submit/', label: 'Enviar um prompt (em inglês)' }
-];
-const resourceLinks = locale === 'pt-BR' ? portugueseResourceLinks : englishResourceLinks;
+const resourceLinks = locale === DEFAULT_LOCALE
+  ? englishResourceLinks
+  : [
+      ...localizedPrompts.map(localizedLink),
+      { href: '/submit/', label: common?.header.submit || 'Submit a Prompt' },
+    ];
 
 const englishBestPromptsLinks = [
   { href: '/best/', label: 'All Collections' },
@@ -52,9 +73,9 @@ const englishBestPromptsLinks = [
   { href: '/best/prompt-templates/', label: 'Prompt Templates' },
   { href: '/prompts/cursor/coding/', label: 'Cursor Coding Prompts' },
 ];
-const bestPromptsLinks = locale === 'pt-BR'
-  ? portugueseDirectoryLinks.slice(1)
-  : englishBestPromptsLinks;
+const bestPromptsLinks = locale === DEFAULT_LOCALE
+  ? englishBestPromptsLinks
+  : localizedRoundups.map(localizedLink);
 
 const englishToolLinks = [
   { href: '/tools/chatgpt/', label: 'ChatGPT Prompts' },
@@ -63,12 +84,9 @@ const englishToolLinks = [
   { href: '/tools/gemini/', label: 'Gemini Prompts' },
   { href: '/tools/cursor/', label: 'Cursor Prompts' },
 ];
-const toolLinks = locale === 'pt-BR'
-  ? [
-      { href: '/pt-BR/best/gemini-prompts/', label: 'Prompts para Gemini' },
-      { href: '/pt-BR/best/cursor-ai-prompts/', label: 'Prompts para Cursor' },
-    ]
-  : englishToolLinks;
+const toolLinks = locale === DEFAULT_LOCALE
+  ? englishToolLinks
+  : localizedRoundups.filter((page) => toolCollectionSlugs.has(page.sourceSlug)).map(localizedLink);
 
 const communityLinks = [
   { href: 'https://www.skool.com/aifreedomlab', label: 'AI Freedom Lab', external: true },
@@ -76,19 +94,22 @@ const communityLinks = [
   { href: 'https://aitoolindex.io', label: 'AIToolIndex.io', external: true },
 ];
 
-const englishCompanyLinks = [
-  { href: '/about/', label: 'About' },
-  { href: '/contact/', label: 'Contact' },
-  { href: '/privacy/', label: 'Privacy Policy' },
+const companyLinks = [
+  { href: '/about/', label: footerCopy?.about || 'About' },
+  { href: '/contact/', label: footerCopy?.contact || 'Contact' },
+  { href: '/privacy/', label: footerCopy?.privacy || 'Privacy Policy' },
 ];
-const companyLinks = locale === 'pt-BR'
-  ? [
-      { href: '/about/', label: 'Sobre (em inglês)' },
-      { href: '/contact/', label: 'Contato (em inglês)' },
-      { href: '/privacy/', label: 'Política de privacidade (em inglês)' },
-    ]
-  : englishCompanyLinks;
+
+const columns = [
+  { heading: footerCopy?.directory || 'Directory', links: directoryLinks },
+  { heading: footerCopy?.resources || 'Resources', links: resourceLinks },
+  { heading: footerCopy?.bestPrompts || 'Best Prompts', links: bestPromptsLinks },
+  { heading: footerCopy?.byTool || 'By Tool', links: toolLinks },
+  { heading: footerCopy?.community || 'Community', links: communityLinks },
+  { heading: footerCopy?.company || 'Company', links: companyLinks },
+].filter((column) => column.links.length > 0);
 ---
+
 
 <footer class="border-t border-[var(--color-border)] bg-[var(--color-surface-1)]">
   <div class="mx-auto max-w-7xl px-[var(--space-page)] py-16">
@@ -104,101 +125,27 @@ const companyLinks = locale === 'pt-BR'
     </div>
 
     <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-6">
-      <!-- Directory -->
-      <div>
-        <h2 class="mb-4 font-[var(--font-display)] text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
-          {footerCopy?.directory || 'Directory'}
-        </h2>
-        <ul class="space-y-2.5">
-          {directoryLinks.map((link) => (
-            <li>
-              <a href={link.href} class="text-sm text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text-primary)]">
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <!-- Resources -->
-      <div>
-        <h2 class="mb-4 font-[var(--font-display)] text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
-          {footerCopy?.resources || 'Resources'}
-        </h2>
-        <ul class="space-y-2.5">
-          {resourceLinks.map((link) => (
-            <li>
-              <a href={link.href} class="text-sm text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text-primary)]">
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <!-- Best Prompts -->
-      <div>
-        <h2 class="mb-4 font-[var(--font-display)] text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
-          {footerCopy?.bestPrompts || 'Best Prompts'}
-        </h2>
-        <ul class="space-y-2.5">
-          {bestPromptsLinks.map((link) => (
-            <li>
-              <a href={link.href} class="text-sm text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text-primary)]">
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <!-- Tools -->
-      <div>
-        <h2 class="mb-4 font-[var(--font-display)] text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
-          {footerCopy?.byTool || 'By Tool'}
-        </h2>
-        <ul class="space-y-2.5">
-          {toolLinks.map((link) => (
-            <li>
-              <a href={link.href} class="text-sm text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text-primary)]">
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <!-- Community -->
-      <div>
-        <h2 class="mb-4 font-[var(--font-display)] text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
-          {footerCopy?.community || 'Community'}
-        </h2>
-        <ul class="space-y-2.5">
-          {communityLinks.map((link) => (
-            <li>
-              <a href={link.href} target="_blank" rel="noopener noreferrer" class="text-sm text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text-primary)]">
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <!-- Company -->
-      <div>
-        <h2 class="mb-4 font-[var(--font-display)] text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
-          {footerCopy?.company || 'Company'}
-        </h2>
-        <ul class="space-y-2.5">
-          {companyLinks.map((link) => (
-            <li>
-              <a href={link.href} class="text-sm text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text-primary)]">
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {columns.map((column) => (
+        <div>
+          <h2 class="mb-4 font-[var(--font-display)] text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
+            {column.heading}
+          </h2>
+          <ul class="space-y-2.5">
+            {column.links.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  target={'external' in link && link.external ? '_blank' : undefined}
+                  rel={'external' in link && link.external ? 'noopener noreferrer' : undefined}
+                  class="text-sm text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text-primary)]"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </div>
 
     <!-- Bottom bar -->

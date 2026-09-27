@@ -26,6 +26,23 @@
     "filter": { "category": "coding" }
   },
   {
+    "slug": "data-analysis-prompts",
+    "title": "Best AI Data Analysis Prompts",
+    "description": "Prompts for analyzing CSVs, survey results, A/B tests and cohorts, and for planning dashboards and charts in ChatGPT, Claude, and Gemini.",
+    "filter": {
+      "category": "data-analysis"
+    },
+    "metaTitle": "Best AI Data Analysis Prompts",
+    "metaDescription": "Eleven prompts for data analysis: CSV reports, survey and A/B test analysis, cohort interpretation, dashboard design, and spreadsheet formulas.",
+    "keyword": "data analysis prompts",
+    "intro": "These prompts cover the analysis work that fills a working week: turning a CSV into a report, reading survey and A/B test results, interpreting cohorts, picking the right chart, planning a KPI dashboard, and writing the spreadsheet formula you keep forgetting. Each one asks for the inputs the model actually needs, such as the columns, the metric definition, and who will read the result, so the output is something you can check rather than a confident guess.",
+    "tips": [
+      "Paste the column headers and two or three sample rows instead of describing the data; the model reasons better from the real shape.",
+      "State how a metric is defined before asking for a conclusion, so a change in the number is not a change in the definition.",
+      "Ask for the calculation steps alongside the answer and spot-check one figure in your spreadsheet before you trust the rest."
+    ]
+  },
+  {
     "slug": "writing-prompts",
     "title": "Best AI Writing Prompts",
     "description": "Top AI writing prompts for blog posts, essays, emails, copywriting, storytelling, editing, and long-form content creation workflows.",

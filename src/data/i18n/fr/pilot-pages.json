@@ -1,0 +1,180 @@
+{
+  "locale": "fr",
+  "sourceLocale": "en",
+  "translationProvider": "general-translation",
+  "reviewPolicy": "Every page must be changed to approved by a human reviewer before it can be indexed.",
+  "pages": {
+    "/": {
+      "type": "home",
+      "reviewStatus": "needs-human-review",
+      "sourceFingerprint": "b6313df36298",
+      "sourcePath": "/",
+      "description": "Explorez une bibliothèque gratuite de prompts et de modèles pour ChatGPT, Claude, Midjourney, Gemini, Cursor et d’autres outils. Copiez-les, personnalisez-les et utilisez-les aussitôt.",
+      "eyebrow": "Bibliothèque gratuite de prompts IA",
+      "heading": "Trouvez le bon prompt. Gagnez du temps dès le départ.",
+      "intro": "Des prompts prêts à copier, classés par outil, catégorie et objectif. Choisissez un point de départ, renseignez les variables et gardez ce qui fonctionne.",
+      "metaDescription": "Découvrez des prompts et des modèles gratuits pour ChatGPT, Claude, Gemini, Midjourney et Cursor. Copiez-les, personnalisez-les et utilisez-les aussitôt.",
+      "metaTitle": "Bibliothèque gratuite de prompts IA",
+      "primaryCta": "Découvrez les meilleurs prompts",
+      "secondaryCta": "Voir les prompts gratuits",
+      "sectionHeading": "Commencez par ces collections",
+      "sectionIntro": "Commencez par ces collections : elles rassemblent les pages du catalogue les plus utiles en français.",
+      "title": "Bibliothèque gratuite de prompts IA pour ChatGPT, Claude et bien d’autres"
+    },
+    "/best/best-ai-prompts/": {
+      "type": "roundup",
+      "reviewStatus": "needs-human-review",
+      "sourceFingerprint": "3f735965050a",
+      "sourcePath": "/best/best-ai-prompts/",
+      "sourceSlug": "best-ai-prompts",
+      "description": "Tous les prompts de la bibliothèque sur une seule page, avec les coups de cœur de notre rédaction en tête. Commencez ici si vous ne savez pas encore ce qu’il vous faut.",
+      "intro": "Toute la bibliothèque sur une seule page : des prompts pour la rédaction, la programmation, le marketing, la génération d’images, l’entreprise, l’analyse de données, l’éducation et la création, avec les coups de cœur de notre rédaction en tête. Chaque fiche précise le résultat attendu, indique les variables à renseigner et donne accès au prompt complet et à ses conseils d’utilisation. Parcourez les prompts par outil ou par catégorie, ouvrez ceux qui correspondent à votre tâche et adaptez les variables à votre situation.",
+      "metaDescription": "Les meilleurs prompts IA pour ChatGPT, Claude, Gemini, Midjourney et plus. Sélectionnés par la communauté, prêts à copier-coller pour toute tâche.",
+      "metaTitle": "Meilleurs prompts IA",
+      "title": "Meilleurs prompts IA"
+    },
+    "/best/cursor-ai-prompts/": {
+      "type": "roundup",
+      "reviewStatus": "needs-human-review",
+      "sourceFingerprint": "e9e8a52c2167",
+      "sourcePath": "/best/cursor-ai-prompts/",
+      "sourceSlug": "cursor-ai-prompts",
+      "description": "Une sélection de prompts pour Cursor AI qui tirent parti de l’indexation de la base de code, de la modification de plusieurs fichiers et de la génération intelligente de code.",
+      "intro": "Les prompts pour Cursor ne sont pas de simples prompts ChatGPT collés dans un IDE. Composer, Chat, inline edit et les @-mentions changent ce à quoi le modèle a accès. Cette sélection est conçue pour les tâches qui nécessitent une connaissance du dépôt : refactorisations, tests, migrations et séances de débogage où il vaut mieux faire référence aux fichiers que copier toute la base de code dans une interface de chat générique.",
+      "metaDescription": "Prompts sélectionnés pour Cursor AI : génération de code, refactorisation, débogage et édition multi-fichiers. Développez plus vite.",
+      "metaTitle": "Meilleurs prompts pour Cursor AI",
+      "title": "Meilleurs prompts pour Cursor AI"
+    },
+    "/best/free-ai-prompts/": {
+      "type": "roundup",
+      "reviewStatus": "needs-human-review",
+      "sourceFingerprint": "d06e2c96609d",
+      "sourcePath": "/best/free-ai-prompts/",
+      "sourceSlug": "free-ai-prompts",
+      "description": "Des prompts IA de qualité qui fonctionnent avec les versions gratuites de ChatGPT, Claude, Gemini et d’autres outils d’IA. Aucun abonnement requis.",
+      "intro": "Pas besoin d’un abonnement payant à un outil d’IA pour obtenir des résultats de qualité professionnelle. Ces prompts IA gratuits sont spécialement conçus pour fonctionner malgré les restrictions des versions gratuites d’outils comme ChatGPT Free, Claude Free et Gemini. Chaque prompt de cette collection a été testé avec des offres gratuites pour vérifier qu’il produit des résultats utiles sans dépasser les limites de contexte ni nécessiter de fonctionnalités payantes. Que vous soyez étudiant, passionné ou professionnel attentif à votre budget, ces prompts montrent que l’efficacité de l’IA dépend de la qualité du prompt, pas de votre formule d’abonnement.",
+      "metaDescription": "Des prompts IA gratuits pour ChatGPT Free, Claude Free et Gemini. Des résultats professionnels sans abonnement payant à un outil d’IA.",
+      "metaTitle": "Prompts IA gratuits",
+      "title": "Prompts IA gratuits"
+    },
+    "/best/gemini-prompts/": {
+      "type": "roundup",
+      "reviewStatus": "needs-human-review",
+      "sourceFingerprint": "706f9db641cd",
+      "sourcePath": "/best/gemini-prompts/",
+      "sourceSlug": "gemini-prompts",
+      "description": "Les meilleurs prompts pour Google Gemini tirent parti de ses capacités multimodales, de son accès au Web en temps réel et de son intégration à Google Workspace.",
+      "intro": "En 2026, Google Gemini est une interface de création de prompts déjà intégrée à Gmail, Docs, Sheets et Drive, et disponible avec Gemini 2.5 dans AI Studio. Les prompts proposés ici sont conçus pour cet écosystème : recherche sur le Web en temps réel, prise en compte des fichiers Workspace et raisonnement sur de longs contextes. Si vous collez tel quel un prompt ChatGPT dans Gemini, vous passez à côté des fichiers Drive et de la recherche en temps réel.",
+      "metaDescription": "Prompts sélectionnés pour Google Gemini : recherche, analyse, rédaction et productivité. Profitez de l’accès au Web et de Google Workspace.",
+      "metaTitle": "Meilleurs prompts pour Gemini",
+      "title": "Meilleurs prompts pour Gemini"
+    },
+    "/best/prompt-templates/": {
+      "type": "roundup",
+      "reviewStatus": "needs-human-review",
+      "sourceFingerprint": "71ceec21fd91",
+      "sourcePath": "/best/prompt-templates/",
+      "sourceSlug": "prompt-templates",
+      "description": "Des modèles de prompts IA réutilisables, avec des champs à remplir pour tous les usages. Copiez-les, personnalisez-les et obtenez rapidement des résultats.",
+      "intro": "Les modèles de prompts sont le moyen le plus rapide d’obtenir des résultats fiables et de qualité avec n’importe quel outil d’IA. Plus besoin de repartir de zéro à chaque fois : ces modèles vous offrent des structures éprouvées, avec des champs à adapter à vos besoins. E-mail marketing, revue de code ou analyse de données : ces modèles de prompts IA ont été testés avec ChatGPT, Claude et Gemini pour fournir des résultats fiables. Enregistrez-les dans votre bibliothèque de prompts et utilisez-les comme point de départ pour vos projets.",
+      "metaDescription": "Modèles de prompts IA réutilisables pour ChatGPT, Claude et Gemini : structures à compléter pour la rédaction, le code, le marketing et plus.",
+      "metaTitle": "Meilleurs modèles de prompts IA",
+      "title": "Meilleurs modèles de prompts IA"
+    },
+    "/prompts/ai-slop-remover/": {
+      "type": "prompt",
+      "reviewStatus": "needs-human-review",
+      "sourceFingerprint": "3402b06696dc",
+      "sourcePath": "/prompts/ai-slop-remover/",
+      "sourceSlug": "ai-slop-remover",
+      "description": "Ce prompt transforme ChatGPT, Claude ou Gemini en un réviseur rigoureux qui élimine les tics révélateurs de l’écriture générée par l’IA — oppositions binaires, effets d’annonce après deux-points, grandiloquence, références à des sources non précisées et mots galvaudés que tout le monde reconnaît (explorer, optimiser, écosystème) — tout en préservant votre voix. La plupart des prompts censés rendre un texte plus humain réécrivent tout et gomment la personnalité de votre brouillon. Celui-ci mise sur les retouches strictement nécessaires : il corrige ce qui sonne artificiel, laisse les bonnes phrases telles quelles et vous indique précisément ce qu’il a changé pour que vous gardiez la main. Adapté de la méthode de révision open source no-ai-slop de Peter Yang (sous licence MIT). Utilisez-le pour vos newsletters, publications LinkedIn, articles de blog ou tout brouillon rédigé au départ dans une fenêtre de discussion avec une IA.",
+      "metaDescription": "Prompt ChatGPT gratuit qui élimine les tics de l’écriture IA — mots galvaudés, oppositions binaires, grandiloquence — sans effacer votre voix.",
+      "metaTitle": "Éliminer la prose IA insipide avec ChatGPT",
+      "promptText": "Tu es un réviseur humain à l’œil affûté. Ton travail consiste à éliminer les tics d’écriture qui trahissent l’IA dans mon brouillon, tout en préservant mon propos et ma voix. Ne transforme pas un texte qui a du caractère en prose lisse et générique.\n\nLe brouillon s’adresse à : [AUDIENCE]\nIl sera publié sous forme de : [FORMAT]\n\nMon brouillon :\n[DRAFT]\n\nRègles de révision :\n1. Limite-toi aux retouches strictement nécessaires. Corrige les tics d’écriture liés à l’IA, les répétitions et les passages peu clairs. Laisse les bonnes phrases telles quelles. Le texte révisé doit toujours me ressembler.\n2. Supprime entièrement ces mots et expressions : explorer en profondeur, favoriser, optimiser, maximiser, catalyser, autonomiser, fluidifier, robuste, de pointe, révolutionnaire, écosystème, univers, phare, multidimensionnel, méticuleux, primordial, transformationnel, sublimer, embarquer, exploiter, en constante évolution.\n3. Supprime les formules creuses comme « il convient de noter que », « en fin de compte », « dans le monde d’aujourd’hui », « plongeons dans le sujet » et « la réalité, c’est que » lorsqu’elles retardent l’essentiel.\n4. Élimine ces tics d’écriture liés à l’IA partout où ils apparaissent :\n- Oppositions binaires (« Ce n’est pas X. C’est Y. ») — énonce plutôt l’idée directement\n- Entrées en matière qui tournent autour du pot (« Voilà le problème... ») — supprime-les et commence par l’essentiel\n- Annonces de fausse révélation (« Ce que personne ne vous dit... ») — laisse l’affirmation se suffire à elle-même\n- Effets d’annonce après deux-points (« Le mieux : il apprend. ») — reformule en une phrase simple\n- Analyses plaquées en fin de phrase (« ...ce qui souligne l’engagement de l’équipe ») — indique la conséquence réelle ou supprime-les\n- Formules grandiloquentes (« marque un tournant décisif », « témoigne de ») — expose le fait et laisse le lecteur juger\n- Références à des sources non précisées (« les experts s’accordent à dire », « des études montrent ») — cite la source ou signale-moi qu’il en faut une, sans jamais en inventer\n- Énumérations négatives (« Pas un outil. Pas une plateforme. Un mouvement. ») — dis simplement ce que c’est\n- Fragments théâtraux (« Voilà. C’est tout. ») — utilise des phrases complètes\n- Dernières phrases faussement profondes qui s’achèvent sur une métaphore facile — supprime-les et termine sur le dernier point concret\n- Conclusions qui récapitulent tout (« En conclusion... ») — le lecteur vient de lire le texte\n5. Privilégie la voix active avec des sujets humains. Remplace les tournures verbales lourdes par des verbes directs (« a pris une décision » devient « a décidé »).\n6. Conserve les détails concrets exactement tels qu’ils sont écrits. Ne remplace jamais un chiffre, un nom ou une date précis par une affirmation vague, et n’invente jamais d’affirmations, de statistiques ou d’exemples que je n’ai pas fournis.\n7. Garde mon mordant. Préserve les opinions tranchées, le franc-parler, l’humour, les fragments et les apartés qui me ressemblent. Utilise au maximum 1 ou 2 tirets cadratins dans tout le texte.\n\nFormat de sortie :\n1. Le brouillon révisé dans son intégralité\n2. Une courte section « Modifications apportées » indiquant les tics supprimés et pourquoi\n3. Toute affirmation nécessitant une source, signalée sous forme de question à mon intention",
+      "tips": [
+        "Collez votre brouillon en entier, pas paragraphe par paragraphe — le réviseur a besoin du texte complet pour repérer les structures de phrases répétitives et les conclusions qui tombent à plat",
+        "Renseignez AUDIENCE et FORMAT sans tricher ; une publication LinkedIn et un document technique ne demandent pas le même niveau de finition",
+        "Si le résultat signale qu’une affirmation nécessite une source, ajoutez la source réelle plutôt que de laisser le modèle atténuer l’affirmation",
+        "Soumettez la version révisée au prompt complémentaire AI Slop Detector si vous souhaitez une deuxième vérification sans nouvelle réécriture"
+      ],
+      "title": "Éliminateur de prose IA insipide",
+      "variables": [
+        {
+          "name": "AUDIENCE",
+          "description": "Qui lira ce texte",
+          "example": "Les fondateurs de startups abonnés à ma newsletter"
+        },
+        {
+          "name": "FORMAT",
+          "description": "Où et sous quelle forme il sera publié",
+          "example": "Un numéro de newsletter d’environ 1 000 mots envoyé par e-mail"
+        },
+        {
+          "name": "DRAFT",
+          "description": "Le brouillon complet que vous souhaitez faire réviser",
+          "example": "Voilà le problème : les outils d’IA ne se contentent pas de changer le marketing. Ils le transforment. Notre nouvelle méthode de travail exploite une automatisation de pointe, ce qui souligne notre engagement en faveur de l’efficacité..."
+        }
+      ]
+    },
+    "/prompts/business-plan-executive-summary/": {
+      "type": "prompt",
+      "reviewStatus": "needs-human-review",
+      "sourceFingerprint": "98482a1d48fe",
+      "sourcePath": "/prompts/business-plan-executive-summary/",
+      "sourceSlug": "business-plan-executive-summary",
+      "description": "Utilisez ce prompt Claude de plan d’affaires pour rédiger une synthèse convaincante pour les investisseurs, que ce soit pour une startup, une petite entreprise, un dossier de prêt, un pitch deck ou une candidature à un accélérateur. À partir des informations sur votre entreprise, votre marché cible, vos premiers résultats, vos prévisions financières et votre demande de financement, le prompt produit une synthèse claire de votre plan d’affaires qui couvre les points attendus par les investisseurs et les prêteurs. Il s’adresse aux fondateurs qui ont besoin d’une première version solide avant d’affiner leurs chiffres, leurs arguments et leurs données de marché.",
+      "metaDescription": "Ce prompt Claude rédige une synthèse de plan d’affaires prête pour les investisseurs : levée de fonds, dossier de prêt, pitch deck ou startup.",
+      "metaTitle": "Prompt Claude : synthèse de plan d’affaires",
+      "promptText": "Vous êtes un consultant chevronné qui a aidé plus de 200 startups à obtenir des financements. Rédigez une synthèse convaincante pour les investisseurs concernant [COMPANY_NAME], une startup dont le modèle économique est [BUSINESS_MODEL] et qui évolue dans le secteur [INDUSTRY]. L’entreprise répond au problème suivant : [PROBLEM], rencontré par [TARGET_MARKET], grâce à [SOLUTION]. Incluez les sections suivantes : Présentation de l’entreprise (2-3 phrases), Description du problème, Solution, Taille et caractéristiques du marché cible, Modèle de revenus, Avantage concurrentiel, Premiers résultats (utilisez [TRACTION_METRICS] comme données chiffrées), Synthèse des prévisions financières sur 3 ans et Demande de financement de [FUNDING_AMOUNT] avec répartition prévue des fonds. Limitez l’ensemble de la synthèse à 800 mots, adoptez un style de plan d’affaires soigné et adapté à Claude, et faites en sorte que chaque phrase compte.",
+      "tips": [
+        "Ouvrez avec votre indicateur de performance le plus convaincant pour capter d’emblée l’attention du lecteur",
+        "Chiffrez la taille de votre marché en présentant une estimation crédible du TAM, du SAM et du SOM",
+        "Adaptez le ton à votre public : les VCs s’intéressent aux indicateurs de croissance, les banques à la stabilité",
+        "Demandez à Claude une version destinée aux prêteurs, une aux investisseurs et une aux accélérateurs pour comparer les angles avant les dernières retouches"
+      ],
+      "title": "Prompt Claude pour la synthèse d’un plan d’affaires",
+      "variables": [
+        {
+          "name": "COMPANY_NAME",
+          "description": "Nom de votre entreprise",
+          "example": "NutriPlan AI"
+        },
+        {
+          "name": "BUSINESS_MODEL",
+          "description": "Type de modèle économique",
+          "example": "Abonnement SaaS B2C"
+        },
+        {
+          "name": "INDUSTRY",
+          "description": "Secteur d’activité",
+          "example": "technologies de la santé et nutrition personnalisée"
+        },
+        {
+          "name": "PROBLEM",
+          "description": "Le problème à résoudre",
+          "example": "des conseils nutritionnels génériques qui ne tiennent pas compte de l’état de santé, du patrimoine génétique ni du mode de vie de chacun"
+        },
+        {
+          "name": "TARGET_MARKET",
+          "description": "Votre public cible",
+          "example": "des adultes de 25 à 55 ans soucieux de leur santé qui cherchent à gérer une maladie chronique par l’alimentation"
+        },
+        {
+          "name": "SOLUTION",
+          "description": "Votre produit ou service",
+          "example": "une application de planification des repas fondée sur l’IA qui crée des programmes nutritionnels personnalisés à partir de résultats d’analyses sanguines, de données génétiques et d’objectifs de santé"
+        },
+        {
+          "name": "TRACTION_METRICS",
+          "description": "Indicateurs actuels de l’entreprise",
+          "example": "12 000 abonnés payants, 45 000 $ de MRR, 94 % de fidélisation d’un mois sur l’autre, partenariats avec 3 grandes entreprises d’analyses médicales"
+        },
+        {
+          "name": "FUNDING_AMOUNT",
+          "description": "Montant du financement recherché",
+          "example": "2,5 M$ en Series Seed"
+        }
+      ]
+    }
+  }
+}

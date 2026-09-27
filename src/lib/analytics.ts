@@ -21,7 +21,7 @@ export function trackEvent(type: EventType, payload?: EventPayload) {
 
     const localizedPayload = {
       site_locale: document.documentElement.lang || 'en',
-      localization_pilot: window.location.pathname.startsWith('/pt-BR/'),
+      localization_pilot: (document.documentElement.lang || 'en') !== 'en',
       ...payload,
     };
 

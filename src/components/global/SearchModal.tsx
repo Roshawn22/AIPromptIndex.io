@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import type { KeyboardEvent as ReactKeyboardEvent } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import Fuse from 'fuse.js';
@@ -69,6 +69,32 @@ const englishTypeLabels: Record<string, string> = {
   guide: 'Guide',
 };
 
+interface LocalizedSearchCopy {
+  aria: string;
+  placeholder: string;
+  loadError: string;
+  loading: string;
+  noResults: string;
+  tryAgain: string;
+  minimum: string;
+  catalogNotice: string;
+  navigate: string;
+  select: string;
+  oneResult: string;
+  manyResults: string;
+  typeLabels: Record<string, string>;
+}
+type SearchCopy = Omit<LocalizedSearchCopy, 'oneResult' | 'manyResults'> & { resultsStatus: (count: number) => string };
+
+function readLocalizedSearchCopy(): LocalizedSearchCopy | null {
+  try {
+    const raw = document.getElementById('search-copy')?.textContent;
+    return raw ? (JSON.parse(raw) as LocalizedSearchCopy) : null;
+  } catch {
+    return null;
+  }
+}
+
 const focusableSelector = [
   'a[href]',
   'button:not([disabled])',
@@ -88,36 +114,30 @@ const softGlass = {
 };
 
 export default function SearchModal() {
-  const isPtBr = typeof document !== 'undefined' && document.documentElement.lang === 'pt-BR';
-  const copy = isPtBr
-    ? {
-        aria: 'Buscar prompts de IA',
-        placeholder: 'Buscar prompts, guias e artigos...',
-        loadError: 'Não foi possível carregar o índice de busca.',
-        loading: 'Carregando o índice de busca...',
-        noResults: 'Nenhum resultado para',
-        tryAgain: 'Tente outro termo de busca',
-        minimum: 'Digite pelo menos 2 caracteres para buscar.',
-        catalogNotice: 'Os resultados abrem o catálogo original em inglês.',
-        navigate: 'navegar',
-        select: 'selecionar',
-        resultsStatus: (count: number) => (count === 1 ? '1 resultado' : `${count} resultados`),
-        typeLabels: { prompt: 'Prompt', blog: 'Artigo', guide: 'Guia' } as Record<string, string>,
-      }
-    : {
-        aria: 'Search AI prompts',
-        placeholder: 'Search prompts, guides, articles...',
-        loadError: 'Search index failed to load.',
-        loading: 'Loading search index...',
-        noResults: 'No results for',
-        tryAgain: 'Try a different search term',
-        minimum: 'Type at least 2 characters to search.',
-        catalogNotice: '',
-        navigate: 'navigate',
-        select: 'select',
-        resultsStatus: (count: number) => (count === 1 ? '1 result' : `${count} results`),
-        typeLabels: englishTypeLabels,
+  // Localized pages embed their search copy as JSON (see BaseLayout); English is the default.
+  const copy = useMemo<SearchCopy>(() => {
+    const localized = typeof document !== 'undefined' ? readLocalizedSearchCopy() : null;
+    if (localized) {
+      return {
+        ...localized,
+        resultsStatus: (count: number) => (count === 1 ? localized.oneResult : localized.manyResults.replace('{count}', String(count))),
       };
+    }
+    return {
+      aria: 'Search AI prompts',
+      placeholder: 'Search prompts, guides, articles...',
+      loadError: 'Search index failed to load.',
+      loading: 'Loading search index...',
+      noResults: 'No results for',
+      tryAgain: 'Try a different search term',
+      minimum: 'Type at least 2 characters to search.',
+      catalogNotice: '',
+      navigate: 'navigate',
+      select: 'select',
+      resultsStatus: (count: number) => (count === 1 ? '1 result' : `${count} results`),
+      typeLabels: englishTypeLabels,
+    };
+  }, []);
   const [items, setItems] = useState<SearchItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);

@@ -1,5 +1,5 @@
 ---
-import { getLocaleFromPath, getPtBrCommon, type SiteLocale } from '../../lib/localization';
+import { DEFAULT_LOCALE, getCommon, getLocaleFromPath, type SiteLocale } from '../../lib/localization';
 
 interface Props {
   heading?: string;
@@ -9,7 +9,9 @@ interface Props {
 }
 
 const locale = Astro.props.locale || getLocaleFromPath(Astro.url.pathname);
-const newsletterCopy = locale === 'pt-BR' ? getPtBrCommon().newsletter : null;
+const newsletterCopy = getCommon(locale)?.newsletter ?? null;
+// Lower-case locale tag used in analytics placements and the newsletter campaign, e.g. pt-br.
+const localeTag = locale.toLowerCase();
 const {
   heading = newsletterCopy?.heading || 'Get the Best AI Prompts Weekly',
   subheading = newsletterCopy?.subheading || 'Curated prompts, tips, and guides delivered to your inbox every week. Free.',
@@ -30,13 +32,13 @@ const beehiivPublicationId = (
 const useEmbed = !newsletterUrl && !!beehiivPublicationId;
 const subscribeHref = (() => {
   if (!newsletterUrl) return null;
-  if (locale !== 'pt-BR') return newsletterUrl;
+  if (locale === DEFAULT_LOCALE) return newsletterUrl;
 
   try {
     const url = new URL(newsletterUrl);
     url.searchParams.set('utm_source', 'aipromptindex');
     url.searchParams.set('utm_medium', 'localization_pilot');
-    url.searchParams.set('utm_campaign', 'pt-br-pilot');
+    url.searchParams.set('utm_campaign', `${localeTag}-pilot`);
     return url.toString();
   } catch {
     return newsletterUrl;
@@ -87,7 +89,7 @@ const subscribeHref = (() => {
             rel="noopener noreferrer"
             class="inline-flex min-h-11 w-full items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-accent-fill)] px-5 py-2.5 text-sm font-[var(--font-display)] font-semibold text-[var(--color-on-accent)] transition-colors hover:bg-[var(--color-accent-fill-hover)]"
             data-newsletter-cta="true"
-            data-newsletter-placement={`${locale === 'pt-BR' ? 'pt-br-' : ''}${compact ? 'compact' : 'standard'}`}
+            data-newsletter-placement={`${locale === DEFAULT_LOCALE ? '' : `${localeTag}-`}${compact ? 'compact' : 'standard'}`}
           >
             {newsletterCopy?.subscribe || 'Subscribe free'}
           </a>
