@@ -1,8 +1,13 @@
 @import "tailwindcss" source(none);
 
+/* Dark mode is a class toggled on <html> (see ThemeToggle.astro), not the OS preference. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @source "../layouts/BaseLayout.astro";
 @source "../pages";
 @source "../components";
+/* Class strings assembled in TypeScript (badge colours, difficulty maps) live here. */
+@source "../lib";
 
 @import "./theme.css";
 

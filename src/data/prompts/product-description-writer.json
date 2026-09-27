@@ -34,6 +34,16 @@
       "name": "TARGET_AUDIENCE",
       "description": "Who the product is for",
       "example": "recreational runners aged 25-45 who run 15-30 miles per week"
+    },
+    {
+      "name": "BRAND_TONE",
+      "description": "The personality the copy should carry",
+      "example": "warm and practical, like advice from a knowledgeable friend"
+    },
+    {
+      "name": "SEO_KEYWORDS",
+      "description": "Search terms to work in naturally, comma-separated",
+      "example": "insulated water bottle, leak-proof bottle, 32 oz stainless steel bottle"
     }
   ],
   "tips": [
@@ -48,6 +58,7 @@
   "exampleOutput": "# CloudStep Pro Running Shoes — Lightweight Comfort for Every Mile\n\nTired of choosing between cushioning and speed? The CloudStep Pro gives you both.\n\n- **Zero-Drop Responsive Foam** absorbs impact without slowing your stride, so your legs feel fresh at mile 20\n- **Engineered Mesh Upper** keeps your feet cool and dry, even on humid summer runs\n- **GripTech Outsole** delivers confident traction on wet pavement and light trails\n- **Only 7.8 oz** — lighter than most daily trainers without sacrificing durability\n\nOver 2,000 runners have made the CloudStep Pro their go-to training shoe. As one reviewer put it: \"I forget I'm wearing them — in the best way.\"\n\n**Ready to run lighter? Choose your size and hit the road.**",
   "isFeatured": false,
   "dateAdded": "2026-04-02",
+  "lastUpdated": "2026-09-26",
   "metaTitle": "E-Commerce Product Description Writer Prompt for ChatGPT",
   "metaDescription": "Create conversion-optimized product descriptions for e-commerce with ChatGPT. SEO-friendly copy that sells."
 }

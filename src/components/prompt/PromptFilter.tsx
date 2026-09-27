@@ -142,6 +142,7 @@ export default function PromptFilter({ prompts, tools, categories }: Props) {
         className="mb-8 flex flex-wrap items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-1)] p-4"
       >
         <Select
+          label="Filter by tool"
           value={tool}
           onChange={setTool}
           options={[
@@ -151,6 +152,7 @@ export default function PromptFilter({ prompts, tools, categories }: Props) {
         />
 
         <Select
+          label="Filter by category"
           value={category}
           onChange={setCategory}
           options={[
@@ -159,12 +161,14 @@ export default function PromptFilter({ prompts, tools, categories }: Props) {
           ]}
         />
 
-        <div className="flex items-center gap-1.5">
+        <div className="flex flex-wrap items-center gap-1.5">
           {(['all', 'beginner', 'intermediate', 'advanced'] as DifficultyFilter[]).map((d) => (
             <button
               key={d}
+              type="button"
+              aria-pressed={difficulty === d}
               onClick={() => setDifficulty(d)}
-              className={`cursor-pointer rounded-full border px-3 py-1 text-xs font-medium capitalize transition-colors duration-200 font-[var(--font-display)] ${
+              className={`min-h-10 cursor-pointer rounded-full border px-3 py-1 text-xs font-medium capitalize transition-colors duration-200 font-[var(--font-display)] ${
                 difficulty === d
                   ? 'border-[var(--color-accent)] bg-[var(--color-accent)]/15 text-[var(--color-accent)]'
                   : 'border-[var(--color-border)] bg-[var(--color-surface-2)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-muted)] hover:text-[var(--color-text-primary)]'
@@ -176,6 +180,7 @@ export default function PromptFilter({ prompts, tools, categories }: Props) {
         </div>
 
         <Select
+          label="Sort prompts"
           value={sort}
           onChange={(v) => setSort(v as SortOption)}
           options={[
@@ -262,17 +267,20 @@ export default function PromptFilter({ prompts, tools, categories }: Props) {
 /* Sub-components */
 
 interface SelectProps {
+  /** Accessible name; the first option stops describing the control once another is chosen. */
+  label: string;
   value: string;
   onChange: (v: string) => void;
   options: { value: string; label: string }[];
 }
 
-function Select({ value, onChange, options }: SelectProps) {
+function Select({ label, value, onChange, options }: SelectProps) {
   return (
     <select
+      aria-label={label}
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="cursor-pointer appearance-none rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-1.5 pr-8 text-xs font-medium text-[var(--color-text-primary)] font-[var(--font-display)] transition-colors hover:border-[var(--color-accent-muted)] focus:border-[var(--color-accent)] focus:outline-none"
+      className="min-h-10 cursor-pointer appearance-none rounded-[var(--radius-md)] border border-[var(--color-border-control)] bg-[var(--color-surface-2)] px-3 py-1.5 pr-8 text-xs font-medium text-[var(--color-text-primary)] font-[var(--font-display)] transition-colors hover:border-[var(--color-accent-muted)] focus:border-[var(--color-accent)] focus:outline-none"
       style={SELECT_CHEVRON_STYLE}
     >
       {options.map((opt) => (

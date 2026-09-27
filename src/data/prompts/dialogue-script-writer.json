@@ -4,7 +4,7 @@
   "promptText": "You are a screenwriter known for writing sharp, naturalistic dialogue. Write a [SCENE_LENGTH]-minute dialogue scene between [CHARACTER_A] and [CHARACTER_B]. The scene takes place in [LOCATION]. The dramatic tension comes from [CONFLICT]. The scene should end with [SCENE_GOAL]. Write in proper screenplay format with character names in caps, brief action lines in parentheses, and stage directions. Each character should have a distinct voice: give them different speech patterns, vocabulary levels, and rhythms. Include subtext where characters mean something different from what they say. Add at least one beat (pause) that carries emotional weight. The dialogue should sound natural when read aloud, not like written English.",
   "description": "Great dialogue is the hardest element of screenwriting because it must simultaneously sound natural, reveal character, advance plot, and carry subtext. This prompt generates screenplay-formatted dialogue with distinct character voices that actors can actually perform. The emphasis on subtext ensures the scenes have depth beyond surface-level conversation, while the required beat adds the kind of dramatic pause that elevates good dialogue to great. The natural speech instruction prevents the common AI pitfall of overly articulate characters. Use it for short films, YouTube videos, podcast dramas, video game scripts, or stage plays.",
   "tool": "claude",
-  "category": "creative",
+  "category": "writing",
   "tags": ["screenplay", "dialogue", "scriptwriting", "film", "video-production"],
   "difficulty": "advanced",
   "promptType": "text",

@@ -131,3 +131,4 @@ for (const workflow of scheduledWorkflows) {
     assert.doesNotMatch(source, /local_hour|date \+%H/);
   });
 }
+

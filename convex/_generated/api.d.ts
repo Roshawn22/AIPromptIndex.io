@@ -8,9 +8,13 @@
  * @module
  */
 
+import type * as assist from "../assist.js";
 import type * as collections from "../collections.js";
 import type * as events from "../events.js";
 import type * as lib_auth from "../lib/auth.js";
+import type * as lib_moderationPolicy from "../lib/moderationPolicy.js";
+import type * as lib_typesafe from "../lib/typesafe.js";
+import type * as moderation from "../moderation.js";
 import type * as submissions from "../submissions.js";
 import type * as votes from "../votes.js";
 
@@ -21,9 +25,13 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  assist: typeof assist;
   collections: typeof collections;
   events: typeof events;
   "lib/auth": typeof lib_auth;
+  "lib/moderationPolicy": typeof lib_moderationPolicy;
+  "lib/typesafe": typeof lib_typesafe;
+  moderation: typeof moderation;
   submissions: typeof submissions;
   votes: typeof votes;
 }>;

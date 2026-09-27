@@ -1,5 +1,14 @@
-import { v } from "convex/values";
+import { ConvexError, v } from "convex/values";
 import { query, mutation } from "./_generated/server";
+import { spendBudget } from "./lib/rateLimit";
+
+// Voting needs no account, so the visitor id is self-issued and a script can mint a new
+// one per call. The per-visitor budget throttles an honest browser; the site-wide budget
+// bounds how far rotating ids can move a prompt's count in any one minute.
+const VOTE_WINDOW_MS = 60 * 1000;
+const VOTES_PER_VISITOR = 30;
+const VOTES_SITE_WIDE = 600;
+const VISITOR_ID_PATTERN = /^[a-zA-Z0-9_-]{8,64}$/;
 
 const voteCountsReturn = v.object({
   upvotes: v.number(),
@@ -52,6 +61,16 @@ export const castVote = mutation({
   },
   returns: v.object({ action: castVoteAction }),
   handler: async (ctx, args) => {
+    if (!VISITOR_ID_PATTERN.test(args.visitorId)) {
+      throw new ConvexError("Invalid visitor id. Please refresh and try again.");
+    }
+    const withinBudget =
+      (await spendBudget(ctx, "voteRateLimits", `visitor:${args.visitorId}`, VOTES_PER_VISITOR, VOTE_WINDOW_MS))
+      && (await spendBudget(ctx, "voteRateLimits", "global", VOTES_SITE_WIDE, VOTE_WINDOW_MS));
+    if (!withinBudget) {
+      throw new ConvexError("Too many votes right now. Please try again in a minute.");
+    }
+
     const existing = await ctx.db
       .query("promptVotes")
       .withIndex("by_prompt_visitor", (q) =>

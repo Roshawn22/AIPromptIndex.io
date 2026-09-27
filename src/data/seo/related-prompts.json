@@ -1,0 +1,804 @@
+{
+  "ab-test-design-analyzer": [
+    "data-cleaning-script-generator",
+    "csv-data-analysis-report",
+    "landing-page-copy-generator",
+    "dashboard-design-prompt"
+  ],
+  "abstract-art-wallpaper": [],
+  "ai-slop-detector": [
+    "ai-slop-remover",
+    "seo-blog-post-optimizer",
+    "essay-feedback-assistant"
+  ],
+  "ai-slop-remover": [
+    "ai-slop-detector",
+    "seo-blog-post-optimizer",
+    "linkedin-post-generator",
+    "newsletter-content-creator"
+  ],
+  "api-documentation-generator": [
+    "technical-documentation-writer",
+    "cursor-api-client-generator",
+    "copilot-code-comment-generator",
+    "code-review-checklist"
+  ],
+  "api-endpoint-builder": [
+    "cursor-test-writer",
+    "copilot-error-handler-generator",
+    "copilot-code-comment-generator",
+    "copilot-interface-generator"
+  ],
+  "architectural-visualization-prompt": [
+    "mj-architecture-visualizer",
+    "real-estate-listing-writer",
+    "sd-interior-design-concept"
+  ],
+  "blog-post-outline-generator": [
+    "seo-blog-post-optimizer",
+    "keyword-clustering-assistant",
+    "content-gap-analyzer",
+    "meta-description-generator"
+  ],
+  "book-chapter-outliner": [
+    "chart-type-recommender"
+  ],
+  "book-cover-designer": [],
+  "brand-messaging-framework": [
+    "storytelling-brand-narrative",
+    "competitive-landscape-mapper",
+    "persuasive-email-copywriter",
+    "product-launch-campaign"
+  ],
+  "business-plan-executive-summary": [
+    "financial-model-assumptions",
+    "startup-pitch-deck-script",
+    "startup-pitch-one-pager",
+    "market-opportunity-analyzer"
+  ],
+  "chart-type-recommender": [
+    "data-visualization-recommender",
+    "data-dashboard-layout-planner",
+    "dashboard-design-prompt",
+    "kpi-dashboard-designer"
+  ],
+  "childrens-story-creator": [
+    "book-cover-designer",
+    "fiction-scene-writer",
+    "lesson-plan-creator"
+  ],
+  "cicd-pipeline-generator": [
+    "github-actions-workflow-builder",
+    "unit-test-generator"
+  ],
+  "cinematic-portrait-generator": [
+    "sd-character-design-sheet",
+    "youtube-thumbnail-concept"
+  ],
+  "classroom-discussion-facilitator": [
+    "interactive-quiz-creator",
+    "lesson-plan-creator",
+    "lesson-plan-differentiation"
+  ],
+  "client-scope-document": [
+    "user-story-writer",
+    "email-response-templates",
+    "freelance-rate-calculator",
+    "freelance-proposal-writer"
+  ],
+  "code-review-checklist": [
+    "cursor-test-writer",
+    "cursor-refactor-assistant",
+    "unit-test-generator"
+  ],
+  "cohort-analysis-interpreter": [
+    "data-visualization-recommender",
+    "data-dashboard-layout-planner",
+    "chart-type-recommender",
+    "csv-data-analysis-report"
+  ],
+  "competitive-landscape-mapper": [
+    "business-plan-executive-summary",
+    "startup-pitch-one-pager",
+    "competitor-analysis-framework",
+    "swot-analysis-generator"
+  ],
+  "competitor-analysis-framework": [
+    "competitive-landscape-mapper",
+    "swot-analysis-generator",
+    "pricing-strategy-advisor",
+    "customer-persona-builder"
+  ],
+  "concept-explainer-for-kids": [
+    "interactive-quiz-creator",
+    "science-experiment-designer",
+    "lesson-plan-differentiation",
+    "socratic-tutor-assistant"
+  ],
+  "content-calendar-generator": [
+    "blog-post-outline-generator",
+    "content-gap-analyzer",
+    "small-business-social-media-strategy",
+    "linkedin-post-generator"
+  ],
+  "content-gap-analyzer": [
+    "seo-blog-post-optimizer",
+    "keyword-clustering-assistant",
+    "seo-keyword-research-strategy",
+    "content-calendar-generator"
+  ],
+  "copilot-code-comment-generator": [
+    "technical-documentation-writer",
+    "api-documentation-generator",
+    "unit-test-generator",
+    "cursor-test-writer"
+  ],
+  "copilot-error-handler-generator": [
+    "unit-test-generator",
+    "api-endpoint-builder",
+    "nextjs-route-handler",
+    "api-documentation-generator"
+  ],
+  "copilot-interface-generator": [
+    "api-endpoint-builder",
+    "nextjs-route-handler",
+    "cursor-api-client-generator",
+    "copilot-error-handler-generator"
+  ],
+  "copilot-regex-explainer": [
+    "regex-pattern-builder",
+    "cursor-test-writer",
+    "unit-test-generator",
+    "code-review-checklist"
+  ],
+  "course-curriculum-designer": [
+    "interactive-quiz-creator",
+    "lesson-plan-creator",
+    "study-guide-generator",
+    "personalized-learning-path"
+  ],
+  "cover-letter-customizer": [
+    "resume-rewriter-ats-optimized",
+    "resume-cover-letter-writer",
+    "resume-achievement-rewriter",
+    "email-response-templates"
+  ],
+  "csv-data-analysis-report": [
+    "kpi-dashboard-designer",
+    "data-dashboard-layout-planner",
+    "data-visualization-recommender",
+    "data-cleaning-script-generator"
+  ],
+  "cursor-api-client-generator": [
+    "cursor-test-writer",
+    "typescript-type-generator",
+    "copilot-error-handler-generator",
+    "cursor-refactor-assistant"
+  ],
+  "cursor-migration-helper": [
+    "cursor-test-writer",
+    "github-actions-workflow-builder",
+    "database-schema-designer",
+    "python-data-pipeline"
+  ],
+  "cursor-refactor-assistant": [
+    "cursor-test-writer",
+    "unit-test-generator",
+    "git-commit-message-writer",
+    "code-review-checklist"
+  ],
+  "cursor-test-writer": [
+    "unit-test-generator",
+    "github-actions-workflow-builder",
+    "code-review-checklist"
+  ],
+  "customer-onboarding-email-sequence": [
+    "customer-testimonial-writer",
+    "persuasive-email-copywriter"
+  ],
+  "customer-persona-builder": [
+    "brand-messaging-framework",
+    "product-launch-campaign",
+    "market-opportunity-analyzer",
+    "competitive-landscape-mapper"
+  ],
+  "customer-survey-analyzer": [
+    "survey-results-analyzer",
+    "customer-persona-builder",
+    "data-visualization-recommender",
+    "customer-testimonial-writer"
+  ],
+  "customer-testimonial-writer": [
+    "landing-page-copy-generator",
+    "social-media-content-calendar",
+    "social-media-graphic-prompt",
+    "customer-onboarding-email-sequence"
+  ],
+  "dalle-brand-mascot-creator": [
+    "sd-character-design-sheet",
+    "social-media-graphic-prompt",
+    "storytelling-brand-narrative",
+    "brand-messaging-framework"
+  ],
+  "dalle-event-poster-designer": [
+    "social-media-graphic-prompt",
+    "social-media-content-calendar",
+    "small-business-social-media-strategy",
+    "content-calendar-generator"
+  ],
+  "dalle-infographic-designer": [
+    "isometric-icon-set-generator",
+    "data-visualization-recommender",
+    "social-media-graphic-prompt",
+    "social-media-content-calendar"
+  ],
+  "dalle-storyboard-artist": [
+    "dialogue-script-writer",
+    "sd-character-design-sheet",
+    "tiktok-video-script-creator",
+    "cinematic-portrait-generator"
+  ],
+  "dashboard-design-prompt": [
+    "data-dashboard-layout-planner",
+    "kpi-dashboard-designer",
+    "data-visualization-recommender",
+    "chart-type-recommender"
+  ],
+  "data-cleaning-script-generator": [
+    "csv-data-analysis-report",
+    "python-data-pipeline",
+    "chart-type-recommender",
+    "data-visualization-recommender"
+  ],
+  "data-dashboard-layout-planner": [
+    "dashboard-design-prompt",
+    "kpi-dashboard-designer",
+    "chart-type-recommender",
+    "data-visualization-recommender"
+  ],
+  "data-visualization-recommender": [
+    "chart-type-recommender",
+    "data-dashboard-layout-planner",
+    "dashboard-design-prompt",
+    "kpi-dashboard-designer"
+  ],
+  "database-schema-designer": [
+    "prisma-schema-generator",
+    "cursor-migration-helper",
+    "sql-query-debugger",
+    "sql-query-optimizer"
+  ],
+  "debug-error-detective": [
+    "cursor-test-writer",
+    "unit-test-generator",
+    "code-review-checklist",
+    "cursor-refactor-assistant"
+  ],
+  "dialogue-script-writer": [
+    "worldbuilding-culture-creator",
+    "cinematic-portrait-generator"
+  ],
+  "dnd-character-backstory": [
+    "worldbuilding-culture-creator",
+    "fiction-scene-writer"
+  ],
+  "docker-compose-generator": [
+    "cicd-pipeline-generator",
+    "github-actions-workflow-builder",
+    "database-schema-designer",
+    "prisma-schema-generator"
+  ],
+  "editorial-illustration-prompt": [
+    "dalle-infographic-designer"
+  ],
+  "email-newsletter-writer": [
+    "ai-slop-remover",
+    "ai-slop-detector",
+    "newsletter-content-creator",
+    "content-calendar-generator"
+  ],
+  "email-response-templates": [
+    "investor-update-email"
+  ],
+  "essay-feedback-assistant": [
+    "essay-outline-builder",
+    "rubric-generator"
+  ],
+  "essay-outline-builder": [
+    "essay-feedback-assistant",
+    "research-paper-summarizer"
+  ],
+  "exam-prep-quiz-maker": [
+    "study-guide-generator",
+    "interactive-quiz-creator",
+    "flashcard-generator"
+  ],
+  "fantasy-landscape-creator": [
+    "worldbuilding-culture-creator",
+    "sd-character-design-sheet",
+    "sci-fi-concept-art-prompt",
+    "book-cover-designer"
+  ],
+  "fashion-design-concept": [],
+  "fiction-scene-writer": [
+    "worldbuilding-culture-creator"
+  ],
+  "financial-model-assumptions": [
+    "spreadsheet-formula-builder",
+    "business-plan-executive-summary",
+    "startup-pitch-one-pager",
+    "startup-pitch-deck-script"
+  ],
+  "flashcard-generator": [
+    "study-guide-generator",
+    "exam-prep-quiz-maker"
+  ],
+  "flat-lay-product-composition": [
+    "product-description-writer",
+    "instagram-caption-writer",
+    "social-media-graphic-prompt",
+    "product-photography-prompt"
+  ],
+  "freelance-proposal-writer": [
+    "client-scope-document",
+    "freelance-rate-calculator"
+  ],
+  "freelance-rate-calculator": [
+    "client-scope-document",
+    "freelance-proposal-writer",
+    "competitive-landscape-mapper",
+    "pricing-strategy-advisor"
+  ],
+  "game-mechanic-designer": [
+    "worldbuilding-culture-creator"
+  ],
+  "git-commit-message-writer": [
+    "code-review-checklist",
+    "copilot-code-comment-generator",
+    "cursor-test-writer",
+    "cursor-refactor-assistant"
+  ],
+  "github-actions-workflow-builder": [
+    "cicd-pipeline-generator"
+  ],
+  "google-ads-copy-generator": [
+    "keyword-clustering-assistant"
+  ],
+  "instagram-caption-writer": [
+    "social-media-graphic-prompt",
+    "content-calendar-generator",
+    "social-media-content-calendar",
+    "small-business-social-media-strategy"
+  ],
+  "interactive-quiz-creator": [
+    "exam-prep-quiz-maker",
+    "rubric-generator",
+    "study-guide-generator",
+    "lesson-plan-creator"
+  ],
+  "investor-update-email": [
+    "financial-model-assumptions",
+    "startup-pitch-deck-script",
+    "business-plan-executive-summary",
+    "kpi-dashboard-designer"
+  ],
+  "isometric-icon-set-generator": [
+    "dalle-infographic-designer",
+    "social-media-graphic-prompt"
+  ],
+  "job-description-writer": [
+    "resume-cover-letter-writer",
+    "meta-description-generator",
+    "cover-letter-customizer"
+  ],
+  "keyword-clustering-assistant": [
+    "content-gap-analyzer",
+    "blog-post-outline-generator",
+    "seo-blog-post-optimizer",
+    "meta-description-generator"
+  ],
+  "kpi-dashboard-designer": [
+    "dashboard-design-prompt",
+    "data-dashboard-layout-planner",
+    "chart-type-recommender",
+    "data-visualization-recommender"
+  ],
+  "landing-page-copy-generator": [
+    "customer-testimonial-writer",
+    "customer-onboarding-email-sequence",
+    "dalle-infographic-designer",
+    "product-launch-campaign"
+  ],
+  "lesson-plan-creator": [
+    "lesson-plan-differentiation",
+    "interactive-quiz-creator",
+    "rubric-generator",
+    "classroom-discussion-facilitator"
+  ],
+  "lesson-plan-differentiation": [
+    "rubric-generator",
+    "classroom-discussion-facilitator",
+    "lesson-plan-creator",
+    "math-problem-set-generator"
+  ],
+  "linkedin-post-generator": [
+    "content-calendar-generator",
+    "social-media-content-calendar",
+    "small-business-social-media-strategy",
+    "dalle-infographic-designer"
+  ],
+  "logo-concept-generator": [
+    "dalle-brand-mascot-creator",
+    "social-media-graphic-prompt"
+  ],
+  "market-opportunity-analyzer": [
+    "competitor-analysis-framework",
+    "competitive-landscape-mapper",
+    "customer-persona-builder",
+    "swot-analysis-generator"
+  ],
+  "math-problem-set-generator": [
+    "rubric-generator",
+    "study-guide-generator",
+    "socratic-tutor-assistant",
+    "exam-prep-quiz-maker"
+  ],
+  "meeting-agenda-facilitator": [
+    "meeting-notes-summarizer",
+    "swot-analysis-generator",
+    "okr-framework-generator"
+  ],
+  "meeting-notes-summarizer": [
+    "meeting-agenda-facilitator"
+  ],
+  "meta-description-generator": [
+    "seo-blog-post-optimizer",
+    "blog-post-outline-generator",
+    "landing-page-copy-generator",
+    "seo-keyword-research-strategy"
+  ],
+  "mj-album-cover-designer": [
+    "social-media-graphic-prompt",
+    "youtube-thumbnail-concept"
+  ],
+  "mj-architecture-visualizer": [
+    "architectural-visualization-prompt",
+    "real-estate-listing-writer",
+    "sd-interior-design-concept",
+    "sd-texture-pattern-generator"
+  ],
+  "mvp-feature-prioritizer": [
+    "product-launch-campaign",
+    "competitive-landscape-mapper",
+    "competitor-analysis-framework",
+    "financial-model-assumptions"
+  ],
+  "newsletter-content-creator": [
+    "email-newsletter-writer",
+    "content-calendar-generator"
+  ],
+  "nextjs-route-handler": [
+    "api-documentation-generator",
+    "cursor-test-writer",
+    "unit-test-generator",
+    "copilot-error-handler-generator"
+  ],
+  "okr-framework-generator": [
+    "financial-model-assumptions",
+    "swot-analysis-generator",
+    "competitor-analysis-framework"
+  ],
+  "open-house-follow-up-email": [],
+  "personalized-learning-path": [
+    "flashcard-generator",
+    "study-guide-generator",
+    "exam-prep-quiz-maker",
+    "rubric-generator"
+  ],
+  "persuasive-email-copywriter": [
+    "customer-onboarding-email-sequence",
+    "landing-page-copy-generator",
+    "product-launch-campaign",
+    "customer-testimonial-writer"
+  ],
+  "podcast-episode-planner": [
+    "podcast-show-notes-writer",
+    "content-calendar-generator",
+    "social-media-content-calendar"
+  ],
+  "podcast-show-notes-writer": [
+    "instagram-caption-writer",
+    "social-media-graphic-prompt",
+    "meta-description-generator",
+    "seo-blog-post-optimizer"
+  ],
+  "poetry-workshop-assistant": [
+    "songwriting-assistant"
+  ],
+  "press-release-generator": [
+    "product-launch-campaign",
+    "linkedin-post-generator"
+  ],
+  "pricing-strategy-advisor": [
+    "competitive-landscape-mapper",
+    "competitor-analysis-framework",
+    "financial-model-assumptions",
+    "customer-persona-builder"
+  ],
+  "prisma-schema-generator": [
+    "cursor-migration-helper",
+    "database-schema-designer",
+    "copilot-interface-generator",
+    "nextjs-route-handler"
+  ],
+  "product-description-writer": [
+    "meta-description-generator",
+    "customer-testimonial-writer",
+    "instagram-caption-writer",
+    "persuasive-email-copywriter"
+  ],
+  "product-launch-campaign": [
+    "persuasive-email-copywriter",
+    "content-calendar-generator",
+    "brand-messaging-framework",
+    "customer-testimonial-writer"
+  ],
+  "product-photography-prompt": [
+    "product-description-writer",
+    "social-media-graphic-prompt",
+    "flat-lay-product-composition",
+    "social-media-content-calendar"
+  ],
+  "property-investment-analyzer": [
+    "financial-model-assumptions",
+    "real-estate-market-analyzer"
+  ],
+  "python-data-pipeline": [
+    "cursor-api-client-generator",
+    "unit-test-generator",
+    "python-decorator-generator",
+    "github-actions-workflow-builder"
+  ],
+  "python-decorator-generator": [
+    "cursor-test-writer",
+    "unit-test-generator",
+    "copilot-code-comment-generator",
+    "cursor-refactor-assistant"
+  ],
+  "react-component-generator": [
+    "cursor-test-writer",
+    "cursor-refactor-assistant",
+    "unit-test-generator",
+    "github-actions-workflow-builder"
+  ],
+  "real-estate-listing-writer": [
+    "social-media-graphic-prompt",
+    "small-business-social-media-strategy",
+    "open-house-follow-up-email",
+    "content-calendar-generator"
+  ],
+  "real-estate-market-analyzer": [
+    "property-investment-analyzer"
+  ],
+  "regex-pattern-builder": [
+    "copilot-regex-explainer",
+    "cursor-test-writer",
+    "unit-test-generator"
+  ],
+  "research-paper-summarizer": [
+    "flashcard-generator",
+    "personalized-learning-path",
+    "exam-prep-quiz-maker",
+    "essay-outline-builder"
+  ],
+  "resume-achievement-rewriter": [
+    "resume-cover-letter-writer",
+    "cover-letter-customizer",
+    "resume-rewriter-ats-optimized",
+    "ai-slop-remover"
+  ],
+  "resume-cover-letter-writer": [
+    "cover-letter-customizer",
+    "resume-rewriter-ats-optimized",
+    "resume-achievement-rewriter",
+    "email-response-templates"
+  ],
+  "resume-rewriter-ats-optimized": [
+    "cover-letter-customizer",
+    "resume-cover-letter-writer",
+    "resume-achievement-rewriter",
+    "ai-slop-remover"
+  ],
+  "retro-pixel-art-scene": [
+    "sd-texture-pattern-generator",
+    "sd-character-design-sheet",
+    "fantasy-landscape-creator",
+    "game-mechanic-designer"
+  ],
+  "rubric-generator": [
+    "interactive-quiz-creator",
+    "student-progress-report-writer",
+    "lesson-plan-creator",
+    "lesson-plan-differentiation"
+  ],
+  "sales-outreach-email-sequence": [
+    "customer-testimonial-writer",
+    "customer-onboarding-email-sequence"
+  ],
+  "sci-fi-concept-art-prompt": [
+    "fantasy-landscape-creator",
+    "sd-character-design-sheet"
+  ],
+  "science-experiment-designer": [
+    "lesson-plan-differentiation",
+    "lesson-plan-creator",
+    "classroom-discussion-facilitator"
+  ],
+  "sd-character-design-sheet": [
+    "dalle-storyboard-artist",
+    "cinematic-portrait-generator"
+  ],
+  "sd-food-photography-style": [
+    "social-media-graphic-prompt",
+    "small-business-social-media-strategy",
+    "flat-lay-product-composition"
+  ],
+  "sd-interior-design-concept": [
+    "architectural-visualization-prompt"
+  ],
+  "sd-texture-pattern-generator": [],
+  "seo-blog-post-optimizer": [
+    "ai-slop-remover",
+    "content-gap-analyzer",
+    "meta-description-generator",
+    "keyword-clustering-assistant"
+  ],
+  "seo-keyword-research-strategy": [
+    "keyword-clustering-assistant",
+    "content-gap-analyzer",
+    "seo-blog-post-optimizer",
+    "meta-description-generator"
+  ],
+  "small-business-budget-planner": [
+    "financial-model-assumptions",
+    "small-business-marketing-plan",
+    "business-plan-executive-summary",
+    "pricing-strategy-advisor"
+  ],
+  "small-business-marketing-plan": [
+    "small-business-social-media-strategy",
+    "kpi-dashboard-designer",
+    "social-media-content-calendar",
+    "content-gap-analyzer"
+  ],
+  "small-business-social-media-strategy": [
+    "instagram-caption-writer",
+    "content-calendar-generator",
+    "social-media-content-calendar",
+    "social-media-graphic-prompt"
+  ],
+  "social-media-content-calendar": [
+    "instagram-caption-writer",
+    "content-calendar-generator",
+    "social-media-graphic-prompt",
+    "small-business-social-media-strategy"
+  ],
+  "social-media-graphic-prompt": [
+    "instagram-caption-writer",
+    "content-calendar-generator",
+    "social-media-content-calendar",
+    "dalle-infographic-designer"
+  ],
+  "socratic-tutor-assistant": [
+    "exam-prep-quiz-maker",
+    "study-guide-generator",
+    "flashcard-generator",
+    "math-problem-set-generator"
+  ],
+  "songwriting-assistant": [
+    "ai-slop-remover"
+  ],
+  "speech-writer-assistant": [
+    "startup-pitch-deck-script"
+  ],
+  "spreadsheet-formula-builder": [
+    "kpi-dashboard-designer",
+    "data-cleaning-script-generator",
+    "csv-data-analysis-report",
+    "financial-model-assumptions"
+  ],
+  "sql-query-debugger": [
+    "sql-query-optimizer",
+    "database-schema-designer"
+  ],
+  "sql-query-optimizer": [
+    "sql-query-debugger"
+  ],
+  "startup-pitch-deck-script": [
+    "startup-pitch-one-pager",
+    "investor-update-email",
+    "business-plan-executive-summary",
+    "storytelling-brand-narrative"
+  ],
+  "startup-pitch-one-pager": [
+    "startup-pitch-deck-script",
+    "financial-model-assumptions",
+    "business-plan-executive-summary",
+    "competitive-landscape-mapper"
+  ],
+  "storytelling-brand-narrative": [
+    "startup-pitch-deck-script",
+    "brand-messaging-framework",
+    "investor-update-email",
+    "small-business-social-media-strategy"
+  ],
+  "student-progress-report-writer": [],
+  "study-guide-generator": [
+    "flashcard-generator",
+    "exam-prep-quiz-maker",
+    "socratic-tutor-assistant",
+    "interactive-quiz-creator"
+  ],
+  "survey-results-analyzer": [
+    "customer-survey-analyzer",
+    "data-dashboard-layout-planner",
+    "csv-data-analysis-report"
+  ],
+  "swot-analysis-generator": [
+    "investor-update-email",
+    "competitor-analysis-framework",
+    "competitive-landscape-mapper",
+    "okr-framework-generator"
+  ],
+  "technical-documentation-writer": [
+    "api-documentation-generator",
+    "copilot-code-comment-generator",
+    "api-endpoint-builder"
+  ],
+  "tiktok-video-script-creator": [
+    "content-calendar-generator",
+    "social-media-content-calendar",
+    "small-business-social-media-strategy",
+    "social-media-graphic-prompt"
+  ],
+  "typescript-type-generator": [
+    "copilot-interface-generator",
+    "cursor-api-client-generator",
+    "nextjs-route-handler",
+    "api-documentation-generator"
+  ],
+  "unit-test-generator": [
+    "cursor-test-writer",
+    "github-actions-workflow-builder",
+    "cicd-pipeline-generator",
+    "code-review-checklist"
+  ],
+  "user-story-writer": [
+    "cursor-test-writer",
+    "mvp-feature-prioritizer",
+    "prisma-schema-generator",
+    "okr-framework-generator"
+  ],
+  "vocabulary-builder-game": [
+    "flashcard-generator",
+    "interactive-quiz-creator",
+    "study-guide-generator"
+  ],
+  "watercolor-illustration-prompt": [
+    "logo-concept-generator"
+  ],
+  "worldbuilding-culture-creator": [
+    "fiction-scene-writer",
+    "fantasy-landscape-creator",
+    "sd-character-design-sheet",
+    "sci-fi-concept-art-prompt"
+  ],
+  "youtube-thumbnail-concept": [
+    "youtube-video-script-writer",
+    "social-media-graphic-prompt",
+    "content-calendar-generator"
+  ],
+  "youtube-video-script-writer": [
+    "youtube-thumbnail-concept"
+  ]
+}

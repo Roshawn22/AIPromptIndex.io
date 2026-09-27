@@ -5,6 +5,7 @@ import Fuse from 'fuse.js';
 import type { IFuseOptions, FuseResult } from 'fuse.js';
 import type { SearchItem } from '../../lib/types';
 import { trackSearchOpened, trackSearchResults } from '../../lib/analytics';
+import { applyRelevance, rerankSearch, shouldRerank } from '../../lib/assist';
 import {
   registerSearchOpenController,
   unregisterSearchOpenController,
@@ -22,15 +23,49 @@ const fuseOptions: IFuseOptions<SearchItem> = {
   minMatchCharLength: 2,
 };
 
+const SEARCH_STOP_WORDS = new Set(['a', 'an', 'and', 'for', 'in', 'my', 'of', 'on', 'the', 'to', 'with', 'ai', 'prompt', 'prompts']);
+const MIN_PHRASE_RESULTS = 3;
+
+/**
+ * Fuse matches the query as one fuzzy phrase, so a natural-language search such as
+ * "email to angry customer" finds nothing even though relevant prompts exist. When the
+ * phrase search comes up short, fall back to matching the meaningful words individually,
+ * ranked by how many of them each item matches.
+ */
+function searchWithTokenFallback(fuse: Fuse<SearchItem>, query: string): FuseResult<SearchItem>[] {
+  const phraseResults = fuse.search(query);
+  const tokens = query.toLowerCase().split(/\s+/).filter((token) => token.length > 2 && !SEARCH_STOP_WORDS.has(token));
+  if (phraseResults.length >= MIN_PHRASE_RESULTS || tokens.length < 2) return phraseResults;
+
+  const merged = new Map<string, { result: FuseResult<SearchItem>; hits: number }>();
+  for (const token of new Set(tokens)) {
+    for (const result of fuse.search(token)) {
+      const existing = merged.get(result.item.url);
+      if (!existing) {
+        merged.set(result.item.url, { result, hits: 1 });
+      } else {
+        existing.hits += 1;
+        if ((result.score ?? 1) < (existing.result.score ?? 1)) existing.result = result;
+      }
+    }
+  }
+  const phraseUrls = new Set(phraseResults.map((result) => result.item.url));
+  const tokenResults = [...merged.values()]
+    .filter((entry) => !phraseUrls.has(entry.result.item.url))
+    .sort((a, b) => b.hits - a.hits || (a.result.score ?? 1) - (b.result.score ?? 1))
+    .map((entry) => entry.result);
+  return [...phraseResults, ...tokenResults];
+}
+
 const typeIcons: Record<string, string> = {
   prompt: 'M8 6h13M8 12h9M8 18h11',
   blog: 'M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z',
   guide: 'M12 6.253v13m0-13C10.832 5.484 9.246 5 7.5 5 4.462 5 2 6.462 2 9.5v8.25A.75.75 0 002.75 18.5h5.5c1.746 0 3.332.484 4.5 1.253m0-13C13.918 5.484 15.504 5 17.25 5 20.288 5 22.75 6.462 22.75 9.5v8.25a.75.75 0 01-.75.75h-5.5c-1.746 0-3.332.484-4.5 1.253',
 };
 
-const typeLabels: Record<string, string> = {
+const englishTypeLabels: Record<string, string> = {
   prompt: 'Prompt',
-  blog: 'Article',
+  blog: 'Blog',
   guide: 'Guide',
 };
 
@@ -53,6 +88,36 @@ const softGlass = {
 };
 
 export default function SearchModal() {
+  const isPtBr = typeof document !== 'undefined' && document.documentElement.lang === 'pt-BR';
+  const copy = isPtBr
+    ? {
+        aria: 'Buscar prompts de IA',
+        placeholder: 'Buscar prompts, guias e artigos...',
+        loadError: 'Não foi possível carregar o índice de busca.',
+        loading: 'Carregando o índice de busca...',
+        noResults: 'Nenhum resultado para',
+        tryAgain: 'Tente outro termo de busca',
+        minimum: 'Digite pelo menos 2 caracteres para buscar.',
+        catalogNotice: 'Os resultados abrem o catálogo original em inglês.',
+        navigate: 'navegar',
+        select: 'selecionar',
+        resultsStatus: (count: number) => (count === 1 ? '1 resultado' : `${count} resultados`),
+        typeLabels: { prompt: 'Prompt', blog: 'Artigo', guide: 'Guia' } as Record<string, string>,
+      }
+    : {
+        aria: 'Search AI prompts',
+        placeholder: 'Search prompts, guides, articles...',
+        loadError: 'Search index failed to load.',
+        loading: 'Loading search index...',
+        noResults: 'No results for',
+        tryAgain: 'Try a different search term',
+        minimum: 'Type at least 2 characters to search.',
+        catalogNotice: '',
+        navigate: 'navigate',
+        select: 'select',
+        resultsStatus: (count: number) => (count === 1 ? '1 result' : `${count} results`),
+        typeLabels: englishTypeLabels,
+      };
   const [items, setItems] = useState<SearchItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -61,6 +126,8 @@ export default function SearchModal() {
   const [debouncedQuery, setDebouncedQuery] = useState('');
   const [results, setResults] = useState<FuseResult<SearchItem>[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const selectedIndexRef = useRef(0);
+  selectedIndexRef.current = selectedIndex;
   const inputRef = useRef<HTMLInputElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
   const fuseRef = useRef<Fuse<SearchItem> | null>(null);
@@ -98,7 +165,7 @@ export default function SearchModal() {
       setItems(nextItems);
       hasLoadedRef.current = true;
     } catch {
-      setLoadError('Search index failed to load.');
+      setLoadError(copy.loadError);
     } finally {
       setIsLoading(false);
     }
@@ -123,11 +190,41 @@ export default function SearchModal() {
       return;
     }
 
-    const allSearchResults = fuseRef.current.search(normalizedQuery);
+    const allSearchResults = searchWithTokenFallback(fuseRef.current, normalizedQuery);
     setResults(allSearchResults.slice(0, 8));
     setSelectedIndex(0);
     trackSearchResults(allSearchResults.length, normalizedQuery.length);
   }, [debouncedQuery, items]);
+
+  // Optional TypeSafe rerank (PUBLIC_TYPESAFE_SEARCH_RERANK). It waits for a typing pause so
+  // results do not shuffle mid-keystroke, and stands down once the user starts navigating.
+  useEffect(() => {
+    const normalizedQuery = debouncedQuery.trim();
+    if (!shouldRerank(normalizedQuery, results.length)) return;
+
+    let cancelled = false;
+    const timeoutId = window.setTimeout(async () => {
+      const relevance = await rerankSearch(
+        normalizedQuery,
+        results.map(({ item }) => ({
+          url: item.url,
+          name: item.name,
+          description: item.description,
+          type: item.type,
+        })),
+      );
+      if (cancelled || !relevance) return;
+      if (selectedIndexRef.current !== 0) return;
+      setResults((shown) => applyRelevance(shown, (result) => result.item.url, relevance));
+    }, 600);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timeoutId);
+    };
+    // `results` is intentionally read from the render that produced this query's matches.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedQuery, results.length]);
 
   useEffect(() => {
     registerSearchOpenController(openModal);
@@ -221,7 +318,7 @@ export default function SearchModal() {
           className="fixed inset-0 z-[100] flex items-start justify-center pt-[10vh] sm:pt-[15vh]"
           role="dialog"
           aria-modal="true"
-          aria-label="Search AI prompts"
+          aria-label={copy.aria}
           aria-busy={isLoading}
           onClick={closeModal}
         >
@@ -273,15 +370,20 @@ export default function SearchModal() {
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 onKeyDown={handleInputKeyDown}
-                placeholder="Search prompts, guides, articles..."
+                placeholder={copy.placeholder}
                 className="w-full bg-transparent py-4 text-base outline-none"
                 style={{
                   color: 'var(--color-text-primary)',
                   fontFamily: 'var(--font-display)',
                 }}
-                aria-label="Search AI prompts"
+                aria-label={copy.aria}
+                role="combobox"
+                aria-expanded={results.length > 0}
+                aria-controls="search-results"
+                aria-autocomplete="list"
+                aria-activedescendant={results.length > 0 ? `search-result-${selectedIndex}` : undefined}
               />
-              <kbd
+              <kbd aria-hidden="true"
                 className="hidden items-center rounded-full border px-2 py-1 text-xs sm:inline-flex"
                 style={{
                   backgroundColor: 'var(--glass-highlight-soft)',
@@ -295,10 +397,15 @@ export default function SearchModal() {
               </kbd>
             </div>
 
-            <div className="max-h-80 overflow-y-auto">
+            <div
+              id="search-results"
+              role={results.length > 0 ? 'listbox' : undefined}
+              aria-label={results.length > 0 ? copy.aria : undefined}
+              className="max-h-80 overflow-y-auto"
+            >
               {isLoading && (
                 <div className="px-5 py-10 text-center" style={{ color: 'var(--color-text-muted)' }}>
-                  <p className="text-sm">Loading search index...</p>
+                  <p className="text-sm">{copy.loading}</p>
                 </div>
               )}
 
@@ -310,14 +417,14 @@ export default function SearchModal() {
 
               {!isLoading && !loadError && query.trim().length >= 2 && results.length === 0 && (
                 <div className="px-5 py-10 text-center" style={{ color: 'var(--color-text-muted)' }}>
-                  <p className="text-sm">No results for &quot;{query}&quot;</p>
-                  <p className="mt-1 text-xs">Try a different search term</p>
+                  <p className="text-sm">{copy.noResults} &quot;{query}&quot;</p>
+                  <p className="mt-1 text-xs">{copy.tryAgain}</p>
                 </div>
               )}
 
               {!isLoading && !loadError && query.trim().length < 2 && (
                 <div className="px-5 py-8 text-center" style={{ color: 'var(--color-text-muted)' }}>
-                  <p className="text-sm">Type at least 2 characters to search.</p>
+                  <p className="text-sm">{copy.minimum}</p>
                 </div>
               )}
 
@@ -330,6 +437,9 @@ export default function SearchModal() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.2, delay: motionDisabled ? 0 : index * 0.03 }}
                     href={result.item.url}
+                    id={`search-result-${index}`}
+                    role="option"
+                    aria-selected={index === selectedIndex}
                     className="flex items-center gap-3 px-5 py-3 transition-colors"
                     style={{
                       backgroundColor:
@@ -368,7 +478,7 @@ export default function SearchModal() {
                             borderColor: 'var(--glass-border)',
                           }}
                         >
-                          {typeLabels[result.item.type] || result.item.type}
+                          {copy.typeLabels[result.item.type] || result.item.type}
                         </span>
                       </div>
                       <p className="mt-0.5 truncate text-xs" style={{ color: 'var(--color-text-muted)' }}>
@@ -389,6 +499,9 @@ export default function SearchModal() {
                   </motion.a>
                 ))}
             </div>
+            <p role="status" className="sr-only">
+              {!isLoading && !loadError && query.trim().length >= 2 ? copy.resultsStatus(results.length) : ''}
+            </p>
 
             <div
               className="flex items-center justify-between border-t px-5 py-3 text-xs"
@@ -398,28 +511,32 @@ export default function SearchModal() {
                 fontFamily: 'var(--font-display)',
               }}
             >
-              <div className="flex items-center gap-3">
+              <div className="hidden items-center gap-3 [@media(hover:hover)]:flex">
                 <span className="flex items-center gap-1">
-                  <kbd
+                  <kbd aria-hidden="true"
                     className="rounded px-1.5 py-0.5"
                     style={{ ...softGlass, borderStyle: 'solid', borderWidth: '1px' }}
                   >
                     &uarr;&darr;
                   </kbd>
-                  navigate
+                  {copy.navigate}
                 </span>
                 <span className="flex items-center gap-1">
-                  <kbd
+                  <kbd aria-hidden="true"
                     className="rounded px-1.5 py-0.5"
                     style={{ ...softGlass, borderStyle: 'solid', borderWidth: '1px' }}
                   >
                     &crarr;
                   </kbd>
-                  select
+                  {copy.select}
                 </span>
               </div>
-              <span>Powered by Fuse.js</span>
             </div>
+            {copy.catalogNotice && (
+              <p className="border-t px-5 py-2 text-center text-[11px]" style={{ borderColor: 'var(--glass-border)', color: 'var(--color-text-muted)' }}>
+                {copy.catalogNotice}
+              </p>
+            )}
           </motion.div>
         </motion.div>
       )}

@@ -22,6 +22,12 @@ const promptIndex = dayOfYear % allPrompts.length;
 const prompt = allPrompts.sort((a, b) => a.data.slug.localeCompare(b.data.slug))[promptIndex];
 const data = prompt.data;
 
+// The site is prerendered, so the pick above is frozen at build time. The browser repeats
+// the same day-of-year arithmetic and, when the calendar has moved on since the last deploy,
+// sends the visitor to today's prompt instead of showing a stale one.
+const sortedSlugs = allPrompts.map((p) => p.data.slug);
+const dailyRedirectScript = `(function(){var slugs=${JSON.stringify(sortedSlugs)};var now=new Date();var day=Math.floor((now.getTime()-new Date(now.getFullYear(),0,0).getTime())/864e5);var slug=slugs[day%slugs.length];if(slug&&slug!==${JSON.stringify(data.slug)}){window.location.replace('/prompts/'+slug+'/');}})();`;
+
 /* toolDisplayNames, difficultyColor imported from lib/constants */
 
 const siteUrl = 'https://aipromptindex.io';
@@ -41,6 +47,7 @@ const formattedDate = today.toLocaleDateString('en-US', {
   noindex={true}
 >
   <Header slot="header" />
+  <script is:inline set:html={dailyRedirectScript} />
   <PromptViewTracker client:load promptSlug={data.slug} tool={data.tool} category={data.category} />
 
   <section class="mx-auto max-w-3xl px-[var(--space-page)] py-12">

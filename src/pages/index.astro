@@ -44,70 +44,65 @@ const tools = [
 ];
 
 const collections = [
-  { title: 'Free AI Prompt Library', description: 'Copy-ready prompts grouped for free AI tool tiers and repeatable workflows.', href: '/best/free-ai-prompts/' },
-  { title: 'Best AI Prompt Catalog', description: 'Start with the strongest prompts across every tool, category, and use case.', href: '/best/best-ai-prompts/' },
+  { title: 'Free AI Prompts', description: 'Copy-ready prompts that work on the free tiers of ChatGPT, Claude, and Gemini.', href: '/best/free-ai-prompts/' },
+  { title: 'Best AI Prompts', description: 'The whole library on one page, with our editors\' picks first.', href: '/best/best-ai-prompts/' },
   { title: 'Best ChatGPT Prompts for Marketing', description: 'High-converting marketing prompts for campaigns, ad copy, and content strategy.', href: '/prompts/chatgpt/marketing/' },
   { title: 'AI Prompts for Teachers', description: 'Lesson plans, quizzes, rubrics, and differentiated instruction materials.', href: '/prompts/for/teachers/' },
   { title: 'Best Cursor Coding Prompts', description: 'Code generation, refactoring, debugging, and multi-file editing prompts.', href: '/prompts/cursor/coding/' },
   { title: 'DALL-E Art Prompts', description: 'Creative prompts for illustrations, concept art, and visual design.', href: '/best/dall-e-art-prompts/' },
   { title: 'AI Prompts for Entrepreneurs', description: 'Validate ideas, build MVPs, create pitch decks, and grow startups.', href: '/prompts/for/entrepreneurs/' },
-  { title: 'Best Claude Writing Prompts', description: 'Leverage Claude\'s nuanced writing for blog posts, essays, and long-form content.', href: '/prompts/claude/writing/' },
+  { title: 'Best Claude Writing Prompts', description: 'Claude holds a consistent voice across long drafts. Use it for posts, essays, and long-form content.', href: '/prompts/claude/writing/' },
   { title: 'AI Resume Prompts', description: 'Rewrite resumes, tailor cover letters, and turn job history into ATS-friendly achievements.', href: '/best/resume-ai-prompts/' },
   { title: 'SEO Prompts', description: 'Keyword research, content briefs, meta descriptions, and on-page SEO workflows.', href: '/best/seo-prompts/' },
   { title: 'ChatGPT Business Prompts', description: 'Business planning, operations, customer communication, and strategy prompts for ChatGPT.', href: '/best/chatgpt-business-prompts/' },
   { title: 'ChatGPT Prompts for Students', description: 'Study guides, flashcards, Socratic tutoring, and exam prep prompts for students.', href: '/best/chatgpt-prompts-for-students/' },
 ];
 
+// Each destination appears once on this page: the guides and articles live in
+// editorialResources, and the two catalog-wide collections live in `collections`.
 const startHereResources = [
   {
-    title: 'Prompt Engineering for Beginners',
-    description: 'Start with the core prompt-engineering patterns, examples, and copy-ready structures.',
-    href: '/guides/prompt-engineering-101/',
-    label: 'Guide',
-  },
-  {
-    title: 'Best ChatGPT Prompts for 2026',
-    description: 'A fast entry point for high-performing writing, marketing, business, and productivity prompts.',
-    href: '/blog/best-chatgpt-prompts-2026/',
-    label: 'Blog',
+    title: 'AI Prompt Templates',
+    description: 'Sixteen fill-in-the-blank prompts with the most reusable structure, one or two per category.',
+    href: '/best/prompt-templates/',
+    label: 'Templates',
   },
   {
     title: 'AI Business Plan Prompts',
-    description: 'Use Claude and ChatGPT prompts for executive summaries, market analysis, pitch decks, and funding narratives.',
+    description: 'Executive summaries, market analysis, pitch decks, and funding narratives for Claude and ChatGPT.',
     href: '/best/ai-business-plan-prompts/',
     label: 'Business',
   },
   {
     title: 'Best Stable Diffusion Prompts',
-    description: 'Browse proven prompts for portraits, fantasy scenes, product shots, and photorealistic images.',
+    description: 'Portraits, fantasy scenes, product shots, and photorealistic images.',
     href: '/best/stable-diffusion-prompts/',
-    label: 'Roundup',
-  },
-  {
-    title: 'AI Prompt Templates',
-    description: 'Use fill-in-the-blank prompt templates you can adapt across ChatGPT, Claude, Gemini, and more.',
-    href: '/best/prompt-templates/',
-    label: 'Templates',
-  },
-  {
-    title: 'Free AI Prompt Library',
-    description: 'Browse the free prompt library and AI prompt catalog by task, tool, category, and reusable template format.',
-    href: '/best/free-ai-prompts/',
-    label: 'Free',
-  },
-  {
-    title: 'Best AI Prompts',
-    description: 'Start with the highest-rated prompts across every major tool, category, and repeatable workflow.',
-    href: '/best/best-ai-prompts/',
-    label: 'Best',
+    label: 'Images',
   },
   {
     title: 'Image Prompt Browser',
-    description: 'Jump straight into AI art, product photo, logo, thumbnail, and visual prompt examples.',
+    description: 'AI art, product photos, logos, thumbnails, and visual prompt examples across every image tool.',
     href: '/categories/image-generation/',
     label: 'Images',
   },
+  {
+    title: 'Best Claude Prompts',
+    description: 'Long-form writing, analysis, and coding prompts that suit Claude\'s longer context.',
+    href: '/best/claude-prompts/',
+    label: 'Claude',
+  },
+  {
+    title: 'Best Gemini Prompts',
+    description: 'Research, analysis, and productivity prompts that use Gemini\'s web access and Workspace tie-ins.',
+    href: '/best/gemini-prompts/',
+    label: 'Gemini',
+  },
 ];
+
+const resourceCta = (label: string) =>
+  label === 'Guide' ? 'Read the guide'
+    : label === 'Blog' || label === 'Comparison' ? 'Read the article'
+    : 'Browse prompts';
 
 const editorialResources = [
   {
@@ -167,8 +162,8 @@ const editorialResources = [
   <section class="border-b border-[var(--glass-border)] bg-transparent">
     <div class="mx-auto max-w-7xl px-[var(--space-page)] py-4">
       <div class="surface-glass-prominent flex items-center gap-3 overflow-x-auto rounded-full px-4 py-3 scrollbar-none scroll-fade-x">
-        <span class="shrink-0 text-xs font-[var(--font-display)] font-medium uppercase tracking-wider text-[var(--color-text-muted)]">
-          By Tool:
+        <span class="shrink-0 text-xs font-[var(--font-display)] font-medium text-[var(--color-text-muted)]">
+          By tool
         </span>
         {tools.map((tool) => (
           <a
@@ -183,12 +178,12 @@ const editorialResources = [
   </section>
 
   <!-- Browse by Category -->
-  <section class="mx-auto max-w-7xl px-[var(--space-page)] py-16 border-b border-[var(--color-border)]" data-reveal>
+  <section class="mx-auto max-w-7xl px-[var(--space-page)] py-16 border-b border-[var(--color-border)]">
     <div class="mb-10 flex items-end justify-between">
       <div class="section-head-copy">
-        <h2 class="text-[var(--color-text-primary)]">Start With the Free Prompt Library</h2>
+        <h2 class="text-[var(--color-text-primary)]">Start with a collection</h2>
         <p class="mt-2 max-w-2xl text-[var(--color-text-secondary)]">
-          These are the fastest paths into the AI prompt catalog if you want a searchable prompt database, prompt examples, prompt templates, or beginner-friendly guidance.
+          Six short, copy-ready sets, each built for one tool or one job. Pick the one closest to what you are doing today.
         </p>
       </div>
     </div>
@@ -199,7 +194,7 @@ const editorialResources = [
           href={resource.href}
           class="surface-glass-prominent group rounded-[var(--radius-lg)] p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--color-accent-muted)] hover:shadow-[var(--shadow-card-hover)]"
         >
-          <span class="inline-flex rounded-full bg-[var(--color-accent)]/10 px-3 py-1 text-xs font-[var(--font-display)] font-semibold uppercase tracking-wider text-[var(--color-accent)]">
+          <span class="inline-flex rounded-full bg-[var(--color-accent)]/10 px-3 py-1 text-xs font-[var(--font-display)] font-semibold text-[var(--color-accent)]">
             {resource.label}
           </span>
           <h3 class="mt-4 text-lg font-[var(--font-display)] font-semibold text-[var(--color-text-primary)]">
@@ -209,14 +204,14 @@ const editorialResources = [
             {resource.description}
           </p>
           <span class="mt-4 inline-flex items-center text-sm font-medium text-[var(--color-accent)]">
-            Open resource &rarr;
+            {resourceCta(resource.label)}
           </span>
         </a>
       ))}
     </div>
   </section>
 
-  <section class="mx-auto max-w-7xl border-t border-[var(--color-border)] px-[var(--space-page)] py-16" data-reveal>
+  <section class="mx-auto max-w-7xl border-t border-[var(--color-border)] px-[var(--space-page)] py-16">
     <div class="mb-10 flex items-end justify-between">
       <div class="section-head-copy">
         <h2 class="text-[var(--color-text-primary)]">Learn Prompting Faster</h2>
@@ -225,7 +220,7 @@ const editorialResources = [
         </p>
       </div>
       <a href="/guides/" class="hidden text-sm font-[var(--font-display)] font-medium text-[var(--color-accent)] hover:underline sm:block">
-        View all guides &rarr;
+        View all guides
       </a>
     </div>
 
@@ -235,7 +230,7 @@ const editorialResources = [
           href={resource.href}
           class="surface-glass-prominent group rounded-[var(--radius-lg)] p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--color-accent-muted)] hover:shadow-[var(--shadow-card-hover)]"
         >
-          <span class="inline-flex rounded-full bg-[var(--color-accent)]/10 px-3 py-1 text-xs font-[var(--font-display)] font-semibold uppercase tracking-wider text-[var(--color-accent)]">
+          <span class="inline-flex rounded-full bg-[var(--color-accent)]/10 px-3 py-1 text-xs font-[var(--font-display)] font-semibold text-[var(--color-accent)]">
             {resource.label}
           </span>
           <h3 class="mt-4 text-lg font-[var(--font-display)] font-semibold text-[var(--color-text-primary)]">
@@ -245,21 +240,21 @@ const editorialResources = [
             {resource.description}
           </p>
           <span class="mt-4 inline-flex items-center text-sm font-medium text-[var(--color-accent)]">
-            Open resource &rarr;
+            {resourceCta(resource.label)}
           </span>
         </a>
       ))}
     </div>
   </section>
 
-  <section class="mx-auto max-w-7xl px-[var(--space-page)] py-16" data-reveal>
+  <section class="mx-auto max-w-7xl px-[var(--space-page)] py-16">
     <div class="mb-10 flex items-end justify-between">
       <div class="section-head-copy">
-        <h2 class="text-[var(--color-text-primary)]">Browse by Use Case</h2>
-        <p class="mt-2 max-w-xl text-[var(--color-text-secondary)]">Find the perfect prompt for your next project</p>
+        <h2 class="text-[var(--color-text-primary)]">Browse by category</h2>
+        <p class="mt-2 max-w-xl text-[var(--color-text-secondary)]">Every prompt, grouped by the job it does.</p>
       </div>
       <a href="/categories/" class="hidden text-sm font-[var(--font-display)] font-medium text-[var(--color-accent)] hover:underline sm:block">
-        View all categories &rarr;
+        View all categories
       </a>
     </div>
 
@@ -268,14 +263,14 @@ const editorialResources = [
 
   <!-- Featured Prompts -->
   {featuredPrompts.length > 0 && (
-    <section class="mx-auto max-w-7xl px-[var(--space-page)] py-16 border-t border-[var(--color-border)]" data-reveal>
+    <section class="mx-auto max-w-7xl px-[var(--space-page)] py-16 border-t border-[var(--color-border)]">
       <div class="mb-10 flex items-end justify-between">
         <div class="section-head-copy">
           <h2 class="text-[var(--color-text-primary)]">Featured Prompts</h2>
-          <p class="mt-2 max-w-xl text-[var(--color-text-secondary)]">Editor's picks &mdash; our most popular and effective prompts</p>
+          <p class="mt-2 max-w-xl text-[var(--color-text-secondary)]">Hand-picked by our editors.</p>
         </div>
         <a href="/prompts/" class="hidden text-sm font-[var(--font-display)] font-medium text-[var(--color-accent)] hover:underline sm:block">
-          View all prompts &rarr;
+          View all prompts
         </a>
       </div>
 
@@ -297,14 +292,14 @@ const editorialResources = [
   )}
 
   <!-- Latest Prompts -->
-  <section class="mx-auto max-w-7xl px-[var(--space-page)] py-16 border-t border-[var(--color-border)]" data-reveal>
+  <section class="mx-auto max-w-7xl px-[var(--space-page)] py-16 border-t border-[var(--color-border)]">
     <div class="mb-10 flex items-end justify-between">
       <div class="section-head-copy">
         <h2 class="text-[var(--color-text-primary)]">Latest Prompts</h2>
         <p class="mt-2 max-w-xl text-[var(--color-text-secondary)]">Recently added to the library</p>
       </div>
       <a href="/prompts/" class="hidden text-sm font-[var(--font-display)] font-medium text-[var(--color-accent)] hover:underline sm:block">
-        View all prompts &rarr;
+        View all prompts
       </a>
     </div>
 
@@ -330,11 +325,11 @@ const editorialResources = [
   </section>
 
   <!-- Popular Prompt Collections -->
-  <section class="mx-auto max-w-7xl px-[var(--space-page)] py-16 border-t border-[var(--color-border)]" data-reveal>
+  <section class="mx-auto max-w-7xl px-[var(--space-page)] py-16 border-t border-[var(--color-border)]">
     <div class="mb-10 flex items-end justify-between">
       <div class="section-head-copy">
-        <h2 class="text-[var(--color-text-primary)]">Popular Prompt Collections</h2>
-        <p class="mt-2 max-w-xl text-[var(--color-text-secondary)]">Curated collections for the most popular tools and audiences</p>
+        <h2 class="text-[var(--color-text-primary)]">Prompt collections</h2>
+        <p class="mt-2 max-w-xl text-[var(--color-text-secondary)]">Curated sets by tool and by audience.</p>
       </div>
     </div>
 
@@ -342,19 +337,21 @@ const editorialResources = [
   </section>
 
   <!-- Cross-Promo -->
-  <section class="mx-auto max-w-7xl px-[var(--space-page)] pb-16" data-reveal>
+  <section class="mx-auto max-w-7xl px-[var(--space-page)] pb-16">
     <div class="surface-glass-prominent rounded-[var(--radius-lg)] p-8 text-center">
       <h2 class="text-xl font-[var(--font-display)] font-bold text-[var(--color-text-primary)]">
         Looking for AI tools?
       </h2>
       <p class="mt-2 text-[var(--color-text-secondary)]">
-        Explore 200+ curated AI tools on our sister site
+        Find the right AI tool on our sister site.
       </p>
       <a
         href="https://aitoolindex.io"
+        target="_blank"
+        rel="noopener noreferrer"
         class="surface-glass-ui mt-4 inline-flex items-center justify-center rounded-[var(--radius-md)] px-5 py-2.5 text-sm font-[var(--font-display)] font-medium text-[var(--color-text-primary)] transition-all duration-200 hover:text-[var(--color-accent)]"
       >
-        Visit AIToolIndex.io &rarr;
+        Visit AIToolIndex.io
       </a>
     </div>
   </section>

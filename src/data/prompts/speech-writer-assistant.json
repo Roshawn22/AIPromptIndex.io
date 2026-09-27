@@ -34,6 +34,11 @@
       "name": "AUDIENCE_DESCRIPTION",
       "description": "Who will be listening",
       "example": "200 employees across engineering, sales, and operations teams"
+    },
+    {
+      "name": "DESIRED_TONE",
+      "description": "How the speech should feel to the audience",
+      "example": "warm and celebratory with a few light jokes"
     }
   ],
   "tips": [
@@ -48,6 +53,7 @@
   "exampleOutput": "[Walk to center stage. Pause. Make eye contact.]\n\nTwo years ago, I sat in a conference room and watched our entire product roadmap become irrelevant — overnight.\n\n[Pause for two beats.]\n\nA competitor we'd never heard of launched something we'd been planning for eighteen months. And in that moment, I had a choice. Panic... or pivot.\n\nI chose to pivot. And that decision — made in uncertainty, without a playbook — turned out to be the best strategic move this company has ever made.\n\n[Transition to first point.]\n\nToday I want to talk about why uncertainty isn't the enemy of good strategy. It IS good strategy...",
   "isFeatured": false,
   "dateAdded": "2026-04-02",
+  "lastUpdated": "2026-09-26",
   "metaTitle": "Speech Writer Assistant Prompt for Claude",
   "metaDescription": "Write compelling speeches for events and presentations with Claude. Natural delivery-ready drafts with stage notes."
 }

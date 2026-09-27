@@ -59,7 +59,7 @@
     "slug": "prompt-templates",
     "title": "Best AI Prompt Templates",
     "description": "Reusable AI prompt templates with fill-in-the-blank structures for any use case. Copy, customize, and get results fast.",
-    "filter": { "tag": "template" },
+    "filter": { "promptSlugs": ["business-plan-executive-summary", "startup-pitch-one-pager", "freelance-proposal-writer", "cover-letter-customizer", "podcast-show-notes-writer", "content-calendar-generator", "landing-page-copy-generator", "customer-onboarding-email-sequence", "lesson-plan-creator", "rubric-generator", "ab-test-design-analyzer", "data-dashboard-layout-planner", "cursor-test-writer", "api-endpoint-builder", "fiction-scene-writer", "cinematic-portrait-generator"] },
     "metaTitle": "Best AI Prompt Templates (2026) — Fill-in-the-Blank Ready",
     "metaDescription": "Reusable AI prompt templates for ChatGPT, Claude, and Gemini. Fill-in-the-blank structures for writing, coding, marketing, and more.",
     "keyword": "ai prompt templates",
@@ -116,8 +116,8 @@
   {
     "slug": "chatgpt-cover-letter-prompts",
     "title": "Best ChatGPT Cover Letter Prompts",
-    "description": "AI prompts specifically designed to generate personalized, professional cover letters that stand out to hiring managers.",
-    "filter": { "tool": "chatgpt", "tag": "cover-letter" },
+    "description": "Prompts for cover letters and the resume bullets that back them up. Written for ChatGPT, and they work in Claude and Gemini too.",
+    "filter": { "promptSlugs": ["cover-letter-customizer", "resume-cover-letter-writer", "resume-achievement-rewriter", "resume-rewriter-ats-optimized"] },
     "metaTitle": "Best ChatGPT Cover Letter Prompts (2026)",
     "metaDescription": "Write personalized cover letters with ChatGPT. Prompts for tailoring to job descriptions, highlighting achievements, and matching company culture.",
     "keyword": "chatgpt cover letter prompts",
@@ -145,12 +145,12 @@
   {
     "slug": "best-ai-prompts",
     "title": "Best AI Prompts",
-    "description": "The ultimate collection of the highest-rated AI prompts across all tools and categories, curated by the community.",
+    "description": "Every prompt in the library on one page, with our editors' picks first. Start here if you don't yet know what you need.",
     "filter": { "sort": "top-rated" },
-    "metaTitle": "Best AI Prompts (2026) — Top-Rated Prompts for Every AI Tool",
+    "metaTitle": "Best AI Prompts (2026) for Every AI Tool",
     "metaDescription": "The best AI prompts for ChatGPT, Claude, Gemini, Midjourney, and more. Community-curated and copy-paste ready for any task.",
     "keyword": "best ai prompts",
-    "intro": "Finding the best AI prompts means sifting through thousands of options to find the ones that consistently deliver exceptional results. This collection brings together the highest-rated prompts from our community across every AI tool and category. Whether you need prompts for writing, coding, marketing, image generation, or data analysis, these are the proven performers that users return to again and again. Each prompt has been tested across multiple AI tools and refined based on real-world feedback to ensure quality.",
+    "intro": "This is the full library on one page: every prompt for writing, coding, marketing, image generation, business, data analysis, education, and creative work, with our editors' picks first. Each entry states what it produces, lists the variables you fill in, and links to the full prompt with tips. Skim by tool or category, open anything that fits your task, and adapt the variables to your own context.",
     "tips": [
       "Bookmark your favorites and build a personal prompt library organized by task type for quick access during your workflow.",
       "Test top-rated prompts across different AI tools — a prompt that excels in ChatGPT may produce even better results in Claude or vice versa.",
@@ -159,7 +159,7 @@
     "faqs": [
       {
         "q": "What makes an AI prompt the 'best'?",
-        "a": "The best AI prompts are specific (clear audience, format, constraints), contextual (provide enough background), and actionable (produce ready-to-use outputs). Community ratings on AI Prompt Index reflect real-world effectiveness across thousands of users."
+        "a": "The best AI prompts are specific (clear audience, format, constraints), contextual (provide enough background), and actionable (produce ready-to-use outputs). Every prompt in this library is written to that standard and reviewed by our editors before it is published."
       },
       {
         "q": "Do the best prompts work across all AI tools?",
@@ -167,7 +167,7 @@
       },
       {
         "q": "How often are the best AI prompts updated?",
-        "a": "Our collection is continuously updated as new AI models launch and prompting techniques evolve. Community submissions and ratings ensure the library reflects current best practices for the latest AI capabilities."
+        "a": "We add and revise prompts as new AI models and features ship, and reader submissions go through the same editorial review before they are published."
       }
     ]
   },
@@ -232,7 +232,7 @@
     "metaTitle": "Best AI Business Plan Prompts (2026) — Copy, Customize, Pitch",
     "metaDescription": "Use these AI business plan prompts to write executive summaries, pitch decks, market analysis, SWOTs, and startup fundraising materials faster.",
     "keyword": "business plan prompt",
-    "intro": "The Semrush and GSC signals on AIPromptIndex show that business-plan intent is one of the clearest early opportunities on the site. Instead of leaving that demand concentrated on a single executive-summary prompt, this page turns it into a tighter business-plan cluster with prompts for market sizing, funding narratives, assumptions, and investor-facing materials. Use these prompts to move from raw startup idea to a business plan that is sharper, faster to draft, and easier to tailor for lenders, accelerators, or investors.",
+    "intro": "Six prompts that take a startup idea to a plan you can show a lender, an accelerator, or an investor: market sizing, a SWOT, financial assumptions, a pitch-deck script, a one-pager, and the executive summary that ties them together. Draft the inputs first, then run the executive summary last so it reflects real numbers.",
     "tips": [
       "Start with the executive summary prompt after you already have your market and assumptions inputs drafted so the final summary reflects real numbers.",
       "Use multiple prompts in sequence rather than asking one model to create an entire business plan in a single shot.",
@@ -270,7 +270,7 @@
     "metaTitle": "Best AI Press Release Prompts (2026) — PR and Launch Templates",
     "metaDescription": "Use these AI press release prompts for company announcements, launch campaigns, media-ready copy, newsletter follow-ups, and LinkedIn distribution.",
     "keyword": "press release prompt",
-    "intro": "A single press release rarely carries an announcement on its own. You usually need the release itself plus launch messaging, email distribution, and social amplification. This roundup turns the existing press-release winner on the site into a broader PR and announcement workflow, so one impression-bearing page can support a stronger internal cluster. Use it when you need to announce funding, product launches, partnerships, hiring news, or milestone updates with consistent messaging across every channel.",
+    "intro": "A single press release rarely carries an announcement on its own. You usually need the release itself plus launch messaging, email distribution, and social amplification. These six prompts cover the release, the launch campaign, the newsletter follow-up, the LinkedIn post, and the messaging framework that keeps them consistent. Use them for funding news, product launches, partnerships, hiring announcements, and milestone updates.",
     "tips": [
       "Draft the press release first, then reuse the approved language to generate your newsletter and LinkedIn follow-up content.",
       "Include specific facts, dates, and quotable metrics so the release reads like news instead of promotional copy.",

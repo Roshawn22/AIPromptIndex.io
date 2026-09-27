@@ -4,13 +4,14 @@
   "promptText": "Write an engaging Instagram caption for a [POST_TYPE] post about [POST_TOPIC] for my [BRAND_NICHE] account. My brand voice is [BRAND_VOICE]. The caption should: open with a scroll-stopping first line (this appears before 'more' so it must hook immediately), tell a micro-story or share an insight that connects emotionally with my audience, include a clear value proposition or takeaway so followers feel they gained something, end with a conversation-starting question or call to action that drives comments, and be formatted for readability with line breaks between ideas. Keep the caption between 150-300 words — long enough to provide value but short enough to hold attention. After the caption, generate: 20 relevant hashtags organized into 3 tiers (5 high-volume over 500K posts, 10 medium-volume 50K-500K, 5 niche under 50K), a suggested alt text for accessibility (under 125 characters), and 2 story slide ideas that complement this post. Do not use generic motivational language. Be specific and original.",
   "description": "This prompt creates Instagram captions that drive meaningful engagement rather than just likes. The structured approach ensures every caption has a hook, value, and call to action — the three elements that Instagram's algorithm rewards with reach. The tiered hashtag strategy balances discoverability across different competition levels, giving your post the best chance of appearing in explore. The included alt text makes your content accessible, and the companion story ideas extend the post's lifecycle beyond the feed. Whether you are a personal brand, e-commerce business, or content creator, this prompt adapts to your voice while following proven engagement patterns.",
   "tool": "gemini",
-  "category": "marketing",
+  "category": "writing",
   "tags": [
     "instagram",
     "social-media",
     "captions",
     "hashtags",
-    "engagement"
+    "engagement",
+    "marketing"
   ],
   "difficulty": "beginner",
   "promptType": "text",

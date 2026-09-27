@@ -2,6 +2,7 @@ import { useState, useMemo, useCallback } from 'react';
 import { SELECT_CHEVRON_STYLE } from '../../lib/utils';
 import { trackPromptCopy } from '../../lib/analytics';
 import { copyTextToClipboard } from '../../lib/clipboard';
+import { checkVariableFit } from '../../lib/assist';
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -49,9 +50,11 @@ function replaceVariables(
   variables: Variable[],
   values: Record<string, string>,
 ): string {
+  // An empty field keeps its [NAME] slot so the copied text matches the preview and the
+  // gap is obvious in the target tool, instead of silently falling back to the example.
   let result = text;
   for (const v of variables) {
-    const val = values[v.name] || v.example;
+    const val = values[v.name]?.trim() ? values[v.name] : `[${v.name}]`;
     result = result.replaceAll(`[${v.name}]`, val);
   }
   return result;
@@ -68,6 +71,8 @@ export default function PromptBuilder({ prompts, tools, categories }: Props) {
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
   const [variableValues, setVariableValues] = useState<Record<string, string>>({});
   const [copied, setCopied] = useState(false);
+  // Variables whose typed value does not look like what the slot asks for (optional TypeSafe hint).
+  const [variableHints, setVariableHints] = useState<Record<string, boolean>>({});
 
   /* ---- Tool lookup ---- */
   const toolMap = useMemo(() => {
@@ -109,8 +114,29 @@ export default function PromptBuilder({ prompts, tools, categories }: Props) {
         defaults[v.name] = v.example;
       }
       setVariableValues(defaults);
+      setVariableHints({});
     },
     [prompts],
+  );
+
+  const checkVariable = useCallback(
+    async (variable: Variable, value: string) => {
+      const trimmed = value.trim();
+      if (!selected || !trimmed || trimmed === variable.example) {
+        setVariableHints((prev) => ({ ...prev, [variable.name]: false }));
+        return;
+      }
+      const fits = await checkVariableFit({
+        promptTitle: selected.title,
+        variableName: variable.name,
+        variableDescription: variable.description,
+        example: variable.example,
+        value: trimmed,
+      });
+      // Only speak up when the model is fairly sure; an unsure or unavailable judgment stays silent.
+      setVariableHints((prev) => ({ ...prev, [variable.name]: fits !== null && fits < 0.25 }));
+    },
+    [selected],
   );
 
   const resetDefaults = useCallback(() => {
@@ -120,6 +146,7 @@ export default function PromptBuilder({ prompts, tools, categories }: Props) {
       defaults[v.name] = v.example;
     }
     setVariableValues(defaults);
+    setVariableHints({});
   }, [selected]);
 
   const handleCopy = useCallback(async () => {
@@ -155,10 +182,11 @@ export default function PromptBuilder({ prompts, tools, categories }: Props) {
         segments.push({ text: remaining.slice(lastIndex, match.index), highlighted: false });
       }
       const varName = match[1];
-      const val = variableValues[varName] || '';
+      const raw = variableValues[varName] ?? '';
       const example = selected.variables.find((v) => v.name === varName)?.example || '';
-      const isChanged = val !== example;
-      segments.push({ text: val, highlighted: isChanged });
+      const isEmpty = !raw.trim();
+      // Highlight edited values and unfilled slots; the untouched example reads as plain text.
+      segments.push({ text: isEmpty ? `[${varName}]` : raw, highlighted: isEmpty || raw !== example });
       lastIndex = match.index + match[0].length;
     }
 
@@ -192,6 +220,7 @@ export default function PromptBuilder({ prompts, tools, categories }: Props) {
         {/* Filters row */}
         <div className="mb-4 flex flex-wrap items-center gap-3">
           <Select
+            label="Filter by tool"
             value={toolFilter}
             onChange={setToolFilter}
             options={[
@@ -200,6 +229,7 @@ export default function PromptBuilder({ prompts, tools, categories }: Props) {
             ]}
           />
           <Select
+            label="Filter by category"
             value={categoryFilter}
             onChange={setCategoryFilter}
             options={[
@@ -228,6 +258,7 @@ export default function PromptBuilder({ prompts, tools, categories }: Props) {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            aria-label="Search prompts"
             placeholder="Search prompts..."
             className="w-full rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-2)] py-2 pl-9 pr-3 text-sm text-[var(--color-text-primary)] placeholder-[var(--color-text-muted)] transition-colors focus:border-[var(--color-accent)] focus:outline-none font-[var(--font-display)]"
           />
@@ -244,6 +275,7 @@ export default function PromptBuilder({ prompts, tools, categories }: Props) {
               <button
                 key={p.slug}
                 type="button"
+                aria-pressed={selectedSlug === p.slug}
                 onClick={() => selectPrompt(p.slug)}
                 className={`flex w-full cursor-pointer items-center gap-3 border-b border-[var(--color-border)]/50 px-4 py-3 text-left text-sm transition-colors last:border-b-0 hover:bg-[var(--color-surface-1)] ${
                   selectedSlug === p.slug
@@ -307,10 +339,17 @@ export default function PromptBuilder({ prompts, tools, categories }: Props) {
                       onChange={(e) =>
                         setVariableValues((prev) => ({ ...prev, [v.name]: e.target.value }))
                       }
+                      onBlur={(e) => void checkVariable(v, e.target.value)}
+                      aria-describedby={variableHints[v.name] ? `var-hint-${v.name}` : undefined}
                       placeholder={v.example}
                       className="w-full rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2 text-sm text-[var(--color-text-primary)] placeholder-[var(--color-text-muted)] transition-colors focus:border-[var(--color-accent)] focus:outline-none"
                     />
                     <p className="mt-1 text-xs text-[var(--color-text-muted)]">{v.description}</p>
+                    {variableHints[v.name] && (
+                      <p id={`var-hint-${v.name}`} role="status" className="mt-1 text-xs text-[var(--color-text-secondary)]">
+                        This doesn't look like what this field expects — for example: "{v.example}". You can keep it if it's what you meant.
+                      </p>
+                    )}
                   </div>
                 ))}
               </div>
@@ -345,7 +384,7 @@ export default function PromptBuilder({ prompts, tools, categories }: Props) {
               seg.highlighted ? (
                 <span
                   key={i}
-                  className="rounded-sm bg-teal-500/20 px-0.5 text-teal-400"
+                  className="rounded-sm bg-teal-500/20 px-0.5 text-teal-800 dark:text-teal-300"
                 >
                   {seg.text}
                 </span>
@@ -362,8 +401,8 @@ export default function PromptBuilder({ prompts, tools, categories }: Props) {
               onClick={handleCopy}
               className={`inline-flex cursor-pointer items-center gap-1.5 rounded-[var(--radius-md)] border px-5 py-2.5 text-sm font-medium font-[var(--font-display)] transition-all duration-200 ${
                 copied
-                  ? 'border-emerald-500 bg-emerald-500 text-white'
-                  : 'border-transparent bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)]'
+                  ? 'border-emerald-500 bg-emerald-700 text-white'
+                  : 'border-transparent bg-[var(--color-accent-fill)] text-[var(--color-on-accent)] hover:bg-[var(--color-accent-fill-hover)]'
               }`}
             >
               {copied ? (
@@ -379,7 +418,7 @@ export default function PromptBuilder({ prompts, tools, categories }: Props) {
                     <rect x="9" y="9" width="13" height="13" rx="2" />
                     <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
                   </svg>
-                  Copy Customized Prompt
+                  Copy prompt
                 </>
               )}
             </button>
@@ -440,24 +479,27 @@ export default function PromptBuilder({ prompts, tools, categories }: Props) {
 
 function StepBadge({ n }: { n: number }) {
   return (
-    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[var(--color-accent)] text-xs font-bold text-white font-[var(--font-display)]">
+    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[var(--color-accent-fill)] text-xs font-bold text-[var(--color-on-accent)] font-[var(--font-display)]">
       {n}
     </span>
   );
 }
 
 interface SelectProps {
+  /** Accessible name; the first option stops describing the control once another is chosen. */
+  label: string;
   value: string;
   onChange: (v: string) => void;
   options: { value: string; label: string }[];
 }
 
-function Select({ value, onChange, options }: SelectProps) {
+function Select({ label, value, onChange, options }: SelectProps) {
   return (
     <select
+      aria-label={label}
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="cursor-pointer appearance-none rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-1.5 pr-8 text-xs font-medium text-[var(--color-text-primary)] font-[var(--font-display)] transition-colors hover:border-[var(--color-accent-muted)] focus:border-[var(--color-accent)] focus:outline-none"
+      className="min-h-10 cursor-pointer appearance-none rounded-[var(--radius-md)] border border-[var(--color-border-control)] bg-[var(--color-surface-2)] px-3 py-1.5 pr-8 text-xs font-medium text-[var(--color-text-primary)] font-[var(--font-display)] transition-colors hover:border-[var(--color-accent-muted)] focus:border-[var(--color-accent)] focus:outline-none"
       style={SELECT_CHEVRON_STYLE}
     >
       {options.map((opt) => (
