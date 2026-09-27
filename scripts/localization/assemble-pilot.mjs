@@ -80,3 +80,16 @@ const output = {
 };
 fs.writeFileSync(path.join(repoRoot, outputPath), JSON.stringify(output, null, 2) + '\n');
 console.log(`assembled ${outputPath}: ${Object.keys(pages).length} page(s) from ${sourceName}, all needs-human-review`);
+
+// common.json is raw General Translation output, and the CLI translates every string in it,
+// including the two that name the locale itself. Pin those so the UI cannot call es-419 "Inglés".
+const LANGUAGE_NAMES = { 'pt-BR': 'Português', 'es-419': 'Español', fr: 'Français', de: 'Deutsch' };
+const commonPath = `src/data/i18n/${locale}/common.json`;
+if (fs.existsSync(path.join(repoRoot, commonPath))) {
+  if (!LANGUAGE_NAMES[locale]) throw new Error(`no language name registered for ${locale}; add it to LANGUAGE_NAMES`);
+  const common = read(commonPath);
+  common.locale = locale;
+  common.languageName = LANGUAGE_NAMES[locale];
+  fs.writeFileSync(path.join(repoRoot, commonPath), JSON.stringify(common, null, 2) + '\n');
+  console.log(`pinned ${commonPath}: locale=${locale}, languageName=${common.languageName}`);
+}
