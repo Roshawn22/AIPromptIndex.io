@@ -36,7 +36,7 @@
     },
     "/best/gemini-prompts/": {
       "description": "Los mejores prompts para Google Gemini, diseñados para aprovechar sus capacidades multimodales, el acceso a la web en tiempo real y la integración con Google Workspace.",
-      "intro": "En 2026, Google Gemini es la interfaz para usar prompts que ya tienes en Gmail, Docs, Sheets, Drive y Gemini 2.5 en AI Studio. Los prompts de esta página están diseñados para aprovechar todo ese ecosistema: búsquedas en la web en tiempo real, archivos de Workspace como contexto y razonamiento con grandes cantidades de contexto. Si pegas un prompt de ChatGPT en Gemini sin adaptarlo, desaprovechas el contexto de Drive y la búsqueda en tiempo real.",
+      "intro": "En 2026, Google Gemini es la interfaz de prompts que ya está en Gmail, Docs, Sheets, Drive y Gemini 2.5 en AI Studio. Los prompts de esta página fueron escritos para ese ecosistema: investigación web en tiempo real, archivos de Workspace como contexto y razonamiento con contexto largo. Si pegas un prompt de ChatGPT en Gemini sin adaptarlo, dejas sin usar el contexto de Drive y la búsqueda en tiempo real.",
       "metaDescription": "Prompts seleccionados para Google Gemini: investigación, análisis, redacción y productividad. Aprovecha el acceso a la web y Google Workspace.",
       "metaTitle": "Los mejores prompts para Gemini",
       "title": "Los mejores prompts para Gemini"
