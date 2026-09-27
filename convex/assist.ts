@@ -95,7 +95,7 @@ export const rerankSearch = action({
     ]));
 
     try {
-      const { answers } = await systemOne({ state, questions }, { maxAttempts: 1 });
+      const { answers } = await systemOne({ state, questions }, { maxAttempts: 1, label: "search rerank" });
       return candidates.map((candidate, index) => ({
         url: candidate.url,
         relevance: asNormalizedScore(answers[`result_${index}`], RELEVANCE_LEVELS.length) ?? 0,
@@ -143,7 +143,7 @@ export const checkVariable = action({
     };
 
     try {
-      const { answers } = await systemOne({ state, questions }, { maxAttempts: 1 });
+      const { answers } = await systemOne({ state, questions }, { maxAttempts: 1, label: "variable check" });
       const fits = asNoul(answers.fits);
       return fits === null ? null : { fits };
     } catch (error) {

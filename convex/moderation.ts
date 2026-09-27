@@ -173,7 +173,7 @@ export const evaluate = internalAction({
 
     let response;
     try {
-      response = await systemOne({ state, questions });
+      response = await systemOne({ state, questions }, { label: "moderation" });
     } catch (error) {
       // Leave the submission pending and untouched; a human reviews it as before.
       console.error("TypeSafe moderation failed", error);
