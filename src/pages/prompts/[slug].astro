@@ -19,7 +19,8 @@ import { promptMatchesBestOfFilter } from '../../lib/bestof';
 import toolsData from '../../data/tools/tools.json';
 import toolCategoryPages from '../../data/seo/tool-category-pages.json';
 import audiencePages from '../../data/seo/audience-pages.json';
-import { isAudienceMember } from '../../lib/audiences';
+import { AUDIENCE_FITS, isAudienceMember } from '../../lib/audiences';
+import { pickRelatedPrompts } from '../../lib/related';
 import bestofPages from '../../data/seo/bestof-pages.json';
 import relatedPromptMap from '../../data/seo/related-prompts.json';
 
@@ -39,18 +40,10 @@ const toolAffiliateUrl = currentTool?.affiliateUrl;
 const toolName = currentTool?.name || data.tool;
 
 const allPrompts = await getCollection('prompts');
-// Judged relatedness (scripts/typesafe/build-related.mjs) comes first; the category/tool
-// match fills any remaining slots and covers prompts that have not been judged yet.
+// Judged relatedness (scripts/typesafe/build-related.mjs) comes first; prompts sharing an
+// audience, category or tool fill any remaining slots, ranked by audience overlap (lib/related).
 const judgedRelatedSlugs: string[] = (relatedPromptMap as Record<string, string[]>)[data.slug] ?? [];
-const judgedRelated = judgedRelatedSlugs
-  .map((slug) => allPrompts.find((p) => p.data.slug === slug))
-  .filter((p): p is (typeof allPrompts)[number] => Boolean(p) && p!.data.slug !== data.slug);
-const fallbackRelated = allPrompts.filter(
-  (p) => p.data.slug !== data.slug
-    && !judgedRelatedSlugs.includes(p.data.slug)
-    && (p.data.category === data.category || p.data.tool === data.tool),
-);
-const relatedPrompts = [...judgedRelated, ...fallbackRelated].slice(0, 4);
+const relatedPrompts = pickRelatedPrompts(prompt, allPrompts, judgedRelatedSlugs, AUDIENCE_FITS);
 
 /* toolDisplayNames, categoryDisplayNames, difficultyColor imported from lib/constants */
 

@@ -12,10 +12,11 @@
  */
 import membership from '../data/seo/audience-membership.json';
 
-const PAGES = membership.pages as Record<string, Record<string, number>>;
+/** Audience page slug -> member prompt slug -> judged fit. */
+export const AUDIENCE_FITS = membership.pages as Record<string, Record<string, number>>;
 
 export function audienceFit(pageSlug: string, promptSlug: string): number | undefined {
-  return PAGES[pageSlug]?.[promptSlug];
+  return AUDIENCE_FITS[pageSlug]?.[promptSlug];
 }
 
 export function isAudienceMember(pageSlug: string, promptSlug: string): boolean {
