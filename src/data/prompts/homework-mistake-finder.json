@@ -1,0 +1,23 @@
+{
+  "title": "Homework Mistake Finder",
+  "slug": "homework-mistake-finder",
+  "promptText": "You are a patient tutor who helps students learn from their own mistakes. I worked through this [SUBJECT] problem and got it wrong, or I am not sure my answer is right.\n\nThe problem: [PROBLEM]\n\nMy work, step by step: [MY_WORK]\n\nThe correct answer, if I have it: [CORRECT_ANSWER]\n\nPlease:\n1. Check my work one step at a time and point to the first step where it goes wrong, quoting that step\n2. Explain the specific rule or idea I misapplied there, in one or two sentences\n3. Tell me which of my other steps were correct, so I know what not to change\n4. Show the corrected version of the wrong step only, then tell me what to do next without doing it, so I can finish the problem myself\n5. Give me one new practice problem that tests the same idea, with its answer at the very end under a heading that says Answer, so I can cover it up\n6. If my work has no errors, say so plainly and check my final answer against the correct answer I gave\n\nDo not solve the whole problem for me unless I ask.",
+  "description": "This prompt has ChatGPT check a problem you have already attempted and find exactly where your work went wrong. It goes through your steps in order, quotes the first incorrect one, names the rule or idea you misapplied, and confirms which of your steps were right so you do not change them. It corrects only the wrong step and tells you what to do next, leaving you to finish the problem, then gives you a new practice problem on the same idea with the answer set apart at the end. It is for students checking homework or exam practice in math, science, or any subject with worked steps, and it is told not to solve the whole problem unless you ask.",
+  "tool": "chatgpt",
+  "category": "education",
+  "tags": ["tutoring", "problem-solving", "math", "STEM", "homework-help"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "SUBJECT", "description": "The subject and level", "example": "Calculus I" },
+    { "name": "PROBLEM", "description": "The problem exactly as it was set", "example": "Find the derivative of f(x) = x² sin(x)." },
+    { "name": "MY_WORK", "description": "Every step you wrote, in order, including the ones you think are right", "example": "Step 1: The derivative of x² is 2x. Step 2: The derivative of sin(x) is cos(x). Step 3: So f'(x) = 2x · cos(x)." },
+    { "name": "CORRECT_ANSWER", "description": "The answer from the key or textbook, or \"unknown\" if you do not have it", "example": "the answer key says 2x sin(x) + x² cos(x)" }
+  ],
+  "tips": ["Write out every step, including the ones that feel obvious. The mistake is often in a step you skipped writing down.", "Try the practice problem before looking at the answer, then run it through the prompt again if you get it wrong.", "If the same kind of mistake keeps appearing, ask ChatGPT for three more practice problems on that one rule."],
+  "exampleOutput": "**First wrong step:** Step 3, \"So f'(x) = 2x · cos(x).\"\n\n**What went wrong:** f(x) is a product of two functions, and the derivative of a product is not the product of the derivatives. The product rule says (uv)' = u'v + uv'.\n\n**What you got right:** Steps 1 and 2 are both correct: the derivative of x² is 2x and the derivative of sin(x) is cos(x). You need both results.\n\n**Corrected Step 3:** Let u = x² and v = sin(x). Then f'(x) = u'v + uv'.\n\n**Next:** substitute your results from Steps 1 and 2 into u'v + uv'. You should get the answer key's result.\n\n**Practice problem:** Find the derivative of g(x) = x³eˣ.\n\n**Answer**\ng'(x) = 3x²eˣ + x³eˣ, which can also be written as x²eˣ(3 + x).",
+  "isFeatured": false,
+  "dateAdded": "2026-09-29",
+  "metaTitle": "Homework Mistake Finder Prompt for ChatGPT",
+  "metaDescription": "Find exactly where your homework went wrong with this free ChatGPT prompt. It spots the first wrong step, explains the rule, and gives a practice problem."
+}
