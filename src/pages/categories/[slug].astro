@@ -10,6 +10,7 @@ import { promptMatchesBestOfFilter } from '../../lib/bestof';
 import toolCategoryPages from '../../data/seo/tool-category-pages.json';
 import bestofPages from '../../data/seo/bestof-pages.json';
 import audiencePages from '../../data/seo/audience-pages.json';
+import { isAudienceMember } from '../../lib/audiences';
 
 export async function getStaticPaths() {
   const categories = await getCollection('categories');
@@ -64,7 +65,12 @@ const categoryRoundups = bestofPages
   .slice(0, 4);
 
 const audienceMatches = audiencePages
-  .filter((page: any) => page.filterCategories?.includes(category.data.slug))
+  .map((page: any) => ({
+    ...page,
+    count: prompts.filter((prompt) => isAudienceMember(page.slug, prompt.data.slug)).length,
+  }))
+  .filter((page: any) => page.count > 0)
+  .sort((a: any, b: any) => b.count - a.count)
   .slice(0, 4);
 
 const topToolSummary = topTools.map((tool) => tool.name).join(', ');

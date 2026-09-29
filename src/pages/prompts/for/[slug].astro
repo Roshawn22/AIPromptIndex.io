@@ -8,17 +8,14 @@ import Breadcrumb from '../../../components/common/Breadcrumb.astro';
 import NewsletterSignup from '../../../components/common/NewsletterSignup.astro';
 import EditorialBody from '../../../components/seo/EditorialBody.astro';
 import audiencePages from '../../../data/seo/audience-pages.json';
+import { audienceFit, isAudienceMember } from '../../../lib/audiences';
 
 export async function getStaticPaths() {
   const allPrompts = await getCollection('prompts');
 
   return audiencePages
     .filter((page: any) => {
-      const count = allPrompts.filter((p) => {
-        const categoryMatch = page.filterCategories?.some((c: string) => p.data.category === c);
-        const tagMatch = page.filterTags?.some((t: string) => p.data.tags?.includes(t));
-        return categoryMatch || tagMatch;
-      }).length;
+      const count = allPrompts.filter((p) => isAudienceMember(page.slug, p.data.slug)).length;
       return count >= 3;
     })
     .map((page: any) => ({
@@ -32,12 +29,11 @@ const { page, allPages } = Astro.props;
 const allPrompts = await getCollection('prompts');
 
 const prompts = allPrompts
-  .filter((p) => {
-    const categoryMatch = page.filterCategories?.some((c: string) => p.data.category === c);
-    const tagMatch = page.filterTags?.some((t: string) => p.data.tags?.includes(t));
-    return categoryMatch || tagMatch;
-  })
+  .filter((p) => isAudienceMember(page.slug, p.data.slug))
+  // Most relevant first: the page shows its first five prominently.
   .sort((a, b) => {
+    const byFit = (audienceFit(page.slug, b.data.slug) ?? 0) - (audienceFit(page.slug, a.data.slug) ?? 0);
+    if (byFit !== 0) return byFit;
     if (a.data.isFeatured && !b.data.isFeatured) return -1;
     if (!a.data.isFeatured && b.data.isFeatured) return 1;
     return new Date(b.data.dateAdded).getTime() - new Date(a.data.dateAdded).getTime();

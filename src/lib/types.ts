@@ -73,8 +73,6 @@ export interface ToolCategoryPage extends SEOPageConfig {
 export interface AudiencePage extends SEOPageConfig {
   audience: string;
   slug: string;
-  filterTags: string[];
-  filterCategories: string[];
 }
 
 export interface BestOfPage {

@@ -11,7 +11,7 @@ Docs: https://docs.typesafe.ai/llms.txt
 | Related prompts | `build-related.mjs` | `npm run typesafe:related` | `src/data/seo/related-prompts.json` (commit it) |
 | Keyword intent & gaps | `classify-keywords.mjs` | `npm run typesafe:keywords` | `output/typesafe/<date>/keyword-intent.{json,md}` |
 | pt-BR pre-review | `verify-localization.mjs` | `npm run typesafe:localization` | `output/typesafe/<date>/localization-review.{json,md}` |
-| Audience fit | `audience-fit.mjs` | `npm run typesafe:audience` | proposes tags; `--apply` writes them |
+| Audience membership | `audience-fit.mjs` | `npm run typesafe:audience -- --write-membership` | `src/data/seo/audience-membership.json` (commit it) |
 | Search rerank, builder hints | `convex/assist.ts`, `src/lib/assist.ts` | In the browser, behind `PUBLIC_TYPESAFE_*` flags | nothing |
 
 Every script accepts `--dry-run` (print the exact request, no API call), `--limit=N`,
@@ -61,26 +61,22 @@ Contradiction and omission are now separate judgments: inventing or contradictin
 6 defects, 1 to confirm and 1 clean, and the 6 are real — the pt-BR roundup descriptions name
 specific tools ("ChatGPT, Claude e Gemini") where the English says "any use case".
 
-## Why audience fit needs two requests
+## Audience pages are judged, not filtered
 
-A prompt lands on an audience page when its category or one of its tags matches that page's
-filters, so recategorising a prompt silently adds and drops it from several audience pages at
-once. `audience-fit.mjs` asks whether each membership is deserved, then proposes tags to
-restore the ones that are.
+`/prompts/for/<audience>/` used to list every prompt whose category or tags matched the page's
+filters. A category is a coarse instrument: `business` alone put prompts on seven audience pages,
+and 98 of 622 placements were prompts that audience would not reach for, such as a real-estate
+investment analyzer on the HR page.
 
-It asks in two rounds, which is the one place in this codebase a second request is justified:
-the candidate tags depend on the first round's answers, so they cannot be batched.
+Membership now comes from `audience-fit.mjs`, which asks one question per prompt and page:
+*would someone in this audience reach for this prompt as part of their own work?* A prompt is a
+member when the calibrated answer is more likely yes than no (above 0.5), and each page lists its
+members most relevant first. `--write-membership` writes `src/data/seo/audience-membership.json`;
+partial runs (`--slugs`) only re-place the prompts they judged.
 
-1. **Does this prompt serve this audience?** One Noul per audience page.
-2. **Is this tag accurate for this prompt?** One Noul per candidate tag.
-
-The second round exists because the first is not enough. A greedy tag picker optimising only
-for coverage proposed tagging a freelance proposal writer `architecture`, purely because that
-tag drives the developers page. The prompt genuinely serves developers; the tag was still a
-lie. Tags below `tagAccurate` are refused and the page is reported as **deserved but
-unreachable** instead — widening that page's own filters is a human call. Writing a false tag
-to win a collection slot is exactly the trade this system exists to avoid.
-
-Note `src/pages/prompts/[tool]/[category].astro` only builds a tool-category page when at
-least 3 prompts match, so adding an entry to `tool-category-pages.json` below that bar creates
-config that silently does nothing.
+- **A new prompt appears on no audience page until judged.** `audience-membership.test.mjs`
+  fails CI and names the fix. The run is cached, so re-judging costs only the new prompts.
+- **Every page must keep at least 3 members.** `src/pages/prompts/for/[slug].astro` skips
+  pages below that, which would turn a live URL into a 404; the same test guards it.
+- Earlier versions fixed filler by adding and renaming tags (the two-round tag-accuracy check).
+  That machinery is gone: tags describe the prompt; membership describes who it is for.
