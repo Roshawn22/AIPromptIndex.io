@@ -24,7 +24,7 @@
     "/best/gemini-prompts/": {
       "type": "roundup",
       "reviewStatus": "approved",
-      "sourceFingerprint": "706f9db641cd",
+      "sourceFingerprint": "8cb496a00641",
       "sourcePath": "/best/gemini-prompts/",
       "sourceSlug": "gemini-prompts",
       "title": "Melhores prompts para Gemini",
@@ -46,7 +46,7 @@
     "/best/free-ai-prompts/": {
       "type": "roundup",
       "reviewStatus": "approved",
-      "sourceFingerprint": "d06e2c96609d",
+      "sourceFingerprint": "02cef09b44d2",
       "sourcePath": "/best/free-ai-prompts/",
       "sourceSlug": "free-ai-prompts",
       "title": "Prompts de IA grátis",
@@ -57,7 +57,7 @@
     "/best/prompt-templates/": {
       "type": "roundup",
       "reviewStatus": "approved",
-      "sourceFingerprint": "71ceec21fd91",
+      "sourceFingerprint": "fa0a40fa61c6",
       "sourcePath": "/best/prompt-templates/",
       "sourceSlug": "prompt-templates",
       "title": "Melhores modelos de prompts de IA",
@@ -68,7 +68,7 @@
     "/best/cursor-ai-prompts/": {
       "type": "roundup",
       "reviewStatus": "approved",
-      "sourceFingerprint": "e9e8a52c2167",
+      "sourceFingerprint": "0891e477195b",
       "sourcePath": "/best/cursor-ai-prompts/",
       "sourceSlug": "cursor-ai-prompts",
       "title": "Melhores prompts para Cursor",

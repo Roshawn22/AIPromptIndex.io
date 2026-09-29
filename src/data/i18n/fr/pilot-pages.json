@@ -36,7 +36,7 @@
     "/best/cursor-ai-prompts/": {
       "type": "roundup",
       "reviewStatus": "needs-human-review",
-      "sourceFingerprint": "e9e8a52c2167",
+      "sourceFingerprint": "0891e477195b",
       "sourcePath": "/best/cursor-ai-prompts/",
       "sourceSlug": "cursor-ai-prompts",
       "description": "Une sélection de prompts pour Cursor AI qui tirent parti de l’indexation de la base de code, de la modification de plusieurs fichiers et de la génération intelligente de code.",
@@ -48,7 +48,7 @@
     "/best/free-ai-prompts/": {
       "type": "roundup",
       "reviewStatus": "needs-human-review",
-      "sourceFingerprint": "d06e2c96609d",
+      "sourceFingerprint": "02cef09b44d2",
       "sourcePath": "/best/free-ai-prompts/",
       "sourceSlug": "free-ai-prompts",
       "description": "Des prompts IA de qualité qui fonctionnent avec les versions gratuites de ChatGPT, Claude, Gemini et d’autres outils d’IA. Aucun abonnement requis.",
@@ -60,7 +60,7 @@
     "/best/gemini-prompts/": {
       "type": "roundup",
       "reviewStatus": "needs-human-review",
-      "sourceFingerprint": "706f9db641cd",
+      "sourceFingerprint": "8cb496a00641",
       "sourcePath": "/best/gemini-prompts/",
       "sourceSlug": "gemini-prompts",
       "description": "Les meilleurs prompts pour Google Gemini tirent parti de ses capacités multimodales, de son accès au Web en temps réel et de son intégration à Google Workspace.",
@@ -72,7 +72,7 @@
     "/best/prompt-templates/": {
       "type": "roundup",
       "reviewStatus": "needs-human-review",
-      "sourceFingerprint": "71ceec21fd91",
+      "sourceFingerprint": "fa0a40fa61c6",
       "sourcePath": "/best/prompt-templates/",
       "sourceSlug": "prompt-templates",
       "description": "Des modèles de prompts IA réutilisables, avec des champs à remplir pour tous les usages. Copiez-les, personnalisez-les et obtenez rapidement des résultats.",
