@@ -84,18 +84,29 @@ test('prompts sharing an audience outrank ones that only share a category and to
   assert.deepEqual(related, ['lesson-plan', 'quiz-builder', 'essay-outline']);
 });
 
-test('on equal audience overlap, a category and tool match breaks the tie, then catalog order', () => {
+test('on equal audience overlap, a category and tool match breaks the tie, then the slug', () => {
   const fits = { designers: { logo: 0.8, a: 0.8, b: 0.8, c: 0.8, d: 0.8 } };
+  const current = prompt('logo', 'image-generation', 'midjourney');
   const catalog = [
-    prompt('a', 'writing', 'claude'), // neither
-    prompt('b', 'image-generation', 'dall-e'), // category only
+    current,
     prompt('c', 'writing', 'midjourney'), // tool only
+    prompt('a', 'writing', 'claude'), // neither
     prompt('d', 'image-generation', 'midjourney'), // both
-    prompt('logo', 'image-generation', 'midjourney'),
+    prompt('b', 'image-generation', 'dall-e'), // category only
   ];
-  const related = slugs(pickRelatedPrompts(catalog[4], catalog, [], fits));
+  const related = slugs(pickRelatedPrompts(current, catalog, [], fits));
 
   assert.deepEqual(related, ['d', 'b', 'c', 'a']);
+});
+
+test('the related prompts do not depend on the order the catalog is loaded in', () => {
+  // Content collection order differed between a macOS build and the production build, which
+  // flipped tied prompts on seven pages.
+  const current = INVOICE_CATALOG.find((p) => p.data.slug === 'overdue-invoice-reminders');
+  const forward = slugs(pickRelatedPrompts(current, INVOICE_CATALOG, [], INVOICE_FITS, 10));
+  const reversed = slugs(pickRelatedPrompts(current, [...INVOICE_CATALOG].reverse(), [], INVOICE_FITS, 10));
+
+  assert.deepEqual(reversed, forward);
 });
 
 test('the live catalog fills zero-judged prompts from their own audience', () => {
