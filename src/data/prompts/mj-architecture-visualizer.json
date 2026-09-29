@@ -5,7 +5,7 @@
   "description": "This prompt generates photorealistic architectural visualizations that showcase buildings in their intended environment with stunning detail. Architectural rendering is typically expensive and time-consuming, requiring specialized 3D software and skilled artists. This prompt produces high-quality exterior visualizations that can be used for concept presentations, design exploration, client pitches, and portfolio pieces. The output includes realistic material textures, environmental context, human figures for scale, and dramatic lighting that brings architectural concepts to life. It is invaluable for architects, real estate developers, design students, and urban planners who need to visualize building concepts quickly.",
   "tool": "midjourney",
   "category": "image-generation",
-  "tags": ["architecture", "3d-rendering", "visualization", "real-estate", "building-design"],
+  "tags": ["architectural-design", "3d-rendering", "architectural-visualization", "real-estate", "building-design"],
   "difficulty": "advanced",
   "promptType": "image",
   "variables": [

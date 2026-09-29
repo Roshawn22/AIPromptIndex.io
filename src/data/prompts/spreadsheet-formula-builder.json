@@ -5,7 +5,7 @@
   "description": "This prompt converts plain English descriptions of calculations into working spreadsheet formulas for Excel or Google Sheets. Whether you need a complex VLOOKUP with multiple criteria, dynamic array formulas, conditional aggregations, or nested IF statements, this prompt generates paste-ready formulas with full explanations. It is ideal for business analysts, finance professionals, and operations teams who know what they want to calculate but struggle with spreadsheet syntax. The output includes not just the formula but also performance considerations and alternative approaches, making it valuable for both quick fixes and production-grade spreadsheet models.",
   "tool": "chatgpt",
   "category": "data-analysis",
-  "tags": ["excel", "google-sheets", "formulas", "spreadsheet", "productivity"],
+  "tags": ["excel", "google-sheets", "formulas", "spreadsheet", "productivity", "business", "analytics"],
   "difficulty": "beginner",
   "promptType": "text",
   "variables": [

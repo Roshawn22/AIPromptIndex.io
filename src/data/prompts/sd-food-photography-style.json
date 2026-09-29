@@ -5,7 +5,7 @@
   "description": "This prompt creates stunning food photography images that rival professional studio shoots. It incorporates the technical parameters that real food photographers use, including specific camera settings, lens choices, lighting setups, and color grading to produce images that look appetizing and editorial-ready. The prompt handles plating style, props, garnishes, and composition angles to create the kind of imagery used in cookbooks, restaurant menus, food blogs, and social media marketing. It is ideal for food bloggers, restaurant owners, cookbook authors, and food brands that need high-quality food visuals without the cost of a professional photo shoot.",
   "tool": "stable-diffusion",
   "category": "image-generation",
-  "tags": ["food-photography", "culinary", "restaurant", "product-photography", "editorial"],
+  "tags": ["food-photography", "culinary", "restaurant", "product-photography", "editorial", "content-creation"],
   "difficulty": "intermediate",
   "promptType": "image",
   "variables": [

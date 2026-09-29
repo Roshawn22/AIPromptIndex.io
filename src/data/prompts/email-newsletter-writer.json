@@ -10,7 +10,9 @@
     "email",
     "content-creation",
     "curation",
-    "writing"
+    "writing",
+    "marketing",
+    "business"
   ],
   "difficulty": "beginner",
   "promptType": "text",

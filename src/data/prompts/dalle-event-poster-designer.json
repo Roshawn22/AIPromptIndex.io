@@ -5,7 +5,7 @@
   "description": "This prompt generates eye-catching event posters that serve as the visual anchor for your event marketing. Whether you are promoting a conference, concert, workshop, or community gathering, the poster is designed with proper hierarchy for essential information: event name, date, venue, and call to action. The output provides a strong visual concept that you can refine with your actual event details in a design tool. It accounts for both print and digital use cases, ensuring the design works as a physical poster and a social media graphic. Essential for event organizers, community managers, and marketing teams who need professional promotional materials quickly.",
   "tool": "dall-e",
   "category": "image-generation",
-  "tags": ["event-poster", "graphic-design", "event-marketing", "promotional", "print-design"],
+  "tags": ["event-poster", "graphic-design", "event-marketing", "promotional", "print-design", "marketing", "content-creation"],
   "difficulty": "beginner",
   "promptType": "image",
   "variables": [

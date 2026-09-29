@@ -10,7 +10,8 @@
     "PR",
     "media",
     "communications",
-    "AP-style"
+    "AP-style",
+    "business"
   ],
   "difficulty": "intermediate",
   "promptType": "text",

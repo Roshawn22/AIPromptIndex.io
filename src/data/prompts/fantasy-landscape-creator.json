@@ -5,7 +5,7 @@
   "description": "This prompt generates breathtaking fantasy landscapes suitable for game concept art, book covers, desktop wallpapers, or worldbuilding reference images. The inclusion of scale references ensures the AI creates scenes with a sense of grandeur rather than miniature-looking environments. By specifying both terrain elements and atmospheric conditions, you get cohesive environments where every element works together. The art style parameter lets you channel specific visual traditions from classical landscape painting to modern concept art aesthetics.",
   "tool": "stable-diffusion",
   "category": "image-generation",
-  "tags": ["fantasy", "landscape", "concept-art", "environment", "worldbuilding"],
+  "tags": ["fantasy", "landscape", "concept-art", "environment", "worldbuilding", "content-creation"],
   "difficulty": "intermediate",
   "promptType": "image",
   "variables": [

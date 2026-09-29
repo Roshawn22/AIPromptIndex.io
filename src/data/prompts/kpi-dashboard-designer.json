@@ -5,7 +5,7 @@
   "description": "This prompt generates a complete KPI dashboard specification including metric selection, calculation formulas, layout design, and drill-down architecture. Instead of guessing which metrics matter, you get a structured framework built on business intelligence best practices. It covers everything from choosing the right leading and lagging indicators to defining alert thresholds and filter panels. The output is detailed enough to hand directly to a BI developer or implement yourself in tools like Tableau, Power BI, or Looker. It is ideal for operations leaders, startup founders, and analysts who need to build dashboards that drive action rather than just display numbers.",
   "tool": "gemini",
   "category": "data-analysis",
-  "tags": ["kpi", "dashboard", "business-intelligence", "metrics", "reporting"],
+  "tags": ["kpi", "dashboard", "business-intelligence", "metrics", "reporting", "business", "analytics"],
   "difficulty": "advanced",
   "promptType": "text",
   "variables": [

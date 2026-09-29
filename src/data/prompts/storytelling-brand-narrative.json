@@ -9,7 +9,9 @@
     "brand-story",
     "copywriting",
     "hero-journey",
-    "about-us"
+    "about-us",
+    "business",
+    "marketing"
   ],
   "difficulty": "intermediate",
   "promptType": "text",

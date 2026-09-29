@@ -5,7 +5,7 @@
   "description": "Turning raw data into actionable insights is where most analysis efforts stall. This prompt provides a structured analytical framework that ensures no important dimension of your data goes unexplored. From basic data quality checks to advanced correlation analysis, it guides the AI through a systematic investigation that mirrors how experienced analysts approach a new dataset. The inclusion of actionable recommendations transforms the output from a passive report into a strategic decision-making tool. Ideal for business analysts, product managers, and founders who need to extract meaning from their data quickly.",
   "tool": "chatgpt",
   "category": "data-analysis",
-  "tags": ["data-analysis", "reporting", "statistics", "business-intelligence"],
+  "tags": ["data-analysis", "reporting", "statistics", "business-intelligence", "business", "analytics"],
   "difficulty": "intermediate",
   "promptType": "text",
   "variables": [

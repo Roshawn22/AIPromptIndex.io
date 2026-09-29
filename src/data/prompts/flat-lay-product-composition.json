@@ -5,7 +5,7 @@
   "description": "Flat lay photography is the visual language of Instagram, e-commerce, and lifestyle branding. This prompt creates meticulously styled overhead compositions where every prop placement feels intentional and the negative space accommodates text overlays for social media or advertising use. The f/8 aperture specification ensures edge-to-edge sharpness that overhead shots require, while the natural window light direction creates the authentic look that audiences prefer over obvious studio lighting. Perfect for product launches, social media campaigns, blog headers, or brand mood boards.",
   "tool": "dall-e",
   "category": "image-generation",
-  "tags": ["flat-lay", "product-styling", "instagram", "lifestyle", "photography"],
+  "tags": ["flat-lay", "product-styling", "instagram", "lifestyle", "photography", "marketing", "content-creation"],
   "difficulty": "beginner",
   "promptType": "image",
   "variables": [

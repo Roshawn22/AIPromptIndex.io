@@ -5,7 +5,7 @@
   "description": "This prompt turns raw survey data into a structured analysis report with actionable insights. It goes beyond simple tallying by identifying hidden patterns, flagging potential biases, and translating findings into business recommendations. Whether you ran a customer satisfaction survey, employee engagement pulse, or market research study, this prompt helps you extract the story behind the numbers. It is especially useful for teams without a dedicated research analyst who need to present survey findings to stakeholders quickly and credibly. The output includes both quantitative analysis and qualitative theme extraction for open-ended responses.",
   "tool": "claude",
   "category": "data-analysis",
-  "tags": ["survey", "research", "insights", "qualitative-analysis", "reporting"],
+  "tags": ["survey", "research", "insights", "qualitative-analysis", "reporting", "business", "analytics", "employee-engagement"],
   "difficulty": "intermediate",
   "promptType": "text",
   "variables": [
