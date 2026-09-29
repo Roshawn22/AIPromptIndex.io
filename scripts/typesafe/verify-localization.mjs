@@ -78,7 +78,17 @@ export function sourceFieldsFor(page, { prompts, bestofPages }) {
   }
   if (page.type === 'roundup') {
     const source = bestofPages.find((roundup) => roundup.slug === page.sourceSlug);
-    return source ? { title: source.title, description: source.description } : {};
+    if (!source) return {};
+    // Mirrors roundupContent() in scripts/localization/build-pilot-source.mjs, so every field
+    // the translator was given is also checked against the English it was translated from.
+    // Only title and description used to be mapped, which left each collection's intro and
+    // metaDescription judged on naturalness alone — never for contradiction or omission.
+    return {
+      title: source.title,
+      description: source.description,
+      metaDescription: source.metaDescription || source.description,
+      intro: source.intro || source.description,
+    };
   }
   // The home page has no structured English source, so it is judged on naturalness only.
   return {};

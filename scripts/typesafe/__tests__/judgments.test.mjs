@@ -6,7 +6,7 @@ import { QUALITY_DIMENSIONS, compositeQuality } from '../rubrics.mjs';
 import { addQualityOutliers, buildAuditRequest, interpretAudit, labelSkew } from '../audit-catalog.mjs';
 import { buildRelatedRequest, pickRelated } from '../build-related.mjs';
 import { buildKeywordRequest, interpretKeyword } from '../classify-keywords.mjs';
-import { buildLocalizationRequest, interpretLocalization } from '../verify-localization.mjs';
+import { buildLocalizationRequest, interpretLocalization, sourceFieldsFor } from '../verify-localization.mjs';
 import {
   currentMembership,
   overBroadMemberships,
@@ -287,4 +287,27 @@ test('tag rewriting preserves each file\'s own array formatting', () => {
   const tight = '{"tags": ["a","b"], "x": 1}';
   assert.equal(rewriteTagsArray(tight, ['c']), '{"tags": ["a","b","c"], "x": 1}');
   assert.equal(rewriteTagsArray(multi, []), null);
+});
+
+test('roundup pages are checked against every field the translator was given', () => {
+  const bestofPages = [{
+    slug: 'gemini-prompts', title: 'Gemini', description: 'Long description.',
+    metaDescription: 'Short meta.', intro: 'An intro paragraph.',
+  }];
+  const fields = sourceFieldsFor({ type: 'roundup', sourceSlug: 'gemini-prompts' }, { prompts: [], bestofPages });
+  assert.deepEqual(fields, {
+    title: 'Gemini', description: 'Long description.', metaDescription: 'Short meta.', intro: 'An intro paragraph.',
+  });
+  // Same fallbacks as build-pilot-source.mjs when a collection has no separate meta or intro.
+  const bare = sourceFieldsFor({ type: 'roundup', sourceSlug: 'x' }, {
+    prompts: [], bestofPages: [{ slug: 'x', title: 'X', description: 'Only this.' }],
+  });
+  assert.equal(bare.metaDescription, 'Only this.');
+  assert.equal(bare.intro, 'Only this.');
+  // Intro must now get a contradiction question, not just a naturalness one.
+  const { questions, fields: asked } = buildLocalizationRequest(
+    { type: 'roundup', reviewStatus: 'approved', title: 'G', intro: 'Uma introdução.' }, fields,
+  );
+  const introIndex = asked.findIndex((field) => field.name === 'intro');
+  assert.ok(questions[`contradicts_${introIndex}`], 'intro gets a contradiction check');
 });
