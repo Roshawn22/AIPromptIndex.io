@@ -278,6 +278,12 @@
     "sql-query-debugger",
     "sql-query-optimizer"
   ],
+  "deal-risk-review": [
+    "sales-call-follow-up",
+    "sales-proposal-writer",
+    "sales-objection-handler",
+    "discovery-call-prep"
+  ],
   "debug-error-detective": [
     "cursor-test-writer",
     "unit-test-generator",
@@ -287,6 +293,12 @@
   "dialogue-script-writer": [
     "worldbuilding-culture-creator",
     "cinematic-portrait-generator"
+  ],
+  "discovery-call-prep": [
+    "sales-proposal-writer",
+    "sales-call-follow-up",
+    "sales-objection-handler",
+    "deal-risk-review"
   ],
   "dnd-character-backstory": [
     "worldbuilding-culture-creator",
@@ -364,7 +376,8 @@
   ],
   "freelance-proposal-writer": [
     "client-scope-document",
-    "freelance-rate-calculator"
+    "freelance-rate-calculator",
+    "sales-proposal-writer"
   ],
   "freelance-rate-calculator": [
     "client-scope-document",
@@ -485,7 +498,8 @@
     "okr-framework-generator"
   ],
   "meeting-notes-summarizer": [
-    "meeting-agenda-facilitator"
+    "meeting-agenda-facilitator",
+    "sales-call-follow-up"
   ],
   "meta-description-generator": [
     "seo-blog-post-optimizer",
@@ -666,9 +680,29 @@
     "lesson-plan-creator",
     "lesson-plan-differentiation"
   ],
+  "sales-call-follow-up": [
+    "deal-risk-review",
+    "sales-proposal-writer",
+    "meeting-notes-summarizer",
+    "sales-objection-handler"
+  ],
+  "sales-objection-handler": [
+    "sales-call-follow-up",
+    "deal-risk-review",
+    "sales-proposal-writer",
+    "discovery-call-prep"
+  ],
   "sales-outreach-email-sequence": [
-    "customer-testimonial-writer",
-    "customer-onboarding-email-sequence"
+    "discovery-call-prep",
+    "sales-objection-handler",
+    "sales-proposal-writer",
+    "sales-call-follow-up"
+  ],
+  "sales-proposal-writer": [
+    "ai-slop-remover",
+    "sales-call-follow-up",
+    "deal-risk-review",
+    "sales-objection-handler"
   ],
   "sci-fi-concept-art-prompt": [
     "fantasy-landscape-creator",
