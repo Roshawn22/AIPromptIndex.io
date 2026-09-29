@@ -19,6 +19,7 @@ import { promptMatchesBestOfFilter } from '../../lib/bestof';
 import toolsData from '../../data/tools/tools.json';
 import toolCategoryPages from '../../data/seo/tool-category-pages.json';
 import audiencePages from '../../data/seo/audience-pages.json';
+import { isAudienceMember } from '../../lib/audiences';
 import bestofPages from '../../data/seo/bestof-pages.json';
 import relatedPromptMap from '../../data/seo/related-prompts.json';
 
@@ -65,9 +66,7 @@ for (const page of toolCategoryPages) {
 
 // Tier 2: audience pages — match by category or tag
 for (const page of audiencePages) {
-  const categoryMatch = page.filterCategories?.includes(data.category);
-  const tagMatch = page.filterTags?.some((ft: string) => data.tags.includes(ft));
-  if (categoryMatch || tagMatch) {
+  if (isAudienceMember(page.slug, data.slug)) {
     collections.push({ title: page.title, url: `/prompts/for/${page.slug}/` });
   }
 }

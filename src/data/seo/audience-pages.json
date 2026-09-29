@@ -6,8 +6,6 @@
     "metaTitle": "Best AI Prompts for Teachers (2026) — Lesson Plans",
     "metaDescription": "Curated AI prompts for educators to create lesson plans, quizzes, rubrics, and differentiated instruction materials. Save hours of prep time.",
     "keyword": "ai prompts for teachers",
-    "filterTags": ["education", "lesson-plan", "quiz", "teaching", "tutoring", "curriculum"],
-    "filterCategories": ["education"],
     "intro": "AI is transforming how teachers plan lessons, create assessments, and differentiate instruction for diverse learners. The right prompts can help you generate entire lesson plans in minutes, create quizzes aligned to standards, and build rubrics that give students clear expectations. These curated AI prompts for teachers cover every stage of the teaching workflow — from curriculum mapping and lesson design to student feedback and parent communication. Save hours of prep time and focus on what matters most: your students.",
     "tips": [
       "Always specify grade level, subject, and learning standards when prompting AI for educational materials.",
@@ -36,8 +34,6 @@
     "metaTitle": "Best AI Prompts for Students (2026) — Study Smarter with AI",
     "metaDescription": "Curated AI prompts for students to study effectively, understand complex topics, and prepare for exams. Ethical AI study techniques.",
     "keyword": "ai prompts for students",
-    "filterTags": ["education", "study", "tutoring", "research", "homework"],
-    "filterCategories": ["education"],
     "intro": "AI tools can be powerful study companions when used ethically and effectively. The key is using AI to deepen your understanding rather than bypass learning. These curated AI prompts for students help you break down complex topics, create study schedules, generate practice problems, and prepare for exams with active recall techniques. Whether you are in high school or graduate school, these prompts will help you study smarter, retain more information, and develop critical thinking skills that AI cannot replace.",
     "tips": [
       "Use AI as a tutor, not a ghostwriter — ask it to explain concepts and generate practice problems rather than write your assignments.",
@@ -66,8 +62,6 @@
     "metaTitle": "Best AI Prompts for Real Estate Agents (2026)",
     "metaDescription": "Curated AI prompts for real estate agents to write listings, generate leads, create market reports, and automate client communication.",
     "keyword": "ai prompts for real estate",
-    "filterTags": ["real-estate", "marketing", "sales", "copywriting", "lead-generation"],
-    "filterCategories": ["business", "marketing"],
     "intro": "AI is giving real estate professionals a competitive edge by automating property descriptions, generating targeted marketing content, and streamlining client communication. The right prompts can help you write compelling MLS listings in seconds, create neighborhood guides that attract buyers, and build email sequences that nurture leads through the sales funnel. These curated AI prompts for real estate cover listing descriptions, social media marketing, market analysis, and client relationship management. Close more deals while spending less time on repetitive tasks.",
     "tips": [
       "Include specific property details like square footage, unique features, and neighborhood highlights in listing prompts for authentic descriptions.",
@@ -96,8 +90,6 @@
     "metaTitle": "Best AI Prompts for Small Business Owners (2026)",
     "metaDescription": "Curated AI prompts for small business owners to streamline operations, marketing, customer service, and financial planning.",
     "keyword": "ai prompts for small business",
-    "filterTags": ["business", "marketing", "operations", "strategy", "small-business"],
-    "filterCategories": ["business", "marketing"],
     "intro": "These prompts are for owners who do marketing, books, hiring, and customer replies in the same afternoon. They are reusable workflows, not 'write a business plan' filler: a 90-day marketing plan, a budget, testimonials, and customer copy you can run in ChatGPT, Gemini, or Claude without a dedicated ops hire.",
     "lastReviewed": "2026-09-02",
     "exampleSlugs": [
@@ -167,8 +159,6 @@
     "metaTitle": "Best AI Prompts for Content Creators (2026)",
     "metaDescription": "Curated AI prompts for content creators to write scripts, generate hooks, plan content calendars, and grow your audience.",
     "keyword": "ai prompts for content creators",
-    "filterTags": ["content-creation", "youtube", "social-media", "writing", "creative"],
-    "filterCategories": ["creative", "marketing", "writing"],
     "intro": "Content creation demands a constant flow of fresh ideas, and AI tools are the ultimate creative accelerator for YouTubers, podcasters, bloggers, and social media creators. The right prompts help you brainstorm video concepts, write engaging scripts, craft scroll-stopping hooks, and plan content calendars weeks in advance. These curated AI prompts for content creators cover ideation, scripting, repurposing, and audience growth strategies. Each prompt is battle-tested by real creators and designed to maintain your unique voice while scaling your output.",
     "tips": [
       "Feed AI your top-performing content and ask it to identify patterns in hooks, topics, and formats that resonate with your audience.",
@@ -197,8 +187,6 @@
     "metaTitle": "Best AI Prompts for SEO (2026) — Keywords & Content",
     "metaDescription": "Curated AI prompts for SEO professionals covering keyword research, content optimization, technical audits, and link building strategies.",
     "keyword": "ai prompts for seo",
-    "filterTags": ["seo", "marketing", "content-strategy", "keyword-research", "technical-seo"],
-    "filterCategories": ["marketing"],
     "intro": "AI tools have become indispensable for SEO professionals who need to scale content production, analyze competitors, and stay ahead of algorithm changes. The right prompts can help you conduct keyword research, optimize existing content, write meta descriptions at scale, and identify technical SEO issues. These curated AI prompts for SEO cover on-page optimization, content strategy, technical audits, and competitive analysis. Each prompt is designed by SEO practitioners to produce outputs that directly improve your search rankings and organic traffic.",
     "tips": [
       "Provide your target keyword, search intent, and top-ranking competitor URLs when asking AI to create content briefs.",
@@ -227,8 +215,6 @@
     "metaTitle": "Best AI Prompts for Developers (2026) — Code Faster with AI",
     "metaDescription": "Curated AI prompts for software developers covering code generation, debugging, architecture, testing, and documentation.",
     "keyword": "ai prompts for developers",
-    "filterTags": ["coding", "debugging", "testing", "architecture", "devops"],
-    "filterCategories": ["coding"],
     "intro": "AI coding assistants are redefining how developers build software, from generating boilerplate and writing tests to explaining complex codebases and debugging production issues. The most effective developers use AI as a force multiplier rather than a replacement — pairing their domain expertise with AI's speed and breadth. These curated AI prompts for developers cover code generation, debugging, code review, architecture decisions, and documentation. Each prompt is crafted for real development workflows and tested across multiple AI tools.",
     "tips": [
       "Always specify the programming language, framework version, and coding conventions when prompting AI for code generation.",
@@ -257,8 +243,6 @@
     "metaTitle": "Best AI Prompts for Freelancers (2026) — Win Clients",
     "metaDescription": "Curated AI prompts for freelancers to write proposals, manage clients, create deliverables, and grow your business.",
     "keyword": "ai prompts for freelancers",
-    "filterTags": ["freelance", "business", "writing", "proposals", "client-management"],
-    "filterCategories": ["business", "writing"],
     "intro": "Freelancers who master AI tools can deliver better work in less time, win more clients, and scale their business without hiring. AI handles the tasks that eat into your billable hours — writing proposals, drafting contracts, creating invoices, and managing client communication. These curated AI prompts for freelancers cover every stage of the freelance workflow from pitching and onboarding to delivery and follow-up. Each prompt is designed to help you look professional, deliver consistently, and focus your energy on the high-value creative work that clients pay a premium for.",
     "tips": [
       "Create a master client brief template with AI and fill it in for each new project to ensure consistent scoping and pricing.",
@@ -287,8 +271,6 @@
     "metaTitle": "Best AI Prompts for Marketers (2026) — Copy & Strategy",
     "metaDescription": "Curated AI prompts for digital marketers covering campaign strategy, ad copy, email marketing, social media, and analytics.",
     "keyword": "ai prompts for marketers",
-    "filterTags": ["marketing", "advertising", "social-media", "email-marketing", "analytics"],
-    "filterCategories": ["marketing"],
     "intro": "AI has become the marketer's most powerful productivity tool, enabling teams to produce more content, test more variations, and analyze more data than ever before. The right prompts turn AI into a strategic marketing partner that can draft campaign briefs, write ad copy, build email sequences, and interpret analytics data. These curated AI prompts for marketers cover the full marketing stack — from brand strategy and content creation to paid media optimization and performance analysis. Each prompt is designed for real marketing workflows and tested across campaigns.",
     "tips": [
       "Build a brand context document (voice, audience, competitors, goals) that you paste into every AI marketing session for consistent output.",
@@ -317,8 +299,6 @@
     "metaTitle": "Best AI Prompts for Entrepreneurs (2026) — Launch Fast",
     "metaDescription": "Curated AI prompts for entrepreneurs to validate ideas, build MVPs, create pitch decks, and grow startups faster.",
     "keyword": "ai prompts for entrepreneurs",
-    "filterTags": ["business", "startup", "strategy", "pitch-deck", "product"],
-    "filterCategories": ["business"],
     "intro": "Entrepreneurs operate at a pace where AI is not a luxury but a necessity. From validating business ideas and writing pitch decks to building MVPs and creating go-to-market strategies, AI tools help founders move faster with fewer resources. These curated AI prompts for entrepreneurs cover the entire startup journey — ideation, validation, fundraising, product development, and growth. Each prompt is designed for the resource-constrained reality of building a business, giving you executive-level outputs without the executive-level team.",
     "tips": [
       "Use AI to stress-test your business idea by asking it to play devil's advocate and identify potential failure modes.",
@@ -347,8 +327,6 @@
     "metaTitle": "Best AI Prompts for Designers (2026) — UI/UX & Branding",
     "metaDescription": "Curated AI prompts for designers covering UI/UX design, branding, visual concepts, design systems, and client presentations.",
     "keyword": "ai prompts for designers",
-    "filterTags": ["design", "ui-ux", "branding", "image-generation", "creative"],
-    "filterCategories": ["creative", "image-generation"],
     "intro": "AI is augmenting the design process at every stage — from initial research and moodboard creation to generating visual concepts and preparing client presentations. Smart designers are using AI to accelerate ideation, explore more design directions, and handle repetitive tasks like resizing and copy variations. These curated AI prompts for designers cover UX research, UI design, branding, visual exploration, and design system documentation. Each prompt helps you work faster without compromising the creative quality that defines great design.",
     "tips": [
       "Use AI image generators (Midjourney, DALL-E) for rapid visual exploration before committing to a design direction in Figma.",
@@ -377,8 +355,6 @@
     "metaTitle": "Best AI Prompts for Data Analysts (2026) — SQL & Python",
     "metaDescription": "Curated AI prompts for data analysts covering SQL queries, Python analysis, data visualization, and reporting.",
     "keyword": "ai prompts for data analysts",
-    "filterTags": ["data-analysis", "sql", "python", "visualization", "reporting"],
-    "filterCategories": ["data-analysis"],
     "intro": "AI tools are transforming data analysis workflows by generating SQL queries, writing Python scripts, and creating visualizations from natural language descriptions. Data analysts who master AI prompting can explore datasets faster, automate repetitive analysis, and communicate insights more effectively. These curated AI prompts for data analysts cover SQL generation, Python data manipulation, statistical analysis, dashboard design, and stakeholder reporting. Each prompt is designed for real analyst workflows and produces code and insights you can use immediately.",
     "tips": [
       "Provide your database schema or table structure when asking AI to generate SQL — this avoids incorrect column names and joins.",
@@ -407,8 +383,6 @@
     "metaTitle": "Best AI Prompts for Product Managers (2026) — PRDs",
     "metaDescription": "Curated AI prompts for product managers covering PRDs, user stories, roadmap planning, competitive analysis, and stakeholder communication.",
     "keyword": "ai prompts for product managers",
-    "filterTags": ["product-management", "strategy", "user-stories", "roadmap", "business"],
-    "filterCategories": ["business"],
     "intro": "Product managers juggle strategy, execution, and communication every day, and AI tools can amplify your effectiveness across all three. From writing detailed PRDs and user stories to analyzing competitive landscapes and drafting stakeholder updates, AI handles the heavy lifting so you can focus on decisions and prioritization. These curated AI prompts for product managers cover requirements documentation, roadmap planning, user research synthesis, and cross-functional communication. Each prompt produces PM artifacts that are ready for team review.",
     "tips": [
       "Provide your product context, user personas, and business goals when prompting AI for strategic documents like PRDs.",
@@ -437,8 +411,6 @@
     "metaTitle": "Best AI Prompts for HR (2026) — Job Posts & Policies",
     "metaDescription": "Curated AI prompts for HR professionals covering job descriptions, interview questions, policies, onboarding, and employee engagement.",
     "keyword": "ai prompts for hr",
-    "filterTags": ["hr", "recruiting", "onboarding", "policies", "employee-engagement"],
-    "filterCategories": ["business"],
     "intro": "HR professionals manage a constant stream of documentation — job descriptions, interview guides, policy updates, and employee communications. AI tools can draft all of these in a fraction of the time while maintaining compliance and consistency. These curated AI prompts for HR cover the full employee lifecycle from recruiting and onboarding to performance management and offboarding. Each prompt is designed to produce professional HR documents that you can customize for your organization's culture, policies, and legal requirements.",
     "tips": [
       "Always review AI-generated HR content for legal compliance with your jurisdiction's employment laws and company policies.",
@@ -467,8 +439,6 @@
     "metaTitle": "Best AI Prompts for Sales (2026) — Outreach & Closing",
     "metaDescription": "Curated AI prompts for sales professionals covering cold outreach, discovery calls, proposals, objection handling, and deal closing.",
     "keyword": "ai prompts for sales",
-    "filterTags": ["sales", "outreach", "lead-generation", "proposals", "negotiation"],
-    "filterCategories": ["business", "marketing"],
     "intro": "AI tools are giving top-performing sales professionals an unfair advantage by automating research, personalizing outreach at scale, and preparing them for every conversation. The right prompts help you write cold emails that get replies, prepare for discovery calls with deep prospect research, and craft proposals that close deals faster. These curated AI prompts for sales cover every stage of the pipeline — from prospecting and outreach to objection handling and closing. Each prompt is designed to sound human, not robotic, and produce outputs that build genuine relationships.",
     "tips": [
       "Provide specific prospect details (company, role, industry, pain points) for personalized outreach that avoids the generic AI feel.",
