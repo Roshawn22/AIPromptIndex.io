@@ -300,6 +300,9 @@
   "email-response-templates": [
     "investor-update-email"
   ],
+  "employee-onboarding-plan": [
+    "personalized-learning-path"
+  ],
   "essay-feedback-assistant": [
     "essay-outline-builder",
     "rubric-generator"
@@ -312,6 +315,10 @@
     "study-guide-generator",
     "interactive-quiz-creator",
     "flashcard-generator"
+  ],
+  "exit-interview-analyzer": [
+    "survey-results-analyzer",
+    "cohort-analysis-interpreter"
   ],
   "fantasy-landscape-creator": [
     "worldbuilding-culture-creator",
@@ -387,8 +394,9 @@
     "social-media-graphic-prompt"
   ],
   "job-description-writer": [
+    "structured-interview-kit",
+    "employee-onboarding-plan",
     "resume-cover-letter-writer",
-    "meta-description-generator",
     "cover-letter-customizer"
   ],
   "keyword-clustering-assistant": [
@@ -489,6 +497,9 @@
     "competitor-analysis-framework"
   ],
   "open-house-follow-up-email": [],
+  "performance-review-writer": [
+    "ai-slop-remover"
+  ],
   "personalized-learning-path": [
     "flashcard-generator",
     "study-guide-generator",
@@ -732,6 +743,11 @@
     "investor-update-email",
     "small-business-social-media-strategy"
   ],
+  "structured-interview-kit": [
+    "employee-onboarding-plan",
+    "job-description-writer",
+    "performance-review-writer"
+  ],
   "student-progress-report-writer": [],
   "study-guide-generator": [
     "flashcard-generator",
@@ -786,6 +802,10 @@
   ],
   "watercolor-illustration-prompt": [
     "logo-concept-generator"
+  ],
+  "workplace-policy-drafter": [
+    "ai-slop-remover",
+    "employee-onboarding-plan"
   ],
   "worldbuilding-culture-creator": [
     "fiction-scene-writer",

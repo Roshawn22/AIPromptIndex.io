@@ -1,0 +1,54 @@
+{
+  "title": "30-60-90 Day Employee Onboarding Plan",
+  "slug": "employee-onboarding-plan",
+  "promptText": "You are an HR onboarding specialist who designs first-90-day plans that get new hires productive quickly and make them want to stay. Create an onboarding plan for the new hire below.\n\nRole and team: [ROLE]\nWhat they must be able to do by day 90: [DAY_90_GOALS]\nTools and systems they will use: [TOOLS]\nPeople they will work with most: [KEY_PEOPLE]\nWorking arrangement: [WORK_SETUP]\n\nBuild the plan in this structure:\n1. Before day one: accounts, equipment, a welcome message, and what the manager and buddy must prepare, with an owner for each item\n2. Week one, day by day: introductions, setup, one small real task they can finish by Friday, and the few documents worth reading first\n3. Days 1-30, 31-60 and 61-90: for each phase, the goals, the skills and context to build, and a measurable sign that the phase went well\n4. A buddy section: who the buddy is, what they do, and how often they meet the new hire\n5. A check-in schedule for the manager, with three questions to ask at each check-in\n6. A short feedback survey to send at day 30 and day 90 so the onboarding itself improves\n\nAdapt the plan to the working arrangement, for example by scheduling video introductions and written documentation for remote hires. Keep the first week light enough that the new hire is not overwhelmed.",
+  "description": "This prompt produces a complete 30-60-90 day onboarding plan for a new hire: a checklist of what must be ready before day one, a day-by-day first week with one small real task to finish by Friday, and goals plus a measurable sign of success for each 30-day phase. It also sets up a buddy, gives the manager questions for each check-in, and adds day-30 and day-90 feedback surveys so the onboarding itself improves with every hire. The plan adapts to remote, hybrid or on-site work and keeps the first week light so the new hire is not overwhelmed. Ideal for HR teams, people operations, and managers preparing for a new team member.",
+  "tool": "gemini",
+  "category": "business",
+  "tags": [
+    "onboarding",
+    "new-hire",
+    "HR",
+    "people-operations",
+    "management"
+  ],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    {
+      "name": "ROLE",
+      "description": "The new hire's role and the team they are joining",
+      "example": "Marketing Operations Specialist joining a four-person growth marketing team"
+    },
+    {
+      "name": "DAY_90_GOALS",
+      "description": "What they should be able to do independently by day 90",
+      "example": "Run the weekly email campaign end to end, own the lead-scoring rules in HubSpot, and report monthly funnel metrics to the marketing lead"
+    },
+    {
+      "name": "TOOLS",
+      "description": "The main tools and systems they will use",
+      "example": "HubSpot, Google Workspace, Slack, Looker Studio, Asana"
+    },
+    {
+      "name": "KEY_PEOPLE",
+      "description": "The colleagues they will work with most",
+      "example": "Marketing lead (manager), content writer, sales ops analyst, and a buddy from the demand-gen team"
+    },
+    {
+      "name": "WORK_SETUP",
+      "description": "Remote, hybrid or on-site, and time zones if relevant",
+      "example": "Fully remote; team spread across US Eastern and Central European time"
+    }
+  ],
+  "tips": [
+    "Send the pre-day-one checklist to IT and the manager at least a week ahead; missing laptops and accounts are the most common first-day failures",
+    "Give the new hire one real, finishable task in week one; an early win does more for confidence than a stack of reading",
+    "Paste the plan into a shared Google Doc and turn the check-ins into recurring calendar events so nothing depends on memory"
+  ],
+  "exampleOutput": "**30-60-90 Day Onboarding Plan: Marketing Operations Specialist**\n\n**Before Day One**\n| Item | Owner | Due |\n|---|---|---|\n| Laptop shipped; HubSpot, Slack and Asana accounts created | IT | 5 days before start |\n| Welcome message with the first-week agenda | Marketing lead | 3 days before |\n| Buddy briefed and first coffee chat scheduled | Buddy | 2 days before |\n\n**Week One**\n- *Monday:* Welcome call with the marketing lead, tool setup, read the campaign playbook\n- *Tuesday:* Shadow the weekly email send; 30-minute intros with content and sales ops...\n\n**Days 1-30: Learn the system**\nGoal: understand how leads flow from first touch to sales handoff. A good sign: explains the lead-scoring model back to the manager without notes...",
+  "isFeatured": false,
+  "dateAdded": "2026-09-29",
+  "metaTitle": "30-60-90 Onboarding Plan Prompt for Gemini",
+  "metaDescription": "Create a 30-60-90 day onboarding plan with Gemini: a pre-day-one checklist, a first-week schedule, phase goals, a buddy program and check-ins."
+}

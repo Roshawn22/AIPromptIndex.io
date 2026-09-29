@@ -1,0 +1,49 @@
+{
+  "title": "Exit Interview Theme Analyzer",
+  "slug": "exit-interview-analyzer",
+  "promptText": "You are a people analytics specialist who finds the patterns in why employees leave and turns them into retention actions. Analyze the exit interview material below.\n\nExit interview notes or survey responses, with names removed: [EXIT_NOTES]\nPeriod covered and number of leavers: [PERIOD]\nTeams, roles or locations to compare: [SEGMENTS]\nRetention concerns leadership already has: [CONCERNS]\n\nDeliver the analysis in this structure:\n1. The main reasons people left, ranked by how often each appears, with a count and one or two short representative quotes for each\n2. Each reason classified as controllable (such as management, pay, workload or growth) or largely outside the company's control (such as relocation or a career change)\n3. Differences between the segments listed, stating the number of leavers behind every comparison and treating any pattern based on fewer than five people as a signal to investigate, not a conclusion\n4. How the findings confirm, contradict or add to leadership's existing concerns\n5. Three prioritized retention actions, each tied to the evidence, with a rough effort level and a metric to track\n6. Suggested changes to the exit interview questions themselves, so the next round answers what this one could not\n\nProtect confidentiality throughout: do not repeat names, and paraphrase any quote specific enough to identify the person who said it.",
+  "description": "This prompt turns a stack of exit interview notes into a clear picture of why people are leaving and what to do about it. It ranks the reasons for leaving with counts and representative quotes, separates the causes a company can control from those it cannot, and compares teams or locations while flagging patterns that rest on too few people to trust. It ends with prioritized retention actions and better exit interview questions for next time. Confidentiality is built in: no names, and identifying quotes are paraphrased. Ideal for HR business partners, people analytics teams, and leaders preparing a retention review. Claude's long context window handles a full quarter of interview notes at once.",
+  "tool": "claude",
+  "category": "data-analysis",
+  "tags": [
+    "exit-interviews",
+    "employee-retention",
+    "people-analytics",
+    "HR",
+    "employee-engagement"
+  ],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    {
+      "name": "EXIT_NOTES",
+      "description": "Exit interview notes or survey answers, with names removed",
+      "example": "Leaver 1 (Support, 14 months): 'Great team, but I was doing senior work without the title or pay.' Leaver 2 (Engineering, 3 years): 'Moving to Denver for family.' Leaver 3 (Support, 8 months): 'The ticket queue never ended and my manager cancelled most of our one-on-ones.'"
+    },
+    {
+      "name": "PERIOD",
+      "description": "The period covered and how many people left",
+      "example": "Q2 2026, 11 leavers"
+    },
+    {
+      "name": "SEGMENTS",
+      "description": "Teams, roles or locations to compare",
+      "example": "Support vs Engineering vs Sales; Austin office vs remote"
+    },
+    {
+      "name": "CONCERNS",
+      "description": "What leadership already believes is driving attrition",
+      "example": "Leadership believes pay is the main issue and is considering an across-the-board raise"
+    }
+  ],
+  "tips": [
+    "Remove names and anything identifying before pasting notes in; the analysis may be shared more widely than the raw interviews",
+    "With small teams, one or two departures can look like a trend, so check the count behind every comparison before acting on it",
+    "Compare the findings with stay interviews or engagement survey results, since exit interviews only hear from people who have already decided to go"
+  ],
+  "exampleOutput": "**Exit Interview Analysis: Q2 2026 (11 leavers)**\n\n**Top reasons for leaving**\n1. **Workload and unsustainable queues** (5 of 11) — controllable\n   > \"The ticket queue never ended.\"\n2. **Senior work without the title or pay** (3 of 11) — controllable\n3. **Relocation or a life change** (2 of 11) — outside our control\n\n**Segment differences**\nSupport accounts for 6 of 11 departures and all 5 workload mentions. Engineering had 3 leavers with no shared theme; that group is too small to draw conclusions from.\n\n**Against leadership's concerns**\nPay came up in 3 of 11 interviews, each time tied to a missing promotion rather than market rates. An across-the-board raise would likely address less of the problem than a clearer promotion path and more support staffing...",
+  "isFeatured": false,
+  "dateAdded": "2026-09-29",
+  "metaTitle": "Exit Interview Analyzer Prompt for Claude",
+  "metaDescription": "Analyze exit interviews with Claude: ranked reasons for leaving, controllable causes, team comparisons with sample-size checks, and retention actions."
+}

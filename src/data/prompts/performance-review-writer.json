@@ -1,0 +1,58 @@
+{
+  "title": "Evidence-Based Performance Review Writer",
+  "slug": "performance-review-writer",
+  "promptText": "You are an experienced people manager and HR business partner who writes fair, specific performance reviews. Using only the evidence provided, draft a performance review for the employee below.\n\nEmployee role and level: [EMPLOYEE_ROLE]\nReview period: [REVIEW_PERIOD]\nEvidence and notes from the period: [EVIDENCE]\nAreas where they need to grow: [GROWTH_AREAS]\nRating scale used by the company: [RATING_SCALE]\n\nWrite the review with these sections:\n1. A two to three sentence summary of the period that a skip-level manager could read on its own\n2. Strengths, each tied to a specific example and its impact from the evidence, never a personality trait on its own\n3. Growth areas described as observable behaviors and their effect on the team or results, with one concrete suggestion for each\n4. Three goals for the next period, each specific, measurable and within the employee's control\n5. A suggested overall rating on the company scale, with a one-paragraph justification that cites the evidence\n6. A bias check: list any sentence that relies on vague or personality-based language (such as 'abrasive', 'not a culture fit' or 'lacks executive presence'), any judgment that rests mostly on the last few weeks of the period, and any claim the evidence does not support, and suggest a rewrite for each\n\nDo not invent accomplishments or incidents that are not in the evidence. Where the evidence is thin, say so rather than filling the gap.",
+  "description": "This prompt turns a manager's notes into a fair, specific performance review. It ties every strength and growth area to evidence from the review period, frames development feedback as observable behavior rather than personality, and sets measurable goals for the next cycle. The built-in bias check flags vague language, recency bias and unsupported claims, which are the most common ways reviews go wrong, and suggests a rewrite for each. It will not invent accomplishments the notes do not contain. Ideal for managers writing reviews, and for HR teams who want more consistent, defensible reviews across the company.",
+  "tool": "chatgpt",
+  "category": "business",
+  "tags": [
+    "performance-review",
+    "feedback",
+    "management",
+    "HR",
+    "employee-development"
+  ],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    {
+      "name": "EMPLOYEE_ROLE",
+      "description": "The employee's role and level (leave their name out)",
+      "example": "Senior Backend Engineer, Payments team"
+    },
+    {
+      "name": "REVIEW_PERIOD",
+      "description": "The period the review covers",
+      "example": "January to June 2026"
+    },
+    {
+      "name": "EVIDENCE",
+      "description": "Your notes, accomplishments, metrics and feedback from the period",
+      "example": "Led the migration of card processing to a new provider with zero downtime; cut p95 checkout latency from 900ms to 450ms; mentored two junior engineers through their first on-call rotations; missed the Q2 fraud-rules deadline by three weeks after underestimating the vendor API work"
+    },
+    {
+      "name": "GROWTH_AREAS",
+      "description": "Where they need to develop",
+      "example": "Estimating work that depends on outside teams; writing a design doc before starting large changes"
+    },
+    {
+      "name": "RATING_SCALE",
+      "description": "The rating scale your company uses",
+      "example": "1 Below expectations, 2 Partially meets, 3 Meets, 4 Exceeds, 5 Exceptional"
+    }
+  ],
+  "tips": [
+    "Keep a running log of specific examples during the period; reviews written from memory in the final week drift toward whatever happened most recently",
+    "Leave the employee's name and personal details out of the prompt and add them when you finalize the review",
+    "Treat the draft as a starting point: read every sentence as the employee will, and cut anything you could not back up in the conversation"
+  ],
+  "relatedGuide": {
+    "title": "ChatGPT for Business: 20 Prompts That Save Hours Every Week",
+    "url": "/guides/chatgpt-for-business/"
+  },
+  "exampleOutput": "**Performance Review: Senior Backend Engineer, Payments — January to June 2026**\n\n**Summary**\nA strong half anchored by a zero-downtime migration of card processing and a halving of checkout latency. The main development area is estimating work that depends on other teams, which contributed to a three-week slip on the fraud-rules project.\n\n**Strengths**\n- *Delivering high-risk changes safely.* Led the card-processing migration with zero downtime, sequencing the cutover to protect checkout during peak hours...\n\n**Bias check**\n- \"Is a natural leader\" (Strengths, paragraph 3) describes a trait, not evidence. Suggested rewrite: \"Mentored two junior engineers through their first on-call rotations.\"\n- The estimation concern rests on a single project; note that one example is thin evidence for a pattern...",
+  "isFeatured": false,
+  "dateAdded": "2026-09-29",
+  "metaTitle": "Performance Review Writer Prompt for ChatGPT",
+  "metaDescription": "Turn manager notes into a fair, evidence-based performance review with ChatGPT, including measurable goals and a bias check for vague language."
+}
