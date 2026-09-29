@@ -5,7 +5,7 @@
   "description": "Editorial illustrations require a different skill set than other art forms: they must communicate complex ideas through visual metaphor while leaving space for typography and maintaining a bold graphic presence at magazine scale. This prompt generates illustrations that think like an art director, balancing visual metaphor, compositional clarity, and text-overlay readiness. The CMYK-friendly color specification ensures the images translate well to print production. The artist reference parameter channels specific editorial illustration traditions from classic New Yorker sophistication to modern Wired dynamism. Use these for blog headers, magazine features, podcast artwork, or presentation visuals.",
   "tool": "midjourney",
   "category": "image-generation",
-  "tags": ["editorial", "illustration", "magazine", "visual-metaphor", "graphic-design"],
+  "tags": ["editorial", "illustration", "magazine", "visual-metaphor", "graphic-design", "content-creation"],
   "difficulty": "intermediate",
   "promptType": "image",
   "variables": [

@@ -5,7 +5,7 @@
   "description": "This image generation prompt creates stunning cinematic portraits that look like stills from high-budget films. By specifying lens focal length, lighting style, and color grading references, you get images with a consistent professional quality that goes far beyond basic AI headshots. The film reference parameter is particularly powerful because it gives the AI a visual shorthand for complex color and mood combinations. Use it for concept art, character design, social media content, or visualizing characters for fiction projects.",
   "tool": "midjourney",
   "category": "image-generation",
-  "tags": ["portrait", "cinematic", "photography", "character-design", "photorealistic"],
+  "tags": ["portrait", "cinematic", "photography", "character-design", "photorealistic", "content-creation"],
   "difficulty": "intermediate",
   "promptType": "image",
   "variables": [

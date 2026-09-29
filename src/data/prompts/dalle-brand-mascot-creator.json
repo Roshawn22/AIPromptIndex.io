@@ -5,7 +5,7 @@
   "description": "This prompt creates memorable brand mascot characters that can become the face of your business across all touchpoints. Great mascots build emotional connections with customers and make brands instantly recognizable. This prompt generates mascots designed for versatility, working equally well as tiny app icons and large hero images. The output emphasizes clean lines, bold colors, and distinctive features that make the character memorable and scalable. It is ideal for startups, apps, food brands, tech companies, and any business that wants to add personality to their brand through a custom character.",
   "tool": "dall-e",
   "category": "image-generation",
-  "tags": ["mascot-design", "branding", "character-design", "logo", "brand-identity"],
+  "tags": ["mascot-design", "branding", "character-design", "logo", "brand-identity", "business", "marketing"],
   "difficulty": "beginner",
   "promptType": "image",
   "variables": [

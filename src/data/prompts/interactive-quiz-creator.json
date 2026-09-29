@@ -5,7 +5,7 @@
   "description": "Creating effective assessments is a specialized skill that goes far beyond writing questions with correct answers. This prompt generates pedagogically sound quizzes where wrong answers are plausible distractors (not obviously incorrect options), explanations reinforce learning even when students get answers right, and the difficulty progression builds confidence before challenging students. The scenario-based question tests real application rather than rote memorization. The grading rubric ensures consistent evaluation whether you are teaching one section or twenty. Ideal for teachers, corporate trainers, and course creators on platforms like Udemy or Teachable.",
   "tool": "gemini",
   "category": "education",
-  "tags": ["quiz", "assessment", "instructional-design", "formative-assessment"],
+  "tags": ["quiz", "assessment", "instructional-design", "formative-assessment", "content-creation"],
   "difficulty": "beginner",
   "promptType": "text",
   "variables": [

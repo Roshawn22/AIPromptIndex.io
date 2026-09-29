@@ -5,7 +5,7 @@
   "description": "This prompt generates professional infographic layouts with clear visual hierarchy, icon illustrations, and data visualization placeholders. Infographics are one of the most shared content types on social media and can drive significant traffic when embedded in blog posts. This prompt produces clean, modern layouts that you can use as visual templates or inspiration for your final designed piece. The output includes section organization, icon concepts, and flow design that would take a graphic designer hours to conceptualize. It is perfect for marketers, educators, and content creators who need visual content but lack advanced design skills.",
   "tool": "dall-e",
   "category": "image-generation",
-  "tags": ["infographic", "data-visualization", "graphic-design", "content-marketing", "visual-content"],
+  "tags": ["infographic", "data-visualization", "graphic-design", "content-marketing", "visual-content", "marketing", "content-creation"],
   "difficulty": "beginner",
   "promptType": "image",
   "variables": [

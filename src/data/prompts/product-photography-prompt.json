@@ -5,7 +5,7 @@
   "description": "Creating professional product photos typically requires expensive equipment and studio time. This prompt generates commercial-grade product photography that rivals professional studio shots. By specifying surface materials, lighting setups, and complementary props, you get images that tell a visual story about your product's positioning and brand identity. The macro lens specification ensures the AI renders fine product details sharply. Use these images for e-commerce listings, social media ads, pitch decks, or mockups before investing in a real photo shoot.",
   "tool": "dall-e",
   "category": "image-generation",
-  "tags": ["product-photography", "commercial", "e-commerce", "advertising"],
+  "tags": ["product-photography", "commercial", "e-commerce", "advertising", "business", "content-creation"],
   "difficulty": "beginner",
   "promptType": "image",
   "variables": [

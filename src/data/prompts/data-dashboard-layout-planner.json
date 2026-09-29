@@ -5,7 +5,7 @@
   "description": "This prompt produces a complete dashboard design specification including layout structure, chart type recommendations, interaction patterns, and responsive breakpoints. It goes beyond picking charts by explaining why each visualization type is optimal for its data, how users should interact with the dashboard, and how to organize information hierarchy for different decision-making needs. The output is detailed enough to hand directly to a frontend developer for implementation. It is essential for data analysts, product managers, and designers who need to create effective dashboards that users actually find useful rather than overwhelming.",
   "tool": "chatgpt",
   "category": "data-analysis",
-  "tags": ["dashboard", "data-visualization", "ux-design", "analytics", "business-intelligence"],
+  "tags": ["dashboard", "data-visualization", "ux-design", "analytics", "business-intelligence", "business", "design"],
   "difficulty": "advanced",
   "promptType": "text",
   "variables": [

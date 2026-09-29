@@ -5,7 +5,7 @@
   "description": "Consistent icon sets are expensive to commission and time-consuming to design from scratch. This prompt generates cohesive isometric icon collections where every icon shares the same visual language, angle, and color treatment. The isometric perspective adds depth and visual interest beyond flat icons while maintaining the clean aesthetic that modern interfaces demand. The grid layout and circular platforms ensure visual consistency that would normally require careful design system work. Perfect for website feature sections, app interfaces, presentation slides, or marketing materials.",
   "tool": "dall-e",
   "category": "image-generation",
-  "tags": ["icons", "isometric", "UI-design", "illustration", "icon-set"],
+  "tags": ["icons", "isometric", "UI-design", "illustration", "icon-set", "content-creation"],
   "difficulty": "beginner",
   "promptType": "image",
   "variables": [

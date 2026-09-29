@@ -5,7 +5,7 @@
   "description": "Customer survey data is only valuable if you can extract actionable insights from it, and many teams lack the analytical framework to do so systematically. This prompt transforms raw survey responses into a structured insights report that product, marketing, and leadership teams can act on immediately. The theme identification from open-ended responses is where the most valuable insights typically hide, and the severity-based pain point categorization helps teams prioritize fixes. The impact/effort prioritization of recommendations ensures you focus resources where they will have the greatest effect.",
   "tool": "claude",
   "category": "data-analysis",
-  "tags": ["survey-analysis", "customer-insights", "NPS", "market-research", "sentiment"],
+  "tags": ["survey-analysis", "customer-insights", "NPS", "market-research", "sentiment", "business", "analytics"],
   "difficulty": "intermediate",
   "promptType": "text",
   "variables": [

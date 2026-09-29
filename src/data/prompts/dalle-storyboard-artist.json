@@ -5,7 +5,7 @@
   "description": "This prompt generates professional storyboard layouts that help visualize narratives before production begins. Storyboards are critical for video production, animation, advertising, and film to plan shots, communicate vision to teams, and identify potential issues before expensive production starts. The output provides sequential panels with consistent character styling, camera angle suggestions, and flow indicators. This saves significant time compared to hand-drawing storyboards and gives non-artists a way to communicate their visual ideas clearly. It is valuable for video creators, ad agencies, animation studios, and anyone planning visual narratives.",
   "tool": "dall-e",
   "category": "image-generation",
-  "tags": ["storyboard", "video-production", "animation", "pre-production", "visual-narrative"],
+  "tags": ["storyboard", "video-production", "animation", "pre-production", "visual-narrative", "content-creation"],
   "difficulty": "intermediate",
   "promptType": "image",
   "variables": [

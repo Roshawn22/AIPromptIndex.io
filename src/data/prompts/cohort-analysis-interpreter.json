@@ -5,7 +5,7 @@
   "description": "Cohort analysis is the most powerful tool for understanding retention, but interpreting cohort tables requires pattern recognition skills that take years to develop. This prompt turns raw cohort data into actionable insights by identifying the critical moments where users disengage and suggesting specific interventions. The lifetime value calculation connects retention data directly to revenue impact, making it easier to justify investment in retention improvements. The benchmark comparison provides context for whether your numbers are good or bad relative to your industry. Essential for product managers, growth marketers, and founders tracking product-market fit.",
   "tool": "claude",
   "category": "data-analysis",
-  "tags": ["cohort-analysis", "retention", "growth", "LTV", "product-analytics"],
+  "tags": ["cohort-analysis", "retention", "growth", "LTV", "product-analytics", "business", "analytics"],
   "difficulty": "advanced",
   "promptType": "text",
   "variables": [

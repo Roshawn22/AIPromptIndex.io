@@ -5,7 +5,7 @@
   "description": "This prompt generates photorealistic interior design concept visualizations that look like they belong in an architectural digest magazine. It produces fully styled room concepts with specific furniture, materials, lighting, and color palettes that help clients and designers visualize spaces before any work begins. The prompt mimics professional interior photography with specific camera and lens parameters for realistic perspective and depth of field. It is invaluable for interior designers creating mood boards, real estate stagers previewing concepts, homeowners exploring renovation ideas, and furniture brands creating lifestyle imagery.",
   "tool": "stable-diffusion",
   "category": "image-generation",
-  "tags": ["interior-design", "architecture", "home-decor", "visualization", "photorealistic"],
+  "tags": ["interior-design", "architecture", "home-decor", "visualization", "photorealistic", "real-estate"],
   "difficulty": "intermediate",
   "promptType": "image",
   "variables": [

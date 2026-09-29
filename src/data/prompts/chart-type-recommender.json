@@ -5,7 +5,7 @@
   "description": "This prompt provides expert-level data visualization guidance by analyzing your specific data and recommending the optimal chart type with detailed justification. Instead of guessing whether to use a bar chart or a line chart, you get a recommendation backed by data visualization principles from leading experts. The output includes design specifications, accessibility guidance, common mistakes to avoid, and working code snippets. It also explains what chart types to avoid and why, which is just as valuable as knowing what to use. This is essential for data analysts, researchers, product managers, and anyone who needs to communicate data effectively to stakeholders.",
   "tool": "gemini",
   "category": "data-analysis",
-  "tags": ["data-visualization", "charts", "analytics", "data-science", "presentation"],
+  "tags": ["data-visualization", "charts", "analytics", "data-science", "presentation", "design", "product-management"],
   "difficulty": "intermediate",
   "promptType": "text",
   "variables": [

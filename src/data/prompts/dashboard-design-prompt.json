@@ -5,7 +5,7 @@
   "description": "Designing effective data dashboards requires balancing information density with clarity, and choosing the right visualization for each metric. This prompt generates a complete dashboard specification that a designer or developer can implement directly. The emphasis on chart type rationale ensures each visualization serves a clear purpose rather than defaulting to bar charts for everything. The accessibility color palette and responsive breakpoint specifications make the design production-ready. Use it for product analytics dashboards, executive reporting interfaces, or client-facing data portals.",
   "tool": "gemini",
   "category": "data-analysis",
-  "tags": ["dashboard", "data-visualization", "UX-design", "KPIs", "wireframe"],
+  "tags": ["dashboard", "data-visualization", "UX-design", "KPIs", "wireframe", "business", "design"],
   "difficulty": "intermediate",
   "promptType": "text",
   "variables": [
