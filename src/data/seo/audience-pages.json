@@ -378,7 +378,7 @@
     "metaDescription": "Curated AI prompts for data analysts covering SQL queries, Python analysis, data visualization, and reporting.",
     "keyword": "ai prompts for data analysts",
     "filterTags": ["data-analysis", "sql", "python", "visualization", "reporting"],
-    "filterCategories": ["data-analysis", "coding"],
+    "filterCategories": ["data-analysis"],
     "intro": "AI tools are transforming data analysis workflows by generating SQL queries, writing Python scripts, and creating visualizations from natural language descriptions. Data analysts who master AI prompting can explore datasets faster, automate repetitive analysis, and communicate insights more effectively. These curated AI prompts for data analysts cover SQL generation, Python data manipulation, statistical analysis, dashboard design, and stakeholder reporting. Each prompt is designed for real analyst workflows and produces code and insights you can use immediately.",
     "tips": [
       "Provide your database schema or table structure when asking AI to generate SQL — this avoids incorrect column names and joins.",
