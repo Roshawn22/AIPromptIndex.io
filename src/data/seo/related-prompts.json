@@ -86,10 +86,17 @@
     "freelance-rate-calculator",
     "freelance-proposal-writer"
   ],
+  "code-explainer": [
+    "unit-test-generator",
+    "code-review-checklist",
+    "copilot-code-comment-generator",
+    "cursor-refactor-assistant"
+  ],
   "code-review-checklist": [
     "cursor-test-writer",
+    "unit-test-generator",
     "cursor-refactor-assistant",
-    "unit-test-generator"
+    "code-explainer"
   ],
   "cohort-analysis-interpreter": [
     "data-visualization-recommender",

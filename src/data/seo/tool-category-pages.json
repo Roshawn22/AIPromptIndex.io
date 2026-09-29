@@ -517,6 +517,34 @@
     ]
   },
   {
+    "tool": "chatgpt",
+    "category": "coding",
+    "title": "Best ChatGPT Prompts for Coding",
+    "metaTitle": "Best ChatGPT Coding Prompts (2026)",
+    "metaDescription": "Curated ChatGPT prompts for explaining unfamiliar code, debugging SQL queries, and building regular expressions. Ready to copy and paste.",
+    "keyword": "chatgpt prompts for coding",
+    "intro": "ChatGPT is where a lot of coding questions go when they sit outside the editor: what a function nobody documented actually does, why a query returns the wrong rows, how to write a regular expression without a round of trial and error. Because you paste code into a conversation rather than letting a tool edit your repository, the prompts worth using ask for reasoning you can check alongside the answer: a trace of one real input, a diagnosis before the fix, a pattern broken into its parts. These ChatGPT coding prompts are built that way, so you can tell whether the answer is right before it goes anywhere near your code.",
+    "tips": [
+      "Paste the exact code, query, error message, or sample strings rather than describing them. ChatGPT can only be as specific as the input it can see.",
+      "State your language version and environment, such as PostgreSQL 15 or Python 3.12. Behavior that differs between versions is a common source of confidently wrong answers.",
+      "Run what you get back. Test the query, the pattern, or the traced input yourself; these prompts ask for explanations so you can check the reasoning instead of trusting the output."
+    ],
+    "faqs": [
+      {
+        "q": "What are the best ChatGPT prompts for coding?",
+        "a": "Prompts that give ChatGPT the real code or data and ask for a structured answer: a diagnosis before the fix, a trace of one real input, or a pattern explained piece by piece. That structure makes mistakes visible, which matters more than speed when the answer ends up in production code."
+      },
+      {
+        "q": "Can ChatGPT explain code I did not write?",
+        "a": "Yes, and it is one of its most useful coding jobs. Paste the code with its imports, say how experienced you are, and say what you plan to do with it. The Code Explainer prompt on this page asks for a walkthrough, a traced example, and the edge cases, and tells ChatGPT to state what it is assuming about anything it cannot see."
+      },
+      {
+        "q": "Should I use ChatGPT or Cursor for coding?",
+        "a": "Use Cursor or GitHub Copilot when you want changes made inside your repository across several files. Use ChatGPT when you want to understand or diagnose something first, such as a function, a query, or a pattern, and then make the change yourself."
+      }
+    ]
+  },
+  {
     "tool": "gemini",
     "category": "data-analysis",
     "title": "Best Gemini Prompts for Data Analysis",
