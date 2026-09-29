@@ -37,8 +37,9 @@ export function audienceOverlap(fits: AudienceFits, a: string, b: string): numbe
 
 /**
  * Judged related prompts in their judged order, then prompts ranked by audience overlap, with a
- * category and tool match breaking ties and catalog order after that. Prompts that share no
- * audience come after every prompt that does, and prompts that share nothing are left out.
+ * category and tool match breaking ties and the slug after that, so every build picks the same
+ * prompts whatever order the collection loads in. Prompts that share no audience come after every
+ * prompt that does, and prompts that share nothing are left out.
  */
 export function pickRelatedPrompts<T extends PromptLike>(
   current: PromptLike,
@@ -62,7 +63,12 @@ export function pickRelatedPrompts<T extends PromptLike>(
       match: Number(prompt.data.category === current.data.category) + Number(prompt.data.tool === current.data.tool),
     }))
     .filter(({ overlap, match }) => overlap > 0 || match > 0)
-    .sort((a, b) => b.overlap - a.overlap || b.match - a.match);
+    .sort((a, b) => b.overlap - a.overlap || b.match - a.match || compareSlugs(a.prompt.data.slug, b.prompt.data.slug));
 
   return [...judged, ...fill.map(({ prompt }) => prompt)].slice(0, limit);
+}
+
+// Code-point order rather than localeCompare, which depends on the ICU data Node was built with.
+function compareSlugs(a: string, b: string): number {
+  return a < b ? -1 : a > b ? 1 : 0;
 }
