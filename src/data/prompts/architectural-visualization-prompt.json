@@ -5,7 +5,7 @@
   "description": "Architectural visualization typically requires expensive 3D rendering software and hours of setup time. This prompt generates photorealistic architectural renders that capture the specific details architects and developers need to see: material treatments, lighting conditions, landscape context, and human scale references. The tilt-shift lens specification ensures the verticals are corrected, which is a hallmark of professional architectural photography. Use these for client presentations, real estate marketing materials, design competitions, or visualizing renovation concepts before committing to expensive construction.",
   "tool": "midjourney",
   "category": "image-generation",
-  "tags": ["architecture", "visualization", "3D-render", "real-estate", "design"],
+  "tags": ["architectural-design", "architectural-visualization", "3D-render", "real-estate", "design"],
   "difficulty": "advanced",
   "promptType": "image",
   "variables": [
