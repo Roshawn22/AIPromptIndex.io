@@ -81,10 +81,10 @@
     "lesson-plan-differentiation"
   ],
   "client-scope-document": [
+    "scope-creep-response",
     "user-story-writer",
-    "email-response-templates",
-    "freelance-rate-calculator",
-    "freelance-proposal-writer"
+    "project-wrap-up-email",
+    "email-response-templates"
   ],
   "code-explainer": [
     "unit-test-generator",
@@ -219,10 +219,10 @@
     "customer-testimonial-writer"
   ],
   "customer-testimonial-writer": [
+    "project-wrap-up-email",
     "landing-page-copy-generator",
-    "social-media-content-calendar",
-    "social-media-graphic-prompt",
-    "customer-onboarding-email-sequence"
+    "ai-slop-remover",
+    "social-media-content-calendar"
   ],
   "dalle-brand-mascot-creator": [
     "sd-character-design-sheet",
@@ -376,14 +376,15 @@
   ],
   "freelance-proposal-writer": [
     "client-scope-document",
+    "portfolio-case-study",
     "freelance-rate-calculator",
-    "sales-proposal-writer"
+    "project-wrap-up-email"
   ],
   "freelance-rate-calculator": [
     "client-scope-document",
+    "rate-increase-letter",
     "freelance-proposal-writer",
-    "competitive-landscape-mapper",
-    "pricing-strategy-advisor"
+    "competitor-analysis-framework"
   ],
   "game-mechanic-designer": [
     "worldbuilding-culture-creator"
@@ -539,6 +540,7 @@
     "competitor-analysis-framework"
   ],
   "open-house-follow-up-email": [],
+  "overdue-invoice-reminders": [],
   "performance-review-writer": [
     "ai-slop-remover"
   ],
@@ -567,6 +569,9 @@
   ],
   "poetry-workshop-assistant": [
     "songwriting-assistant"
+  ],
+  "portfolio-case-study": [
+    "project-wrap-up-email"
   ],
   "press-release-generator": [
     "product-launch-campaign",
@@ -602,6 +607,9 @@
     "flat-lay-product-composition",
     "social-media-content-calendar"
   ],
+  "project-wrap-up-email": [
+    "portfolio-case-study"
+  ],
   "property-investment-analyzer": [
     "financial-model-assumptions",
     "real-estate-market-analyzer"
@@ -618,6 +626,7 @@
     "copilot-code-comment-generator",
     "cursor-refactor-assistant"
   ],
+  "rate-increase-letter": [],
   "react-component-generator": [
     "cursor-test-writer",
     "cursor-refactor-assistant",
@@ -712,6 +721,9 @@
     "lesson-plan-differentiation",
     "lesson-plan-creator",
     "classroom-discussion-facilitator"
+  ],
+  "scope-creep-response": [
+    "client-scope-document"
   ],
   "sd-character-design-sheet": [
     "dalle-storyboard-artist",

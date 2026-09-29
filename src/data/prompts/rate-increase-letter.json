@@ -1,0 +1,24 @@
+{
+  "title": "Rate Increase Letter for Existing Clients",
+  "slug": "rate-increase-letter",
+  "promptText": "You are a freelance business coach who helps independent professionals raise their rates without losing the clients they want to keep. I am raising my rates for an existing client.\n\nCurrent and new rates: [RATE_CHANGE]\nWhen the new rate takes effect, and when I am sending this: [EFFECTIVE_DATE]\nWhy I am raising them: [REASONS]\nThe client this letter is for, and our history: [CLIENT_CONTEXT]\nAnything I am willing to offer during the transition: [TRANSITION_OFFER]\n\nPlease write:\n1. A rate increase email under 200 words that states the new rate and effective date in the first paragraph, gives my reason briefly without over-explaining or apologizing, thanks the client for something specific about our work together, and explains exactly how work already in progress is billed\n2. Two subject line options\n3. Short replies to the three most likely responses: acceptance, a request to delay, and pushback on the price\n4. The percentage increase and what it means for this client's typical monthly bill, using the numbers I gave you\n5. Whether my notice period is reasonable for this client, and why\n\nDo not invent reasons, achievements, or market data that I did not provide.",
+  "description": "This prompt has Claude write the email that tells an existing client your rates are going up. The email states the new rate and effective date up front, gives your reason briefly without apologizing, thanks the client for something specific, and explains how work already in progress is billed. Claude also drafts two subject lines and short replies for acceptance, a request to delay, and pushback on price, calculates the percentage increase and its effect on the client's typical monthly bill, and checks whether your notice period is reasonable. It is told not to invent reasons, achievements, or market data. It suits freelancers and consultants raising rates for clients they want to keep.",
+  "tool": "claude",
+  "category": "writing",
+  "tags": ["freelancing", "pricing", "client-management", "business-writing", "email"],
+  "difficulty": "beginner",
+  "promptType": "text",
+  "variables": [
+    { "name": "RATE_CHANGE", "description": "Your current rate and your new rate", "example": "$75/hour to $90/hour" },
+    { "name": "EFFECTIVE_DATE", "description": "When the new rate starts, and when you are sending the letter", "example": "September 1; I am sending this on July 15" },
+    { "name": "REASONS", "description": "Your actual reasons for the increase", "example": "I have added motion design and accessibility testing to my services, and my rate has not changed in three years" },
+    { "name": "CLIENT_CONTEXT", "description": "Who the client is, how long you have worked together, and roughly how much work they send", "example": "A marketing agency I have worked with for three years, about 20 hours a month of design work. A great client I want to keep." },
+    { "name": "TRANSITION_OFFER", "description": "Anything you will honor at the old rate, or \"none\"", "example": "Projects quoted before September 1 stay at the old rate" }
+  ],
+  "tips": ["Give at least a month's notice, more for clients who plan budgets quarterly. The letter reads as fair when the client has time to plan.", "Send it to one client first and see how the reply goes before sending the rest.", "Decide in advance what you will do if a client says no. The pushback reply is easier to send when you know your answer."],
+  "exampleOutput": "**Subject options**\n1. Updated rates from September 1\n2. A note about my rates for the rest of the year\n\n**Email**\nHi Morgan,\n\nI'm writing to let you know that from September 1, my rate will increase from $75 to $90 an hour.\n\nMy rate hasn't changed in three years, and in that time I've added motion design and accessibility testing to what I offer. The new rate reflects that.\n\nAnything already quoted before September 1 stays at $75 an hour, so nothing in progress changes.\n\nWorking with your team has been a highlight of the last three years, [add one specific thing you value about working with them; your notes don't include one], and I'm looking forward to more of it.\n\nIf you'd like to talk through what this means for upcoming projects, I'm happy to set up a call.\n\nBest,\nSam\n\n**The numbers:** a 20% increase. At about 20 hours a month, the client's typical bill goes from $1,500 to $1,800, or $300 more a month.\n\n**Notice period:** 48 days (July 15 to September 1). Reasonable for a client with steady monthly work, and long enough to plan for it.",
+  "isFeatured": false,
+  "dateAdded": "2026-09-29",
+  "metaTitle": "Rate Increase Letter Prompt for Claude",
+  "metaDescription": "Raise your freelance rates with this free Claude prompt. Get a clear rate increase email, replies to likely responses, and the numbers checked."
+}
