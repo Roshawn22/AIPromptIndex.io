@@ -20,6 +20,7 @@
     "cinematic-portrait-generator",
     "classroom-discussion-facilitator",
     "client-scope-document",
+    "code-explainer",
     "code-review-checklist",
     "cohort-analysis-interpreter",
     "competitive-landscape-mapper",
@@ -472,6 +473,7 @@
     },
     "developers": {
       "debug-error-detective": 0.97,
+      "code-explainer": 0.96,
       "code-review-checklist": 0.96,
       "cursor-refactor-assistant": 0.96,
       "cursor-test-writer": 0.96,
@@ -607,6 +609,7 @@
       "podcast-episode-planner": 0.52,
       "python-data-pipeline": 0.52,
       "sql-query-debugger": 0.52,
+      "code-explainer": 0.51,
       "sd-interior-design-concept": 0.51,
       "seo-keyword-research-strategy": 0.51
     },
