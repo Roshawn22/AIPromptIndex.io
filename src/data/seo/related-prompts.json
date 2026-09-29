@@ -104,6 +104,9 @@
     "chart-type-recommender",
     "csv-data-analysis-report"
   ],
+  "college-essay-brainstormer": [
+    "essay-outline-builder"
+  ],
   "competitive-landscape-mapper": [
     "business-plan-executive-summary",
     "startup-pitch-one-pager",
@@ -312,7 +315,7 @@
   ],
   "essay-feedback-assistant": [
     "essay-outline-builder",
-    "rubric-generator"
+    "research-source-evaluator"
   ],
   "essay-outline-builder": [
     "essay-feedback-assistant",
@@ -322,6 +325,12 @@
     "study-guide-generator",
     "interactive-quiz-creator",
     "flashcard-generator"
+  ],
+  "exam-study-schedule-planner": [
+    "exam-prep-quiz-maker",
+    "flashcard-generator",
+    "study-guide-generator",
+    "lecture-notes-organizer"
   ],
   "exit-interview-analyzer": [
     "survey-results-analyzer",
@@ -378,6 +387,12 @@
   "google-ads-copy-generator": [
     "keyword-clustering-assistant"
   ],
+  "homework-mistake-finder": [
+    "socratic-tutor-assistant",
+    "math-problem-set-generator",
+    "exam-prep-quiz-maker",
+    "flashcard-generator"
+  ],
   "instagram-caption-writer": [
     "social-media-graphic-prompt",
     "content-calendar-generator",
@@ -423,6 +438,12 @@
     "customer-onboarding-email-sequence",
     "dalle-infographic-designer",
     "product-launch-campaign"
+  ],
+  "lecture-notes-organizer": [
+    "flashcard-generator",
+    "study-guide-generator",
+    "exam-prep-quiz-maker",
+    "exam-study-schedule-planner"
   ],
   "lesson-plan-creator": [
     "lesson-plan-differentiation",
@@ -604,10 +625,16 @@
     "unit-test-generator"
   ],
   "research-paper-summarizer": [
+    "research-source-evaluator",
     "flashcard-generator",
     "personalized-learning-path",
-    "exam-prep-quiz-maker",
-    "essay-outline-builder"
+    "essay-feedback-assistant"
+  ],
+  "research-source-evaluator": [
+    "essay-outline-builder",
+    "essay-feedback-assistant",
+    "research-paper-summarizer",
+    "chart-type-recommender"
   ],
   "resume-achievement-rewriter": [
     "resume-cover-letter-writer",
@@ -708,9 +735,9 @@
     "dalle-infographic-designer"
   ],
   "socratic-tutor-assistant": [
-    "exam-prep-quiz-maker",
-    "study-guide-generator",
+    "homework-mistake-finder",
     "flashcard-generator",
+    "study-guide-generator",
     "math-problem-set-generator"
   ],
   "songwriting-assistant": [
@@ -760,7 +787,7 @@
     "flashcard-generator",
     "exam-prep-quiz-maker",
     "socratic-tutor-assistant",
-    "interactive-quiz-creator"
+    "exam-study-schedule-planner"
   ],
   "survey-results-analyzer": [
     "customer-survey-analyzer",
