@@ -1,0 +1,49 @@
+{
+  "title": "Structured Interview Question and Scorecard Builder",
+  "slug": "structured-interview-kit",
+  "promptText": "You are an experienced talent acquisition partner who designs structured interviews that predict job performance and treat every candidate the same way. Build a complete interview kit for the role below.\n\nRole and level: [JOB_TITLE]\nCompetencies this interview must assess: [COMPETENCIES]\nInterview stage and length: [INTERVIEW_STAGE]\nContext on the team and the work: [ROLE_CONTEXT]\n\nProduce the following:\n1. For each competency, two behavioral questions (\"Tell me about a time...\") and one situational question grounded in a realistic scenario from this role, not a generic hypothetical\n2. Two or three follow-up probes per question that push for specifics: what the candidate personally did, what the outcome was, and what they would do differently\n3. A 1-to-4 rating scale for each competency with observable behavioral anchors at every level, so two interviewers hearing the same answer give the same score\n4. A timed agenda that fits the stated interview length, including time for the candidate's own questions\n5. A short list of questions interviewers must not ask, such as those about age, family plans, health, religion or national origin, with a compliant alternative where one exists\n6. Instructions for interviewers to score independently before any debrief, and a debrief format that starts from evidence rather than overall impressions\n\nKeep every question job-related. Do not rate or rank any real candidate: this kit is for human interviewers to use.",
+  "description": "This prompt builds a structured interview kit: competency-based behavioral and situational questions, follow-up probes, and a scoring rubric with behavioral anchors for every rating. Structured interviews, where every candidate answers the same job-related questions and is scored against the same anchors, are among the most reliable predictors of job performance, and they leave far less room for bias than unstructured conversations. The kit also lists questions interviewers must avoid and sets up independent scoring before the debrief, so the loudest voice in the room does not decide. Ideal for HR teams, recruiters, and hiring managers building a consistent interview process.",
+  "tool": "claude",
+  "category": "business",
+  "tags": [
+    "interviewing",
+    "hiring",
+    "recruiting",
+    "HR",
+    "scorecard"
+  ],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    {
+      "name": "JOB_TITLE",
+      "description": "The role title and seniority level",
+      "example": "Customer Success Manager, mid-level"
+    },
+    {
+      "name": "COMPETENCIES",
+      "description": "The 3-5 competencies this interview should assess",
+      "example": "Handling difficult customer conversations, prioritizing a book of 40 accounts, spotting expansion opportunities, collaborating with product and support"
+    },
+    {
+      "name": "INTERVIEW_STAGE",
+      "description": "Which interview this is and how long it runs",
+      "example": "Second-round hiring manager interview, 45 minutes, video call"
+    },
+    {
+      "name": "ROLE_CONTEXT",
+      "description": "What the team does and what the first year in the role looks like",
+      "example": "B2B software for dental clinics; the CSM owns onboarding and renewals for 40 mid-market accounts and works closely with support and product"
+    }
+  ],
+  "tips": [
+    "Ask every candidate the same core questions in the same order; that consistency is what makes the scores comparable",
+    "Have each interviewer submit scores before the debrief so the first or most senior opinion does not anchor everyone else",
+    "Use AI to design the interview, not to evaluate candidates: hiring decisions should rest on human judgment and the evidence you collected"
+  ],
+  "exampleOutput": "**Interview Kit: Customer Success Manager (Mid-Level) — Hiring Manager Round, 45 min**\n\n**Competency 1: Handling difficult customer conversations**\n\n*Behavioral:* Tell me about a time a customer was ready to cancel because of something your company got wrong. What did you do in the first conversation?\n- Probe: What did you say, specifically, in the first two minutes?\n- Probe: What happened at renewal?\n\n*Situational:* A clinic's office manager emails that your software lost two days of appointment data and she wants a refund today. Walk me through your reply and your next 24 hours.\n\n**Rating anchors**\n- 1: Deflects blame or promises outcomes they cannot control\n- 2: Apologizes and escalates but offers no plan\n- 3: Acknowledges the impact, sets a concrete next step, and follows through\n- 4: Does all of 3 and uses the recovery to strengthen the relationship, with evidence...",
+  "isFeatured": false,
+  "dateAdded": "2026-09-29",
+  "metaTitle": "Structured Interview Kit Prompt for Claude",
+  "metaDescription": "Build a structured interview kit with Claude: competency questions, follow-up probes, anchored scorecards, and questions interviewers must avoid."
+}

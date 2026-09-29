@@ -1,0 +1,49 @@
+{
+  "title": "Plain-Language Workplace Policy Drafter",
+  "slug": "workplace-policy-drafter",
+  "promptText": "You are an HR policy writer who turns rules into plain language that employees actually read and managers can apply consistently. Draft a workplace policy from the details below.\n\nPolicy topic: [POLICY_TOPIC]\nCompany size, industry and where employees work: [COMPANY_CONTEXT]\nThe rules and decisions the policy must capture: [KEY_RULES]\nExisting constraints such as union agreements, handbook sections or benefits: [CONSTRAINTS]\n\nWrite the policy with these sections:\n1. Purpose: why the policy exists, in two or three sentences\n2. Who it applies to, including how it treats contractors, part-time staff and managers where relevant\n3. Definitions of any term that could be read two ways\n4. The policy itself, in plain language at roughly an eighth-grade reading level, using 'you' and 'we' rather than 'the employee'\n5. Two or three short worked examples showing how the policy applies in common situations\n6. How to ask questions, request an exception, or raise a concern, including a route that does not go through the employee's own manager\n7. What happens if the policy is not followed, stated proportionately\n8. Owner, effective date and next review date\n\nFinally, list every point that depends on employment law in the locations given, such as leave entitlements, pay rules, notice periods or data privacy, and mark each one for review by employment counsel before the policy is published. Do not present legal requirements as settled facts.",
+  "description": "This prompt drafts a workplace policy that employees can actually read: plain language, a clear scope, defined terms, worked examples, and a way to raise concerns that does not depend on one's own manager. It structures the policy so managers apply it consistently, and adds an owner and review date so it does not go stale. Because employment law varies by location, the prompt lists every point that depends on local law and marks it for review by employment counsel rather than presenting a legal requirement as fact. Ideal for HR teams and founders writing or refreshing handbook policies such as remote work, time off, expenses, or a code of conduct.",
+  "tool": "claude",
+  "category": "writing",
+  "tags": [
+    "hr-policy",
+    "employee-handbook",
+    "compliance",
+    "HR",
+    "people-operations"
+  ],
+  "difficulty": "intermediate",
+  "promptType": "text",
+  "variables": [
+    {
+      "name": "POLICY_TOPIC",
+      "description": "The policy you need",
+      "example": "Remote and hybrid work"
+    },
+    {
+      "name": "COMPANY_CONTEXT",
+      "description": "Company size, industry and where employees work",
+      "example": "85-person software company with employees in California, Texas, and Ontario, Canada"
+    },
+    {
+      "name": "KEY_RULES",
+      "description": "The decisions the policy must capture",
+      "example": "Hybrid staff in the office Tuesday to Thursday; fully remote roles approved by department heads; a one-time $500 home office stipend; core collaboration hours 10am to 3pm Eastern"
+    },
+    {
+      "name": "CONSTRAINTS",
+      "description": "Anything the policy must stay consistent with",
+      "example": "The expense policy caps monthly reimbursements at $100; the handbook's equipment section says laptops remain company property"
+    }
+  ],
+  "tips": [
+    "Have employment counsel review every item on the legal-review list before publishing, especially when staff work in more than one state or country",
+    "Test the draft on two or three employees and one new manager: if they read a rule differently, rewrite it",
+    "Give every policy an owner and a review date so it is updated when practices change instead of drifting out of date"
+  ],
+  "exampleOutput": "**Remote and Hybrid Work Policy**\n\n**Purpose**\nWe want you to do your best work wherever you do it, while keeping the in-person time that helps teams collaborate. This policy explains where you work, when you should be reachable, and what support we provide.\n\n**Who this applies to**\nAll full-time and part-time employees. Contractors follow the terms of their contracts.\n\n**Example**\nPriya works hybrid and has a medical appointment on a Wednesday. She works from home that day and tells her team in Slack; occasional changes like this need no approval...\n\n**Needs review by employment counsel before publishing**\n- California: whether ongoing home internet and phone costs must be reimbursed as necessary business expenses, in addition to the one-time stipend\n- Ontario: whether the Employment Standards Act's requirement for a written policy on disconnecting from work applies at this headcount...",
+  "isFeatured": false,
+  "dateAdded": "2026-09-29",
+  "metaTitle": "Workplace Policy Drafter Prompt for Claude",
+  "metaDescription": "Draft plain-language workplace policies with Claude, with defined terms, worked examples, and every legal point flagged for employment counsel."
+}
