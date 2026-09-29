@@ -64,7 +64,7 @@ const NATURALNESS_LEVELS = [
 
 const asText = (value) => (Array.isArray(value) ? value.join('\n') : value);
 
-export function sourceFieldsFor(page, { prompts, bestofPages }) {
+export function sourceFieldsFor(page, { prompts, bestofPages, englishPilot }) {
   if (page.type === 'prompt') {
     const source = prompts.find((prompt) => prompt.slug === page.sourceSlug);
     if (!source) return {};
@@ -90,7 +90,12 @@ export function sourceFieldsFor(page, { prompts, bestofPages }) {
       intro: source.intro || source.description,
     };
   }
-  // The home page has no structured English source, so it is judged on naturalness only.
+  if (page.type === 'home') {
+    // The localized home page is its own small page, not a copy of index.astro. Its English
+    // copy is the HOME block that build-pilot-source.mjs writes to en/pilot-content.json,
+    // which is exactly what the translator was given.
+    return englishPilot?.pages?.['/'] ?? {};
+  }
   return {};
 }
 
@@ -213,6 +218,7 @@ async function main() {
       .map((page) => loadJson(`src/data/prompts/${page.sourceSlug}.json`))
       .filter(Boolean),
     bestofPages: loadJson('src/data/seo/bestof-pages.json', []),
+    englishPilot: loadJson('src/data/i18n/en/pilot-content.json', { pages: {} }),
   };
   const entries = Object.entries(pilot.pages);
 

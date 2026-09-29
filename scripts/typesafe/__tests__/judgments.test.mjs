@@ -311,3 +311,18 @@ test('roundup pages are checked against every field the translator was given', (
   const introIndex = asked.findIndex((field) => field.name === 'intro');
   assert.ok(questions[`contradicts_${introIndex}`], 'intro gets a contradiction check');
 });
+
+test('the home page is checked against the English copy the translator was given', () => {
+  const englishPilot = { pages: { '/': { title: 'Free AI Prompt Library', heading: 'Find a better prompt.', intro: 'Copy-ready prompts.' } } };
+  const fields = sourceFieldsFor({ type: 'home' }, { prompts: [], bestofPages: [], englishPilot });
+  assert.equal(fields.heading, 'Find a better prompt.');
+  const { questions, fields: asked } = buildLocalizationRequest(
+    { type: 'home', reviewStatus: 'approved', title: 'Biblioteca', heading: 'Encontre um prompt melhor.', intro: 'Prompts prontos.' },
+    fields,
+  );
+  for (const name of ['title', 'heading', 'intro']) {
+    assert.ok(questions[`contradicts_${asked.findIndex((field) => field.name === name)}`], `${name} gets a contradiction check`);
+  }
+  // Without the English file the home page still gets naturalness checks rather than failing.
+  assert.deepEqual(sourceFieldsFor({ type: 'home' }, { prompts: [], bestofPages: [] }), {});
+});
