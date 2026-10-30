@@ -30,6 +30,9 @@ interface SaveButtonProps {
   labels?: Partial<SaveButtonLabels>;
 }
 
+// Clerk's loader gives up after 15s, so past this a blocked script is not coming.
+const CLERK_WAIT_MS = 30_000;
+
 type ClerkSessionLike = {
   getToken?: (options?: {
     template?: 'convex';
@@ -93,10 +96,12 @@ function useClerkSingleton() {
     syncSnapshot();
     attachListener();
 
+    const startedAt = Date.now();
     const intervalId = window.setInterval(() => {
       syncSnapshot();
       attachListener();
-      if (getClerk()?.loaded && detach) {
+      const timedOut = Date.now() - startedAt > CLERK_WAIT_MS;
+      if ((getClerk()?.loaded && detach) || timedOut) {
         window.clearInterval(intervalId);
       }
     }, 250);

@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/astro';
+import { classifyClerkLoadFailure } from './src/lib/sentryEvents';
 
 // The DSN only exists in deployed environments. When it is unset — local dev, or
 // any build before the env var is configured — Vite folds this branch away and
@@ -14,5 +15,6 @@ if (dsn) {
     // astro.config.mjs; this keeps the runtime side consistent with that.
     tracesSampleRate: 0,
     sendDefaultPii: false,
+    beforeSend: classifyClerkLoadFailure,
   });
 }
